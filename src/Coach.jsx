@@ -8,7 +8,7 @@ import Say from './Say.jsx';
 // Two schools, one step list (VARIANT, set per branch; ?coach=a|b overrides for dogfood):
 //   a  spotlight   : the page dims to ink 60%, the parts the step needs stay lit (Apple-style coach marks).
 //   b  panels      : the page washes to paper 82%, each lit part gets a 3px ink panel frame + numbered caption box.
-// The arrow keeps the site's dot rule: dash = w, gap = 2w, butt caps, w = the 2u rule; solid ink head.
+// A cartoon glove points AT the element on every step (Tony, issue 6: the dotted arrow read as a draggable wire).
 export const VARIANT = 'a';
 export const TOUR_KEY = 'gob.tour';
 export const TOUR_MS = 3000;
@@ -24,24 +24,41 @@ export const STEPS = [
   { key: 'read', say: 'tourRead', help: 'Read the truth table' },
 ];
 
-// Which elements a step lights, where its arrow runs, and who speaks. All rects are client px.
+// Which elements a step lights, where the hand points, and who speaks. All coordinates are client px.
+// Lit areas are TIGHT (Tony, issue 6): a part is lit along its own drawn outline (body + knobs, the node's
+// svg.shape path.body, re-drawn in the mask with the node's own screen matrix), never as a white box around it.
+// hand = { at: fingertip [x, y], a: pointing angle in degrees, 0 = up, -90 = left, 90 = right }.
 const q = (s) => document.querySelector(s);
 const rect = (el) => { if (!el) return null; const r = el.getBoundingClientRect(); return r.width ? r : null; };
 const mid = (r) => [r.left + r.width / 2, r.top + r.height / 2];
+const shapesOf = (root) => {
+  const seen = new Set(), out = [];
+  for (const p of root?.querySelectorAll('svg.shape path.body') ?? []) {
+    const d = p.getAttribute('d'), m = p.getScreenCTM();
+    if (!d || !m || seen.has(d)) continue;
+    seen.add(d); out.push({ d, m: [m.a, m.b, m.c, m.d, m.e, m.f] });
+  }
+  return out;
+};
+const GAP = 4; // fingertip stops this far short of the thing it points at (the nudge closes it)
 function measure(step, circuit, palOpen) {
   const canvas = rect(q('.canvas'));
   if (!canvas) return null;
   if (step === 1 && !palOpen) step = 0; // drawer closed again mid-step: point back at the tab
   if (step === 0) {
     const tab = rect(q('.pal-tab')); if (!tab) return null;
-    const [x, y] = mid(tab);
-    return { holes: [tab], arrow: [[x + 120, y + 110], [tab.right, y + 8]], say: 'hint', tip: [tab.right, y], k: 'lowleft' };
+    const [, y] = mid(tab);
+    return { holes: [tab], shapes: [], hand: { at: [tab.right + GAP, y], a: -90 }, say: 'hint', tip: [tab.right, y], k: 'lowleft' };
   }
   if (step === 1) {
-    const item = rect(q('.pal-group:nth-child(2) .pal-item')) ?? rect(q('.pal-item')); if (!item) return null;
+    const itemEl = q('.pal-group:nth-child(2) .pal-item') ?? q('.pal-item');
+    const item = rect(itemEl); if (!item) return null;
+    const glyph = itemEl.querySelector('.glyph'), label = [...itemEl.children].filter((c) => !c.classList.contains('glyph')).map(rect).filter(Boolean);
     const drop = { left: canvas.left + canvas.width * 0.42, top: canvas.top + canvas.height * 0.72, width: canvas.width * 0.16, height: canvas.height * 0.2 };
     drop.right = drop.left + drop.width; drop.bottom = drop.top + drop.height;
-    return { holes: [item, drop], drop: true, arrow: [[item.right, mid(item)[1]], mid(drop)], say: 'tourDrag', tip: [item.right - item.width * 0.2, item.top + item.height * 0.15] };
+    const g = rect(glyph) ?? item;
+    return { holes: [...label, drop], dropAt: label.length, shapes: shapesOf(glyph), drop: true,
+      hand: { at: mid(g), a: -45, to: mid(drop), ghost: 'part' }, say: 'tourDrag', tip: [item.right - item.width * 0.2, item.top + item.height * 0.15] };
   }
   const nodes = Object.values(circuit.nodes), wires = Object.values(circuit.wires);
   const el = (id) => q(`.react-flow__node[data-id="${id}"]`);
@@ -52,38 +69,72 @@ function measure(step, circuit, palOpen) {
     let dst = null;
     for (const n of nodes) if (n.kind === 'G') { const p = pins(n).find((i) => !wires.some((w) => w.target === n.id && w.pin === i)); if (p != null) { dst = [n.id, p]; break; } }
     if (!sw || !dst) return null;
-    const a = hnd(sw.id, 'out'), b = hnd(dst[0], `in${dst[1]}`), sa = rect(el(sw.id)), sb = rect(el(dst[0]));
-    if (!a || !b || !sa || !sb) return null;
-    return { holes: [sa, sb], arrow: [mid(a), mid(b)], say: 'tourWire', tip: [mid(a)[0] - 4, sa.top - 6], from: a, to: b };
+    const a = hnd(sw.id, 'out'), b = hnd(dst[0], `in${dst[1]}`), sa = rect(el(sw.id));
+    if (!a || !b || !sa) return null;
+    // The two nubs: the source pin's knob and the target gate's free input knob, lit as disks and ringed.
+    const z = a.width / 20, R = 17 * z; // handle box is 20 local px at zoom 1; knob ink reaches 12
+    const [ax, ay] = mid(a);
+    return { holes: [], shapes: [...shapesOf(el(sw.id)), ...shapesOf(el(dst[0]))], dots: [[ax, ay, R], [...mid(b), R]],
+      hand: { at: [ax, ay], a: -45, to: mid(b), ghost: 'wire' }, say: 'tourWire', tip: [ax - 4, sa.top - 6] };
   }
   if (step === 3) {
     const sw = nodes.find((n) => n.kind === 'S' && wires.some((w) => w.source === n.id)) ?? nodes.find((n) => n.kind === 'S');
     const btn = sw && rect(el(sw.id)?.querySelector('.switch')), box = sw && rect(el(sw.id)); if (!btn || !box) return null;
     const [x, y] = mid(btn);
-    return { holes: [box], arrow: [[x + 110, y - 90], [x, y]], say: 'tourClick', tip: [x, box.top - 6], to: btn };
+    return { holes: [], shapes: shapesOf(el(sw.id)), hand: { at: [x + btn.width * 0.12, y + btn.height * 0.12], a: -45 }, say: 'tourClick', tip: [x, box.top - 6] };
   }
   const t = rect(q('.truth')); if (!t) return null;
   const live = rect(q('.truth tr.live')) ?? t;
-  return { holes: [t], arrow: [[t.left - 90, mid(live)[1] + 70], [live.left, mid(live)[1]]], say: 'tourRead', tip: [t.left - 6, t.top + t.height * 0.12], to: live };
+  return { holes: [t], shapes: [], hand: { at: [t.left - GAP, mid(live)[1]], a: 90 }, say: 'tourRead', tip: [t.left - 6, t.top + t.height * 0.12] };
 }
 
-// Arrow: from a -> b, stopping GAP short of both ends, head = solid triangle 5w long. Gentle bow (one quadratic).
-function Arrow({ a, b, w, ink }) {
-  const GAP = 6 * w, L = Math.hypot(b[0] - a[0], b[1] - a[1]);
-  if (L < 3 * GAP) return null;
-  const ux = (b[0] - a[0]) / L, uy = (b[1] - a[1]) / L;
-  const bow = Math.min(0.12 * L, 40); // perpendicular sag of the control point
-  const c = [(a[0] + b[0]) / 2 + uy * bow, (a[1] + b[1]) / 2 - ux * bow];
-  // end direction = tangent at t=1: (b - c)
-  const s = [a[0] + ux * GAP, a[1] + uy * GAP];
-  const tl = Math.hypot(b[0] - c[0], b[1] - c[1]), tx = (b[0] - c[0]) / tl, ty = (b[1] - c[1]) / tl;
-  const tip = [b[0] - tx * GAP, b[1] - ty * GAP], H = 5 * w, base = [tip[0] - tx * H, tip[1] - ty * H];
-  const head = `M${tip[0]} ${tip[1]}L${base[0] - ty * H * 0.55} ${base[1] + tx * H * 0.55}L${base[0] + ty * H * 0.55} ${base[1] - tx * H * 0.55}Z`;
+// Pointing hand: an original cartoon white glove (four fingers, three back stitches, rolled cuff), drawn pointing UP
+// with the index fingertip at (50, 0) of a 100 x 142 box. Motion (from Tony's ref gif, measured with Pillow: 20 frames
+// x 40 ms = 0.8 s loop, pure translation along the pointing axis, no rotation, 38% of the hand's length; 8 frames in,
+// 11 frames back, easing out at the far end) = the .coach-hand .nudge keyframes in theme.css.
+const HAND_H = 142;
+const HAND_L = 88; // px long at 1440
+function Glove({ k }) {
   return (
-    <g className={`coach-arrow ${ink ? '' : 'on-veil'}`} data-tip={`${tip[0]},${tip[1]}`} data-dir={`${tx},${ty}`}>
-      <path className="halo" d={`M${s[0]} ${s[1]}Q${c[0]} ${c[1]} ${base[0]} ${base[1]}`} strokeWidth={w * 3} />
-      <path className="shaft" d={`M${s[0]} ${s[1]}Q${c[0]} ${c[1]} ${base[0]} ${base[1]}`} strokeWidth={w} strokeDasharray={`${w} ${2 * w}`} />
-      <path className="head" d={head} />
+    <g transform={`scale(${(HAND_L * k) / HAND_H}) translate(-50 0)`}>
+      <path className="glove" d="M32 78C20 70 8 62 10 52C12 44 22 44 30 52L40 62Z" />
+      <path className="glove" d="M36 58C26 56 20 64 22 76L24 98C26 110 36 116 50 116H70C82 116 90 108 88 96L86 70C85 58 74 52 62 56Z" />
+      <path className="fill" d="M38 66V13A12 12 0 0 1 62 13V66Z" />
+      <path className="line" d="M38 68V13A12 12 0 0 1 62 13V60" />
+      <path className="line thin" d="M62 70C70 66 80 67 86 74M62 84C70 80 80 81 87 88" />
+      <path className="line thin" d="M44 94V106M52 92V106M60 94V106" />
+      <path className="glove" d="M26 114H86A8 8 0 0 1 86 130H26A8 8 0 0 1 26 114Z" />
+      <path className="line thin" d="M30 122H82" />
+    </g>
+  );
+}
+// Tap loop (steps 1, 4, 5): the fingertip backs off by amp and nudges back in to touch the target (the ref gif).
+function Hand({ at, a, k, cls = '' }) {
+  return (
+    <g className={`coach-hand ${cls}`} transform={`translate(${at[0]} ${at[1]}) rotate(${a})`} data-tip={`${at[0]},${at[1]}`} data-a={a}>
+      <g className="nudge" style={{ '--amp': `${8 * k}px` }}><Glove k={k} /></g>
+    </g>
+  );
+}
+// Demo (steps 2, 3; Tony: a video-game tutorial): press on the source, glide to the target carrying a ghost (a straight
+// pencil wire from the pin, as the real draft wire, or a faint copy of the part), release, pause, loop. 2.6 s.
+// Reduced motion / logic mode: no glide; a still hand at the source and a still hand at the target.
+function Demo({ at, to, a, k, ghost, shapes }) {
+  const dx = to[0] - at[0], dy = to[1] - at[1];
+  return (
+    <g className="coach-demo" style={{ '--dx': `${dx}px`, '--dy': `${dy}px`, '--amp': `${8 * k}px` }}>
+      {ghost === 'wire' && <g className="ghost-wire">
+        <line className="casing" x1={at[0]} y1={at[1]} x2={to[0]} y2={to[1]} pathLength="1" />
+        <line className="pencil" x1={at[0]} y1={at[1]} x2={to[0]} y2={to[1]} pathLength="1" />
+      </g>}
+      <g className="glide">
+        {ghost === 'part' && <g className="ghost-part">
+          {shapes.map((s, i) => <path key={i} d={s.d} transform={`matrix(${s.m.join(' ')})`} />)}</g>}
+        <g className="coach-hand" transform={`translate(${at[0]} ${at[1]}) rotate(${a})`} data-tip={`${at[0]},${at[1]}`} data-to={`${to[0]},${to[1]}`} data-a={a}>
+          <g className="press"><Glove k={k} /></g>
+        </g>
+      </g>
+      <Hand at={to} a={a} k={k} cls="rm-only" />
     </g>
   );
 }
@@ -130,7 +181,10 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
       const m = app && measure(step, circuit, palOpen);
       if (m) { const o = [app.left, app.top];
         const sh = (r) => ({ x: r.left - o[0], y: r.top - o[1], w: r.width, h: r.height });
-        const g = { ...m, holes: m.holes.map(sh), arrow: m.arrow.map((p) => [p[0] - o[0], p[1] - o[1]]), tip: [m.tip[0] - o[0], m.tip[1] - o[1]], W: app.width, H: app.height };
+        const g = { ...m, holes: m.holes.map(sh), W: app.width, H: app.height,
+          shapes: m.shapes.map(({ d, m: t }) => ({ d, m: [t[0], t[1], t[2], t[3], t[4] - o[0], t[5] - o[1]] })),
+          dots: m.dots?.map(([x, y, r]) => [x - o[0], y - o[1], r]), tip: [m.tip[0] - o[0], m.tip[1] - o[1]],
+          hand: { ...m.hand, at: [m.hand.at[0] - o[0], m.hand.at[1] - o[1]], to: m.hand.to && [m.hand.to[0] - o[0], m.hand.to[1] - o[1]] } };
         const s = JSON.stringify(g); if (s !== last) { last = s; setGeo(g); } }
       raf = requestAnimationFrame(tick);
     };
@@ -146,19 +200,31 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
       <button onClick={end}>Skip</button>
     </div>), slot);
   if (step < 0 || !geo) return <><div ref={box} hidden />{bar}</>;
-  const w = Math.max(1, Math.round(2 * geo.W / 1440)); // the 2u rule, whole px
-  const pad = Math.round(10 * geo.W / 1440);
-  const holes = geo.holes.map((r) => ({ x: r.x - pad, y: r.y - pad, w: r.w + 2 * pad, h: r.h + 2 * pad }));
-  const veil = `M0 0H${geo.W}V${geo.H}H0Z` + holes.map((r) => `M${r.x} ${r.y}v${r.h}h${r.w}v${-r.h}Z`).join('');
+  const k = geo.W / 1440;
+  const w = Math.max(1, Math.round(2 * k)); // the 2u rule, whole px
+  const pad = Math.max(2, Math.round(4 * k)); // lit margin around a rect target (tab, table, drop spot)
+  const holes = geo.holes.map((r, i) => (geo.drop && i === geo.dropAt ? r : { x: r.x - pad, y: r.y - pad, w: r.w + 2 * pad, h: r.h + 2 * pad }));
+  const mid = `coach-cut-${step}`;
   return (
     <>
       <div ref={box} className={`coach coach-${variant}`} aria-hidden="true">
         <svg width={geo.W} height={geo.H}>
-          {variant !== 'c' && <path className="veil" d={veil} fillRule="evenodd" />}
+          <defs>
+            <mask id={mid} maskUnits="userSpaceOnUse" x="0" y="0" width={geo.W} height={geo.H}>
+              <rect width={geo.W} height={geo.H} fill="#fff" />
+              {holes.map((r, i) => <rect key={i} x={r.x} y={r.y} width={r.w} height={r.h} fill="#000" />)}
+              {/* the part's own outline, filled and fattened by 4 local px each side of its 3px ink: tight, border intact */}
+              {geo.shapes.map((s, i) => <path key={i} d={s.d} transform={`matrix(${s.m.join(' ')})`} fill="#000" stroke="#000" strokeWidth={11} strokeLinejoin="round" />)}
+              {geo.dots?.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} fill="#000" />)}
+            </mask>
+          </defs>
+          {variant !== 'c' && <rect className="veil" width={geo.W} height={geo.H} mask={`url(#${mid})`} />}
           {variant === 'b' && holes.map((r, i) => <rect key={i} className="panel" x={r.x} y={r.y} width={r.w} height={r.h} />)}
-          {geo.drop && <rect className="drop" x={geo.holes[1].x} y={geo.holes[1].y} width={geo.holes[1].w} height={geo.holes[1].h}
+          {geo.drop && <rect className="drop" x={geo.holes[geo.dropAt].x} y={geo.holes[geo.dropAt].y} width={geo.holes[geo.dropAt].w} height={geo.holes[geo.dropAt].h}
             strokeWidth={w} strokeDasharray={`${w} ${2 * w}`} />}
-          <Arrow a={geo.arrow[0]} b={geo.arrow[1]} w={w} ink={variant !== 'a'} />
+          {geo.dots?.map(([x, y, r], i) => <g key={i} className="coach-nub"><circle className="ring" cx={x} cy={y} r={r + 3 * w} strokeWidth={2 * w} />
+            <circle className="ping" cx={x} cy={y} r={r + 3 * w} strokeWidth={w} /></g>)}
+          {geo.hand.to ? <Demo {...geo.hand} k={Math.max(k, 0.8)} shapes={geo.shapes} /> : <Hand {...geo.hand} k={Math.max(k, 0.8)} />}
         </svg>
         {variant === 'b' && <span className="cap" style={{ left: holes[0].x, top: holes[0].y }}>{step + 1}</span>}
         {variant !== 'c' && <Say phrase={geo.say} role="presentation" className="coach-say"

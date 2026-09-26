@@ -481,17 +481,56 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .coach-b .panel { fill: none; stroke: var(--ink); stroke-width: 3; }
 .coach-b .cap { position: absolute; transform: translate(-3px, -100%); min-width: calc(28 * max(var(--u), 0.8px)); padding: 0 calc(6 * max(var(--u), 0.8px));
   background: var(--caption); border: 3px solid var(--ink); border-bottom: 0; font: 800 calc(18 * max(var(--u), 0.8px))/1.4 var(--font); text-align: center; }
-.coach-arrow .shaft { fill: none; stroke: var(--ink); stroke-linecap: butt; }
-.coach-arrow .halo { fill: none; stroke: var(--paper); stroke-linecap: round; }
-.coach-arrow .head { fill: var(--ink); }
 .coach .drop { fill: none; stroke: var(--ink); stroke-linecap: butt; } /* drop spot: the dot rule, as the snap guides */
-.coach-arrow.on-veil .shaft { stroke: var(--paper); } .coach-arrow.on-veil .head { fill: var(--paper); } .coach-arrow.on-veil .halo { stroke: none; }
 .coach-say { --k: max(var(--u), 0.95px); z-index: 2; } /* Anime Ace cap 12k: >= 11.4px at any width */
-/* Marching dots only outside logic mode and only without reduced motion; logic mode is still. */
+/* Pointing glove (Coach.jsx Hand): paper glove, ink outline, square-free round joins like the balloons. */
+.coach-hand .glove, .coach-hand .fill { fill: var(--paper); }
+.coach-hand .glove, .coach-hand .line { stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
+.coach-hand .line { fill: none; } .coach-hand .line.thin { stroke-width: 3.5; }
+/* Wiring step: the two nubs to join. Lit disk + a paper ring on the veil (strong on ink 60%) + an ink ring inside it. */
+.coach-nub .ring { fill: none; stroke: var(--paper); }
+.coach-nub .ping { fill: none; stroke: var(--paper); opacity: 0; transform-box: fill-box; transform-origin: center; }
+/* Demo ghosts: the pencil wire = the draft wire (2px ink on a 6px paper casing, straight); the part = a faint copy. */
+.ghost-wire line { fill: none; stroke-linecap: butt; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+.ghost-wire .casing { stroke: var(--paper); stroke-width: 6px; } .ghost-wire .pencil { stroke: var(--ink); stroke-width: 2px; }
+.ghost-part path { fill: var(--paper); fill-opacity: 0.55; stroke: var(--ink); stroke-width: 3; }
+.coach-demo .press { transform: translateY(var(--amp)); }
+.coach-demo .ghost-wire, .coach-demo .ghost-part { display: none; } /* still: a hand at the source + a hand at the target */
+/* The tour moves in every mode (Tony, issue 6: an animated hand); only reduced motion stills it: two still hands, still rings. */
 @media (prefers-reduced-motion: no-preference) {
-  html:not([data-mode="logic"]) .coach-arrow .shaft { animation: coach-march 0.6s linear infinite; }
+  .coach-hand .nudge { animation: coach-nudge 0.8s infinite; }
+  .coach-nub .ping { animation: coach-ping 1.6s ease-out infinite; }
+  .coach-demo .rm-only { display: none; }
+  .coach-demo .ghost-wire, .coach-demo .ghost-part { display: inline; }
+  .coach-demo .glide { animation: coach-glide 2.6s infinite; }
+  .coach-demo .press { animation: coach-press 2.6s infinite; }
+  .coach-demo .ghost-wire line { animation: coach-draw 2.6s infinite; }
+  .coach-demo .ghost-part { animation: coach-carry 2.6s infinite; }
 }
-@keyframes coach-march { to { stroke-dashoffset: -30; } }
+/* ref gif: frames 0-8 travel toward the target (ease in-out), 8-19 travel back; 40% = frame 8 of 20 */
+@keyframes coach-nudge {
+  0% { transform: translateY(var(--amp)); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  40% { transform: translateY(0); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  100% { transform: translateY(var(--amp)); }
+}
+@keyframes coach-ping { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.8); } }
+/* demo timeline (2.6 s): 0-12 press in at the source · 12-60 glide · 60-70 release · 70-100 pause at the target */
+@keyframes coach-press {
+  0% { transform: translateY(var(--amp)); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  12%, 60% { transform: translateY(0); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  70%, 100% { transform: translateY(var(--amp)); }
+}
+@keyframes coach-glide {
+  0%, 12% { transform: translate(0, 0); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  60%, 97% { transform: translate(var(--dx), var(--dy)); }
+  100% { transform: translate(0, 0); }
+}
+@keyframes coach-draw {
+  0%, 12% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  60%, 72% { stroke-dashoffset: 0; opacity: 1; }
+  90%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes coach-carry { 0%, 10% { opacity: 0; } 14%, 62% { opacity: 1; } 72%, 100% { opacity: 0; } }
 .coach-bar, .coach-replay { font: 500 max(calc(16.9 * var(--u)), calc(16.9 * var(--f)))/1 var(--font-help); font-variation-settings: 'wdth' 78, 'opsz' 36; text-transform: uppercase; color: var(--ink); }
 .coach-bar { position: relative; z-index: 21; display: flex; align-items: center; gap: 0.8em; white-space: nowrap; }
 .coach-bar .n { font-weight: 800; font-variant-numeric: tabular-nums; }
