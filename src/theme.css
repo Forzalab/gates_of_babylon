@@ -38,6 +38,8 @@
   --ink-2: #767676;        /* de-emphasis ink, 4.54:1 on paper (disabled palette item) */
   --one: #ff5a1f;          /* logic 1 + live table row, nothing else */
   --grid: #e2e2e2;
+  --hover: #e2e2e2;
+  --caption: #fbf5d2;      /* toast caption fill only: Blambot caption cream, muted toward paper */
   --font: 'Roboto Flex Variable', 'Roboto Flex Fallback', 'Helvetica Neue', Arial, sans-serif;
   --font-help: 'Roboto Flex Variable', 'Help Fallback', 'Helvetica Neue', Arial, sans-serif;
   --font-label: 'Roboto Flex Variable', 'Label Fallback', 'Helvetica Neue', Arial, sans-serif;
@@ -60,7 +62,7 @@
   --hair: max(1px, round(nearest, var(--u), 1px));
   /* Gutter: 53u, but in the zoom reflow it must still hold the rem-floored field numerals. */
   --gut: calc(53 * var(--u));
-  --stroke: 6px;
+  --stroke: 3px; /* pit2/t1w-d: STROKE at userZoom 1, see src/nodes/geom.js; App.jsx overrides on the canvas per zoom */
 }
 
 * { box-sizing: border-box; }
@@ -92,7 +94,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 /* Field numerals: bold, cap 12px, set in the gutter (Müller-Brockmann: numbered fields). */
 .rownum { position: absolute; left: calc(16 * var(--u)); font: 800 max(calc(18.3 * var(--u)), calc(18.3 * var(--f)))/1 var(--font); font-stretch: 118%; letter-spacing: 0; }
 .rownum .f1 { font-variation-settings: 'XTRA' 603; } /* ref3's 1 is a wider figure than Roboto Flex's; XTRA opens it */
-.r1 .rownum { bottom: calc(20 * var(--u)); }
+.r1 .rownum { bottom: calc(12 * var(--u)); }
 .r2 .rownum { top: calc(26 * var(--u)); }
 .r3 .rownum { top: 50%; transform: translateY(-50%); }
 
@@ -121,7 +123,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
   background: var(--ink); cursor: pointer; display: grid; place-items: center; }
 .disk svg { width: calc(100 * var(--u)); height: calc(100 * var(--u)); overflow: visible; }
 .disk path { fill: none; stroke: var(--paper); stroke-width: 13; stroke-linecap: butt; stroke-linejoin: miter; }
-.disk:hover { background: #000; box-shadow: 0 0 0 calc(4 * var(--u)) var(--paper), 0 0 0 calc(7 * var(--u)) var(--ink); }
+.disk:hover { background: var(--ink); box-shadow: 0 0 0 calc(4 * var(--u)) var(--paper), 0 0 0 calc(7 * var(--u)) var(--ink); }
 .disk[aria-pressed='true'] svg { transform: rotate(90deg); }
 .lockup { position: absolute; left: calc(206 * var(--u)); top: calc(96 * var(--u)); margin: 0; font: 800 max(calc(57.9 * var(--u)), calc(57.9 * var(--f)))/0.91537 var(--font); font-stretch: 112%; letter-spacing: 0; text-transform: uppercase; }
 
@@ -141,12 +143,12 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
    mid-drag (measured 7/8 drops landing before, see commit). */
 .pal-tab { position: absolute; top: 50%; left: calc(var(--tw) / -2); width: var(--tw); height: max(calc(80 * var(--u)), 88px); transform: translateY(-50%);
   margin: 0; padding: 0; background: var(--paper); border: var(--rule) solid var(--ink); border-radius: 0; cursor: pointer;
-  display: grid; place-items: center; pointer-events: auto; transition: left .16s ease-out; }
+  display: grid; place-items: center; pointer-events: auto; transition: left .16s ease-out; z-index: 1; }
 .palette.open .pal-tab { left: calc(var(--pw) - var(--tw) / 2); }
 .palette.open.tucked .pal-tab { left: calc(var(--tw) / -2); }
 .pal-tab svg { width: calc(14 * var(--u)); height: calc(24 * var(--u)); overflow: visible; }
 .pal-tab path { fill: none; stroke: var(--ink); stroke-width: 3.5; stroke-linecap: butt; stroke-linejoin: miter; }
-.pal-tab:hover, .pal-tab:focus-visible { background: var(--ink); outline: none; }
+.pal-tab:hover, .pal-tab:focus-visible { background: var(--ink); } .pal-tab:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
 .pal-tab:hover path, .pal-tab:focus-visible path { stroke: var(--paper); }
 
 /* Column on the frame's baseline grid (20u). Glyphs = the canvas circuit at 0.41 (Tony: bigger, as in PR 3's first
@@ -154,12 +156,13 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
    with its 2u rule centred. 20u pad + 8 x 60 + 2 x 60 + 20u pad = 640u > the 480u row, so the list scrolls: at rest
    the NAND module is sliced by the bottom margin (the peek) and the arrowhead sits in that margin. */
 .pal-list, .pal-list ul { list-style: none; margin: 0; padding: 0; }
-.pal-list { height: 100%; overflow-y: auto; scrollbar-width: none; padding: calc(20 * var(--u)) 0; box-sizing: border-box; --fa: 0px; --fb: 0px;
+.pal-list { height: 100%; overflow-y: auto; scrollbar-width: none; padding: calc(20 * var(--u)) 0; box-sizing: border-box; }
+.pal-list, .truth .tt { --fa: 0px; --fb: 0px;
   -webkit-mask-image: linear-gradient(to bottom, transparent calc(var(--fa) * .5), #000 var(--fa), #000 calc(100% - var(--fb)), transparent calc(100% - var(--fb) * .5));
           mask-image: linear-gradient(to bottom, transparent calc(var(--fa) * .5), #000 var(--fa), #000 calc(100% - var(--fb)), transparent calc(100% - var(--fb) * .5)); }
 /* Edge fade (Tony: the hard cut read as broken): a transparency MASK, not a colour gradient, so ink and paper stay flat.
    Only on a side with more parts; it runs over one 40u span and is fully clear at the 20u margin holding the arrowhead. */
-.pal-list.fd { --fb: calc(40 * var(--u)); } .pal-list.fu { --fa: calc(40 * var(--u)); }
+.pal-list.fd, .truth .tt.fd { --fb: calc(40 * var(--u)); } .pal-list.fu { --fa: calc(40 * var(--u)); }
 .pal-list::-webkit-scrollbar { display: none; }
 .pal-group ul { display: flex; flex-direction: column; align-items: center; padding-left: calc(4 * var(--u)); } /* pins pull ink left of the box: +2u optical shift */
 .pal-group li { height: calc(60 * var(--u)); display: grid; place-items: center; }
@@ -178,9 +181,9 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .pal-item[aria-disabled] .shape .body { stroke: var(--ink-2); }
 .glyph { position: relative; display: block; width: calc(var(--gw) * .41 * var(--u)); height: calc(var(--gh) * .41 * var(--u)); }
 .glyph .shape { width: 100%; height: 100%; }
-/* Palette stroke = the canvas 6 scaled with the glyph (6 x 0.41): same stroke-to-size ratio, so tray and canvas read
+/* Palette stroke = the canvas 4 scaled with the glyph (4 x 0.41): same stroke-to-size ratio, so tray and canvas read
    equally black (Pillow ink density tray/canvas 0.92; a flat 4px on both measured 2.19x darker in the tray, RUI p.48-51). */
-.glyph .shape .body { stroke-width: calc(6 * .41 * var(--u)); vector-effect: non-scaling-stroke; }
+.glyph .shape .body { stroke-width: max(2px, calc(3 * .41 * var(--u))); vector-effect: non-scaling-stroke; }
 
 /* Scroll cues: a 16x8u solid ink arrowhead centred in a 20u (one baseline) paper margin at the list edge. The next part
    is cut off by that margin (overlap/peek, RUI p.170), which says "more below" by itself; the arrowhead confirms it.
@@ -196,14 +199,6 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
    gap between the demo's two switches (ellipse centre 15u above the tab's, tip 4.5u above the tab's bottom), never on a node.
    Size from the ref's balloon : tab ratio (4.55 tab widths wide). Lettering = Anime Ace 3 BB outlines (src/hintLettering.js), the
    face the ref imitates; shipped as paths, never as a font. SVG box 200x130 drawn at 1.052u per unit. */
-.pal-hint { position: absolute; margin: 0; left: calc(var(--tw) / 2 - 6.3 * var(--u)); top: calc(50% - 65.5 * var(--u));
-  width: calc(210.4 * var(--u)); height: calc(136.8 * var(--u)); pointer-events: none; }
-.pal-hint svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.pal-hint path { fill: var(--paper); stroke: var(--ink); stroke-width: 3.6; stroke-linejoin: round; }
-.pal-hint .lettering { position: absolute; left: calc(105.2 * var(--u)); top: calc(50.5 * var(--u)); inset-block-end: auto; inset-inline-end: auto;
-  width: calc(136 * var(--u)); height: auto; transform: translate(-50%, -50%); overflow: visible; } /* ref: text ~75% of the balloon width; scales with the balloon */
-.pal-hint .lettering path { fill: var(--ink); stroke: none; }
-.pal-hint .lettering .rest { stroke: var(--ink); stroke-width: 22; stroke-linejoin: round; } /* +0.022em: Regular up to the ref's weight */
 .react-flow { background: transparent; }
 .react-flow__pane { cursor: default; }
 
@@ -213,7 +208,8 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .shape .line { fill: none; }
 .shape .lit { fill: var(--one); stroke: none; }
 .stubs { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
-.stubs line { stroke: var(--ink-2); stroke-width: 2; stroke-dasharray: 2 4; stroke-linecap: butt; }
+.stubs line, .shape .dots path, .shape .dots line { fill: none;  stroke: var(--ink-2); stroke-width: 2; stroke-dasharray: 2 4; stroke-linecap: butt; }
+.shape .dots line.one { stroke: var(--one); }
 /* Hovering a wire previews its deletion in the stubs' language: it turns dotted (a click removes it). */
 /* Delete X: square ink tile + white X (Tony: square, not round). Hidden until its node or wire is hovered (or it has keyboard focus). */
 .remove { width: 24px; height: 24px; margin: 0; padding: 0; border: 0; border-radius: 0; background: var(--ink); cursor: pointer;
@@ -223,10 +219,11 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .remove svg { width: 24px; height: 24px; }
 .remove path { stroke: var(--paper); stroke-width: 2.5; stroke-linecap: butt; fill: none; }
 .remove:hover, .remove:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-.node .remove { display: none; border-radius: 50%; }
+.remove::after { content: ''; position: absolute; inset: -10px; }   /* 44x44 hit area around the 24px tile */
+.node .remove { display: grid; opacity: 0; pointer-events: none; border-radius: 50%; }
 /* The X borrows its host's geometry (Tony, pick 3): wires are right angles -> square X; parts are arcs and
    bubbles -> round X. */
-.react-flow__node:hover .node .remove, .node .remove:focus-visible { display: grid; }
+.react-flow__node:hover .node .remove, .react-flow__node.selected .node .remove, .node .remove:focus-visible { opacity: 1; pointer-events: all; }
 /* Hovering the X previews the result: the wire goes dotted, like a free pin's stub. */
 .armed .react-flow__edge-path { stroke-dasharray: 2 6; }
 .node { position: relative; }
@@ -242,7 +239,8 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
   left: var(--hit-left); top: var(--hit-top); width: var(--hit-w); height: var(--hit-h); }
 .debug-hitzones .react-flow__handle.port::after { outline: 1px dashed red; background: rgba(255, 0, 0, 0.08); }
 .react-flow__handle.port:hover, .react-flow__handle.port.connectingto { outline: 2px solid var(--ink); outline-offset: 1px; }
-.react-flow__handle.port.picked { outline: 3px solid var(--ink); outline-offset: 1px; }
+.react-flow__handle.port.picked { outline: 3px solid var(--ink); outline-offset: 1px; background: var(--ink); }
+.react-flow__handle.port.picked:focus-visible { outline-offset: 4px; }
 
 /* Wires: 6px, orthogonal, ink = 0, orange = 1. */
 .react-flow__edge-path { stroke: var(--ink); stroke-width: var(--stroke); stroke-linejoin: miter; stroke-linecap: butt; }
@@ -259,43 +257,69 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .disk:focus-visible { outline: max(2px, calc(3 * var(--u))) solid var(--ink); outline-offset: calc(5 * var(--u)); }
 .react-flow__node { cursor: grab; }
 
-/* Inline rejection beside the failed port (GOV.UK Design System: error message next to the field).
-   22px clear of the node box so neither the knob nor its hover ring is covered (R6 defect 8). */
-.reject { position: absolute; right: calc(100% + 22px); transform: translateY(-50%); margin: 0; white-space: nowrap; z-index: 10;
-  padding: 3px 0 3px 10px; border-left: 4px solid var(--ink); background: var(--paper);
-  font: 700 14px/1.2 var(--font); font-stretch: 112%; letter-spacing: 0; text-transform: uppercase; color: var(--ink); }
+/* Speech balloons (pit2 bub-d): every message is said by a part or by the Figur wordmark, never by a box. Same drawing as
+   the palette hint: white 2:1 ellipse, ~0.25 cap ink line, curved tail; lettering = outlined Anime Ace 3 BB, cap 12u
+   (src/sayLettering.js, src/Say.jsx). The <p> is placed by its tail tip (--ax, --ay); --k = one u in that layer. */
+.say { position: absolute; margin: 0; z-index: 10; pointer-events: none; --k: 1px;
+  left: calc(var(--ax) - var(--dx) * var(--k)); top: calc(var(--ay) - var(--dy) * var(--k));
+  width: calc(var(--w) * var(--k)); height: calc(var(--h) * var(--k)); }
+.say svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.say .bal { fill: var(--paper); stroke: var(--ink); stroke-width: 3; stroke-linejoin: round; }
+.say .emph { fill: var(--ink); stroke: var(--ink); stroke-width: 0.5; stroke-linejoin: round; } /* Bold Italic held above the thickened Regular */
+.say .rest { fill: var(--ink); stroke: var(--ink); stroke-width: 0.4; stroke-linejoin: round; } /* +0.022em, as the hint */
+.say-part { --ax: 42%; --ay: -9px; } /* tip just above the part's top edge, short of it */
+.say-part.flip-y { --ay: calc(100% + 9px); }
+.say.flip-y svg { transform: scaleY(-1); }
+.say.flip-y .emph, .say.flip-y .rest { transform: scaleY(-1); transform-box: fill-box; transform-origin: center; }
+.say.flip-x svg { transform: scaleX(-1); }
+.say.flip-x .emph, .say.flip-x .rest { transform: scaleX(-1); transform-box: fill-box; transform-origin: center; }
+.say.flip-y.flip-x svg { transform: scale(-1, -1); }
+.pal-hint { --k: var(--u); --ax: calc(var(--tw) / 2); --ay: 50%; z-index: 6; } /* same balloon; tail tip at the tab arrow's centre y (Tony), x on the tab's right edge */
+.say-logo { --k: var(--u); --ax: calc(771 * var(--u)); --ay: calc(112 * var(--u)); z-index: 6; } /* tip at the r's shoulder */
 
 /* Truth table: block centred in row 02 (Tony delta 3). */
-.truth { display: flex; flex-direction: column; justify-content: center; padding: 0 calc(20 * var(--u)); }
+.truth { display: flex; flex-direction: column; justify-content: flex-start; padding: calc(56 * var(--u)) calc(20 * var(--u)) 0; }
 .truth .label { margin: 0 0 0 calc(4 * var(--u)); font: 760 max(calc(43.7 * var(--u)), calc(43.7 * var(--f)))/0.68650 var(--font-label); font-stretch: 88%; text-transform: uppercase; letter-spacing: 0; word-spacing: calc(-1 * var(--u)); }
 .truth table { width: 100%; border-collapse: collapse; table-layout: fixed; margin-top: calc(32 * var(--u)); }
 .truth th { font: 700 max(calc(32.4 * var(--u)), calc(32.4 * var(--f)))/0.70988 var(--font); font-stretch: 100%; padding: 0 0 0.52469em; text-align: center; border-bottom: var(--rule) solid var(--ink); }
 .truth td { font: 760 max(calc(35.8 * var(--u)), calc(35.8 * var(--f)))/1 var(--font); font-stretch: 105%; height: 1.89944em; padding: 0; text-align: center; border-bottom: var(--hair) solid var(--ink); font-variant-numeric: tabular-nums; }
-.truth th:first-child, .truth td:first-child { text-align: left; padding-left: calc(8 * var(--u)); }
-/* Column widths set so column centres land on ref3's (A 1129, B 1248, OUT 1366 at 1440 wide). */
-.truth .classic th:nth-child(1) { width: 22.25%; } .truth .classic th:nth-child(2) { width: 23.62%; }
-.truth .classic th:nth-child(3) { width: 30.73%; } .truth .classic th:nth-child(4) { width: 23.40%; }
+/* Column widths: ref3's A / B / OUT columns (23.62 / 30.73 / 23.40) rescaled to fill the width the # column left. */
+.truth .classic th:nth-child(1) { width: 30.38%; } .truth .classic th:nth-child(2) { width: 39.52%; }
+.truth .classic th:nth-child(3) { width: 30.10%; }
 /* Rows scroll inside the table box under a sticky header; a click on a row sets the switches. */
-.truth .tt { max-height: calc(360 * var(--u)); overflow-y: auto; scrollbar-width: thin; margin-top: calc(32 * var(--u)); }
+.truth .tt { max-height: calc(360 * var(--u)); overflow-y: auto; scrollbar-width: thin; margin-top: calc(32 * var(--u) - 0.2 * max(calc(32.4 * var(--u)), calc(32.4 * var(--f)))); }
 .truth .tt table { margin-top: 0; }
+/* Scroll cues = the palette's .pal-more, unchanged (16x8u ink arrowhead in a 20u box), set in the cell's 20u right
+   paper margin beside the table box, top and bottom: paper margin, never over a figure. */
+.truth .tt-wrap { position: relative; }
+.truth .pal-more { left: 100%; right: auto; width: calc(20 * var(--u)); }
+/* Sideways: the same arrowhead turned 90 degrees, centred in the cell's left / right 20u paper margins. */
+.truth .pal-more.left, .truth .pal-more.right { top: 0; bottom: 0; height: auto; }
+.truth .pal-more.left { left: auto; right: 100%; }
+.truth .pal-more.left svg, .truth .pal-more.right svg { width: calc(8 * var(--u)); height: calc(16 * var(--u)); }
+.truth .pal-more.down { left: 0; right: 0; width: auto; top: auto; bottom: 0; }   /* centred bottom cue over the fade, as in the sidebar */
+.truth .tt table { width: calc(max(4, var(--n)) * 25%); } /* never squeeze: a column keeps its n = 3 width (1/4 of the box); past 4 columns the table scrolls sideways */
+/* The header line box (0.71em) is exactly cap height, so round caps (O, C) overshoot it; inside the scroller that overshoot
+   was clipped at the box top. 0.2em of headroom inside the box, taken back from the margin above: nothing moves. */
+.truth thead th { padding-top: 0.2em; }
 .truth thead th { position: sticky; top: 0; background: var(--paper); z-index: 1; border-bottom: 0; box-shadow: inset 0 calc(-1 * var(--rule)) 0 var(--ink); } /* sticky cells drop collapsed borders: draw the rule as a shadow */
-.truth tbody tr:not(.pad) { cursor: pointer; scroll-snap-align: start; }
-.truth .tt { scroll-snap-type: y proximity; } /* not mandatory: with windowed rows a long jump would snap back to the few rendered ones */
-.truth tbody tr:not(.live):not(.pad):hover td { background: var(--grid, #f2f2f2); }
+.truth tbody tr:not(.pad) { cursor: pointer; scroll-snap-align: start none; }
+.truth td { scroll-snap-align: none start; } /* sideways: snap to whole columns, so a cut header only ever means "scrolled" */
+.truth .tt { scroll-snap-type: both proximity; } /* not mandatory: with windowed rows a long jump would snap back to the few rendered ones */
+.truth tbody tr:not(.live):not(.pad):hover td { background: var(--hover); }
+.truth tbody tr:focus-visible { outline: 3px solid var(--ink); outline-offset: -3px; }
 /* Per-glyph fit (Pillow vs ref3 at cap 23 / 26). Roboto Flex has no 'tnum' feature: its default figures are
    already tabular (GSUB lists only liga/locl/pnum/rvrn), so ink width is fitted per figure with wdth and XTRA
    (XTRA = counter/white width, Google Fonts Roboto Flex axis docs). */
-.truth th .hN { font-stretch: 55%; } .truth th .hA { font-stretch: 115%; } .truth th .hB { font-stretch: 130%; }
+.truth th .hA { font-stretch: 115%; } .truth th .hB { font-stretch: 130%; }
 .truth th .hO { letter-spacing: -0.061728em; } .truth th .hU { font-stretch: 115%; letter-spacing: -0.030864em; }
 .truth td .f4 { font-stretch: 50%; } /* N2: 4 was 20 vs ref3 17 */
 .truth td .f2 { font-stretch: 75%; } .truth td .f1 { font-stretch: 125%; font-variation-settings: 'XTRA' 520; }
-.truth tr.live td { background: var(--one); color: var(--paper); }
+.truth tr.live td { background: var(--one); color: var(--ink); }
 .truth tr:not(.live) td { font-weight: 560; } /* 1c: non-live rows one weight step down, same ink */
 
 /* Footer: status (left) and help bar (right). Delta 6: Medium caps, cap 12px, +0.08em, ink. */
 .status { display: flex; align-items: center; padding: 0 calc(16 * var(--u)); }
-.status .msg { font: 500 max(calc(16.9 * var(--u)), calc(16.9 * var(--f)))/1 var(--font-help); letter-spacing: 0; font-variation-settings: 'wdth' 78, 'opsz' 36; text-transform: uppercase; color: var(--ink); }
-.status .msg.bad { font-weight: 700; border-left: 0.2367em solid var(--ink); padding-left: 0.59172em; }
 
 .help { display: flex; align-items: center; justify-content: flex-end; padding: 0 calc(16 * var(--u)) 0 calc(8 * var(--u)); }
 .help p { margin: 0; white-space: nowrap; font: 500 max(calc(16.9 * var(--u)), calc(16.9 * var(--f)))/1 var(--font-help); letter-spacing: 0; font-variation-settings: 'wdth' 78, 'opsz' 36; text-transform: uppercase; color: var(--ink); }
@@ -335,7 +359,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
   .lockup br { display: none; } /* one line: keeps the band short so the canvas stays in the first screen */
   .c-margin.r2 { grid-area: 3 / 1 / 5 / 2; }
   .canvas { grid-area: 3 / 2 / 4 / 4; border-right: 0; }
-  .truth { grid-area: 4 / 2 / 5 / 4; padding-block: 1.5rem; align-items: end; }
+  .truth { grid-area: 4 / 2 / 5 / 4; padding-block: 1.5rem; align-items: end; padding-top: 1.5rem; }
   .truth .label, .truth table { width: calc(23.5rem - 40 * var(--u)); }
   .c-margin.r3 { grid-area: 5 / 1; } .status { grid-area: 5 / 2; } .help { grid-area: 5 / 3; }
   .wordmark { left: calc(var(--gut) + 2 * var(--u)); }
@@ -344,3 +368,22 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 
 /* Snap guide: a thin dotted --ink-2 line across the canvas at the shared pin height (same language as pin stubs). */
 .guide { position: absolute; left: -10000px; width: 20000px; height: 0; border-top: 2px dotted var(--ink-2); pointer-events: none; transform: translateY(-1px); }
+
+/* Toasts (pit2 bub-f): comic CAPTION boxes for system news with no speaker (Blambot grammar_caps.jpg, first style:
+   the flat "MEANWHILE..." box). Flat rectangle, thin ink rule (0.14 cap, as measured), Italic caps, 0.45 x 0.5 cap
+   padding, one line (e1 layout). Fill = --caption, the ref's cream muted toward paper (e2 colouring; --one stays
+   logic 1 only). Stack: newest at the bottom,
+   gap 20u = one canvas grid line. */
+.toasts { position: absolute; right: calc(20 * var(--u)); bottom: calc(20 * var(--u)); z-index: 7; pointer-events: none;
+  display: flex; flex-direction: column; align-items: flex-end; gap: calc(20 * var(--u)); }
+.toast { margin: 0; width: calc(var(--w) * max(var(--u), 1px)); height: calc(var(--h) * max(var(--u), 1px)); animation: toast-in 160ms ease-out; }
+.toast svg { display: block; width: 100%; height: 100%; overflow: visible; }
+.toast .box { fill: var(--caption); stroke: var(--ink); stroke-width: 1.7; }
+.toast path { fill: var(--ink); stroke: var(--ink); stroke-width: 0.4; stroke-linejoin: round; }
+@keyframes toast-in { from { opacity: 0; transform: translateY(calc(8 * var(--u))); } }
+@media (prefers-reduced-motion: reduce) { .toast { animation: none; } .pal-bar, .palette.open .pal-bar, .palette.open.tucked .pal-bar, .pal-tab { transition: none; } }
+/* Column kind, rules only: one --rule ink rule stands between the switch (input) and lamp (output) columns,
+   the same weight as the header rule; signal crosses it left to right, as it does on the canvas. */
+.truth td.k-S + td.k-L { border-left: var(--rule) solid var(--ink); }
+.truth thead th.k-S { box-shadow: inset 0 calc(-1 * var(--hair)) 0 var(--ink); } /* the heavy header rule runs over the lamp group only: with the vertical rule it makes one ink corner that closes the outputs; the switch side keeps the row hairline */
+.truth thead th.k-S + th.k-L { box-shadow: inset var(--rule) 0 0 var(--ink), inset 0 calc(-1 * var(--rule)) 0 var(--ink); }

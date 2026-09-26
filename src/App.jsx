@@ -1,10 +1,13 @@
-import { useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ReactFlow, Background, useNodesState, ViewportPortal } from '@xyflow/react';
 import { canConnect, canAddSwitch, evaluate } from './sim.js';
 import { nodeTypes, pinYs } from './nodes/index.jsx';
+import { STROKE, ZOOM_EXP } from './nodes/geom.js';
 import Palette, { DND } from './Palette.jsx';
 import Wire from './Wire.jsx';
 import Truth from './Truth.jsx';
+import Say from './Say.jsx';
+import Toasts, { TOAST_MS } from './Toasts.jsx';
 
 const edgeTypes = { wire: Wire };
 
@@ -27,7 +30,10 @@ const VIEW = [
   { id: 'l1', type: 'L', position: { x: 736, y: 181 }, data: {} },
 ];
 
-let nextWire = 1, nextNode = 1;
+// Dev-only test hook (stripped from the build): a harness may preset window.__GOB = { circuit, view }.
+const BOOT = import.meta.env.DEV ? window.__GOB : null;
+
+let nextWire = 1, nextNode = 1, nextToast = 1;
 
 // Per-figure spans: each figure gets its own width fit against ref3 (see theme.css, table figures).
 // Glyph spans are aria-hidden; one visually hidden run carries the whole word ("01", not "0 1").
@@ -35,13 +41,23 @@ const fig = (v) => [<span key="t" className="sr">{String(v)}</span>,
   <span key="g" aria-hidden="true">{[...String(v)].map((c, k) => <span key={k} className={'f' + c}>{c}</span>)}</span>];
 
 export default function App() {
-  const [circuit, setCircuit] = useState(START);
-  const [view, setView, onViewChange] = useNodesState(VIEW);
+  const [circuit, setCircuit] = useState(BOOT?.circuit ?? START);
+  const [view, setView, onViewChange] = useNodesState(BOOT?.view ?? VIEW);
   const [showGrid, setShowGrid] = useState(false);
   const [reject, setReject] = useState(null); // inline error beside the failed port (GOV.UK error message)
   const [edgeSel, setEdgeSel] = useState(() => new Set()); // controlled wire selection, so Backspace can delete a wire
   const [pending, setPending] = useState(null); // keyboard wiring: source picked with Enter/Space
-  const [status, setStatus] = useState({ text: '', bad: false });
+  // Toasts (caption boxes): newest last; each removes itself after TOAST_MS.
+  const [toasts, setToasts] = useState([]);
+  const toast = (phrase) => {
+    const id = nextToast++;
+    const topic = (p) => p.replace(/(On|Off)$/, '');
+    setToasts((l) => [...l.filter((t) => topic(t.phrase) !== topic(phrase)), { id, phrase }]);
+    setTimeout(() => setToasts((l) => l.filter((t) => t.id !== id)), TOAST_MS);
+  };
+  const [status, setStatus] = useState({ phrase: null, text: '' }); // phrase = a key of sayLettering.js
+  useEffect(() => { if (!reject) return; const t = setTimeout(() => setReject(null), TOAST_MS); return () => clearTimeout(t); }, [reject]);
+  useEffect(() => { if (!status.phrase) return; const t = setTimeout(() => setStatus({ phrase: null, text: '' }), TOAST_MS); return () => clearTimeout(t); }, [status.phrase]);
   // Palette: open is the person's choice; tucked hides it only while a drag runs, so it comes back as it was.
   const [palOpen, setPalOpen] = useState(false);
   const [tucked, setTucked] = useState(false);
@@ -58,6 +74,10 @@ export default function App() {
   // Pan/zoom are the user's (React Flow docs: Viewport). A resize rescales the current viewport by zoom/zoom_prev
   // instead of resetting it, so the user's own pan and zoom survive (React Flow docs: getViewport / setViewport).
   const [rf, setRf] = useState(null);
+  // T1 iter 3 (Tony, option c): user zoom (viewport / base) is capped to 0.75-1.5. T1 verdict (pit2/t1w-d):
+  // lines no longer hold a constant screen width across that range; they grow slightly bolder zooming in,
+  // screen px = STROKE * userZoom^ZOOM_EXP (see src/nodes/geom.js).
+  const [userZoom, setUserZoom] = useState(1);
   const prevZoom = useRef(null);
   useLayoutEffect(() => {
     if (!rf) return;
@@ -79,7 +99,8 @@ export default function App() {
   const nodes = view.map((n) => ({
     ...n,
     data: { ...circuit.nodes[n.id], on: values[n.id],
-      wired: { in: [0, 1].map((pin) => wires.some((w) => w.target === n.id && w.pin === pin)), out: wires.some((w) => w.source === n.id) }, onToggle: () => { setReject(null); toggle(n.id); },
+      wired: { in: [0, 1].map((pin) => wires.some((w) => w.target === n.id && w.pin === pin)), out: wires.some((w) => w.source === n.id) },
+      lit: { in: [0, 1].map((pin) => wires.some((w) => w.target === n.id && w.pin === pin && values[w.source])), out: !!values[n.id] && wires.some((w) => w.source === n.id) }, onToggle: () => { setReject(null); toggle(n.id); },
       reject: reject && reject.node === n.id ? reject : null,
       pending, onPort: (handle) => onPort(n.id, handle), onRemove: () => removeNodes([n.id]) },
   }));
@@ -100,16 +121,28 @@ export default function App() {
   // New node from the palette. `at` = flow position of the drop; none (click / Enter) = canvas centre,
   // nudged per add so repeated adds don't stack exactly.
   const switchFull = !canAddSwitch(circuit).ok;
+  const SIZE = { S: [86, 86], L: [114, 114], G: [112, 108] };   // flow units, as measured at zoom 1
+  const free = (at, kind) => {
+    const [w, h] = SIZE[kind];
+    const hit = (p) => view.some((n) => { const [nw, nh] = SIZE[n.type] ?? [112, 108];
+      return p.x < n.position.x + nw + 20 && p.x + w + 20 > n.position.x && p.y < n.position.y + nh + 20 && p.y + h + 20 > n.position.y; });
+    for (let r = 0; r < 12; r++) for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
+      if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
+      const p = { x: Math.round((at.x + dx * 40) / 20) * 20, y: Math.round((at.y + dy * 40) / 20) * 20 };
+      if (!hit(p)) return p; }
+    return at;
+  };
   const addNode = (it, at) => {
     if (it.kind === 'S' && switchFull) return;
     const id = `${it.kind.toLowerCase()}${it.type ? it.type.toLowerCase() : ''}_${nextNode++}`; // "_" keeps added parts clear of the demo ids (s1, s2, g1, l1)
     if (!at) {
       const box = frame.current.querySelector('.canvas').getBoundingClientRect();
       const c = rf.screenToFlowPosition({ x: box.left + box.width / 2, y: box.top + box.height / 2 });
-      at = { x: c.x - 60 + ((nextNode % 5) * 20), y: c.y - 54 + ((nextNode % 5) * 20) };
+      at = { x: c.x - 60, y: c.y - 54 };
     }
+    at = free(at, it.kind);
     setCircuit((c) => ({ ...c, nodes: { ...c.nodes, [id]: { id, kind: it.kind, ...(it.type && { type: it.type }), ...(it.kind === 'S' && { value: false }) } } }));
-    setView((v) => [...v, { id, type: it.kind, position: at, data: {} }]);
+    setView((v) => [...v.map((n) => ({ ...n, selected: false })), { id, type: it.kind, position: at, data: {}, selected: true }]);
   };
   const onDrop = (e) => {
     const raw = e.dataTransfer.getData(DND);
@@ -117,23 +150,25 @@ export default function App() {
     e.preventDefault();
     const p = rf.screenToFlowPosition({ x: e.clientX, y: e.clientY });
     addNode(JSON.parse(raw), { x: p.x - 40, y: p.y - 54 }); // pointer lands near the glyph's middle
+    setPalOpen(false);
   };
 
   // Plain-language copy for reasons a person might actually hit; anything else falls back to the raw reason.
-  const REJECT_TEXT = { 'pin taken': 'That input already has a wire' };
+  // Every message is a comic balloon (Blambot, Comic Book Grammar & Tradition): caps, *bold* marks the stressed word.
+  const REJECT_PHRASE = { 'pin taken': 'pinTaken' };
 
   const onConnect = ({ source, target, targetHandle }) => {
     const pin = Number(targetHandle.slice(2));
     const check = canConnect(circuit, source, target, pin);
     if (!check.ok) {
-      const text = REJECT_TEXT[check.reason] ?? `Can't connect: ${check.reason}`;
-      setReject({ node: target, handle: targetHandle, text });
-      return setStatus({ text, bad: true });
+      const phrase = REJECT_PHRASE[check.reason] ?? 'cantConnect';
+      setReject({ node: target, handle: targetHandle, phrase, text: phrase === 'cantConnect' ? `Can't connect: ${check.reason}` : undefined });
+      return setStatus({ phrase: null, text: '' }); // the gate says it (role=alert); the logo stays quiet
     }
     setReject(null);
     const id = `w${nextWire++}`;
     setCircuit((c) => ({ ...c, wires: { ...c.wires, [id]: { id, source, target, pin } } }));
-    setStatus({ text: '', bad: false }); // silent success: ref3 leaves row 03 empty
+    setStatus({ phrase: null, text: '' }); // silent success: ref3 leaves row 03 empty
   };
 
   // The drop target is decided HERE, by the port hit zones under the pointer (the same big zones a
@@ -158,12 +193,15 @@ export default function App() {
 
   // Keyboard wiring (WCAG 2.1.1): Enter/Space on an output picks it, on an input connects it.
   const onPort = (node, handle) => {
-    if (handle === 'out') { setPending(node); return setStatus({ text: `Wiring from ${node.toUpperCase()}: pick an input`, bad: false }); }
-    if (!pending) return setStatus({ text: 'Pick an output first', bad: true });
+    if (handle === 'out') { setPending(node); return setStatus({ phrase: null, text: `Wiring from ${node.toUpperCase()}: pick an input` }); }
+    if (!pending) return setStatus({ phrase: 'pickOutput', text: '' });
     setPending(null);
     onConnect({ source: pending, target: node, targetHandle: handle });
   };
 
+  // Wipe the canvas: every part and wire goes, then a caption toast says so. No key yet: the parked T4 wipe button calls it.
+  // eslint-disable-next-line no-unused-vars
+  const wipe = () => { removeNodes(view.map((n) => n.id)); toast('wiped'); };
   // Node delete (double-click, or select + Backspace/Delete): drop the node and every wire touching it.
   const removeNodes = (ids) => {
     if (!ids.length) return;
@@ -173,7 +211,7 @@ export default function App() {
       wires: Object.fromEntries(Object.entries(c.wires).filter(([, w]) => !ids.includes(w.source) && !ids.includes(w.target))),
     }));
     setReject(null); setPending(null);
-    setStatus({ text: '', bad: false });
+    setStatus({ phrase: null, text: '' });
   };
   // Snap guides (Tony, Sep 25; Figma/Canva smart guides). A pin within SNAP flow units of another node's pin height
   // pulls the dragged node onto that line, and a thin dotted --ink-2 guide shows it. SNAP = 8: the 20u grid already
@@ -226,19 +264,23 @@ export default function App() {
       <div className="cell c-main r1" />
       <div className="cell c-side r1">
         <button className="disk" aria-pressed={showGrid} aria-label={showGrid ? 'Hide grid' : 'Show grid'} title={showGrid ? 'Hide grid' : 'Show grid'}
-          onClick={() => setShowGrid((g) => !g)}>
+          onClick={() => { setShowGrid(!showGrid); toast(showGrid ? 'gridOff' : 'gridOn'); }}>
           <svg viewBox="-50 -50 100 100" aria-hidden="true"><path d="M-36.5 0H26M-0.6 -27.9L27.3 0L-0.6 27.9" /></svg>
         </button>
         <p className="lockup">Circuit<br /> editor</p>
       </div>
       <h1 className="wordmark" lang="sv" aria-label="Figur"><span className="sr">Figur</span><span aria-hidden="true"><span className="wF">F</span><span className="wi">i</span><span className="wg">g</span><span className="wu">u</span><span className="wr">r</span></span></h1>
+      {/* Status lines are spoken by the logo: a balloon whose tail points at the wordmark. */}
+      {status.phrase ? <Say phrase={status.phrase} className="say-logo" /> : <p className="sr" role="status">{status.text}</p>}
 
       <div className="cell c-margin r2"><span className="rownum">{fig('02')}</span></div>
       {/* Part drops are caught here in the capture phase, so a drop that lands on an existing node still adds the part
           (nodes like the switch button would otherwise swallow it). */}
-      <main className="cell c-main r2 canvas"
+      <main style={{ '--stroke': `${STROKE * userZoom ** (ZOOM_EXP - 1)}px` }} className="cell c-main r2 canvas" aria-label="Circuit canvas"
         onDragOverCapture={(e) => { if (e.dataTransfer.types.includes(DND)) { e.preventDefault(); e.dataTransfer.dropEffect = 'copy'; } }}
         onDropCapture={onDrop} onPointerMove={wireGuides}>
+        {/* Palette first in DOM: its tab is the first stop in the canvas (absolute, so nothing moves) */}
+        <Palette open={palOpen} setOpen={setPalOpen} tucked={tucked} onDrag={setTucked} switchFull={switchFull} onAdd={(it) => addNode(it)} />
         <ReactFlow
           nodes={nodes}
           edges={edges}
@@ -254,27 +296,27 @@ export default function App() {
           onConnect={onConnect}
           onConnectStart={onConnectStart}
           onConnectEnd={onConnectEnd}
-          onPaneClick={() => setPalOpen(false)} // HIG: an overlay panel is transient; a click on the work closes it
+          onPaneClick={() => { setPalOpen(false); setReject(null); }} // HIG: an overlay panel is transient; a click on the work closes it
           onNodeDragStart={() => setTucked(true)}
           onNodeDragStop={() => setTucked(false)}
           snapToGrid
           snapGrid={[20, 20]}
           onInit={setRf}
           defaultViewport={{ x: 0, y: 0, zoom }}
-          minZoom={0.25}
-          maxZoom={4}
+          onMove={(_, v) => setUserZoom(v.zoom / zoom)}
+          minZoom={0.75 * zoom}
+          maxZoom={1.5 * zoom}
           proOptions={{ hideAttribution: true }}
         >
           {showGrid && <Background gap={20} color="var(--grid)" />}
           <ViewportPortal>{guides.map((y) => <div key={y} className="guide" style={{ top: y }} />)}</ViewportPortal>
         </ReactFlow>
-        <Palette open={palOpen} setOpen={setPalOpen} tucked={tucked} onDrag={setTucked} switchFull={switchFull} onAdd={(it) => addNode(it)} />
+        <Toasts list={toasts} />
       </main>
       <Truth circuit={circuit} view={view} fig={fig} setSwitches={setSwitches} />
 
       <div className="cell c-margin r3"><span className="rownum">{fig('03')}</span></div>
       <footer className="cell c-main r3 status">
-        <span className={`msg ${status.bad ? 'bad' : ''}`} role="status">{status.text}</span>
       </footer>
       <div className="cell c-side r3 help" />
     </div>
