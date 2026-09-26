@@ -71,7 +71,7 @@ export function andGeom(inv = false) {
   const d = INSET, r = R - d;
   const inset = `M${x0 + d} ${y0 + d}H${cx}A${r} ${r} 0 0 1 ${cx} ${y0 + H - d}H${x0 + d}Z`;
   const g = { h: y0 + H + PAD, outline, inset, in: inY.map((y) => [x0, y]) };
-  if (!inv) return { ...g, w: cx + R + PAD, out: [ox, cy] };
+  if (!inv) return { ...g, w: cx + R + PAD, out: [ox, cy], insetOut: cx + r }; // insetOut: the inset contour's x on the output axis
   const b = bubbleAt(cx + R, cy);
   return { ...g, ...b, w: b.out[0] + PAD };
 }
