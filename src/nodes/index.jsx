@@ -147,6 +147,9 @@ function Shape({ g, on, idle, lit, hit }) {
           {MIDV !== 'f2' && <line className={MIDV === 'f1' ? 'one' : ''} x1={0} x2={g.w} clipPath={`url(#${cid}i)`}
             y1={g.h / 2 + (j ? off : -off)} y2={g.h / 2 + (j ? off : -off)} />}
           <line x1={px - KNOB + HALF} x2={px + INSET} y1={py} y2={py} />
+          {/* img07: the output links out too. The empty wedge dots on through the output knob to its ink, where the free
+              stub (or the wire) takes over, so the dotted half never dead-ends at the knob. Bubbles touch the body: no gap. */}
+          {!g.bubble && g.out && <line className="link-out" x1={g.insetOut ?? g.out[0] - INSET} x2={g.out[0] + KNOB - HALF} y1={g.out[1]} y2={g.out[1]} />}
         </g>;
       })()}
     </svg>
