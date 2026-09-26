@@ -1,7 +1,7 @@
 import { useId, useRef, useState } from 'react';
 import { Handle as RFHandle, Position } from '@xyflow/react';
 import Remove from '../Remove.jsx';
-import Say from '../Say.jsx';
+import { SayBurst } from '../Say.jsx';
 import { switchGeom, andGeom, orGeom, notGeom, nandGeom, norGeom, xorGeom, lampGeom, SW, PAD, KNOB, INSET, BUB, STROKE } from './geom.js';
 
 const SWG = switchGeom(), LAMPG = lampGeom();
@@ -261,8 +261,8 @@ export function GateNode({ id, data }) {
         <Handle key={i} nodeId={id} data={data} at={at} zone={zones[`in${i}`]} type="target" position={Position.Left} id={`in${i}`} />
       ))}
       <Handle nodeId={id} data={data} at={g.out} zone={zones.out} type="source" position={Position.Right} id="out" />
-      {data.reject && (
-        <Say phrase={data.reject.phrase} text={data.reject.text} className="say-part" role="alert" />
+      {data.reject?.phrase && (
+        <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={data.reject.handle === 'out' ? g.out : g.in[+data.reject.handle.slice(2)] ?? g.out} />
       )}
     </div>
   );
@@ -278,7 +278,7 @@ export function LampNode({ id, data }) {
       <Plate g={LAMPG} x={PAD + 45} name={data.name} on={data.on} />
       <Mark data={data} at={{ in0: LAMPG.in }} />
       <Handle nodeId={id} data={data} at={LAMPG.in} zone={LAMP_ZONES.in0} type="target" position={Position.Left} id="in0" />
-      {data.reject && <Say phrase={data.reject.phrase} text={data.reject.text} className="say-part" role="alert" />}
+      {data.reject?.phrase && <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={LAMPG.in} />}
     </div>
   );
 }
