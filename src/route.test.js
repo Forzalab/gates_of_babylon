@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { route, bends, clear, segHitsBox, stepPoints, MAX_BENDS } from './route.js';
+import { clean, stepFallback } from './route.js';
 
 const box = (x, y, w, h) => ({ x, y, w, h });
 
@@ -104,4 +105,11 @@ test('jogShift: the smallest sub-cell pin offset is removed, aligned or far pins
   assert.equal(jogShift([0, 40]), 0);             // already straight / not a jog
   assert.equal(jogShift([JOG]), 0);               // exactly one cell is a legal step
   assert.equal(jogShift([]), 0);
+});
+
+test('img12: a sub-pixel or backwards jog at a corner is tidied away (no notch)', () => {
+  assert.deepEqual(clean([[0, 0], [40, 0], [40.0000001, 0], [40.0000001, -60], [100, -60]]), [[0, 0], [40, 0], [40, -60], [100, -60]]);
+  assert.deepEqual(clean([[0, 0], [40, 0], [39.8, 0.2], [39.8, -60], [100, -60]]), [[0, 0], [40, 0], [40, -60], [100, -60]]);
+  const f = stepFallback([100, 50], [60, 90]);
+  for (let i = 1; i < f.length; i++) assert.ok(f[i][0] === f[i - 1][0] || f[i][1] === f[i - 1][1], 'axis-aligned');
 });

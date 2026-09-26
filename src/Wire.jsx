@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
-import { BaseEdge, EdgeLabelRenderer, getSmoothStepPath, useStore, useStoreApi } from '@xyflow/react';
-import { toPath, midpoint } from './route.js';
+import { BaseEdge, EdgeLabelRenderer, useStore, useStoreApi } from '@xyflow/react';
+import { toPath, midpoint, stepFallback } from './route.js';
 import { routeAll, shares, JN, DOT_R } from './junction.js';
 import { crossings, hopPath } from './hop.js';
 import { STROKE, ZOOM_EXP } from './nodes/geom.js';
@@ -41,7 +41,7 @@ const line = ([a, b], cls, key) => <path key={key} className={cls} d={`M${a[0]} 
 
 // Wire = right-angle route. Hover shows the delete X at the path midpoint; hovering the X previews the result
 // (the wire goes dotted, like a free pin's stub). A click on the wire itself does nothing.
-export default function Wire({ id, sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, data }) {
+export default function Wire({ id, sourceX, sourceY, targetX, targetY, data }) {
   const all = useRoutes();
   const pts = all.routes[id], sh = all.share[id] ?? { runs: [], dots: [] };
   const sw = useStore((s) => STROKE * (s.transform[2] / (s.width / 906)) ** (ZOOM_EXP - 1));
@@ -54,7 +54,7 @@ export default function Wire({ id, sourceX, sourceY, targetX, targetY, sourcePos
     const cx = crossings(pts, lines, sw).map((c) => ({ ...c, ok: c.ok && !dots.some(([x, y]) => Math.hypot(x - c.x, y - c.y) < 5 * sw + DOT_R) }));
     path = hopPath(pts, cx, sw); [mx, my] = midpoint(pts);
   }
-  else [path, mx, my] = getSmoothStepPath({ sourceX, sourceY, targetX, targetY, sourcePosition, targetPosition, borderRadius: 0 });
+  else { const f = stepFallback([sourceX, sourceY], [targetX, targetY]); path = toPath(f); [mx, my] = midpoint(f); } // img12: no zero-radius Q corners
   const [hover, setHover] = useState(false), [arm, setArm] = useState(false);
   const t = useRef(0);
   const enter = () => { clearTimeout(t.current); setHover(true); };
