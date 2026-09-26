@@ -1,7 +1,7 @@
 import { useId, useRef, useState } from 'react';
 import { Handle as RFHandle, Position } from '@xyflow/react';
 import Remove from '../Remove.jsx';
-import Say from '../Say.jsx';
+import { SayBurst } from '../Say.jsx';
 import { switchGeom, andGeom, orGeom, notGeom, nandGeom, norGeom, xorGeom, lampGeom, SW, PAD, KNOB, INSET, BUB, STROKE } from './geom.js';
 
 const SWG = switchGeom(), LAMPG = lampGeom();
@@ -147,6 +147,9 @@ function Shape({ g, on, idle, lit, hit }) {
           {MIDV !== 'f2' && <line className={MIDV === 'f1' ? 'one' : ''} x1={0} x2={g.w} clipPath={`url(#${cid}i)`}
             y1={g.h / 2 + (j ? off : -off)} y2={g.h / 2 + (j ? off : -off)} />}
           <line x1={px - KNOB + HALF} x2={px + INSET} y1={py} y2={py} />
+          {/* img07: the output links out too. The empty wedge dots on through the output knob to its ink, where the free
+              stub (or the wire) takes over, so the dotted half never dead-ends at the knob. Bubbles touch the body: no gap. */}
+          {!g.bubble && g.out && <line className="link-out" x1={g.insetOut ?? g.out[0] - INSET} x2={g.out[0] + KNOB - HALF} y1={g.out[1]} y2={g.out[1]} />}
         </g>;
       })()}
     </svg>
@@ -261,8 +264,8 @@ export function GateNode({ id, data }) {
         <Handle key={i} nodeId={id} data={data} at={at} zone={zones[`in${i}`]} type="target" position={Position.Left} id={`in${i}`} />
       ))}
       <Handle nodeId={id} data={data} at={g.out} zone={zones.out} type="source" position={Position.Right} id="out" />
-      {data.reject && (
-        <Say phrase={data.reject.phrase} text={data.reject.text} className="say-part" role="alert" />
+      {data.reject?.phrase && (
+        <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={data.reject.handle === 'out' ? g.out : g.in[+data.reject.handle.slice(2)] ?? g.out} />
       )}
     </div>
   );
@@ -278,7 +281,7 @@ export function LampNode({ id, data }) {
       <Plate g={LAMPG} x={PAD + 45} name={data.name} on={data.on} />
       <Mark data={data} at={{ in0: LAMPG.in }} />
       <Handle nodeId={id} data={data} at={LAMPG.in} zone={LAMP_ZONES.in0} type="target" position={Position.Left} id="in0" />
-      {data.reject && <Say phrase={data.reject.phrase} text={data.reject.text} className="say-part" role="alert" />}
+      {data.reject?.phrase && <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={LAMPG.in} />}
     </div>
   );
 }

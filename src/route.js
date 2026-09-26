@@ -34,15 +34,33 @@ export const bends = (pts) => {
   return n;
 };
 const length = (pts) => pts.slice(1).reduce((s, p, i) => s + Math.abs(p[0] - pts[i][0]) + Math.abs(p[1] - pts[i][1]), 0);
-const clean = (pts) => { // drop zero-length and collinear points
+// Tidy a polyline (img12 "curve render problem"): snap coordinates within SNAP of the previous point onto it, drop
+// zero-length and collinear points. Without the snap, a sub-pixel jog at a corner (e.g. 122.5859 vs 122.5860, or a
+// tiny segment that runs BACKWARDS) makes the browser mitre the wrong side of the corner and leaves a notch. The last
+// point is the pin itself and never moves; the point before it is snapped onto it instead.
+const SNAP = 0.5;
+export const clean = (pts) => {
   const out = [];
-  for (const p of pts) { if (out.length && out.at(-1)[0] === p[0] && out.at(-1)[1] === p[1]) continue; out.push(p); }
+  pts.forEach((p0, i) => {
+    const p = [p0[0], p0[1]], q = out.at(-1);
+    if (q) for (const k of [0, 1]) if (Math.abs(p[k] - q[k]) < SNAP) { if (i < pts.length - 1) p[k] = q[k]; else if (out.length > 1) q[k] = p[k]; }
+    if (q && q[0] === p[0] && q[1] === p[1]) { if (i === pts.length - 1) out[out.length - 1] = p; return; }
+    out.push(p);
+  });
   for (let i = out.length - 2; i > 0; i--) {
     const [a, b, c] = [out[i - 1], out[i], out[i + 1]];
     if ((a[0] === b[0] && b[0] === c[0]) || (a[1] === b[1] && b[1] === c[1])) out.splice(i, 1);
   }
   return out;
 };
+
+// Fallback when the capped router finds nothing: a plain right-angle step with STUB runs out of / into the pins
+// (4 corners when the input sits left of the output). Always tidied, never a zero-radius curve.
+export function stepFallback(s, t) {
+  if (t[0] - s[0] >= 2 * STUB) return stepPoints(s, t);
+  const my = (s[1] + t[1]) / 2;
+  return clean([s, [s[0] + STUB, s[1]], [s[0] + STUB, my], [t[0] - STUB, my], [t[0] - STUB, t[1]], t]);
+}
 
 // Is the polyline clear of every obstacle? Source/target boxes are obstacles too (a wire must not run back
 // through its own parts), but only their exact outline, so the pin stubs on the edge are allowed.
@@ -95,7 +113,7 @@ export function route(s, t, { src, dst, others = [], prefer, margin = MARGIN } =
     if (prefer != null && p.length > 2 && p[1][0] === prefer) cost -= 80; // fan-out: share the sibling's trunk
     if (cost < bestCost) { best = p; bestCost = cost; }
   }
-  return best;
+  return best && clean(best);
 }
 
 export const toPath = (pts) => 'M' + pts.map((p) => `${p[0]} ${p[1]}`).join('L');
