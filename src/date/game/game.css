@@ -299,3 +299,9 @@
 .ecard .hint { display: none; grid-column: 1 / -1; font: italic 700 11px 'Roboto Condensed', sans-serif; color: #8a3a9f; }
 .ecard:not(.got):hover .hint, .ecard:not(.got):focus .hint { display: block; }
 .ecard:not(.got):hover span, .ecard:not(.got):focus span { display: none; }
+
+/* reduced motion: juice by colour, never by movement */
+.game.still .cell.flash .tile-g { transform: none; outline: 3px solid #fff; outline-offset: 1px; filter: brightness(1.7) saturate(1.3); }
+.game.still .fx.float { transform: translate(-20%, -14px); }
+.stat .ticking { color: var(--yellow); }
+.game.still .fx.combo { transform: rotate(-4deg); }

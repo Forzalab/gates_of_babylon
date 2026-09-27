@@ -12,7 +12,8 @@ const STILL = params.has('still') || matchMedia('(prefers-reduced-motion: reduce
 const SEED = Number(params.get('seed')) || Math.floor(Math.random() * 1e9);
 const BASE = import.meta.env.BASE_URL;
 const EMO = (n) => `${BASE}emotes/emote_${n}.png`;
-const T = (ms) => (STILL ? Math.min(ms, 90) : ms); // reduced motion: same beats, no travel
+// Reduced motion (the graded mode): the SAME beats, readable one merge at a time, as instant swaps. Colour + sound carry the juice.
+const T = (ms) => ms;
 
 const TALK = {
   AND: 'x AND 1 = x. I’m supportive, why won’t anyone—',
@@ -297,7 +298,7 @@ export default function Bagging() {
           <span className="neon small dj">Dejting</span><b>GATEXX</b>
         </a>
         <div className={`lcd${g.over?.reason === 'overflow' || g.frozen ? ' alarm' : ''}`} data-testid="lane">{header}</div>
-        <div className="stat"><small>AFFECTION</small><b data-testid="affection">{g.affection}</b></div>
+        <div className="stat"><small>AFFECTION</small><b data-testid="affection"><Tick n={g.affection} /></b></div>
         <div className="stat"><small>ENDINGS</small><b data-testid="endings">{found}/7</b></div>
         <button className="mute" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? 'Unmute sound' : 'Mute sound'}>
           <svg viewBox="0 0 24 24" aria-hidden="true" className="spk"><path d="M3 9h4l5-4v14l-5-4H3z" />{muted ? <path className="cut" d="M16 9l6 6M22 9l-6 6" /> : <path className="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />}</svg>
@@ -401,6 +402,17 @@ export default function Bagging() {
       {g.over && <MatchPopup over={g.over} affection={g.affection} mean={mean} bestCombo={g.bestCombo} onHello={() => handOff(true)} onWire={() => handOff(false)} />}
     </div>
   );
+}
+
+// A ticking number (allowed under reduced motion): counts up to the new score instead of jumping.
+function Tick({ n }) {
+  const [v, setV] = useState(n);
+  useEffect(() => {
+    if (v === n) return;
+    const t = setTimeout(() => setV((x) => x + Math.sign(n - x)), 45);
+    return () => clearTimeout(t);
+  }, [v, n]);
+  return <span className={v !== n ? 'ticking' : ''}>{v}</span>;
 }
 
 function Fx({ f }) {
