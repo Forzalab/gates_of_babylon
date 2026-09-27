@@ -38,19 +38,8 @@ export default function Palette({ open, setOpen, tucked, onDrag, switchFull, onA
     const el = list.current;
     if (!el) return;
     setMore({ up: el.scrollTop > 1, down: el.scrollTop + el.clientHeight < el.scrollHeight - 1 });
-    if (bar.current) {
-      const pad = parseFloat(getComputedStyle(el).paddingTop) * 2;
-      const avail = bar.current.clientHeight - pad;
-      const items = [...el.querySelectorAll('.pal-item')];
-      let cut = 0;
-      for (const it of items) {
-        const bottom = it.parentElement.offsetTop + it.parentElement.offsetHeight;
-        if (bottom <= avail) cut = bottom; else break;
-      }
-      if (cut > 0) list.current.style.height = `${cut + pad}px`;
-      // Tony: the down cue sat at the bar's bottom, ~96px under the last part. Pin it to the list's bottom padding band instead.
-      if (cut > 0) bar.current.style.setProperty('--cue-top', `${el.offsetTop + pad / 2 + cut}px`);
-    }
+    // Tony: no cut-off at the last whole part; the list fills the bar, the next part peeks in under the fade and the
+    // chevron sits at the bar's foot over it (was: a list shortened to whole parts left a dead band above row 03).
   };
   useEffect(() => {
     measure();
