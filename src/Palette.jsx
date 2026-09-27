@@ -49,7 +49,15 @@ export default function Palette({ open, setOpen, tucked, onDrag, switchFull, onA
       }
       if (cut > 0) list.current.style.height = `${cut + pad}px`;
       // Tony: the down cue sat at the bar's bottom, ~96px under the last part. Pin it to the list's bottom padding band instead.
-      if (cut > 0) bar.current.style.setProperty('--cue-top', `${el.offsetTop + pad / 2 + cut}px`);
+      // Tony (again): it still sat ~2x the part gap low. Place the chevron's ink exactly one part-gap under the last whole part.
+      const svgs = [...el.querySelectorAll('.pal-item svg')].map((s) => s.getBoundingClientRect());
+      const B = bar.current.getBoundingClientRect(), L = el.getBoundingClientRect();
+      const last = svgs.filter((r) => r.bottom <= L.bottom - pad / 2 + 0.5).at(-1);
+      if (last && svgs.length > 1) {
+        const u = (bar.current.closest('.frame')?.clientWidth ?? 1440) / 1440;
+        const gap = svgs[1].top - svgs[0].bottom, inset = 6 * u; // cue box 20u, chevron 8u, centred
+        bar.current.style.setProperty('--cue-top', `${last.bottom - B.top + gap - inset}px`);
+      }
     }
   };
   useEffect(() => {

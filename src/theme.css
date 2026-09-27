@@ -434,6 +434,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .cb::before { content: ''; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); } /* HIG 44pt */
 .cb svg { width: 50%; height: 50%; overflow: visible; } /* glyph = 50% of the cell; stroke = wire weight, never under 2px */
 .cb path { fill: none; stroke: currentColor; stroke-width: max(2px, var(--stroke)); vector-effect: non-scaling-stroke; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; }
+.cb.wipe path { stroke-width: 2px; } /* Tony: the bin read too heavy next to undo/redo */
 .cb:disabled { color: var(--ink-2); cursor: default; }
 .cb:focus-visible { outline: none; }
 
