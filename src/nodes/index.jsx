@@ -156,10 +156,12 @@ function Shape({ g, on, idle, lit, hit }) {
   );
 }
 
-// Palette glyph: the same Shape a node draws, never lit (a part in the tray has no value yet), sized by CSS (--gw = geometry width in px at 1440).
+// Palette glyph: the same Shape a node draws, sized by CSS (--gw = geometry width in px at 1440). Unlit, except an
+// inverting gate's bubble: it shows the orange dot a fresh one gets on the canvas (inputs 0 -> output 1).
 export function Glyph({ kind, type }) {
   const g = kind === 'S' ? SWG : kind === 'L' ? LAMPG : GATE_GEOM[type];
-  return <span className="glyph" style={{ '--gw': g.w, '--gh': g.h }}><Shape g={g} idle /></span>;
+  const inv = !!g.bubble;
+  return <span className="glyph" style={{ '--gw': g.w, '--gh': g.h }}><Shape g={g} idle={!inv} on={inv} lit={{}} /></span>;
 }
 
 // Free-pin stubs (Tony's sketch): a dotted lead on every pin with no wire yet, drawn exactly over that pin's grab
