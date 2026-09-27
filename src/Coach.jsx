@@ -41,14 +41,16 @@ const shapesOf = (root) => {
   return out;
 };
 const GAP = 4; // fingertip stops this far short of the thing it points at (the nudge closes it)
-function measure(step, circuit, palOpen) {
+function measure(step, circuit, palOpen, k) { // k = app width / 1440
   const canvas = rect(q('.canvas'));
   if (!canvas) return null;
   if (step === 1 && !palOpen) step = 0; // drawer closed again mid-step: point back at the tab
   if (step === 0) {
     const tab = rect(q('.pal-tab')); if (!tab) return null;
     const [, y] = mid(tab);
-    return { holes: [tab], shapes: [], hand: { at: [tab.right + GAP, y], a: -90 }, say: 'hint', tip: [tab.right, y], k: 'lowleft' };
+    // Balloon sits ABOVE the hand (bug 7): hand top = glove x 90 (+2.5 stroke) turned up; balloon ink reaches 16 units below its tip.
+    const lift = 42.5 * (HAND_L * Math.max(k, 0.8)) / HAND_H + 16 * Math.max(k, 0.95) + GAP;
+    return { holes: [tab], shapes: [], hand: { at: [tab.right + GAP, y], a: -90 }, say: 'hint', tip: [tab.right, y - lift] };
   }
   if (step === 1) {
     const itemEl = q('.pal-group:nth-child(2) .pal-item') ?? q('.pal-item');
@@ -178,7 +180,7 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
     let raf, last = '';
     const tick = () => {
       const app = box.current?.parentElement?.getBoundingClientRect();
-      const m = app && measure(step, circuit, palOpen);
+      const m = app && measure(step, circuit, palOpen, app.width / 1440);
       if (m) { const o = [app.left, app.top];
         const sh = (r) => ({ x: r.left - o[0], y: r.top - o[1], w: r.width, h: r.height });
         const g = { ...m, holes: m.holes.map(sh), W: app.width, H: app.height,
@@ -199,7 +201,9 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
       <span className="sr">{variant === 'c' ? '' : STEPS[step].help}</span>
       <button onClick={end}>Skip</button>
     </div>), slot);
-  if (step < 0 || !geo) return <><div ref={box} hidden />{bar}</>;
+  // Bug 8: no delete X while the tour runs (the pointer often rests on the part just dropped).
+  const noX = step >= 0 && <style>{'.node .remove { opacity: 0 !important; pointer-events: none !important; }'}</style>;
+  if (step < 0 || !geo) return <><div ref={box} hidden />{noX}{bar}</>;
   const k = geo.W / 1440;
   const w = Math.max(1, Math.round(2 * k)); // the 2u rule, whole px
   const pad = Math.max(2, Math.round(4 * k)); // lit margin around a rect target (tab, table, drop spot)
@@ -231,7 +235,7 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
           text="" key={step} />}
         <style>{`.coach-say{--ax:${geo.tip[0]}px;--ay:${geo.tip[1]}px}`}</style>
       </div>
-      {bar}
+      {noX}{bar}
     </>
   );
 }
