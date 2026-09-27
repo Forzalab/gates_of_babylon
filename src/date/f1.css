@@ -12,11 +12,11 @@
 .v-f1 .tile { background: #7a4656; }
 .v-f1 .blob { filter: blur(11px) saturate(1.25) contrast(1.15); background:
   radial-gradient(ellipse 34% 46% at calc(40% + var(--h) * .4%) 45%, hsl(calc(8deg + var(--h) * .5deg) 38% 34%), transparent 70%),
-  radial-gradient(circle at 22% 30%, hsl(calc(330deg + var(--h) * 1deg) 80% 80%), transparent 30%),
-  radial-gradient(circle at 80% 25%, hsl(345 70% 84%), transparent 28%),
+  radial-gradient(circle at 22% 30%, hsl(calc(330deg + var(--h) * 1deg) 65% 70%), transparent 30%),
+  radial-gradient(circle at 80% 25%, hsl(345 55% 74%), transparent 28%),
   radial-gradient(circle at 70% 80%, hsl(calc(20deg + var(--h) * .6deg) 45% 58%), transparent 38%),
-  radial-gradient(circle at 12% 85%, hsl(320 60% 70%), transparent 30%),
-  linear-gradient(calc(100deg + var(--h) * 3deg), #c98a9c, #8e5364 55%, #b4707f); }
+  radial-gradient(circle at 12% 85%, hsl(320 45% 58%), transparent 30%),
+  linear-gradient(calc(100deg + var(--h) * 3deg), #a8707f, #6e3c4c 55%, #95596a); }
 .v-f1 .tile::after { content: ''; position: absolute; inset: 0; opacity: .22; mix-blend-mode: overlay; pointer-events: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
 .v-f1 .tile { isolation: isolate; }
@@ -25,7 +25,7 @@
 /* ---------- the gate ---------- */
 .sf { place-items: center; padding: calc(var(--u) * 2.2) 0 calc(var(--u) * 2.6); }
 .mf { width: calc(var(--u) * 55); padding: 0 calc(var(--u) * 1.6) calc(var(--u) * 1); transform-origin: 50% 60%; }
-.mf .plate { margin: 0 calc(var(--u) * -1.4) calc(var(--u) * .9); height: calc(var(--u) * 4.6); align-items: center; overflow: visible;
+.mf .plate { margin: 0 calc(var(--u) * -1.4) calc(var(--u) * .5); height: calc(var(--u) * 4.6); align-items: center; overflow: visible;
   background: #0d0414; background-image: linear-gradient(rgba(255, 110, 220, .2) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 110, 220, .2) 1px, transparent 1px);
   background-size: calc(var(--u) * 1.5) calc(var(--u) * 1.5); border-radius: calc(var(--u) * .5) calc(var(--u) * .5) 0 0;
   border-bottom: 2px solid #ff9ee6; }
@@ -35,7 +35,7 @@
 .mf .nh.l { left: 13%; } .mf .nh.r { right: 13%; }
 .mf .cols { grid-template-columns: calc(var(--u) * 13.5) 1fr; gap: calc(var(--u) * 2); align-items: start; }
 .mf .left { position: relative; padding-top: calc(var(--u) * .6); }
-.mf .copy { padding-top: calc(var(--u) * .2); }
+.mf .copy { padding-top: calc(var(--u) * 1.1); }
 
 /* cut-out headline (P5): tilted, white knock-out outline, navy hard shadow = a sticker pasted on the panel */
 .warn.cut { font-size: calc(var(--u) * 7.8); line-height: .92; transform: rotate(-3deg) skewX(-8deg); transform-origin: 30% 50%; }
@@ -155,3 +155,6 @@
 .mute path.x { fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; }
 .mute[aria-pressed='true'] path.x { stroke: #ff7fcf; }
 .mute:focus-visible, .v-f1 .btn:focus-visible, .like:focus-visible { outline: 3px dashed #fff; outline-offset: 4px; }
+/* M3's panel edge: white inner line, lilac rim, deep-violet outer bevel, soft pink glow */
+.mf { border-color: #e486f4; box-shadow: inset 0 0 0 calc(var(--u) * .3) #fff, 0 calc(var(--u) * .3) 0 #cc31e6, 0 0 0 calc(var(--u) * .3) #cc31e6,
+  0 0 calc(var(--u) * 1.8) rgba(255, 79, 216, .7), 0 calc(var(--u) * .8) calc(var(--u) * 2.6) rgba(0, 0, 40, .5); }

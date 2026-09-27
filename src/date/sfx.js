@@ -4,9 +4,9 @@
 // play() is swallowed, because sound is feedback only and every sound has a visual twin.
 const BASE = `${import.meta.env.BASE_URL}sfx/`;
 const FILES = {
-  glitch: ['glitch_001', 'glitch_002'], error: ['error_001', 'error_002'], back: ['back_001'], confirm: ['confirmation_001'],
-  chips: ['chips-stack-1', 'chips-stack-2'], drop: ['drop_001', 'drop_002'], click: ['click_001', 'click_002'],
-  select: ['select_001', 'select_002'], dice: ['dice-throw-1'], hover: ['rollover2'],
+  glitch: ['glitch_001', 'glitch_002'], error: ['error_001', 'error_002'], confirm: ['confirmation_001'],
+  chips: ['chips-stack-1', 'chips-stack-2'], grade: ['jingles_HIT00'], click: ['click_001', 'click_002'],
+  match: ['jingles_SAX00'], hover: ['rollover2'],
 };
 const cache = {};
 let muted = false;

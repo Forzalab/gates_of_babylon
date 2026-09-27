@@ -61,7 +61,7 @@ export function F1() {
   const on = useLanded(1500);
   const [go, to] = useWipe();
   useEffect(() => { play('glitch', { vol: 0.3 }); }, []); // entering Dejting (silent until the browser allows audio)
-  useEffect(() => { if (on && !STILL && !CLEAN) play('drop'); }, [on]); // the red pen lands
+  useEffect(() => { if (on && !STILL && !CLEAN) play('grade', { vol: 0.35 }); }, [on]); // the red pen lands
   const enter = (e) => { then('confirm', 'chips', 260); to(NEXT)(e); };
   return (
     <div className="stage sf">
@@ -127,7 +127,7 @@ export function Feed() {
   // each new match pitches the blip up (combo), capped in sfx.js
   const toggle = (i) => () => setLiked((s) => {
     const n = new Set(s);
-    if (n.has(i)) { n.delete(i); play('click'); } else { n.add(i); play('select', { rate: 1 + 0.08 * n.size }); }
+    if (n.has(i)) { n.delete(i); play('click'); } else { n.add(i); play('match', { rate: 1 + 0.08 * (n.size - 1) }); }
     return n;
   });
   return (
