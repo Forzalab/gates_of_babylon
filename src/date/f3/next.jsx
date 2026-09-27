@@ -5,7 +5,7 @@
 // real compatibility (compat.js runs the pair through sim.evaluate). Office-hours lens: she's still #47 in the queue.
 import { createRoot } from 'react-dom/client';
 import { createPortal } from 'react-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import '@xyflow/react/dist/style.css';
 import '../../theme.css';
 import '@fontsource/bangers/400.css';
@@ -15,6 +15,7 @@ import '@fontsource/roboto-condensed/700.css';
 import App from '../../App.jsx';
 import { Shape, GATE_GEOM } from '../../nodes/index.jsx';
 import { compat } from '../compat.js';
+import { play, isMuted, setMuted, onMute } from '../sfx.js';
 import './next.css';
 
 const q = new URLSearchParams(location.search);
@@ -83,11 +84,23 @@ function Match({ m, onClose }) {
         <p className="dj-compat"><b>{c}%</b> compatible <small>({rows}/4 truth-table rows agree)</small></p>
         <div className="dj-bar" aria-hidden="true"><i style={{ width: `${Math.max(c, 4)}%` }} /></div>
         <div className="dj-btns">
-          <button className="dj-btn hot" onClick={onClose} autoFocus>&#9829; KEEP WIRING &#9829;</button>
+          <button className="dj-btn hot" onClick={() => { play('select', { gap: 0 }); onClose(); }} autoFocus>&#9829; KEEP WIRING &#9829;</button>
           <a className="dj-btn soft" href={GATE}>BACK TO THE GATE</a>
         </div>
       </section>
     </div>
+  );
+}
+
+function MuteBtn() {
+  const [m, set] = useState(isMuted());
+  useEffect(() => onMute(set), []);
+  return (
+    <button className="dj-mute" aria-pressed={m} aria-label={m ? 'Sound off (click to turn on)' : 'Sound on (click to mute)'} title={m ? 'Unmute' : 'Mute'}
+      onClick={() => { setMuted(!m); if (m) play('toggle', { gap: 0 }); }}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path className="spk" d="M3 9H7L12 4.5V19.5L7 15H3Z" />
+        {m ? <path className="wave" d="M16 9L21 15M21 9L16 15" /> : <path className="wave" d="M15.5 8.5Q18 12 15.5 15.5M18.5 6Q22.5 12 18.5 18" />}</svg>
+    </button>
   );
 }
 
@@ -104,7 +117,8 @@ function Skin({ line, match, closeMatch }) {
   return <>
     {r1 && createPortal(<div className="dj-plate">
       <span className="dj-neon" lang="sv" aria-hidden="true">Dejting</span>
-      <a className="dj-back" href={GATE}>&#9664; BACK TO THE GATE</a>
+      <a className="dj-back" href={GATE} onClick={() => play('back', { gap: 0 })}>&#9664; BACK TO THE GATE</a>
+      <MuteBtn />
     </div>, r1)}
     {side && createPortal(<a className="dj-disk" href={LOGIC} aria-label="Logic mode" title="Back to Logic mode">
       <svg viewBox="-50 -50 100 100" aria-hidden="true"><path d="M0 34L-30 4A17 17 0 0 1 0 -24A17 17 0 0 1 30 4Z" /></svg>
@@ -119,9 +133,12 @@ function Skin({ line, match, closeMatch }) {
 function Next() {
   const [line, setLine] = useState('hello');
   const [match, setMatch] = useState(null);
+  const combo = useRef(0); // each further match pitches the payoff up (SOUND.md rule 7), capped at 1.6
   const onWire = (src, dst) => {
-    if (src?.kind === 'G' && dst?.kind === 'G') { setMatch({ A: src.type, B: dst.type }); setLine('match'); }
-    else setLine(dst?.kind === 'L' ? 'lamp' : 'other');
+    if (src?.kind === 'G' && dst?.kind === 'G') {
+      setMatch({ A: src.type, B: dst.type }); setLine('match');
+      play('sax', { gap: 0, rate: 1 + 0.08 * combo.current++ }); // cheesy-romance sax sting, pitched up per further match
+    } else { setLine(dst?.kind === 'L' ? 'lamp' : 'other'); play('tick', { gap: 0 }); }
   };
   useEffect(() => { const t = setTimeout(restore, 1500); return () => clearTimeout(t); }, []);
   return (

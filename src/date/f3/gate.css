@@ -30,7 +30,7 @@ a { color: inherit; }
 
 /* ---------- 4 x 3 thumbnail grid, fills to ~.92 H (no dead band) ---------- */
 .grid { position: absolute; left: 0; right: 0; top: var(--bar-h); bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr);
-  gap: 2.4vh 1.5vw; padding: 2.6vh 2.6vw 7vh; }
+  gap: 2.4vh 1.5vw; padding: 2.6vh 2.6vw 8.6vh; }
 .tile { position: relative; overflow: hidden; border-radius: 3px; display: block; text-decoration: none; background: #9c6a78;
   box-shadow: 0 2px 8px rgba(0, 0, 30, .35); }
 /* warm, noisy, blurred: several soft blobs + film grain (no photo, no people) */
@@ -174,3 +174,15 @@ a { color: inherit; }
 @keyframes jolt { 0% { transform: translateX(calc(var(--u) * -.8)); clip-path: inset(0 0 60% 0); } 34% { transform: translateX(calc(var(--u) * .7)); clip-path: none; } 67% { transform: translateX(calc(var(--u) * -.3)); } 100% { transform: none; } }
 
 @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } }
+
+/* typewriter: untyped text holds its place invisibly */
+.ghost { visibility: hidden; }
+.glitch .ghost { visibility: hidden; }
+/* mute: Wenrexa round icon button (kit's round white buttons, lilac rim, darker lip) */
+.mute { flex: none; width: max(28px, calc(var(--u) * 3.1)); height: max(28px, calc(var(--u) * 3.1)); margin-left: calc(var(--u) * .4); padding: 0; border: 0; border-radius: 50%; cursor: pointer;
+  background: linear-gradient(#fff, #fde6f8); display: grid; place-items: center;
+  box-shadow: 0 0 0 2px var(--rim), 0 3px 0 2px var(--rim-2); }
+.mute svg { width: 62%; height: 62%; }
+.mute .spk { fill: var(--hot); }
+.mute .wave { fill: none; stroke: var(--hot); stroke-width: 2.2; stroke-linecap: round; }
+.mute:focus-visible { outline: 3px dashed #fff; outline-offset: 3px; }

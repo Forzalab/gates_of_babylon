@@ -14,6 +14,7 @@ import '@fontsource/roboto-condensed/400.css';
 import '@fontsource/roboto-condensed/700.css';
 import { Shape, GATE_GEOM } from '../../nodes/index.jsx';
 import { Grid, Heart } from './tiles.jsx';
+import { play, isMuted, setMuted, onMute } from '../sfx.js';
 import './gate.css';
 
 const q = new URLSearchParams(location.search);
@@ -34,6 +35,7 @@ function Bar() {
       <a className="logo" href={LOGIC}><b>GATEXX</b></a>
       <form className="search" onSubmit={(e) => e.preventDefault()}><input placeholder="Search..." aria-label="Search" /><button>Search</button></form>
       <nav>{['BEST OF', 'HITS', 'TRUTH TABLES', 'LIVE GATES', 'DATING'].map((n) => <a key={n} href="#">{n}</a>)}</nav>
+      <Mute />
     </header>
   );
 }
@@ -90,22 +92,53 @@ function Sprite({ yan }) {
   );
 }
 
-// ADV textbox: nameplate tab + the line + the advance cursor. The DDLC turn swaps the line and glitches the last words.
+// ADV textbox: nameplate tab + the line + the advance cursor. The DDLC turn types the new line out (a tick per few
+// characters, as VN engines do) and glitches the last words.
+const YAN = [['You’re ', ''], ['#47', 'b'], [' in the office-hours queue, senpai. I’ll wait. ', ''], ['I’ll ALWAYS wait.', 'glitch'], [' ♡', '']];
+const YAN_LEN = YAN.reduce((n, [t]) => n + t.length, 0);
 function Textbox({ yan }) {
+  const [n, setN] = useState(STILL ? YAN_LEN : 0);
+  useEffect(() => {
+    if (!yan || STILL) return;
+    const k = setInterval(() => setN((c) => { if (c >= YAN_LEN) { clearInterval(k); return c; } if (c % 4 === 0) play('tick', { vol: 0.25, gap: 60 }); return c + 1; }), 16);
+    return () => clearInterval(k);
+  }, [yan]);
+  let left = n;
   return (
-    <div className={yan ? 'adv yan' : 'adv'} role="status">
+    <div className={yan ? 'adv yan' : 'adv'} role="status" aria-label={yan ? YAN.map(([t]) => t).join('') : undefined}>
       <span className="nameplate">AND-chan</span>
       {yan
-        ? <p>You&rsquo;re <b>#47</b> in the office-hours queue, senpai. I&rsquo;ll wait. <span className="glitch" data-t="I'll ALWAYS wait.">I&rsquo;ll ALWAYS wait.</span> &#9825;</p>
-        : <p>By entering, you confirm you're 18+ and know what a truth table is. &#9825;</p>}
+        ? <p aria-hidden="true">{YAN.map(([t, c], i) => {
+          const shown = t.slice(0, Math.max(0, left)); left -= t.length;
+          const ghost = t.slice(shown.length); // untyped text keeps its space, so the box never reflows
+          const body = <>{shown}<span className="ghost">{ghost}</span></>;
+          return c === 'b' ? <b key={i}>{body}</b> : c === 'glitch' ? <span key={i} className={shown.length === t.length ? 'glitch' : ''} data-t={t}>{body}</span> : <span key={i}>{body}</span>;
+        })}</p>
+        : <p>By entering, you confirm you&rsquo;re 18+ and know what a truth table is. &#9825;</p>}
       <i className="cursor" aria-hidden="true">&#9660;</i>
     </div>
   );
 }
 
+// Mute: a Wenrexa round icon button in the site bar (the classroom kill switch). Remembered in localStorage.
+export function Mute({ className = 'mute' }) {
+  const [m, set] = useState(isMuted());
+  useEffect(() => onMute(set), []);
+  return (
+    <button className={className} aria-pressed={m} aria-label={m ? 'Sound off (click to turn on)' : 'Sound on (click to mute)'} title={m ? 'Unmute' : 'Mute'}
+      onClick={() => { setMuted(!m); if (m) play('toggle', { gap: 0 }); }}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path className="spk" d="M3 9H7L12 4.5V19.5L7 15H3Z" />
+        {m ? <path className="wave" d="M16 9L21 15M21 9L16 15" /> : <path className="wave" d="M15.5 8.5Q18 12 15.5 15.5M18.5 6Q22.5 12 18.5 18" />}</svg>
+    </button>
+  );
+}
+
 function Gate() {
-  const yan = useLanded(1800);
-  const enter = (e) => { e.preventDefault(); location.href = NEXT; };
+  const yan = useLanded(1200);
+  useEffect(() => { if (yan && !STILL) play('creep', { vol: 0.3 }); }, [yan]);
+  const enter = (e) => { e.preventDefault(); play('confirm', { gap: 0 }); setTimeout(() => { location.href = NEXT; }, isMuted() ? 0 : 260); };
+  const leave = (e) => { e.preventDefault(); const to = e.currentTarget.href; play('back', { gap: 0 }); setTimeout(() => { location.href = to; }, isMuted() ? 0 : 220); };
+  const hover = () => play('select', { vol: 0.25, gap: 120 });
   return (
     <div className={`date f3${STILL ? ' still' : ''}${yan ? ' yan' : ''}`}>
       <Bar />
@@ -117,7 +150,7 @@ function Gate() {
             <Dejting />
             <svg viewBox="-12 -12 24 24" className="nh r" aria-hidden="true"><Heart className="heart tube" /></svg>
           </div>
-          <a className="close" href={LOGIC} aria-label="Close (back to Logic)">&#10005;</a>
+          <a className="close" href={LOGIC} onClick={leave} aria-label="Close (back to Logic)">&#10005;</a>
           <i className="cn bl" /><i className="cn br" />
           <div className="cols">
             <Sprite yan={yan} />
@@ -126,8 +159,8 @@ function Gate() {
               <p className="sub">THESE GATES ARE <em className="y">18+</em></p>
               <p className="sub n">... AND A FEW BITS NAUGHTY &#9825;</p>
               <nav className="choices" aria-label="Choices">
-                <a className="btn hot" href={NEXT} onClick={enter}>&#9829; ENTER ANYWAY &#9829;</a>
-                <a className={yan ? 'btn soft glitchy' : 'btn soft'} href={LOGIC} data-t="NO THANKS">NO THANKS</a>
+                <a className="btn hot" href={NEXT} onClick={enter} onPointerEnter={hover} onFocus={hover}>&#9829; ENTER ANYWAY &#9829;</a>
+                <a className={yan ? 'btn soft glitchy' : 'btn soft'} href={LOGIC} onClick={leave} onPointerEnter={hover} onFocus={hover} data-t="NO THANKS">NO THANKS</a>
               </nav>
             </div>
           </div>

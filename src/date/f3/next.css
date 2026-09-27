@@ -28,6 +28,11 @@
   font: 400 max(12px, calc(19 * var(--u)))/1 'Bangers', cursive; letter-spacing: .06em; color: #c02c93;
   padding: calc(9 * var(--u)) calc(16 * var(--u)) calc(8 * var(--u)); border-radius: 999px; background: linear-gradient(#fff, #fde6f8);
   box-shadow: 0 0 0 calc(3 * var(--u)) var(--rim), 0 0 0 calc(5 * var(--u)) #fff, 0 calc(5 * var(--u)) 0 calc(5 * var(--u)) var(--rim-2); }
+.dj-mute { position: absolute; right: calc(18 * var(--u)); top: calc(76 * var(--u)); pointer-events: auto; width: calc(44 * var(--u)); height: calc(44 * var(--u)); min-width: 28px; min-height: 28px;
+  padding: 0; border: 0; border-radius: 50%; cursor: pointer; background: linear-gradient(#fff, #fde6f8); display: grid; place-items: center;
+  box-shadow: 0 0 0 calc(3 * var(--u)) var(--rim), 0 calc(4 * var(--u)) 0 calc(3 * var(--u)) var(--rim-2); }
+.dj-mute svg { width: 62%; height: 62%; }
+.dj-mute .spk { fill: var(--hot); } .dj-mute .wave { fill: none; stroke: var(--hot); stroke-width: 2.2; stroke-linecap: round; }
 .dj-back:hover { filter: brightness(1.05); transform: translateY(-1px); }
 
 /* row 01 right: MATCH MAKER lockup, heart disk = Logic/Date toggle (filled = in Date) */

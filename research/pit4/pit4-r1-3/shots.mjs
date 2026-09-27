@@ -24,7 +24,7 @@ for (const j of jobs) {
   const page = await browser.newPage({ viewport: { width: j.w, height: j.h }, reducedMotion: j.rm ?? 'no-preference' });
   page.on('pageerror', (e) => errors.push(`${j.name}: ${e.message}`));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(`${j.name} console: ${m.text()}`); });
-  page.on('requestfailed', (r) => errors.push(`${j.name} reqfail: ${r.url()}`));
+  page.on('requestfailed', (r) => errors.push(`${j.name} reqfail: ${r.url()} ${r.failure()?.errorText}`));
   page.on('response', (r) => { if (r.status() >= 400) errors.push(`${j.name} ${r.status()}: ${r.url()}`); });
   await page.goto(BASE + j.url);
   await page.evaluate(() => document.fonts.ready);
