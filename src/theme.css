@@ -248,10 +248,11 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
   left: var(--hit-left); top: var(--hit-top); width: var(--hit-w); height: var(--hit-h); }
 .debug-hitzones .react-flow__handle.port::after { outline: 1px dashed red; background: rgba(255, 0, 0, 0.08); }
 .react-flow__handle.port { border-radius: 50%; }
-/* T4-tt pin glow: a soft grey halo (ink at low alpha), never orange (orange = logic 1). Shown while the pointer is
+/* T4-tt pin halo: a flat --hover disc (the truth-table row hover), never orange (orange = logic 1), no blur (glow is
+   Date mode only). Shown while the pointer is
    anywhere in the pin's hit zone, while a wire drag hovers it, and on the picked (keyboard) pin. */
 .react-flow__handle.port:hover, .react-flow__handle.port.connectingto, .react-flow__handle.port.picked {
-  outline: none; box-shadow: 0 0 0 5px rgb(17 17 17 / 0.10), 0 0 12px 8px rgb(17 17 17 / 0.14); }
+  outline: none; box-shadow: 0 0 0 8px var(--hover); }
 .react-flow__handle.port.picked { background: transparent; }
 .react-flow__handle.port.picked:focus-visible { outline-offset: 4px; }
 
@@ -448,12 +449,13 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .plate { position: absolute; transform: translateX(-50%); margin-top: calc(var(--stroke) / 2 + 6px * var(--zk, 1));
   display: grid; place-items: center; box-sizing: border-box; height: calc(24px * var(--zk, 1)); min-width: calc(24px * var(--zk, 1));
   padding: 0 calc(5px * var(--zk, 1)); border: 0; border-radius: 0; background: none;
-  font: 700 calc(20px * var(--zk, 1))/1 var(--font); font-stretch: 100%; letter-spacing: 0.02em; color: var(--ink);
+  font: 760 calc(20px * var(--zk, 1))/1 var(--font-label); font-stretch: 100%; letter-spacing: 0.02em; color: var(--ink);
   white-space: nowrap; pointer-events: none; user-select: none; z-index: 2; }
 /* combo-2: a name, not a part. No keyline box (the 3px box read as another component); lit = orange chip with a WHITE
-   letter (Tony), the only filled state; unlit = bare ink letters. Gates stay --ink-2. */
+   letter (Tony), the only filled state; unlit = bare ink letters. Gates too (Tony, Sep 26: --ink-2 read too grey).
+   Weight 760 = the site's heavy label weight (.truth .label), not a third one. */
 .plate.on { background: var(--one); color: var(--paper); }
-.plate.bare { background: none; color: var(--ink-2); }
+.plate.bare { background: none; }
 /* T4-tt: empty truth table (no switch or no lamp): no rows, no live highlight; a placeholder box marks where art goes. */
 .tt-empty { position: relative; align-self: stretch; box-sizing: border-box; margin: calc(32 * var(--u)) calc(4 * var(--u)) 0; height: calc(260 * var(--u)); border: var(--rule) solid var(--ink); }
 .tt-empty svg { position: absolute; inset: 0; width: 100%; height: 100%; }
