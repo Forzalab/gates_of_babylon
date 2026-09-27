@@ -488,7 +488,7 @@ export default function App() {
           proOptions={{ hideAttribution: true }}
           connectionLineComponent={Draft}
         >
-          {showGrid && <Background gap={20} color="var(--grid)" />}
+          {showGrid && <Background gap={20} size={3} color="var(--grid)" />}
           <ViewportPortal>{guides.map((y) => <div key={y} className="guide" style={{ top: y }} />)}
             {ghost && <svg className="nudge-ghost" aria-hidden="true" style={{ left: ghost.x, top: ghost.y, width: ghost.w, height: ghost.h }}>
               <rect x="1" y="1" width={ghost.w - 2} height={ghost.h - 2} /></svg>}</ViewportPortal>

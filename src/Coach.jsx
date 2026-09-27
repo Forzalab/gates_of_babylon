@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Say from './Say.jsx';
+import { draftPoints, polyD } from './Draft.jsx';
 
 // First-visit coach marks (blind test: nobody found wiring or the switch). Five steps; the person's own action
 // completes each one, so a step never times out while it waits for them. Only the last (read the table) asks for
@@ -118,18 +119,30 @@ function Hand({ at, a, k, cls = '' }) {
     </g>
   );
 }
-// Demo (steps 2, 3; Tony: a video-game tutorial): press on the source, glide to the target carrying a ghost (a straight
-// pencil wire from the pin, as the real draft wire, or a faint copy of the part), release, pause, loop. 2.6 s.
+// Demo (steps 2, 3; Tony: a video-game tutorial): press on the source, glide to the target carrying a ghost (the real
+// draft wire's right-angle pencil path, or a faint copy of the part), release, pause, loop. 2.6 s.
+// Tony: the wire ghost is grid-like, never a diagonal, and the hand rides the same path: its glide keyframes are made
+// per geometry, each leg's share of 12-60% = its share of the path length (linear, so hand tip = pencil tip).
 // Reduced motion / logic mode: no glide; a still hand at the source and a still hand at the target.
 function Demo({ at, to, a, k, ghost, shapes }) {
   const dx = to[0] - at[0], dy = to[1] - at[1];
+  const pts = ghost === 'wire' ? draftPoints(at, to, 0) : [at, to];
+  const legs = pts.slice(1).map((p, i) => Math.abs(p[0] - pts[i][0]) + Math.abs(p[1] - pts[i][1]));
+  const tot = legs.reduce((x, y) => x + y, 0) || 1;
+  let acc = 0;
+  const frames = pts.map((p, i) => { if (i) acc += legs[i - 1];
+    return `${(12 + (48 * acc) / tot).toFixed(2)}% { transform: translate(${p[0] - at[0]}px, ${p[1] - at[1]}px); }`; });
+  const name = `coach-glide-${Math.round(dx)}-${Math.round(dy)}`.replace(/-(?=-)/g, 'm');
+  const kf = ghost === 'wire' ? `@keyframes ${name} { 0% { transform: translate(0, 0); } ${frames.join(' ')} 97% { transform: translate(${dx}px, ${dy}px); } 100% { transform: translate(0, 0); } }
+    @media (prefers-reduced-motion: no-preference) { .coach-demo .glide.path { animation: ${name} 2.6s linear infinite; } .coach-demo .ghost-wire path { animation: coach-draw-lin 2.6s infinite; } }` : '';
   return (
     <g className="coach-demo" style={{ '--dx': `${dx}px`, '--dy': `${dy}px`, '--amp': `${8 * k}px` }}>
+      {kf && <style>{kf}</style>}
       {ghost === 'wire' && <g className="ghost-wire">
-        <line className="casing" x1={at[0]} y1={at[1]} x2={to[0]} y2={to[1]} pathLength="1" />
-        <line className="pencil" x1={at[0]} y1={at[1]} x2={to[0]} y2={to[1]} pathLength="1" />
+        <path className="casing" d={polyD(pts)} pathLength="1" />
+        <path className="pencil" d={polyD(pts)} pathLength="1" />
       </g>}
-      <g className="glide">
+      <g className={`glide ${kf ? 'path' : ''}`}>
         {ghost === 'part' && <g className="ghost-part">
           {shapes.map((s, i) => <path key={i} d={s.d} transform={`matrix(${s.m.join(' ')})`} />)}</g>}
         <g className="coach-hand" transform={`translate(${at[0]} ${at[1]}) rotate(${a})`} data-tip={`${at[0]},${at[1]}`} data-to={`${to[0]},${to[1]}`} data-a={a}>
@@ -179,9 +192,11 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
     if (step < 0) return setGeo(null);
     let raf, last = '';
     const tick = () => {
-      const app = box.current?.parentElement?.getBoundingClientRect();
+      const par = box.current?.parentElement, app = par?.getBoundingClientRect();
       const m = app && measure(step, circuit, palOpen, app.width / 1440);
-      if (m) { const o = [app.left, app.top];
+      // Tony: the lit silhouettes sat 2px down-right. The overlay is inset:0 in .app = inside its 2px border, so the
+      // origin is the padding box (clientLeft/Top), not the border box.
+      if (m) { const o = [app.left + par.clientLeft, app.top + par.clientTop];
         const sh = (r) => ({ x: r.left - o[0], y: r.top - o[1], w: r.width, h: r.height });
         const g = { ...m, holes: m.holes.map(sh), W: app.width, H: app.height,
           shapes: m.shapes.map(({ d, m: t }) => ({ d, m: [t[0], t[1], t[2], t[3], t[4] - o[0], t[5] - o[1]] })),

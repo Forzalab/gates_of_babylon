@@ -37,7 +37,7 @@
   --ink: #111111;
   --ink-2: #767676;        /* de-emphasis ink, 4.54:1 on paper (disabled palette item) */
   --one: #ff5a1f;          /* logic 1 + live table row, nothing else */
-  --grid: #e2e2e2;
+  --grid: #a8a8a8;        /* Tony: #e2e2e2 1px dots read as no grid at all */
   --hover: #e2e2e2;
   --caption: #fbf5d2;      /* toast caption fill only: Blambot caption cream, muted toward paper */
   --font: 'Roboto Flex Variable', 'Roboto Flex Fallback', 'Helvetica Neue', Arial, sans-serif;
@@ -433,8 +433,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
   display: grid; place-items: center; -webkit-tap-highlight-color: transparent; }
 .cb::before { content: ''; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: max(100%, 44px); transform: translate(-50%, -50%); } /* HIG 44pt */
 .cb svg { width: 50%; height: 50%; overflow: visible; } /* glyph = 50% of the cell; stroke = wire weight, never under 2px */
-.cb path { fill: none; stroke: currentColor; stroke-width: max(2px, var(--stroke)); vector-effect: non-scaling-stroke; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; }
-.cb.wipe path { stroke-width: 2px; } /* Tony: the bin read too heavy next to undo/redo */
+.cb path { fill: none; stroke: currentColor; stroke-width: 2px; vector-effect: non-scaling-stroke; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; } /* Tony: 3px read heavy; all three at 2px */
 .cb:disabled { color: var(--ink-2); cursor: default; }
 .cb:focus-visible { outline: none; }
 
@@ -506,7 +505,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
    on a paper hole in the veil. */
 .coach-nub { fill: none; stroke: var(--ink); }
 /* Demo ghosts: the pencil wire = the draft wire (2px ink on a 6px paper casing, straight); the part = a faint copy. */
-.ghost-wire line { fill: none; stroke-linecap: butt; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
+.ghost-wire path { fill: none; stroke-linecap: butt; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
 .ghost-wire .casing { stroke: var(--paper); stroke-width: 6px; } .ghost-wire .pencil { stroke: var(--ink); stroke-width: 2px; }
 .ghost-part path { fill: var(--paper); fill-opacity: 0.55; stroke: var(--ink); stroke-width: 3; }
 .coach-demo .press { transform: translateY(var(--amp)); }
@@ -518,7 +517,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
   .coach-demo .ghost-wire, .coach-demo .ghost-part { display: inline; }
   .coach-demo .glide { animation: coach-glide 2.6s infinite; }
   .coach-demo .press { animation: coach-press 2.6s infinite; }
-  .coach-demo .ghost-wire line { animation: coach-draw 2.6s infinite; }
+  .coach-demo .ghost-wire path { animation: coach-draw 2.6s infinite; }
   .coach-demo .ghost-part { animation: coach-carry 2.6s infinite; }
 }
 /* ref gif: frames 0-8 travel toward the target (ease in-out), 8-19 travel back; 40% = frame 8 of 20 */
@@ -540,6 +539,11 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 }
 @keyframes coach-draw {
   0%, 12% { stroke-dashoffset: 1; opacity: 1; animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
+  60%, 72% { stroke-dashoffset: 0; opacity: 1; }
+  90%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes coach-draw-lin { /* = coach-draw, linear: the pencil tip stays under the hand on a right-angle path */
+  0%, 12% { stroke-dashoffset: 1; opacity: 1; }
   60%, 72% { stroke-dashoffset: 0; opacity: 1; }
   90%, 100% { stroke-dashoffset: 0; opacity: 0; }
 }
