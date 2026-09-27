@@ -1,0 +1,101 @@
+/* f3 continue screen: the real editor, Date tokens. Only token overrides + a few skin rules; layout stays the editor's. */
+:root[data-mode="date"] {
+  --paper: #fff6fc;          /* Wenrexa panel white-pink */
+  --ink: #001b62;            /* GATEXX top-bar navy: rules, outlines, table ink */
+  --ink-2: #8a6fb8;
+  --one: #f01a88;            /* logic 1 = the mockup headline pink */
+  --grid: #f5a6dc;
+  --hover: #ffe0f4;
+  --caption: #ffe6f6;
+  --hot: #f01a88; --hot-2: #f24898; --rim: #ec86f4; --rim-2: #d77ae8; --plum: #b94fe6; --lilac: #f7d2fb; --bg: #003ec5; --neon: #fc4dd0;
+}
+.dj { display: contents; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+:root[data-mode="date"] #root { background: #003ec5; }
+:root[data-mode="date"] .app { background: var(--paper); }
+
+/* ---------- row 01: neon plate + Dejting (j, g hang past the rule into the canvas) ---------- */
+.wordmark { display: none; }
+.dj-plate { position: absolute; inset: 0; z-index: 5; pointer-events: none; overflow: visible;
+  background: #0d0414; background-image: linear-gradient(rgba(255, 120, 230, .22) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 120, 230, .22) 1px, transparent 1px);
+  background-size: calc(26 * var(--u)) calc(26 * var(--u)); background-position: left bottom; }
+.dj-neon { position: absolute; left: calc(40 * var(--u)); bottom: calc(-58 * var(--u)); font: 400 calc(196 * var(--u))/1 'Yellowtail', cursive; color: #fff0fb;
+  letter-spacing: .005em; white-space: nowrap;
+  text-shadow: 0 0 1px #fff, 0 0 calc(4 * var(--u)) #ff8be4, 0 0 calc(12 * var(--u)) var(--neon), 0 0 calc(28 * var(--u)) #ff1fb4, 0 0 calc(56 * var(--u)) #ff00a0; }
+.dj:not(.still) .dj-neon { animation: djflick 7s infinite steps(1); }
+@keyframes djflick { 0%, 100% { opacity: 1; } 81% { opacity: .6; } 82% { opacity: 1; } 84% { opacity: .75; } 85% { opacity: 1; } }
+.dj-back { position: absolute; right: calc(18 * var(--u)); top: calc(16 * var(--u)); pointer-events: auto; text-decoration: none;
+  font: 400 max(12px, calc(19 * var(--u)))/1 'Bangers', cursive; letter-spacing: .06em; color: #c02c93;
+  padding: calc(9 * var(--u)) calc(16 * var(--u)) calc(8 * var(--u)); border-radius: 999px; background: linear-gradient(#fff, #fde6f8);
+  box-shadow: 0 0 0 calc(3 * var(--u)) var(--rim), 0 0 0 calc(5 * var(--u)) #fff, 0 calc(5 * var(--u)) 0 calc(5 * var(--u)) var(--rim-2); }
+.dj-back:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+/* row 01 right: MATCH MAKER lockup, heart disk = Logic/Date toggle (filled = in Date) */
+.disk { display: none; }
+.dj-disk { position: absolute; left: calc(25 * var(--u)); top: calc(74 * var(--u)); width: calc(153 * var(--u)); height: calc(153 * var(--u)); border-radius: 50%;
+  background: var(--hot); display: grid; place-items: center; box-shadow: inset 0 calc(6 * var(--u)) 0 rgba(255, 255, 255, .35), 0 calc(6 * var(--u)) 0 var(--plum); }
+.dj-disk svg { width: calc(100 * var(--u)); height: calc(100 * var(--u)); overflow: visible; }
+.dj-disk path { fill: #fff; stroke: #fff; stroke-width: 8; stroke-linejoin: miter; }
+.dj-disk:hover { box-shadow: 0 0 0 calc(4 * var(--u)) var(--paper), 0 0 0 calc(7 * var(--u)) var(--hot); }
+.lockup { font-size: 0 !important; line-height: 0 !important; }
+.lockup::before { content: 'Match\A maker'; white-space: pre; display: block; font: 400 calc(64 * var(--u))/.9 'Bangers', cursive; letter-spacing: .02em; color: var(--hot);
+  transform: skewX(-7deg); }
+
+/* truth table: Raggningstabell (spec: fits the 433u label box) */
+.truth .label { font-size: 0 !important; }
+.truth .label::before { content: 'Raggningstabell'; font: 400 calc(46 * var(--u))/1 'Bangers', cursive; letter-spacing: .01em; color: var(--hot); text-transform: none; display: block; transform: skewX(-7deg); }
+.truth th, .truth td { color: var(--ink); }
+
+/* ---------- row 03 right: the VN textbox (AND-chan) ---------- */
+.dj-adv { position: absolute; inset: calc(10 * var(--u)) calc(12 * var(--u)) calc(8 * var(--u)) calc(10 * var(--u)); display: flex; align-items: center; gap: calc(10 * var(--u));
+  background: #fff; border: calc(2.5 * var(--u)) solid var(--rim); border-radius: calc(12 * var(--u)); padding: 0 calc(26 * var(--u)) 0 calc(8 * var(--u)); z-index: 3;
+  box-shadow: inset 0 0 0 calc(2 * var(--u)) #fff, 0 calc(3 * var(--u)) 0 var(--lilac); }
+.dj-name { flex: none; font: 400 max(12px, calc(17 * var(--u)))/1 'Bangers', cursive; letter-spacing: .06em; color: #fff; background: var(--hot);
+  padding: calc(6 * var(--u)) calc(11 * var(--u)) calc(5 * var(--u)); border-radius: 999px; }
+.dj-adv p { margin: 0; white-space: normal; text-transform: none; letter-spacing: 0; font-variation-settings: normal; text-rendering: auto; font: 400 max(12px, calc(15.5 * var(--u)))/1.15 'Roboto Condensed', sans-serif; color: #8e0c55; }
+.dj-adv b { color: var(--hot); }
+.dj-adv i { position: absolute; right: calc(9 * var(--u)); bottom: calc(5 * var(--u)); font-style: normal; font-size: calc(12 * var(--u)); color: var(--hot); }
+.dj:not(.still) .dj-adv i { animation: djbob .9s ease-in-out infinite; }
+@keyframes djbob { 50% { transform: translateY(calc(3 * var(--u))); } }
+
+/* ---------- IT'S A MATCH (Wenrexa "YOU WIN!" panel, centred on the canvas) ---------- */
+.dj-veil { position: absolute; inset: 0; z-index: 20; display: grid; place-items: center; background: rgba(0, 27, 98, .38); }
+.dj:not(.still) .dj-veil { animation: djfade .18s ease-out; }
+@keyframes djfade { from { opacity: 0; } }
+.dj-match { position: relative; width: calc(560 * var(--u)); text-align: center; color: var(--hot);
+  background: linear-gradient(#fff, #fff3fc); border: calc(4 * var(--u)) solid var(--rim); border-radius: calc(13 * var(--u));
+  box-shadow: inset 0 0 0 calc(4 * var(--u)) #fff, 0 calc(8 * var(--u)) 0 calc(2 * var(--u)) var(--plum), 0 0 calc(40 * var(--u)) rgba(255, 80, 216, .6);
+  padding: calc(22 * var(--u)) calc(34 * var(--u)) calc(26 * var(--u)); }
+.dj:not(.still) .dj-match { animation: djpop .42s cubic-bezier(.2, 1.6, .45, 1); }
+@keyframes djpop { from { transform: scale(.4) rotate(-6deg); opacity: 0; } }
+.dj-match .cn { position: absolute; width: calc(18 * var(--u)); height: calc(18 * var(--u)); background: var(--rim); opacity: .7; }
+.dj-match .cn.tl { left: calc(9 * var(--u)); top: calc(9 * var(--u)); clip-path: polygon(0 0, 100% 0, 0 100%); }
+.dj-match .cn.tr { right: calc(9 * var(--u)); top: calc(9 * var(--u)); clip-path: polygon(0 0, 100% 0, 100% 100%); }
+.dj-match .cn.bl { left: calc(9 * var(--u)); bottom: calc(9 * var(--u)); clip-path: polygon(0 0, 0 100%, 100% 100%); }
+.dj-match .cn.br { right: calc(9 * var(--u)); bottom: calc(9 * var(--u)); clip-path: polygon(100% 0, 0 100%, 100% 100%); }
+.dj-its { margin: 0; font: 400 calc(84 * var(--u))/1 'Bangers', cursive; letter-spacing: .02em; color: var(--hot); transform: skewX(-7deg); text-shadow: 0 calc(3 * var(--u)) 0 #c10f6c; }
+.dj-pair { display: flex; align-items: center; justify-content: center; gap: calc(10 * var(--u)); margin: calc(12 * var(--u)) 0 calc(4 * var(--u)); }
+.dj-pair svg { height: calc(96 * var(--u)); width: auto; overflow: visible; }
+.dj-pair .flip { transform: scaleX(-1); }
+.dj-pair .dj-mid { height: calc(64 * var(--u)); }
+.dj:not(.still) .dj-mid { animation: djbeat .8s ease-in-out infinite; }
+@keyframes djbeat { 30% { transform: scale(1.2); } }
+.dj-heart { fill: var(--hot); }
+.dj-match .shape .body { fill: #fff; stroke: var(--hot); stroke-width: 4; }
+.dj-match .shape .lit { fill: #ffc4e6; }
+.dj-names { margin: 0; font: 400 calc(30 * var(--u))/1.1 'Bangers', cursive; letter-spacing: .04em; color: #c02c93; }
+.dj-names span { color: var(--hot); }
+.dj-compat { margin: calc(8 * var(--u)) 0 0; font: 400 max(12px, calc(19 * var(--u)))/1.2 'Roboto Condensed', sans-serif; color: #8e0c55; }
+.dj-compat b { font: 400 calc(30 * var(--u))/1 'Bangers', cursive; color: var(--hot); letter-spacing: .03em; }
+.dj-compat small { font-size: max(12px, calc(15 * var(--u))); color: #a0487a; }
+.dj-bar { height: calc(16 * var(--u)); margin: calc(10 * var(--u)) calc(40 * var(--u)) 0; border-radius: 999px; background: var(--lilac); box-shadow: inset 0 0 0 calc(2 * var(--u)) var(--rim); overflow: hidden; }
+.dj-bar i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(#ff6fbe, #f0268f); }
+.dj-btns { display: flex; gap: calc(22 * var(--u)); justify-content: center; margin-top: calc(24 * var(--u)); }
+.dj-btn { cursor: pointer; border: 0; white-space: nowrap; text-decoration: none; font: 400 calc(25 * var(--u))/1 'Bangers', cursive; letter-spacing: .05em; padding: calc(12 * var(--u)) calc(26 * var(--u)); border-radius: 999px; }
+.dj-btn.hot { background: linear-gradient(#ff6fbe, #f0268f 70%); color: #fff;
+  box-shadow: inset 0 calc(4 * var(--u)) 0 rgba(255, 255, 255, .45), 0 0 0 calc(3 * var(--u)) var(--rim), 0 0 0 calc(6 * var(--u)) #fff, 0 calc(6 * var(--u)) 0 calc(6 * var(--u)) var(--rim-2); }
+.dj-btn.soft { background: linear-gradient(#fff, #fde6f8); color: #c02c93;
+  box-shadow: 0 0 0 calc(3 * var(--u)) var(--rim), 0 0 0 calc(6 * var(--u)) #fff, 0 calc(6 * var(--u)) 0 calc(6 * var(--u)) var(--rim-2); }
+.dj-btn:focus-visible, .dj-back:focus-visible, .dj-disk:focus-visible { outline: 3px dashed var(--hot); outline-offset: 5px; }
+
+@media (prefers-reduced-motion: reduce) { .dj *, .dj *::before, .dj *::after { animation: none !important; } }

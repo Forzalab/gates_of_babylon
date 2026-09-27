@@ -31,8 +31,8 @@ for (const j of jobs) {
   await page.waitForTimeout(j.wait);
   if (j.match) {
     // wire gate A's output to gate B's input 0 by a real drag
-    const src = await page.locator('.react-flow__node[data-id="g1"] .react-flow__handle.source').first().boundingBox();
-    const dst = await page.locator('.react-flow__node[data-id="g2"] .react-flow__handle.target').first().boundingBox();
+    const src = await page.locator('.react-flow__node[data-id="g1"] .react-flow__handle[data-handleid="out"]').boundingBox();
+    const dst = await page.locator('.react-flow__node[data-id="g2"] .react-flow__handle[data-handleid="in0"]').boundingBox();
     await page.mouse.move(src.x + src.width / 2, src.y + src.height / 2);
     await page.mouse.down();
     await page.mouse.move((src.x + dst.x) / 2, dst.y + 5, { steps: 8 });
@@ -43,7 +43,7 @@ for (const j of jobs) {
   await page.screenshot({ path: path.join(OUT, j.name + '.png') });
   const fit = await page.evaluate(() => {
     const r = (s) => { const b = document.querySelector(s)?.getBoundingClientRect(); return b && [b.left, b.top, b.right, b.bottom].map(Math.round); };
-    return { sw: document.documentElement.scrollWidth, iw: innerWidth, modal: r('.modal'), plate: r('.plate'), neon: r('.neon'), warn: r('.warn'), adv: r('.adv'), grid: r('.grid'), bar: r('.bar'), match: !!document.querySelector('.itsmatch') };
+    return { sw: document.documentElement.scrollWidth, iw: innerWidth, modal: r('.modal'), plate: r('.plate'), neon: r('.neon'), warn: r('.warn'), adv: r('.adv'), grid: r('.grid'), bar: r('.bar'), match: !!document.querySelector('.dj-match') };
   });
   console.log(j.name, JSON.stringify(fit));
   await page.close();

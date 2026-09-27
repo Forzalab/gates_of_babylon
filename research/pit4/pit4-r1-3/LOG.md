@@ -7,3 +7,4 @@
 - Found: pit3 tiles were flat because hsl(calc(330 + var(--h) * 1deg)) mixes number + angle (invalid -> whole background dropped). Fixed with deg units.
 - Coordinator: school = S3 galge/VN. Lens = M9 office-hours queue (M5 printer jam considered, see REPORT).
 - Surprise = DDLC turn: textbox line -> "#47 in the office-hours queue. I'll wait. I'll ALWAYS wait.", meter -> QUEUE #47 ticket, stare eyes, NO THANKS glitches.
+- 2026-09-27T18:42:17Z next=1: real App with Date tokens, neon Dejting plate in r1 (j/g cross the rule), MATCH MAKER lockup, heart disk -> /, Raggningstabell, AND-chan VN textbox in r3, IT'S A MATCH card on gate->gate wire (real compat). Tour muted for this mount only, keys restored.
