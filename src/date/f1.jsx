@@ -14,7 +14,7 @@ const NEXT = `${location.pathname}?v=f1&next=1`;
 const GATE = `${location.pathname}?v=f1`;
 
 // P5-style exit: a tilted pink slash wipes the screen, then we navigate.
-function useWipe() {
+export function useWipe() {
   const [go, set] = useState(null);
   useEffect(() => {
     if (!go) return;
@@ -25,10 +25,10 @@ function useWipe() {
 }
 // Refusal: the error buzz plays, then we bounce to Logic.
 const refuse = (e) => { e.preventDefault(); play('error'); setTimeout(() => { location.href = LOGIC; }, STILL ? 0 : 380); };
-const hover = () => play('hover', { vol: 0.2 });
+export const hover = () => play('hover', { vol: 0.2 });
 
 // Mute lives in the site's own top bar (Web-1.0 button, same as Search). Kenney's UI pack has no speaker icon, so it is drawn here.
-function Mute() {
+export function Mute() {
   const [m, set] = useState(isMuted());
   useEffect(() => onMute(set), []);
   return (
@@ -39,7 +39,7 @@ function Mute() {
   );
 }
 
-const Wipe = ({ on }) => <div className={on ? 'wipe on' : 'wipe'} aria-hidden="true"><i /><i /></div>;
+export const Wipe = ({ on }) => <div className={on ? 'wipe on' : 'wipe'} aria-hidden="true"><i /><i /></div>;
 
 // The red pen. Hand-drawn paths only (no new font: the note is the page's own Yellowtail script, in ink).
 function Grade({ on }) {

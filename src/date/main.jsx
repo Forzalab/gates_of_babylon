@@ -14,9 +14,11 @@ import { compat, pairRow } from './compat.js';
 import './date.css';
 import './f1.css';
 import { F1, Feed } from './f1.jsx';
+import './g3.css';
+import { G3, Feed3 } from './g3.jsx';
 
 const params = new URLSearchParams(location.search);
-const V = ['x1', 'x2', 'x3', 'f1'].includes(params.get('v')) ? params.get('v') : 'x1';
+const V = ['x1', 'x2', 'x3', 'f1', 'g3'].includes(params.get('v')) ? params.get('v') : 'x1';
 export const STILL = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const LOGIC = import.meta.env.BASE_URL; // "/": the real app. "I'm not 18" lands here (the 4th-wall joke).
 
@@ -283,6 +285,7 @@ function Page() {
   const [hash, setHash] = useState(location.hash);
   useEffect(() => { const f = () => setHash(location.hash); addEventListener('hashchange', f); return () => removeEventListener('hashchange', f); }, []);
   if (V === 'f1') return <div className={`date v-f1${STILL ? ' still' : ''}`}>{params.get('next') === '1' ? <Feed /> : <><Bar /><Grid /><F1 /></>}</div>;
+  if (V === 'g3') return <div className={`date v-f1 v-g3${STILL ? ' still' : ''}`}>{params.get('next') === '1' ? <Feed3 /> : <><Bar /><Grid /><G3 /></>}</div>;
   return (
     <div className={`date v-${V}${STILL ? ' still' : ''}`}>
       <Bar logo={V === 'x1'} />

@@ -1,0 +1,171 @@
+/* g3 (pit4 run 2): f1 + the r1 fix list, S6 arcade attract mode. Loaded on top of f1.css (.v-f1.v-g3). */
+
+/* fix 2: the Dejting tube had a dotted seam where the script's joined strokes overlap under -webkit-text-stroke.
+   Paint the stroke under the fill so internal contours vanish. */
+.v-g3 .neon { paint-order: stroke fill; -webkit-text-stroke: 3px #ff7fe0; }
+
+/* fix 5: column 1 badges sat under the modal's left edge ("456,22"): anchor them left in that column */
+.v-g3 .grid .tile:nth-child(4n + 1) .badge { right: auto; left: calc(var(--u) * .5); }
+
+/* ---------- gate ---------- */
+.v-g3 .sf { padding-top: calc(var(--u) * 1.2); padding-bottom: 0; }
+/* fix 1: the plate is a cabinet marquee; WARNING starts below the j/g descenders + glow core, >= 8px clear */
+.mg .plate { height: calc(var(--u) * 4.4); margin-bottom: calc(var(--u) * .2); }
+.mg .plate .neon { font-size: calc(var(--u) * 9.2); transform: translateY(-20%); }
+.mg .copy { padding-top: calc(var(--u) * 3.6); }
+/* fix 3: the headline scales with min(vw, vh) so the cap is ~.12 H at 16:9 and at 4:3 */
+.mg .warn.cut { font-size: min(7.3vw, 14.2vh); }
+.mg .plain { margin: calc(var(--u) * .5) 0 calc(var(--u) * .4); }
+
+/* steal from f2: the compat pill, a thin on-palette bar under the fine print */
+.mg .compat { position: relative; height: max(16px, calc(var(--u) * 1.6)); margin: 0 auto calc(var(--u) * .9); width: 88%;
+  background: var(--lilac); border-radius: 99px; box-shadow: inset 0 0 0 1px var(--rim); overflow: hidden; }
+.mg .compat i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(#ff7cc6, var(--hot)); border-radius: 99px; }
+.mg .compat span { position: relative; display: block; font: 700 max(12px, calc(var(--u) * 1.1))/max(16px, calc(var(--u) * 1.6)) 'Roboto Condensed', sans-serif;
+  color: #9b1a78; letter-spacing: .03em; }
+/* steal from f2/x2: the PARENTAL CONTROLS footer, M2's heart-rule line */
+.mg .foot { margin: calc(var(--u) * .8) 0 0; padding-top: calc(var(--u) * .5); border-top: 2px solid var(--lilac);
+  font: 400 max(12px, calc(var(--u) * 1.45))/1 'Bangers', cursive; letter-spacing: .05em; color: var(--hot-2); transform: skewX(-6deg); }
+.fh { width: 1.1em; height: 1.1em; vertical-align: -.2em; }
+.fh .heart { fill: #ff7fcf; }
+
+/* S6: ENTER ANYWAY is the PRESS START. The glow blinks in attract-mode steps; the label never moves. */
+.v-g3:not(.still) .btn.start { animation: attract 1.2s steps(1) infinite; }
+@keyframes attract { 50% { filter: brightness(1.12) drop-shadow(0 0 calc(var(--u) * .9) #ff4fd8); } }
+
+/* ---------- the surprise: B+ ring + the note on a lilac sticky (M12) ---------- */
+.pen3 { position: relative; margin-top: calc(var(--u) * .3); display: grid; justify-items: center; color: var(--pen); pointer-events: none; }
+.pen3.clean { visibility: hidden; }
+.pen3 .ring { width: calc(var(--u) * 9.5); overflow: visible; transform: rotate(-9deg); position: relative; z-index: 1; }
+.pen3 .ring path { fill: none; stroke: var(--pen); stroke-width: 5; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+.pen3 .ring text { font: 400 92px 'Yellowtail', cursive; fill: var(--pen); opacity: 0; }
+/* fix 4: note >= 16px at 1024 */
+.sticky { margin: calc(var(--u) * -1.2) 0 0; padding: calc(var(--u) * .9) calc(var(--u) * .7) calc(var(--u) * .5); width: 100%;
+  font: 400 max(17px, calc(var(--u) * 2.05))/1.05 'Yellowtail', cursive; text-align: center; color: var(--pen);
+  background: var(--lilac); border-top: calc(var(--u) * .7) solid #f0b6f6; box-shadow: 0 calc(var(--u) * .3) 0 var(--rim), 0 calc(var(--u) * .6) calc(var(--u) * 1) rgba(120, 20, 90, .25);
+  transform: rotate(-4deg); opacity: 0; }
+.sticky span { display: block; text-align: right; }
+.pen3.on .ring path { animation: draw .55s cubic-bezier(.5, 0, .3, 1) forwards; }
+.pen3.on .ring text { animation: ink .01s .5s forwards, slam .3s .5s cubic-bezier(.2, 1.8, .4, 1) both; transform-box: fill-box; transform-origin: center; }
+.pen3.on .sticky { animation: stick .35s .8s cubic-bezier(.2, 1.6, .4, 1) forwards; }
+@keyframes stick { from { opacity: 0; transform: translateY(-30%) rotate(-14deg); } to { opacity: 1; transform: rotate(-4deg); } }
+.still .pen3 .ring path { animation: none; stroke-dashoffset: 0; }
+.still .pen3 .ring text, .still .sticky { animation: none; opacity: 1; }
+
+/* 4:3 and taller: the copy column is too narrow for a .12 H headline, so WARNING spans the panel (M1 style) */
+@media (max-aspect-ratio: 3/2) {
+  .mg .cols { grid-template-columns: calc(var(--u) * 15) 1fr; row-gap: 0; align-items: start; }
+  .mg .copy { display: contents; }
+  .mg .copy > h1 { grid-column: 1 / -1; grid-row: 1; padding-top: calc(var(--u) * 3.4); margin-bottom: calc(var(--u) * 1.2); }
+  .mg .left { grid-column: 1; grid-row: 2 / span 3; padding-top: 0; }
+  .mg .copy > :not(h1) { grid-column: 2; }
+}
+
+/* ---------- continue: HIGH SCORE attract mode ---------- */
+.g3bar .hud { display: flex; align-items: stretch; gap: 0; background: var(--navy); border: calc(var(--u) * .25) solid var(--rim); border-radius: calc(var(--u) * .5);
+  box-shadow: 0 calc(var(--u) * .3) 0 var(--plum); position: relative; }
+.hud > div { padding: calc(var(--u) * .4) calc(var(--u) * 1.3); display: grid; align-content: center; border-right: 2px dashed rgba(236, 134, 244, .5); }
+.hud small { font: 700 max(12px, calc(var(--u) * 1.05))/1 'Roboto Condensed', sans-serif; letter-spacing: .14em; color: #ffb3e3; }
+.hud b { font: 400 calc(var(--u) * 2.5)/1.05 'Bangers', cursive; letter-spacing: .08em; color: #fff; }
+.hud .blink { margin: 0; align-self: center; padding: 0 calc(var(--u) * 1.3); font: 400 calc(var(--u) * 2)/1 'Bangers', cursive; letter-spacing: .08em; color: var(--neon);
+  text-shadow: 0 0 6px #ff2fc8; }
+.hud .blink.off { visibility: hidden; }
+.g3feed { grid-template-rows: 1fr 1fr auto; gap: calc(var(--u) * 1.6) calc(var(--u) * 2); }
+/* fix 6: 8 cards with air, tubes in navy not black */
+.card.g .tube { background-color: var(--navy); }
+.card.g .tube .tt { position: absolute; inset: 4% 6%; }
+.tt { width: 100%; border-collapse: collapse; font: 700 max(12px, calc(var(--u) * 1.15))/1.1 'Roboto Condensed', sans-serif; color: #dfe8ff; text-align: center; }
+.tt th { color: #ffb3e3; font-weight: 700; letter-spacing: .06em; border-bottom: 1px solid rgba(236, 134, 244, .5); }
+.tt tr.ok td { color: #fff; } .tt tr.ok td:last-child { color: var(--neon); }
+.tt td:last-child { width: 2em; }
+.scores { grid-column: 1 / -1; display: grid; grid-template-columns: auto 1fr; align-items: center; gap: calc(var(--u) * 2);
+  background: var(--navy); color: #fff; border: calc(var(--u) * .25) solid var(--rim); border-radius: calc(var(--u) * .7);
+  box-shadow: 0 calc(var(--u) * .3) 0 var(--plum); padding: calc(var(--u) * .7) calc(var(--u) * 1.6); }
+.scores h2 { margin: 0; font: 400 calc(var(--u) * 3)/1 'Bangers', cursive; letter-spacing: .08em; color: var(--neon); text-shadow: 0 0 8px #ff2fc8; }
+.scores ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: calc(var(--u) * 1.2); }
+.scores li { display: grid; grid-template-columns: auto 1fr; column-gap: calc(var(--u) * .6); font: 400 calc(var(--u) * 1.7)/1.15 'Bangers', cursive; letter-spacing: .06em; }
+.scores li b { color: #ffb3e3; grid-row: span 2; font-size: 1.3em; align-self: center; }
+.scores li em { font-style: normal; color: #fff; }
+.scores li i { font-style: normal; color: #8fb0ff; }
+.scores li span { grid-column: 2; }
+.scores li.you i { color: var(--neon); }
+.scores li.kerney { color: var(--pen); font-family: 'Yellowtail', cursive; font-size: max(16px, calc(var(--u) * 2)); letter-spacing: 0; }
+.scores li.kerney b, .scores li.kerney em, .scores li.kerney i { color: #ff8a9c; }
+/* the big IT'S A MATCH moment (>= 75%) */
+.bigmatch { position: fixed; inset: 0; z-index: 25; display: grid; place-items: center; background: rgba(0, 27, 98, .72); }
+.mbm { width: calc(var(--u) * 40); text-align: center; padding: calc(var(--u) * 2) calc(var(--u) * 3); }
+.mbm strong { display: block; font: 400 calc(var(--u) * 7)/1 'Bangers', cursive; color: var(--hot); letter-spacing: .03em; transform: rotate(-3deg) skewX(-8deg);
+  text-shadow: calc(var(--u) * .18) calc(var(--u) * .18) 0 #fff, calc(var(--u) * .45) calc(var(--u) * .45) 0 var(--navy); }
+.mbm p { font: 400 calc(var(--u) * 2)/1.2 'Bangers', cursive; letter-spacing: .06em; color: var(--hot-2); margin: calc(var(--u) * 1) 0; }
+.mbm .tt { background: var(--navy); border-radius: calc(var(--u) * .5); padding: calc(var(--u) * .5); margin-bottom: calc(var(--u) * 1.4); font-size: calc(var(--u) * 1.6); }
+.mbm .btn { width: 70%; margin: 0 auto; border: 0; cursor: pointer; font-size: calc(var(--u) * 2.8); }
+.v-g3:not(.still) .mbm { animation: slamin .45s cubic-bezier(.2, 1.4, .4, 1) both; }
+
+/* ---------- height budget (modal + sign <= .70 H) ---------- */
+.mg .cols { grid-template-columns: calc(var(--u) * 12.5) 1fr; }
+.mg .copy { padding-top: calc(var(--u) * 3.2); }
+.mg .btn.wide { padding: calc(var(--u) * .55) 0; }
+.mg .btn.narrow { padding: calc(var(--u) * .35) 0; }
+.mg .foot { margin-top: calc(var(--u) * .6); }
+/* the B+ ring is inked onto the portrait's bottom-right corner; the sticky hangs below, clear of the ENTER tick */
+.pen3 { margin-top: calc(var(--u) * -5.2); }
+.pen3 .ring { width: calc(var(--u) * 8); justify-self: end; margin-right: calc(var(--u) * -1.4); }
+.sticky { width: 84%; justify-self: start; margin-top: calc(var(--u) * -1.8); }
+.mg .compat i { background: linear-gradient(#ffa6d8, #ff6cb8); }
+.mg .compat span { color: #7a0f5c; }
+
+@media (max-aspect-ratio: 3/2) {
+  .mg .warn.cut { font-size: 13.4vh; }
+  .mg .cols { grid-template-columns: calc(var(--u) * 14) 1fr; grid-template-rows: auto auto auto auto 1fr; }
+  .mg .left { grid-row: 2 / span 4; }
+  .mg .copy > h1 { padding-top: calc(var(--u) * 3.6); margin-bottom: calc(var(--u) * .6); }
+  .mg .copy > .plain { margin-top: calc(var(--u) * 1); }
+}
+/* round 2 of the height budget */
+.mg .copy { padding-top: calc(var(--u) * 1.5); }
+.mg .warn.cut { font-size: min(7.1vw, 14vh); }
+.mg .warn small { margin-top: .02em; }
+.mg .plain { margin: calc(var(--u) * .3) 0 calc(var(--u) * .3); line-height: 1.2; }
+.mg .compat { margin-bottom: calc(var(--u) * .6); }
+.mg .btn.wide { font-size: calc(var(--u) * 2.8); }
+.mg .btns.stack { gap: calc(var(--u) * .5); }
+.mg .foot { margin-top: calc(var(--u) * .4); padding-top: calc(var(--u) * .35); }
+.mg { padding-bottom: calc(var(--u) * .7); }
+@media (max-aspect-ratio: 3/2) {
+  .mg .warn.cut { font-size: 13.2vh; }
+  .mg .copy > h1 { padding-top: calc(var(--u) * 1.6); margin-bottom: calc(var(--u) * .3); }
+  .mg .cols { grid-template-columns: calc(var(--u) * 12.5) 1fr; }
+  .sticky { width: 100%; }
+  .mg .copy > .plain { margin-top: calc(var(--u) * .4); }
+}
+@media (max-aspect-ratio: 3/2) {
+  .pen3 { margin-top: calc(var(--u) * -6); }
+  .sticky { padding: calc(var(--u) * .5) calc(var(--u) * .6) calc(var(--u) * .3); line-height: 1; border-top-width: calc(var(--u) * .5); }
+}
+.mg .warn.cut { font-size: min(7.5vw, 14vh); }
+@media (max-aspect-ratio: 3/2) { .mg .warn.cut { font-size: 13.2vh; } .mg .copy > h1 { padding-top: calc(var(--u) * 2.5); } }
+.mg .foot { font-size: max(12px, calc(var(--u) * 1.3)); margin-top: calc(var(--u) * .3); }
+.mg .compat { margin-bottom: calc(var(--u) * .4); }
+.mg .plain { line-height: 1.12; }
+.mg .btns.stack { gap: calc(var(--u) * .35); }
+.mg .copy { padding-top: calc(var(--u) * 1.2); }
+@media (max-aspect-ratio: 3/2) { .pen3 { margin-top: calc(var(--u) * -6.8); } }
+@media (min-aspect-ratio: 3/2) { .sticky { width: 78%; } .mg .tick { left: calc(var(--u) * -4.4); } }
+
+/* continue polish */
+.g3bar .warn.cut { font-size: calc(var(--u) * 4.6); }
+.g3bar { gap: calc(var(--u) * 1.6); }
+.g3bar .feednav .btn { font-size: calc(var(--u) * 1.9); padding: calc(var(--u) * .7) calc(var(--u) * 1.4); }
+.hud > div { padding: calc(var(--u) * .35) calc(var(--u) * 1); }
+.hud b { font-size: calc(var(--u) * 2.2); white-space: nowrap; }
+.hud small { white-space: nowrap; }
+.hud .blink { white-space: nowrap; font-size: calc(var(--u) * 1.8); }
+.card.g .tube .tt { inset: 6% 5%; width: 90%; height: 88%; font-size: max(12px, calc(var(--u) * 1.3)); table-layout: fixed; }
+.tt td:last-child, .tt th:last-child { width: 14%; }
+.scores li { grid-template-columns: auto auto 1fr; align-items: baseline; }
+.scores li b { grid-row: 1 / span 2; grid-column: 1; }
+.scores li span { grid-column: 2 / span 2; grid-row: 1; white-space: nowrap; }
+.scores li em { grid-column: 2; grid-row: 2; }
+.scores li i { grid-column: 3; grid-row: 2; }
+.scores li.kerney span { font-size: .9em; }
+.scores li.kerney b { font-family: 'Bangers', cursive; font-size: calc(var(--u) * 2.2); color: #ff8a9c; }
