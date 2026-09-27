@@ -8,3 +8,4 @@ Mundane lens: kept M9 (office-hours queue). M4/M11 would be a second gag, so not
   "I'LL ALWAYS WAIT." in Bangers at 1.4x; fix 4 grid bottom pad 8.6vh -> 3.2vh. Textbox height is identical before and after
   the turn (no reflow). Gacha: card flip-flash, spinning white star burst, SSR ★★★★★ band, pulsing pink rarity glow.
   Stars are white (yellow stays on 18+ only).
+- step 3: tests/e2e/build pass, full shots, Pillow deltas, REPORT.md.
