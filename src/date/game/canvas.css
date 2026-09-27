@@ -21,3 +21,5 @@
 .grp .proof { margin: 4px 0 0; font: 700 13px 'JetBrains Mono', monospace; color: #b8ffcf; }
 .loose { display: flex; gap: 12px; }
 .loose .lt { position: relative; width: 70px; height: 70px; }
+.cbar .order { display: flex; flex-direction: column; gap: 2px; font-size: 12px; }
+.cbar .order .tip { font: 700 15px 'Roboto Condensed', sans-serif; color: #fff; }

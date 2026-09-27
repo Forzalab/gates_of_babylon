@@ -291,7 +291,7 @@ export default function Bagging() {
   return (
     <div className={`game${STILL ? ' still' : ''}${g.over ? ' is-over' : ''}`} style={{ '--rows': R.H, '--cols': R.W }}>
       <header className="bar gbar">
-        <a className="logo neonlogo" href={`${BASE}date.html`}>
+        <a className="logo neonlogo" href="?canvas=1" title="Your Date canvas">
           <span className="neon small dj">Dejting</span><b>GATEXX</b>
         </a>
         <div className={`lcd${g.over?.reason === 'overflow' || g.frozen ? ' alarm' : ''}`} data-testid="lane">{header}</div>
@@ -391,7 +391,7 @@ export default function Bagging() {
         <div className="nameplate">{g.talk.who ?? 'GATEXX'}</div>
         <div className="portrait-s">{g.talk.who && <GateTile t={g.talk.who} />}</div>
         <p className="line" key={g.talk.text}>{g.talk.text}</p>
-        <div className="vn-meta">SEED {SEED}{fromCanvas ? ` · ${fromCanvas} from canvas` : ''}</div>
+        {params.has('debug') && <div className="vn-meta">SEED {SEED}</div>}
       </footer>
 
       {card && <IdentityCard card={card} onClose={() => setCard(null)} />}

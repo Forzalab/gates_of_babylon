@@ -103,16 +103,16 @@ export default function DateCanvas() {
   return (
     <div className={`game canvas-page${STILL ? ' still' : ''}`}>
       <header className="bar gbar">
-        <a className="logo neonlogo" href={`${import.meta.env.BASE_URL}date.html`}><span className="neon small dj">Dejting</span><b>GATEXX</b></a>
+        <a className="logo neonlogo" href="?canvas=1"><span className="neon small dj">Dejting</span><b>GATEXX</b></a>
         <div className="lcd">DATE CANVAS {'·'} {gates.length} GATES</div>
-        <div className="stat"><small>BONDED PAIRS</small><b data-testid="bonded">{state.groups.filter((g) => g.bonded).length}</b></div>
+        <div className="stat"><small>COUPLES YOU MADE</small><b data-testid="bonded">{state.groups.filter((g) => g.bonded).length}</b></div>
         <button className="mute" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? 'Unmute sound' : 'Mute sound'}>{muted ? '♪̸' : '♪'}<span>{muted ? 'MUTED' : 'SOUND'}</span></button>
       </header>
       <main className="cmain">
         <div className="cbar">
           <button className="btn hot" onClick={bag} data-testid="bag">{'▶'} BAG MY {gates.length} GATES</button>
           <button className="btn soft" onClick={() => { dispatch({ type: 'reset', state: starter() }); play('click'); }}>CLEAR CANVAS</button>
-          <span className="order">first drops: {gates.slice(0, 8).map((n) => n.type).join(' → ')}{gates.length > 8 ? ' …' : ''}</span>
+          <span className="order"><b className="tip">Tap a 0/1 switch to flip it; the round lamp lights up when the answer is 1.</b> First drops: {gates.slice(0, 8).map((n) => n.type).join(' → ')}{gates.length > 8 ? ' …' : ''}</span>
         </div>
         <div className="canvas" data-testid="canvas">
           {state.groups.map((gr) => {
@@ -120,7 +120,7 @@ export default function DateCanvas() {
             const hot = hello && gr === endingGroup;
             return (
               <section key={gr.id} className={`grp${gr.hurt ? ' hurt' : ''}${gr.bonded ? ' bonded' : ''}${hot ? ' hello' : ''}`} data-testid={gr.id.startsWith('run') ? 'imported' : 'group'}>
-                <header><b>{gr.label}</b><span>{gr.name}</span>{gr.bonded && <i>BONDED {'♥'}</i>}{gr.hurt && <i className="red">NOT A MATCH</i>}{gr.ending && <i className="end">ENDING</i>}</header>
+                <header><b>{gr.label}</b><span>{gr.name}</span>{gr.bonded && <i title="a couple you made in the bagging area">COUPLE {'♥'}</i>}{gr.hurt && <i className="red">NOT A MATCH</i>}{gr.ending && <i className="end">ENDING</i>}</header>
                 {gr.loose ? <div className="loose">{Object.values(c.nodes).map((n) => <div key={n.id} className="lt"><GateTile t={n.type} /></div>)}</div>
                   : <CircuitView circuit={c} hurt={gr.hurt} onToggle={(id) => { dispatch({ type: 'toggle', id }); play('click', { rate: 1.3 }); }} label={gr.label} />}
                 {gr.proof && <p className="proof">{gr.proof}</p>}
@@ -133,7 +133,6 @@ export default function DateCanvas() {
         <div className="nameplate">{talk.who}</div>
         <div className="portrait-s">{endingGroup ? <GateTile t={Object.values(sub(state, endingGroup.id).nodes).find((n) => n.kind === 'G')?.type ?? 'NOT'} /> : <GateTile t="AND" />}</div>
         <p className="line">{talk.text}</p>
-        <div className="vn-meta">real sim.evaluate {'·'} canConnect-checked wires</div>
       </footer>
     </div>
   );
