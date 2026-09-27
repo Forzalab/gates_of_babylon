@@ -91,6 +91,8 @@ export function stepPoints(s, t) {
 // Capped router. Returns points with <= MAX_BENDS corners that clear all boxes, or null (caller falls back).
 // ends = { src, dst } boxes of the wire's own nodes; others = every other node box.
 export function route(s, t, { src, dst, others = [], prefer, margin = MARGIN } = {}, maxBends = MAX_BENDS) {
+  // Measured pins carry float noise (334.00003 vs 333.99996): pins within SNAP share one row, so the wire is straight.
+  if (Math.abs(t[1] - s[1]) < SNAP) t = [t[0], s[1]];
   // Pins can sit inside their own box (knobs, padding): trim the source box at the pin's x, and the target box too.
   const own = [src && { ...src, w: Math.min(src.w, s[0] - src.x) }, dst && { ...dst, x: Math.max(dst.x, t[0]), w: dst.x + dst.w - Math.max(dst.x, t[0]) }];
   const ownObs = own.filter((b) => b && b.w > 0);
