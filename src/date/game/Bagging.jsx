@@ -72,6 +72,7 @@ export default function Bagging() {
   const [hover, setHover] = useState(3);
   const [drag, setDrag] = useState(false);
   const [shakeCol, setShakeCol] = useState(null);
+  const [missed, setMissed] = useState(false);
   // The demo: a ghost of your gate jumps from the lane onto its buddy until your first drop (instant jumps: reduced-motion safe).
   const [demo, setDemo] = useState(0);
   useEffect(() => { const t = setInterval(() => setDemo((d) => 1 - d), 1100); return () => clearInterval(t); }, []);
@@ -259,6 +260,12 @@ export default function Bagging() {
     const p = press.current; press.current = null; setDrag(false);
     if (!p) return;
     const r = boardRef.current.getBoundingClientRect(), cell = r.width / R.W, dx = e.clientX - p.x;
+    // Dogfood fix 3: a release off the board is refused out loud (error sound + shake, a red flash under reduced motion).
+    if (e.clientX < r.left - cell * 0.3 || e.clientX > r.right + cell * 0.3 || e.clientY > r.bottom + cell * 0.5 || e.clientY < r.top - cell * 1.2) {
+      play('error'); setMissed(true); later(450, () => setMissed(false));
+      notify({ kind: 'toast', text: 'MISSED THE BAG', sub: 'let go over a column to drop' });
+      return;
+    }
     if (p.gid && Math.abs(dx) > cell * 0.45) { swipeGate(p.gid, dx < 0 ? -1 : 1); return; }
     drop(colAt(e));
   };
@@ -328,12 +335,12 @@ export default function Bagging() {
           ) : !g.merges.length && !g.over ? (
             <div className="howto" data-testid="howto"><b>HOW TO:</b> Drop gates. Same-vibe neighbours merge. Merges = {'♥'}. <i>Tap a column or drag.</i></div>
           ) : <div className="preview-line" aria-live="polite">
-            {pv ? (best ? <>drag {'▼'} <b>({g.cur.t})</b> next to <b>{best.t}</b> <span className={best.glow ? 'glow' : 'hurtc'}>{best.dots} {Math.round(best.compat * 100)}% {best.glow ? '♥ GLOW' : '✕ HURT'}</span></>
-              : <>drag {'▼'} <b>({g.cur.t})</b> into an empty spot</>) : g.frozen ? <>an attendant is on the way...</> : <>&nbsp;</>}
+            {pv ? (best ? <>tap a column or drag {'▼'} <b>({g.cur.t})</b> next to <b>{best.t}</b> <span className={best.glow ? 'glow' : 'hurtc'}>{best.dots} {Math.round(best.compat * 100)}% {best.glow ? '♥ GLOW' : '✕ HURT'}</span></>
+              : <>tap a column or drag {'▼'} <b>({g.cur.t})</b> into an empty spot</>) : g.frozen ? <>an attendant is on the way...</> : <>&nbsp;</>}
           </div>}
-          <div className={`board${drag ? ' dragging' : ''}`} ref={boardRef} tabIndex={0} role="application" data-testid="board"
+          <div className={`board${drag ? ' dragging' : ''}${missed ? ' missed' : ''}`} ref={boardRef} tabIndex={0} role="application" data-testid="board"
             aria-label={`Bagging area. Column ${hover + 1}. Arrow keys move, Enter drops ${g.cur.t}.`}
-            onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={() => setDrag(false)} onKeyDown={onKey}>
+            onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerCancel={() => { press.current = null; setDrag(false); }} onKeyDown={onKey}>
             <div className="lane">
               {!g.over && <div className={`hand${g.frozen ? ' frozen' : ''}`} style={{ '--c': hover }}><GateTile t={g.cur.t} className="held" /></div>}
             </div>

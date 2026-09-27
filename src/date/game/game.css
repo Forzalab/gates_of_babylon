@@ -284,3 +284,9 @@
   background: var(--yellow); color: #7a0b45; font: 400 15px 'Bangers', cursive; letter-spacing: .05em; box-shadow: 0 2px 0 #b0106a; }
 .demo.p1 .demo-tag { background: #0f6fd6; color: #fff; box-shadow: 0 0 10px var(--glow); }
 .demo.p0 .demo-tag { bottom: auto; top: calc(100% + 4px); }
+
+/* dogfood fix 3: a missed drop. Motion: a shake. Reduced motion: the same beat as a red flash (colour only). */
+.board.missed .well { box-shadow: inset 0 0 0 3px var(--hurt), 0 0 18px var(--hurt); }
+.game:not(.still) .board.missed { animation: miss .4s ease-in-out; }
+@keyframes miss { 20% { transform: translateX(-8px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
+.game:not(.still) .colbg.shake { animation: miss .3s; }
