@@ -480,7 +480,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
    B: twin lines = a 3-stroke band with a 1-stroke paper core (two 3px lines, 3px apart). Dots = 9px at 3px wire.
    Mixed nets on one run: one weight, alternating ink / orange dashes (both states show). Orange stays logic 1. */
 .jn path { fill: none; stroke-linecap: butt; }
-.jn .trunk { stroke: var(--ink); stroke-width: calc(var(--stroke) * 2); }
+.jn .trunk { stroke: var(--ink); stroke-width: calc(var(--stroke) * 2); stroke-linecap: square; } /* Tony: square caps fill the corner where two trunk runs meet (butt left a notch) */
 .jn .twin { stroke: var(--ink); stroke-width: calc(var(--stroke) * 3); }
 .jn .twin-gap { stroke: var(--paper); stroke-width: var(--stroke); }
 .jn .mix0 { stroke: var(--ink); stroke-width: var(--stroke); }
