@@ -11,8 +11,10 @@ import { play, then, isMuted, setMuted, onMute } from './sfx.js';
 const params = new URLSearchParams(location.search);
 const CLEAN = params.has('clean'); // arbiter's overlap diff: the page without the red pen
 // g2 (pit4 r2) reuses this file: same surprise, JRPG-menu chrome (S5) and the r1 fix list. f1 stays as it was.
-const G2 = params.get('v') === 'g2';
-const VID = G2 ? 'g2' : 'f1';
+// h1 (pit4 r3) = g2 + the r2 fix list + g3's HIGH SCORES + on-page credits + K7 (NO THANKS flees, gives up: "fine.").
+const H1 = params.get('v') === 'h1';
+const G2 = params.get('v') === 'g2' || H1;
+const VID = H1 ? 'h1' : G2 ? 'g2' : 'f1';
 const NEXT = `${location.pathname}?v=${VID}&next=1`;
 const GATE = `${location.pathname}?v=${VID}`;
 
@@ -66,6 +68,25 @@ function Grade({ on }) {
 const Tick = ({ on }) => (
   <svg className={CLEAN ? 'tick clean' : on ? 'tick on' : 'tick'} viewBox="0 0 60 50" aria-hidden="true"><path pathLength="1" d="M6 26l14 16C30 26 42 12 56 4" /></svg>);
 
+// K7, the punchline to the red pen (h1 only): NO THANKS runs from the cursor three times, then gives up, lies down
+// and says "fine." Reduced motion: no tween. It TELEPORTS to the far corner in one frame, then says "fine."
+// Keyboard focus never flees (you can always refuse with Tab + Enter).
+const FLEE = [[30, -.2], [-30, .3], [28, 1.6]]; // x in % of the button's own width, y in --u: all inside the copy column
+function NoThanks({ onHover, onFocus }) {
+  const [n, setN] = useState(0);
+  const done = STILL ? n >= 1 : n > FLEE.length;
+  const off = done ? [0, 0] : n ? FLEE[n - 1] : [0, 0]; // given up = parked at the far right end of the row (CSS)
+  const run = () => {
+    onHover();
+    if (done) return;
+    if (STILL) { setN(1); play('click', { vol: 0.3 }); return; }
+    setN(n + 1); play(n + 1 > FLEE.length ? 'error' : 'hover', { vol: 0.3 });
+  };
+  return (
+    <a className={`btn soft narrow flee${n ? ' moved' : ''}${done ? ' fine' : ''}`} href={LOGIC} onClick={refuse} onPointerEnter={run} onFocus={onFocus}
+      style={{ '--fx': off[0], '--fy': off[1] }} aria-label="No thanks">{done ? 'fine.' : 'NO THANKS'}</a>);
+}
+
 export function F1() {
   const on = useLanded(1500);
   const [go, to] = useWipe();
@@ -99,7 +120,8 @@ export function F1() {
                 <a className="btn hot wide" href={NEXT} onClick={enter} onPointerEnter={hover} onFocus={() => setCur(0)} onMouseEnter={() => setCur(0)}>&#9829; ENTER ANYWAY &#9829;</a>
                 {G2 && cur === 0 && <Hand />}</div>
               <div className="tickrow nrow">
-                <a className="btn soft narrow" href={LOGIC} onClick={refuse} onPointerEnter={hover} onFocus={() => setCur(1)} onMouseEnter={() => setCur(1)}>NO THANKS</a>
+                {H1 ? <NoThanks onHover={() => { hover(); setCur(-1); }} onFocus={() => setCur(1)} />
+                  : <a className="btn soft narrow" href={LOGIC} onClick={refuse} onPointerEnter={hover} onFocus={() => setCur(1)} onMouseEnter={() => setCur(1)}>NO THANKS</a>}
                 {G2 && cur === 1 && <Hand />}</div>
             </div>
             {G2 && <div className="cpill" role="meter" aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} aria-label="XOR and you (AND): 25% compatible">
@@ -140,7 +162,7 @@ function TT({ A, B }) {
   return (
     <table className="tt"><thead><tr><th>a</th><th>b</th><th>{A}</th><th>{B}</th><th /></tr></thead>
       <tbody>{[0, 1, 2, 3].map((i) => { const r = pairRow(A, B, i); return (
-        <tr key={i} className={r.A === r.B ? 'y' : ''}><td>{+r.a}</td><td>{+r.b}</td><td>{+r.A}</td><td>{+r.B}</td><td>{r.A === r.B ? '\u2665' : ''}</td></tr>); })}</tbody></table>);
+        <tr key={i} className={r.A === r.B ? (H1 ? 'ag' : 'y') : ''}><td>{+r.a}</td><td>{+r.b}</td><td>{+r.A}</td><td>{+r.B}</td><td>{r.A === r.B ? '\u2665' : ''}</td></tr>); })}</tbody></table>);
 }
 // g2: the big moment. A JRPG message window (S5): "Tony learned NAND!", with the M10 software-update line as the footnote.
 function Learned({ m, onClose }) {
@@ -156,14 +178,32 @@ function Learned({ m, onClose }) {
     </div>);
 }
 
+// h1: g3's attract-mode HIGH SCORES strip (ported), with Prof. Kerney's own entry in 5th: the age gate, B+.
+const INIT = ['ANN', 'ORA', 'XOX', 'NOR', 'NAN', 'ORR', 'ADA', 'XIO'];
+function Scores({ liked }) {
+  const rows = FEED.slice(0, 8).map(([A, B], i) => ({ A, B, i, pct: Math.round(compat(A, B) * 100) }))
+    .sort((a, b) => b.pct - a.pct || a.i - b.i).slice(0, 4);
+  return (
+    <section className="scores" aria-label="High scores">
+      <h2>HIGH SCORES</h2>
+      <ol>
+        {rows.map((r, k) => (
+          <li key={r.i} className={liked.has(r.i) ? 'you' : ''}><b>{['1ST', '2ND', '3RD', '4TH'][k]}</b>
+            <span>{r.A} &#9829; {r.B}</span><em>{String(r.pct).padStart(3, '0')}%</em><i>{liked.has(r.i) ? 'YOU' : INIT[r.i]}</i></li>))}
+        {!CLEAN && <li className="kerney"><b>5TH</b><span>the age gate</span><em>B+</em><i>&ndash; K.</i></li>}
+      </ol>
+    </section>
+  );
+}
+
 export function Feed() {
   const t = useTick(900);
   const serving = 42 + Math.floor(t / 3) % 70;
   const [liked, setLiked] = useState(() => new Set(STILL ? [2] : []));
   const [go, to] = useWipe();
   // each new match pitches the blip up (combo), capped in sfx.js
-  const [match, setMatch] = useState(() => (G2 && STILL ? { A: FEED[2][0], B: FEED[2][1], pct: 100 } : null));
-  useEffect(() => { if (!match || STILL) return; const t = setTimeout(() => setMatch(null), 2600); return () => clearTimeout(t); }, [match]);
+  const [match, setMatch] = useState(() => (G2 && !H1 && STILL ? { A: FEED[2][0], B: FEED[2][1], pct: 100 } : null));
+  useEffect(() => { if (!match || (STILL && !H1)) return; const t = setTimeout(() => setMatch(null), 2600); return () => clearTimeout(t); }, [match]);
   const toggle = (i) => () => {
     const on = !liked.has(i);
     setLiked((s) => {
@@ -195,7 +235,9 @@ export function Feed() {
       </div>
       <main className="feed">
         {cards.map(([A, B], i) => <Card key={i} i={i} A={A} B={B} row={t + i} liked={liked.has(i)} onLike={toggle(i)} />)}
+        {H1 && <Scores liked={liked} />}
       </main>
+      {H1 && <p className="credits">Sound: Kenney.nl (CC0): Interface, UI Audio, Casino Audio, Music Jingles. Fonts: Bangers, Yellowtail, Roboto Condensed (OFL, @fontsource). <a href={`${import.meta.env.BASE_URL}sfx/CREDITS.md`}>full credits</a></p>}
       {G2 && <Learned m={match} onClose={() => setMatch(null)} />}
       <Wipe on={!!go} />
     </>
