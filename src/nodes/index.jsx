@@ -242,6 +242,7 @@ function Mark({ data, at }) {
 
 export function SwitchNode({ id, data }) {
   const [inside, hit, xHover, pinHover] = useShapeHover();
+  const down = useRef(null);
   return (
     <div className="node sw" style={{ width: SWG.w, height: SWG.h }}>
       <Shape g={SWG} on={data.on} lit={data.lit} hit={hit} />
@@ -249,7 +250,10 @@ export function SwitchNode({ id, data }) {
       <X g={SWG} label="Delete switch" data={data} show={inside} onHover={xHover} />
       <Plate g={SWG} x={PAD + SW.side / 2} name={data.name} on={data.on} />
       <Mark data={data} at={{ out: SWG.out }} />
-      <button {...hit} className={`switch nodrag ${data.on ? 'on' : ''}`} onClick={(e) => { e.stopPropagation(); data.onToggle(); }} aria-pressed={!!data.on}
+      {/* Tony: the switch must drag like any part. No nodrag: a press that moves > 4px is a drag, a still press is a toggle. */}
+      <button {...hit} className={`switch ${data.on ? 'on' : ''}`} onPointerDown={(e) => { down.current = [e.clientX, e.clientY]; }}
+        onClick={(e) => { e.stopPropagation(); const d = down.current; down.current = null;
+          if (d && e.detail > 0 && Math.hypot(e.clientX - d[0], e.clientY - d[1]) > 4) return; data.onToggle(); }} aria-pressed={!!data.on}
         aria-label={`Switch ${data.name ?? id}, ${data.on ? 'on' : 'off'}`} />
       <Handle nodeId={id} data={data} hover={pinHover} at={SWG.out} zone={SW_ZONES.out} type="source" position={Position.Right} id="out" />
     </div>
