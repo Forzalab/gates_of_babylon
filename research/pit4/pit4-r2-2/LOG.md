@@ -1,0 +1,6 @@
+# pit4/r2-2 (g2) log
+- 2026-09-27 · read IMPL, RUBRIC, plan, SOUND, VERDICT-r1, sheet-r1 and refs. Branched pit4/r2-2 off origin/pit4/r1-1. g2 reuses f1.jsx behind a `G2` flag + scoped g2.css; f1 unchanged.
+- · fixes 1-8 applied: plate/neon re-seated (sign bottom 252 vs WARNING top 260 at 1440, 264/274 at 1024); stipple = plate grid through the centred text-stroke, fixed with paint-order stroke; WARNING sized max(7.8u, 13.4vh); pen note max(2.05u, 2.9vh) nowrap (22 px at 1024); column-1 badges mirrored bottom-left; feed 8 cards 4x2 with navy tubes; IT'S A MATCH window on a >=75% like; compat pill + PARENTAL CONTROLS (NOT GATE) footer; heart expand = real truth table with a heart per agreeing row.
+- · S5 JRPG: bobbing white-glove cursor hand follows the hovered/focused button; the match moment is an FF-blue message window "Tony learned AND! AFFECTION +75" (navy/white = page tokens). M10 lens only as the window footnote "Restart required to apply your new relationship."
+- · call: dropped the red tick in g2 (collided with the larger pen note at 1024); the B+ ring carries the gag alone.
+- · measured: bar #001b62, bg #003ec5, cap .116 H (1440) / .113 H (1024), modal+sign .72 / .59 H (f1 same method: .71), L/R 1.038, 0 page errors, no h-scroll. test 131 pass, build, e2e green.

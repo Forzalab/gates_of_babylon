@@ -5,13 +5,16 @@
 // &next=1 is the continue screen: a MATCH FEED of live gate pairs on the real simulator + real Shape.
 import { useEffect, useState } from 'react';
 import { Pair, Portrait, Bar, Neon, Heart, Corners, useLanded, useTick, LOGIC, STILL } from './main.jsx';
-import { compat } from './compat.js';
+import { compat, pairRow } from './compat.js';
 import { play, then, isMuted, setMuted, onMute } from './sfx.js';
 
 const params = new URLSearchParams(location.search);
 const CLEAN = params.has('clean'); // arbiter's overlap diff: the page without the red pen
-const NEXT = `${location.pathname}?v=f1&next=1`;
-const GATE = `${location.pathname}?v=f1`;
+// g2 (pit4 r2) reuses this file: same surprise, JRPG-menu chrome (S5) and the r1 fix list. f1 stays as it was.
+const G2 = params.get('v') === 'g2';
+const VID = G2 ? 'g2' : 'f1';
+const NEXT = `${location.pathname}?v=${VID}&next=1`;
+const GATE = `${location.pathname}?v=${VID}`;
 
 // P5-style exit: a tilted pink slash wipes the screen, then we navigate.
 function useWipe() {
@@ -39,6 +42,12 @@ function Mute() {
   );
 }
 
+// S5: the JRPG menu cursor (a white-gloved pointing hand, hand-drawn), bobbing at the chosen command.
+const Hand = () => (
+  <svg className="hand" viewBox="0 0 40 26" aria-hidden="true">
+    <path d="M2 9h18c2-4 6-6 8-4l-3 4h11c2.5 0 2.5 4 0 4h-3c2 0 2 4 0 4h-2c2 0 2 4 0 4H14C7 21 2 18 2 15z" />
+    <path className="f" d="M26 13h7M26 17h6M20 9l-3 3" /></svg>);
+
 const Wipe = ({ on }) => <div className={on ? 'wipe on' : 'wipe'} aria-hidden="true"><i /><i /></div>;
 
 // The red pen. Hand-drawn paths only (no new font: the note is the page's own Yellowtail script, in ink).
@@ -62,6 +71,7 @@ export function F1() {
   const [go, to] = useWipe();
   useEffect(() => { play('glitch', { vol: 0.3 }); }, []); // entering Dejting (silent until the browser allows audio)
   useEffect(() => { if (on && !STILL && !CLEAN) play('grade', { vol: 0.35 }); }, [on]); // the red pen lands
+  const [cur, setCur] = useState(0); // g2: the JRPG cursor hand follows the hovered/focused button
   const enter = (e) => { then('confirm', 'chips', 260); to(NEXT)(e); };
   return (
     <div className="stage sf">
@@ -86,11 +96,17 @@ export function F1() {
             <p className="plain">By entering, I confirm I am 18 or older and<br />I know what a truth table is.</p>
             <div className="btns stack">
               <div className="tickrow"><Tick on={on} />
-                <a className="btn hot wide" href={NEXT} onClick={enter} onPointerEnter={hover}>&#9829; ENTER ANYWAY &#9829;</a></div>
-              <a className="btn soft narrow" href={LOGIC} onClick={refuse} onPointerEnter={hover}>NO THANKS</a>
+                <a className="btn hot wide" href={NEXT} onClick={enter} onPointerEnter={hover} onFocus={() => setCur(0)} onMouseEnter={() => setCur(0)}>&#9829; ENTER ANYWAY &#9829;</a>
+                {G2 && cur === 0 && <Hand />}</div>
+              <div className="tickrow nrow">
+                <a className="btn soft narrow" href={LOGIC} onClick={refuse} onPointerEnter={hover} onFocus={() => setCur(1)} onMouseEnter={() => setCur(1)}>NO THANKS</a>
+                {G2 && cur === 1 && <Hand />}</div>
             </div>
+            {G2 && <div className="cpill" role="meter" aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} aria-label="XOR and you (AND): 25% compatible">
+              <i style={{ width: '25%' }} /><span>XOR &amp; you (AND): 25% compatible</span></div>}
           </div>
         </div>
+        {G2 && <p className="pctl">&#9829; IF YOU HAVE CHILDREN, USE PARENTAL CONTROLS (<u>NOT GATE</u>) &#9829;</p>}
       </section>
       <Wipe on={!!go} />
     </div>
@@ -108,15 +124,36 @@ function Card({ A, B, row, i, liked, onLike }) {
   const pct = Math.round(compat(A, B) * 100);
   return (
     <article className={liked ? 'card liked' : 'card'} style={{ '--i': i }}>
-      <div className="tube"><Pair A={A} B={B} row={row} /></div>
+      {G2 && liked ? <TT A={A} B={B} /> : <div className="tube"><Pair A={A} B={B} row={row} /></div>}
       <header><b>{A} <span>&#9829;</span> {B}</b><em>{pct}%</em>
         <button className="like" onClick={onLike} aria-pressed={liked} aria-label={liked ? 'Unmatch' : 'Swipe right'}>{liked ? '♥' : '♡'}</button></header>
       <div className="meter" role="meter" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${A} and ${B} compatibility`}>
         <i style={{ width: `${Math.max(pct, 4)}%` }} /></div>
       <p>{LINES[pct]}</p>
-      {liked && <strong className="stamp">IT&rsquo;S A MATCH!<small>please take a number: A-{118 + i}</small></strong>}
+      {liked && !G2 && <strong className="stamp">IT&rsquo;S A MATCH!<small>please take a number: A-{118 + i}</small></strong>}
     </article>
   );
+}
+
+// g2 (stolen from f2's Tinder card): the ♡ expand state is the pair's real truth table, a heart on every row they agree on.
+function TT({ A, B }) {
+  return (
+    <table className="tt"><thead><tr><th>a</th><th>b</th><th>{A}</th><th>{B}</th><th /></tr></thead>
+      <tbody>{[0, 1, 2, 3].map((i) => { const r = pairRow(A, B, i); return (
+        <tr key={i} className={r.A === r.B ? 'y' : ''}><td>{+r.a}</td><td>{+r.b}</td><td>{+r.A}</td><td>{+r.B}</td><td>{r.A === r.B ? '\u2665' : ''}</td></tr>); })}</tbody></table>);
+}
+// g2: the big moment. A JRPG message window (S5): "Tony learned NAND!", with the M10 software-update line as the footnote.
+function Learned({ m, onClose }) {
+  if (!m) return null;
+  return (
+    <div className="learned" role="alertdialog" aria-label="It's a match" onClick={onClose}>
+      <div className="lw">
+        <strong className="big">IT&rsquo;S A MATCH!</strong>
+        <p><b>{m.A}</b> &amp; <b>{m.B}</b> agree on {m.pct / 25} of 4 rows.</p>
+        <p className="lv">&#9656; Tony learned <b>{m.B}</b>! <span>AFFECTION +{m.pct}</span></p>
+        <p className="upd">Restart required to apply your new relationship. <span>&#9660;</span></p>
+      </div>
+    </div>);
 }
 
 export function Feed() {
@@ -125,11 +162,19 @@ export function Feed() {
   const [liked, setLiked] = useState(() => new Set(STILL ? [2] : []));
   const [go, to] = useWipe();
   // each new match pitches the blip up (combo), capped in sfx.js
-  const toggle = (i) => () => setLiked((s) => {
-    const n = new Set(s);
-    if (n.has(i)) { n.delete(i); play('click'); } else { n.add(i); play('match', { rate: 1 + 0.08 * (n.size - 1) }); }
-    return n;
-  });
+  const [match, setMatch] = useState(() => (G2 && STILL ? { A: FEED[2][0], B: FEED[2][1], pct: 100 } : null));
+  useEffect(() => { if (!match || STILL) return; const t = setTimeout(() => setMatch(null), 2600); return () => clearTimeout(t); }, [match]);
+  const toggle = (i) => () => {
+    const on = !liked.has(i);
+    setLiked((s) => {
+      const n = new Set(s);
+      if (n.has(i)) { n.delete(i); play('click'); } else { n.add(i); play('match', { rate: Math.min(1.6, 1 + 0.08 * (n.size - 1)) }); }
+      return n;
+    });
+    const [A, B] = FEED[i]; const pct = Math.round(compat(A, B) * 100);
+    if (G2 && on && pct >= 75) setMatch({ A, B, pct });
+  };
+  const cards = G2 ? FEED.slice(0, 8) : FEED;
   return (
     <>
       <Bar />
@@ -149,8 +194,9 @@ export function Feed() {
         </nav>
       </div>
       <main className="feed">
-        {FEED.map(([A, B], i) => <Card key={i} i={i} A={A} B={B} row={t + i} liked={liked.has(i)} onLike={toggle(i)} />)}
+        {cards.map(([A, B], i) => <Card key={i} i={i} A={A} B={B} row={t + i} liked={liked.has(i)} onLike={toggle(i)} />)}
       </main>
+      {G2 && <Learned m={match} onClose={() => setMatch(null)} />}
       <Wipe on={!!go} />
     </>
   );
