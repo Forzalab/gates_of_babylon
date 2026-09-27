@@ -286,7 +286,20 @@ export default function App() {
     commit();
     const id = `w${nextWire++}`;
     setCircuit((c) => ({ ...c, wires: { ...c.wires, [id]: { id, source, target, pin } } }));
+    straighten(source, target, pin);
     setStatus({ phrase: null, text: '' }); // silent success: ref3 leaves row 03 empty
+  };
+  // Jog rule on a NEW wire too (BUGS #9): pin rows differ per part (gate out 54, lamp in 57), so a freshly drawn wire
+  // between grid-placed parts can carry a sub-cell step. Shift the target part (else the source) onto the partner's
+  // pin row when that spot is free and breaks no wire.
+  const straighten = (source, target, pin) => {
+    const a = view.find((n) => n.id === source), b = view.find((n) => n.id === target); if (!a || !b) return;
+    const pa = pinYs(circuit.nodes[source].kind, circuit.nodes[source].type).out, pb = pinYs(circuit.nodes[target].kind, circuit.nodes[target].type).ins[pin];
+    const dy = jogShift([a.position.y + pa - (b.position.y + pb)]); if (!dy) return;
+    for (const [me, d] of [[b, dy], [a, -dy]]) {
+      const q = { x: me.position.x, y: me.position.y + d }, base = stuck();
+      if (free(q, me.type, me.id) === q && !worse(stuck(me.id, q), base)) return setView((v) => v.map((n) => (n.id === me.id ? { ...n, position: q } : n)));
+    }
   };
 
   // The drop target is decided HERE, by the port hit zones under the pointer (the same big zones a

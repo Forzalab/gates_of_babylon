@@ -21,6 +21,6 @@ Difficulty: ★ easy · ★★ medium · ★★★ hard
 | 6 | Part labels (G1, A, OUT) and the hover grey look out of place | Look at the grey "G1" under a gate | `.plate` in `src/theme.css` | Font, weight and colour use the site's existing tokens (`--ink`, `--ink-2`, Roboto Flex) | ★ | |
 | 7 | Tour step 1: the hand hides under the "Gates are in here" balloon | Clear site data, reload, look at step 1 | `src/Coach.jsx` | Hand and balloon never overlap | ★ | |
 | 8 | Tour step 3: a delete X shows on G2 | Clear site data, reload, go to step 3 | `src/Coach.jsx` | No X shows during the tour | ★ | |
-| 9 | 1px step in some gate→lamp wires | Wire a gate to a lamp placed about 1 unit higher or lower | `src/route.js` | The wire is perfectly straight | ★★ | |
+| 9 | 1px step in some gate→lamp wires | Wire a gate to a lamp placed about 1 unit higher or lower | `src/route.js` | The wire is perfectly straight | ★★ | Claude (alt) |
 
 To replay the tour: click "Show me how" in the bottom-right cell, or clear the site data.

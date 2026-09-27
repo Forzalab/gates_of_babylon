@@ -113,3 +113,9 @@ test('img12: a sub-pixel or backwards jog at a corner is tidied away (no notch)'
   const f = stepFallback([100, 50], [60, 90]);
   for (let i = 1; i < f.length; i++) assert.ok(f[i][0] === f[i - 1][0] || f[i][1] === f[i - 1][1], 'axis-aligned');
 });
+
+test('BUGS #9: pins a float hair apart route as one straight segment', () => {
+  const p = route([108.66, 334.0000031], [303.23, 333.9999619], { src: box(0, 280, 110, 108), dst: box(300, 277, 114, 114) });
+  assert.equal(p.length, 2);
+  assert.equal(p[0][1], p[1][1]);
+});
