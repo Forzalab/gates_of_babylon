@@ -54,12 +54,23 @@ function Handle({ nodeId, data, at, zone: base, hover, ...p }) {
   const zone = data.zones?.[p.id] ?? base; // clipped by App.jsx so no zone overlaps a neighbour's body or zone
   const key = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); data.onPort(p.id); } };
   const left = at[0] - HB / 2, top = at[1] - HB / 2;
+  // Tony: the grab area is an OUTWARD half-disc (radius PIN_HIT = 2 x the old halo's outer radius), still clipped to the
+  // zone App.jsx resolved against neighbours; the cue is a dotted half-arc at the old ring's mid radius (PIN_ARC).
+  const cx = HB / 2 - (zone.x - left), cy = HB / 2 - (zone.y - top), out = p.type === 'source';
+  const a = PIN_ARC, arc = out ? `M${HB / 2} ${HB / 2 - a}A${a} ${a} 0 0 1 ${HB / 2} ${HB / 2 + a}` : `M${HB / 2} ${HB / 2 - a}A${a} ${a} 0 0 0 ${HB / 2} ${HB / 2 + a}`;
   return <RFHandle {...p} {...hover} tabIndex={0} role="button" onKeyDown={key}
     style={{ left, top, width: HB, height: HB,
-      '--hit-left': `${zone.x - left}px`, '--hit-top': `${zone.y - top}px`, '--hit-w': `${zone.w}px`, '--hit-h': `${zone.h}px` }}
-    className={`port ${data.pending === nodeId && p.id === 'out' ? 'picked' : ''}`}
-    aria-label={`${nodeId} ${p.id === 'out' ? 'output' : 'input ' + (+p.id.slice(2) + 1)}`} />;
+      '--hit-left': `${zone.x - left}px`, '--hit-top': `${zone.y - top}px`, '--hit-w': `${zone.w}px`, '--hit-h': `${zone.h}px`,
+      '--hit-clip': `circle(${PIN_HIT}px at ${cx}px ${cy}px)` }}
+    className={`port ${out ? 'p-out' : 'p-in'} ${data.pending === nodeId && p.id === 'out' ? 'picked' : ''}`}
+    aria-label={`${nodeId} ${p.id === 'out' ? 'output' : 'input ' + (+p.id.slice(2) + 1)}`}>
+    <svg className="pin-arc" aria-hidden="true" viewBox={`0 0 ${HB} ${HB}`}>
+      <path className="pa-arc" d={arc} />
+      <path className="pa-tick" d={out ? `M${HB / 2 + a} ${HB / 2}h6` : `M${HB / 2 - a} ${HB / 2}h-6`} />
+    </svg>
+  </RFHandle>;
 }
+const PIN_OUTER = HB / 2 + 8, PIN_HIT = 2 * PIN_OUTER, PIN_ARC = (HB / 2 + PIN_OUTER) / 2; // 18 -> hit 36, arc 14
 
 // Outline = one path (body + knobs, one continuous stroke). Lit = second path: the true inset contour.
 // bubble (NAND/NOR/NOT) and extraCurve (XOR) are optional extra ink paths, same stroke system.
@@ -242,6 +253,7 @@ function Mark({ data, at }) {
 
 export function SwitchNode({ id, data }) {
   const [inside, hit, xHover, pinHover] = useShapeHover();
+  const down = useRef(null);
   return (
     <div className="node sw" style={{ width: SWG.w, height: SWG.h }}>
       <Shape g={SWG} on={data.on} lit={data.lit} hit={hit} />
@@ -249,7 +261,10 @@ export function SwitchNode({ id, data }) {
       <X g={SWG} label="Delete switch" data={data} show={inside} onHover={xHover} />
       <Plate g={SWG} x={PAD + SW.side / 2} name={data.name} on={data.on} />
       <Mark data={data} at={{ out: SWG.out }} />
-      <button {...hit} className={`switch nodrag ${data.on ? 'on' : ''}`} onClick={(e) => { e.stopPropagation(); data.onToggle(); }} aria-pressed={!!data.on}
+      {/* Tony: the switch must drag like any part. No nodrag: a press that moves > 4px is a drag, a still press is a toggle. */}
+      <button {...hit} className={`switch ${data.on ? 'on' : ''}`} onPointerDown={(e) => { down.current = [e.clientX, e.clientY]; }}
+        onClick={(e) => { e.stopPropagation(); const d = down.current; down.current = null;
+          if (d && e.detail > 0 && Math.hypot(e.clientX - d[0], e.clientY - d[1]) > 4) return; data.onToggle(); }} aria-pressed={!!data.on}
         aria-label={`Switch ${data.name ?? id}, ${data.on ? 'on' : 'off'}`} />
       <Handle nodeId={id} data={data} hover={pinHover} at={SWG.out} zone={SW_ZONES.out} type="source" position={Position.Right} id="out" />
     </div>

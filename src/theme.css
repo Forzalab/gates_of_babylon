@@ -197,6 +197,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .pal-more { position: absolute; left: 0; right: 0; height: calc(20 * var(--u)); background: transparent; display: none; place-items: center; cursor: default; }
 .pal-more.on { display: grid; }
 .pal-more.up { top: 0; } .pal-more.down { bottom: 0; }
+.pal-bar .pal-more.down { bottom: auto; top: var(--cue-top, auto); } /* right under the last whole part, not the bar's foot */
 .pal-more svg { width: calc(16 * var(--u)); height: calc(8 * var(--u)); overflow: visible; }
 .pal-more path { fill: none; stroke: var(--ink); stroke-width: var(--rule); vector-effect: non-scaling-stroke; stroke-linejoin: miter; stroke-linecap: butt; } /* restored T1: open chevron, not a filled arrowhead */
 
@@ -214,6 +215,12 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .shape .line { fill: none; }
 .shape .lit { fill: var(--one); stroke: none; }
 .stubs { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+/* Tony (pic 3): free-pin dots only when the pointer is near. Near = over the part or inside a pin's grab half-disc
+   (the handles are the node's children, so :hover covers both), a focused pin, or while a wire is being dragged:
+   then every free pin that could take it shows (inputs when dragging from an output, and the reverse). */
+.stubs line { opacity: 0; }
+.react-flow__node:hover .stubs line, .react-flow__node:focus-within .stubs line,
+.wiring-from-out .stubs line[class^="s-in"], .wiring-from-in .stubs line.s-out { opacity: 1; }
 .stubs line, .shape .dots path, .shape .dots line { fill: none;  stroke: var(--ink-2); stroke-width: 2; stroke-dasharray: 2 4; stroke-linecap: butt; }
 .shape .dots line.one { stroke: var(--one); }
 /* Hovering a wire previews its deletion in the stubs' language: it turns dotted (a click removes it). */
@@ -251,8 +258,15 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 /* T4-tt pin halo: a flat --hover disc (the truth-table row hover), never orange (orange = logic 1), no blur (glow is
    Date mode only). Shown while the pointer is
    anywhere in the pin's hit zone, while a wire drag hovers it, and on the picked (keyboard) pin. */
-.react-flow__handle.port:hover, .react-flow__handle.port.connectingto, .react-flow__handle.port.picked {
-  outline: none; box-shadow: 0 0 0 8px var(--hover); }
+/* Tony: no grey disc. Outward half-disc hit area + a dotted half-arc cue in the stubs' dot language (--ink-2, 2px, 2 4)
+   plus a short solid tick on the pin axis (variant B, NYCTA, picked by Tony). */
+.react-flow__handle.port::after { clip-path: var(--hit-clip); }
+.pin-arc { position: absolute; left: 0; top: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; opacity: 0; }
+.pin-arc path { fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-dasharray: 2 4; stroke-linecap: butt; }
+.pin-arc .pa-tick { stroke-dasharray: none; }
+.react-flow__handle.port:hover .pin-arc, .react-flow__handle.port.connectingto .pin-arc, .react-flow__handle.port.picked .pin-arc,
+.react-flow__handle.port:focus-visible .pin-arc { opacity: 1; }
+.react-flow__handle.port:hover, .react-flow__handle.port.connectingto, .react-flow__handle.port.picked { outline: none; box-shadow: none; }
 .react-flow__handle.port.picked { background: transparent; }
 .react-flow__handle.port.picked:focus-visible { outline-offset: 4px; }
 
@@ -464,7 +478,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
    B: twin lines = a 3-stroke band with a 1-stroke paper core (two 3px lines, 3px apart). Dots = 9px at 3px wire.
    Mixed nets on one run: one weight, alternating ink / orange dashes (both states show). Orange stays logic 1. */
 .jn path { fill: none; stroke-linecap: butt; }
-.jn .trunk { stroke: var(--ink); stroke-width: calc(var(--stroke) * 2); }
+.jn .trunk { stroke: var(--ink); stroke-width: calc(var(--stroke) * 2); stroke-linecap: square; } /* Tony: square caps fill the corner where two trunk runs meet (butt left a notch) */
 .jn .twin { stroke: var(--ink); stroke-width: calc(var(--stroke) * 3); }
 .jn .twin-gap { stroke: var(--paper); stroke-width: var(--stroke); }
 .jn .mix0 { stroke: var(--ink); stroke-width: var(--stroke); }
@@ -548,3 +562,8 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 /* Nudge cue: where the part was dropped, as the dot rule (--ink-2, dash w, gap 2w). Still; gone on next action or 3 s. */
 .nudge-ghost { position: absolute; overflow: visible; pointer-events: none; }
 .nudge-ghost rect { fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-dasharray: 2 4; }
+
+/* Tony: bundle count tag, the wire X's language (28px ink square, white glyph); orange when every wire in the bundle is 1. */
+.bundle-tag { position: absolute; width: 28px; height: 28px; display: grid; place-items: center; background: var(--ink); color: var(--paper);
+  font: 700 15px/1 var(--font); font-variant-numeric: tabular-nums; pointer-events: none; }
+.bundle-tag.on { background: var(--one); }

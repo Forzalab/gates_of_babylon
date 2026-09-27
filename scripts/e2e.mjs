@@ -370,8 +370,8 @@ async function testRestored(page) {
   const gp = page.locator('.react-flow__node[data-id="g1"] .react-flow__handle[data-handleid="out"]');
   const gb = await gp.boundingBox();
   await page.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2, { steps: 4 }); await page.waitForTimeout(40);
-  const halo = await gp.evaluate((e) => getComputedStyle(e).boxShadow);
-  ok('pin halo up and X gone at once (never both)', (await xOf('g1')) === '0' && halo !== 'none', `${await xOf('g1')} ${halo}`);
+  const halo = await gp.evaluate((e) => getComputedStyle(e.querySelector(".pin-arc")).opacity); // halo = the dotted half-arc now
+  ok('pin halo up and X gone at once (never both)', (await xOf('g1')) === '0' && halo === "1", `${await xOf('g1')} ${halo}`);
   await page.mouse.move(xb.x + xb.width / 2, xb.y + xb.height / 2, { steps: 4 }); await page.waitForTimeout(250);
   await page.mouse.move(box.x - 60, box.y - 60); await page.waitForTimeout(300);
   ok('X hides after leaving', (await xOf('g1')) === '0', await xOf('g1'));

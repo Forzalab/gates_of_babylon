@@ -127,6 +127,15 @@ export function route(s, t, { src, dst, others = [], prefer, margin = MARGIN, to
 export const toPath = (pts) => 'M' + pts.map((p) => `${p[0]} ${p[1]}`).join('L');
 // Label point = middle of the longest segment (where the delete X sits).
 export function midpoint(pts) {
+  // Tony (pic 4): the X sat on the first of two equal runs, off to one side. Put it at the wire's arc-length middle;
+  // only if the run there is too short to hold the X (56 = its hit square) fall back to the centre of the longest run.
+  const L = [], tot = pts.slice(1).reduce((s, p, i) => { const l = Math.abs(p[0] - pts[i][0]) + Math.abs(p[1] - pts[i][1]); L.push(l); return s + l; }, 0);
+  let acc = 0;
+  for (let i = 0; i < L.length; i++) {
+    if (acc + L[i] >= tot / 2 && L[i] >= 56) return [(pts[i][0] + pts[i + 1][0]) / 2, (pts[i][1] + pts[i + 1][1]) / 2];
+    if (acc + L[i] >= tot / 2) break;
+    acc += L[i];
+  }
   let bi = 1, bl = -1;
   for (let i = 1; i < pts.length; i++) { const l = Math.abs(pts[i][0] - pts[i - 1][0]) + Math.abs(pts[i][1] - pts[i - 1][1]); if (l > bl) { bl = l; bi = i; } }
   return [(pts[bi][0] + pts[bi - 1][0]) / 2, (pts[bi][1] + pts[bi - 1][1]) / 2];
