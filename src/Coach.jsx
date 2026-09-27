@@ -233,7 +233,9 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
               <rect width={geo.W} height={geo.H} fill="#fff" />
               {holes.map((r, i) => <rect key={i} x={r.x} y={r.y} width={r.w} height={r.h} fill="#000" />)}
               {/* the part's own outline, filled and fattened by 4 local px each side of its 3px ink: tight, border intact */}
-              {geo.shapes.map((s, i) => <path key={i} d={s.d} transform={`matrix(${s.m.join(' ')})`} fill="#000" stroke="#000" strokeWidth={11} strokeLinejoin="round" />)}
+              {/* Tony: halo width in SCREEN px (>= 10 = ~4px paper past the ink): at 11 local units the 0.41x tray glyph got ~1px */}
+              {geo.shapes.map((s, i) => <path key={i} d={s.d} transform={`matrix(${s.m.join(' ')})`} fill="#000" stroke="#000"
+                strokeWidth={Math.max(11, 10 / Math.hypot(s.m[0], s.m[1]))} strokeLinejoin="round" />)}
               {geo.dots?.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r + 5 * w} fill="#000" />)}
             </mask>
           </defs>
