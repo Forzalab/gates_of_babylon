@@ -48,9 +48,11 @@ let nextWire = 1, nextNode = 1, nextToast = 1;
 const fig = (v) => [<span key="t" className="sr">{String(v)}</span>,
   <span key="g" aria-hidden="true">{[...String(v)].map((c, k) => <span key={k} className={'f' + c}>{c}</span>)}</span>];
 
-export default function App() {
-  const [circuit, setCircuit] = useState(BOOT?.circuit ?? START);
-  const [view, setView, onViewChange] = useNodesState(BOOT?.view ?? VIEW);
+// Optional props (Date mode's continue screen only; Logic passes none): a different start circuit, and a callback
+// after each accepted wire. Defaults keep Logic mode byte-for-byte the same.
+export default function App({ start = START, startView = VIEW, onWire } = {}) {
+  const [circuit, setCircuit] = useState(BOOT?.circuit ?? start);
+  const [view, setView, onViewChange] = useNodesState(BOOT?.view ?? startView);
   const [showGrid, setShowGrid] = useState(false);
   const [reject, setReject] = useState(null); // inline error beside the failed port (GOV.UK error message)
   const [edgeSel, setEdgeSel] = useState(() => new Set()); // controlled wire selection, so Backspace can delete a wire
@@ -291,6 +293,7 @@ export default function App() {
     const id = `w${nextWire++}`;
     setCircuit((c) => ({ ...c, wires: { ...c.wires, [id]: { id, source, target, pin } } }));
     straighten(source, target, pin);
+    onWire?.(circuit.nodes[source], circuit.nodes[target]);
     setStatus({ phrase: null, text: '' }); // silent success: ref3 leaves row 03 empty
   };
   // Jog rule on a NEW wire too (BUGS #9): pin rows differ per part (gate out 54, lamp in 57), so a freshly drawn wire
