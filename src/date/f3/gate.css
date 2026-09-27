@@ -117,6 +117,10 @@ a { color: inherit; }
   padding: calc(var(--u) * .55) 0; background: var(--hot-2); }
 .meter svg { width: calc(var(--u) * 1.9); height: calc(var(--u) * 1.9); }
 .meter .heart { fill: #fff; }
+.meter.ticket { font: 400 calc(var(--u) * 2)/calc(var(--u) * 1.9) 'Bangers', cursive; letter-spacing: .08em; color: #fff; gap: calc(var(--u) * .6); align-items: baseline;
+  background: repeating-linear-gradient(90deg, var(--hot) 0 calc(var(--u) * .6), var(--hot-2) calc(var(--u) * .6) calc(var(--u) * 1.2)); }
+.meter.ticket b { font-weight: 400; font-size: 1.25em; color: var(--yellow); display: none; }
+.meter.ticket b { display: inline; color: #fff; text-shadow: calc(var(--u) * .12) 0 var(--bg); }
 
 .copy { padding-top: calc(var(--u) * .2); }
 .warn { margin: 0; font: 400 calc(var(--u) * 8.3)/.9 'Bangers', cursive; letter-spacing: .005em; color: var(--hot); transform: skewX(-7deg);
@@ -156,14 +160,14 @@ a { color: inherit; }
 /* ---------- the surprise: the DDLC turn (only on .yan) ---------- */
 .glitch { position: relative; display: inline-block; font-weight: 700; color: var(--hot); }
 .glitch::before, .glitch::after { content: attr(data-t); position: absolute; left: 0; top: 0; pointer-events: none; }
-.glitch::before { color: var(--bg); transform: translate(-2px, 0); clip-path: inset(0 0 55% 0); opacity: .85; }
-.glitch::after { color: #ff79e0; transform: translate(2px, 1px); clip-path: inset(55% 0 0 0); }
+.glitch::before { color: var(--bg); transform: translate(-1.5px, 0); clip-path: inset(0 0 62% 0); opacity: .55; }
+.glitch::after { color: #ff79e0; transform: translate(2px, 0); clip-path: inset(70% 0 0 0); opacity: .8; }
 .btn.glitchy { color: transparent; }
 .btn.glitchy::before, .btn.glitchy::after { content: attr(data-t); position: absolute; inset: 0; display: grid; place-items: center; }
-.btn.glitchy::before { color: #c02c93; clip-path: inset(0 0 48% 0); transform: translateX(calc(var(--u) * -.5)); text-shadow: calc(var(--u) * .25) 0 rgba(0, 62, 197, .55); }
-.btn.glitchy::after { color: #c02c93; clip-path: inset(52% 0 0 0); transform: translateX(calc(var(--u) * .6)); text-shadow: calc(var(--u) * -.25) 0 rgba(255, 79, 216, .7); }
+.btn.glitchy::before { color: #c02c93; clip-path: inset(0 0 48% 0); transform: translateX(calc(var(--u) * -.3)); text-shadow: calc(var(--u) * .25) 0 rgba(0, 62, 197, .55); }
+.btn.glitchy::after { color: #c02c93; clip-path: inset(52% 0 0 0); transform: translateX(calc(var(--u) * .3)); text-shadow: calc(var(--u) * -.25) 0 rgba(255, 79, 216, .7); }
 .date:not(.still) .btn.glitchy::before { animation: tear 2.4s steps(1) infinite; }
-@keyframes tear { 0%, 100% { transform: translateX(calc(var(--u) * -.5)); } 40% { transform: translateX(calc(var(--u) * .9)); } 43% { transform: translateX(calc(var(--u) * -.5)); } 70% { transform: translateX(calc(var(--u) * -1.2)); } 72% { transform: translateX(calc(var(--u) * -.5)); } }
+@keyframes tear { 0%, 100% { transform: translateX(calc(var(--u) * -.3)); } 40% { transform: translateX(calc(var(--u) * .9)); } 43% { transform: translateX(calc(var(--u) * -.5)); } 70% { transform: translateX(calc(var(--u) * -1.2)); } 72% { transform: translateX(calc(var(--u) * -.5)); } }
 .yan .adv { border-color: var(--hot); }
 .yan .adv p { color: #8e0c55; }
 .date.yan:not(.still) .modal { animation: jolt .32s steps(3) 1; }

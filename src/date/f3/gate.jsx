@@ -1,8 +1,10 @@
 // pit4 f3: the fused Dejting age gate. Base = x3's M3 layout (sign plate, gate-mascot portrait, wide ENTER ANYWAY over a
 // narrow NO THANKS, the one yellow 18+). School = galge / visual novel (Tony): the portrait is a VN sprite card with a
 // Tokimeki heart meter, the confirm line is spoken in an ADV textbox with a nameplate, and the buttons are the choice menu.
-// ONE surprise: the Doki Doki Literature Club turn. ~1.8 s in, AND-chan breaks the 4th wall: her line glitches from the
-// mockup's legal text to a yandere pun, her eyes open into a stare, and the NO THANKS choice glitches. Reduced motion
+// ONE surprise: the Doki Doki Literature Club turn, through a mundane lens (Tony's M9, the office-hours queue; cf. the Tax
+// Day dating sim). ~1.8 s in, AND-chan breaks the 4th wall: her line glitches from the mockup's legal text to "you're #47
+// in the office-hours queue ... I'll ALWAYS wait", her heart meter becomes a queue ticket, her eyes open into a stare,
+// and the NO THANKS choice glitches. Reduced motion
 // (or ?still) = the landed frame. No people, no photos, no AI art: the heroine is our own AND Shape plus SVG.
 import { createRoot } from 'react-dom/client';
 import { useEffect, useState } from 'react';
@@ -79,9 +81,11 @@ function Sprite({ yan }) {
         </g>
       </svg>
       {/* Tokimeki Memorial affection meter, drawn as the Wenrexa profile card's heart row */}
-      <div className="meter" aria-label="Affection: full">
-        {[0, 1, 2, 3, 4].map((i) => <svg key={i} viewBox="-12 -12 24 24"><Heart s={1} className="heart" /></svg>)}
-      </div>
+      {yan
+        ? <div className="meter ticket" aria-label="Queue ticket 47">QUEUE <b>#47</b></div>
+        : <div className="meter" aria-label="Affection: full">
+          {[0, 1, 2, 3, 4].map((i) => <svg key={i} viewBox="-12 -12 24 24"><Heart s={1} className="heart" /></svg>)}
+        </div>}
     </div>
   );
 }
@@ -92,7 +96,7 @@ function Textbox({ yan }) {
     <div className={yan ? 'adv yan' : 'adv'} role="status">
       <span className="nameplate">AND-chan</span>
       {yan
-        ? <p>Senpai... you&rsquo;ll set <b>BOTH</b> my inputs high, right? <span className="glitch" data-t="...Right?">...Right?</span> &#9825;</p>
+        ? <p>Senpai, you&rsquo;re <b>#47</b> in the office-hours queue. I&rsquo;ll wait. <span className="glitch" data-t="I'll ALWAYS wait.">I&rsquo;ll ALWAYS wait.</span> &#9825;</p>
         : <p>By entering, you confirm you're 18+ and know what a truth table is. &#9825;</p>}
       <i className="cursor" aria-hidden="true">&#9660;</i>
     </div>
