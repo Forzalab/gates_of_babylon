@@ -14,7 +14,7 @@ Difficulty: ★ easy · ★★ medium · ★★★ hard
 | # | Bug | How to see it | Where to look | Done when | ★ | Taken by |
 |---|---|---|---|---|---|---|
 | 1 | The delete X and the pin halo both show at once | Hover a part's X, then slide the pointer onto a pin | `src/nodes/index.jsx`, `src/theme.css` (`.remove`, `.port:hover`) | Only one of them is ever visible, with no flicker | ★★ | |
-| 2 | Wires and parts hug the top edge of the canvas | Drag a part or a wire near the top border of row 02 | `src/route.js`, `free()` in `src/App.jsx` | Wires and parts keep at least 20px from the canvas top edge | ★★ | |
+| 2 | Wires and parts hug the top edge of the canvas | Drag a part or a wire near the top border of row 02 | `src/route.js`, `free()` in `src/App.jsx` | Wires and parts keep at least 20px from the canvas top edge | ★★ | Claude (alt) |
 | 3 | The line drawn while dragging a new wire is jarring | Drag from a pin | `src/Draft.jsx` | While dragging: a straight thin line from the pin to the cursor. On drop: the normal routed wire | ★★ | |
 | 4 | Lit knobs look "too fat" on gates | Turn a switch on and zoom in on a gate's knob | `.lit` paths in `src/nodes/index.jsx` | Tony picks A, B or C (ask him) and it matches the lamp's look | ★ | |
 | 5 | The NOT/NAND/NOR bubbles in the parts tray have no orange dot | Open the tray (`>` tab) | `src/Palette.jsx` | Tray bubbles look like the ones on the canvas | ★ | |

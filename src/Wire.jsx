@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 import { BaseEdge, EdgeLabelRenderer, useStore, useStoreApi } from '@xyflow/react';
-import { toPath, midpoint, stepFallback } from './route.js';
+import { toPath, midpoint, stepFallback, EDGE, MARGIN } from './route.js';
 import { routeAll, shares, JN, DOT_R } from './junction.js';
 import { crossings, hopPath } from './hop.js';
 import { STROKE, ZOOM_EXP } from './nodes/geom.js';
@@ -11,21 +11,28 @@ import Remove from './Remove.jsx';
 const boxOf = (n) => ({ x: n.internals.positionAbsolute.x, y: n.internals.positionAbsolute.y, w: n.measured?.width ?? 0, h: n.measured?.height ?? 0 });
 const pin = (n, id, src) => { const h = (src ? n.internals.handleBounds?.source : n.internals.handleBounds?.target)?.find((k) => k.id === id); if (!h) return null;
   const p = n.internals.positionAbsolute; return [p.x + h.x + (src ? h.width : 0), p.y + h.y + h.height / 2]; };
+// Canvas top edge + EDGE in flow units (pane origin = canvas top), or null while no part is near enough for a route
+// to reach it (routes never climb above the highest box - MARGIN): keeps panning from re-routing every frame.
+const topOf = (s) => {
+  const top = Math.round(-s.transform[1] / s.transform[2]) + EDGE;
+  for (const n of s.nodeLookup.values()) if (n.internals.positionAbsolute.y - MARGIN < top) return top;
+  return null;
+};
 const cache = { key: null, val: null };
 function compute(s) {
-  const list = [], nets = {};
+  const list = [], nets = {}, top = topOf(s);
   for (const e of s.edges) {
     const a = s.nodeLookup.get(e.source), b = s.nodeLookup.get(e.target); if (!a || !b) continue;
     const sp = pin(a, e.sourceHandle, true), tp = pin(b, e.targetHandle, false); if (!sp || !tp) continue;
     const others = []; for (const n of s.nodeLookup.values()) if (n.id !== a.id && n.id !== b.id) others.push(boxOf(n));
-    list.push({ id: e.id, source: e.source, s: sp, t: tp, src: boxOf(a), dst: boxOf(b), others });
+    list.push({ id: e.id, source: e.source, s: sp, t: tp, src: boxOf(a), dst: boxOf(b), others, top });
     nets[e.id] = { source: e.source, on: e.className === 'on' };
   }
   const routes = routeAll(list);
   return { routes, src: Object.fromEntries(list.map((w) => [w.id, w.source])), ends: Object.fromEntries(list.map((w) => [w.id, [w.s, w.t]])), share: shares(routes, nets) };
 }
 const keyOf = (s) => {
-  let k = '';
+  let k = `${topOf(s)};`;
   for (const n of s.nodeLookup.values()) { const p = n.internals.positionAbsolute; k += `${n.id}:${p.x},${p.y},${n.measured?.width},${n.measured?.height},${n.internals.handleBounds ? 1 : 0};`; }
   for (const e of s.edges) k += `${e.id}>${e.source}.${e.target}.${e.targetHandle}.${e.className};`;
   return k;

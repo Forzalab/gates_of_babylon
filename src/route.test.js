@@ -113,3 +113,15 @@ test('img12: a sub-pixel or backwards jog at a corner is tidied away (no notch)'
   const f = stepFallback([100, 50], [60, 90]);
   for (let i = 1; i < f.length; i++) assert.ok(f[i][0] === f[i - 1][0] || f[i][1] === f[i - 1][1], 'axis-aligned');
 });
+
+test('BUGS #2: no wire corner above the canvas top edge + EDGE; the rule drops only when nothing else routes', async () => {
+  const { routeMetro, EDGE } = await import('./route.js');
+  // Backward wire: the cheap detour goes over the top of both parts.
+  const src = box(300, 40, 100, 100), dst = box(0, 60, 100, 100), s = [400, 90], t = [0, 110];
+  const free = route(s, t, { src, dst });
+  const top = 20 + EDGE; // canvas top at flow y 20
+  assert.ok(free.some((p) => p[1] < top), 'without the edge the route climbs over the parts');
+  const p = route(s, t, { src, dst, top });
+  assert.ok(p && p.slice(1, -1).every((q) => q[1] >= top), 'with the edge it goes under');
+  assert.ok(routeMetro([100, 10], [300, 60], { src: box(0, -40, 100, 100), dst: box(300, 10, 100, 100), top: 40 }), 'a part above the edge still gets its wire');
+});
