@@ -1,0 +1,23 @@
+/* Date canvas (date.html?canvas=1) */
+.cmain { display: flex; flex-direction: column; gap: 12px; padding: 12px 22px 0; min-height: 0; }
+.cbar { display: flex; align-items: center; gap: 22px; }
+.cbar .btn { flex: 0 0 auto; border: 0; font-size: 26px; padding: 10px 26px; }
+.cbar .order { font: 700 14px 'JetBrains Mono', monospace; color: #dfe8ff; }
+.canvas { flex: 1; min-height: 0; overflow: auto; display: flex; flex-wrap: wrap; align-content: flex-start; gap: 16px; padding: 16px; border-radius: 10px;
+  background: linear-gradient(rgba(255, 60, 200, .14) 1px, transparent 1px) 0 0 / 24px 24px, linear-gradient(90deg, rgba(255, 60, 200, .14) 1px, transparent 1px) 0 0 / 24px 24px, #140226;
+  border: 3px solid var(--rim); box-shadow: inset 0 0 0 3px #fff, 0 0 0 3px var(--bevel-2), 0 12px 28px rgba(0, 0, 40, .5); }
+.grp { width: 340px; padding: 8px 12px 10px; border-radius: 10px; background: rgba(255, 255, 255, .05); border: 2px solid rgba(255, 255, 255, .25); }
+.grp header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 6px; }
+.grp header b { font: 400 22px/1 'Bangers', cursive; letter-spacing: .04em; color: #fff; }
+.grp header span { font: 700 13px 'Roboto Condensed', sans-serif; color: #ffb3e3; }
+.grp header i { font: 700 11px 'Roboto Condensed', sans-serif; font-style: normal; padding: 2px 7px; border-radius: 999px; background: #ec1a86; color: #fff; letter-spacing: .06em; }
+.grp header i.red { background: #c4123a; }
+.grp header i.end { background: var(--yellow); color: #7a0b45; }
+.grp.bonded { border-color: #ff7fe0; box-shadow: 0 0 16px rgba(255, 60, 200, .4); }
+.grp.hurt { border-color: #ff2a55; box-shadow: 0 0 16px rgba(255, 30, 70, .5); }
+.grp.hello { border-color: var(--yellow); box-shadow: 0 0 0 2px var(--yellow), 0 0 26px rgba(254, 229, 31, .6); }
+.game:not(.still) .grp.hello { animation: bob 1.6s ease-in-out infinite; }
+.grp .cv { max-height: 150px; }
+.grp .proof { margin: 4px 0 0; font: 700 13px 'JetBrains Mono', monospace; color: #b8ffcf; }
+.loose { display: flex; gap: 12px; }
+.loose .lt { position: relative; width: 70px; height: 70px; }
