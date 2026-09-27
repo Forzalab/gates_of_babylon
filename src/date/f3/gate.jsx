@@ -96,7 +96,7 @@ function Textbox({ yan }) {
     <div className={yan ? 'adv yan' : 'adv'} role="status">
       <span className="nameplate">AND-chan</span>
       {yan
-        ? <p>Senpai, you&rsquo;re <b>#47</b> in the office-hours queue. I&rsquo;ll wait. <span className="glitch" data-t="I'll ALWAYS wait.">I&rsquo;ll ALWAYS wait.</span> &#9825;</p>
+        ? <p>You&rsquo;re <b>#47</b> in the office-hours queue, senpai. I&rsquo;ll wait. <span className="glitch" data-t="I'll ALWAYS wait.">I&rsquo;ll ALWAYS wait.</span> &#9825;</p>
         : <p>By entering, you confirm you're 18+ and know what a truth table is. &#9825;</p>}
       <i className="cursor" aria-hidden="true">&#9660;</i>
     </div>
