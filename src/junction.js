@@ -8,13 +8,13 @@ import { routeMetro as route } from './route.js';
 export const JN = 'a';            // a = thick trunk, b = twin lines, c = dot only
 export const DOT_R = 4.5;          // junction dot radius, flow px = 1.5 strokes (a 9px dot on a 3px wire)
 
-// list: [{ id, source, s, t, src, dst, others }] -> { id: pts | null }
+// list: [{ id, source, s, t, src, dst, others, top }] -> { id: pts | null }
 export function routeAll(list) {
   const out = {}, first = {};
   const order = [...list].sort((a, b) => (a.source === b.source ? a.t[1] - b.t[1] : a.source < b.source ? -1 : 1));
   for (const w of order) {
     const f = first[w.source];
-    let p = route(w.s, w.t, { src: w.src, dst: w.dst, others: w.others, prefer: f && f.length > 2 && f[0][1] === w.s[1] ? f[1][0] : undefined });
+    let p = route(w.s, w.t, { src: w.src, dst: w.dst, others: w.others, top: w.top, prefer: f && f.length > 2 && f[0][1] === w.s[1] ? f[1][0] : undefined });
     out[w.id] = p;
     if (p && !f) first[w.source] = p;
   }

@@ -3,7 +3,7 @@ import { ReactFlow, Background, useNodesState, ViewportPortal } from '@xyflow/re
 import { canConnect, canAddSwitch, evaluate } from './sim.js';
 import { nodeTypes, pinYs, portGeom } from './nodes/index.jsx';
 import { resolveZones } from './zones.js';
-import { routeMetro as route, bends, NUDGE, jogShift } from './route.js';
+import { routeMetro as route, bends, NUDGE, jogShift, EDGE } from './route.js';
 import { STROKE, ZOOM_EXP } from './nodes/geom.js';
 import Palette, { DND } from './Palette.jsx';
 import Wire from './Wire.jsx';
@@ -190,12 +190,15 @@ export default function App() {
     const h = (src ? hb?.source : hb?.target)?.find((k) => k.id === hid); if (!h) return null;
     return [at.x + h.x + (src ? h.width : 0), at.y + h.y + h.height / 2]; };
   // Ids of wires with no legal route (or a forward wire looping back) when node `id` sits at `at` (`extra` = a part not in the view yet).
+  // Canvas top edge + EDGE in flow units (BUGS #2): no part box and no wire corner above it.
+  const edgeTop = () => { const v = rf?.getViewport(); return v ? Math.round(-v.y / v.zoom) + EDGE : -Infinity; };
   const stuck = (id, at, extra) => {
+    const top = edgeTop();
     const pos = (n) => (n.id === id ? at : n.position), all = extra ? [...view, extra] : view;
     return Object.values(circuit.wires).filter((w) => {
       const a = all.find((n) => n.id === w.source), b = all.find((n) => n.id === w.target); if (!a || !b) return false;
       const s = pinAt(a, pos(a), 'out'), t = pinAt(b, pos(b), `in${w.pin}`); if (!s || !t) return false;
-      const r = route(s, t, { src: boxAt(a, pos(a)), dst: boxAt(b, pos(b)), others: all.filter((n) => n !== a && n !== b).map((n) => boxAt(n, pos(n))) });
+      const r = route(s, t, { src: boxAt(a, pos(a)), dst: boxAt(b, pos(b)), others: all.filter((n) => n !== a && n !== b).map((n) => boxAt(n, pos(n))), top });
       return !r || (t[0] > s[0] && bends(r) > 2); // a forward wire forced into a 4-bend loop counts as stuck too
     }).map((w) => w.id);
   };
@@ -212,7 +215,8 @@ export default function App() {
     const vr = !id && frame.current?.querySelector('.react-flow')?.getBoundingClientRect();
     const v0 = vr && rf?.screenToFlowPosition({ x: vr.left, y: vr.top }), v1 = vr && rf?.screenToFlowPosition({ x: vr.right, y: vr.bottom });
     const outside = (p) => !!v0 && (p.x < v0.x + 20 || p.y < v0.y + 20 || p.x + w > v1.x - 20 || p.y + h > v1.y - 20);
-    const hit = (p) => underG(p) || outside(p) || view.some((n) => { if (n.id === id) return false; const [nw, nh] = SIZE[n.type] ?? [112, 108];
+    const top = edgeTop();
+    const hit = (p) => underG(p) || outside(p) || p.y < top || view.some((n) => { if (n.id === id) return false; const [nw, nh] = SIZE[n.type] ?? [112, 108];
       return p.x < n.position.x + nw + 20 && p.x + w + 20 > n.position.x && p.y < n.position.y + nh + 20 && p.y + h + 20 > n.position.y; });
     for (let r = 0; r < 12; r++) for (let dy = -r; dy <= r; dy++) for (let dx = -r; dx <= r; dx++) {
       if (Math.max(Math.abs(dx), Math.abs(dy)) !== r) continue;
@@ -232,7 +236,7 @@ export default function App() {
   const settle = (_, node) => {
     const me = view.find((n) => n.id === node.id), from = dragFrom0.current; dragFrom0.current = null; if (!me || !rf) return false;
     const base = from ? stuck(me.id, from) : [];
-    const nudge = NUDGE !== 'never' && worse(stuck(me.id, node.position), base);
+    const nudge = node.position.y < edgeTop() || (NUDGE !== 'never' && worse(stuck(me.id, node.position), base));
     let p = nudge ? free(node.position, me.type, me.id, (q) => !worse(stuck(me.id, q), base)) : node.position;
     // Jog rule: line a wired pin up with its partner when they sit < 20 apart (route.js jogShift), if that spot is legal.
     const pinY = (n, at, hid) => pinAt(n, at, hid)?.[1];
