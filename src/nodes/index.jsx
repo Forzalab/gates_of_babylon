@@ -31,7 +31,7 @@ function gateZones(g) {
 }
 
 // One geometry + zone set per gate type, built once (same pattern as SWG/LAMPG above).
-const GATE_GEOM = {
+export const GATE_GEOM = {
   AND: andGeom(), OR: orGeom(), NOT: notGeom(), NAND: nandGeom(), NOR: norGeom(), XOR: xorGeom(),
 };
 const GATE_ZONES = Object.fromEntries(Object.entries(GATE_GEOM).map(([type, g]) => [type, gateZones(g)]));
@@ -125,7 +125,7 @@ function bleeds(g, lit, bodyLit, on) {
   return { fill, neck: nk };
 }
 
-function Shape({ g, on, idle, lit, hit }) {
+export function Shape({ g, on, idle, lit, hit }) {
   const bodyLit = !idle && (g.bubble ? !on : on);
   const z = idle ? { fill: '', neck: '' } : bleeds(g, lit, bodyLit, on);
   // Half fills: body unlit, some inputs lit -> the inset clipped to the lit inputs' halves (split at the midline).
