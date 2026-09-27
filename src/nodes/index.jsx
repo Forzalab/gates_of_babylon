@@ -54,12 +54,26 @@ function Handle({ nodeId, data, at, zone: base, hover, ...p }) {
   const zone = data.zones?.[p.id] ?? base; // clipped by App.jsx so no zone overlaps a neighbour's body or zone
   const key = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); data.onPort(p.id); } };
   const left = at[0] - HB / 2, top = at[1] - HB / 2;
+  // Tony: the grab area is an OUTWARD half-disc (radius PIN_HIT = 2 x the old halo's outer radius), still clipped to the
+  // zone App.jsx resolved against neighbours; the cue is a dotted half-arc at the old ring's mid radius (PIN_ARC).
+  const cx = HB / 2 - (zone.x - left), cy = HB / 2 - (zone.y - top), out = p.type === 'source';
+  const a = PIN_ARC, arc = out ? `M${HB / 2} ${HB / 2 - a}A${a} ${a} 0 0 1 ${HB / 2} ${HB / 2 + a}` : `M${HB / 2} ${HB / 2 - a}A${a} ${a} 0 0 0 ${HB / 2} ${HB / 2 + a}`;
   return <RFHandle {...p} {...hover} tabIndex={0} role="button" onKeyDown={key}
     style={{ left, top, width: HB, height: HB,
-      '--hit-left': `${zone.x - left}px`, '--hit-top': `${zone.y - top}px`, '--hit-w': `${zone.w}px`, '--hit-h': `${zone.h}px` }}
-    className={`port ${data.pending === nodeId && p.id === 'out' ? 'picked' : ''}`}
-    aria-label={`${nodeId} ${p.id === 'out' ? 'output' : 'input ' + (+p.id.slice(2) + 1)}`} />;
+      '--hit-left': `${zone.x - left}px`, '--hit-top': `${zone.y - top}px`, '--hit-w': `${zone.w}px`, '--hit-h': `${zone.h}px`,
+      '--hit-clip': `circle(${PIN_HIT}px at ${cx}px ${cy}px)` }}
+    className={`port ${out ? 'p-out' : 'p-in'} ${data.pending === nodeId && p.id === 'out' ? 'picked' : ''}`}
+    aria-label={`${nodeId} ${p.id === 'out' ? 'output' : 'input ' + (+p.id.slice(2) + 1)}`}>
+    <svg className="pin-arc" aria-hidden="true" viewBox={`0 0 ${HB} ${HB}`}>
+      <path className="pa-fill" d={`${arc}Z`} />
+      <path className="pa-arc" d={arc} />
+      <path className="pa-tick" d={out ? `M${HB / 2 + a} ${HB / 2}h6` : `M${HB / 2 - a} ${HB / 2}h-6`} />
+    </svg>
+  </RFHandle>;
 }
+const PIN_OUTER = HB / 2 + 8, PIN_HIT = 2 * PIN_OUTER, PIN_ARC = (HB / 2 + PIN_OUTER) / 2; // 18 -> hit 36, arc 14
+export const PIN_V = (import.meta.env.DEV && new URLSearchParams(location.search).get('pin')) || 'a'; // a Swiss | b NYCTA | c Material
+document.documentElement.dataset.pin = PIN_V;
 
 // Outline = one path (body + knobs, one continuous stroke). Lit = second path: the true inset contour.
 // bubble (NAND/NOR/NOT) and extraCurve (XOR) are optional extra ink paths, same stroke system.
