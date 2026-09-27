@@ -81,7 +81,8 @@ const neck = (x0, x1, y) => band(x0, x1, y, HALF);
 // The knob ink stays, opened only a wire's width where the orange passes (the neck). Same for inversion bubbles:
 // the bubble's disk fills and the wire tapers out of it. When the body behind the pin is lit, the disk also joins
 // the body's inset fill (one orange piece, as before). Unlit pins are unchanged.
-const BULB = KNOB - HALF - 2; // disk radius: 2px of paper inside the knob ink ring
+const GAP = 3; // bug #4, Tony pick A: 3px of paper inside the ink ring (was 2; read "too fat"). Every lit knob shares it, lamp included.
+const BULB = KNOB - HALF - GAP; // disk radius
 function bulb(cx, cy, r0, tx, r1) { // hull of circle (cx,cy,r0) and circle (tx,cy,r1), sampled as a polygon
   const d = Math.abs(tx - cx), u = Math.sign(tx - cx), phi = Math.acos(Math.min(1, (r0 - r1) / d)), pts = [];
   const arc = (x, r, a0, a1) => { for (let i = 0; i <= 12; i++) { const a = a0 + (a1 - a0) * i / 12; pts.push([x + u * r * Math.cos(a), cy + r * Math.sin(a)]); } };
@@ -103,7 +104,7 @@ function bleeds(g, lit, bodyLit, on) {
   });
   if (g.out && lit.out) {
     const [x, y] = g.out;
-    if (g.bubble) { if (on) { const cx = x - BUB; fill += bulb(cx, y, BUB - HALF - 2, x + 6, HALF); nk += neck(x - 2 * HALF - 2, x + 10, y); } }
+    if (g.bubble) { if (on) { const cx = x - BUB; fill += bulb(cx, y, BUB - HALF - GAP, x + 6, HALF); nk += neck(x - 2 * HALF - 2, x + 10, y); } }
     else {
       fill += bulb(x, y, BULB, x + KI, HALF);
       if (bodyLit) fill += band(x - DEEP, x, y, BULB);
