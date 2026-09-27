@@ -1,3 +1,6 @@
+// pit4 g1 (r2-1, from f3): gacha school (S4) on top of f3. The office-hours creep now lands as a gacha PULL: the
+// sprite card flashes, a star burst spins behind AND-chan, an SSR rarity band drops in and the heart meter becomes a
+// huge QUEUE #47 result. Still ONE surprise. f3 notes follow.
 // pit4 f3: the fused Dejting age gate. Base = x3's M3 layout (sign plate, gate-mascot portrait, wide ENTER ANYWAY over a
 // narrow NO THANKS, the one yellow 18+). School = galge / visual novel (Tony): the portrait is a VN sprite card with a
 // Tokimeki heart meter, the confirm line is spoken in an ADV textbox with a nameplate, and the buttons are the choice menu.
@@ -55,6 +58,9 @@ function Sprite({ yan }) {
           <radialGradient id="sg" cx="45%" cy="40%" r="75%"><stop offset="0" stopColor="#fff2fb" /><stop offset=".65" stopColor="#ffc2e6" /><stop offset="1" stopColor="#ff8fcf" /></radialGradient>
         </defs>
         <rect width="300" height="330" fill="url(#sg)" />
+        {yan && <g transform="translate(150 175)" aria-hidden="true"><g className="burst">
+          {Array.from({ length: 16 }, (_, i) => <path key={i} className="ray" transform={`rotate(${i * 22.5})`} d="M-9 0L0 -260L9 0Z" />)}
+        </g></g>}
         {/* kawaii sparkles + soft hearts: the kit's background props */}
         {[[34, 42, 1.1], [262, 250, 1], [44, 278, .9], [266, 120, .8]].map(([x, y, s], i) => <Heart key={i} x={x} y={y} s={s} className="heart soft" />)}
         {[[250, 40], [30, 160], [150, 300]].map(([x, y], i) => <path key={i} className="spark" transform={`translate(${x} ${y})`} d="M0 -11Q1.5 -1.5 11 0Q1.5 1.5 0 11Q-1.5 1.5 -11 0Q-1.5 -1.5 0 -11Z" />)}
@@ -83,8 +89,9 @@ function Sprite({ yan }) {
         </g>
       </svg>
       {/* Tokimeki Memorial affection meter, drawn as the Wenrexa profile card's heart row */}
+      {yan && <div className="rarity" aria-label="SSR, five stars"><b>SSR</b><span aria-hidden="true">&#9733;&#9733;&#9733;&#9733;&#9733;</span></div>}
       {yan
-        ? <div className="meter ticket" aria-label="Queue ticket 47">QUEUE <b>#47</b></div>
+        ? <div className="meter ticket" aria-label="Queue ticket 47"><span>QUEUE</span><b>#47</b></div>
         : <div className="meter" aria-label="Affection: full">
           {[0, 1, 2, 3, 4].map((i) => <svg key={i} viewBox="-12 -12 24 24"><Heart s={1} className="heart" /></svg>)}
         </div>}
@@ -94,7 +101,7 @@ function Sprite({ yan }) {
 
 // ADV textbox: nameplate tab + the line + the advance cursor. The DDLC turn types the new line out (a tick per few
 // characters, as VN engines do) and glitches the last words.
-const YAN = [['You’re ', ''], ['#47', 'b'], [' in the office-hours queue, senpai. I’ll wait. ', ''], ['I’ll ALWAYS wait.', 'glitch'], [' ♡', '']];
+const YAN = [['You’re ', ''], ['#47', 'b'], [' in the office-hours queue, senpai. ', ''], ['I’ll ALWAYS wait.', 'glitch'], [' ♡', '']];
 const YAN_LEN = YAN.reduce((n, [t]) => n + t.length, 0);
 function Textbox({ yan }) {
   const [n, setN] = useState(STILL ? YAN_LEN : 0);
@@ -135,12 +142,15 @@ export function Mute({ className = 'mute' }) {
 
 function Gate() {
   const yan = useLanded(1200);
+  // NO THANKS tears for 600 ms when she turns, then settles readable (arbiter r1 fix 2)
+  const [tear, setTear] = useState(false);
+  useEffect(() => { if (!yan || STILL) return; setTear(true); const t = setTimeout(() => setTear(false), 600); return () => clearTimeout(t); }, [yan]);
   useEffect(() => { if (yan && !STILL) play('creep', { vol: 0.3 }); }, [yan]);
   const enter = (e) => { e.preventDefault(); play('confirm', { gap: 0 }); setTimeout(() => { location.href = NEXT; }, isMuted() ? 0 : 260); };
   const leave = (e) => { e.preventDefault(); const to = e.currentTarget.href; play('back', { gap: 0 }); setTimeout(() => { location.href = to; }, isMuted() ? 0 : 220); };
   const hover = () => play('select', { vol: 0.25, gap: 120 });
   return (
-    <div className={`date f3${STILL ? ' still' : ''}${yan ? ' yan' : ''}`}>
+    <div className={`date f3 g1${STILL ? ' still' : ''}${yan ? ' yan' : ''}`}>
       <Bar />
       <Grid still={STILL} />
       <div className="stage">
@@ -160,7 +170,7 @@ function Gate() {
               <p className="sub n">... AND A FEW BITS NAUGHTY &#9825;</p>
               <nav className="choices" aria-label="Choices">
                 <a className="btn hot" href={NEXT} onClick={enter} onPointerEnter={hover} onFocus={hover}>&#9829; ENTER ANYWAY &#9829;</a>
-                <a className={yan ? 'btn soft glitchy' : 'btn soft'} href={LOGIC} onClick={leave} onPointerEnter={hover} onFocus={hover} data-t="NO THANKS">NO THANKS</a>
+                <a className={tear ? 'btn soft glitchy' : 'btn soft'} href={LOGIC} onClick={leave} onPointerEnter={hover} onFocus={hover} data-t="NO THANKS">NO THANKS</a>
               </nav>
             </div>
           </div>

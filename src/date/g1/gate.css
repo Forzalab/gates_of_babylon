@@ -30,7 +30,7 @@ a { color: inherit; }
 
 /* ---------- 4 x 3 thumbnail grid, fills to ~.92 H (no dead band) ---------- */
 .grid { position: absolute; left: 0; right: 0; top: var(--bar-h); bottom: 0; display: grid; grid-template-columns: repeat(4, 1fr); grid-template-rows: repeat(3, 1fr);
-  gap: 2.4vh 1.5vw; padding: 2.6vh 2.6vw 8.6vh; }
+  gap: 2.4vh 1.5vw; padding: 2.6vh 2.6vw 3.2vh; }
 .tile { position: relative; overflow: hidden; border-radius: 3px; display: block; text-decoration: none; background: #9c6a78;
   box-shadow: 0 2px 8px rgba(0, 0, 30, .35); }
 /* warm, noisy, blurred: several soft blobs + film grain (no photo, no people) */
@@ -80,7 +80,7 @@ a { color: inherit; }
 .cn.br { right: calc(var(--u) * .6); bottom: calc(var(--u) * .6); clip-path: polygon(100% 0, 0 100%, 100% 100%); }
 
 /* ---------- neon sign plate (f762be2f tube style) ---------- */
-.plate { position: relative; z-index: 2; width: calc(var(--u) * 33); height: calc(var(--u) * 6); margin: calc(var(--u) * -2.4) auto calc(var(--u) * 1.7);
+.plate { position: relative; z-index: 2; width: calc(var(--u) * 33); height: calc(var(--u) * 6); margin: calc(var(--u) * -2.4) auto calc(var(--u) * 2.9);
   display: flex; justify-content: center; align-items: flex-end;
   background: #0d0414; background-image: linear-gradient(rgba(255, 120, 230, .24) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 120, 230, .24) 1px, transparent 1px);
   background-size: calc(var(--u) * 1.4) calc(var(--u) * 1.4); background-position: center;
@@ -166,7 +166,7 @@ a { color: inherit; }
 .btn.glitchy::before, .btn.glitchy::after { content: attr(data-t); position: absolute; inset: 0; display: grid; place-items: center; }
 .btn.glitchy::before { color: #c02c93; clip-path: inset(0 0 48% 0); transform: translateX(calc(var(--u) * -.3)); text-shadow: calc(var(--u) * .25) 0 rgba(0, 62, 197, .55); }
 .btn.glitchy::after { color: #c02c93; clip-path: inset(52% 0 0 0); transform: translateX(calc(var(--u) * .3)); text-shadow: calc(var(--u) * -.25) 0 rgba(255, 79, 216, .7); }
-.date:not(.still) .btn.glitchy::before { animation: tear 2.4s steps(1) infinite; }
+.date:not(.still) .btn.glitchy::before { animation: tear .6s steps(1) 1; }
 @keyframes tear { 0%, 100% { transform: translateX(calc(var(--u) * -.3)); } 40% { transform: translateX(calc(var(--u) * .9)); } 43% { transform: translateX(calc(var(--u) * -.5)); } 70% { transform: translateX(calc(var(--u) * -1.2)); } 72% { transform: translateX(calc(var(--u) * -.5)); } }
 .yan .adv { border-color: var(--hot); }
 .yan .adv p { color: #8e0c55; }
@@ -186,3 +186,35 @@ a { color: inherit; }
 .mute .spk { fill: var(--hot); }
 .mute .wave { fill: none; stroke: var(--hot); stroke-width: 2.2; stroke-linecap: round; }
 .mute:focus-visible { outline: 3px dashed #fff; outline-offset: 3px; }
+
+/* ---------- g1: the gacha pull (S4). Palette only: pink, white, navy; yellow stays on 18+ alone ---------- */
+.g1.yan .adv p { line-height: 1.25; }
+.g1 .adv .glitch { font-size: 1.4em; font-family: 'Bangers', cursive; font-weight: 400; letter-spacing: .03em; }
+.g1 .adv b { font-size: 1.25em; }
+.burst .ray { fill: #fff; opacity: .55; }
+.date.g1.yan:not(.still) .burst { animation: spin 14s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.g1.yan .sprite { box-shadow: 0 0 0 calc(var(--u) * .28) #fff, 0 0 0 calc(var(--u) * .5) var(--hot), 0 calc(var(--u) * .35) 0 calc(var(--u) * .5) var(--plum),
+  0 0 calc(var(--u) * 2.2) calc(var(--u) * .4) rgba(255, 60, 200, .8); }
+.date.g1.yan:not(.still) .sprite { animation: pull .7s ease-out 1, glow 1.6s ease-in-out .7s infinite; }
+@keyframes pull { 0% { filter: brightness(3) saturate(0); transform: scale(.92) rotateY(80deg); } 45% { filter: brightness(2); transform: scale(1.06) rotateY(0); } 100% { filter: none; transform: none; } }
+@keyframes glow { 50% { box-shadow: 0 0 0 calc(var(--u) * .28) #fff, 0 0 0 calc(var(--u) * .5) var(--hot), 0 calc(var(--u) * .35) 0 calc(var(--u) * .5) var(--plum), 0 0 calc(var(--u) * 3.4) calc(var(--u) * .8) rgba(255, 60, 200, .95); } }
+.rarity { position: absolute; left: 0; right: 0; top: 0; display: flex; justify-content: center; align-items: baseline; gap: calc(var(--u) * .6);
+  padding: calc(var(--u) * .35) 0 calc(var(--u) * .25); background: linear-gradient(90deg, var(--hot), #ff7ad0, var(--hot)); color: #fff;
+  font: 400 calc(var(--u) * 2.2)/1 'Bangers', cursive; letter-spacing: .08em; text-shadow: 0 calc(var(--u) * .12) 0 #c10f6c; }
+.rarity b { font-weight: 400; }
+.rarity span { font-size: .8em; letter-spacing: .1em; font-family: 'Roboto Condensed', sans-serif; }
+.date.g1.yan:not(.still) .rarity { animation: drop .45s cubic-bezier(.2, 1.6, .45, 1) .25s both; }
+@keyframes drop { from { transform: translateY(-110%); } }
+.g1 .meter.ticket { padding: calc(var(--u) * .35) 0 calc(var(--u) * .45); align-items: center; gap: calc(var(--u) * .7); }
+.g1 .meter.ticket span { font-size: calc(var(--u) * 2.1); }
+.g1 .meter.ticket b { display: inline-block; font-size: calc(var(--u) * 4.7); line-height: .9; color: #fff; text-shadow: 0 calc(var(--u) * .2) 0 #c10f6c; }
+.date.g1.yan:not(.still) .meter.ticket b { animation: stamp .5s cubic-bezier(.2, 1.8, .45, 1) .45s both; }
+@keyframes stamp { from { transform: scale(2.4); opacity: 0; } }
+.g1 .adv { margin-top: calc(var(--u) * 1.3); padding-top: calc(var(--u) * .9); padding-bottom: calc(var(--u) * .6); }
+.g1 .adv p { white-space: nowrap; min-height: calc(max(12px, calc(var(--u) * 1.6)) * 1.4 * 1.25); display: flex; align-items: baseline; }
+.g1 .adv p > * { white-space: pre; }
+.g1 .choices { gap: calc(var(--u) * .8); margin-top: calc(var(--u) * .7); }
+/* g1: sign vs WARNING clearance (arbiter r1 fix 1): the descenders still cross the plate rule, but stop >= 10 px above the cap */
+.g1 .neon { margin-bottom: calc(var(--u) * -2.2); }
+.g1 .copy { padding-top: calc(var(--u) * 1.1); }
