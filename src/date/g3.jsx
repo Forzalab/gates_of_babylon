@@ -33,7 +33,7 @@ export function G3() {
   const on = useLanded(1500);
   const [go, to] = useWipe();
   useEffect(() => { play('glitch', { vol: 0.3 }); }, []);
-  useEffect(() => { if (on && !STILL && !CLEAN) play('grade', { vol: 0.35 }); }, [on]);
+  useEffect(() => { if (on && !CLEAN) { play('grade', { vol: 0.35 }); play('boom', { vol: 0.3 }); } }, [on]); // vine boom: sound only, fine under reduced motion
   const enter = (e) => { then('confirm', 'chips', 260); to(NEXT)(e); };
   return (
     <div className="stage sf s3g">

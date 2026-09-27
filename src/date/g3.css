@@ -31,6 +31,8 @@
 
 /* S6: ENTER ANYWAY is the PRESS START. The glow blinks in attract-mode steps; the label never moves. */
 .v-g3:not(.still) .btn.start { animation: attract 1.2s steps(1) infinite; }
+/* reduced motion (Kerney's browser): PRESS START is a steady lit state, no blink loop */
+.v-g3.still .btn.start { filter: brightness(1.08) drop-shadow(0 0 calc(var(--u) * .7) #ff4fd8); }
 @keyframes attract { 50% { filter: brightness(1.12) drop-shadow(0 0 calc(var(--u) * .9) #ff4fd8); } }
 
 /* ---------- the surprise: B+ ring + the note on a lilac sticky (M12) ---------- */
@@ -153,6 +155,8 @@
 @media (min-aspect-ratio: 3/2) { .sticky { width: 78%; } .mg .tick { left: calc(var(--u) * -4.4); } }
 
 /* continue polish */
+.mbm { width: calc(var(--u) * 50); }
+.mbm strong { font-size: calc(var(--u) * 6.4); white-space: nowrap; }
 .g3bar .warn.cut { font-size: calc(var(--u) * 4.6); }
 .g3bar { gap: calc(var(--u) * 1.6); }
 .g3bar .feednav .btn { font-size: calc(var(--u) * 1.9); padding: calc(var(--u) * .7) calc(var(--u) * 1.4); }
