@@ -14,8 +14,9 @@ const jobs = [];
 for (const [w, h] of [[1440, 810], [1024, 768]]) {
   jobs.push({ name: `gate-${w}`, url: '/date.html?v=g1', w, h, wait: 3500 });
   jobs.push({ name: `gate-${w}-still`, url: '/date.html?v=g1', w, h, rm: 'reduce', wait: 600 });
-  jobs.push({ name: `next-${w}`, url: '/date.html?v=g1&next=1', w, h, wait: 2500 });
-  jobs.push({ name: `next-${w}-match`, url: '/date.html?v=g1&next=1', w, h, wait: 1500, match: true });
+  jobs.push({ name: `next-${w}-pull`, url: '/date.html?v=g1&next=1', w, h, wait: 2500 });
+  jobs.push({ name: `next-${w}`, url: '/date.html?v=g1&next=1', w, h, wait: 1500, like: true });
+  jobs.push({ name: `next-${w}-match`, url: '/date.html?v=g1&next=1', w, h, wait: 1500, like: true, match: true });
 }
 jobs.push({ name: 'gate-1440-clean', url: '/date.html?v=g1&clean=1', w: 1440, h: 810, wait: 3500 });
 jobs.push({ name: 'gate-1440-t0', url: '/date.html?v=g1', w: 1440, h: 810, wait: 700 });
@@ -29,6 +30,7 @@ for (const j of jobs) {
   await page.goto(BASE + j.url);
   await page.evaluate(() => document.fonts.ready);
   await page.waitForTimeout(j.wait);
+  if (j.like) { await page.getByRole('button', { name: /LIKE/ }).click(); await page.waitForTimeout(900); }
   if (j.match) {
     // wire gate A's output to gate B's input 0 by a real drag
     const src = await page.locator('.react-flow__node[data-id="g1"] .react-flow__handle[data-handleid="out"]').boundingBox();

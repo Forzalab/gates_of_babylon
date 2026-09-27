@@ -104,3 +104,52 @@
 .dj-btn:focus-visible, .dj-back:focus-visible, .dj-disk:focus-visible { outline: 3px dashed var(--hot); outline-offset: 5px; }
 
 @media (prefers-reduced-motion: reduce) { .dj *, .dj *::before, .dj *::after { animation: none !important; } }
+
+/* ================= g1 (r2-1) additions ================= */
+/* fix 5: neon glow stays in row 01; the j and g still hang past the rule (clip leaves room for the descenders only) */
+.dj-plate { clip-path: inset(0 -40px calc(-110 * var(--u)) 0); }
+.dj-neon { text-shadow: 0 0 1px #fff, 0 0 calc(4 * var(--u)) #ff8be4, 0 0 calc(10 * var(--u)) var(--neon), 0 0 calc(20 * var(--u)) #ff1fb4; }
+/* fix 6: LOGIC MODE pill next to BACK TO THE GATE */
+.dj-nav { position: absolute; right: calc(18 * var(--u)); top: calc(16 * var(--u)); display: flex; gap: calc(16 * var(--u)); pointer-events: auto; }
+.dj-nav .dj-back { position: static; }
+.dj-back.dj-logic { background: linear-gradient(#ff6fbe, #f0268f 70%); color: #fff; }
+/* fix 5: compat pill + IT'S A MATCH stamp in the Raggningstabell header */
+.truth { position: relative; }
+.dj-pill { position: absolute; left: calc(24 * var(--u)); top: calc(10 * var(--u)); display: flex; align-items: center; gap: calc(8 * var(--u));
+  font: 400 max(12px, calc(17 * var(--u)))/1 'Bangers', cursive; letter-spacing: .05em; color: #fff; background: var(--hot);
+  padding: calc(6 * var(--u)) calc(14 * var(--u)) calc(5 * var(--u)); border-radius: 999px; box-shadow: 0 0 0 calc(2 * var(--u)) #fff, 0 0 0 calc(4 * var(--u)) var(--rim); white-space: nowrap; }
+.dj-pill b { font-weight: 400; font-size: 1.25em; }
+.dj-stamp { position: absolute; left: 100%; top: -30%; margin-left: calc(14 * var(--u)); font: 400 calc(26 * var(--u))/1 'Bangers', cursive; color: var(--hot);
+  background: #fff; border: calc(3 * var(--u)) solid var(--hot); border-radius: calc(6 * var(--u)); padding: calc(4 * var(--u)) calc(10 * var(--u)); transform: rotate(-8deg); }
+.dj:not(.still) .dj-stamp { animation: djstamp .4s cubic-bezier(.2, 1.8, .45, 1) both; }
+@keyframes djstamp { from { transform: rotate(-8deg) scale(2.4); opacity: 0; } }
+
+/* fix 7: gacha pull card intro (kit title panel + f2's NOPE / LIKE) */
+.dj-veil.pull { position: fixed; z-index: 50; background: rgba(0, 27, 98, .62); }
+.dj-card { position: relative; width: min(92vw, calc(420 * var(--u))); max-height: 94vh; overflow: hidden; text-align: center; color: var(--hot);
+  background: linear-gradient(#fff, #fff3fc); border: calc(4 * var(--u)) solid var(--hot); border-radius: calc(16 * var(--u));
+  box-shadow: inset 0 0 0 calc(4 * var(--u)) #fff, 0 calc(8 * var(--u)) 0 calc(2 * var(--u)) var(--plum), 0 0 calc(50 * var(--u)) calc(8 * var(--u)) rgba(255, 60, 200, .8);
+  padding: 0 calc(26 * var(--u)) calc(24 * var(--u)); transition: transform .38s ease-in, opacity .38s ease-in; }
+.dj:not(.still) .dj-card { animation: djpull .8s ease-out; }
+@keyframes djpull { 0% { transform: rotateY(90deg) scale(.6); filter: brightness(3); } 50% { transform: rotateY(0) scale(1.05); filter: brightness(1.8); } }
+.dj-card.like { transform: translateX(60vw) rotate(18deg); opacity: 0; }
+.dj-card.nope { transform: translateX(-60vw) rotate(-18deg); opacity: 0; }
+.dj-rar { margin: 0 calc(-26 * var(--u)); padding: calc(8 * var(--u)) 0 calc(6 * var(--u)); background: linear-gradient(90deg, var(--hot), #ff7ad0, var(--hot)); color: #fff;
+  font: 400 calc(30 * var(--u))/1 'Bangers', cursive; letter-spacing: .1em; }
+.dj-rar b { font-weight: 400; }
+.dj-rar span { font: 400 .75em 'Roboto Condensed', sans-serif; letter-spacing: .1em; }
+.dj-art { position: relative; height: calc(210 * var(--u)); margin: 0 calc(-26 * var(--u)); overflow: hidden; background: radial-gradient(#fff2fb, #ffc2e6 65%, #ff8fcf); display: grid; place-items: center; }
+.dj-rays { position: absolute; width: 180%; left: -40%; top: -80%; fill: #fff; opacity: .6; }
+.dj:not(.still) .dj-rays { animation: djspin 14s linear infinite; }
+@keyframes djspin { to { transform: rotate(360deg); } }
+.dj-gate { position: relative; height: calc(130 * var(--u)); width: calc(180 * var(--u)); overflow: visible; }
+.dj-card .shape .body { fill: #fff; stroke: #d1177f; stroke-width: 3.5; }
+.dj-card .shape .lit { fill: #ffc4e6; }
+.dj-pn { margin: calc(12 * var(--u)) 0 0; font: 400 calc(40 * var(--u))/1 'Bangers', cursive; letter-spacing: .03em; }
+.dj-pn small { display: block; font: 400 max(12px, calc(15 * var(--u)))/1.4 'Roboto Condensed', sans-serif; color: #a0487a; letter-spacing: 0; }
+.dj-tt { margin: calc(8 * var(--u)) auto 0; border-collapse: collapse; font: 700 max(12px, calc(17 * var(--u)))/1.35 'Roboto Condensed', sans-serif; color: var(--ink); }
+.dj-tt th, .dj-tt td { padding: 0 calc(18 * var(--u)); border-bottom: 1px solid var(--rim); }
+.dj-tt td:last-child { color: var(--hot); }
+.dj-cp { margin: calc(10 * var(--u)) 0 0; font: 400 max(12px, calc(17 * var(--u)))/1.2 'Roboto Condensed', sans-serif; color: #8e0c55; }
+.dj-cp b { font: 400 1.5em 'Bangers', cursive; color: var(--hot); }
+.dj-card .dj-btns { margin-top: calc(18 * var(--u)); }
