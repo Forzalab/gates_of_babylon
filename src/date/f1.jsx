@@ -6,6 +6,7 @@
 import { useEffect, useState } from 'react';
 import { Pair, Portrait, Bar, Neon, Heart, Corners, useLanded, useTick, LOGIC, STILL } from './main.jsx';
 import { compat } from './compat.js';
+import { play, then, isMuted, setMuted, onMute } from './sfx.js';
 
 const params = new URLSearchParams(location.search);
 const CLEAN = params.has('clean'); // arbiter's overlap diff: the page without the red pen
@@ -22,13 +23,28 @@ function useWipe() {
   }, [go]);
   return [go, (href) => (e) => { e.preventDefault(); set(href); }];
 }
+// Refusal: the error buzz plays, then we bounce to Logic.
+const refuse = (e) => { e.preventDefault(); play('error'); setTimeout(() => { location.href = LOGIC; }, STILL ? 0 : 380); };
+const hover = () => play('hover', { vol: 0.2 });
+
+// Mute lives in the site's own top bar (Web-1.0 button, same as Search). Kenney's UI pack has no speaker icon, so it is drawn here.
+function Mute() {
+  const [m, set] = useState(isMuted());
+  useEffect(() => onMute(set), []);
+  return (
+    <button className="mute" onClick={() => setMuted(!m)} aria-pressed={m} aria-label={m ? 'Unmute sound' : 'Mute sound'} title={m ? 'Sound off' : 'Sound on'}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" />
+        {m ? <path className="x" d="M16 9l5 6M21 9l-5 6" /> : <path className="x" d="M16 8.5c1.6 2 1.6 5 0 7M19 6c3 3.5 3 8.5 0 12" />}</svg>
+    </button>
+  );
+}
+
 const Wipe = ({ on }) => <div className={on ? 'wipe on' : 'wipe'} aria-hidden="true"><i /><i /></div>;
 
 // The red pen. Hand-drawn paths only (no new font: the note is the page's own Yellowtail script, in ink).
 function Grade({ on }) {
-  if (CLEAN) return null;
-  return (
-    <div className={on ? 'pen on' : 'pen'} aria-label="Graded by Prof. Kerney: B plus. Bold choice, see me after class.">
+  return ( // &clean=1 keeps the pen's box (so nothing reflows) but hides the ink
+    <div className={CLEAN ? 'pen clean' : on ? 'pen on' : 'pen'} aria-label="Graded by Prof. Kerney: B plus. Bold choice, see me after class.">
       <svg className="pen-ring" viewBox="0 0 200 170" aria-hidden="true">
         <path pathLength="1" d="M112 14C58 6 14 40 16 88c2 44 44 72 94 68 50-4 80-38 76-78C182 38 146 12 96 16 80 18 66 24 58 30" />
         <text x="100" y="112" textAnchor="middle">B+</text>
@@ -38,14 +54,18 @@ function Grade({ on }) {
   );
 }
 // The red tick on ENTER ANYWAY, in the gutter left of the button so it never covers the label.
-const Tick = ({ on }) => (CLEAN ? null :
-  <svg className={on ? 'tick on' : 'tick'} viewBox="0 0 60 50" aria-hidden="true"><path pathLength="1" d="M6 26l14 16C30 26 42 12 56 4" /></svg>);
+const Tick = ({ on }) => (
+  <svg className={CLEAN ? 'tick clean' : on ? 'tick on' : 'tick'} viewBox="0 0 60 50" aria-hidden="true"><path pathLength="1" d="M6 26l14 16C30 26 42 12 56 4" /></svg>);
 
 export function F1() {
   const on = useLanded(1500);
   const [go, to] = useWipe();
+  useEffect(() => { play('glitch', { vol: 0.3 }); }, []); // entering Dejting (silent until the browser allows audio)
+  useEffect(() => { if (on && !STILL && !CLEAN) play('drop'); }, [on]); // the red pen lands
+  const enter = (e) => { then('confirm', 'chips', 260); to(NEXT)(e); };
   return (
     <div className="stage sf">
+      <Mute />
       <section className="modal mf" role="dialog" aria-modal="true" aria-labelledby="fh">
         <Corners />
         <div className="sign plate">
@@ -53,7 +73,7 @@ export function F1() {
           <Neon word="Dejting" />
           <svg viewBox="-12 -12 24 24" className="nh r"><Heart className="heart tube" /></svg>
         </div>
-        <a className="close" href={LOGIC} aria-label="Close (back to Logic)">&#10005;</a>
+        <a className="close" href={LOGIC} onClick={refuse} aria-label="Close (back to Logic)">&#10005;</a>
         <div className="cols">
           <div className="left">
             <Portrait />
@@ -66,8 +86,8 @@ export function F1() {
             <p className="plain">By entering, I confirm I am 18 or older and<br />I know what a truth table is.</p>
             <div className="btns stack">
               <div className="tickrow"><Tick on={on} />
-                <a className="btn hot wide" href={NEXT} onClick={to(NEXT)}>&#9829; ENTER ANYWAY &#9829;</a></div>
-              <a className="btn soft narrow" href={LOGIC}>NO THANKS</a>
+                <a className="btn hot wide" href={NEXT} onClick={enter} onPointerEnter={hover}>&#9829; ENTER ANYWAY &#9829;</a></div>
+              <a className="btn soft narrow" href={LOGIC} onClick={refuse} onPointerEnter={hover}>NO THANKS</a>
             </div>
           </div>
         </div>
@@ -81,7 +101,7 @@ export function F1() {
 const FEED = [['OR', 'AND'], ['XOR', 'NAND'], ['AND', 'AND'], ['NOR', 'OR'], ['NAND', 'AND'], ['OR', 'XOR'],
   ['AND', 'NOT'], ['NOT', 'NOR'], ['XOR', 'OR'], ['NAND', 'NOT'], ['OR', 'OR'], ['NOR', 'XOR']];
 const LINES = {
-  100: 'soulmates. same truth table.', 75: 'agree 3 rows out of 4', 50: 'it’s complicated', 25: 'only agree on one row', 0: 'literally opposites (hot)',
+  100: 'same truth table. soulmates.', 75: 'agree on 3 of 4 rows', 50: 'it\u2019s complicated', 25: 'agree on 1 row. once.', 0: 'total opposites (hot)',
 };
 
 function Card({ A, B, row, i, liked, onLike }) {
@@ -104,22 +124,28 @@ export function Feed() {
   const serving = 42 + Math.floor(t / 3) % 70;
   const [liked, setLiked] = useState(() => new Set(STILL ? [2] : []));
   const [go, to] = useWipe();
-  const toggle = (i) => () => setLiked((s) => { const n = new Set(s); n.has(i) ? n.delete(i) : n.add(i); return n; });
+  // each new match pitches the blip up (combo), capped in sfx.js
+  const toggle = (i) => () => setLiked((s) => {
+    const n = new Set(s);
+    if (n.has(i)) { n.delete(i); play('click'); } else { n.add(i); play('select', { rate: 1 + 0.08 * n.size }); }
+    return n;
+  });
   return (
     <>
       <Bar />
+      <Mute />
       <div className="feedbar">
         <h1 className="warn cut"><span className="w1">MATCH FEED</span><small>LIVE GATES NEAR YOU &middot; {liked.size} MATCHED</small></h1>
         {/* the mundane lens (M2, the DMV): dating a gate means taking a number */}
-        <div className="ticket" role="status" aria-live="off">
+        <div className="ticketwrap"><div className="ticket" role="status" aria-live="off">
           <div><small>NOW SERVING</small><b>A-{String(serving).padStart(3, '0')}</b></div>
           <div><small>YOUR NUMBER</small><b className="mine">A-117</b></div>
-          <div><small>EST. WAIT</small><b>{117 - serving} clock cycles</b></div>
+          <div><small>EST. WAIT</small><b>{117 - serving} clock cycles</b></div></div>
           {!CLEAN && <p className="feed-pen" aria-label="Prof. Kerney: still B+. show your truth tables.">still B+. show your truth tables. <span>&ndash; K.</span></p>}
         </div>
         <nav className="feednav">
-          <a className="btn soft narrow" href={GATE} onClick={to(GATE)}>&#9664; BACK TO GATE</a>
-          <a className="btn hot" href={LOGIC}>LOGIC MODE</a>
+          <a className="btn soft narrow" href={GATE} onClick={(e) => { play('click'); to(GATE)(e); }} onPointerEnter={hover}>&#9664; BACK TO GATE</a>
+          <a className="btn hot" href={LOGIC} onPointerEnter={hover}>LOGIC MODE</a>
         </nav>
       </div>
       <main className="feed">
