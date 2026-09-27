@@ -50,11 +50,11 @@ export function portGeom(kind, type) {
 // Every port is a real tab stop (WCAG 2.1.1 / 2.4.7); Enter or Space wires it.
 // The box is centred on the knob, so the edge endpoint sits on the knob's centreline (y exact).
 // The hit area (::after) tiles the node's side instead, via CSS vars set from `zone`.
-function Handle({ nodeId, data, at, zone: base, ...p }) {
+function Handle({ nodeId, data, at, zone: base, hover, ...p }) {
   const zone = data.zones?.[p.id] ?? base; // clipped by App.jsx so no zone overlaps a neighbour's body or zone
   const key = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); data.onPort(p.id); } };
   const left = at[0] - HB / 2, top = at[1] - HB / 2;
-  return <RFHandle {...p} tabIndex={0} role="button" onKeyDown={key}
+  return <RFHandle {...p} {...hover} tabIndex={0} role="button" onKeyDown={key}
     style={{ left, top, width: HB, height: HB,
       '--hit-left': `${zone.x - left}px`, '--hit-top': `${zone.y - top}px`, '--hit-w': `${zone.w}px`, '--hit-h': `${zone.h}px` }}
     className={`port ${data.pending === nodeId && p.id === 'out' ? 'picked' : ''}`}
@@ -196,11 +196,14 @@ const mass = (() => {
 // Restored from pit2/archive-T2: the X shows ONLY while the pointer is inside the drawn shape (outline + bubble fill,
 // SVG hit test, pointer-events: visiblePainted), never for the node box, a pin zone or the gap around it. A 150ms grace
 // lets the pointer travel from the shape onto the X (same idiom as Wire.jsx); the X's own hover keeps it up.
+// Bug #1: the X and a pin's halo are never both up. A pin under the pointer wins (it is where a wire starts), so it
+// hides the X at once, skipping the grace that would otherwise leave both visible while the pointer crosses over.
 function useShapeHover() {
-  const [on, set] = useState(false), t = useRef(0);
+  const [on, set] = useState(false), [pin, setPin] = useState(false), t = useRef(0);
   const enter = () => { clearTimeout(t.current); set(true); };
   const leave = () => { t.current = setTimeout(() => set(false), 150); };
-  return [on, { onPointerEnter: enter, onPointerLeave: leave }, (v) => (v ? enter() : leave())];
+  const pinHover = { onPointerEnter: () => setPin(true), onPointerLeave: () => setPin(false) };
+  return [on && !pin, { onPointerEnter: enter, onPointerLeave: leave }, (v) => (v ? enter() : leave()), pinHover];
 }
 const X = ({ g, label, data, show, onHover }) => !data.reject && <Remove label={label} onRemove={data.onRemove}
   onHover={onHover} className={show ? 'show' : ''}
@@ -235,7 +238,7 @@ function Mark({ data, at }) {
 }
 
 export function SwitchNode({ id, data }) {
-  const [inside, hit, xHover] = useShapeHover();
+  const [inside, hit, xHover, pinHover] = useShapeHover();
   return (
     <div className="node sw" style={{ width: SWG.w, height: SWG.h }}>
       <Shape g={SWG} on={data.on} lit={data.lit} hit={hit} />
@@ -245,14 +248,14 @@ export function SwitchNode({ id, data }) {
       <Mark data={data} at={{ out: SWG.out }} />
       <button {...hit} className={`switch nodrag ${data.on ? 'on' : ''}`} onClick={(e) => { e.stopPropagation(); data.onToggle(); }} aria-pressed={!!data.on}
         aria-label={`Switch ${data.name ?? id}, ${data.on ? 'on' : 'off'}`} />
-      <Handle nodeId={id} data={data} at={SWG.out} zone={SW_ZONES.out} type="source" position={Position.Right} id="out" />
+      <Handle nodeId={id} data={data} hover={pinHover} at={SWG.out} zone={SW_ZONES.out} type="source" position={Position.Right} id="out" />
     </div>
   );
 }
 
 export function GateNode({ id, data }) {
   const g = GATE_GEOM[data.type], zones = GATE_ZONES[data.type];
-  const [inside, hit, xHover] = useShapeHover();
+  const [inside, hit, xHover, pinHover] = useShapeHover();
   return (
     <div className="node gate" style={{ width: g.w, height: g.h }} role="img" aria-label={`${data.type} gate ${data.name ?? ''}, output ${data.on ? 1 : 0}`}>
       <Shape g={g} on={data.on} lit={data.lit} hit={hit} />
@@ -261,9 +264,9 @@ export function GateNode({ id, data }) {
       <Plate g={g} x={mass(g)[0]} name={data.name} bare />
       <Mark data={data} at={{ ...Object.fromEntries(g.in.map((p, i) => [`in${i}`, p])), out: g.out }} />
       {g.in.map((at, i) => (
-        <Handle key={i} nodeId={id} data={data} at={at} zone={zones[`in${i}`]} type="target" position={Position.Left} id={`in${i}`} />
+        <Handle key={i} nodeId={id} data={data} hover={pinHover} at={at} zone={zones[`in${i}`]} type="target" position={Position.Left} id={`in${i}`} />
       ))}
-      <Handle nodeId={id} data={data} at={g.out} zone={zones.out} type="source" position={Position.Right} id="out" />
+      <Handle nodeId={id} data={data} hover={pinHover} at={g.out} zone={zones.out} type="source" position={Position.Right} id="out" />
       {data.reject?.phrase && (
         <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={data.reject.handle === 'out' ? g.out : g.in[+data.reject.handle.slice(2)] ?? g.out} />
       )}
@@ -272,7 +275,7 @@ export function GateNode({ id, data }) {
 }
 
 export function LampNode({ id, data }) {
-  const [inside, hit, xHover] = useShapeHover();
+  const [inside, hit, xHover, pinHover] = useShapeHover();
   return (
     <div className="node lamp" style={{ width: LAMPG.w, height: LAMPG.h }} role="img" aria-label={`Lamp ${data.name ?? ''} ${data.on ? 'on' : 'off'}`}>
       <Shape g={LAMPG} on={data.on} lit={data.lit} hit={hit} />
@@ -280,7 +283,7 @@ export function LampNode({ id, data }) {
       <X g={LAMPG} label="Delete lamp" data={data} show={inside} onHover={xHover} />
       <Plate g={LAMPG} x={PAD + 45} name={data.name} on={data.on} />
       <Mark data={data} at={{ in0: LAMPG.in }} />
-      <Handle nodeId={id} data={data} at={LAMPG.in} zone={LAMP_ZONES.in0} type="target" position={Position.Left} id="in0" />
+      <Handle nodeId={id} data={data} hover={pinHover} at={LAMPG.in} zone={LAMP_ZONES.in0} type="target" position={Position.Left} id="in0" />
       {data.reject?.phrase && <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={LAMPG.in} />}
     </div>
   );
