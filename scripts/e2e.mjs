@@ -59,6 +59,8 @@ async function main() {
     page.on('pageerror', (e) => { failures.push(`page error: ${e.message}`); log('  PAGE ERROR:', e.message); });
     page.on('console', (m) => { if (m.type() === 'error') log('  console.error:', m.text()); });
 
+    // Tour done: it hides the delete X while it runs (BUGS #8), and these tests hover parts.
+    await page.addInitScript(() => localStorage.setItem('gob.tour', 'done'));
     await page.goto(URL, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__gob, null, { timeout: 10000 });
 
@@ -364,6 +366,13 @@ async function testRestored(page) {
   const xb = await page.locator('.react-flow__node[data-id="g1"] .remove').boundingBox();
   await page.mouse.move(xb.x + xb.width / 2, xb.y + xb.height / 2, { steps: 4 }); await page.waitForTimeout(250);
   ok('X stays up while the pointer travels onto it (grace)', (await xOf('g1')) === '1', await xOf('g1'));
+  // Bug #1: X -> pin. Checked inside the 150ms grace, where both used to show at once.
+  const gp = page.locator('.react-flow__node[data-id="g1"] .react-flow__handle[data-handleid="out"]');
+  const gb = await gp.boundingBox();
+  await page.mouse.move(gb.x + gb.width / 2, gb.y + gb.height / 2, { steps: 4 }); await page.waitForTimeout(40);
+  const halo = await gp.evaluate((e) => getComputedStyle(e).boxShadow);
+  ok('pin halo up and X gone at once (never both)', (await xOf('g1')) === '0' && halo !== 'none', `${await xOf('g1')} ${halo}`);
+  await page.mouse.move(xb.x + xb.width / 2, xb.y + xb.height / 2, { steps: 4 }); await page.waitForTimeout(250);
   await page.mouse.move(box.x - 60, box.y - 60); await page.waitForTimeout(300);
   ok('X hides after leaving', (await xOf('g1')) === '0', await xOf('g1'));
 

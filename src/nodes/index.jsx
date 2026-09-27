@@ -50,11 +50,11 @@ export function portGeom(kind, type) {
 // Every port is a real tab stop (WCAG 2.1.1 / 2.4.7); Enter or Space wires it.
 // The box is centred on the knob, so the edge endpoint sits on the knob's centreline (y exact).
 // The hit area (::after) tiles the node's side instead, via CSS vars set from `zone`.
-function Handle({ nodeId, data, at, zone: base, ...p }) {
+function Handle({ nodeId, data, at, zone: base, hover, ...p }) {
   const zone = data.zones?.[p.id] ?? base; // clipped by App.jsx so no zone overlaps a neighbour's body or zone
   const key = (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); e.stopPropagation(); data.onPort(p.id); } };
   const left = at[0] - HB / 2, top = at[1] - HB / 2;
-  return <RFHandle {...p} tabIndex={0} role="button" onKeyDown={key}
+  return <RFHandle {...p} {...hover} tabIndex={0} role="button" onKeyDown={key}
     style={{ left, top, width: HB, height: HB,
       '--hit-left': `${zone.x - left}px`, '--hit-top': `${zone.y - top}px`, '--hit-w': `${zone.w}px`, '--hit-h': `${zone.h}px` }}
     className={`port ${data.pending === nodeId && p.id === 'out' ? 'picked' : ''}`}
@@ -81,7 +81,8 @@ const neck = (x0, x1, y) => band(x0, x1, y, HALF);
 // The knob ink stays, opened only a wire's width where the orange passes (the neck). Same for inversion bubbles:
 // the bubble's disk fills and the wire tapers out of it. When the body behind the pin is lit, the disk also joins
 // the body's inset fill (one orange piece, as before). Unlit pins are unchanged.
-const BULB = KNOB - HALF - 2; // disk radius: 2px of paper inside the knob ink ring
+const GAP = 3; // bug #4, Tony pick A: 3px of paper inside the ink ring (was 2; read "too fat"). Every lit knob shares it, lamp included.
+const BULB = KNOB - HALF - GAP; // disk radius
 function bulb(cx, cy, r0, tx, r1) { // hull of circle (cx,cy,r0) and circle (tx,cy,r1), sampled as a polygon
   const d = Math.abs(tx - cx), u = Math.sign(tx - cx), phi = Math.acos(Math.min(1, (r0 - r1) / d)), pts = [];
   const arc = (x, r, a0, a1) => { for (let i = 0; i <= 12; i++) { const a = a0 + (a1 - a0) * i / 12; pts.push([x + u * r * Math.cos(a), cy + r * Math.sin(a)]); } };
@@ -103,7 +104,7 @@ function bleeds(g, lit, bodyLit, on) {
   });
   if (g.out && lit.out) {
     const [x, y] = g.out;
-    if (g.bubble) { if (on) { const cx = x - BUB; fill += bulb(cx, y, BUB - HALF - 2, x + 6, HALF); nk += neck(x - 2 * HALF - 2, x + 10, y); } }
+    if (g.bubble) { if (on) { const cx = x - BUB; fill += bulb(cx, y, BUB - HALF - GAP, x + 6, HALF); nk += neck(x - 2 * HALF - 2, x + 10, y); } }
     else {
       fill += bulb(x, y, BULB, x + KI, HALF);
       if (bodyLit) fill += band(x - DEEP, x, y, BULB);
@@ -156,10 +157,12 @@ function Shape({ g, on, idle, lit, hit }) {
   );
 }
 
-// Palette glyph: the same Shape a node draws, never lit (a part in the tray has no value yet), sized by CSS (--gw = geometry width in px at 1440).
+// Palette glyph: the same Shape a node draws, sized by CSS (--gw = geometry width in px at 1440). Unlit, except an
+// inverting gate's bubble: it shows the orange dot a fresh one gets on the canvas (inputs 0 -> output 1).
 export function Glyph({ kind, type }) {
   const g = kind === 'S' ? SWG : kind === 'L' ? LAMPG : GATE_GEOM[type];
-  return <span className="glyph" style={{ '--gw': g.w, '--gh': g.h }}><Shape g={g} idle /></span>;
+  const inv = !!g.bubble;
+  return <span className="glyph" style={{ '--gw': g.w, '--gh': g.h }}><Shape g={g} idle={!inv} on={inv} lit={{}} /></span>;
 }
 
 // Free-pin stubs (Tony's sketch): a dotted lead on every pin with no wire yet, drawn exactly over that pin's grab
@@ -196,11 +199,14 @@ const mass = (() => {
 // Restored from pit2/archive-T2: the X shows ONLY while the pointer is inside the drawn shape (outline + bubble fill,
 // SVG hit test, pointer-events: visiblePainted), never for the node box, a pin zone or the gap around it. A 150ms grace
 // lets the pointer travel from the shape onto the X (same idiom as Wire.jsx); the X's own hover keeps it up.
+// Bug #1: the X and a pin's halo are never both up. A pin under the pointer wins (it is where a wire starts), so it
+// hides the X at once, skipping the grace that would otherwise leave both visible while the pointer crosses over.
 function useShapeHover() {
-  const [on, set] = useState(false), t = useRef(0);
+  const [on, set] = useState(false), [pin, setPin] = useState(false), t = useRef(0);
   const enter = () => { clearTimeout(t.current); set(true); };
   const leave = () => { t.current = setTimeout(() => set(false), 150); };
-  return [on, { onPointerEnter: enter, onPointerLeave: leave }, (v) => (v ? enter() : leave())];
+  const pinHover = { onPointerEnter: () => setPin(true), onPointerLeave: () => setPin(false) };
+  return [on && !pin, { onPointerEnter: enter, onPointerLeave: leave }, (v) => (v ? enter() : leave()), pinHover];
 }
 const X = ({ g, label, data, show, onHover }) => !data.reject && <Remove label={label} onRemove={data.onRemove}
   onHover={onHover} className={show ? 'show' : ''}
@@ -235,7 +241,7 @@ function Mark({ data, at }) {
 }
 
 export function SwitchNode({ id, data }) {
-  const [inside, hit, xHover] = useShapeHover();
+  const [inside, hit, xHover, pinHover] = useShapeHover();
   return (
     <div className="node sw" style={{ width: SWG.w, height: SWG.h }}>
       <Shape g={SWG} on={data.on} lit={data.lit} hit={hit} />
@@ -245,14 +251,14 @@ export function SwitchNode({ id, data }) {
       <Mark data={data} at={{ out: SWG.out }} />
       <button {...hit} className={`switch nodrag ${data.on ? 'on' : ''}`} onClick={(e) => { e.stopPropagation(); data.onToggle(); }} aria-pressed={!!data.on}
         aria-label={`Switch ${data.name ?? id}, ${data.on ? 'on' : 'off'}`} />
-      <Handle nodeId={id} data={data} at={SWG.out} zone={SW_ZONES.out} type="source" position={Position.Right} id="out" />
+      <Handle nodeId={id} data={data} hover={pinHover} at={SWG.out} zone={SW_ZONES.out} type="source" position={Position.Right} id="out" />
     </div>
   );
 }
 
 export function GateNode({ id, data }) {
   const g = GATE_GEOM[data.type], zones = GATE_ZONES[data.type];
-  const [inside, hit, xHover] = useShapeHover();
+  const [inside, hit, xHover, pinHover] = useShapeHover();
   return (
     <div className="node gate" style={{ width: g.w, height: g.h }} role="img" aria-label={`${data.type} gate ${data.name ?? ''}, output ${data.on ? 1 : 0}`}>
       <Shape g={g} on={data.on} lit={data.lit} hit={hit} />
@@ -261,9 +267,9 @@ export function GateNode({ id, data }) {
       <Plate g={g} x={mass(g)[0]} name={data.name} bare />
       <Mark data={data} at={{ ...Object.fromEntries(g.in.map((p, i) => [`in${i}`, p])), out: g.out }} />
       {g.in.map((at, i) => (
-        <Handle key={i} nodeId={id} data={data} at={at} zone={zones[`in${i}`]} type="target" position={Position.Left} id={`in${i}`} />
+        <Handle key={i} nodeId={id} data={data} hover={pinHover} at={at} zone={zones[`in${i}`]} type="target" position={Position.Left} id={`in${i}`} />
       ))}
-      <Handle nodeId={id} data={data} at={g.out} zone={zones.out} type="source" position={Position.Right} id="out" />
+      <Handle nodeId={id} data={data} hover={pinHover} at={g.out} zone={zones.out} type="source" position={Position.Right} id="out" />
       {data.reject?.phrase && (
         <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={data.reject.handle === 'out' ? g.out : g.in[+data.reject.handle.slice(2)] ?? g.out} />
       )}
@@ -272,7 +278,7 @@ export function GateNode({ id, data }) {
 }
 
 export function LampNode({ id, data }) {
-  const [inside, hit, xHover] = useShapeHover();
+  const [inside, hit, xHover, pinHover] = useShapeHover();
   return (
     <div className="node lamp" style={{ width: LAMPG.w, height: LAMPG.h }} role="img" aria-label={`Lamp ${data.name ?? ''} ${data.on ? 'on' : 'off'}`}>
       <Shape g={LAMPG} on={data.on} lit={data.lit} hit={hit} />
@@ -280,7 +286,7 @@ export function LampNode({ id, data }) {
       <X g={LAMPG} label="Delete lamp" data={data} show={inside} onHover={xHover} />
       <Plate g={LAMPG} x={PAD + 45} name={data.name} on={data.on} />
       <Mark data={data} at={{ in0: LAMPG.in }} />
-      <Handle nodeId={id} data={data} at={LAMPG.in} zone={LAMP_ZONES.in0} type="target" position={Position.Left} id="in0" />
+      <Handle nodeId={id} data={data} hover={pinHover} at={LAMPG.in} zone={LAMP_ZONES.in0} type="target" position={Position.Left} id="in0" />
       {data.reject?.phrase && <SayBurst phrase={data.reject.phrase} text={data.reject.text} pin={LAMPG.in} />}
     </div>
   );

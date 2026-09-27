@@ -15,6 +15,10 @@ export const STUB = 20;   // straight run out of / into a pin before the first c
 export const GAP_PAPER = 20;
 export const MARGIN = Math.max(14, GAP_PAPER + 3 - 12);
 
+// BUGS #2: wires and parts keep EDGE flow units from the canvas top edge. `top` (route option) = that edge + EDGE;
+// no inner wire point may sit above it. Pins are exempt (a part panned past the edge still gets its wire).
+export const EDGE = 20;
+
 const inflate = (b, m) => ({ x: b.x - m, y: b.y - m, w: b.w + 2 * m, h: b.h + 2 * m });
 
 // Does the axis-aligned segment a-b pass through the open interior of box b?
@@ -70,10 +74,11 @@ export function clear(pts, obstacles) {
 }
 // Full clearance: inner segments keep MARGIN from every box (own ones too); the first and last segment (pin runs)
 // keep MARGIN from foreign boxes and only stay outside the open interior of their own box.
-export function legal(pts, { src, dst, others = [], margin = MARGIN }, own) {
+export function legal(pts, { src, dst, others = [], margin = MARGIN, top = -Infinity }, own) {
   const far = others.map((b) => inflate(b, margin)), mine = [src, dst].filter(Boolean).map((b) => inflate(b, margin));
   const n = pts.length; // pin runs are horizontal: out of the output going right, into the input going right
   if (n < 2 || pts[1][1] !== pts[0][1] || pts[1][0] <= pts[0][0] || pts[n - 2][1] !== pts[n - 1][1] || pts[n - 2][0] >= pts[n - 1][0]) return false;
+  for (let i = 1; i < n - 1; i++) if (pts[i][1] < top) return false;
   for (let i = 1; i < pts.length; i++) {
     const a = pts[i - 1], b = pts[i], end = i === 1 || i === pts.length - 1;
     for (const o of far) if (segHitsBox(a, b, o)) return false;
@@ -90,12 +95,15 @@ export function stepPoints(s, t) {
 
 // Capped router. Returns points with <= MAX_BENDS corners that clear all boxes, or null (caller falls back).
 // ends = { src, dst } boxes of the wire's own nodes; others = every other node box.
-export function route(s, t, { src, dst, others = [], prefer, margin = MARGIN } = {}, maxBends = MAX_BENDS) {
+export function route(s, t, { src, dst, others = [], prefer, margin = MARGIN, top } = {}, maxBends = MAX_BENDS) {
+  // Measured pins carry float noise (334.00003 vs 333.99996): pins within SNAP share one row, so the wire is straight.
+  if (Math.abs(t[1] - s[1]) < SNAP) t = [t[0], s[1]];
   // Pins can sit inside their own box (knobs, padding): trim the source box at the pin's x, and the target box too.
   const own = [src && { ...src, w: Math.min(src.w, s[0] - src.x) }, dst && { ...dst, x: Math.max(dst.x, t[0]), w: dst.x + dst.w - Math.max(dst.x, t[0]) }];
   const ownObs = own.filter((b) => b && b.w > 0);
   const all = [...others, src, dst].filter(Boolean).map((b) => inflate(b, margin));
   const xs1 = new Set([s[0] + STUB]), xs2 = new Set([t[0] - STUB]), ys = new Set([s[1], t[1]]);
+  if (top != null) ys.add(top);
   for (const b of all) { xs1.add(b.x + b.w); xs2.add(b.x); ys.add(b.y); ys.add(b.y + b.h); }
   const mids = new Set([(s[0] + t[0]) / 2, ...xs1, ...xs2]);
   if (prefer != null) { mids.add(prefer); xs1.add(prefer); }
@@ -108,7 +116,7 @@ export function route(s, t, { src, dst, others = [], prefer, margin = MARGIN } =
     for (const y of ys) cands.push(clean([s, [x1, s[1]], [x1, y], [x2, y], [x2, t[1]], t]));
   let best = null, bestCost = Infinity;
   for (const p of cands) {
-    const n = bends(p); if (n > maxBends || !legal(p, { src, dst, others, margin }, ownObs)) continue;
+    const n = bends(p); if (n > maxBends || !legal(p, { src, dst, others, margin, top }, ownObs)) continue;
     let cost = length(p) + 40 * n; // a corner costs two grid cells of length
     if (prefer != null && p.length > 2 && p[1][0] === prefer) cost -= 80; // fan-out: share the sibling's trunk
     if (cost < bestCost) { best = p; bestCost = cost; }
@@ -129,7 +137,8 @@ export function midpoint(pts) {
 // paper, never inside an outline. NUDGE = 'last' moves the part only if even that fails; 'never' never moves it.
 export const SQUEEZE = 3;
 export const NUDGE = 'last';
-export const routeMetro = (s, t, o) => route(s, t, o) ?? route(s, t, { ...o, margin: SQUEEZE });
+// No route below the top edge at all (a part sits right under it): drop the edge rule rather than fall back to a step.
+export const routeMetro = (s, t, o) => route(s, t, o) ?? route(s, t, { ...o, margin: SQUEEZE }) ?? (o?.top != null ? routeMetro(s, t, { ...o, top: undefined }) : null);
 
 // Jog rule (defaults round): a wire whose two pins sit 0 < |dy| < JOG apart draws a sub-cell step (a "jog"). After a
 // drop the part shifts by the smallest such dy so that pin pair lines up (a straight wire). dys = partnerY - myPinY for
