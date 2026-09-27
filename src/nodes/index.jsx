@@ -65,15 +65,12 @@ function Handle({ nodeId, data, at, zone: base, hover, ...p }) {
     className={`port ${out ? 'p-out' : 'p-in'} ${data.pending === nodeId && p.id === 'out' ? 'picked' : ''}`}
     aria-label={`${nodeId} ${p.id === 'out' ? 'output' : 'input ' + (+p.id.slice(2) + 1)}`}>
     <svg className="pin-arc" aria-hidden="true" viewBox={`0 0 ${HB} ${HB}`}>
-      <path className="pa-fill" d={`${arc}Z`} />
       <path className="pa-arc" d={arc} />
       <path className="pa-tick" d={out ? `M${HB / 2 + a} ${HB / 2}h6` : `M${HB / 2 - a} ${HB / 2}h-6`} />
     </svg>
   </RFHandle>;
 }
 const PIN_OUTER = HB / 2 + 8, PIN_HIT = 2 * PIN_OUTER, PIN_ARC = (HB / 2 + PIN_OUTER) / 2; // 18 -> hit 36, arc 14
-export const PIN_V = (import.meta.env.DEV && new URLSearchParams(location.search).get('pin')) || 'a'; // a Swiss | b NYCTA | c Material
-document.documentElement.dataset.pin = PIN_V;
 
 // Outline = one path (body + knobs, one continuous stroke). Lit = second path: the true inset contour.
 // bubble (NAND/NOR/NOT) and extraCurve (XOR) are optional extra ink paths, same stroke system.
