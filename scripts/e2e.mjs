@@ -59,6 +59,8 @@ async function main() {
     page.on('pageerror', (e) => { failures.push(`page error: ${e.message}`); log('  PAGE ERROR:', e.message); });
     page.on('console', (m) => { if (m.type() === 'error') log('  console.error:', m.text()); });
 
+    // Tour done: it hides the delete X while it runs (BUGS #8), and these tests hover parts.
+    await page.addInitScript(() => localStorage.setItem('gob.tour', 'done'));
     await page.goto(URL, { waitUntil: 'networkidle' });
     await page.waitForFunction(() => !!window.__gob, null, { timeout: 10000 });
 
