@@ -13,7 +13,7 @@ const open = async (w, h, q, rm = 'no-preference') => {
   const page = await browser.newPage({ viewport: { width: w, height: h }, reducedMotion: rm });
   page.on('pageerror', (e) => errors.push(`${q} ${w}: ${e.message}`));
   page.on('console', (m) => m.type() === 'error' && errors.push(`${q} ${w} console: ${m.text()}`));
-  page.on('requestfailed', (r) => errors.push(`${q} ${w} failed: ${r.url()}`));
+  page.on('requestfailed', (r) => !(r.failure()?.errorText.includes('ABORTED')) && errors.push(`${q} ${w} failed: ${r.url()}`));
   page.on('response', (r) => r.status() >= 400 && errors.push(`${q} ${w} ${r.status()}: ${r.url()}`));
   await page.goto(`${BASE}/date.html?${q}`);
   await page.evaluate(() => document.fonts.ready);
@@ -58,9 +58,10 @@ await page.mouse.move(b.x + b.width / 2 - 200, b.y + b.height / 2, { steps: 5 })
 await page.waitForTimeout(700);
 console.log('after nope:', await page.textContent('.f2-card.top h2'));
 await page.keyboard.press('ArrowRight'); await page.waitForTimeout(900); // OR vs AND = 50% -> match
-console.log('result:', await page.textContent('.f2-result h1'), await page.textContent('.f2-result .f2-fine'));
+console.log('result:', await page.textContent('.f2-result h1'), await page.textContent('.f2-result .f2-fine'),
+  await page.evaluate(() => { const m = document.querySelector('.f2-result .f2-modal'); const r = m.getBoundingClientRect(); const c = getComputedStyle(m); return [r.x, r.y, r.width, r.height, c.opacity, c.visibility, c.animationName, JSON.stringify(m.getAnimations().map((a) => [a.animationName, a.playState, a.currentTime]))].join(' '); }));
 await page.screenshot({ path: path.join(OUT, 'f2-next-1440-match.png') });
-await page.click('.f2-result .f2-btn.hot'); await page.waitForTimeout(500);
+await page.click('.f2-file button'); await page.waitForTimeout(900);
 await page.screenshot({ path: path.join(OUT, 'f2-next-1440-after.png') });
 await page.close();
 await browser.close();

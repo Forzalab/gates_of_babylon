@@ -104,13 +104,14 @@ function Neon({ small }) {
   return <span className={small ? 'neon small' : 'neon'} aria-label="Date">Date</span>;
 }
 
-function Bar({ logo }) {
+function Bar({ logo, children }) {
   return (
     <header className="bar">
       {logo ? <a className="logo neonlogo" href="#"><svg viewBox="-12 -12 24 24" className="nh"><Heart s={1} className="heart tube" /></svg><Neon small /><b>GATEXX</b><svg viewBox="-12 -12 24 24" className="nh"><Heart s={1} className="heart tube" /></svg></a>
         : <a className="logo" href="#"><b>GATEXX</b></a>}
       <form className="search" onSubmit={(e) => e.preventDefault()}><input placeholder="Search..." aria-label="Search" /><button>Search</button></form>
       <nav>{['BEST OF', 'HITS', 'TRUTH TABLES', 'LIVE GATES', 'DATING'].map((n) => <a key={n} href="#">{n}</a>)}</nav>
+      {children}
     </header>
   );
 }

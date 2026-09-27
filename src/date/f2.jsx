@@ -7,6 +7,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Shape, GATE_GEOM } from '../nodes/index.jsx';
 import { gateTT, agree, gateCompat, ROWS } from './compat.js';
+import { play, isMuted, setMuted } from './sfx.js';
 import './f2.css';
 
 const q = new URLSearchParams(location.search);
@@ -77,17 +78,16 @@ export function Sign() {
 // ---------- the surprise: the site's own LIVE CHAT tile, where the class has found the page ----------
 const GATE_CHAT = [
   ['jay', 'wait is THIS the assignment??'],
-  ['mo', 'why is the XOR gate blushing at me'],
-  ['priya', `${pct(gateCompat('XOR', 'AND'))} compatible with XOR. still higher than my lab partner`],
+  ['priya', `${pct(gateCompat('XOR', 'AND'))} with XOR. still beats my lab partner`],
+  ['mo', 'is this a captcha? select all squares with a NAND gate'],
   ['Prof. Kerney', 'I can see who is online.', true],
-  ['jay', '...'],
 ];
 const AV = { jay: 'var(--f2-blue)', mo: 'var(--f2-lilac-2)', priya: 'var(--hot-2)', 'Prof. Kerney': 'var(--navy)' };
 export function Chat({ script, typing = 'Prof. Kerney', extra = [] }) {
   const [n, setN] = useState(STILL ? script.length : 0);
   useEffect(() => {
     if (n >= script.length) return;
-    const t = setTimeout(() => setN(n + 1), n === 0 ? 350 : 420);
+    const t = setTimeout(() => { setN(n + 1); play('chat', { gap: 0 }); }, n === 0 ? 350 : 420);
     return () => clearTimeout(t);
   }, [n, script.length]);
   const msgs = [...script.slice(0, n), ...extra].slice(-6);
@@ -113,7 +113,7 @@ function Gate() {
   const go = async (e, g) => {
     e.preventDefault();
     const r = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.classList.add('hit');
+    e.currentTarget.classList.add('hit'); play('confirm');
     burst(r.left + r.width / 2, r.top + r.height / 2, 12);
     await wait(260);
     location.search = href({ next: '1', you: g });
@@ -139,7 +139,7 @@ function Gate() {
         <div className="f2-btns">
           {ORDER.map((g, i) => (
             <a key={g} className={i === 0 ? 'f2-btn hot' : 'f2-btn soft'} href={href({ next: '1', you: g })}
-              onMouseEnter={() => setYou(g)} onFocus={() => setYou(g)} onClick={(e) => go(e, g)}>
+              onMouseEnter={() => { setYou(g); play('hover', { vol: .25 }); }} onFocus={() => setYou(g)} onClick={(e) => go(e, g)}>
               <Heart /> {g} : ENTER <Heart /></a>))}
         </div>
         <p className="f2-foot"><Heart /> IF YOU HAVE CHILDREN, USE PARENTAL CONTROLS (<a href={LOGIC}>NOT GATE</a>). <Heart /></p>
@@ -194,25 +194,43 @@ function Swipe() {
   const [result, setResult] = useState(null);
   const [extra, setExtra] = useState([]);
   const [shake, setShake] = useState(0);
+  const [matches, setMatches] = useState(0);
+  const streak = useRef(0);
+  const [filed, setFiled] = useState(null);
   const start = useRef(null);
   const type = DECK[i % DECK.length], done = i >= DECK.length;
 
   const commit = async (d) => {
     if (phase !== 'idle' || done || result) return;
     const them = type, c = gateCompat(them, YOU);
+    const match = d > 0 && c >= .5;
+    streak.current = match ? streak.current + 1 : d > 0 ? 0 : streak.current;
+    if (d < 0) play('slide');
+    else if (match) play('pluck', { rate: 1 + .08 * (streak.current - 1) }); // pitch-up per match streak
+    else { play('error'); setTimeout(() => play('hurt', { vol: .35 }), 110); } // HURT: swiped right on a bad table
     setDir(d); setPhase('hit');        // hit-stop: the card freezes with a flash for 90 ms, then leaves
     await wait(90);
     setPhase('out');
     await wait(280);
     setPhase('idle'); setDrag(0); setI((k) => k + 1);
     if (d > 0) {
-      const match = c >= .5;
       setResult({ them, c, match });
-      if (match) { setShake((s) => s + 1); burst(innerWidth / 2, innerHeight / 2, 16); }
+      if (match) { play(streak.current > 1 ? 'streak' : 'match', { rate: streak.current > 1 ? 1 + .08 * streak.current : 1 }); setMatches((m) => m + 1); setShake((s) => s + 1); burst(innerWidth / 2, innerHeight / 2, 16); }
       setExtra((x) => [...x, match
         ? ['priya', `${YOU} x ${them} at ${pct(c)}?? we love a ${pct(c)} love story`]
         : ['jay', `bro swiped right on ${them}. ${Math.round(c * 4)}/4 rows. rip`]]);
     }
+  };
+  // M1 (tax filing): a match has to pick a filing status. Tick first (instant feedback), then the chat reacts.
+  const file = async (e, kind) => {
+    if (filed) return;
+    const r = e.currentTarget.getBoundingClientRect();
+    setFiled(kind); play('click'); burst(r.left + 30, r.top + r.height / 2, 8);
+    await wait(420);
+    setResult(null); setFiled(null);
+    setExtra((x) => [...x, kind === 'jointly'
+      ? ['Prof. Kerney', 'Jointly = both of you must sign. That is an AND gate.', true]
+      : ['jay', 'filing singly on the first date. respect']]);
   };
   useEffect(() => {
     const k = (e) => { if (e.key === 'ArrowRight') commit(1); if (e.key === 'ArrowLeft') commit(-1); if (e.key === 'Escape') setResult(null); };
@@ -239,7 +257,8 @@ function Swipe() {
     <div className="f2-stage next">
       <Sign />
       <div className={`f2-deck${shake ? ' shook' : ''}`} key={`s${shake}`}>
-        <p className="f2-you">YOU ARE <b>{YOU}</b>. SWIPE ON GATES <small>drag the card, or &larr; / &rarr;</small></p>
+        <p className="f2-you">YOU ARE <b>{YOU}</b>. SWIPE ON GATES
+          <small><Heart /> MATCHES {matches}/{DECK.length} &middot; REFUND $0 &middot; drag the card, or &larr; / &rarr;</small></p>
         <div className="pile">
           {!done && i + 1 < DECK.length && <Card type={DECK[i + 1]} you={YOU} drag={0} />}
           {!done ? <Card key={i} top type={type} you={YOU} drag={shownDrag} onPointerDown={down}
@@ -262,10 +281,19 @@ function Swipe() {
             <p className="f2-fine">{result.match
               ? `YOU (${YOU}) AND ${result.them} AGREE ON ${Math.round(result.c * 4)} OF 4 ROWS.`
               : `${result.them} CHECKED YOUR TRUTH TABLE: ${Math.round(result.c * 4)} OF 4 ROWS. OUCH.`}</p>
-            <div className="f2-btns two">
-              <button className="f2-btn hot" autoFocus onClick={() => setResult(null)}><Heart /> KEEP SWIPING</button>
-              <a className="f2-btn soft" href={LOGIC}>WIRE US UP IN LOGIC</a>
-            </div>
+            {result.match ? (
+              <div className="f2-file" role="group" aria-label="Filing status">
+                <span className="tab">FILING STATUS: CHOOSE 1</span>
+                {[['jointly', 'FILE JOINTLY', 'AND: we both sign'], ['singly', 'FILE SINGLY', 'OR: either of us will do']].map(([k, t, sub], n) => (
+                  <button key={k} className={filed === k ? 'on' : ''} autoFocus={n === 0} onClick={(e) => file(e, k)}>
+                    <i className="box">{filed === k && <svg viewBox="0 0 20 20"><path d="M3 10l5 5L18 3" /></svg>}</i>{t} <small>({sub})</small></button>))}
+              </div>
+            ) : (
+              <div className="f2-btns two">
+                <button className="f2-btn hot" autoFocus onClick={() => setResult(null)}><Heart /> KEEP SWIPING</button>
+                <a className="f2-btn soft" href={LOGIC}>FILE SINGLY IN LOGIC</a>
+              </div>
+            )}
           </section>
         </div>
       )}
@@ -289,10 +317,21 @@ function ChatSlot({ children }) {
   return box && <div className="f2-slot" style={box}>{children}</div>;
 }
 
+function Mute() {
+  const [m, setM] = useState(isMuted());
+  return (
+    <button className="f2-mute" aria-pressed={m} title={m ? 'Sound off' : 'Sound on'} onClick={() => { setMuted(!m); setM(!m); if (m) play('click'); }}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" />
+        {m ? <path className="x" d="M16 9l5 6M21 9l-5 6" /> : <path className="x" d="M16 8.5q3 3.5 0 7M18.5 6q5.5 6 0 12" />}</svg>
+      {m ? 'SOUND OFF' : 'SOUND ON'}
+    </button>
+  );
+}
+
 export default function F2({ Bar, Grid }) {
   return (
     <div className={`date f2 ${NEXT ? 'is-next' : 'is-gate'}${STILL ? ' still' : ''}`}>
-      <Bar />
+      <Bar><Mute /></Bar>
       <Grid />
       <div className="veil" />
       {NEXT ? <Swipe /> : <><Gate />{!CLEAN && <ChatSlot><Chat script={GATE_CHAT} /></ChatSlot>}</>}
