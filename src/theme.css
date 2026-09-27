@@ -502,9 +502,9 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .coach-hand .glove, .coach-hand .fill { fill: var(--paper); }
 .coach-hand .glove, .coach-hand .line { stroke: var(--ink); stroke-width: 5; stroke-linejoin: round; stroke-linecap: round; }
 .coach-hand .line { fill: none; } .coach-hand .line.thin { stroke-width: 3.5; }
-/* Wiring step: the two nubs to join. Lit disk + a paper ring on the veil (strong on ink 60%) + an ink ring inside it. */
-.coach-nub .ring { fill: none; stroke: var(--paper); }
-.coach-nub .ping { fill: none; stroke: var(--paper); opacity: 0; transform-box: fill-box; transform-origin: center; }
+/* Wiring step: the two nubs to join. Tony: the pulsing paper ring read out of place; now the used-pin .mark ring, still,
+   on a paper hole in the veil. */
+.coach-nub { fill: none; stroke: var(--ink); }
 /* Demo ghosts: the pencil wire = the draft wire (2px ink on a 6px paper casing, straight); the part = a faint copy. */
 .ghost-wire line { fill: none; stroke-linecap: butt; stroke-dasharray: 1 1; stroke-dashoffset: 0; }
 .ghost-wire .casing { stroke: var(--paper); stroke-width: 6px; } .ghost-wire .pencil { stroke: var(--ink); stroke-width: 2px; }
@@ -514,7 +514,6 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 /* The tour moves in every mode (Tony, issue 6: an animated hand); only reduced motion stills it: two still hands, still rings. */
 @media (prefers-reduced-motion: no-preference) {
   .coach-hand .nudge { animation: coach-nudge 0.8s infinite; }
-  .coach-nub .ping { animation: coach-ping 1.6s ease-out infinite; }
   .coach-demo .rm-only { display: none; }
   .coach-demo .ghost-wire, .coach-demo .ghost-part { display: inline; }
   .coach-demo .glide { animation: coach-glide 2.6s infinite; }
@@ -528,7 +527,6 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
   40% { transform: translateY(0); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }
   100% { transform: translateY(var(--amp)); }
 }
-@keyframes coach-ping { 0% { opacity: 0.9; transform: scale(1); } 100% { opacity: 0; transform: scale(1.8); } }
 /* demo timeline (2.6 s): 0-12 press in at the source · 12-60 glide · 60-70 release · 70-100 pause at the target */
 @keyframes coach-press {
   0% { transform: translateY(var(--amp)); animation-timing-function: cubic-bezier(0.45, 0, 0.55, 1); }

@@ -219,15 +219,14 @@ export default function Coach({ circuit, palOpen, parts, slot, variant: v0 = VAR
               {holes.map((r, i) => <rect key={i} x={r.x} y={r.y} width={r.w} height={r.h} fill="#000" />)}
               {/* the part's own outline, filled and fattened by 4 local px each side of its 3px ink: tight, border intact */}
               {geo.shapes.map((s, i) => <path key={i} d={s.d} transform={`matrix(${s.m.join(' ')})`} fill="#000" stroke="#000" strokeWidth={11} strokeLinejoin="round" />)}
-              {geo.dots?.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r} fill="#000" />)}
+              {geo.dots?.map(([x, y, r], i) => <circle key={i} cx={x} cy={y} r={r + 5 * w} fill="#000" />)}
             </mask>
           </defs>
           {variant !== 'c' && <rect className="veil" width={geo.W} height={geo.H} mask={`url(#${mid})`} />}
           {variant === 'b' && holes.map((r, i) => <rect key={i} className="panel" x={r.x} y={r.y} width={r.w} height={r.h} />)}
           {geo.drop && <rect className="drop" x={geo.holes[geo.dropAt].x} y={geo.holes[geo.dropAt].y} width={geo.holes[geo.dropAt].w} height={geo.holes[geo.dropAt].h}
             strokeWidth={w} strokeDasharray={`${w} ${2 * w}`} />}
-          {geo.dots?.map(([x, y, r], i) => <g key={i} className="coach-nub"><circle className="ring" cx={x} cy={y} r={r + 3 * w} strokeWidth={2 * w} />
-            <circle className="ping" cx={x} cy={y} r={r + 3 * w} strokeWidth={w} /></g>)}
+          {geo.dots?.map(([x, y, r], i) => <circle key={i} className="coach-nub" cx={x} cy={y} r={r + 3 * w} strokeWidth={1.5 * w} />)} {/* Tony: = the used-pin mark (solid ink ring, still) */}
           {geo.hand.to ? <Demo {...geo.hand} k={Math.max(k, 0.8)} shapes={geo.shapes} /> : <Hand {...geo.hand} k={Math.max(k, 0.8)} />}
         </svg>
         {variant === 'b' && <span className="cap" style={{ left: holes[0].x, top: holes[0].y }}>{step + 1}</span>}
