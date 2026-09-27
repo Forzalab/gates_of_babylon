@@ -59,7 +59,7 @@ async function playAt(browser, w, h, reduced) {
   await page.screenshot({ path: `${OUT}/${tag}-4-card.png` });
   await sleep(2000);
   const st = await page.evaluate(() => window.__bag.state());
-  await page.getByRole('button', { name: /FINISH/ }).click();
+  await page.getByRole('button', { name: /CHECK OUT/ }).click();
   await page.waitForSelector('[data-testid=pop]');
   await sleep(reduced ? 200 : 900);
   await page.screenshot({ path: `${OUT}/${tag}-5-ending.png` });

@@ -106,7 +106,7 @@ export default function DateCanvas() {
         <a className="logo neonlogo" href="?canvas=1"><span className="neon small dj">Dejting</span><b>GATEXX</b></a>
         <div className="lcd">DATE CANVAS {'·'} {gates.length} GATES</div>
         <div className="stat"><small>COUPLES YOU MADE</small><b data-testid="bonded">{state.groups.filter((g) => g.bonded).length}</b></div>
-        <button className="mute" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? 'Unmute sound' : 'Mute sound'}>{muted ? '♪̸' : '♪'}<span>{muted ? 'MUTED' : 'SOUND'}</span></button>
+        <button className="mute" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? 'Unmute sound' : 'Mute sound'}><svg viewBox="0 0 24 24" aria-hidden="true" className="spk"><path d="M3 9h4l5-4v14l-5-4H3z" />{muted ? <path className="cut" d="M16 9l6 6M22 9l-6 6" /> : <path className="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />}</svg><span>{muted ? 'SOUND OFF' : 'SOUND ON'}</span></button>
       </header>
       <main className="cmain">
         <div className="cbar">

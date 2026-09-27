@@ -23,6 +23,8 @@ const TALK = {
   NOT: 'No. ...Unless you meant yes.',
 };
 const HURT_LINES = [['We Are Never Ever', 'Getting Back Together'], ['Bad Blood', ''], ['Irreplaceable', '(to the left, to the left)']];
+const HINT = { clingy: 'an OR with ♥♥♥ meets another OR', xor: 'XOR next to XOR', or: 'OR next to OR', notnot: 'NOT next to NOT',
+  child: 'OR next to XOR', and: 'AND next to AND', nand: 'NAND or NOR next to NAND, NOR or NOT' };
 const RARE = { clingy: 5, xor: 5, or: 4, notnot: 4, child: 4, and: 3, nand: 3 }; // stars from BASE_RATE
 
 function readIn() {
@@ -298,7 +300,8 @@ export default function Bagging() {
         <div className="stat"><small>AFFECTION</small><b data-testid="affection">{g.affection}</b></div>
         <div className="stat"><small>ENDINGS</small><b data-testid="endings">{found}/7</b></div>
         <button className="mute" onClick={toggleMute} aria-pressed={muted} aria-label={muted ? 'Unmute sound' : 'Mute sound'}>
-          {muted ? '♪̸' : '♪'}<span>{muted ? 'MUTED' : 'SOUND'}</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true" className="spk"><path d="M3 9h4l5-4v14l-5-4H3z" />{muted ? <path className="cut" d="M16 9l6 6M22 9l-6 6" /> : <path className="wave" d="M15.5 8.5a5 5 0 0 1 0 7M18.5 5.5a9 9 0 0 1 0 13" />}</svg>
+          <span>{muted ? 'SOUND OFF' : 'SOUND ON'}</span>
         </button>
       </header>
 
@@ -313,9 +316,9 @@ export default function Bagging() {
             <div className="rc-h"><b>GATEXX</b><span>SELF-CHECKOUT #4</span><span>{'*'.repeat(22)}</span></div>
             <ol>{g.receipt.slice(-14).map((l) => <li key={l.k} className={l.kind}><span>{l.text}</span><em>{l.amt}</em></li>)}</ol>
             <div className="rc-t"><span>TOTAL</span><b>{g.affection}</b></div>
-            <div className="swipes" title="Tap a settled gate and flick it sideways">SWIPES <span data-testid="swipes">{[0, 1, 2].map((i) => (i < g.swipes ? '◆' : '◇')).join('')}</span></div>
+            <div className="swipes" title="Press a gate that has landed and flick it one column left or right. Combo x3 gives one back.">SWIPES <span data-testid="swipes">{[0, 1, 2].map((i) => (i < g.swipes ? '◆' : '◇')).join('')}</span><small>flick a landed gate sideways</small></div>
           </div>
-          <button className="btn hot pay" onClick={() => !g.busy && end(R.overflow(g.cols) ? 'overflow' : 'pay')} disabled={!!g.over}>FINISH &amp; PAY</button>
+          <button className="btn hot pay" onClick={() => !g.busy && end(R.overflow(g.cols) ? 'overflow' : 'pay')} disabled={!!g.over} title="End the date here and see your match. Nothing is charged.">CHECK OUT {'♥'}</button>
         </aside>
 
         <section className="bagwrap">
@@ -346,7 +349,7 @@ export default function Bagging() {
             </div>
             <div className="well">
               {Array.from({ length: R.W }, (_, c) => <div key={c} className={`colbg${c === hover ? ' hov' : ''}${shakeCol === c ? ' shake' : ''}`} style={{ '--c': c }} />)}
-              <div className="fullline"><span>BAG FULL</span></div>
+              {Math.max(...g.cols.map((col) => col.length)) >= R.H - 3 && <div className="fullline"><span>BAG FULL</span></div>}
               {pv && <div className="ghost" style={{ '--c': pv.at.c, '--i': pv.at.i }}><GateTile t={g.cur.t} /></div>}
               {pv?.pairs.map((p) => (
                 <div key={p.dir} className={`strip ${p.glow ? 'glow' : 'hurtc'} d-${p.dir}`} style={{ '--c': p.c, '--i': p.i }}>
@@ -376,8 +379,8 @@ export default function Bagging() {
             {R.RARITY.map((k) => {
               const I = R.IDENTITIES[k], n = g.counts[k] ?? 0;
               return (
-                <div key={k} className={`ecard${n ? ' got' : ''}`} title={n ? `${I.name}: hit ${n}×` : 'locked'}>
-                  {n ? <><b>{I.formula}</b><span>{I.name}</span><i>{'★'.repeat(RARE[k])} ×{n}</i></> : <><b>?</b><span>{'★'.repeat(RARE[k])}</span></>}
+                <div key={k} tabIndex={0} className={`ecard${n ? ' got' : ''}`} title={n ? `${I.name}: hit ${n}×` : `How to unlock: ${HINT[k]}`}>
+                  {n ? <><b>{I.formula}</b><span>{I.name}</span><i>{'★'.repeat(RARE[k])} ×{n}</i></> : <><b>?</b><span>{'★'.repeat(RARE[k])}</span><em className="hint">{HINT[k]}</em></>}
                 </div>
               );
             })}

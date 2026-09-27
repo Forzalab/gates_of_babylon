@@ -290,3 +290,12 @@
 .game:not(.still) .board.missed { animation: miss .4s ease-in-out; }
 @keyframes miss { 20% { transform: translateX(-8px); } 40% { transform: translateX(7px); } 60% { transform: translateX(-5px); } 80% { transform: translateX(3px); } }
 .game:not(.still) .colbg.shake { animation: miss .3s; }
+
+/* dogfood solo items */
+.spk { width: 20px; height: 20px; }
+.spk path { fill: currentColor; }
+.spk .wave, .spk .cut { fill: none; stroke: currentColor; stroke-width: 2.2; stroke-linecap: round; }
+.swipes small { display: block; font-size: 10px; letter-spacing: 0; }
+.ecard .hint { display: none; grid-column: 1 / -1; font: italic 700 11px 'Roboto Condensed', sans-serif; color: #8a3a9f; }
+.ecard:not(.got):hover .hint, .ecard:not(.got):focus .hint { display: block; }
+.ecard:not(.got):hover span, .ecard:not(.got):focus span { display: none; }
