@@ -564,3 +564,8 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 /* Nudge cue: where the part was dropped, as the dot rule (--ink-2, dash w, gap 2w). Still; gone on next action or 3 s. */
 .nudge-ghost { position: absolute; overflow: visible; pointer-events: none; }
 .nudge-ghost rect { fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-dasharray: 2 4; }
+
+/* Tony: bundle count tag, the wire X's language (28px ink square, white glyph); orange when every wire in the bundle is 1. */
+.bundle-tag { position: absolute; width: 28px; height: 28px; display: grid; place-items: center; background: var(--ink); color: var(--paper);
+  font: 700 15px/1 var(--font); font-variant-numeric: tabular-nums; pointer-events: none; }
+.bundle-tag.on { background: var(--one); }

@@ -28,8 +28,28 @@ function compute(s) {
     list.push({ id: e.id, source: e.source, s: sp, t: tp, src: boxOf(a), dst: boxOf(b), others, top });
     nets[e.id] = { source: e.source, on: e.className === 'on' };
   }
-  const routes = routeAll(list);
-  return { routes, src: Object.fromEntries(list.map((w) => [w.id, w.source])), ends: Object.fromEntries(list.map((w) => [w.id, [w.s, w.t]])), share: shares(routes, nets) };
+  const routes = routeAll(list), share = shares(routes, nets);
+  return { routes, src: Object.fromEntries(list.map((w) => [w.id, w.source])), ends: Object.fromEntries(list.map((w) => [w.id, [w.s, w.t]])), share,
+    bundles: bundlesOf(routes, share, nets) };
+}
+// Tony: a count tag on bunched wires. A bundle = one shared stretch; its wires = every route that runs along all of it.
+// One tag per stretch >= 40 flow px, owned (rendered) by the bundle's first wire id; lit = every wire in it carries 1.
+const k2 = (p) => `${Math.round(p[0])},${Math.round(p[1])}`;
+function bundlesOf(routes, share, nets) {
+  const by = new Map();
+  for (const [id, sh] of Object.entries(share)) for (const r of sh.runs) {
+    const key = [k2(r.a), k2(r.b)].sort().join('|');
+    if (!by.has(key)) by.set(key, { a: r.a, b: r.b, ids: new Set() });
+    by.get(key).ids.add(id);
+  }
+  // One tag per bundle (same set of wires), on its longest straight stretch: a trunk that turns a corner is still one bundle.
+  const best = new Map();
+  for (const b of by.values()) {
+    const len = Math.abs(b.a[0] - b.b[0]) + Math.abs(b.a[1] - b.b[1]); if (len < 40 || b.ids.size < 2) continue;
+    const ids = [...b.ids].sort(), key = ids.join(',');
+    if (!best.has(key) || best.get(key).len < len) best.set(key, { len, owner: ids[0], ids, n: ids.length, lit: ids.every((i) => nets[i]?.on), at: [(b.a[0] + b.b[0]) / 2, (b.a[1] + b.b[1]) / 2] });
+  }
+  return [...best.values()];
 }
 const keyOf = (s) => {
   let k = `${topOf(s)};`;
@@ -52,6 +72,7 @@ export default function Wire({ id, sourceX, sourceY, targetX, targetY, data }) {
   const all = useRoutes();
   const pts = all.routes[id], sh = all.share[id] ?? { runs: [], dots: [] };
   const sw = useStore((s) => STROKE * (s.transform[2] / (s.width / 906)) ** (ZOOM_EXP - 1));
+  const z = useStore((s) => s.transform[2]); // bundle tags scale like the X (Remove.jsx --rs)
   let path, mx, my;
   if (pts) {
     // combo-1 ownership: hops only over FOREIGN nets (a same-net overlap is a junction trunk, not a crossing), and never
@@ -76,6 +97,11 @@ export default function Wire({ id, sourceX, sourceY, targetX, targetY, data }) {
         {sh.dots.map(([x, y], i) => <circle key={'d' + i} className="dot" cx={x} cy={y} r={DOT_R} />)}
       </g>}
       <path className="wire-hit" d={path} fill="none" stroke="transparent" strokeWidth={24} onPointerEnter={enter} onPointerLeave={leave} />
+      {all.bundles?.filter((b) => b.owner === id && !hover).map((b, i) => (
+        <EdgeLabelRenderer key={'bt' + i}>
+          <span className={`bundle-tag ${b.lit ? 'on' : ''}`} aria-label={`${b.n} wires`}
+            style={{ '--rs': 1 / Math.sqrt(z), transform: `translate(-50%, -50%) translate(${b.at[0]}px, ${b.at[1]}px) scale(var(--rs))` }}>{b.n}</span>
+        </EdgeLabelRenderer>))}
       {hover && (
         <EdgeLabelRenderer>
           <Remove label="Delete wire" onRemove={() => data.onRemove(id)}
