@@ -311,8 +311,9 @@ export default function App() {
   // radius of each knob centre, ignores the zones, and could lose a fast release on a busy first load.
   // The drag origin is kept ourselves: on a fast release React Flow's connection state can already be cleared.
   const dragFrom = useRef(null);
-  const onConnectStart = (_, { nodeId, handleId, handleType }) => { dragFrom.current = { node: nodeId, handle: handleId, type: handleType }; setTucked(true); };
+  const onConnectStart = (_, { nodeId, handleId, handleType }) => { dragFrom.current = { node: nodeId, handle: handleId, type: handleType }; setTucked(true); frame.current?.classList.add(handleType === 'source' ? 'wiring-from-out' : 'wiring-from-in'); };
   const onConnectEnd = (e, cs) => {
+    frame.current?.classList.remove('wiring-from-out', 'wiring-from-in');
     setTucked(false); setGuides([]);
     const from = dragFrom.current;
     dragFrom.current = null;
