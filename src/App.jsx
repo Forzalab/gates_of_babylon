@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ReactFlow, Background, useNodesState, ViewportPortal } from '@xyflow/react';
 import { canConnect, canAddSwitch, evaluate } from './sim.js';
 import { nodeTypes, pinYs, portGeom } from './nodes/index.jsx';
@@ -421,6 +421,12 @@ export default function App() {
   // A truth-table row click sets every input switch to that row's bits.
   const setSwitches = (ids, bits) => (commit(), setCircuit((c) => ({ ...c, nodes: { ...c.nodes,
     ...Object.fromEntries(ids.map((id, i) => [id, { ...c.nodes[id], value: !!bits[i] }])) } })));
+  // Drag lag (Tony): the table depends on the circuit and the column ORDER, never on exact positions. Hand it a view
+  // that only changes when the order (names) changes, plus a stable setter, so a drag frame doesn't re-render it.
+  const ssRef = useRef(setSwitches); ssRef.current = setSwitches;
+  const setSwitchesStable = useCallback((ids, bits) => ssRef.current(ids, bits), []);
+  const orderKey = JSON.stringify(names);
+  const tview = useMemo(() => view, [orderKey, view.length]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div className="frame" ref={frame}>
@@ -489,7 +495,7 @@ export default function App() {
         {lost && <button className="back-parts" onClick={() => { rf?.fitView({ padding: 0.15, minZoom: 0.75 * zoom, maxZoom: zoom, duration: 200 }); setLost(false); }}>Back to parts</button>}
         <Toasts list={toasts} />
       </main>
-      <Truth circuit={circuit} view={view} fig={fig} setSwitches={setSwitches} />
+      <Truth circuit={circuit} view={tview} fig={fig} setSwitches={setSwitchesStable} />
 
       <div className="cell c-margin r3"><span className="rownum">{fig('03')}</span></div>
       <footer className="cell c-main r3 status">

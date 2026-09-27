@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { memo, useEffect, useMemo, useRef, useState } from 'react';
 import { evaluate } from './sim.js';
 import { ScrollCues } from './Palette.jsx';
 import { partNames } from './names.js';
@@ -8,7 +8,8 @@ import { partNames } from './names.js';
 // SHAPE (wires, parts, order), not per toggle; only a window of rows is rendered, so 13 switches (8,192 rows) stay cheap.
 // The live row = the switches' current values. Clicking a row sets the switches to it.
 
-export default function Truth({ circuit, view, fig, setSwitches }) {
+export default memo(Truth);
+function Truth({ circuit, view, fig, setSwitches }) {
   const byPos = (kind) => view.filter((n) => circuit.nodes[n.id]?.kind === kind)
     .sort((a, b) => a.position.y - b.position.y || a.position.x - b.position.x).map((n) => n.id);
   const ins = byPos('S'), outs = byPos('L');
@@ -54,7 +55,9 @@ export default function Truth({ circuit, view, fig, setSwitches }) {
     if (el.scrollHeight > cap + 0.5) el.style.maxHeight = `${head + Math.floor((cap - head) / rowH) * rowH}px`;
     setBoxH(el.clientHeight);
     cues(el);
-  });
+    // Tony: the table snapped back while scrolling. This effect ran after EVERY render, and a scroll re-renders (setTop):
+    // clearing maxHeight each time shrank/regrew the box and clamped scrollTop. Re-measure only when the table or the frame changes.
+  }, [shape, fig, rowH]); // eslint-disable-line react-hooks/exhaustive-deps
   const first = Math.max(0, Math.floor(top / rowH) - 2), last = Math.min(rows.length, first + Math.ceil(boxH / rowH) + 5);
   // Keep the live row in view when the switches change.
   useEffect(() => {
