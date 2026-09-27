@@ -40,8 +40,10 @@ export const IDENTITIES = {
   child:  { formula: 'x ∨ (x ⊕ x) = x', name: 'Meant To Be Together', line: 'OR and XOR agreed on 3 rows of 4. Now there’s a little one.', expect: [false, true] },
 };
 export const IDENTITY_KEYS = Object.keys(IDENTITIES);
-// Rarest first: the impersonator floods every run, so ties go to the rarer identity (B review #4).
-export const RARITY = ['clingy', 'child', 'notnot', 'xor', 'and', 'or', 'nand'];
+// Base rates measured by research/game/balance.mjs (300 random + 300 greedy runs): share of all merges.
+export const BASE_RATE = { clingy: 0.012, xor: 0.05, or: 0.09, notnot: 0.125, child: 0.135, and: 0.23, nand: 0.36 };
+// Rarest first (from BASE_RATE). The impersonator floods every run, so ties go to the rarer identity (B review #4).
+export const RARITY = ['clingy', 'xor', 'or', 'notnot', 'child', 'and', 'nand'];
 
 // Which identity a GLOW pair proves. Only meaningful for glowing pairs.
 export function identityOf(A, B) {
@@ -245,12 +247,16 @@ export function swipe(cols0, id, dir, r = Math.random) {
 
 export const overflow = (cols) => cols.some((col) => col.length >= H);
 
-// B review #4: identities hit at least twice beat ones hit once; among those, the rarest wins.
+// B review #4: an identity hit once never beats one hit twice. Among the eligible ones, the ending is the identity you hit
+// most OVER its base rate (count / BASE_RATE), so the impersonator flood doesn't win every run. Ties go to the rarer.
 export function pickEnding(counts) {
   const hit = RARITY.filter((k) => (counts[k] ?? 0) > 0);
   if (!hit.length) return null;
   const twice = hit.filter((k) => counts[k] >= 2);
-  return (twice.length ? twice : hit)[0];
+  const pool = twice.length ? twice : hit;
+  let best = pool[0];
+  for (const k of pool) if (counts[k] / BASE_RATE[k] > counts[best] / BASE_RATE[best]) best = k;
+  return best;
 }
 
 // Affection = sum of matched rows over GLOW merges (HURT adds 0); the pop-up shows the mean compat of those pairs.

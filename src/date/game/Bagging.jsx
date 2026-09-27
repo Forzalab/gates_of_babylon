@@ -23,7 +23,7 @@ const TALK = {
   NOT: 'No. ...Unless you meant yes.',
 };
 const HURT_LINES = [['We Are Never Ever', 'Getting Back Together'], ['Bad Blood', ''], ['Irreplaceable', '(to the left, to the left)']];
-const RARE = { clingy: 5, child: 5, notnot: 4, xor: 4, and: 3, or: 3, nand: 3 };
+const RARE = { clingy: 5, xor: 5, or: 4, notnot: 4, child: 4, and: 3, nand: 3 }; // stars from BASE_RATE
 
 function readIn() {
   try {
@@ -111,7 +111,7 @@ export default function Bagging() {
 
   // Replay the resolver's frames: flash (hit-stop), then merge, floater, sound, receipt.
   function run(res, piece) {
-    let t = T(230);
+    let t = T(piece ? 260 : 200); // after the 0.2 s fall lands
     res.frames.forEach((f) => {
       later(t, () => { g.flash = new Set([f.ev.aId, f.ev.bId]); bump(); });
       later(t + T(90), () => applyMerge(f));

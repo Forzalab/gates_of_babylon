@@ -120,6 +120,8 @@ test('ending tie-break (B review #4) and the canvas hand-off payload', () => {
   assert.equal(pickEnding({ nand: 5, clingy: 1 }), 'nand', 'hit once never beats hit twice');
   assert.equal(pickEnding({ nand: 1, xor: 1 }), 'xor', 'ties go to the rarer');
   assert.equal(pickEnding({}), null);
+  assert.equal(pickEnding({ nand: 6, and: 4 }), 'and', 'over its base rate, not raw count');
+  assert.equal(pickEnding({ nand: 20, child: 2 }), 'nand', 'a real flood still wins');
   const cols = emptyGrid();
   cols[2].push(gate('NOT')); cols[3].push(gate('NAND'));
   const run = dropAndResolve(cols, 3, gate('NAND'));

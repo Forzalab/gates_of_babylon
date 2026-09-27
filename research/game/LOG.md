@@ -28,3 +28,13 @@
 - 2026-09-27T11:05Z research/game/play.mjs: a scripted game with real mouse input (canvas -> 9 gates in -> hurt -> 3 hurts = approval ->
   XOR+XOR vanish, the NOT falls onto a NOT = combo x2 -> OR+XOR child -> AND+AND -> FINISH & PAY -> MATCH -> SAY HELLO -> 3 circuits on canvas).
   npm test 140/140, build ok, e2e 101 ok.
+- 2026-09-27T11:40Z Balance pass (research/game/balance.mjs, 300 random + 300 greedy runs): a random player lasts ~65 drops, and a greedy one
+  gets 7/7 in ~87 drops (clingy is the bottleneck, as intended). The ending rule was giving "child" 86% of the time, so the ending is now
+  the identity hit most OVER its measured base rate (count / BASE_RATE, still requiring 2 hits where possible, ties to the rarer).
+  The spread is now 7 endings, none above 34%. The RARITY order is corrected from the data (clingy, xor, or, notnot, child, and, nand).
+- Playtest fixes: the dropped gate fell for 0.34 s but the merge replay started at 230 ms (merges flashed mid-air), so the fall is now 0.2 s and
+  the replay waits for it. play.mjs gained a lose run: a real drag from column 0 to 6, a real swipe flick (◆◆◇), overflow, the header
+  "PLEASE WAIT FOR ASSISTANCE", "IT'S NOT A MATCH", and SAY HELLO puts the AND×NOR pair on the canvas in red.
+- Final: npm test 140 pass, build ok, e2e all pass. Shots in research/game/shots (1440, 1024, 1440-still, 1440-lose).
+- Gaps: the canvas is a card board, not React Flow, and has no decay/child-spawn rules (arbiter has none to hook into), so "bonded" is a label
+  plus a glow. Logic persistence (JOINT step 6) is dropped. The clickable netlist receipt is cut (STRETCH). Sound is verified wired, not heard.
