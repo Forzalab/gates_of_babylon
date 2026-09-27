@@ -271,3 +271,16 @@
 .notice.n-bag b { color: #fff; }
 .notice.n-approval { background: #1d0309; color: #ffd0da; border-color: var(--hurt); }
 .attendant { flex: none; border: 0; border-radius: 999px; padding: 4px 12px; background: var(--yellow); color: #7a0b45; font: 400 16px 'Bangers', cursive; letter-spacing: .05em; box-shadow: 0 3px 0 #b0106a; }
+
+/* dogfood fix 2: how-to line + the demo ghost (jumps between two states; motion mode just eases the jump) */
+.howto { width: calc(var(--cell) * var(--cols)); height: 32px; display: flex; align-items: center; justify-content: center; gap: 5px; border-radius: 6px;
+  background: #0f6fd6; color: #fff; font: 700 14px 'Roboto Condensed', sans-serif; white-space: nowrap; overflow: hidden; }
+.howto b { font: 400 17px 'Bangers', cursive; letter-spacing: .05em; color: var(--yellow); }
+.howto i { font-style: normal; color: #cfe6ff; }
+.demo { position: absolute; left: calc(var(--c) * var(--cell)); bottom: calc(var(--i) * var(--cell)); width: var(--cell); height: var(--cell); z-index: 6; pointer-events: none; }
+.game:not(.still) .demo { transition: bottom .45s cubic-bezier(.5, 0, .9, .5); }
+.demo .tile-g { opacity: .55; outline: 3px dashed var(--yellow); outline-offset: 1px; }
+.demo-tag { position: absolute; left: 50%; bottom: calc(100% + 2px); transform: translateX(-50%); white-space: nowrap; padding: 2px 8px; border-radius: 999px;
+  background: var(--yellow); color: #7a0b45; font: 400 15px 'Bangers', cursive; letter-spacing: .05em; box-shadow: 0 2px 0 #b0106a; }
+.demo.p1 .demo-tag { background: #0f6fd6; color: #fff; box-shadow: 0 0 10px var(--glow); }
+.demo.p0 .demo-tag { bottom: auto; top: calc(100% + 4px); }

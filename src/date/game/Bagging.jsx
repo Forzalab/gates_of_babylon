@@ -60,6 +60,8 @@ export default function Bagging() {
       affection: 0, receipt: [], hurtPairs: [], lastHurt: null, busy: false, frozen: false, over: null, flash: new Set(), landed: null,
       fallRows: 0, drops: 0, bestCombo: 0, talk: { who: null, text: '' } };
     const first = G.current.cur.t;
+    // Dogfood fix 2: a "buddy" of the first gate waits in the middle column, so the first drop always makes a match.
+    G.current.cols[3].push(R.gate(first));
     G.current.talk = fromCanvas
       ? { who: first, text: `Your exes are in the bag. ${fromCanvas} of them, straight off your canvas. Me first.` }
       : { who: first, text: TALK[first] };
@@ -70,6 +72,9 @@ export default function Bagging() {
   const [hover, setHover] = useState(3);
   const [drag, setDrag] = useState(false);
   const [shakeCol, setShakeCol] = useState(null);
+  // The demo: a ghost of your gate jumps from the lane onto its buddy until your first drop (instant jumps: reduced-motion safe).
+  const [demo, setDemo] = useState(0);
+  useEffect(() => { const t = setInterval(() => setDemo((d) => 1 - d), 1100); return () => clearInterval(t); }, []);
   const timers = useRef([]);
   const boardRef = useRef(null);
   const press = useRef(null);
@@ -107,6 +112,8 @@ export default function Bagging() {
     if (g.busy || g.over || g.frozen) return;
     if (!R.canDrop(g.cols, c)) { play('error'); setShakeCol(c); later(300, () => setShakeCol(null)); return; }
     const piece = g.cur;
+    // The first drop is guaranteed to merge: if it wouldn't, it snaps onto the buddy in column 3.
+    if (g.drops === 0 && !R.preview(g.cols, c, piece.t)?.pairs.some((x) => x.glow)) c = 3;
     const res = R.dropAndResolve(g.cols, c, piece, rnd);
     g.busy = true; g.drops++;
     g.cols = res.placed; g.landed = piece.id; g.fallRows = R.H - res.landed.i;
@@ -318,6 +325,8 @@ export default function Bagging() {
                 ? <button className="attendant" onPointerDown={(e) => { e.stopPropagation(); play('click'); closeNote(); bump(); }}>CALL ATTENDANT</button>
                 : <i className="x">tap to close</i>}
             </div>
+          ) : !g.merges.length && !g.over ? (
+            <div className="howto" data-testid="howto"><b>HOW TO:</b> Drop gates. Same-vibe neighbours merge. Merges = {'♥'}. <i>Tap a column or drag.</i></div>
           ) : <div className="preview-line" aria-live="polite">
             {pv ? (best ? <>drag {'▼'} <b>({g.cur.t})</b> next to <b>{best.t}</b> <span className={best.glow ? 'glow' : 'hurtc'}>{best.dots} {Math.round(best.compat * 100)}% {best.glow ? '♥ GLOW' : '✕ HURT'}</span></>
               : <>drag {'▼'} <b>({g.cur.t})</b> into an empty spot</>) : g.frozen ? <>an attendant is on the way...</> : <>&nbsp;</>}
@@ -343,6 +352,12 @@ export default function Bagging() {
                   <GateTile t={x.t} tier={x.tier} />
                 </div>
               )))}
+              {g.drops === 0 && !g.over && (
+                <div className={`demo p${demo}`} style={{ '--c': 3, '--i': demo ? 1 : R.H }} aria-hidden="true">
+                  <GateTile t={g.cur.t} />
+                  <span className="demo-tag">{demo ? '♥ MATCH!' : 'TAP HERE ▼'}</span>
+                </div>
+              )}
               {fx.map((f) => <Fx key={f.id} f={f} />)}
             </div>
           </div>
