@@ -38,27 +38,8 @@ export default function Palette({ open, setOpen, tucked, onDrag, switchFull, onA
     const el = list.current;
     if (!el) return;
     setMore({ up: el.scrollTop > 1, down: el.scrollTop + el.clientHeight < el.scrollHeight - 1 });
-    if (bar.current) {
-      const pad = parseFloat(getComputedStyle(el).paddingTop) * 2;
-      const avail = bar.current.clientHeight - pad;
-      const items = [...el.querySelectorAll('.pal-item')];
-      let cut = 0;
-      for (const it of items) {
-        const bottom = it.parentElement.offsetTop + it.parentElement.offsetHeight;
-        if (bottom <= avail) cut = bottom; else break;
-      }
-      if (cut > 0) list.current.style.height = `${cut + pad}px`;
-      // Tony: the down cue sat at the bar's bottom, ~96px under the last part. Pin it to the list's bottom padding band instead.
-      // Tony (again): it still sat ~2x the part gap low. Place the chevron's ink exactly one part-gap under the last whole part.
-      const svgs = [...el.querySelectorAll('.pal-item svg')].map((s) => s.getBoundingClientRect());
-      const B = bar.current.getBoundingClientRect(), L = el.getBoundingClientRect();
-      const last = svgs.filter((r) => r.bottom <= L.bottom - pad / 2 + 0.5).at(-1);
-      if (last && svgs.length > 1) {
-        const u = (bar.current.closest('.frame')?.clientWidth ?? 1440) / 1440;
-        const gap = svgs[1].top - svgs[0].bottom, inset = 6 * u; // cue box 20u, chevron 8u, centred
-        bar.current.style.setProperty('--cue-top', `${last.bottom - B.top + gap - inset}px`);
-      }
-    }
+    // Tony: no cut-off at the last whole part; the list fills the bar, the next part peeks in under the fade and the
+    // chevron sits at the bar's foot over it (was: a list shortened to whole parts left a dead band above row 03).
   };
   useEffect(() => {
     measure();

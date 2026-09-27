@@ -197,7 +197,6 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .pal-more { position: absolute; left: 0; right: 0; height: calc(20 * var(--u)); background: transparent; display: none; place-items: center; cursor: default; }
 .pal-more.on { display: grid; }
 .pal-more.up { top: 0; } .pal-more.down { bottom: 0; }
-.pal-bar .pal-more.down { bottom: auto; top: var(--cue-top, auto); } /* right under the last whole part, not the bar's foot */
 .pal-more svg { width: calc(16 * var(--u)); height: calc(8 * var(--u)); overflow: visible; }
 .pal-more path { fill: none; stroke: var(--ink); stroke-width: var(--rule); vector-effect: non-scaling-stroke; stroke-linejoin: miter; stroke-linecap: butt; } /* restored T1: open chevron, not a filled arrowhead */
 
