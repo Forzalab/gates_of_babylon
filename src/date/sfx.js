@@ -15,6 +15,7 @@ const FILES = {
   trombone: ['sad-trombone.wav'],
   phaser: ['phaserDown1'],
   barcode: ['barcode.wav'],
+  bagvoice: ['unexpected-bagging.mp3'],
   print: ['card-shuffle'],
   match: ['confirmation_002'],
   sax: ['jingles_SAX03'],

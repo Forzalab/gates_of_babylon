@@ -1,6 +1,6 @@
 /* Bagging-area minigame (date.html?game=1). GATEXX palette from date.css: site blue, Wenrexa pink panels, neon plate. */
 .game {
-  --cell: clamp(40px, calc((100vh - 236px) / 10), 64px);
+  --cell: clamp(40px, calc((100vh - 246px) / 10), 64px);
   --glow: #5fd2ff; --hurt: #ff2a55; --paper-r: #fbf8f1; --ink-r: #3a2a36;
   position: relative; height: 100vh; overflow: hidden; display: grid; grid-template-rows: auto 1fr auto; color: #fff;
   background: radial-gradient(60vw 50vh at 12% 30%, rgba(255, 120, 200, .28), transparent 70%),
@@ -70,7 +70,7 @@
 .bagtitle { position: absolute; left: 12px; right: 12px; top: -26px; display: flex; justify-content: space-between; align-items: flex-end; pointer-events: none; }
 .bagtitle .warn { font-size: 26px; color: #fff; background: linear-gradient(#ec4a9e, #d4167a); padding: 3px 16px 1px; border-radius: 6px 6px 0 0; transform: none; }
 .scale { font: 700 12px 'JetBrains Mono', monospace; color: #b8ffcf; background: #03131a; border: 2px solid #1f6f5a; padding: 2px 8px; border-radius: 4px 4px 0 0; }
-.preview-line { width: calc(var(--cell) * var(--cols)); height: 22px; font: 700 14px/22px 'Roboto Condensed', sans-serif; color: #7a3a8f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
+.preview-line { width: calc(var(--cell) * var(--cols)); height: 32px; font: 700 14px/32px 'Roboto Condensed', sans-serif; color: #7a3a8f; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-align: center; }
 .preview-line .glow { color: #0f6fd6; }
 .preview-line .hurtc { color: #d2123a; }
 .board { position: relative; width: calc(var(--cell) * var(--cols)); height: calc(var(--cell) * (var(--rows) + 1)); outline: none; touch-action: none; cursor: grab; border-radius: 6px; }
@@ -258,3 +258,16 @@
   .vn .line { font-size: 17px; }
   .receipt { font-size: 11px; }
 }
+
+/* dogfood fix 1: the notice band. One notice at a time, above the grid, never over it. Opacity cut only (reduced-motion safe). */
+.notice { width: calc(var(--cell) * var(--cols)); height: 32px; display: flex; align-items: center; gap: 8px; padding: 0 8px; border-radius: 6px;
+  background: #fff3c4; color: #7a0b45; border: 2px solid #f2b400; font: 400 13px/1.05 'Roboto Condensed', sans-serif; overflow: hidden; }
+.notice img { width: 22px; flex: none; }
+.notice span { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.notice b { font: 400 18px 'Bangers', cursive; letter-spacing: .05em; }
+.notice em { display: block; font: italic 700 11px 'Roboto Condensed', sans-serif; }
+.notice .x { font: 700 10px 'Roboto Condensed', sans-serif; font-style: normal; opacity: .6; flex: none; }
+.notice.n-hurt, .notice.n-bag { background: #2a0010; color: #ffd0da; border-color: var(--hurt); }
+.notice.n-bag b { color: #fff; }
+.notice.n-approval { background: #1d0309; color: #ffd0da; border-color: var(--hurt); }
+.attendant { flex: none; border: 0; border-radius: 999px; padding: 4px 12px; background: var(--yellow); color: #7a0b45; font: 400 16px 'Bangers', cursive; letter-spacing: .05em; box-shadow: 0 3px 0 #b0106a; }

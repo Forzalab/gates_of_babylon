@@ -80,6 +80,24 @@ export default function Bagging() {
   const addFx = (item, ms) => { const id = ++fxId; setFx((a) => [...a, { ...item, id }]); later(ms, () => setFx((a) => a.filter((x) => x.id !== id))); };
   const say = (who, text) => { g.talk = { who, text }; };
   const printLine = (line) => { g.receipt = [...g.receipt, { k: ++fxId, ...line }]; };
+  // Notices (dogfood fix 1): ONE at a time, in the band above the grid (never over it), auto-dismissed in <= 2 s,
+  // and a tap anywhere closes the current one. Same-kind notices replace each other; the queue holds at most 3.
+  const [notes, setNotes] = useState([]);
+  const notify = (n) => setNotes((q) => [...q.filter((x) => x.kind !== n.kind), { ...n, id: ++fxId }].slice(-3));
+  const closeNote = () => setNotes((q) => {
+    if (q[0]?.kind === 'approval') { g.frozen = false; }
+    return q.slice(1);
+  });
+  useEffect(() => {
+    if (!notes.length) return;
+    const t = setTimeout(closeNote, notes[0].ms ?? 1900);
+    return () => clearTimeout(t);
+  }, [notes[0]?.id]);
+  useEffect(() => {
+    const f = (e) => { if (notes.length && !e.target.closest?.('.attendant')) closeNote(); };
+    window.addEventListener('pointerdown', f, true);
+    return () => window.removeEventListener('pointerdown', f, true);
+  });
 
   // ---------- drop / swipe ----------
   function advance() {
@@ -99,7 +117,7 @@ export default function Bagging() {
   }
   function swipeGate(id, dir) {
     if (g.busy || g.over || g.frozen) return;
-    if (g.swipes <= 0) { play('error'); addFx({ kind: 'toast', text: 'NO SWIPES LEFT' }, 1000); return; }
+    if (g.swipes <= 0) { play('error'); notify({ kind: 'toast', text: 'NO SWIPES LEFT' }); return; }
     const res = R.swipe(g.cols, id, dir, rnd);
     if (!res) { play('error'); return; }
     g.swipes--; g.busy = true; g.cols = res.placed; g.landed = null;
@@ -135,7 +153,7 @@ export default function Bagging() {
     addFx({ kind: 'float', c: pos.c, i: pos.i, text: `+${ev.rows} Affection`, dots: R.dots(ev.a, ev.b), big: ev.rows === 4 }, 1300);
     addFx({ kind: 'emote', c: pos.c, i: pos.i, img: 'hearts' }, 900);
     if (ev.combo >= 2) addFx({ kind: 'combo', n: ev.combo }, 1100);
-    if (ev.jackpot) addFx({ kind: 'toast', text: ev.identity === 'clingy' ? 'CLINGY JACKPOT! x ∨ 1 = 1' : 'JACKPOT! tier 3 + tier 3' }, 1400);
+    if (ev.jackpot) notify({ kind: 'toast', text: ev.identity === 'clingy' ? 'CLINGY JACKPOT! x ∨ 1 = 1' : 'JACKPOT! tier 3 + tier 3' });
     play('merge', { rate: comboRate(ev.combo) });
     play(ev.combo >= 3 ? 'stack' : 'chips', { vol: 0.7, delay: 60 });
     if (ev.combo >= 2) play('power', { rate: comboRate(ev.combo - 2), vol: 0.5, delay: 90 });
@@ -153,14 +171,14 @@ export default function Bagging() {
     g.busy = false;
     if (res.combo > 0) {
       g.streak = 0;
-      if (res.combo >= 3 && g.swipes < 3) { g.swipes++; addFx({ kind: 'toast', text: 'COMBO ×3: +1 SWIPE REFUND' }, 1300); }
+      if (res.combo >= 3 && g.swipes < 3) { g.swipes++; notify({ kind: 'toast', text: 'COMBO ×3: +1 SWIPE REFUND' }); }
     } else if (res.hurts?.length) hurt(res.hurts, piece);
     else if (piece) say(g.cur.t, TALK[g.cur.t]);
     // A pair survives only while both gates still exist.
     const alive = new Set(g.cols.flat().map((x) => x.id));
     g.hurtPairs = g.hurtPairs.filter((h) => alive.has(h.a) && alive.has(h.b));
     const tall = Math.max(...g.cols.map((c) => c.length));
-    if (tall >= R.H - 2 && !g.hurried) { g.hurried = true; play('hurry', { vol: 0.9 }); addFx({ kind: 'toast', text: 'HURRY UP! THE BAG IS NEARLY FULL' }, 1400); }
+    if (tall >= R.H - 2 && !g.hurried) { g.hurried = true; play('hurry', { vol: 0.9 }); notify({ kind: 'toast', text: 'HURRY UP! THE BAG IS NEARLY FULL' }); }
     if (tall < R.H - 3) g.hurried = false;
     if (Object.keys(g.counts).length === R.IDENTITY_KEYS.length) end('win');
     else if (R.overflow(g.cols)) end('overflow');
@@ -173,7 +191,7 @@ export default function Bagging() {
     const [l1, l2] = HURT_LINES[g.drops % HURT_LINES.length];
     const mid = { c: (piece ? R.find(g.cols, piece.id) : h.at) ?? h.at };
     const p = R.find(g.cols, h.a) ?? h.at;
-    addFx({ kind: 'hurtcap', c: p.c, i: p.i, l1, l2, opp: h.opposite }, 2000);
+    notify({ kind: 'hurt', text: l1, sub: l2, tag: h.opposite ? 'Opposites attract. Doesn’t mean it works.' : `${h.ta} × ${h.tb}: ${R.dots(h.ta, h.tb)} ${Math.round(h.compat * 100)}%` });
     hurts.forEach((x) => { const q = R.find(g.cols, x.b); if (q) addFx({ kind: 'emote', c: q.c, i: q.i, img: x.opposite ? 'heartBroken' : 'anger' }, 1400); });
     addFx({ kind: 'emote', c: p.c, i: p.i, img: 'anger' }, 1400);
     play('phaser', { vol: 0.7 });
@@ -183,12 +201,15 @@ export default function Bagging() {
     void mid;
     later(T(1000), () => {
       const alive = new Set(g.cols.flat().map((x) => x.id));
-      if (alive.has(h.a) && alive.has(h.b)) { const q = R.find(g.cols, h.a); addFx({ kind: 'bag', c: q.c, i: q.i }, 1800); play('barcode', { rate: 0.8, vol: 0.5 }); }
+      if (alive.has(h.a) && alive.has(h.b)) {
+        notify({ kind: 'bag', text: 'UNEXPECTED ITEM IN BAGGING AREA', sub: `${h.ta} and ${h.tb} are not a couple` });
+        if (!g.voiced) { g.voiced = true; play('bagvoice', { vol: 0.9 }); } else play('barcode', { rate: 0.8, vol: 0.5 }); // the voice line once per game
+      }
     });
     g.streak++;
     if (g.streak >= 3) {
       g.streak = 0; g.frozen = true;
-      addFx({ kind: 'approval' }, 1500);
+      notify({ kind: 'approval', text: 'APPROVAL NEEDED', sub: '3 unexpected items in a row.', ms: 1500 });
       play('error', { rate: 0.8, delay: 300 });
       printLine({ text: 'APPROVAL NEEDED', amt: '', kind: 'hurt' });
       later(1500, () => { g.frozen = false; bump(); });
@@ -288,10 +309,19 @@ export default function Bagging() {
             <span className="warn">BAGGING AREA</span>
             <span className="scale">SCALE {weight} kg</span>
           </div>
-          <div className="preview-line" aria-live="polite">
+          {notes[0] ? (
+            <div className={`notice n-${notes[0].kind}`} role="status" data-testid="notice" key={notes[0].id}>
+              {notes[0].kind === 'approval' && <img src={EMO('exclamations')} alt="" />}
+              {notes[0].kind === 'hurt' && <img src={EMO('heartBroken')} alt="" />}
+              <span><b>{notes[0].text}</b>{notes[0].sub && <small> {notes[0].sub}</small>}{notes[0].tag && <em>{notes[0].tag}</em>}</span>
+              {notes[0].kind === 'approval'
+                ? <button className="attendant" onPointerDown={(e) => { e.stopPropagation(); play('click'); closeNote(); bump(); }}>CALL ATTENDANT</button>
+                : <i className="x">tap to close</i>}
+            </div>
+          ) : <div className="preview-line" aria-live="polite">
             {pv ? (best ? <>drag {'▼'} <b>({g.cur.t})</b> next to <b>{best.t}</b> <span className={best.glow ? 'glow' : 'hurtc'}>{best.dots} {Math.round(best.compat * 100)}% {best.glow ? '♥ GLOW' : '✕ HURT'}</span></>
               : <>drag {'▼'} <b>({g.cur.t})</b> into an empty spot</>) : g.frozen ? <>an attendant is on the way...</> : <>&nbsp;</>}
-          </div>
+          </div>}
           <div className={`board${drag ? ' dragging' : ''}`} ref={boardRef} tabIndex={0} role="application" data-testid="board"
             aria-label={`Bagging area. Column ${hover + 1}. Arrow keys move, Enter drops ${g.cur.t}.`}
             onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={() => setDrag(false)} onKeyDown={onKey}>
@@ -354,10 +384,6 @@ function Fx({ f }) {
   if (f.kind === 'bloom') return <div className={`fx bloom b-${f.idn}${f.jackpot ? ' jack' : ''}`} style={pos}>{f.idn === 'xor' ? '0' : f.idn === 'notnot' ? '♥' : ''}</div>;
   if (f.kind === 'emote') return <img className="fx emote" style={pos} src={EMO(f.img)} alt="" />;
   if (f.kind === 'combo') return <div className="fx combo" data-testid="combo">COMBO <b>{'×'}{f.n}</b></div>;
-  if (f.kind === 'toast') return <div className="fx toast">{f.text}</div>;
-  if (f.kind === 'hurtcap') return <div className="fx hurtcap" style={pos} data-testid="hurt">{f.opp && <em>Opposites attract. Doesn{'’'}t mean it works.</em>}<b>{f.l1}</b>{f.l2 && <span>{f.l2}</span>}</div>;
-  if (f.kind === 'bag') return <div className="fx bag" style={pos}>UNEXPECTED ITEM<br />IN BAGGING AREA</div>;
-  if (f.kind === 'approval') return <div className="fx approval"><img src={EMO('exclamations')} alt="" /><b>APPROVAL NEEDED</b><span>3 unexpected items in a row. Please wait for an attendant (a NOT gate).</span></div>;
   return null;
 }
 
