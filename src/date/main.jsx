@@ -12,33 +12,35 @@ import '@fontsource/jetbrains-mono/700.css';
 import { Shape, GATE_GEOM } from '../nodes/index.jsx';
 import { compat, pairRow } from './compat.js';
 import './date.css';
+import './f1.css';
+import { F1, Feed } from './f1.jsx';
 
 const params = new URLSearchParams(location.search);
-const V = ['x1', 'x2', 'x3'].includes(params.get('v')) ? params.get('v') : 'x1';
-const STILL = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
-const LOGIC = import.meta.env.BASE_URL; // "/": the real app. "I'm not 18" lands here (the 4th-wall joke).
+const V = ['x1', 'x2', 'x3', 'f1'].includes(params.get('v')) ? params.get('v') : 'x1';
+export const STILL = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+export const LOGIC = import.meta.env.BASE_URL; // "/": the real app. "I'm not 18" lands here (the 4th-wall joke).
 
 // Surprise clock: the page opens as a straight mockup, then the gag lands. Reduced motion = the landed still.
-function useLanded(ms) {
+export function useLanded(ms) {
   const [on, set] = useState(STILL);
   useEffect(() => { if (STILL) return; const t = setTimeout(() => set(true), ms); return () => clearTimeout(t); }, [ms]);
   return on;
 }
-function useTick(ms) {
+export function useTick(ms) {
   const [n, set] = useState(0);
   useEffect(() => { if (STILL) return; const t = setInterval(() => set((k) => k + 1), ms); return () => clearInterval(t); }, [ms]);
   return n;
 }
 
-const HEART = 'M0 -3C-4 -10 -14 -6 -9 2L0 10L9 2C14 -6 4 -10 0 -3Z';
-const Heart = ({ x = 0, y = 0, s = 1, className = 'heart' }) =>
+export const HEART = 'M0 -3C-4 -10 -14 -6 -9 2L0 10L9 2C14 -6 4 -10 0 -3Z';
+export const Heart = ({ x = 0, y = 0, s = 1, className = 'heart' }) =>
   <path className={className} d={HEART} transform={`translate(${x} ${y}) scale(${s})`} />;
 
 const pins = (g) => (Array.isArray(g.in?.[0]) ? g.in : [g.in]);
 const outTip = (g) => [g.out[0] + (g.bubble ? 0 : 12), g.out[1]];
 
 // A live pair: switches a, b -> gate A -> gate B (pin 0), b -> B pin 1. Values come from sim.evaluate.
-function Pair({ A, B, row }) {
+export function Pair({ A, B, row }) {
   const gA = GATE_GEOM[A], gB = GATE_GEOM[B];
   const r = pairRow(A, B, row);
   const ax = 40, ay = 20;
@@ -77,7 +79,7 @@ function Icon({ type }) {
   );
 }
 
-const PAIRS = [['OR', 'AND'], ['XOR', 'NAND'], ['AND', 'NOT'], ['NOR', 'OR'], ['NAND', 'AND'], ['OR', 'XOR'],
+export const PAIRS = [['OR', 'AND'], ['XOR', 'NAND'], ['AND', 'NOT'], ['NOR', 'OR'], ['NAND', 'AND'], ['OR', 'XOR'],
   ['AND', 'AND'], ['NOT', 'NOR'], ['XOR', 'OR'], ['NAND', 'NOT'], ['OR', 'OR'], ['NOR', 'XOR']];
 const FAKE = [6083, 2415, 1811, 4562, 3129, 5201, 1811, 2079, 2415, 1559, 4562, 1812];
 
@@ -94,16 +96,16 @@ function Tile({ i, A, B, row }) {
   );
 }
 
-function Grid() {
+export function Grid() {
   const t = useTick(1100);
   return <main className="grid">{PAIRS.map(([A, B], i) => <Tile key={i} i={i} A={A} B={B} row={t + i} />)}</main>;
 }
 
-function Neon({ small }) {
-  return <span className={small ? 'neon small' : 'neon'} aria-label="Date">Date</span>;
+export function Neon({ small, word = 'Date' }) {
+  return <span className={small ? 'neon small' : 'neon'} aria-label={word}>{word}</span>;
 }
 
-function Bar({ logo }) {
+export function Bar({ logo }) {
   return (
     <header className="bar">
       {logo ? <a className="logo neonlogo" href="#"><svg viewBox="-12 -12 24 24" className="nh"><Heart s={1} className="heart tube" /></svg><Neon small /><b>GATEXX</b><svg viewBox="-12 -12 24 24" className="nh"><Heart s={1} className="heart tube" /></svg></a>
@@ -115,7 +117,7 @@ function Bar({ logo }) {
 }
 
 // Dialog portrait: a big AND gate with a face. Blush, wink, smile and the heart bubble are hand-built SVG.
-function Portrait() {
+export function Portrait() {
   const g = GATE_GEOM.AND;
   return (
     <div className="portrait">
@@ -259,7 +261,7 @@ function X3() {
   );
 }
 
-const Corners = () => <><i className="cn tl" /><i className="cn tr" /><i className="cn bl" /><i className="cn br" /></>;
+export const Corners = () => <><i className="cn tl" /><i className="cn tr" /><i className="cn bl" /><i className="cn br" /></>;
 
 function Stub() {
   return (
@@ -280,6 +282,7 @@ function Stub() {
 function Page() {
   const [hash, setHash] = useState(location.hash);
   useEffect(() => { const f = () => setHash(location.hash); addEventListener('hashchange', f); return () => removeEventListener('hashchange', f); }, []);
+  if (V === 'f1') return <div className={`date v-f1${STILL ? ' still' : ''}`}>{params.get('next') === '1' ? <Feed /> : <><Bar /><Grid /><F1 /></>}</div>;
   return (
     <div className={`date v-${V}${STILL ? ' still' : ''}`}>
       <Bar logo={V === 'x1'} />
