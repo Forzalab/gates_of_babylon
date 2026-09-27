@@ -123,7 +123,7 @@ function Portrait() {
         <defs><radialGradient id="pg" cx="45%" cy="55%" r="70%"><stop offset="0" stopColor="#ffd6f0" /><stop offset="1" stopColor="#ff8fd0" /></radialGradient></defs>
         <rect width="300" height="300" rx="18" fill="url(#pg)" />
         {[[30, 40], [250, 250], [40, 260], [270, 150]].map(([x, y], i) => <Heart key={i} x={x} y={y} s={1.1} className="heart soft" />)}
-        <g transform="translate(18 88) scale(1.95)">
+        <g transform="translate(46 84) scale(1.75)">
           <line className="w on" x1={-8} x2={0} y1={33} y2={33} /><line className="w on" x1={-8} x2={0} y1={75} y2={75} />
           <Shape g={g} on lit={{ in: [true, true], out: true }} />
           <g className="face">
@@ -213,7 +213,7 @@ function X2() {
   const on = useLanded(1500);
   return (
     <div className="stage s2">
-      <div className="sign"><Neon /></div>
+      <div className="sign"><svg viewBox="-12 -12 24 24" className="nh l"><Heart className="heart tube" /></svg><Neon /><svg viewBox="-12 -12 24 24" className="nh r"><Heart className="heart tube" /></svg></div>
       <section className="modal m2" role="dialog" aria-modal="true">
         <Corners />
         <div className="cols">
