@@ -1,0 +1,28 @@
+/* h2 (pit4 r3-2), continue screen additions. --u here is next.css's px-scale unit. */
+/* g1 fix 6: the pull card (and the K1 player before it) dock over Raggningstabell; no veil, the circuit stays readable */
+.dj-dock { position: fixed; z-index: 50; right: 1.2vw; top: 50%; transform: translateY(-46%); pointer-events: none; }
+.dj-dock > * { pointer-events: auto; }
+.dj-dock .dj-card { width: calc(330 * var(--u)); max-height: 84vh; padding: 0 calc(18 * var(--u)) calc(16 * var(--u)); }
+.dj-dock .dj-rar { margin: 0 calc(-18 * var(--u)); }
+.dj-dock .dj-art { margin: 0 calc(-18 * var(--u)); height: calc(150 * var(--u)); }
+/* K1: the player, in the page's own chrome (navy screen, pink rim), not a third-party app's look */
+.dj-player { width: calc(360 * var(--u)); background: #001b62; color: #fff; border: calc(4 * var(--u)) solid var(--hot); border-radius: calc(12 * var(--u));
+  box-shadow: inset 0 0 0 calc(3 * var(--u)) #fff, 0 calc(8 * var(--u)) 0 calc(2 * var(--u)) var(--plum); padding: calc(10 * var(--u)); text-align: left; }
+.dj-screen { position: relative; height: calc(170 * var(--u)); border-radius: calc(6 * var(--u)); display: grid; place-items: center;
+  background: #0d0414 linear-gradient(rgba(255, 110, 220, .16) 1px, transparent 1px) 0 0 / calc(14 * var(--u)) calc(14 * var(--u)); }
+.dj-screen .dj-gate { height: calc(96 * var(--u)); width: calc(140 * var(--u)); }
+.dj-player .shape .body { fill: #fff0fb; stroke: #ff7fe0; stroke-width: 3.5; }
+.dj-q { position: absolute; left: calc(10 * var(--u)); top: calc(8 * var(--u)); font: 400 calc(20 * var(--u))/1 'Bangers', cursive; letter-spacing: .06em; color: #ff9ee6; }
+.dj-boom { position: absolute; inset: auto 0 calc(12 * var(--u)); text-align: center; font: 400 calc(34 * var(--u))/1 'Bangers', cursive; color: #fff;
+  background: var(--hot); padding: calc(4 * var(--u)) 0; letter-spacing: .04em; }
+.dj-title { margin: calc(10 * var(--u)) 0 calc(6 * var(--u)); font: 400 calc(30 * var(--u))/1.02 'Bangers', cursive; letter-spacing: .03em; color: #fff; }
+.dj-title small { display: block; font-size: .62em; color: #ff9ee6; }
+.dj-ctl { display: flex; align-items: center; gap: calc(8 * var(--u)); font: 700 max(13px, calc(15 * var(--u)))/1 'Roboto Condensed', sans-serif; }
+.dj-seek { flex: 1; height: calc(6 * var(--u)); background: rgba(255, 255, 255, .25); border-radius: 99px; overflow: hidden; }
+.dj-seek i { display: block; height: 100%; background: var(--hot); }
+.dj-time { font-variant-numeric: tabular-nums; }
+.dj-skip { font: 400 max(13px, calc(16 * var(--u)))/1 'Bangers', cursive; letter-spacing: .05em; color: var(--hot); background: #fff; border: 0; border-radius: 99px;
+  padding: calc(5 * var(--u)) calc(10 * var(--u)); cursor: pointer; }
+.dj-credits { position: fixed; z-index: 40; left: 50%; bottom: 4px; transform: translateX(-50%); margin: 0; white-space: nowrap;
+  font: 400 12px/1.2 'Roboto Condensed', sans-serif; color: #fff; background: rgba(0, 27, 98, .85); padding: 2px 10px; border-radius: 99px; }
+.dj-credits a { color: #ff9ee6; }

@@ -10,6 +10,7 @@ const FAMILIES = {
   back: ['back_001'],
   sax: ['jingles_SAX04'],
   toggle: ['switch1'],
+  boom: ['vine-boom.mp3'], // h2 K1 payoff (freesound BY-NC, credited on the page + CREDITS.md)
 };
 const KEY = 'gob.date.mute';
 let muted = (() => { try { return localStorage.getItem(KEY) === '1'; } catch { return false; } })();
@@ -20,7 +21,7 @@ const subs = new Set();
 let ctx = null;
 const buf = {}; // decoded WebAudio buffers (fetch + decode: no media-element range requests, exact pitch control)
 function load(f) {
-  return (buf[f] ??= fetch(BASE + f + '.ogg').then((r) => r.arrayBuffer()).then((b) => ctx.decodeAudioData(b)).catch(() => null));
+  return (buf[f] ??= fetch(BASE + f + (f.includes('.') ? '' : '.ogg')).then((r) => r.arrayBuffer()).then((b) => ctx.decodeAudioData(b)).catch(() => null));
 }
 function unlock() {
   unlocked = true;
