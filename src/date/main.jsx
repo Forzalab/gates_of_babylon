@@ -12,9 +12,10 @@ import '@fontsource/jetbrains-mono/700.css';
 import { Shape, GATE_GEOM } from '../nodes/index.jsx';
 import { compat, pairRow } from './compat.js';
 import './date.css';
+import F2 from './f2.jsx';
 
 const params = new URLSearchParams(location.search);
-const V = ['x1', 'x2', 'x3'].includes(params.get('v')) ? params.get('v') : 'x1';
+const V = ['x1', 'x2', 'x3', 'f2'].includes(params.get('v')) ? params.get('v') : 'x1';
 const STILL = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 const LOGIC = import.meta.env.BASE_URL; // "/": the real app. "I'm not 18" lands here (the 4th-wall joke).
 
@@ -291,4 +292,4 @@ function Page() {
 }
 
 document.title = 'GATEXX';
-createRoot(document.getElementById('root')).render(<Page />);
+createRoot(document.getElementById('root')).render(V === 'f2' ? <F2 Bar={Bar} Grid={Grid} /> : <Page />);

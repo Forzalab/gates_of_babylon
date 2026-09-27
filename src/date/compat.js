@@ -31,3 +31,16 @@ export function compat(A, B) {
   const same = ROWS.filter((_, i) => { const r = pairRow(A, B, i); return r.A === r.B; }).length;
   return same / ROWS.length;
 }
+
+// f2: single-gate truth tables straight from the simulator (a lone gate fed by switches a, b; NOT reads a only).
+export function gateTT(type) {
+  return ROWS.map(([a, b]) => {
+    const nodes = { a: { id: 'a', kind: 'S', value: a }, b: { id: 'b', kind: 'S', value: b }, G: { id: 'G', kind: 'G', type } };
+    const wires = { w0: { id: 'w0', source: 'a', target: 'G', pin: 0 } };
+    if (GATES[type].pins > 1) wires.w1 = { id: 'w1', source: 'b', target: 'G', pin: 1 };
+    return evaluate({ nodes, wires }).G;
+  });
+}
+// Per row: do the two gates output the same bit? And the share of rows that agree, in [0, 1].
+export const agree = (A, B) => { const a = gateTT(A), b = gateTT(B); return a.map((v, i) => v === b[i]); };
+export const gateCompat = (A, B) => agree(A, B).filter(Boolean).length / ROWS.length;
