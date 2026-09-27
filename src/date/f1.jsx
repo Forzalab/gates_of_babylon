@@ -11,8 +11,9 @@ import { play, then, isMuted, setMuted, onMute } from './sfx.js';
 const params = new URLSearchParams(location.search);
 const CLEAN = params.has('clean'); // arbiter's overlap diff: the page without the red pen
 // g2 (pit4 r2) reuses this file: same surprise, JRPG-menu chrome (S5) and the r1 fix list. f1 stays as it was.
-const G2 = params.get('v') === 'g2';
-const VID = G2 ? 'g2' : 'f1';
+const H3 = params.get('v') === 'h3'; // pit4 r3: g2 + fix list + HIGH SCORES + feelings.exe (K3)
+const G2 = params.get('v') === 'g2' || H3;
+const VID = H3 ? 'h3' : G2 ? 'g2' : 'f1';
 const NEXT = `${location.pathname}?v=${VID}&next=1`;
 const GATE = `${location.pathname}?v=${VID}`;
 
@@ -35,7 +36,7 @@ function Mute() {
   const [m, set] = useState(isMuted());
   useEffect(() => onMute(set), []);
   return (
-    <button className="mute" onClick={() => setMuted(!m)} aria-pressed={m} aria-label={m ? 'Unmute sound' : 'Mute sound'} title={m ? 'Sound off' : 'Sound on'}>
+    <button className="mute" onClick={() => setMuted(!m)} aria-pressed={m} aria-label={m ? 'Unmute sound' : 'Mute sound'} title={`${m ? 'Sound off' : 'Sound on'} (credits: sfx/CREDITS.md)`}>
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" />
         {m ? <path className="x" d="M16 9l5 6M21 9l-5 6" /> : <path className="x" d="M16 8.5c1.6 2 1.6 5 0 7M19 6c3 3.5 3 8.5 0 12" />}</svg>
     </button>
@@ -51,6 +52,31 @@ const Hand = () => (
 const Wipe = ({ on }) => <div className={on ? 'wipe on' : 'wipe'} aria-hidden="true"><i /><i /></div>;
 
 // The red pen. Hand-drawn paths only (no new font: the note is the page's own Yellowtail script, in ink).
+// h3 (K3, the pen's punchline): Kerney's margin note is a stuck installer. "feelings.exe" crawls to 99%,
+// falls back to 12%, crawls back to 99% and stays. Reduced motion: it is simply 99% (instant, no tween).
+function Feelings({ on }) {
+  const [pct, set] = useState(STILL ? 99 : 0);
+  useEffect(() => {
+    if (STILL || !on) return;
+    let p = 0, phase = 0;
+    const id = setInterval(() => {
+      if (phase === 0) { p = Math.min(99, p + 9); if (p === 99) phase = 1; }
+      else if (phase < 12) phase++; // sits at 99% for a moment
+      else if (phase === 12) { p = 12; phase = 13; play('error', { vol: 0.25 }); } // the jump back
+      else { p = Math.min(99, p + 11); if (p === 99) clearInterval(id); }
+      set(p);
+    }, 110);
+    return () => clearInterval(id);
+  }, [on]);
+  return (
+    <div className="fx">
+      <div className="fxw" role="progressbar" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label="Installing feelings.exe">
+        <b>installing feelings.exe</b>
+        <div className="fxbar"><i style={{ width: `${pct}%` }} /></div><em>{pct}%</em></div>
+      <p className="fx-pen">est. time left: 4 years (your degree) <span>&ndash; K.</span></p>
+    </div>);
+}
+
 function Grade({ on }) {
   return ( // &clean=1 keeps the pen's box (so nothing reflows) but hides the ink
     <div className={CLEAN ? 'pen clean' : on ? 'pen on' : 'pen'} aria-label="Graded by Prof. Kerney: B plus. Bold choice, see me after class.">
@@ -58,7 +84,10 @@ function Grade({ on }) {
         <path pathLength="1" d="M112 14C58 6 14 40 16 88c2 44 44 72 94 68 50-4 80-38 76-78C182 38 146 12 96 16 80 18 66 24 58 30" />
         <text x="100" y="112" textAnchor="middle">B+</text>
       </svg>
-      <p className="pen-note">bold choice.<br />see me after class.<span>&ndash; K.</span></p>
+      {H3 ? <>
+        <p className="pen-note">bold choice. see me<br />after class.</p>
+        <Feelings on={on} />
+      </> : <p className="pen-note">bold choice.<br />see me after class.<span>&ndash; K.</span></p>}
     </div>
   );
 }
@@ -70,7 +99,7 @@ export function F1() {
   const on = useLanded(1500);
   const [go, to] = useWipe();
   useEffect(() => { play('glitch', { vol: 0.3 }); }, []); // entering Dejting (silent until the browser allows audio)
-  useEffect(() => { if (on && !STILL && !CLEAN) play('grade', { vol: 0.35 }); }, [on]); // the red pen lands
+  useEffect(() => { if (on && (!STILL || H3) && !CLEAN) { play('grade', { vol: 0.35 }); if (H3) play('boom', { vol: 0.3 }); } }, [on]); // h3: sound is allowed under reduced motion // the red pen lands
   const [cur, setCur] = useState(0); // g2: the JRPG cursor hand follows the hovered/focused button
   const enter = (e) => { then('confirm', 'chips', 260); to(NEXT)(e); };
   return (
@@ -156,13 +185,29 @@ function Learned({ m, onClose }) {
     </div>);
 }
 
+// h3: the arcade HIGH SCORES strip (ported from g3), with Kerney's grade as 5th place.
+const INIT = ['ANN', 'ORA', 'XOX', 'NOR', 'NAN', 'ORR', 'ADA', 'XIO'];
+function Scores({ cards, liked }) {
+  const rows = cards.map(([A, B], i) => ({ A, B, i, pct: Math.round(compat(A, B) * 100) })).sort((a, b) => b.pct - a.pct || a.i - b.i).slice(0, 4);
+  return (
+    <section className="scores" aria-label="High scores">
+      <h2>HIGH SCORES</h2>
+      <ol>
+        {rows.map((r, k) => (
+          <li key={r.i} className={liked.has(r.i) ? 'you' : ''}><b>{['1ST', '2ND', '3RD', '4TH'][k]}</b>
+            <span>{r.A} &#9829; {r.B}</span><em>{String(r.pct).padStart(3, '0')}%</em><i>{liked.has(r.i) ? 'YOU' : INIT[r.i]}</i></li>))}
+        {!CLEAN && <li className="kerney"><b>5TH</b><span>the age gate</span><em>B+</em><i>&ndash; K.</i></li>}
+      </ol>
+    </section>);
+}
+
 export function Feed() {
   const t = useTick(900);
   const serving = 42 + Math.floor(t / 3) % 70;
   const [liked, setLiked] = useState(() => new Set(STILL ? [2] : []));
   const [go, to] = useWipe();
   // each new match pitches the blip up (combo), capped in sfx.js
-  const [match, setMatch] = useState(() => (G2 && STILL ? { A: FEED[2][0], B: FEED[2][1], pct: 100 } : null));
+  const [match, setMatch] = useState(() => (G2 && !H3 && STILL ? { A: FEED[2][0], B: FEED[2][1], pct: 100 } : null));
   useEffect(() => { if (!match || STILL) return; const t = setTimeout(() => setMatch(null), 2600); return () => clearTimeout(t); }, [match]);
   const toggle = (i) => () => {
     const on = !liked.has(i);
@@ -196,6 +241,8 @@ export function Feed() {
       <main className="feed">
         {cards.map(([A, B], i) => <Card key={i} i={i} A={A} B={B} row={t + i} liked={liked.has(i)} onLike={toggle(i)} />)}
       </main>
+      {H3 && <Scores cards={cards} liked={liked} />}
+      {H3 && <p className="credits">Sound: Kenney.nl (CC0) &middot; &ldquo;Vine boom&rdquo; by Business Goose (CC BY-NC) &middot; <a href={`${import.meta.env.BASE_URL}sfx/CREDITS.md`}>full credits (sfx/CREDITS.md)</a></p>}
       {G2 && <Learned m={match} onClose={() => setMatch(null)} />}
       <Wipe on={!!go} />
     </>

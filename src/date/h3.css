@@ -1,0 +1,82 @@
+/* h3 (pit4 r3): g2 + the r2 fix list + g3's HIGH SCORES strip + K3 feelings.exe as the red pen's punchline.
+   Scoped to .v-h3 (loaded on top of f1.css + g2.css), so f1 and g2 render as before. */
+
+/* fix 1: WARNING cap >= .115 H (pink rows) at both sizes */
+.v-h3 .mf .warn.cut { font-size: max(calc(var(--u) * 8.6), 14.8vh); }
+.v-h3 .mf .warn small { font-size: .38em; }
+.v-h3 .mf .warn .n { font-size: .28em; }
+
+/* fix 2: modal + sign <= .70 H: the plate sits lower, the footer is tighter */
+.v-h3 .sf { padding-top: calc(var(--u) * 3.6); }
+.v-h3 .mf .copy { padding-top: max(calc(var(--u) * .5), 1vh); }
+.v-h3 .pctl { margin-top: calc(var(--u) * .2); }
+.v-h3 .mf { padding-bottom: calc(var(--u) * .5); }
+.v-h3 .mf .btns.stack { gap: calc(var(--u) * .4); }
+
+/* fix 7: compat pill label >= 13 px at 1024 */
+.v-h3 .cpill { height: max(calc(var(--u) * 1.6), 18px); }
+.v-h3 .cpill span { font-size: max(13px, calc(var(--u) * 1.2)); line-height: max(calc(var(--u) * 1.6), 18px); }
+
+/* ---------- the pen + K3 feelings.exe ---------- */
+.v-h3 .pen { margin-top: calc(var(--u) * .2); }
+.v-h3 .pen-ring { width: calc(var(--u) * 7.4); }
+.v-h3 .pen-note { font-size: max(calc(var(--u) * 1.8), 17px); margin-top: calc(var(--u) * -.6); }
+.fx { width: 100%; margin-top: calc(var(--u) * .5); opacity: 0; }
+.pen.on .fx { animation: ink .01s 1s forwards; }
+.still .fx { animation: none; opacity: 1; }
+/* a Wenrexa progress panel (kit: "25%" pill bar), not Win-98 grey */
+.fxw { background: var(--panel); border: 2px solid var(--rim); border-radius: calc(var(--u) * .5); box-shadow: 0 calc(var(--u) * .2) 0 var(--rim-2);
+  padding: calc(var(--u) * .3) calc(var(--u) * .5); display: grid; grid-template-columns: 1fr auto; gap: calc(var(--u) * .2) calc(var(--u) * .5); align-items: center; }
+.fxw b { grid-column: 1 / -1; font: 700 max(12px, calc(var(--u) * 1.1))/1 'Roboto Condensed', sans-serif; color: #9c1b8a; text-align: left; letter-spacing: .02em; }
+.fxbar { height: max(10px, calc(var(--u) * .9)); background: var(--lilac); border-radius: 99px; box-shadow: inset 0 0 0 1px var(--rim); overflow: hidden; }
+.fxbar i { display: block; height: 100%; background: linear-gradient(#ff7cc6, var(--hot)); border-radius: 99px; }
+.fxw em { font: 400 max(14px, calc(var(--u) * 1.6))/1 'Bangers', cursive; font-style: normal; color: var(--hot); letter-spacing: .04em; }
+.fx-pen { margin: calc(var(--u) * .3) 0 0; font: 400 max(16px, calc(var(--u) * 1.6))/1.05 'Yellowtail', cursive; color: var(--pen); transform: rotate(-3deg); }
+.fx-pen span { white-space: nowrap; }
+
+/* ---------- continue ---------- */
+/* fix 4: truth-table digits are white/pink, the 18+ stays the only yellow */
+.v-h3 .tt td { color: #fff; }
+.v-h3 .tt tr.y td { color: #ffb8e6; }
+.v-h3 .tt td:last-child { color: var(--neon); }
+/* room for the HIGH SCORES strip + credits under the feed */
+.v-h3 .feed { height: calc(100vh - var(--hdr) - var(--u) * 8.4 - max(13vh, calc(var(--u) * 8.5)) - 22px); padding-bottom: calc(var(--u) * 1.2); }
+/* fix 3: the MATCH window docks to the bottom band (<= .22 H) over the scores, only after a >=75% heart */
+.v-h3 .learned { place-items: end center; padding-bottom: 1.5vh; background: none; pointer-events: none; }
+.v-h3 .lw { pointer-events: auto; max-height: 22vh; padding: calc(var(--u) * .7) calc(var(--u) * 2); min-width: calc(var(--u) * 60); }
+.v-h3 .lw .big { font-size: calc(var(--u) * 3.6); display: inline-block; }
+.v-h3 .lw p { font-size: max(13px, calc(var(--u) * 1.5)); margin-top: calc(var(--u) * .3); }
+
+/* HIGH SCORES (from g3) */
+.scores { margin: 0 calc(var(--u) * 2.3); height: max(12vh, calc(var(--u) * 7.8)); display: grid; grid-template-columns: auto 1fr; align-items: center; gap: calc(var(--u) * 2);
+  background: var(--navy); color: #fff; border: calc(var(--u) * .25) solid var(--rim); border-radius: calc(var(--u) * .7);
+  box-shadow: 0 calc(var(--u) * .3) 0 var(--plum); padding: 0 calc(var(--u) * 1.6); }
+.scores h2 { margin: 0; font: 400 calc(var(--u) * 3)/1 'Bangers', cursive; letter-spacing: .08em; color: var(--neon); text-shadow: 0 0 8px #ff2fc8; }
+.scores ol { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(5, 1fr); gap: calc(var(--u) * 1.2); }
+.scores li { display: grid; grid-template-columns: auto auto 1fr; align-items: baseline; column-gap: calc(var(--u) * .6);
+  font: 400 max(13px, calc(var(--u) * 1.7))/1.15 'Bangers', cursive; letter-spacing: .06em; }
+.scores li b { grid-row: 1 / span 2; grid-column: 1; color: #ffb3e3; font-size: 1.3em; align-self: center; }
+.scores li span { grid-column: 2 / span 2; grid-row: 1; white-space: nowrap; }
+.scores li em { grid-column: 2; grid-row: 2; font-style: normal; }
+.scores li i { grid-column: 3; grid-row: 2; font-style: normal; color: #8fb0ff; }
+.scores li.you i { color: var(--neon); }
+.scores li.kerney { color: var(--pen); font-family: 'Yellowtail', cursive; font-size: max(16px, calc(var(--u) * 2)); letter-spacing: 0; }
+.scores li.kerney b { font-family: 'Bangers', cursive; font-size: max(14px, calc(var(--u) * 2.2)); color: #ff8a9c; }
+.scores li.kerney em, .scores li.kerney i { color: #ff8a9c; }
+.credits { margin: calc(var(--u) * .5) calc(var(--u) * 2.3) 0; font: 400 12px/1.2 'Roboto Condensed', sans-serif; color: #c9d8ff; text-align: right; }
+.credits a { color: #fff; }
+/* truth-table card: compact, white digits (no second yellow) */
+.v-h3 .card .tt { align-self: start; line-height: 1.1; font-size: max(12px, calc(var(--u) * 1.15)); }
+.v-h3 .card .tt td { color: #fff !important; }
+.v-h3 .card .tt tr.y td { color: #ffc4ea !important; }
+.v-h3 .card .tt td:last-child { color: #ff7fcf !important; }
+/* gate height budget (<= .70 H at 1440): smaller portrait + pen */
+.v-h3 .mf .cols { grid-template-columns: calc(var(--u) * 12) 1fr; }
+.v-h3 .pen-ring { width: calc(var(--u) * 6.4); }
+.v-h3 .pen-note { font-size: max(calc(var(--u) * 1.6), 16px); }
+.v-h3 .fx { margin-top: calc(var(--u) * .3); }
+.v-h3 .fx-pen { font-size: max(16px, calc(var(--u) * 1.45)); }
+/* fix 4 root cause: the agreeing rows had class "y", which picked up the global 18+ yellow stroke + 1.35em */
+.v-h3 .tt tr.y { -webkit-text-stroke: 0; font-size: 1em; color: inherit; }
+.v-h3 .card .tt { font-size: 12px; line-height: 1.05; } .v-h3 .card .tt th, .v-h3 .card .tt td { padding: 0; }
+.scores { height: max(11vh, calc(var(--u) * 7)); }
