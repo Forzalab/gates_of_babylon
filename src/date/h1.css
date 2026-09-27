@@ -61,3 +61,13 @@
 .v-h1 .credits a { color: #fff; }
 /* K7: "fine." keeps NO THANKS's exact box height, so the modal never reflows */
 .v-h1 .btn.flee { height: calc(var(--u) * 2.95); display: grid; place-items: center; padding: 0; margin-top: calc(var(--u) * .25); }
+/* room for the credits line; the match window docks over the HIGH SCORES band, above the credits */
+.v-h1 .feed { padding-bottom: calc(var(--u) * .8 + 22px); }
+.v-h1 .learned { bottom: 24px; padding: 0; }
+.v-h1 .learned .lw { max-height: 12.5vh; padding-top: calc(var(--u) * .5); padding-bottom: calc(var(--u) * .5); }
+/* the ♥ truth table fits the tube row at 16:9 (it spilled over the label at 1440) */
+.v-h1 .card > .tt { min-height: 0; font-size: max(12px, calc(var(--u) * 1.05)); line-height: 1.05; }
+.v-h1 .card { grid-template-rows: minmax(0, 1fr) auto auto auto; }
+.v-h1 .learned { bottom: 26px; }
+.v-h1 .learned .lw .big { font-size: calc(var(--u) * 3.6); }
+.v-h1 .learned .lw p { font-size: max(14px, calc(var(--u) * 1.4)); }

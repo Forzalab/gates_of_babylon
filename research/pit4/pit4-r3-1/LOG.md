@@ -5,3 +5,4 @@ Base origin/pit4/r2-2 (g2, 73). h1 = g2 code paths + `.v-h1` overrides (src/date
   stays in the copy column), 4th approach = gives up, parks right, lies down (tilt+squash), label "fine." in the pen's
   Yellowtail. Reduced motion: instant teleport to the far right + "fine." (no transition). Same box height = no reflow.
   Keyboard focus never flees.
+- step 2 (next): fixes 3-6 (docked match window, pink agree rows, credits line, HIGH SCORES), TT fits at 16:9. Tests/build/e2e pass; REPORT.
