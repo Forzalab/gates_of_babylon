@@ -441,3 +441,6 @@ html.dev .devbadge { display: block; }
 .ncell { border: 5px solid #3a1d3f; border-radius: 16px; overflow: hidden; box-shadow: 0 7px 0 #3a1d3f; }
 .ncell[data-dread="2"] { border-color: var(--her); box-shadow: 0 7px 0 #8b0f2c; }
 .nlive .fr { display: none; } .nlive[data-f="0"] .f0, .nlive[data-f="1"] .f1, .nlive[data-f="2"] .f2, .nlive[data-f="3"] .f3 { display: block; }
+.nbob { position: absolute; inset: 0; animation: nbob 1s steps(1, end) infinite; }
+@keyframes nbob { 50% { transform: translateY(-10px); } }
+html.rm .nbob { animation: none; }

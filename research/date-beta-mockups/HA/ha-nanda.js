@@ -373,6 +373,214 @@
     { label: `<b>R2e · V1${head}</b> · turnaround + the 4 stages` });
   }
 
-  if (host) host.innerHTML = [b1(), turnV1('a'), turnV1('b')].join('\n');
-  window.SHOTS = [];
+
+  /* ================================================================== V2 · the illusion (placeholder sprite; alt owns the final art) */
+  const INK = '#3a0a26';
+  // overlays on the 600x900 sprite (same as props board 4): NAND hair pin over the old pin, NAND pupils
+  const ovPin = (big) => `${nand(372, 236, big ? 26 : 20, '#ff5fa2', INK, 5)}<circle cx="364" cy="228" r="4" fill="#fff"/>`;
+  const ovPupils = (lvl) => {
+    const r = lvl === 2 ? 11 : 6, f = lvl === 2 ? '#f0243f' : '#ff8fc8';
+    return [244, 356].map((x) => `${lvl === 2 ? `<circle cx="${x}" cy="355" r="17" fill="#1a0610"/>` : ''}${nand(x - r * .3, 355, r, f, lvl === 2 ? '#ffd6e6' : INK, lvl === 2 ? 2 : 1.5)}`).join('');
+  };
+  const spr = (face, ov, { x, y, w, pin } = {}) => `<div class="abs" style="left:${x}px;top:${y}px;width:${w}px;height:${w * 1.5}px">
+      <div class="fill">${A.nanda({ face, pin })}</div><svg class="fill" viewBox="0 0 600 900" style="overflow:visible">${ov || ''}</svg></div>`;
+  const SPR = { 1: ['smile', 'hum', () => ovPin(false)], 2: ['smile', 'flicker', () => ovPin(false) + ovPupils(1)], 3: ['wide', 'red', () => ovPin(true) + ovPupils(2)] };
+  const sprStage = (s, pos) => { const [f, pin, ov] = SPR[s]; return spr(f, ov(), { ...pos, pin }); };
+  const layer = (body, cls = '') => `<svg class="abs ${cls}" viewBox="0 0 1920 1080" style="left:0;top:0;width:1920px;height:1080px;overflow:visible">${body}</svg>`;
+  const artLayer = (body) => `<svg class="abs art" viewBox="0 0 1920 1080" style="left:0;top:0;width:1920px;height:1080px;overflow:visible">${body}</svg>`;
+
+  /* ------------------------------------------------------------------ new scenes (1920x1080): XOR Coffee café · rooftop clock */
+  function xorCup(x, y, s) { // the XOR Coffee logo: an XOR gate standing up as a cup (output = the tip, the extra curve = the foam)
+    return `<g transform="translate(${x} ${y}) scale(${s})">
+      <path d="M26,-8 C44,-8 48,14 30,20" fill="none" stroke="#ffd6e6" stroke-width="7" stroke-linecap="round"/>
+      <path d="M-34,-24 Q0,-12 34,-24 Q30,20 0,44 Q-30,20 -34,-24 Z" fill="#ff9cc8" stroke="#ffd6e6" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M-34,-36 Q0,-24 34,-36" fill="none" stroke="#ffd6e6" stroke-width="5" stroke-linecap="round"/>
+      <path d="M-8,-46 C-16,-58 0,-64 -6,-78 M10,-46 C2,-58 18,-64 12,-78" fill="none" stroke="#ffd6e6" stroke-width="4" stroke-linecap="round"/></g>`;
+  }
+  function cafeBG() {
+    const stripes = Array.from({ length: 33 }, (_, i) => `<rect x="${i * 60}" y="0" width="22" height="640" fill="#ffc2dc" opacity=".45"/>`).join('');
+    const panels = Array.from({ length: 9 }, (_, i) => `<rect x="${30 + i * 240}" y="680" width="200" height="120" rx="10" fill="none" stroke="#e893ba" stroke-width="4"/>`).join('');
+    return layer(`<defs><linearGradient id="nnsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#bfe3ff"/><stop offset="1" stop-color="#ffe3f0"/></linearGradient></defs>
+      <rect width="1920" height="1080" fill="#ffd1e4"/>${stripes}
+      <rect y="640" width="1920" height="440" fill="#f7b6d2"/><path d="M0,640 H1920" stroke="#3a1d3f" stroke-width="5"/>${panels}
+      <rect x="110" y="110" width="720" height="450" rx="18" fill="#fff8fb" stroke="#3a1d3f" stroke-width="6"/>
+      <rect x="134" y="134" width="672" height="402" rx="8" fill="url(#nnsky)"/>
+      <circle cx="700" cy="210" r="44" fill="#fff6c4"/>
+      <rect x="150" y="300" width="230" height="236" fill="#e7c6f5" stroke="#3a1d3f" stroke-width="4"/>
+      ${[0, 1, 2].map((r) => [0, 1, 2].map((c) => `<rect x="${172 + c * 70}" y="${324 + r * 64}" width="44" height="36" rx="4" fill="#fff8fb" stroke="#3a1d3f" stroke-width="3"/>`).join('')).join('')}
+      <rect x="400" y="248" width="240" height="288" fill="#ffc2dc" stroke="#3a1d3f" stroke-width="4"/>
+      <rect x="416" y="266" width="208" height="60" rx="10" fill="#fff8fb" stroke="#3a1d3f" stroke-width="4"/>
+      <text x="520" y="307" text-anchor="middle" style="font:900 30px/1 var(--font-btn,'Nunito')" fill="#a3135a">NAND HOUSE</text>
+      ${[0, 1].map((r) => [0, 1, 2].map((c) => `<rect x="${420 + c * 72}" y="${350 + r * 80}" width="48" height="56" rx="6" fill="#fff0f6" stroke="#3a1d3f" stroke-width="3"/>`).join('')).join('')}
+      <rect x="656" y="330" width="150" height="206" fill="#d9d2ea" stroke="#3a1d3f" stroke-width="4"/>
+      <path d="M392,134 V536 M134,340 H806" stroke="#fff8fb" stroke-width="16"/><path d="M384,134 V536 M400,134 V536" stroke="#3a1d3f" stroke-width="2" opacity=".35"/>
+      <rect x="90" y="556" width="760" height="28" rx="8" fill="#fff8fb" stroke="#3a1d3f" stroke-width="5"/>
+      <rect x="900" y="110" width="340" height="390" rx="18" fill="#3a1d3f" stroke="#1c0f1f" stroke-width="6"/>
+      <rect x="916" y="126" width="308" height="358" rx="12" fill="none" stroke="#ff9cc8" stroke-width="3" stroke-dasharray="10 8"/>
+      ${xorCup(1070, 200, 1.05)}
+      <text x="1070" y="290" text-anchor="middle" style="font:900 44px/1 var(--font-btn,'Nunito')" fill="#ffd6e6">XOR Coffee</text>
+      ${[['Latte', '400'], ['Truth tea', '380'], ['Mochi', '250']].map(([n, p], i) => `<text x="942" y="${352 + i * 48}" style="font:800 28px/1 var(--font-btn,'Nunito')" fill="#fff">${n}</text><text x="1200" y="${352 + i * 48}" text-anchor="end" style="font:800 28px/1 var(--font-btn,'Nunito')" fill="#ff9cc8">${p}</text>`).join('')}
+      <path d="M1320,0 V110 M1760,0 V80" stroke="#3a1d3f" stroke-width="4"/>
+      <path d="M1262,172 Q1320,86 1378,172 Z M1702,142 Q1760,56 1818,142 Z" fill="#ff9cc8" stroke="#3a1d3f" stroke-width="5" stroke-linejoin="round"/>
+      <circle cx="1320" cy="180" r="14" fill="#fff6c4" stroke="#3a1d3f" stroke-width="3"/><circle cx="1760" cy="150" r="14" fill="#fff6c4" stroke="#3a1d3f" stroke-width="3"/>`);
+  }
+  function cafeFG() {
+    return layer(`<path d="M0,780 H1920 V1080 H0 Z" fill="#ffcfa8"/><rect y="780" width="1920" height="28" fill="#f4a97e"/>
+      <path d="M0,780 H1920 M0,808 H1920" stroke="#3a1d3f" stroke-width="5"/><path d="M120,880 C400,870 700,890 1000,876 M1100,960 C1400,950 1700,968 1900,956" fill="none" stroke="#f4a97e" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="1660" cy="866" rx="130" ry="30" fill="#fff" stroke="#3a1d3f" stroke-width="5"/>`)
+      + artLayer(`${A.cup(1150, 790, 1.05)}<path d="M0 -3C-4 -10 -14 -6 -9 2L0 10L9 2C14 -6 4 -10 0 -3Z" transform="translate(1150 792) scale(1.5 .6)" fill="#fff" stroke="none"/>${A.mochi(1620, 850, 1.5)}${A.mochi(1700, 856, 1.4)}`);
+  }
+  function rooftop() {
+    const posts = Array.from({ length: 13 }, (_, i) => 60 + i * 160);
+    const mesh = Array.from({ length: 50 }, (_, i) => `M${-300 + i * 48},540 L${-80 + i * 48},760 M${-80 + i * 48},540 L${-300 + i * 48},760`).join(' ');
+    return layer(`<defs><linearGradient id="nnsun" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffb3cf"/><stop offset=".6" stop-color="#ffd0b8"/><stop offset="1" stop-color="#ffe7c4"/></linearGradient>
+        <clipPath id="nnmesh"><rect x="0" y="540" width="1920" height="220"/></clipPath></defs>
+      <rect width="1920" height="1080" fill="url(#nnsun)"/>
+      <circle cx="1500" cy="520" r="110" fill="#fff3c4" opacity=".9"/>
+      <path d="M200,200 q40,-40 90,-10 q40,-30 80,10 q30,30 -10,40 h-150 q-40,-10 -10,-40 Z M1180,150 q40,-36 84,-8 q40,-26 76,10 q26,28 -10,36 h-140 q-36,-10 -10,-38 Z" fill="#fff" opacity=".75"/>
+      ${[[480, 470, 140], [630, 430, 110], [760, 490, 180], [960, 450, 120], [1100, 480, 160], [1280, 440, 130], [1700, 470, 170]].map(([x, y, w]) => `<rect x="${x}" y="${y}" width="${w}" height="${640 - y}" fill="#e7a6d0" stroke="#b56a9c" stroke-width="3"/>`).join('')}
+      <rect y="600" width="1920" height="480" fill="#f2e6f4"/>
+      <path d="${mesh}" stroke="#b07aa6" stroke-width="3" opacity=".45" clip-path="url(#nnmesh)"/>
+      <path d="M0,540 H1920 M0,760 H1920" stroke="#fff8fb" stroke-width="14"/><path d="M0,533 H1920 M0,547 H1920 M0,753 H1920 M0,767 H1920" stroke="#3a1d3f" stroke-width="3"/>
+      ${posts.map((x) => `<rect x="${x - 9}" y="500" width="18" height="290" rx="6" fill="#fff8fb" stroke="#3a1d3f" stroke-width="4"/>`).join('')}
+      <rect y="790" width="1920" height="290" fill="#e9dff0"/><path d="M0,790 H1920" stroke="#3a1d3f" stroke-width="5"/>
+      <path d="M0,880 H1920 M0,990 H1920 M300,790 L200,1080 M800,790 L760,1080 M1300,790 L1340,1080 M1800,790 L1900,1080" stroke="#cbbfd8" stroke-width="4" fill="none"/>
+      <path d="M130,190 L290,110 L450,190 Z" fill="#ff9cc8" stroke="#3a1d3f" stroke-width="6" stroke-linejoin="round"/>
+      <rect x="160" y="190" width="260" height="600" fill="#fff0f6" stroke="#3a1d3f" stroke-width="6"/>
+      <circle cx="290" cy="330" r="100" fill="#fff" stroke="#3a1d3f" stroke-width="7"/>
+      ${Array.from({ length: 12 }, (_, i) => `<path d="M290,${240} v14" transform="rotate(${i * 30} 290 330)" stroke="#3a1d3f" stroke-width="${i % 3 ? 3 : 6}"/>`).join('')}
+      <path d="M290,330 V262 M290,330 V282" stroke="#3a1d3f" stroke-width="9" stroke-linecap="round"/><circle cx="290" cy="330" r="9" fill="#ff5fa2" stroke="#3a1d3f" stroke-width="3"/>
+      <text x="290" y="392" text-anchor="middle" style="font:900 22px/1 var(--font-btn,'Nunito')" fill="#a3135a">Figur</text>`);
+  }
+  const kitchen = (clipTop) => `<div class="fill"${clipTop ? ` style="clip-path:inset(${clipTop}px 0 0 0)"` : ''}>${A.sceneKitchen()}</div>`;
+  const dim = (clipTop) => `<div class="abs" style="left:0;top:0;width:1920px;height:1080px;background:#2a0510;mix-blend-mode:multiply;opacity:.62${clipTop ? `;clip-path:inset(${clipTop}px 0 0 0)` : ''}"></div>`;
+
+  /* ------------------------------------------------------------------ the stage cells: 1 café · 2 rain stairs · 3 genkan · 4 third cup */
+  const VAR = { V1a: { head: 'a', v2: false }, V1b: { head: 'b', v2: false }, V2a: { head: 'a', v2: true }, V2b: { head: 'b', v2: true } };
+  const SCN = ['XOR Coffee', 'rain stairs', 'genkan', 'the third cup'];
+  const STG = ['sweet', 'clingy', 'possessive', 'reveal'];
+  // figure placement per stage x head: [x, ground, scale]
+  const PLACE = { a: [[1400, 1010, 1.85], [760, 1000, 1.75], [330, 900, 1.6], [960, 870, 2.0]], b: [[1360, 1010, 2.3], [720, 1000, 2.2], [300, 900, 2.0], [900, 790, 2.6]] };
+  const thoughtAt = (s, x, y, k) => layer(`<g transform="translate(${x} ${y}) scale(${k})">${thought(s, PAL[s])}</g>`);
+  function cell(vk, s) {
+    const v = VAR[vk], [fx, fy, fs] = PLACE[v.head][s - 1];
+    const trueForm = (o = {}) => layer(fig({ head: v.head, stage: s, ...o }, fx, fy, fs));
+    if (s === 1) {
+      const who = v.v2 ? `${sprStage(1, { x: 1100, y: 160, w: 600 })}${thoughtAt(1, 1720, 260, 1.4)}` : trueForm();
+      return { d: 0, html: `${cafeBG()}${who}${cafeFG()}${U.dlg({ text: 'You\'re late. I saved your seat. Obviously.', dock: 'bl' })}${U.chrome({})}` };
+    }
+    if (s === 2) {
+      const hand = artLayer(A.hand(1540, 900, 1.1, false, 'open'));
+      const wr = [1540, 995];
+      let who;
+      if (v.v2) {
+        who = `${sprStage(2, { x: 480, y: 150, w: 600 })}${layer(reachRibbon('M890,330 C1080,330 1240,640 1540,995', wr[0], wr[1], '#ff5fa2', '#a3135a', 18, 58))}${thoughtAt(2, 1130, 330, 1.4)}`;
+      } else {
+        who = trueForm({ reach: [(wr[0] - fx) / fs, (wr[1] - fy) / fs] });
+      }
+      return { d: 1, html: `<div class="fill">${A.sceneDoor()}</div>${A.threads()}${hand}${who}${U.dlg({ text: 'I boiled the water this morning. Just in case.', dock: 'tl' })}${U.chrome({})}` };
+    }
+    if (s === 3) {
+      let who;
+      if (v.v2) {
+        who = `${layer(silhouette({ head: v.head, stage: 1 }, v.head === 'a' ? 640 : 600, 600, v.head === 'a' ? 1.5 : 1.9))}${sprStage(3, { x: 30, y: 150, w: 600 })}${thoughtAt(3, 720, 250, 1.4)}`;
+      } else who = trueForm();
+      return { d: 1, html: `<div class="fill">${A.sceneGenkan()}</div>${A.threads({ paths: ['M1180,0 C1190,80 1150,140 1170,210', 'M1560,0 C1550,40 1580,80 1570,120'] })}${who}
+        ${U.dlg({ text: 'Take off your shoes. OR I will.', dock: 'bl', style: { left: 700, width: 1120 } })}${U.chrome({})}` };
+    }
+    const hx = v.head === 'a' ? fx : fx + 20 * fs, hy = v.head === 'a' ? fy - 308 * fs : fy - 150 * fs;
+    return { d: 2, html: `${kitchen()}${dim()}${A.short(hx, hy, { r: v.head === 'a' ? 150 : 240 })}${trueForm()}${kitchen(500)}${dim(500)}
+      ${U.cap('[a pour · nobody is pouring]', { style: { left: 90, bottom: 64 } })}${U.chrome({})}` };
+  }
+  const mini = (vk, s, k, x, y) => { const c = cell(vk, s); return `<div class="abs ncell" data-dread="${c.d}" style="left:${x}px;top:${y}px;width:${1920 * k}px;height:${1080 * k}px">
+      <div class="abs" data-dread="${c.d}" style="left:0;top:0;width:1920px;height:1080px;transform:scale(${k});transform-origin:0 0;overflow:hidden;background:var(--bg)">${c.html}</div></div>`; };
+
+  /* ------------------------------------------------------------------ BOARDS 4-5: V2 turnaround = the illusion, the clues, the true form */
+  function turnV2(head) {
+    const a = head === 'a', W = 270, H = W * 1.5;
+    const frame = (inner, i, dk, t) => `<div class="abs pframe${dk ? ' dk' : ''}" style="left:${50 + i * 305}px;top:110px;width:${W}px;height:${H}px">${inner}</div>${cap(t, 58 + i * 305, 110 + H + 18, { dk, style: 'font-size:23px;padding:4px 10px' })}`;
+    const vbF = a ? '-190 -440 380 570' : '-150 -330 320 480';
+    const tf = (s, extra = '') => `${svgAt(vbF, extra + girl({ head, stage: s, talk: true }), 0, 0, W, H)}`;
+    const sil = svgAt(a ? '-190 -470 380 570' : '-150 -350 320 480', silhouette({ head, stage: 1 }, a ? 70 : 60, 0, 1, '#1a0610', .45), 0, 0, W, H);
+    const seq = [
+      frame(spr('smile', ovPin(false), { x: 0, y: 0, w: W, pin: 'hum' }), 0, false, '1 what you see'),
+      frame(spr('smile', ovPin(true), { x: 0, y: 0, w: W, pin: 'hum' }), 1, false, 'clue · the pin'),
+      frame(spr('smile', ovPin(false) + ovPupils(1), { x: 0, y: 0, w: W, pin: 'flicker' }), 2, false, 'clue · NAND pupils'),
+      frame(`${sil}${spr('wide', ovPin(true) + ovPupils(2), { x: 0, y: 0, w: W, pin: 'red' })}`, 3, true, 'clue · her shadow'),
+      frame(tf(4), 4, true, 'CUT · hold ≥500 ms'),
+      frame(spr('smile', ovPin(false), { x: 0, y: 0, w: W, pin: 'hum' }), 5, false, 'back, smiling'),
+    ].join('');
+    const vbT = a ? '-190 -440 380 470' : '-150 -330 320 360';
+    const turn = VIEWS.map(([v, t], i) => `${svgAt(vbT, girl({ head, view: v, stage: 4, talk: false }), 320 + i * 390, 640, 340, 380)}${cap(t, 330 + i * 390, 988, { dk: true, style: 'font-size:22px;padding:3px 10px' })}`).join('');
+    return board(`
+      ${cap(`<b>V2${head} · two forms</b> · the sprite is the illusion · the gate-girl${a ? ' (bubble head)' : ' (face on body)'} is her`, 50, 36)}
+      ${seq}
+      <div class="abs npanel dk" style="left:50px;top:620px;width:1820px;height:420px"></div>
+      ${cap('<b>true form</b>', 76, 646, { dk: true })}
+      <div class="abs" style="left:76px;top:720px;width:230px;font:800 26px/1.3 var(--font-btn);color:#ffe9f1">Only ever seen at the horror beats. One hard cut, then she is back.</div>
+      ${turn}
+      ${note('Placeholder sprite (alt owns the final). Option C order kept: pin → NAND pupils → CUT → back. New clue: her cast shadow on the wall is the gate-girl (Hatoful-style), shown only at dread 1+. Cut = a class swap, hold 625 ms (≥500), ≤ 2 swaps/s; RM = the same frames, 1 s holds.', 50, 1046, 1820)}`,
+    { label: `<b>R2e · V2${head}</b> · illusion → clues → cut → true form turnaround` });
+  }
+
+  /* ------------------------------------------------------------------ BOARDS 6-9: one variant, 4 stages in 4 scenes (2x2) */
+  function stageBoard(vk) {
+    const k = 0.43, w = 1920 * k, h = 1080 * k, x0 = (1920 - 2 * w - 50) / 2, xs = [x0, x0 + w + 50], ys = [62, 62 + h + 62];
+    const cells = [1, 2, 3, 4].map((s, i) => `${mini(vk, s, k, xs[i % 2], ys[i >> 1])}${cap(`<b>${s} ${STG[s - 1]}</b> · ${SCN[s - 1]}`, xs[i % 2] + 16, ys[i >> 1] - 24, { dk: s >= 3, style: 'font-size:24px;padding:4px 12px;z-index:5' })}`).join('');
+    return board(`${cells}${note(`${vk}: 1 café date (dread 0) · 2 her door in the rain, she holds on (dread 1, threads) · 3 genkan, OR line = rule C scrim (dread 1) · 4 the third cup, the true form, traces from the ceiling (dread 2).`, 60, 1040, 1800)}`,
+      { label: `<b>R2e · ${vk}</b> · stage × scene` });
+  }
+
+  /* ------------------------------------------------------------------ BOARD 10: the overview grid (4 variants x 4 stages) */
+  function overview() {
+    const k = 0.2, w = 1920 * k, h = 1080 * k, x0 = 250, y0 = 96, gx = 16, gy = 22;
+    const cols = [1, 2, 3, 4].map((s, j) => cap(`${s} ${STG[s - 1]} · ${SCN[s - 1]}`, x0 + j * (w + gx), 44, { dk: s >= 3, style: 'font-size:21px;padding:4px 10px' })).join('');
+    const rows = Object.keys(VAR).map((vk, i) => `${cap(`<b>${vk}</b>`, 60, y0 + i * (h + gy) + h / 2 - 22)}
+      <div class="abs" style="left:60px;top:${y0 + i * (h + gy) + h / 2 + 26}px;width:170px;font:800 19px/1.2 var(--font-btn);color:#6e3f6c">${['mascot · bubble head', 'mascot · face on body', 'sprite → bubble head', 'sprite → face on body'][i]}</div>
+      ${[1, 2, 3, 4].map((s, j) => mini(vk, s, k, x0 + j * (w + gx), y0 + i * (h + gy))).join('')}`).join('');
+    return board(`${cols}${rows}`, { label: '<b>R2e · overview</b> · 4 variants × 4 stages' });
+  }
+
+  /* ------------------------------------------------------------------ BOARD 11: the cut, live (rooftop, clock stuck at 12:00) */
+  function cutFrames(head) {
+    const fx = 1000, fy = 1010, a = head === 'a', fs = a ? 1.9 : 2.4;
+    const sweet = `${rooftop()}${spr('smile', ovPin(false), { x: 700, y: 170, w: 600, pin: 'hum' })}<div class="nbob">${thoughtAt(1, 1320, 280, 1.4)}</div>`;
+    const clue = `${rooftop()}${spr('wide', ovPin(true) + ovPupils(2), { x: 700, y: 170, w: 600, pin: 'red' })}`;
+    const hy = a ? fy - 308 * fs : fy - 150 * fs, hx = a ? fx : fx + 20 * fs;
+    const cut = `${rooftop()}${dim()}${A.short(hx, hy, { r: a ? 150 : 250 })}${layer(fig({ head, stage: 4 }, fx, fy, fs))}`;
+    return [[sweet, 0], [clue, 1], [cut, 2], [sweet, 0]];
+  }
+  const stageBox = (frames, k, x, y, cls = '', f0 = 0) => `<div class="abs ncell nlive ${cls}" data-f="${f0}" style="left:${x}px;top:${y}px;width:${1920 * k}px;height:${1080 * k}px">
+      ${frames.map(([html, d], i) => `<div class="abs fr f${i}" data-dread="${d}" style="left:0;top:0;width:1920px;height:1080px;transform:scale(${k});transform-origin:0 0;overflow:hidden;background:var(--bg)">${html}</div>`).join('')}</div>`;
+  function cutBoard() {
+    const k = 0.44, W = 1920 * k, xs = [60, 60 + W + 60];
+    const kk = 0.1, sw = 1920 * kk + 14;
+    const t = ['sweet · 1.5 s', 'clue · 1 s', 'CUT · 625 ms', 'back · 1.5 s'];
+    const col = (head, x) => {
+      const fr = cutFrames(head);
+      return `${stageBox(fr, k, x, 100, `live-${head}`)}${cap(`<b>V2${head}</b> · live`, x + 16, 76, { style: 'font-size:24px;padding:4px 12px;z-index:5' })}
+        ${fr.map((f, i) => `${stageBox([f], kk, x + i * (sw + 22), 650, '', 0)}${cap(t[i], x + i * (sw + 22), 776, { dk: i === 2, style: 'font-size:17px;padding:3px 7px' })}`).join('')}`;
+    };
+    return board(`${col('a', xs[0])}${col('b', xs[1])}
+      <div class="abs" style="left:60px;top:860px;display:flex;gap:40px;align-items:center">${U.gicon('play', { cls: 'nplay', style: { width: 104, height: 104 } })}
+        <div style="font:800 28px/1.3 var(--font-btn);color:#3a1d3f;max-width:1500px">Press play: sweet → clue → <b style="color:#b0102c">CUT</b> → back, as if nothing happened. The clock never moves.</div></div>
+      ${note('Stepped on the shared 125 ms grid (DB.step). CUT hold 625 ms (≥ 500), ≤ 2 swaps/s (< 3 Hz). Still / reduced motion: the same frames as hard swaps, every hold ≥ 1 s; the heart bob (2 poses, 500 ms each = 8 fps grid) is off.', 60, 990, 1800)}`,
+    { label: '<b>R2e · the cut</b> · live timing on the rooftop (12:00)' });
+  }
+
+  if (host) host.innerHTML = [b1(), turnV1('a'), turnV1('b'), turnV2('a'), turnV2('b'), stageBoard('V1a'), stageBoard('V1b'), stageBoard('V2a'), stageBoard('V2b'), overview(), cutBoard()].join('\n');
+
+  // live cut: DB.step on the 8 fps grid; RM = same frames, longer holds
+  const play = () => {
+    const RM = window.DB.RM, st = [...document.querySelectorAll('.nlive.live-a, .nlive.live-b')];
+    const set = (f) => () => st.forEach((e) => { e.dataset.f = f; });
+    window.DB.step([{ ms: 1500, fn: set(0) }, { ms: RM ? 1000 : 1000, fn: set(1) }, { ms: RM ? 1000 : 625, fn: set(2) }, { ms: 1500, fn: set(3) }], set(0));
+  };
+  window.nandaPlay = play;
+  document.addEventListener('click', (e) => { if (e.target.closest('.nplay')) play(); });
+  window.SHOTS = [
+    { name: 'analysis-1024', b: 1, vw: 1024 }, { name: 'V1a-1024', b: 2, vw: 1024 }, { name: 'V1b-1024', b: 3, vw: 1024 },
+    { name: 'V2a-1024', b: 4, vw: 1024 }, { name: 'V2b-1024', b: 5, vw: 1024 }, { name: 'grid-1024', b: 10, vw: 1024 },
+    { name: 'cut-play-t2800', b: 11, fn: 'nandaPlay', wait: 2800 }, { name: 'cut-still-t2800', b: 11, rm: true, fn: 'nandaPlay', wait: 2800 },
+  ];
 })();
