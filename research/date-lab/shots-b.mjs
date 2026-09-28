@@ -39,6 +39,23 @@ export const SHOTS = [
   // cam-6 Anno
   ...[1.5, 5.0, 8.6, 11.0, 14.4, 16.0, 20.0, 22.4, 26.6, 29.4, 32.4, 36.0, 40.0].map((s) => ({ id: 'cam-6', name: `t${s.toFixed(1).padStart(4, '0')}`, q: `t=${s}&pause`, wait: 900 })),
   { id: 'cam-6', name: 'rm-t29.4', q: 't=29.4&pause&still', wait: 900 },
+  // fx-1 reel (each beat mid-effect) + RM
+  { id: 'fx-1', name: 'rain', q: 'beat=rain', wait: 1400 },
+  { id: 'fx-1', name: 'breath', q: 'beat=breath', wait: 900 },
+  { id: 'fx-1', name: 'bell', q: 'beat=bell', wait: 1100 },
+  { id: 'fx-1', name: 'sour', q: 'beat=sour', wait: 560 },
+  { id: 'fx-1', name: 'bleed', q: 'beat=bleed', wait: 600 },
+  { id: 'fx-1', name: 'thump', q: 'beat=thump', wait: 560 },
+  { id: 'fx-1', name: 'steam', q: 'beat=steam', wait: 1500 },
+  { id: 'fx-1', name: 'static', q: 'beat=static', wait: 1500 },
+  { id: 'fx-1', name: 'steeped', q: 'beat=steeped', wait: 4000 },
+  { id: 'fx-1', name: 'steeped-blink', q: 'beat=steeped', wait: 4300 + 900 },
+  { id: 'fx-1', name: 'rm-steam', q: 'beat=steam&still', wait: 900 },
+  { id: 'fx-1', name: 'rm-sour', q: 'beat=sour&still', wait: 600 },
+  // fx-2 wall
+  { id: 'fx-2', name: 'wall', wait: 3500 },
+  { id: 'fx-2', name: 'wall-late', wait: 16500 },
+  { id: 'fx-2', name: 'rm-wall', q: 'still', wait: 3500 },
 ];
 
 const filter = process.argv[2];

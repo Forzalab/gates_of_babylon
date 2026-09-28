@@ -47,3 +47,18 @@ Tests: `src/date-lab-b.test.js` (door state machine, cue table, timelines, shake
 **RM:** the same film: no shot ever travels. Only the 1 Hz warning blink holds solid.
 **Self-critique:** it borrows every frame from main's scenes, so it is an edit, not new art; the 駅 glyph failed in the fallback JP font, so the kanji card is thinner than planned.
 **Round-2 carry-forward:** keep the MAGI vote (the purest "illusion of choice" image we have) and the L-layout cards; add one Eva "long take" of 12 s with nothing but the train hum to test the room, and a Nanda silhouette that appears and vanishes between two identical cuts of the platform (the Rei-on-the-road trope).
+
+## fx-1 · Demo-path FX reel (horror 3)
+**Theme:** "every sound has a body" (Mushishi's visible breath x Lynch's room tone). Each SFX gets a visible twin, so the room still reads it with the speakers off, and a caption names it.
+**What it does:** nine beats in demo-path order, each auto-plays on entry and replays on every click (← → to move, strip at the bottom, a one-line spec card per beat for the integrators). 1 rain (Platform + foreground streaks and puddle rings, 2 stepped poses, rain bed). 2 breath on OR (sign cut-in; her breath fogs the frame like cold glass and the OR glows). 3 the 12:00 bell (the tower hard-cuts to noon, two stepped sound rings). 4 SOUR (train ad insert: squash scaleY .92 from the floor + a 3 Hz shiver + yellow-green multiply tint + squeak). 5 purple bleed (334 ms, one step). 6 heartbeat (vignette slams shut 334 ms, 1.8% bump, idle pulse 0.7 Hz). 7 steam OR (main's third-cup kitchen; the third cup's steam writes OR in her red and rises on 8 fps steps; breath). 8 CRT static (ADORE ME squeezes to a white line, holds, 2-frame static at 2 Hz). 9 STEEPED (colour drains to pink, the cups double, two slow blinks at 0.4 Hz, the whole mix goes underwater through a 380 Hz lowpass, then surfaces).
+**RM:** each beat has its own still branch (fog holds 1 s then cuts; one still ring; static tint; purple edge frame; vignette only; a static OR for 1 s; a held white-line frame; static blur + half-closed lids), same SFX.
+**Note:** SOUR MUST READ asks for a 300 ms tint; the flash rule (any flash >= 334 ms) wins, so the tint holds 334 ms.
+**Self-critique:** the effects sit on main's scenes as overlays; the SOUR squash is the only one that deforms the picture itself, and STEEPED needs her in frame (it is just cups).
+**Round-2 carry-forward:** export the nine effects as the integration API (`<RainFx|BreathFx|... go rm>` + cue ids), add the Nanda bust to STEEPED (face 'smile', slowly doubling), and make the breath fog follow the actual OR position from the text layout instead of a fixed spot.
+
+## fx-2 · The monitor wall (horror 2)
+**Theme:** Kiyoshi Kurosawa's Kairo (Pulse): a dark room of CRTs, "FIGUR MONITORING · 9 CHANNELS". A test bench, not a scene.
+**What it does:** all nine fx-1 effects as live 480x270 monitors with scanline glass. The wall scans: one channel fires every 2.6 s so sounds never stack; click a monitor (or ▶ play) to fire it alone and stop the scan; each monitor has its own `still` toggle so full motion and reduced motion can be compared side by side on the projector.
+**RM:** the page starts every monitor in still mode; per-monitor toggles override.
+**Self-critique:** nine live SVG scenes is heavy on a weak laptop; the monitors are small on a projector, so it is for the arbiter and integrators, not the audience.
+**Round-2 carry-forward:** keep as the FX QA page; add a "flash audit" readout per monitor (measured swaps/s from the DOM) so the <= 3 Hz rule is checked live.

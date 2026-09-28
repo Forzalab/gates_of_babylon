@@ -12,6 +12,7 @@ import '@fontsource/inter-tight/900-italic.css';
 import '@fontsource/jetbrains-mono/400.css';
 import { Ors } from '../../../date-beta/Say.jsx';
 import { unlock, onState, onCaption, soundState, setMuted, isMuted, stopAll, play, bed } from './audio.js';
+import '../../../date-beta/art/art.css'; // main's scene text styles + the train/genkan camera classes
 import './b.css';
 
 const Q = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams();
