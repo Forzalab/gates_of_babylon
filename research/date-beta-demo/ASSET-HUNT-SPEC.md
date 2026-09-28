@@ -5,7 +5,7 @@
 1. **Your job:** find and download sound effects, anime backgrounds and anime sprites/props for our class game. No coding. No drawing.
 2. **Deadline: TONIGHT.** Work from the top of the ranked list (§5) down. Item #1 matters most. Stop wherever you are when time runs out, and that's fine.
 3. **Sounds:** use freesound.org, pixabay.com/sound-effects or kenney.nl. **MP3 or OGG only. No WAV.**
-4. **Anime images:** use **Google Images** and download. Tony sorts out copyright later. Just **copy the page URL** for every image.
+4. **Anime images:** use **Google Images**. **Download the image file itself into Drive** (Tony must not have to download anything), AND copy its page URL into the sheet. Tony sorts out copyright later.
 5. **NO AI-generated images.** Section §4 shows how to spot them.
 6. **Put everything** in the shared Google Drive folder `date-beta-assets`, and add one row per file to the `sources` sheet.
 7. **Can't find a good one in 15 minutes?** Write "not found" plus the keywords you tried, and move to the next item.
@@ -45,6 +45,8 @@
 - **Licence:** on freesound, use the filter **"Licence: Creative Commons 0"** when you can. Pixabay and kenney are fine as they are. Just copy the page URL, and Tony handles the rest.
 
 ## 4. Image rules (backgrounds + sprites)
+
+**Always save the actual image file into Drive.** A link alone is not enough. Open the image at full size first (click it, then "Visit" if needed), right-click → **Save image as**, then upload it. Check it's the big version, not the small thumbnail. Then paste the page URL in the sheet.
 
 **Backgrounds:**
 - Anime / visual-novel style. **No photos.**
@@ -139,7 +141,7 @@
 
 - [ ] You went down the list in order, as far as time allowed.
 - [ ] Every item you reached has a file in Drive **or** a "not found + keywords" row.
-- [ ] Every file has a row in `sources` with its page URL.
+- [ ] Every image and sound is an actual **file in Drive** (full size, not a thumbnail), plus a row in `sources` with its page URL.
 - [ ] Every file name starts with its rank + ID.
 - [ ] Sounds are MP3/OGG and passed the phone test. Images are not AI-made.
 - [ ] You messaged Tony at each checkpoint.
