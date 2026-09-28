@@ -66,6 +66,27 @@ export const SHOTS = [
   // anim-4 Paprika parade (scene = 4.6 s: hold 2.6 + morph 2.0)
   ...[1.0, 3.2, 3.8, 4.4, 14.0, 17.4, 28.5, 40.2].map((s) => ({ id: 'anim-4', name: `t${s.toFixed(1).padStart(4, '0')}`, q: `t=${s}&pause`, wait: 900 })),
   { id: 'anim-4', name: 'rm-t40.2', q: 't=40.2&pause&still', wait: 900 },
+  // ---------------- round 2 ----------------
+  // menu-h2-r2 "Her Time, Her Cut" (?mt=<ms> freezes the menu clock)
+  { id: 'menu-h2-r2', name: '1-caret-tell-t1s', q: 'state=menu&mt=1000', wait: 1200 },
+  { id: 'menu-h2-r2', name: '2-glitch-t3.1s', q: 'state=menu&mt=3100', wait: 1200 },
+  { id: 'menu-h2-r2', name: '3-select-t3.6s', q: 'state=menu&mt=3600', wait: 1200 },
+  { id: 'menu-h2-r2', name: '4-typing-t4.0s', q: 'state=menu&mt=4000', wait: 1200 },
+  { id: 'menu-h2-r2', name: '5-stay-t4.6s', q: 'state=menu&mt=4600', wait: 1200 },
+  { id: 'menu-h2-r2', name: '6-live-timeout-pink', q: 'state=menu', wait: 6000 },
+  { id: 'menu-h2-r2', name: '7-leave-her-face', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 2500]] },
+  { id: 'menu-h2-r2', name: '8-her-cut', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 5200]] },
+  { id: 'menu-h2-r2', name: '9-take-two-cut', q: 'state=replay&mt=2000', wait: 1400 },
+  { id: 'menu-h2-r2', name: 'rm-edit', q: 'state=menu&mt=3200&still', wait: 1200 },
+  // menu-4-r2 Bandersnatch improved
+  { id: 'menu-4-r2', name: '1-first-frame-lean', q: 'state=menu&mt=0', wait: 1200 },
+  { id: 'menu-4-r2', name: '2-t2.5s', q: 'state=menu&mt=2500', wait: 1200 },
+  { id: 'menu-4-r2', name: '3-t4.5s', q: 'state=menu&mt=4500', wait: 1200 },
+  { id: 'menu-4-r2', name: '4-reaction-real-face', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 2600]] },
+  { id: 'menu-4-r2', name: '5-rewind', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 4800]] },
+  { id: 'menu-4-r2', name: '6-already-seen', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 6200]] },
+  { id: 'menu-4-r2', name: '7-room-chose-pink', q: 'state=replay', wait: 1000, steps: [['key', '1'], ['wait', 1500], ['key', 'r'], ['wait', 2000]] },
+  { id: 'menu-4-r2', name: 'rm-first-frame', q: 'state=menu&mt=0&still', wait: 1200 },
 ];
 
 const filter = process.argv[2];
