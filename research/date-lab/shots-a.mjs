@@ -25,6 +25,33 @@ const SHOTS = {
     await page.keyboard.press('r'); await wait(2400); await snap('9-replay-purple-pinned');
     await open(true); await wait(1500); await snap('rm-spread');
   },
+  'menu-2': async (page, snap, open) => {
+    await open();
+    await wait(800); await snap('1-napkin');
+    await wait(3900); await snap('2-tally-3');
+    await page.hover('.row-purple'); await wait(300); await snap('3-hover-purple');
+    await page.mouse.move(10, 10);
+    await wait(2800); await snap('4-timeout-red-tick');
+    await page.keyboard.press('r'); await wait(2400); await snap('5-replay-pink-ruled');
+    await open(); await wait(2600); await page.keyboard.press('2'); await wait(120); await snap('6-purple-bleed');
+    await wait(1400); await snap('7-purple-awake');
+    await open(true); await wait(2700); await snap('rm-table');
+  },
+  'menu-3': async (page, snap, open) => {
+    await open();
+    await wait(1200); await snap('1-normal-vn');
+    await wait(2100); await snap('2-backspacing-goodnight');
+    await wait(1600); await snap('3-stay-typed');
+    await wait(1600); await snap('4-label-take-your-time');
+    await page.waitForSelector('.hercursor.p1'); await wait(100); await snap('5-her-cursor');
+    await page.waitForSelector('.opt.pink.chosen'); await wait(200); await snap('6-her-click');
+    await wait(2200); await snap('7-lens-the-one-clicking');
+    await page.keyboard.press('r'); await wait(3000); await snap('8-replay-pink-disabled-both-agree');
+    await open(); await wait(3600); await page.keyboard.press('2'); await wait(120); await snap('9-purple-bleed');
+    await wait(3200); await snap('10-purple-lea');
+    await page.keyboard.press('r'); await wait(2400); await snap('11-replay-purple-disabled');
+    await open(true); await wait(4200); await snap('rm-stay');
+  },
 };
 
 const ids = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(SHOTS);

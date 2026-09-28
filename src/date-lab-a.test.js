@@ -4,6 +4,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createMenu, tickMenu, pickMenu, replayMenu, progress, secondsLeft, isDisabled, optionForKey, OPTIONS, DUR, BLEED } from './date-lab/a/kit/menu.js';
+import { retype, textAt, endOf } from './date-lab/a/kit/retype.js';
 import { shotAt, keyAt, stepAt, rmPose, total, flashSafe, words, camTransform, POSE, TICK } from './date-lab/a/kit/time.js';
 
 test('menu: the two DOOR options, pink = toward her, purple = leave', () => {
@@ -113,6 +114,21 @@ test('time: flash audit: holds >= 334 ms and <= 3 flashes a second', () => {
 test('time: <= 12 words per click counter matches the engine rule', () => {
   assert.equal(words('NANDA: Come in? Just for tea.'), 6);
   assert.equal(words("That's… fine."), 2);
+});
+
+test('retype (menu-3): she backspaces and retypes on the 8 fps grid; rm = one hard cut held >= 500 ms', () => {
+  const f = retype("It's late. Goodnight.", "It's late. ", 'Stay.', 700);
+  assert.equal(f[0].text, "It's late. Goodnight.");
+  assert.equal(f.at(-1).text, "It's late. Stay.");
+  for (let i = 1; i < f.length; i++) assert.ok(f[i].at - f[i - 1].at >= 125, 'no keystroke faster than one 125 ms tick');
+  assert.equal(textAt(f, 0), "It's late. Goodnight.");
+  assert.equal(textAt(f, 700 + 125), "It's late. Goodnight");
+  assert.equal(textAt(f, 1e9), "It's late. Stay.");
+  const r = retype("It's late. Goodnight.", "It's late. ", 'lea—', 0, { rm: true });
+  assert.equal(r.length, 2);
+  assert.ok(r[1].at - r[0].at >= 500);
+  assert.equal(endOf(r), 500);
+  assert.throws(() => retype('abc', 'x', 'y'));
 });
 
 test('registry: every builder-A variant is builder A with a unique id and a known track', () => {

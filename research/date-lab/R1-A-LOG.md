@@ -31,3 +31,38 @@ Shots: `node research/date-lab/shots-a.mjs [id ...]` -> `research/date-lab/shots
 - **Carry-forward (R2)**: keep the candle timer + her eyes between the cards; make the face-down card *warm up* toward pink as the
   candle burns (her influence), add a 3rd card slot that is always empty (the third cup), and draw the hair-pin bigger with a red
   puncture so "disabled" reads from the back row.
+
+## menu-2 · Truth table (horror 1)
+- **School**: KyoAni / *Hyouka* prop-detail inserts (anime) x Wes Anderson dead-frontal planimetric framing (cinema) x Hitchcock's
+  *Suspicion* quiet wrongness (horror, dialled to 1).
+- **Theme**: *the output is already written.* MC's lunch napkin (his truth-table habit) is taped to her door, Unit 12. Columns
+  A (you, pencil, mono), B (her, red pen, pre-filled 1s), OUT (NAND, pre-filled: "0 ♡" for stay, "1" circled three times for go).
+- **What it does**: tick a row (the rows are the buttons, keys 1 / 2). Timer = 5 pencil tallies, one a second, the fifth strikes
+  through; her red pen hangs on a string and swings in 2 held poses (a pendulum clock). Timeout: the red pen ticks the pink row
+  ("I ticked it for you. You were thinking."). Pink: the warm door sliver widens, OUT "0 ♡" gets circled. Purple: 334 ms bleed,
+  the door sliver shuts, her note becomes "1 = awake. all night.". Replay: the row you ticked is ruled out in her red, tallies restart.
+- **RM**: tallies/ticks are already hard cuts; the pen stops swinging; no fades.
+- **Self-critique**: the calmest and most legible of the three (reads from the back row), but horror 1 means it barely unsettles;
+  the pencil mono font reads "typed", not "handwritten".
+- **Carry-forward (R2)**: keep the pre-filled OUT column as the core joke/threat; draw MC's hand-lettering as SVG paths; add a third,
+  empty row she has already ticked in red ("both") for the Input-B foreshadow; tally strokes should *scratch* on (3 stepped poses each).
+
+## menu-3 · DDLC 4th wall (horror 5)
+- **School**: *Doki Doki Literature Club* / Monika (anime-VN) x Haneke's *Funny Games* (the film knows you are watching) x Pony
+  Island meta-horror (the UI is rewritten by the antagonist).
+- **Theme**: *she edits the menu while you read it* — the choice UI is her territory.
+- **What it does**: a normal pastel VN choice at her door (Nanda at her door, smiling). As the 5 s bar drains: her red caret lands on
+  the purple option, "NANDA is typing…", "Goodnight." is backspaced one key per 125 ms and "Stay." typed in; then she types over the
+  timer label, "take your time ♡", while the bar keeps draining (gaslight). Timeout: a second cursor (hers, white with a red edge)
+  walks to pink in 3 held poses and clicks; hard cut to an ECU of her wide eyes, the menu shoved into a corner reading "Just one cup."
+  twice, the tab title becomes "Unit 12 · don't close me", a DDLC-style file list ("nanda.chr modified 23:47 / you still here"),
+  a torn scanline band holding 500 ms per position: "Not him. You. The one clicking." Purple: 334 ms bleed, the button snaps back to
+  what you actually read and she retypes it to "It's late. lea—" (she never finishes "leave"): "You read the old text. Cheater."
+  Replay: disabled option struck through with her note ("you already tried that"); on a pink-disabled replay she retypes purple into
+  "Just one cup." too, and still takes pink on timeout. Console easter egg: "I know you opened this."
+- **RM**: every edit is one hard cut held >= 500 ms; her cursor jumps straight to the press; no tear band; caret doesn't blink.
+- **Self-critique**: strongest horror payoff and the most "only-in-a-game" idea; the pre-timeout half is plain on purpose, but the
+  pastel box is generic DDLC and the ECU sprite is a scaled bust (line weight stays thin at 3x, a bit soft for a projector).
+- **Carry-forward (R2)**: keep the live edit + her cursor + lens ECU; draw a dedicated ECU eye layer (thicker line, highlight removed
+  = yandere stare) instead of scaling the bust; let her edit the *dialogue box* too (MC's own line gets rewritten); tie the file list
+  to real state (runs count from localStorage).
