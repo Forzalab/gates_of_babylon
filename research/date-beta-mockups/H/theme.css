@@ -301,3 +301,6 @@
 .ovlines p { margin: 3px 0 0; padding: 2px 6px; background: transparent; font: 400 26px/1.15 var(--font-body); border-radius: 6px; }
 .ovlines p.last { font-weight: 700; background: var(--pink); color: #2a0615; border: 3px solid #3a1d3f; }
 .scrim { position: absolute; left: 0; right: 0; bottom: 0; height: 330px; background: linear-gradient(rgba(42, 24, 48, 0), rgba(42, 24, 48, .88) 26%); z-index: 1; }
+/* invalid-pin footer: Leave uses the canonical disabled look (same as the replay pick) */
+.pinerr .ft .btn:last-child { background: repeating-linear-gradient(135deg, #e3deeb 0 14px, #d6cfe2 14px 28px) !important; color: #4a4258 !important; border-color: #7a7189 !important; }
+.cw .btn { font-size: 28px; }

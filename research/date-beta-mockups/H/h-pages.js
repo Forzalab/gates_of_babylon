@@ -57,11 +57,11 @@
           <div class="abs" style="left:40px;top:${70 + i * 136}px;width:1730px;height:260px;transform:scale(.44);transform-origin:0 0">
             ${choices({ pink: 'Stand up.', purple: 'Stay seated.', t, secs: t ? String(Math.ceil(t * 5)) : '0', state: s, style: { left: 90, right: 90, bottom: 'auto', top: 90 } })}</div>
           <div class="abs note" style="left:800px;top:${108 + i * 136}px;width:380px">${l}</div>`).join('')}
-        <div class="tag" style="position:absolute;top:780px;left:0">the ONE meta slot · captions</div>
-        <div class="abs" style="left:0;top:826px;width:440px;height:80px">${chrome({ on: ['cc'], style: { left: 0, top: 0, right: 'auto' } })}</div>
-        <div class="abs" style="left:460px;top:826px;width:440px;height:80px">${chrome({ on: ['cc', 'rm', 'mute'], style: { left: 0, top: 0, right: 'auto' } })}</div>
-        <div class="abs note" style="left:920px;top:830px;width:260px">top-right · 412×72 · 4 max · never faint</div>
-        <div class="abs" style="left:0;top:920px;width:1200px;height:70px">${cap('[her breath]', { style: { left: 0, bottom: 'auto', top: 0 } })}${cap('[train hum stops]', { style: { left: 250, bottom: 'auto', top: 0 } })}${cap('Nanda (whisper): "…lea—"', { style: { left: 610, bottom: 'auto', top: 0 } })}</div>
+        <div class="tag" style="position:absolute;top:735px;left:0">the ONE meta slot · captions</div>
+        <div class="abs" style="left:0;top:780px;width:440px;height:80px">${chrome({ on: ['cc'], style: { left: 0, top: 0, right: 'auto' } })}</div>
+        <div class="abs" style="left:460px;top:780px;width:440px;height:80px">${chrome({ on: ['cc', 'rm', 'mute'], style: { left: 0, top: 0, right: 'auto' } })}</div>
+        <div class="abs note" style="left:920px;top:784px;width:260px">top-right · 4 max<br>never faint</div>
+        <div class="abs" style="left:0;top:872px;width:1200px;height:70px">${cap('[her breath]', { style: { left: 0, bottom: 'auto', top: 0 } })}${cap('[train hum stops]', { style: { left: 250, bottom: 'auto', top: 0 } })}${cap('Nanda (whisper): "…lea—"', { style: { left: 610, bottom: 'auto', top: 0 } })}</div>
       </div>`, { label: '<b>States</b> · diegetic voice = RC / Bangers · substrate + meta = mono', kind: 'sheet' }));
 
     // dread ladder
