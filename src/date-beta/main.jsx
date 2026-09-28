@@ -15,6 +15,8 @@ import data from './scenes.json';
 import { loadScenes, start, next, skip, beatAt, canAdvance } from './engine.js';
 import { ART } from './art/index.js';
 import { Say } from './Say.jsx';
+import manifest from './assets.json';
+import { createLoader } from './assets.js';
 import './beta.css';
 
 const params = new URLSearchParams(location.search);
@@ -22,8 +24,10 @@ const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)')
 const SCENES = loadScenes(data);
 export const W = 1920, H = 1080;
 
-// Sound is a placeholder: the cue name is exposed for tests and read out as a caption for screen readers.
-function cue(name) { if (name) document.documentElement.dataset.sfx = name; }
+// Sound: cue name -> asset id via assets.json (beep if the file is missing). Also exposed for tests + read as a caption.
+const ASSETS = createLoader(manifest, import.meta.env.BASE_URL);
+ASSETS.preload();
+function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
 
 function useFit() {
   const [k, setK] = useState(1);
