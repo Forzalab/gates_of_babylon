@@ -16,6 +16,8 @@ import './f1.css';
 import './g2.css';
 import './h1.css';
 import { F1, Feed } from './f1.jsx';
+import Bagging from './game/Bagging.jsx';
+import DateCanvas from './game/DateCanvas.jsx';
 
 const params = new URLSearchParams(location.search);
 const V = ['x1', 'x2', 'x3', 'f1', 'g2', 'h1'].includes(params.get('v')) ? params.get('v') : 'h1';
@@ -276,6 +278,7 @@ function Stub() {
           <a className="btn hot" href="#" onClick={(e) => { e.preventDefault(); location.hash = ''; }}>&#9829; BACK &#9829;</a>
           <a className="btn soft" href={LOGIC}>LOGIC MODE</a>
         </div>
+        <p className="fine"><a href="?canvas=1">Date canvas</a> &middot; <a href="?game=1">Unexpected gate in bagging area</a></p>
       </section>
     </div>
   );
@@ -296,4 +299,6 @@ function Page() {
 }
 
 document.title = 'GATEXX';
-createRoot(document.getElementById('root')).render(<Page />);
+// pit4/game: ?game=1 = the bagging-area minigame, ?canvas=1 = the Date canvas it wraps around.
+const Root = params.has('game') ? Bagging : params.has('canvas') ? DateCanvas : Page;
+createRoot(document.getElementById('root')).render(<Root />);
