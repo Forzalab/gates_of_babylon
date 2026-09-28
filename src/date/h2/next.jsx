@@ -21,7 +21,7 @@ import '@fontsource/roboto-condensed/700.css';
 import App from '../../App.jsx';
 import { Shape, GATE_GEOM } from '../../nodes/index.jsx';
 import { compat } from '../compat.js';
-import { play, isMuted, setMuted, onMute } from '../sfx.js';
+import { play, isMuted, setMuted, onMute, tryUnlock } from '../sfx.js';
 import './next.css';
 import './dock.css';
 
@@ -80,6 +80,7 @@ const hms = (t) => `${Math.floor(t / 3600)}:${String(Math.floor(t / 60) % 60).pa
 function Player({ onDone }) {
   const [t, setT] = useState(0);
   const at = useRef(4 + Math.floor(Math.random() * 6)); // boom at a random 4-9 s
+  useEffect(tryUnlock, []);
   useEffect(() => { const k = setInterval(() => setT((n) => n + 1), 1000); return () => clearInterval(k); }, []);
   useEffect(() => { if (t === at.current) { play('boom', { gap: 0, vol: 0.55 }); const k = setTimeout(onDone, 900); return () => clearTimeout(k); } }, [t]);
   const boomed = t >= at.current;

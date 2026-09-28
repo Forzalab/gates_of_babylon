@@ -26,6 +26,12 @@ function load(f) {
 function unlock() {
   unlocked = true;
   try { ctx = new AudioContext(); Object.values(FAMILIES).flat().forEach(load); } catch { ctx = null; } removeEventListener('pointerdown', unlock, true); removeEventListener('keydown', unlock, true); }
+// h2: after ENTER (a same-origin click) Chrome lets a fresh page start audio without a new gesture. Try it; if the
+// context comes up 'running', unlock now so the K1 boom can land even if the viewer never touches the player.
+export function tryUnlock() {
+  if (unlocked) return;
+  try { const c = new AudioContext(); if (c.state === 'running') { ctx = c; unlocked = true; Object.values(FAMILIES).flat().forEach(load); } else c.close(); } catch { /* no audio */ }
+}
 addEventListener('pointerdown', unlock, true);
 addEventListener('keydown', unlock, true);
 

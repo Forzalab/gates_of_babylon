@@ -1,6 +1,7 @@
 /* h2 (pit4 r3-2), continue screen additions. --u here is next.css's px-scale unit. */
 /* g1 fix 6: the pull card (and the K1 player before it) dock over Raggningstabell; no veil, the circuit stays readable */
-.dj-dock { position: fixed; z-index: 50; right: 1.2vw; top: 50%; transform: translateY(-46%); pointer-events: none; }
+.dj-dock { position: fixed; z-index: 50; right: 0; width: 33.2vw; top: 50%; transform: translateY(-46%); display: grid; place-items: center; pointer-events: none; }
+.dj-dock .dj-player, .dj-dock .dj-card { max-width: 31vw; }
 .dj-dock > * { pointer-events: auto; }
 .dj-dock .dj-card { width: calc(330 * var(--u)); max-height: 84vh; padding: 0 calc(18 * var(--u)) calc(16 * var(--u)); }
 .dj-dock .dj-rar { margin: 0 calc(-18 * var(--u)); }
@@ -23,6 +24,6 @@
 .dj-time { font-variant-numeric: tabular-nums; }
 .dj-skip { font: 400 max(13px, calc(16 * var(--u)))/1 'Bangers', cursive; letter-spacing: .05em; color: var(--hot); background: #fff; border: 0; border-radius: 99px;
   padding: calc(5 * var(--u)) calc(10 * var(--u)); cursor: pointer; }
-.dj-credits { position: fixed; z-index: 40; left: 50%; bottom: 4px; transform: translateX(-50%); margin: 0; white-space: nowrap;
+.dj-credits { position: fixed; z-index: 40; left: 5vw; bottom: 6px; margin: 0; white-space: nowrap;
   font: 400 12px/1.2 'Roboto Condensed', sans-serif; color: #fff; background: rgba(0, 27, 98, .85); padding: 2px 10px; border-radius: 99px; }
 .dj-credits a { color: #ff9ee6; }
