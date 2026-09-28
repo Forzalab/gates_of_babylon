@@ -377,5 +377,11 @@ function flowchart(opt = {}) {
   return s;
 }
 
+// Place a full-sprite string (<svg class="art sprite ..." viewBox=...>) inside another SVG at x, y, w, h.
+// The nested svg drops the .art class (that class sizes a whole stage); the parent svg carries .art for the role CSS.
+export function placed(markup, x, y, w, h, extra = '') {
+  return markup.replace(/^\s*<svg class="art /, `<svg x="${x}" y="${y}" width="${w}" height="${h}" ${extra} class="`);
+}
+
 export const ART = { nanda, xor, sil, hand, cup, steam, plum, egg, mochi, shoe, slipper, phone, nandSym, pin,
   sceneTrain, sceneGenkan, sceneKitchen, sceneDoor, flowchart, ROLES, SIL, EYES };

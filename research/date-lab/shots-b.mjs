@@ -21,6 +21,14 @@ export const SHOTS = [
   { id: 'menu-4', name: 'pink-genkan', q: 'state=menu', wait: 900, steps: [['key', '1'], ['wait', 4200]] },
   { id: 'menu-4', name: 'rm-choice', q: 'state=menu&still', wait: 2300 },
   { id: 'menu-4', name: 'rm-replay', q: 'state=replay&still', wait: 3200 },
+  // menu-5 circuit wires (the wire rests at 420,820; pads at 1420,400 pink / 1420,730 purple)
+  { id: 'menu-5', name: 'boot', wait: 1600 },
+  { id: 'menu-5', name: 'choice-t2s', q: 'state=menu', wait: 2200 },
+  { id: 'menu-5', name: 'drag-toward-purple', q: 'state=menu', wait: 1500, steps: [['move', 420, 820], ['down'], ['move', 900, 800], ['move', 1150, 880], ['wait', 200]] },
+  { id: 'menu-5', name: 'purple-wired', q: 'state=menu', wait: 1200, steps: [['move', 420, 820], ['down'], ['move', 900, 850], ['move', 1250, 910], ['up'], ['wait', 900]] },
+  { id: 'menu-5', name: 'replay-scorched', q: 'state=replay', wait: 2600 },
+  { id: 'menu-5', name: 'timeout-pink', q: 'state=menu', wait: 6600 },
+  { id: 'menu-5', name: 'rm-choice', q: 'state=menu&still', wait: 2300 },
 ];
 
 const filter = process.argv[2];

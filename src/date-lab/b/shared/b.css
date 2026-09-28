@@ -34,6 +34,12 @@
 .lb svg { overflow: hidden; }
 /* the scene components' own camera classes (train zoom, genkan insert) are driven by props; our cameras wrap them */
 
+/* Nanda's hair-clip pin = her mood light (hum = safe, flicker = flustered, red = afraid, off = blank) */
+.lb .pin-hum .pinbub { fill: var(--pink); } .lb .pin-hum .pinglow { fill: var(--pink); opacity: .45; }
+.lb .pin-flicker .pinbub { fill: #ffd0e4; } .lb .pin-flicker .pinglow { fill: var(--pink); opacity: .2; }
+.lb .pin-red .pinbub { fill: var(--her); } .lb .pin-red .pinglow { fill: var(--her); opacity: .5; }
+.lb .pin-off .pinbub { fill: #b9b2c4; } .lb .pin-off .pinglow { opacity: 0; }
+
 /* ---------- the OR rule: her red, 1px offset ---------- */
 .lb .or { color: var(--her); position: relative; left: 1px; top: 1px; text-shadow: 2px 0 0 rgba(90, 0, 18, .55); }
 .lb .or-svg { fill: var(--her); }
