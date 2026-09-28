@@ -67,3 +67,8 @@ Horror = intensity 0-5. Each variant's theme = one film/anime school; the centra
 
 ## Round 2 (cron 08:15 PT)
 Menu: 3 survivors improved + 2 hybrids of the 3 best. Other tracks: hybrid of the 2 best of the top 3, same setup, improved, plus each builder's own round-1 carry-forward spec.
+
+## FIX PASS (Tony, Mon 03:20 PT) — one MEDIUM agent, spawned only after ALL rounds are done
+- MUST FIX 1, physics: anything that moves wrong (train leave, rain angle/speed vs wind, straps, steam, hair, falling petals, camera easing, dolly-zoom maths, weight/overshoot on impacts). Audit every shipped scene + the winning variants; list each "looks odd" item with the fix.
+- MUST FIX 2, style unify: match the reference image Tony attaches (pending — not received yet). One palette/line/shading system across scenes 1-10 + the winners.
+- Assets: use the files in brain + repo FIRST (brain `projects/csci/_files/assets/`, `sfx/`; repo `public/sfx/` (see CREDITS.md), `public/emotes/`) before drawing or synthesizing new ones. The big packs live in the private bucket `gob-space/sorted/` (catalogue: brain `gob-assets-INDEX.md`); its keys are in main's session only. Noraneko BGs: licence bans AI use → never feed them to an agent.
