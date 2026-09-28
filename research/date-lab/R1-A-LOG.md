@@ -167,3 +167,22 @@ out-of-focus foreground petals falling in held 500 ms steps, raindrops on the le
   "W-wait. Not both at once—" / solid red "Don't lea—" / dark, silence. RM: flicker = a static half-lit bubble.
 - **Self-critique**: clearest "rules card" for the audience, least cinematic; the pin reads as a plain gate, not a jewel. **R2**: add
   enamel/metal shading and a glint, and use it as a HUD element in the real game instead of a standalone insert.
+
+## Nanda integration kit (`kit/integrate.js` pure + node-tested, `kit/Lit.jsx`)
+Each scene has a LIGHT RIG measured from main's art (ambient, key colour + direction, rim source, a sampled wall colour next to her,
+a scale reference at a known depth). Her role palette is DERIVED from the rig (multiply toward ambient + key lift), not hand-picked.
+`LitNanda` composites main's sprite with 4 toggleable passes: grade, form shade (key-direction gradient masked by her own alpha),
+rim (SVG edge filter on the lit side; all-round for backlit rigs), cast shadow (blurred black copy away from the key; a long
+skewed floor shadow for the silhouette). Placement = `bustScale()/silScale()` from the reference object, never eyeballed.
+
+## nanda-1 · Lit like the room (horror 2)
+- **School**: Ghibli / KyoAni cel-over-BG compositing (colour script) x Deakins motivated light x "she is closer each time".
+- **Theme**: *she belongs in every room.* 22 s, 4 shots, slow push each: (1) platform — main's own silhouette gets a cool rim
+  from the city, a wet-floor reflection and pin bloom ("Her stop. She waited in the rain."); (2) her door — bust graded to the
+  walkway, warm rim from the ajar door, cast shadow on the wall ("This is me. Unit 12."); (3) genkan — backlit silhouette in the
+  hall doorway, all-round warm rim, red eyes, a long shadow reaching toward you over the step ("Shoes off. The hall light is
+  for you."); (4) third cup — she sits BEHIND the table (kitchen split into back/front planes), pin red ("Drink while it's warm.").
+- **RM**: one held frame per shot, hard cuts.
+- **Self-critique**: grade + rim make her sit in the door and genkan shots; the kitchen is main's flat Kawaii palette so there
+  is little to match, and the door-shot form shade reads a bit grey/flat. **R2**: add a bounce light (floor colour, from below)
+  pass and a subtle key-colour hair highlight; draw a real lower body for the door so she can stand at the door's scale.

@@ -1,0 +1,18 @@
+/* Nanda integration: the kitchen uses a warm-evening role palette (same as closeup-3) */
+.nd-kitchen { --c-wall: #caa3b8; --c-wall2: #a9829a; --c-wood: #b98a6a; --c-wood2: #8a5f48; --c-night: #1c1733; --c-tea: #a8cf7a; --art-stroke: #3a1d3f; }
+.nanda-int .lit-sil .k-sil, .nbench .lit-sil .k-sil { fill: var(--c-sil); stroke: none; }
+.nanda-int .lit-sil .k-eye, .nbench .lit-sil .k-eye { fill: var(--her); }
+.nanda-int .lit-sil .k-pin, .nbench .lit-sil .k-pin { fill: var(--pink); }
+/* test bench */
+.nbench { background: #0c0a10; }
+.nbench .cell { position: absolute; width: 944px; height: 531px; overflow: hidden; border: 2px solid #2a2530; }
+.nbench .cell .inner { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; transform: scale(.4917); }
+.nbench .half { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.nbench .half.raw { clip-path: inset(0 50% 0 0); }
+.nbench .half.int { clip-path: inset(0 0 0 50%); }
+.nbench .divider { position: absolute; left: 960px; top: 0; width: 6px; height: 1080px; background: #fff; box-shadow: 0 0 12px #000; }
+.nbench .lbl { position: absolute; top: 22px; font: 700 40px/1 var(--cond); letter-spacing: .1em; padding: 8px 16px; border-radius: 8px; background: rgba(0, 0, 0, .7); }
+.nbench .lbl.l { left: 24px; color: #bbb; } .nbench .lbl.r { left: 990px; color: #9fe7a0; }
+.nbench .checks { position: absolute; left: 24px; bottom: 22px; display: flex; gap: 10px; flex-wrap: wrap; width: 1860px; }
+.nbench .checks span { font: 700 30px/1 'JetBrains Mono', monospace; padding: 8px 12px; border-radius: 8px; background: rgba(0, 0, 0, .78); color: #9fe7a0; }
+.nbench .checks span.warn { color: #ffd27a; }
