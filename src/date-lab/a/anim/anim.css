@@ -1,0 +1,9 @@
+/* animation track */
+.anim { cursor: pointer; }
+.anim .camfade { position: absolute; inset: 0; background: #000; pointer-events: none; z-index: 44; }
+.anim .a-sub { z-index: 46; }
+.anim .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.kyo .kyo-breathe { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 50%, rgba(240, 36, 63, .12), transparent 30%); opacity: .4; }
+.kyo .kyo-breathe.in { opacity: 1; }
+/* splash needs main's splash css (imported by the art index) and a start button that does nothing here */
+.kyo.scene-splash .start { pointer-events: none; }

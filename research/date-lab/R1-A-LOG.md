@@ -199,3 +199,18 @@ skewed floor shadow for the silhouette). Placement = `bustScale()/silScale()` fr
 - **RM**: static, identical.
 - **Self-critique**: a useful arbitration tool more than a demo piece; the platform split is weak because main's silhouette is on
   the lit half only. **R2**: a draggable divider, per-pass toggles (grade / shade / rim / shadow) as chips you can click.
+
+## anim-1 · KyoAni idle life (horror 1)
+- **School**: Kyoto Animation small-motion realism (*Hyouka*, *Violet Evergarden*, *Tamako Market*) x Ozu pillow shots (empty
+  rooms between scenes) x one wrong breath at the end.
+- **Theme**: *the world breathes (and so does she).* All 10 of main's scenes + her at the door, 4.4 s each (48 s loop), soft fades.
+  Idle overlays in scene coordinates, all stepped (8 fps grid, every pose >= 500 ms): START ring pulse; rooftop petals; a pole +
+  glass glint passing the train window (behind the ad); curry steam on the NAAN board; the blackout OR breathing; puddle rings,
+  umbrella drips and her pin glow on the platform; a moth at the one good tube + vending glow in the underpass; the lit curtain;
+  the door-light sliver breathing; candle + dust motes in the genkan hall light; then Nanda at her door: a 500 ms blink every 3 s
+  (a new `blink` pose added to my sprite port), twin-tail sway (2 poses, 1 s), breathing shoulders (2 poses, 1.5 s) —
+  "…You were staring. I noticed." Main's own motion (rain, straps, NAAN glitch) keeps running underneath.
+- **RM**: every overlay holds pose 0, main's scenes get `rm` (rain/straps still), no fades.
+- **Self-critique**: covers every scene and the blink/breath on her is the most "alive" she looks anywhere; several overlays are
+  small (moth, drips) and barely read on a projector. **R2**: fewer, bigger idle moves per scene (one hero motion each), hair
+  strands that trail the sway by one pose (overlap = the KyoAni tell), and a blink that only happens when the viewer isn't clicking.

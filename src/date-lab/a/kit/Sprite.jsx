@@ -5,8 +5,8 @@ import * as ART from './art.js';
 
 const sized = (svg, w, h) => svg.replace('<svg ', `<svg width="${w}" height="${h}" overflow="visible" `);
 
-export const Nanda = memo(function Nanda({ face = 'smile', pin, x = 0, y = 0, s = 1, className = '', flip = false, style }) {
-  const html = useMemo(() => sized(ART.nanda({ face, pin }), 600, 900), [face, pin]);
+export const Nanda = memo(function Nanda({ face = 'smile', pin, blink = false, x = 0, y = 0, s = 1, className = '', flip = false, style }) {
+  const html = useMemo(() => sized(ART.nanda({ face, pin, blink }), 600, 900), [face, pin, blink]);
   const t = `translate(${x} ${y}) scale(${flip ? -s : s} ${s})${flip ? ' translate(-600 0)' : ''}`;
   return <g className={`ka-bust ${className}`} transform={t} style={style} dangerouslySetInnerHTML={{ __html: html }} />;
 });

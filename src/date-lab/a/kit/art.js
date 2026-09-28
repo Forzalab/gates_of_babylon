@@ -15,6 +15,8 @@ const mirror = (inner) => `<g transform="translate(600 0) scale(-1 1)">${inner}<
 
 // ---------- eyes (local coords, centred on 0,0; left eye as drawn, right eye mirrored) ----------
 function eye(face, cid) {
+  // builder-A addition: a blink pose (closed lids, lash arc only) for the idle-life animation
+  if (face === 'closed') return `<path class="k-lash ln fat" d="M-44,6 Q0,30 42,4"/><path class="k-lash ln" d="M38,4 L50,-2"/>`;
   const white = 'M-42,-8 C-28,-31 20,-34 40,-16 C43,12 24,36 0,38 C-25,36 -42,16 -42,-8 Z';
   let s = `<clipPath id="${cid}"><path d="${white}"/></clipPath>`;
   s += `<path class="k-white nostroke" d="${white}"/>`;
@@ -69,6 +71,7 @@ function strands(pts) {
 
 // ---------- NANDA bust (viewBox 0 0 600 900). face: smile | blank | tears | wide ----------
 function nanda(opt = {}) {
+  const eyes = opt.blink ? 'closed' : (opt.face || 'smile');
   const face = opt.face || 'smile';
   const pinState = opt.pin || ({ smile: 'hum', blank: 'off', tears: 'flicker', wide: 'red' })[face];
   const cL = id('eyeL'), cR = id('eyeR');
@@ -110,8 +113,8 @@ function nanda(opt = {}) {
     <rect class="k-ribbon" x="286" y="648" width="28" height="26" rx="7"/>
     <path class="k-skin" d="M178,284 C178,392 240,456 300,478 C360,456 422,392 422,284 C422,188 178,188 178,284 Z"/>
     ${blush}
-    <g transform="translate(244 352) scale(1.12)">${eye(face, cL)}</g>
-    <g transform="translate(356 352) scale(-1.12 1.12)">${eye(face, cR)}</g>
+    <g transform="translate(244 352) scale(1.12)">${eye(eyes, cL)}</g>
+    <g transform="translate(356 352) scale(-1.12 1.12)">${eye(eyes, cR)}</g>
     ${tears}
     <path class="k-lash ln thin" d="M297,398 L302,405"/>
     ${mouths[face]}
