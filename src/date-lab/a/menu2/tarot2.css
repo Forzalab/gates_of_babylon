@@ -1,0 +1,101 @@
+/* Round-2 tarot table (menu-1-r2 + menu-h1-r2). Jewel tones, candle key light, her card warm, yours cold (until she types). */
+.t2 .bg { position: absolute; inset: 0; transition: filter 900ms ease; }
+.t2 .bg > .art { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.t2.st-deal .bg, .t2.st-table .bg { filter: blur(9px) brightness(.42) saturate(.8); }
+.t2 .dim { position: absolute; inset: 0; opacity: 0; transition: opacity 900ms ease;
+  background: radial-gradient(ellipse 60% 70% at 50% 46%, rgba(255, 190, 120, .16), rgba(20, 6, 18, .7) 70%, rgba(8, 2, 8, .92)); }
+.t2.st-deal .dim, .t2.st-table .dim { opacity: 1; }
+.t2 .cloth { position: absolute; left: -40px; right: -40px; top: 560px; bottom: -40px; opacity: 0; transition: opacity 900ms ease;
+  background: radial-gradient(ellipse 50% 40% at 50% 10%, rgba(255, 170, 110, .28), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, .12) 0 3px, transparent 3px 22px), linear-gradient(#4a1236, #22061a);
+  border-top: 3px solid #d6a93f; box-shadow: 0 -30px 80px rgba(0, 0, 0, .6); }
+.t2.st-deal .cloth, .t2.st-table .cloth { opacity: 1; }
+
+.t2 .spread { position: absolute; inset: 0; }
+.t2 .card { position: absolute; top: 70px; width: 396px; height: 666px; padding: 0; border: 0; background: none; cursor: pointer;
+  perspective: 1800px; transform-style: preserve-3d; font: inherit; color: inherit;
+  transition: transform 700ms cubic-bezier(.3, .7, .2, 1), opacity 500ms ease, filter 500ms ease; }
+.t2 .card.her { left: 452px; } .t2 .card.yours { left: 1072px; }
+.t2 .cardface { position: absolute; inset: 0; border-radius: 22px; backface-visibility: hidden; transition: transform 700ms cubic-bezier(.3, .7, .2, 1), filter 500ms ease; }
+.t2 .cardface svg { width: 100%; height: 100%; display: block; border-radius: 22px; }
+.t2 .cardface.flip { transform: rotateY(180deg); }
+.t2 .card.flipped .cardface:not(.flip), .t2 .card.her.off .cardface:not(.flip) { transform: rotateY(-180deg); }
+.t2 .card.flipped .cardface.flip, .t2 .card.her.off .cardface.flip { transform: rotateY(0deg); }
+.t2 .card.her .cardface { box-shadow: 0 0 0 3px #ffd8e8, 0 0 70px 14px rgba(255, 95, 162, .55), 0 26px 40px rgba(0, 0, 0, .6); }
+/* your card's glow warms with --warm (0 cold purple .. 1 her pink); set in held steps by the component */
+.t2 .card.yours .cardface { box-shadow: 0 0 0 3px #3a2a5a, 0 0 calc(40px + 30px * var(--warm, 0)) calc(4px + 10px * var(--warm, 0))
+  color-mix(in srgb, rgba(138, 92, 246, .35), rgba(255, 95, 162, .6) calc(var(--warm, 0) * 100%)), 0 26px 40px rgba(0, 0, 0, .7); }
+.t2 .card:not(:disabled):hover, .t2 .card:not(:disabled):focus-visible { transform: translateY(-22px); outline: none; }
+.t2 .card .key { position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%); font: 700 24px/1 var(--cond); width: 44px; height: 44px;
+  display: grid; place-items: center; border-radius: 50%; background: #0c0610; border: 3px solid currentColor; z-index: 4; }
+.t2 .card.her .key { color: var(--pink); } .t2 .card.yours .key { color: #b7a4e8; }
+
+/* the deal: both cards drop from one stack at the candle */
+.t2.st-door .card { opacity: 0; pointer-events: none; }
+.t2.st-door .card.her { transform: translate(310px, -140px) rotate(-8deg); }
+.t2.st-door .card.yours { transform: translate(-310px, -140px) rotate(8deg); }
+.t2.st-door .candlewrap { opacity: 0; }
+
+/* the slip: the option text, typed on a strip of paper tucked across the card (read once, big) */
+.t2 .slip { position: absolute; left: -26px; right: -26px; bottom: 44px; min-height: 96px; display: flex; align-items: center; justify-content: center;
+  background: #fff8ee; border-radius: 6px; transform: rotate(-1.5deg); z-index: 3; padding: 0 12px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, .55), inset 0 -4px 0 rgba(0, 0, 0, .08); font: 700 50px/1 var(--cond); letter-spacing: -.01em; white-space: nowrap; }
+.t2 .slip.pink { color: #d6337f; border-bottom: 8px solid var(--pink); }
+.t2 .slip.purple { color: #5a36c4; border-bottom: 8px solid var(--purple); transform: rotate(1.5deg); }
+.t2 .slip.purple.warm { color: #c2306f; background: #fff0f6; }
+.t2 .slip .stxt { position: relative; }
+.t2 .slip.struck .stxt { color: #4a3a4e; text-decoration: line-through; text-decoration-color: var(--her); text-decoration-thickness: 7px; }
+.t2 .curs { position: relative; display: inline-block; width: 0; }
+.t2 .caret { display: inline-block; width: 6px; height: .95em; margin-left: 4px; vertical-align: -.1em; background: var(--her); animation: t2-blink 1s step-end infinite; }
+@keyframes t2-blink { 50% { opacity: 0; } }
+.t2 .herarrow { position: absolute; left: 4px; top: 26px; width: 52px; height: 78px; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .6)); z-index: 5; }
+.t2 .typing { position: absolute; top: 790px; margin: 0; width: 396px; text-align: center; font: italic 700 38px/1 var(--cond); color: #fff; text-shadow: 0 2px 6px #000; }
+.t2 .typing.purple { left: 1072px; } .t2 .typing.pink { left: 452px; }
+.t2 .typing b { color: var(--her); }
+
+/* DISABLED on replay: dim card, the big pin through it, DRAWN stamp, her note under it. Built for the back row. */
+.t2 .card.off { cursor: not-allowed; }
+.t2 .card.off .cardface { filter: saturate(.2) brightness(.42); }
+.t2 .disabled { position: absolute; inset: 0; pointer-events: none; z-index: 4; }
+.t2 .bigpin { position: absolute; left: 10px; top: 90px; width: 380px; height: 380px; filter: drop-shadow(0 14px 8px rgba(0, 0, 0, .75)) drop-shadow(0 0 22px rgba(240, 36, 63, .55)); }
+.t2 .stamp { position: absolute; right: -18px; top: 26px; padding: 6px 18px; font: 900 64px/1 var(--cond); letter-spacing: .08em; color: var(--her);
+  border: 7px solid var(--her); border-radius: 10px; transform: rotate(12deg); background: rgba(18, 4, 10, .55); }
+.t2 .dnote { position: absolute; left: 0; right: 0; bottom: -104px; text-align: center; font: 400 50px/1 'Yellowtail', cursive; color: #ff4a64;
+  text-shadow: 0 2px 6px #000; transform: rotate(-2deg); }
+
+/* card faces text */
+.t2 .t-num { font: 400 46px/1 Georgia, 'Times New Roman', serif; fill: #8a3a3a; letter-spacing: .12em; }
+.t2 .t-num.dark, .t2 .t-name.dark { fill: #3a2a5a; }
+.t2 .t-name { font: 700 44px/1 Georgia, 'Times New Roman', serif; letter-spacing: .22em; fill: #6a1f4f; }
+.t2 .t-maker { font: 400 30px/1 'Yellowtail', cursive; fill: #b0123e; }
+.t2 .t-12 { font: 700 34px/1 var(--cond); letter-spacing: .1em; }
+
+/* candle timer */
+.t2 .candlewrap { position: absolute; left: 860px; top: 230px; width: 200px; height: 520px; transition: opacity 600ms ease; }
+.t2 .candle { width: 200px; height: 520px; overflow: visible; }
+.t2 .pips { position: absolute; left: 50%; bottom: -40px; transform: translateX(-50%); display: flex; gap: 12px; }
+.t2 .pips i { width: 16px; height: 16px; border-radius: 50%; background: #ffcf7a; box-shadow: 0 0 10px #ffb13d; }
+.t2 .pips i.out { background: #3a2a30; box-shadow: none; }
+
+/* Nanda across the table, candle-underlit, a touch out of focus */
+.t2 .her { opacity: 0; transition: opacity 1200ms ease; }
+.t2.st-deal .her, .t2.st-table .her { opacity: 1; }
+.t2 .her .bust { filter: brightness(.66) sepia(.3) saturate(1.15) blur(1.2px); }
+.t2.picked-purple .her .bust { filter: brightness(.55) saturate(.5) blur(1.2px); }
+
+/* her hand (timeout): 3 stepped poses, no tween */
+.t2 .herhand { position: absolute; left: 50px; top: -560px; width: 300px; height: 560px; transition: none !important; filter: drop-shadow(0 20px 10px rgba(0, 0, 0, .5)); z-index: 6; }
+.t2 .herhand.p0 { transform: translateY(-500px); } .t2 .herhand.p1 { transform: translateY(40px); } .t2 .herhand.p2 { transform: translateY(170px); }
+
+/* outcomes */
+.t2.picked-pink .card.her { transform: translate(310px, 10px) scale(1.08); z-index: 7; }
+.t2.by-timeout.picked-pink .card.her { transition-delay: 1000ms; }
+.t2.picked-pink .card.yours { opacity: .18; transform: translateY(60px) rotate(6deg); }
+.t2.picked-pink .candlewrap, .t2.picked-purple .candlewrap { opacity: 0; }
+.t2.picked-purple .card.yours { transform: translate(-310px, 10px) scale(1.08); z-index: 7; }
+.t2.picked-purple .card.her { opacity: .3; filter: saturate(.3); }
+.t2.picked-purple .bg { filter: blur(9px) brightness(.3) saturate(.4); }
+.t2.picked-purple .dim { background: radial-gradient(ellipse 60% 70% at 50% 46%, rgba(138, 92, 246, .14), rgba(8, 4, 20, .8) 70%, rgba(4, 2, 8, .95)); }
+.t2 .a-line { background: rgba(20, 6, 16, .9); border-color: rgba(214, 169, 63, .55); }
+/* RM: the caret holds (no blink) */
+.t2.is-rm .caret { animation: none; }
