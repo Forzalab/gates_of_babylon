@@ -1,0 +1,52 @@
+/* date-beta: one 1920x1080 stage scaled to fit any screen (projector). Art is authored in stage px.
+   Motion rule: drawn things step on an 8 fps grid and hold every pose >= 500 ms; camera + fades are smooth.
+   .rm (prefers-reduced-motion or ?still) turns every animation/transition into a hard cut. */
+:root {
+  --pink: #ff5fa2;   /* toward her */
+  --purple: #8a5cf6; /* leave */
+  --her: #f0243f;    /* her red: every OR */
+  --ink: #f4eef6;
+  --jp: 'Hiragino Kaku Gothic StdN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', 'IPAGothic', sans-serif;
+  --jp-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK JP', 'IPAMincho', 'IPAPMincho', serif;
+  --cond: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
+body { font-family: var(--cond); color: var(--ink); }
+
+.viewport { position: fixed; inset: 0; background: #000; cursor: pointer; user-select: none; }
+.stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; overflow: hidden;
+  transform-origin: 50% 50%; background: #000; }
+.scene { position: absolute; inset: 0; }
+.scene > svg, .art { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.enter-fade { animation: enter-fade 700ms ease-out both; }
+@keyframes enter-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* the OR rule */
+.or { color: var(--her); position: relative; left: 1px; top: 1px; text-shadow: 2px 0 0 rgba(90, 0, 18, .55); }
+.or-svg { fill: var(--her); }
+
+/* ---------- dialogue ---------- */
+.say { position: absolute; left: 50%; bottom: 56px; transform: translateX(-50%); width: 1380px; min-height: 150px;
+  background: rgba(14, 8, 20, .86); border: 2px solid rgba(255, 255, 255, .22); border-radius: 18px;
+  padding: 34px 56px 30px; display: flex; align-items: center; gap: 28px; pointer-events: none;
+  animation: say-in 260ms ease-out both; }
+.say p { margin: 0; font: 400 50px/1.25 var(--cond); letter-spacing: .005em; }
+.say .speaker { position: absolute; top: -26px; left: 48px; font: 700 30px/1 var(--cond); letter-spacing: .08em;
+  padding: 10px 22px; border-radius: 999px; background: #d9e6ff; color: #0e1630; }
+.say.who-nanda .speaker { background: var(--pink); color: #2a0615; }
+.say.narration p { font-style: italic; color: #e6deea; }
+@keyframes say-in { from { opacity: 0; } to { opacity: 1; } }
+.nexthint { position: absolute; right: 44px; bottom: 18px; font: 700 26px/1 var(--cond); letter-spacing: .1em;
+  color: rgba(255, 255, 255, .55); text-shadow: 0 1px 2px #000; pointer-events: none; }
+
+/* ---------- chrome (outside the stage, never scaled) ---------- */
+.chrome { position: fixed; top: 10px; right: 10px; display: flex; gap: 8px; z-index: 10; opacity: .4; transition: opacity .2s; }
+.chrome:hover, .chrome:focus-within { opacity: 1; }
+.chrome button { font: 700 14px/1 var(--cond); letter-spacing: .06em; color: #fff; background: rgba(0, 0, 0, .55);
+  border: 1px solid rgba(255, 255, 255, .35); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+.chrome button:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+
+/* ---------- reduced motion: everything is a hard cut ---------- */
+.rm *, .rm *::before, .rm *::after { animation: none !important; transition: none !important; }

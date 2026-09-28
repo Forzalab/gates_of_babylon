@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "note": "date-beta render test: 5 no-input scenes. bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words; sfx = placeholder cue name; rmAlt = what reduced motion does (same | hard-cut | static | skip).",
+  "scenes": [
+    {
+      "id": "splash",
+      "title": "START / house of cards",
+      "bg": "splash",
+      "beats": [
+        { "props": { "collapsed": false }, "wait": "start" },
+        { "props": { "collapsed": true }, "sfx": "static", "motion": true, "rmAlt": "hard-cut", "hold": 2000 }
+      ]
+    },
+    {
+      "id": "rooftop",
+      "title": "Rooftop / clock tower",
+      "bg": "rooftop",
+      "enter": "fade",
+      "beats": [
+        { "props": { "clock": "live" }, "text": "Lunch on the roof. The tower keeps your time.", "sfx": "wind", "hold": 1200 },
+        { "props": { "clock": "noon" }, "text": "MC: Technically, rain wasn't f-OR-ecast.", "sfx": "bell" }
+      ]
+    },
+    {
+      "id": "train",
+      "title": "Train window / NOT Sweet ad",
+      "bg": "train",
+      "enter": "fade",
+      "beats": [
+        { "props": { "zoom": false }, "text": "AND Line, local service. Home in twelve stops.", "sfx": "train-hum", "motion": true, "rmAlt": "static" },
+        { "props": { "zoom": true }, "text": "Nobody reads the ads. You read this one.", "sfx": "tick", "motion": true, "rmAlt": "hard-cut", "hold": 1600 }
+      ]
+    },
+    {
+      "id": "naan",
+      "title": "Hot NAAN billboard",
+      "bg": "naan",
+      "enter": "fade",
+      "beats": [
+        { "props": {}, "sfx": "tick", "motion": true, "rmAlt": "static", "hold": 1500 },
+        { "text": "MC: Technically, that's a NAND gate. Not bread.", "sfx": "tick", "motion": true, "rmAlt": "static" }
+      ]
+    },
+    {
+      "id": "blackout",
+      "title": "Blackout / ADORE ME",
+      "bg": "blackout",
+      "beats": [
+        { "props": { "phase": "dark" }, "sfx": "drone", "auto": 1000 },
+        { "props": { "phase": "forecast" }, "motion": true, "rmAlt": "hard-cut", "auto": 2600 },
+        { "props": { "phase": "or" }, "sfx": "breath", "motion": true, "rmAlt": "hard-cut", "auto": 2600 },
+        { "props": { "phase": "dor" }, "motion": true, "rmAlt": "skip", "auto": 1500 },
+        { "props": { "phase": "ador" }, "motion": true, "rmAlt": "hard-cut", "auto": 1500 },
+        { "props": { "phase": "adore" }, "motion": true, "rmAlt": "skip", "auto": 1500 },
+        { "props": { "phase": "adoreme" }, "motion": true, "rmAlt": "hard-cut", "auto": 2800 },
+        { "props": { "phase": "fade" }, "motion": true, "rmAlt": "skip", "auto": 1800 },
+        { "props": { "phase": "cut" }, "sfx": "silence", "auto": 1000 },
+        { "sfx": "static", "hold": 800 }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+/* Splash: the title "site". Cards in stage px. Collapse = 4 frames, one every 500 ms (2 Hz), all cards on the same tick. */
+.splash { background: #1b0a22; background-image:
+    linear-gradient(rgba(255, 95, 162, .10) 2px, transparent 2px), linear-gradient(90deg, rgba(255, 95, 162, .10) 2px, transparent 2px);
+  background-size: 60px 60px; overflow: hidden; }
+.splash .card { position: absolute; background: #fff3f8; color: #2a0f24; border: 5px solid #2a0f24; border-radius: 14px;
+  box-shadow: 12px 12px 0 #ff5fa2; }
+.splash .nav { left: 60px; top: 40px; width: 1800px; height: 100px; display: flex; align-items: center; gap: 60px; padding: 0 40px; }
+.splash .logo { display: flex; align-items: center; gap: 14px; font: 400 56px/1 'Bangers', var(--cond); letter-spacing: .04em; }
+.splash .nav nav { display: flex; gap: 44px; font: 700 34px/1 var(--cond); }
+.splash .nav nav .on { color: #d81b6a; border-bottom: 5px solid #ff5fa2; }
+.splash .sponsor { margin-left: auto; font: 400 26px/1 var(--cond); }
+.splash .sponsor b { font: 400 44px/1 'Yellowtail', cursive; color: #d81b6a; margin-left: 6px; }
+
+.splash .hero { left: 60px; top: 190px; width: 1150px; height: 620px; padding: 56px 72px;
+  background: #fff3f8 radial-gradient(circle at 88% 30%, #ffd1e6 0 180px, transparent 181px); }
+.splash .kicker { margin: 0; font: 700 34px/1 var(--cond); letter-spacing: .18em; text-transform: uppercase; color: #8a2d5c; }
+.splash h1 { margin: 22px 0 0; font: 400 172px/.9 'Bangers', var(--cond); letter-spacing: .02em; color: #2a0f24;
+  text-shadow: 8px 8px 0 #ff5fa2; }
+.splash .sub { margin: 18px 0 0; font: italic 400 40px/1 var(--cond); color: #5a2a48; }
+.splash .start { position: absolute; right: 64px; bottom: 60px; display: flex; align-items: center; gap: 18px;
+  font: 400 88px/1 'Bangers', var(--cond); letter-spacing: .06em; color: #2a0f24; background: #ff5fa2;
+  border: 6px solid #2a0f24; border-radius: 22px; padding: 22px 52px 18px 40px; box-shadow: 10px 10px 0 #2a0f24; cursor: pointer; }
+.splash .start:hover { background: #ff7cb4; }
+.splash .start:focus-visible { outline: 6px solid #fff; outline-offset: 6px; }
+.splash .start:active { transform: translate(6px, 6px); box-shadow: 4px 4px 0 #2a0f24; }
+
+.splash .poll, .splash .idol { left: 1260px; width: 600px; height: 290px; padding: 34px 40px; }
+.splash .poll { top: 190px; }
+.splash .idol { top: 520px; background: #1f1020; color: #fff3f8; box-shadow: 12px 12px 0 #ff5fa2; }
+.splash .tag { margin: 0; font: 700 26px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase; color: #d81b6a; }
+.splash .idol .tag { color: #ff5fa2; }
+.splash .q { margin: 16px 0 0; font: 700 56px/1.05 var(--cond); }
+.splash .idol .q { font-size: 40px; }
+.splash .idol .q b { font: 400 64px/1.1 'Bangers', var(--cond); letter-spacing: .04em; color: #ff5fa2; }
+.splash .bars { margin-top: 30px; display: grid; grid-template-columns: 51fr 49fr; border: 4px solid #2a0f24; border-radius: 10px; overflow: hidden; }
+.splash .bars span { font: 700 26px/1 var(--cond); padding: 18px 14px; white-space: nowrap; }
+.splash .bars .sweet { background: #ffd84d; }
+.splash .bars .sour { background: #b8174a; color: #fff; }
+.splash .sil { position: absolute; right: 30px; bottom: 0; display: flex; gap: 8px; align-items: flex-end; }
+.splash .sil i { display: block; width: 42px; height: 104px; border-radius: 21px 21px 5px 5px; background: #ff5fa2; }
+.splash .sil i:nth-child(even) { background: #000; box-shadow: 0 0 0 3px #ff5fa2 inset; height: 116px; }
+
+.splash .strip .mini { top: 860px; width: 560px; height: 150px; display: flex; align-items: center; justify-content: center; gap: 12px;
+  font: 700 34px/1.1 var(--cond); text-align: center; padding: 0 24px; background: #ffe3ef; }
+.splash .strip .mini:nth-child(1) { left: 60px; }
+.splash .strip .mini:nth-child(2) { left: 680px; }
+.splash .strip .mini:nth-child(3) { left: 1300px; }
+
+.splash .void { position: absolute; inset: 0; background: #07040a; opacity: 0;
+  background-image: repeating-linear-gradient(to bottom, rgba(255, 255, 255, .05) 0 2px, transparent 2px 6px);
+  display: grid; place-items: center; }
+.splash .void span { font: 400 44px/1 'JetBrains Mono', monospace; letter-spacing: .5em; color: rgba(255, 255, 255, .38); margin-top: -300px; }
+
+/* the collapse: end pose on the element, a stepped 4-frame path to it (step-end per 500 ms segment) */
+.splash.collapsed .card { transform: translate(var(--x), var(--y)) rotate(var(--r));
+  animation: gob-fall 2000ms both; box-shadow: 12px 12px 0 #5a1f3c; }
+.splash.collapsed .void { opacity: 1; animation: gob-void 2000ms both; }
+@keyframes gob-fall {
+  0% { transform: none; animation-timing-function: step-end; }
+  25% { transform: translate(calc(var(--x) * .05), calc(var(--y) * .03)) rotate(calc(var(--r) * .35)); animation-timing-function: step-end; }
+  50% { transform: translate(calc(var(--x) * .22), calc(var(--y) * .2)) rotate(calc(var(--r) * .6)); animation-timing-function: step-end; }
+  75% { transform: translate(calc(var(--x) * .58), calc(var(--y) * .56)) rotate(calc(var(--r) * .85)); animation-timing-function: step-end; }
+}
+@keyframes gob-void { 0% { opacity: 0; animation-timing-function: step-end; } 25% { opacity: 1; } }
