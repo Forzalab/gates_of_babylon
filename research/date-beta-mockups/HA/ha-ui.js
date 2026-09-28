@@ -22,6 +22,23 @@
       ${next ? '<span class="next" aria-hidden="true">▸</span>' : ''}</div>`;
   }
 
+  // R2c icon set (white, 1 px dark outline), drawn fresh in SVG
+  const I = (inner) => `<svg viewBox="0 0 100 100" aria-hidden="true">${inner}</svg>`;
+  const L = (d) => `<path class="lno" d="${d}"/><path class="ln" d="${d}"/>`;
+  const ICON = {
+    play: I('<path d="M32,20 L80,50 L32,80 Z"/>'),
+    pause: I('<rect x="24" y="20" width="18" height="60" rx="8"/><rect x="58" y="20" width="18" height="60" rx="8"/>'),
+    stop: I('<rect x="22" y="22" width="56" height="56" rx="12"/>'),
+    back: I('<path d="M70,20 L22,50 L70,80 Z"/>'),
+    check: I(L('M20,52 L42,72 L82,28')),
+    list: I('<circle cx="20" cy="26" r="7"/><circle cx="20" cy="50" r="7"/><circle cx="20" cy="74" r="7"/>' + L('M36,26 H82 M36,50 H82 M36,74 H82')),
+    retry: I(L('M74,40 A28,28 0 1 0 72,66') + '<path d="M60,30 L86,26 L80,52 Z"/>'),
+    gear: I('<path d="M44,8 h12 l3,12 l9,4 l11,-6 l8,8 l-6,11 l4,9 l12,3 v12 l-12,3 l-4,9 l6,11 l-8,8 l-11,-6 l-9,4 l-3,12 h-12 l-3,-12 l-9,-4 l-11,6 l-8,-8 l6,-11 l-4,-9 l-12,-3 v-12 l12,-3 l4,-9 l-6,-11 l8,-8 l11,6 l9,-4 Z M50,36 a14,14 0 1 0 0.1,0 Z" fill-rule="evenodd"/>'),
+    grid: I([20, 50, 80].map((y) => [20, 50, 80].map((x) => `<circle cx="${x}" cy="${y}" r="9"/>`).join('')).join('')),
+  };
+  const gicon = (k, { cls = '', style } = {}) => `<button class="gl gicon ${cls}" aria-label="${k}" style="${st(style)}">${ICON[k]}</button>`;
+  const gpill = (label, { cls = '', style } = {}) => `<button class="gl gpill ${cls}" style="${st(style)}"><span class="lbl">${or(label)}</span>${/is-refused/.test(cls) ? '<span aria-hidden="true">✕</span>' : ''}</button>`;
+
   // pink's lead: a resistor squiggle from a heart rail (shape only, no label)
   const pullup = `<svg class="pullup" viewBox="0 0 80 170" aria-hidden="true">
       <path class="heart" d="M40,34 C22,20 20,6 30,4 C35,3 40,8 40,12 C40,8 45,3 50,4 C60,6 58,20 40,34 Z"/>
@@ -35,8 +52,8 @@
     const replay = state.purple === 'disabled' || state.purple === 'replay';
     return `<div class="choices${replay ? ' has-replay' : ''}" style="${st(style)}">
       ${pullup}
-      <button class="choice pink is-default${s('pink')}${/OR/.test(pink) ? ' hasor' : ''}"><span class="key">1</span><span class="line">${or(pink)}</span></button>
-      <button class="choice purple${/OR/.test(purple) ? ' hasor' : ''}${replay ? ' is-replay' : s('purple')}"${replay ? ' aria-disabled="true" aria-label="already refused"' : ''}><span class="key">2</span><span class="line">${or(purple)}</span>${replay ? '<span class="x" aria-hidden="true">✕</span>' : ''}${nclead}</button>
+      <button class="choice gl pink is-default${s('pink')}${/OR/.test(pink) ? ' hasor' : ''}"><span class="key">1</span><span class="line">${or(pink)}</span></button>
+      <button class="choice gl purple${/OR/.test(purple) ? ' hasor' : ''}${replay ? ' is-replay' : s('purple')}"${replay ? ' aria-disabled="true" aria-label="already refused"' : ''}><span class="key">2</span><span class="line">${or(purple)}</span>${replay ? '<span class="x" aria-hidden="true">✕</span>' : ''}${nclead}</button>
       ${noTimer ? '' : `<div class="timer" style="--t:${t}"><i></i><span class="secs">${secs}</span></div>`}
     </div>`;
   }
@@ -45,7 +62,7 @@
   function chrome({ on = [], style, open = false } = {}) {
     const row = (k, label) => `<button class="${on.includes(k) ? 'on' : ''}" aria-pressed="${on.includes(k)}">${label}<span>${on.includes(k) ? 'on' : 'off'}</span></button>`;
     return `<nav class="meta" aria-label="player controls" style="${st(style)}">
-      <button class="menu${open ? ' on' : ''}" aria-label="menu" aria-expanded="${open}">☰</button><button class="skip" aria-label="skip scene">skip ▶▶</button></nav>
+      <button class="menu gl gicon${open ? ' on' : ''}" aria-label="menu" aria-expanded="${open}">${ICON.list}</button><button class="skip gl" aria-label="skip scene">skip ▶▶</button></nav>
       ${open ? `<div class="menupop" role="menu">${row('cc', 'Captions')}${row('rm', 'Still mode')}${row('mute', 'Mute')}${row('fs', 'Fullscreen')}</div>` : ''}`;
   }
   // the date HUD tile (top-left): portrait + a heart counter that corrupts. d0 "♥ 4/5" → d2 "LEAVES 0/∞"
@@ -80,5 +97,5 @@
       <div class="ava" style="width:64px;height:64px;border-radius:50%;overflow:hidden;background:var(--purple-deep);flex:none">${A.xor()}</div>
       <div><div class="app">Figur Talk</div><div class="body"><b>${title}</b> ${or(body)}</div></div></div>`;
 
-  Object.assign(U, { dlg, choices, chrome, cw, pause, pinerr, notif, datehud, sticker });
+  Object.assign(U, { gicon, gpill, ICON, dlg, choices, chrome, cw, pause, pinerr, notif, datehud, sticker });
 })();
