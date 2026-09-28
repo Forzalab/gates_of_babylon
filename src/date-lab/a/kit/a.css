@@ -1,0 +1,77 @@
+/* Builder A shared layer: palette tokens, the OR rule, dialogue line, HUD chips, purple bleed, grades.
+   Stage px (1920 x 1080). Motion: drawn things step (8 fps grid, >= 500 ms poses); camera/fades/text smooth.
+   Reduced motion: lab .rm kills every animation/transition; components also branch on the rm prop for hard cuts. */
+.aroot {
+  position: absolute; inset: 0; overflow: hidden; background: #07060b; color: #f4eef6;
+  font-family: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+  --pink: #ff5fa2; --purple: #8a5cf6; --her: #f0243f; --ink: #f4eef6;
+  --jp: 'Hiragino Kaku Gothic StdN', 'Hiragino Sans', 'Yu Gothic', 'Noto Sans CJK JP', 'IPAGothic', sans-serif;
+  --jp-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK JP', 'IPAMincho', serif;
+  --cond: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+  /* sprite roles: main's Kawaii tokens (mockups A/theme.css) */
+  --art-stroke: #4a2347; --art-sw: 4px; --art-sw-thin: 2.5px; --art-sw-fat: 7px;
+  --c-hair: #e9ebf6; --c-hair2: #aeb3d3; --c-hairhl: #ffffff; --s-hair2: #9ea3c8;
+  --c-skin: #ffece3; --c-skin2: #f7cdc0; --c-white: #ffffff; --c-iris: #d6337f; --c-iris2: #ff9cc8; --c-pupil: #3d0b2c;
+  --c-lash: #3a1d3f; --s-lash: #3a1d3f; --c-blush: #ff8fb8; --c-mouth: #c93d64;
+  --c-cloth: #ffffff; --c-cloth2: #cfc7ff; --c-collar: #8a7ff0; --c-stripe: #fff; --s-stripe: #ffffff; --c-ribbon: #ff5fa2;
+  --c-tie: #ffffff; --c-pin: #ff5fa2; --c-tear: #9fe0ff; --s-tear: #5fb8e6; --c-shade: rgba(58, 29, 63, .55);
+  --c-sil: #05060c; --s-sil: #05060c; --c-eye: #f0243f;
+  --c-metal: #d9d2ea; --c-wall: #ffd1e4; --c-wall2: #f7b6d2; --c-floor: #ffc2dc; --c-floor2: #e893ba; --s-floor2: #e27fae;
+  --c-glass: #a9dcff; --c-seat: #ff7fb0; --c-light: #fff6fb; --c-wood: #ffcfa8; --c-wood2: #f4a97e; --c-tile: #fff0f6;
+  --c-cup: #ffffff; --c-tea: #b8e08a; --c-steam: none; --s-steam: #ffffff; --c-plum: #e8335c; --c-egg: #ffd84d; --c-mochi: #fff4f8;
+  --c-phone: #3a1d3f; --c-screen: #fff0f7; --c-hand: #ffe2d6; --c-hand2: #e8b8a8; --c-sleeve: #bfe3ff;
+  --c-paper: #fffdf6; --c-frame: #ff9cc8; --c-candle: #fff; --c-flame: #ffc53d; --c-night: #6f63c9;
+  --c-shoe: #6d3a2c; --c-shoe2: #3a1d3f; --c-slipper: #9fd4ff; --c-strap: #ffffff; --c-accent: #ff5fa2; --s-accent: #ff5fa2;
+}
+.aroot * { box-sizing: border-box; }
+.aroot svg { display: block; }
+.aroot .full { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+
+/* pin states (her mood light), from main's theme */
+.pin-hum .pinbub { fill: var(--pink); } .pin-hum .pinglow { fill: var(--pink); opacity: .45; }
+.pin-flicker .pinbub { fill: #ffd0e4; } .pin-flicker .pinglow { fill: var(--pink); opacity: .2; }
+.pin-red .pinbub { fill: var(--her); } .pin-red .pinglow { fill: var(--her); opacity: .5; }
+.pin-off .pinbub { fill: #b9b2c4; } .pin-off .pinglow { opacity: 0; }
+
+/* the OR rule: her red, 1px offset, a dark ghost 2px behind (+ the breath caption for screen readers) */
+.aroot .or { color: var(--her); position: relative; left: 1px; top: 1px; text-shadow: 2px 0 0 rgba(90, 0, 18, .55); }
+.aroot .or-svg { fill: var(--her); }
+
+/* dialogue line (variants restyle) */
+.a-line { position: absolute; left: 50%; bottom: 60px; transform: translateX(-50%); width: 1300px; min-height: 130px; padding: 30px 54px;
+  background: rgba(12, 8, 18, .84); border: 2px solid rgba(255, 255, 255, .2); border-radius: 16px; display: flex; align-items: center;
+  font: 400 48px/1.25 var(--cond); pointer-events: none; animation: a-fade 260ms ease-out both; }
+.a-line b.who { position: absolute; top: -24px; left: 46px; font: 700 28px/1 var(--cond); letter-spacing: .08em; padding: 10px 20px;
+  border-radius: 999px; background: #d9e6ff; color: #0e1630; }
+.a-line.who-nanda b.who { background: var(--pink); color: #2a0615; }
+.a-line.narr p { font-style: italic; color: #e6deea; }
+.a-line p { margin: 0; }
+@keyframes a-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* caption strip for camera pieces: lower third, subtitle style */
+.a-sub { position: absolute; left: 0; right: 0; bottom: 70px; text-align: center; font: 400 46px/1.3 var(--cond); color: #fff;
+  text-shadow: 0 2px 0 #000, 0 0 18px rgba(0, 0, 0, .8); pointer-events: none; animation: a-fade 400ms ease-out both; }
+
+/* HUD chips (replay, hints): small, bottom-right, never over the art's centre */
+.a-hud { position: absolute; right: 26px; bottom: 20px; display: flex; gap: 10px; z-index: 50; }
+.a-hud button, .a-chip { font: 700 22px/1 var(--cond); letter-spacing: .08em; color: #fff; background: rgba(0, 0, 0, .5);
+  border: 1px solid rgba(255, 255, 255, .35); border-radius: 8px; padding: 10px 14px; cursor: pointer; }
+.a-hud button:focus-visible { outline: 3px solid var(--pink); outline-offset: 2px; }
+.a-tag { position: absolute; left: 26px; top: 30px; font: 700 20px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255, 255, 255, .55); z-index: 50; pointer-events: none; }
+
+/* purple bleed: one 334 ms step, not a flicker */
+.a-bleed { position: absolute; inset: 0; background: var(--purple); mix-blend-mode: color; opacity: .75; pointer-events: none; z-index: 40; }
+.a-pinkwash { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 60%, rgba(255, 95, 162, .35), rgba(255, 95, 162, 0) 70%); pointer-events: none; z-index: 39; }
+
+/* letterbox bars: animate height smoothly (camera language), rm = hard cut via .rm */
+.a-bars::before, .a-bars::after { content: ''; position: absolute; left: 0; right: 0; height: var(--bar, 0px); background: #000; z-index: 45;
+  transition: height 900ms cubic-bezier(.45, 0, .2, 1); pointer-events: none; }
+.a-bars::before { top: 0; } .a-bars::after { bottom: 0; }
+
+/* film grain: a still noise tile (no motion), and a vignette */
+.a-vig { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 0, 0, .55) 100%); z-index: 30; }
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+/* main's scene components (date-beta/art) render as .art: pin them to the full stage */
+.aroot .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.aroot .art > svg { width: 100%; height: 100%; display: block; }

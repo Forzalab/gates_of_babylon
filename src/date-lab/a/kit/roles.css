@@ -1,0 +1,65 @@
+/* Role classes for the ported Nanda sprite (kit/art.js). Generated from ROLES; palette = main's Kawaii tokens (mockups A/theme.css).
+   Defaults live on .aroot (every builder-A variant root). A grade wrapper (.grade-*) re-maps roles so she is lit like the BG. */
+.k-hair{fill:var(--c-hair);stroke:var(--s-hair,var(--art-stroke));}
+.k-hair2{fill:var(--c-hair2);stroke:var(--s-hair2,var(--art-stroke));}
+.k-hairhl{fill:var(--c-hairhl);stroke:var(--s-hairhl,var(--art-stroke));}
+.k-skin{fill:var(--c-skin);stroke:var(--s-skin,var(--art-stroke));}
+.k-skin2{fill:var(--c-skin2);stroke:var(--s-skin2,var(--art-stroke));}
+.k-white{fill:var(--c-white);stroke:var(--s-white,var(--art-stroke));}
+.k-iris{fill:var(--c-iris);stroke:var(--s-iris,var(--art-stroke));}
+.k-iris2{fill:var(--c-iris2);stroke:var(--s-iris2,var(--art-stroke));}
+.k-pupil{fill:var(--c-pupil);stroke:var(--s-pupil,var(--art-stroke));}
+.k-lash{fill:var(--c-lash);stroke:var(--s-lash,var(--art-stroke));}
+.k-blush{fill:var(--c-blush);stroke:var(--s-blush,var(--art-stroke));}
+.k-mouth{fill:var(--c-mouth);stroke:var(--s-mouth,var(--art-stroke));}
+.k-cloth{fill:var(--c-cloth);stroke:var(--s-cloth,var(--art-stroke));}
+.k-cloth2{fill:var(--c-cloth2);stroke:var(--s-cloth2,var(--art-stroke));}
+.k-collar{fill:var(--c-collar);stroke:var(--s-collar,var(--art-stroke));}
+.k-stripe{fill:var(--c-stripe);stroke:var(--s-stripe,var(--art-stroke));}
+.k-ribbon{fill:var(--c-ribbon);stroke:var(--s-ribbon,var(--art-stroke));}
+.k-tie{fill:var(--c-tie);stroke:var(--s-tie,var(--art-stroke));}
+.k-pin{fill:var(--c-pin);stroke:var(--s-pin,var(--art-stroke));}
+.k-tear{fill:var(--c-tear);stroke:var(--s-tear,var(--art-stroke));}
+.k-shade{fill:var(--c-shade);stroke:var(--s-shade,var(--art-stroke));}
+.k-sil{fill:var(--c-sil);stroke:var(--s-sil,var(--art-stroke));}
+.k-eye{fill:var(--c-eye);stroke:var(--s-eye,var(--art-stroke));}
+.k-metal{fill:var(--c-metal);stroke:var(--s-metal,var(--art-stroke));}
+.k-wall{fill:var(--c-wall);stroke:var(--s-wall,var(--art-stroke));}
+.k-wall2{fill:var(--c-wall2);stroke:var(--s-wall2,var(--art-stroke));}
+.k-floor{fill:var(--c-floor);stroke:var(--s-floor,var(--art-stroke));}
+.k-floor2{fill:var(--c-floor2);stroke:var(--s-floor2,var(--art-stroke));}
+.k-glass{fill:var(--c-glass);stroke:var(--s-glass,var(--art-stroke));}
+.k-seat{fill:var(--c-seat);stroke:var(--s-seat,var(--art-stroke));}
+.k-light{fill:var(--c-light);stroke:var(--s-light,var(--art-stroke));}
+.k-wood{fill:var(--c-wood);stroke:var(--s-wood,var(--art-stroke));}
+.k-wood2{fill:var(--c-wood2);stroke:var(--s-wood2,var(--art-stroke));}
+.k-tile{fill:var(--c-tile);stroke:var(--s-tile,var(--art-stroke));}
+.k-cup{fill:var(--c-cup);stroke:var(--s-cup,var(--art-stroke));}
+.k-tea{fill:var(--c-tea);stroke:var(--s-tea,var(--art-stroke));}
+.k-steam{fill:var(--c-steam);stroke:var(--s-steam,var(--art-stroke));}
+.k-plum{fill:var(--c-plum);stroke:var(--s-plum,var(--art-stroke));}
+.k-egg{fill:var(--c-egg);stroke:var(--s-egg,var(--art-stroke));}
+.k-mochi{fill:var(--c-mochi);stroke:var(--s-mochi,var(--art-stroke));}
+.k-phone{fill:var(--c-phone);stroke:var(--s-phone,var(--art-stroke));}
+.k-screen{fill:var(--c-screen);stroke:var(--s-screen,var(--art-stroke));}
+.k-xhair{fill:var(--c-xhair);stroke:var(--s-xhair,var(--art-stroke));}
+.k-xhair2{fill:var(--c-xhair2);stroke:var(--s-xhair2,var(--art-stroke));}
+.k-hood{fill:var(--c-hood);stroke:var(--s-hood,var(--art-stroke));}
+.k-hood2{fill:var(--c-hood2);stroke:var(--s-hood2,var(--art-stroke));}
+.k-cans{fill:var(--c-cans);stroke:var(--s-cans,var(--art-stroke));}
+.k-hand{fill:var(--c-hand);stroke:var(--s-hand,var(--art-stroke));}
+.k-hand2{fill:var(--c-hand2);stroke:var(--s-hand2,var(--art-stroke));}
+.k-sleeve{fill:var(--c-sleeve);stroke:var(--s-sleeve,var(--art-stroke));}
+.k-paper{fill:var(--c-paper);stroke:var(--s-paper,var(--art-stroke));}
+.k-frame{fill:var(--c-frame);stroke:var(--s-frame,var(--art-stroke));}
+.k-candle{fill:var(--c-candle);stroke:var(--s-candle,var(--art-stroke));}
+.k-flame{fill:var(--c-flame);stroke:var(--s-flame,var(--art-stroke));}
+.k-night{fill:var(--c-night);stroke:var(--s-night,var(--art-stroke));}
+.k-shoe{fill:var(--c-shoe);stroke:var(--s-shoe,var(--art-stroke));}
+.k-shoe2{fill:var(--c-shoe2);stroke:var(--s-shoe2,var(--art-stroke));}
+.k-slipper{fill:var(--c-slipper);stroke:var(--s-slipper,var(--art-stroke));}
+.k-strap{fill:var(--c-strap);stroke:var(--s-strap,var(--art-stroke));}
+.k-accent{fill:var(--c-accent);stroke:var(--s-accent,var(--art-stroke));}
+.ka .ln{fill:none!important;stroke-linecap:round;stroke-linejoin:round}
+.ka *{stroke-width:var(--art-sw);stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke}
+.ka .thin{stroke-width:var(--art-sw-thin)}.ka .fat{stroke-width:var(--art-sw-fat)}.ka .nostroke{stroke:none!important}
