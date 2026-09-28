@@ -1,0 +1,73 @@
+/* menu-4 Bandersnatch letterbox. Smooth = camera + bars + UI fades (lab .rm turns them into hard cuts). */
+.m4 .m4-cam { position: absolute; inset: 0; transform-origin: 1290px 520px; transform: none; transition: transform 900ms ease-out; }
+.m4 .m4-cam.in { transform: scale(1.08); transition: transform 5200ms linear; }
+.m4 .m4-cam.in2 { transform-origin: 1560px 520px; transform: scale(1.32); transition: transform 2600ms cubic-bezier(.45, 0, .2, 1); }
+.m4 .m4-cam.face { transform-origin: 1000px 400px; transform: scale(2.3); transition: none; } /* reaction: a hard cut-in */
+.m4 .m4-her .k-sil { stroke: rgba(255, 214, 150, .45); stroke-width: 3px; paint-order: stroke; } /* rim from the door lamp */
+.m4 .m4-her .eyes { opacity: 0; }
+.m4 .m4-her .eyes-on .eyes { opacity: 1; }
+.m4 .m4-her .pinbub { fill: var(--pink); }
+.m4.ph-purple .m4-her .pinbub { fill: var(--her); }
+
+/* film grade: cool shadows, warm door, soft vignette */
+.m4 .m4-grade { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 62% 45%, rgba(255, 200, 120, .06), transparent 60%),
+    radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(0, 4, 20, .6)); mix-blend-mode: normal; }
+
+/* letterbox */
+.m4 .m4-bar-top, .m4 .m4-bar-bot { position: absolute; left: 0; right: 0; background: #000; z-index: 50;
+  transition: height 700ms cubic-bezier(.3, 0, .2, 1); }
+.m4 .m4-bar-top { top: 0; }
+.m4 .m4-bar-bot { bottom: 0; }
+.m4 .m4-bar-bot::before { content: ''; position: absolute; left: 0; right: 0; top: -90px; height: 90px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, .65)); }
+
+/* cinema subtitles, not a VN box */
+.m4 .m4-sub { position: absolute; left: 0; right: 0; margin: 0; text-align: center; z-index: 60; pointer-events: none;
+  font: 400 46px/1.2 'Inter Tight', var(--cond); color: #fff; letter-spacing: .005em;
+  text-shadow: 0 2px 0 #000, 0 0 12px rgba(0, 0, 0, .9); transition: bottom 700ms cubic-bezier(.3, 0, .2, 1); }
+.m4 .m4-who { font: 800 26px/1 'Inter Tight', var(--cond); letter-spacing: .14em; color: var(--pink); margin-right: 18px; vertical-align: 6px; }
+
+/* the choice */
+.m4 .m4-menu { position: absolute; left: 0; right: 0; bottom: 0; z-index: 65; animation: m4-in 500ms ease-out both; }
+@keyframes m4-in { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+.m4 .m4-timer { position: absolute; left: 260px; width: 1400px; top: 34px; height: 10px; }
+.m4 .m4-bar { position: absolute; left: 0; top: 0; bottom: 0; border-radius: 5px;
+  background: linear-gradient(90deg, var(--pink), #ffd3e6 40%, #fff); box-shadow: 0 0 14px rgba(255, 95, 162, .6); }
+.m4 .m4-head { position: absolute; top: -15px; width: 80px; height: 40px; margin-left: -40px; }
+.m4 .m4-timer.blocks { display: flex; gap: 14px; }
+.m4 .m4-timer.blocks i { flex: 1; height: 10px; border-radius: 5px; background: rgba(255, 255, 255, .12); }
+.m4 .m4-timer.blocks i.on { background: #fff; }
+.m4 .m4-timer.blocks i.on:first-child { background: var(--pink); }
+
+.m4 .m4-opts { position: absolute; left: 260px; width: 1400px; top: 82px; height: 110px; display: flex; align-items: center; gap: 0; }
+.m4 .m4-opt { position: relative; flex: 0 0 600px; height: 110px; overflow: hidden; cursor: pointer; border-radius: 4px;
+  background: rgba(0, 0, 0, .35); border: 3px solid rgba(255, 255, 255, .7); color: #fff;
+  font: 400 48px/1 'Inter Tight', var(--cond); display: flex; align-items: center; justify-content: center; gap: 22px;
+  transition: transform 180ms ease-out, box-shadow 180ms ease-out, opacity 300ms; }
+.m4 .m4-opt.pink { border-color: var(--pink); }
+.m4 .m4-opt.purple { border-color: var(--purple); }
+.m4 .m4-opt.focus { transform: scale(1.03); box-shadow: 0 0 0 4px #fff, 0 0 28px rgba(255, 255, 255, .35); }
+.m4 .m4-opt.pink.focus { box-shadow: 0 0 0 4px #fff, 0 0 36px rgba(255, 95, 162, .7); }
+.m4 .m4-opt.purple.focus { box-shadow: 0 0 0 4px #fff, 0 0 36px rgba(138, 92, 246, .7); }
+.m4 .m4-fill { position: absolute; left: 0; right: 0; bottom: 0; background: linear-gradient(0deg, #ff5fa2, #ff8cc0); z-index: 0; }
+.m4 .m4-key, .m4 .m4-label { position: relative; z-index: 1; }
+.m4 .m4-key { font: 700 24px/1 var(--mono); border: 2px solid currentColor; border-radius: 6px; padding: 5px 9px; opacity: .8; }
+.m4 .m4-opt.off { opacity: .38; cursor: not-allowed; border-style: dashed; }
+.m4 .m4-opt.off .m4-label { text-decoration: line-through; text-decoration-color: var(--her); text-decoration-thickness: 4px; }
+.m4 .m4-opt.off::after { content: 'LOCKED'; position: absolute; right: 14px; top: 10px; font: 700 16px/1 var(--mono); letter-spacing: .2em; color: var(--her); }
+.m4 .m4-or { flex: 1; text-align: center; font: 800 40px/1 'Inter Tight', var(--cond); letter-spacing: .04em; }
+
+.m4 .m4-rewbtn { position: absolute; right: 40px; bottom: 44px; z-index: 70; }
+.m4 .m4-hint { right: 44px; bottom: 54px; }
+.m4 .m4-slate { position: absolute; left: 40px; bottom: 14px; margin: 0; z-index: 70; font: 400 16px/1 var(--mono); color: rgba(255, 255, 255, .35); }
+
+/* her rewind: VHS tracking bands roll smoothly (no flashing); the picture desaturates */
+.m4.rew .m4-cam { filter: saturate(.3) contrast(1.25) brightness(.9); transform: scaleX(1.02); }
+.m4 .m4-rew { position: absolute; inset: 0; z-index: 55; pointer-events: none; overflow: hidden; }
+.m4 .m4-rew b { position: absolute; left: 90px; top: 170px; font: 700 64px/1 var(--mono); color: #fff; text-shadow: 3px 0 0 #f0243f, -3px 0 0 #3af; letter-spacing: .06em; }
+.m4 .m4-rew .band { position: absolute; left: 0; right: 0; height: 90px; top: -120px;
+  background: repeating-linear-gradient(0deg, rgba(255, 255, 255, .22) 0 3px, rgba(0, 0, 0, .3) 3px 7px);
+  animation: m4-roll 1400ms linear infinite; }
+.m4 .m4-rew .band.b2 { height: 40px; animation-delay: -600ms; }
+@keyframes m4-roll { to { transform: translateY(1300px); } }
