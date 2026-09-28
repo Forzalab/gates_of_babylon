@@ -1,0 +1,27 @@
+/* menu-2 TRUTH TABLE: dead-frontal door (planimetric), a napkin taped at eye level. Pencil = MC (mono), red pen = her (script). */
+.truth .plate { font: 700 36px/1 var(--cond); fill: #3a302a; letter-spacing: .04em; }
+.truth .pencil { stroke: #4b4a52; fill: none; stroke-linecap: round; }
+.truth .pencil text { stroke: none; fill: #4b4a52; }
+.truth .p-title { font: 400 38px/1 'JetBrains Mono', monospace; letter-spacing: -.01em; }
+.truth .p-head { font: 700 34px/1 'JetBrains Mono', monospace; }
+.truth .p-sub { font: 400 26px/1 'JetBrains Mono', monospace; }
+.truth .p-note { font: 400 24px/1 'JetBrains Mono', monospace; }
+.truth .pencil .p-opt { font: 400 37px/1 'JetBrains Mono', monospace; letter-spacing: -.04em; }
+.truth .pencil .p-opt.pink { fill: #c2306f; } .truth .pencil .p-opt.purple { fill: #6a45d6; }
+.truth .redpen .r-num { font: 400 86px/1 'Yellowtail', cursive; fill: var(--her); }
+.truth .redpen .r-heart { fill: none; stroke: var(--her); stroke-width: 1.4px; }
+.truth .r-circle { stroke: var(--her); fill: none; opacity: .9; }
+.truth .r-circle.wide { stroke-width: 4px; stroke: var(--pink); }
+.truth .redpen .r-note { font: 400 36px/1 'Yellowtail', cursive; fill: var(--her); }
+.truth .tick { fill: none; stroke: #2f2e36; stroke-width: 9px; stroke-linecap: round; stroke-linejoin: round; }
+.truth .tick.red { stroke: var(--her); }
+.truth .ruleout { stroke: var(--her); stroke-width: 7px; stroke-linecap: round; opacity: .85; }
+.truth .pen-brand { font: 400 22px/1 'Yellowtail', cursive; fill: #ffd0dc; }
+
+/* row buttons: invisible hit areas over the napkin rows, a pencil-grey hover wash */
+.truth .row { position: absolute; background: transparent; border: 0; border-radius: 10px; cursor: pointer; transition: background 200ms ease, box-shadow 200ms ease; }
+.truth .row-pink:not(:disabled):hover, .truth .row-pink:focus-visible { background: rgba(255, 95, 162, .1); box-shadow: inset 0 0 0 3px rgba(255, 95, 162, .6); outline: none; }
+.truth .row-purple:not(:disabled):hover, .truth .row-purple:focus-visible { background: rgba(138, 92, 246, .1); box-shadow: inset 0 0 0 3px rgba(138, 92, 246, .6); outline: none; }
+.truth .row:disabled { cursor: default; }
+.truth .a-line { background: rgba(28, 24, 22, .9); border-color: rgba(246, 241, 230, .35); }
+.truth.picked-purple svg { filter: saturate(.7) brightness(.9); }

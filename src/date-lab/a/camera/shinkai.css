@@ -1,0 +1,13 @@
+/* cam-1 Shinkai: grades are light, not filters. Saturated skies, warm bloom, blue rain. */
+.shinkai .flare { mix-blend-mode: screen; }
+.shinkai .bloom { mix-blend-mode: screen; }
+.shinkai .g-noon { background: radial-gradient(ellipse 80% 60% at 92% 0%, rgba(255, 244, 210, .55), rgba(255, 244, 210, 0) 60%); mix-blend-mode: screen; }
+.shinkai .g-dusk { background: linear-gradient(#3a2a7a 0%, #b04a8a 38%, #ff8a5c 70%, #ffd08a 100%); mix-blend-mode: multiply; opacity: .92; }
+.shinkai .g-night { background: linear-gradient(#070b2a 0%, #1a2466 55%, #3a3f86 100%); mix-blend-mode: multiply; }
+.shinkai .g-dusk-in { background: linear-gradient(100deg, rgba(255, 150, 90, .5), rgba(120, 60, 140, .45) 60%, rgba(40, 20, 60, .5)); mix-blend-mode: multiply; }
+.shinkai .beam { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: screen; z-index: 21;
+  background: linear-gradient(118deg, transparent 18%, rgba(255, 190, 120, .32) 26%, transparent 36%, transparent 44%, rgba(255, 190, 120, .2) 50%, transparent 58%); }
+.shinkai .g-blue { background: linear-gradient(rgba(40, 70, 190, .15), rgba(10, 20, 80, .3)); mix-blend-mode: multiply; }
+.shinkai .g-warm { background: radial-gradient(ellipse 60% 80% at 75% 20%, rgba(255, 200, 120, .25), rgba(0, 0, 0, 0) 70%), linear-gradient(rgba(30, 20, 60, .1), rgba(10, 10, 30, .35));
+  mix-blend-mode: soft-light; }
+.shinkai .lensrain { mix-blend-mode: screen; }

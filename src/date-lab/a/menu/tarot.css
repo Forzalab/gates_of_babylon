@@ -1,0 +1,87 @@
+/* menu-1 TAROT. Jewel tones (Suspiria), candle key light from the centre, her card warm, yours cold. */
+.tarot .bg { position: absolute; inset: 0; transition: filter 900ms ease; }
+.tarot .bg > .art { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.tarot.st-deal .bg, .tarot.st-table .bg { filter: blur(9px) brightness(.42) saturate(.8); }
+.tarot .dim { position: absolute; inset: 0; opacity: 0; transition: opacity 900ms ease;
+  background: radial-gradient(ellipse 60% 70% at 50% 46%, rgba(255, 190, 120, .16), rgba(20, 6, 18, .7) 70%, rgba(8, 2, 8, .92)); }
+.tarot.st-deal .dim, .tarot.st-table .dim { opacity: 1; }
+/* velvet cloth: the lower half, plum with a soft candle pool */
+.tarot .cloth { position: absolute; left: -40px; right: -40px; top: 560px; bottom: -40px; opacity: 0; transition: opacity 900ms ease;
+  background: radial-gradient(ellipse 50% 40% at 50% 10%, rgba(255, 170, 110, .28), transparent 70%),
+    repeating-linear-gradient(90deg, rgba(0, 0, 0, .12) 0 3px, transparent 3px 22px), linear-gradient(#4a1236, #22061a);
+  border-top: 3px solid #d6a93f; box-shadow: 0 -30px 80px rgba(0, 0, 0, .6); }
+.tarot.st-deal .cloth, .tarot.st-table .cloth { opacity: 1; }
+
+.tarot .spread { position: absolute; inset: 0; }
+.tarot .card { position: absolute; top: 96px; width: 396px; height: 666px; padding: 0; border: 0; background: none; cursor: pointer;
+  perspective: 1800px; transform-style: preserve-3d; font: inherit; color: inherit;
+  transition: transform 700ms cubic-bezier(.3, .7, .2, 1), opacity 500ms ease, filter 500ms ease; }
+.tarot .card.her { left: 452px; } .tarot .card.yours { left: 1072px; }
+.tarot .cardface { position: absolute; inset: 0; border-radius: 22px; backface-visibility: hidden; transition: transform 700ms cubic-bezier(.3, .7, .2, 1); }
+.tarot .cardface svg { width: 100%; height: 100%; display: block; border-radius: 22px; }
+.tarot .cardface.flip { transform: rotateY(180deg); }
+.tarot .card.flipped .cardface:not(.flip), .tarot .card.her.off .cardface:not(.flip) { transform: rotateY(-180deg); }
+.tarot .card.flipped .cardface.flip, .tarot .card.her.off .cardface.flip { transform: rotateY(0deg); }
+.tarot .card.her .cardface { box-shadow: 0 0 0 3px #ffd8e8, 0 0 70px 14px rgba(255, 95, 162, .55), 0 26px 40px rgba(0, 0, 0, .6); }
+.tarot .card.yours .cardface { box-shadow: 0 0 0 3px #3a2a5a, 0 0 40px 4px rgba(138, 92, 246, .3), 0 26px 40px rgba(0, 0, 0, .7); }
+.tarot .card:not(:disabled):hover, .tarot .card:not(:disabled):focus-visible { transform: translateY(-26px); outline: none; }
+.tarot .card.yours:not(:disabled):hover .cardface, .tarot .card.yours:not(:disabled):focus-visible .cardface { box-shadow: 0 0 0 4px #b7a4e8, 0 0 60px 10px rgba(138, 92, 246, .55), 0 26px 40px rgba(0, 0, 0, .7); }
+.tarot .card .key { position: absolute; left: 50%; bottom: -30px; transform: translateX(-50%); font: 700 22px/1 var(--cond); width: 40px; height: 40px;
+  display: grid; place-items: center; border-radius: 50%; background: #0c0610; border: 2px solid currentColor; }
+.tarot .card.her .key { color: var(--pink); } .tarot .card.yours .key { color: #b7a4e8; }
+
+/* the deal: both cards drop from one stack at the candle */
+.tarot.st-door .card { opacity: 0; transform: translate(0, -80px) rotate(0deg); pointer-events: none; }
+.tarot.st-door .card.her { transform: translate(310px, -140px) rotate(-8deg); }
+.tarot.st-door .card.yours { transform: translate(-310px, -140px) rotate(8deg); }
+.tarot.st-door .under, .tarot.st-door .candlewrap { opacity: 0; }
+
+/* disabled on replay: pinned, desaturated, still visible */
+.tarot .card.off { cursor: not-allowed; }
+.tarot .card.off .cardface { filter: saturate(.2) brightness(.5); }
+.tarot .pinned { position: absolute; width: 190px; height: 190px; left: 50%; top: 150px; transform: translateX(-30%);
+  filter: drop-shadow(0 10px 6px rgba(0, 0, 0, .7)) drop-shadow(0 0 16px rgba(240, 36, 63, .5)); }
+
+/* card faces text */
+.tarot .t-num { font: 400 44px/1 Georgia, 'Times New Roman', serif; fill: #8a3a3a; letter-spacing: .12em; }
+.tarot .t-num.dark, .tarot .t-name.dark { fill: #3a2a5a; }
+.tarot .t-name { font: 700 40px/1 Georgia, 'Times New Roman', serif; letter-spacing: .22em; fill: #6a1f4f; }
+.tarot .t-opt { font: 700 40px/1 var(--cond); }
+.tarot .t-opt.pink { fill: #d6337f; } .tarot .t-opt.purple { fill: #5a36c4; }
+.tarot .t-maker { font: 400 26px/1 'Yellowtail', cursive; fill: #b0123e; }
+.tarot .t-maker.back { fill: #b7a4e8; }
+.tarot .t-12 { font: 700 28px/1 var(--cond); fill: #b7a4e8; letter-spacing: .1em; }
+
+/* under-card labels: the option text always readable, even for the face-down card */
+.tarot .under { position: absolute; top: 790px; width: 396px; margin: 0; text-align: center; font: 700 40px/1.1 var(--cond); transition: opacity 500ms ease; }
+.tarot .her-u { left: 452px; color: var(--pink); text-shadow: 0 0 18px rgba(255, 95, 162, .5); }
+.tarot .yours-u { left: 1072px; color: #b7a4e8; }
+
+/* candle timer */
+.tarot .candlewrap { position: absolute; left: 860px; top: 250px; width: 200px; height: 520px; transition: opacity 600ms ease; }
+.tarot .candle { width: 200px; height: 520px; overflow: visible; }
+.tarot .pips { position: absolute; left: 50%; bottom: -40px; transform: translateX(-50%); display: flex; gap: 12px; }
+.tarot .pips i { width: 14px; height: 14px; border-radius: 50%; background: #ffcf7a; box-shadow: 0 0 10px #ffb13d; }
+.tarot .pips i.out { background: #3a2a30; box-shadow: none; }
+
+/* Nanda across the table: candle underlight (warm from below, dark above), a touch out of focus (she is behind the cards) */
+.tarot .her { opacity: 0; transition: opacity 1200ms ease; }
+.tarot.st-deal .her, .tarot.st-table .her { opacity: 1; }
+.tarot .her .bust { filter: brightness(.66) sepia(.3) saturate(1.15) blur(1.2px); }
+.tarot.picked-purple .her .bust { filter: brightness(.55) saturate(.5) blur(1.2px); }
+
+/* her hand (timeout): 3 stepped poses, no tween */
+.tarot .herhand { position: absolute; left: 50px; top: -560px; width: 300px; height: 560px; transition: none !important; filter: drop-shadow(0 20px 10px rgba(0, 0, 0, .5)); }
+.tarot .herhand.p0 { transform: translateY(-500px); } .tarot .herhand.p1 { transform: translateY(40px); } .tarot .herhand.p2 { transform: translateY(170px); }
+
+/* outcomes */
+.tarot.picked-pink .card.her { transform: translate(310px, 10px) scale(1.08); z-index: 3; }
+.tarot.by-timeout.picked-pink .card.her { transition-delay: 1000ms; }
+.tarot.picked-pink .card.yours { opacity: .18; transform: translateY(60px) rotate(6deg); }
+.tarot.picked-pink .candlewrap, .tarot.picked-pink .under, .tarot.picked-purple .candlewrap, .tarot.picked-purple .under { opacity: 0; }
+.tarot.picked-purple .card.yours { transform: translate(-310px, 10px) scale(1.08); z-index: 3; }
+.tarot.picked-purple .card.her { opacity: .3; filter: saturate(.3); }
+.tarot.picked-purple .bg { filter: blur(9px) brightness(.3) saturate(.4); }
+.tarot.picked-purple .dim { background: radial-gradient(ellipse 60% 70% at 50% 46%, rgba(138, 92, 246, .14), rgba(8, 4, 20, .8) 70%, rgba(4, 2, 8, .95)); }
+
+.tarot .a-line { background: rgba(20, 6, 16, .88); border-color: rgba(214, 169, 63, .55); }

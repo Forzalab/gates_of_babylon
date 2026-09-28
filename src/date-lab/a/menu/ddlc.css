@@ -1,0 +1,58 @@
+/* menu-3 DDLC: a pastel VN choice box that she edits live; at timeout the UI hard-cuts to her lens stare. */
+.ddlc .bg { position: absolute; inset: 0; }
+.ddlc .grade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(20, 10, 30, .35), rgba(20, 10, 30, 0) 60%); pointer-events: none; }
+.ddlc .her .bust { filter: brightness(.94) saturate(1.05) drop-shadow(-14px 20px 18px rgba(0, 0, 0, .45)); }
+
+/* the menu: DDLC pastel */
+.ddlc .menu { position: absolute; left: 300px; top: 230px; width: 800px; display: flex; flex-direction: column; gap: 26px;
+  transition: transform 700ms cubic-bezier(.3, .7, .2, 1), opacity 500ms ease; transform-origin: 0 100%; }
+.ddlc .menu.pre { opacity: .0; transform: translateY(20px); }
+.ddlc .timer { position: relative; height: 40px; border-radius: 999px; background: #fff; border: 4px solid #ffbde0; overflow: hidden; }
+.ddlc .timer > i { position: absolute; left: 0; top: 0; bottom: 0; width: 100%; background: linear-gradient(90deg, #ff9ccc, var(--pink)); transform-origin: 0 50%; }
+.ddlc .tlabel { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); font: 700 24px/1 var(--cond); color: #7a2a52; letter-spacing: .04em; }
+.ddlc .opt { position: relative; display: flex; align-items: center; gap: 22px; padding: 22px 30px; min-height: 104px; text-align: left; cursor: pointer;
+  background: #fff; border: 5px solid #ffbde0; border-radius: 18px; box-shadow: 0 8px 0 #ffd6ea; font: 700 46px/1.1 var(--cond); color: #5a2a48;
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease; }
+.ddlc .opt .k { flex: none; width: 50px; height: 50px; border-radius: 50%; display: grid; place-items: center; font: 700 26px/1 var(--cond); color: #fff; }
+.ddlc .opt.pink .k { background: var(--pink); } .ddlc .opt.purple .k { background: var(--purple); }
+.ddlc .opt.pink .txt { color: #c2306f; } .ddlc .opt.purple .txt { color: #6a45d6; }
+.ddlc .opt:not(:disabled):hover, .ddlc .opt:focus-visible { transform: translateX(10px); background: #fff4fa; outline: none; }
+.ddlc .opt.purple:not(:disabled):hover { border-color: #cbb8ff; }
+.ddlc .opt.pressed, .ddlc .opt.chosen.pink { background: #ffe1f0; border-color: var(--pink); transform: translateY(6px); box-shadow: 0 2px 0 #ffd6ea; }
+.ddlc .opt.chosen.purple { background: #efe8ff; border-color: var(--purple); }
+.ddlc .opt.off { opacity: .55; cursor: not-allowed; }
+.ddlc .opt.off .txt { text-decoration: line-through; text-decoration-color: var(--her); text-decoration-thickness: 4px; }
+.ddlc .opt .note { position: absolute; right: 26px; top: 50%; margin-top: -18px; font: 400 32px/1 'Yellowtail', cursive; color: var(--her); transform: rotate(-3deg); }
+.ddlc .typing { margin: 4px 0 0 8px; font: italic 400 28px/1 var(--cond); color: #fff; text-shadow: 0 2px 4px #000; }
+.ddlc .typing b { color: var(--her); }
+/* her caret: blinks at 1 Hz (500 ms on / 500 ms off, well under 3 Hz) */
+.ddlc .caret { display: inline-block; width: 5px; height: 1em; margin-left: 4px; vertical-align: -.12em; background: var(--her); animation: dd-blink 1s step-end infinite; }
+@keyframes dd-blink { 50% { opacity: 0; } }
+
+/* her cursor: 3 held poses from the bottom-right corner to the pink button */
+.ddlc .hercursor { position: absolute; width: 84px; height: 126px; z-index: 60; transition: none; filter: drop-shadow(0 4px 4px rgba(0, 0, 0, .5)); }
+.ddlc .hercursor.p0 { left: 1640px; top: 880px; } .ddlc .hercursor.p1 { left: 1240px; top: 700px; }
+.ddlc .hercursor.p2 { left: 860px; top: 520px; } .ddlc .hercursor.p3 { left: 700px; top: 350px; }
+
+/* purple: the frame goes cold */
+.ddlc.picked-purple .bg { filter: saturate(.4) brightness(.7); }
+
+/* LENS: hard cut, her face fills the frame, the menu is shoved into a corner, her red takes the chrome */
+.ddlc.lens .bg { filter: brightness(.25) saturate(.3) blur(6px); }
+.ddlc.lens .grade { background: radial-gradient(ellipse at 50% 40%, rgba(60, 0, 12, 0) 30%, rgba(30, 0, 8, .85) 80%); }
+.ddlc.lens .her .bust { filter: saturate(1.1) contrast(1.05) brightness(.95); }
+.ddlc .lensgrade { position: absolute; inset: 0; pointer-events: none; mix-blend-mode: multiply; background: linear-gradient(#5b1430, #3b0a1c 30%, rgba(59, 10, 28, 0) 55%); opacity: .55; }
+.ddlc.lens .menu { transform: translate(-250px, 470px) scale(.45); opacity: .9; transition: none; }
+.ddlc.lens .opt { border-color: var(--her); box-shadow: 0 8px 0 #8b0f2c; }
+.ddlc.lens .opt .txt { color: var(--her) !important; }
+.ddlc.lens .timer { border-color: var(--her); }
+.ddlc.lens .timer > i { background: var(--her); }
+.ddlc .a-line.broken { background: #1b0610; border-color: var(--her); }
+.ddlc .a-line.broken .who { background: var(--her); color: #fff; }
+/* a torn scanline band that holds, then jumps: 2 held positions at 500 ms (2 swaps a second) */
+.ddlc .tear { position: absolute; left: 0; right: 0; height: 26px; top: 300px; background: rgba(240, 36, 63, .16);
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, .08); pointer-events: none; animation: dd-tear 1s step-end infinite; mix-blend-mode: screen; }
+@keyframes dd-tear { 0% { top: 300px; } 50% { top: 610px; } }
+/* DDLC file-list nod: her character file was edited just now */
+.ddlc .chr { position: absolute; right: 40px; top: 36px; margin: 0; font: 400 24px/1.5 'JetBrains Mono', monospace; color: rgba(255, 208, 220, .8);
+  text-align: left; white-space: pre; text-shadow: 0 0 10px rgba(240, 36, 63, .6); z-index: 20; }

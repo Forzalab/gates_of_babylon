@@ -1,0 +1,17 @@
+/* cam-2 Kubrick: cold fluorescent, intertitles in wide-tracked sans on black, dead centre everything. */
+.kubrick .kb-black { background: #000; }
+.kubrick .kb-title { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 26px; background: #000; }
+.kubrick .kb-title b { font: 800 88px/1 'Inter Tight', var(--cond); letter-spacing: .32em; color: #f2f4ff; padding-left: .32em; }
+.kubrick .kb-title span { font: 400 40px/1 'Inter Tight', var(--cond); letter-spacing: .5em; color: #8f96b8; padding-left: .5em; }
+.kubrick .kb-ad { font-family: 'Bangers', var(--cond); letter-spacing: .04em; }
+.kubrick .kb-ad2 { font-family: 'Roboto Condensed', var(--cond); font-weight: 700; }
+.kubrick .kb-tube { filter: drop-shadow(0 0 18px rgba(230, 255, 245, .9)); }
+.kubrick .kb-exit { filter: drop-shadow(0 0 40px rgba(255, 230, 170, .9)); }
+.kubrick .kb-her .k-sil { fill: #040405; stroke: none; }
+.kubrick .kb-her .k-eye { fill: var(--her); }
+.kubrick .kb-her .k-pin { fill: var(--pink); }
+.kubrick .kb-vig { background: radial-gradient(ellipse at 50% 50%, transparent 45%, rgba(0, 0, 0, .7) 100%); }
+.kubrick .kb-cold { position: absolute; inset: 0; pointer-events: none; background: linear-gradient(rgba(120, 150, 170, .18), rgba(20, 30, 40, .35)); mix-blend-mode: multiply; }
+.kubrick .kb-stare { background: #120c0a; }
+.kubrick .kb-bust { filter: brightness(.85) contrast(1.05); }
+.kubrick .a-sub { font-family: 'Inter Tight', var(--cond); letter-spacing: .02em; }
