@@ -6,6 +6,8 @@ import { fileURLToPath } from 'node:url';
 const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), 'shots');
 const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const errors = [];
+const boxes = {};
+import fs from 'node:fs';
 for (const rm of ['reduce', 'no-preference']) for (const [w, h] of [[1440, 810], [1024, 768]])
   for (const [n, qs] of [['gate', ''], ['next', '&next=1'], ['next-pull', '&next=1&novid'], ['gate-clean', '&clean=1']]) {
     if (n === 'gate-clean' && rm !== 'reduce') continue;
@@ -26,7 +28,10 @@ for (const rm of ['reduce', 'no-preference']) for (const [w, h] of [[1440, 810],
         gap: warn && neon ? Math.round(warn.top - neon.bottom) : null, warnW: warn && Math.round(warn.width), copyW: r('.copy') && Math.round(r('.copy').width) };
     });
     console.log(f, JSON.stringify(m));
+    if (n === 'gate' && rm === 'reduce') boxes[f] = await p.evaluate(() => Object.fromEntries(['warn', 'neon', 'modal'].map((k) => {
+      const r = document.querySelector('.' + k).getBoundingClientRect(); return [k, [r.left, r.top, r.right, r.bottom]]; })));
     await p.close();
   }
 await b.close();
+fs.writeFileSync(path.join(OUT, '..', 'boxes.json'), JSON.stringify(boxes, null, 1));
 console.log(errors.length ? 'ERRORS:\n' + errors.join('\n') : '0 page errors');

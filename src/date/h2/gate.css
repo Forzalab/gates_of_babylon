@@ -221,16 +221,22 @@ a { color: inherit; }
 
 /* ---------- h2 (pit4 r3-2): VERDICT-r2 g1 fixes ---------- */
 /* fix 2: WARNING cap .11-.13 H at 1024 too: height-driven size, sprite column narrows on 4:3 so it fits */
-.h2 .warn { font-size: max(calc(var(--u) * 8.8), 14.6vh); }
+.h2 .warn { font-size: max(calc(var(--u) * 8.8), 15.3vh); }
+/* 4:3 and narrower: the sprite column gives up width so the height-scaled WARNING still fits inside the panel */
+@media (max-aspect-ratio: 3/2) { .h2 .cols { grid-template-columns: calc(var(--u) * 15.5) 1fr !important; gap: calc(var(--u) * .9) !important; }
+  .h2 .warn { letter-spacing: -.025em; padding-right: calc(var(--u) * 1); } .h2 .modal { padding-left: calc(var(--u) * 1); padding-right: calc(var(--u) * 1); } }
 /* fix 4: modal + sign <= .70 H at 1440: tighter plate gap, textbox and choices */
 .h2 .plate { margin-bottom: calc(var(--u) * 2.1); }
 .h2 .adv { margin-top: calc(var(--u) * .9); }
 .h2 .choices { gap: calc(var(--u) * .55); margin-top: calc(var(--u) * .5); }
-.h2 .modal { padding-bottom: calc(var(--u) * .9); }
-.h2 .cols { grid-template-columns: min(calc(var(--u) * 17.5), 22.5vh) 1fr; gap: calc(var(--u) * 1.2); }
+.h2 .modal { padding-bottom: calc(var(--u) * .7); }
+.h2 .adv { padding-top: calc(var(--u) * .75); padding-bottom: calc(var(--u) * .4); }
+.h2 .sub { margin-top: 0; }
+.h2 .cols { grid-template-columns: calc(var(--u) * 17.5) 1fr; gap: calc(var(--u) * 1.2); }
 /* fix 1: I'LL ALWAYS WAIT is solid ink, Bangers, 1.4x, no tear */
 .h2 .adv .wait { display: inline-block; font: 400 1.4em/1 'Bangers', cursive; letter-spacing: .03em; color: #f01a88; }
 .h2 .adv .wait .ghost { visibility: hidden; }
 /* fix 5: the queue joke reads without the textbox: OFFICE HOURS on the SSR band */
 .h2 .rarity { flex-wrap: wrap; row-gap: calc(var(--u) * .15); }
 .h2 .rarity .oh { flex-basis: 100%; text-align: center; font-size: 1.05em; letter-spacing: .06em; }
+@media (max-aspect-ratio: 3/2) { .h2 .adv { margin-top: calc(var(--u) * 1.6); } }
