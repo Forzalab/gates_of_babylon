@@ -1,0 +1,79 @@
+/* menu-5 circuit wires: Lain x PCB. Copper traces, tin pads, silkscreen, a scanline veil. */
+.m5 .m5-hit { position: absolute; inset: 0; cursor: grab; touch-action: none; }
+.m5 .m5-grid line { stroke: rgba(120, 200, 170, .04); stroke-width: 1; }
+.m5 .m5-traces polyline { fill: none; stroke: #b87333; stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; opacity: 0; }
+.m5 .m5-traces polyline.on { opacity: .28; }
+.m5 .m5-traces.lit polyline.on { stroke: #ff5fa2; opacity: .5; }
+.m5 .m5-vias circle { fill: #0b1512; stroke: #c9a45a; stroke-width: 3; opacity: .55; }
+.m5 .m5-route { fill: none; stroke: #d08a45; stroke-width: 12; stroke-linejoin: round; opacity: 0; }
+.m5 .m5-route.on { opacity: .55; }
+.m5 .m5-route.lit { stroke: #ff5fa2; opacity: .9; }
+.m5 .m5-silk { font: 700 24px/1 var(--mono); fill: #d7e8de; letter-spacing: .12em; opacity: .75; }
+.m5 .m5-silk.dim { opacity: .35; }
+.m5 .m5-silk.big { font-size: 34px; opacity: .9; }
+.m5 .m5-silk.nc { fill: var(--her); font-size: 22px; opacity: 1; }
+.m5 .m5-part rect, .m5 .m5-part circle { fill: #1c2a26; stroke: #d7e8de; stroke-width: 3; opacity: .7; }
+.m5 .m5-part circle.in { fill: #28403a; }
+
+.m5 .m5-chip .body { fill: #121212; stroke: #333; stroke-width: 3; }
+.m5 .m5-chip .leg { fill: #c9c9c9; }
+.m5 .m5-chip .dot { fill: #2a2a2a; }
+.m5 .m5-chip-t { font: 800 58px/1 'Inter Tight', var(--cond); fill: #e8e8e8; letter-spacing: .06em; }
+.m5 .m5-chip-s { font: 400 20px/1 var(--mono); fill: #9a9a9a; letter-spacing: .1em; }
+.m5 .m5-chip.lit .leg { fill: #ff5fa2; }
+.m5 .m5-chip.lit .dot { fill: #ff5fa2; }
+
+/* pads */
+.m5 .m5-pad .ring { fill: #0c1714; stroke-width: 8; }
+.m5 .m5-pad.pink .ring { stroke: var(--pink); }
+.m5 .m5-pad.purple .ring { stroke: var(--purple); }
+.m5 .m5-pad .tin { fill: #d9d2b4; stroke: #8f866a; stroke-width: 3; }
+.m5 .m5-pad .hole { fill: #0a0a0a; }
+.m5 .m5-pad.hot .ring { stroke-width: 14; filter: drop-shadow(0 0 16px currentColor); }
+.m5 .m5-pad.pink.hot .ring { color: var(--pink); }
+.m5 .m5-pad.purple.hot .ring { color: var(--purple); }
+.m5 .m5-label { font: 400 56px/1 'Inter Tight', var(--cond); fill: #fff; }
+.m5 .m5-label.pink { fill: #ffd2e6; }
+.m5 .m5-label.purple { fill: #ddd0ff; }
+.m5 .m5-pad.off .tin { fill: #2a2420; }
+.m5 .m5-pad.off .m5-label { opacity: .35; text-decoration: line-through; }
+.m5 .m5-pad .burn circle { fill: rgba(10, 6, 4, .75); }
+.m5 .m5-pad .burn path { stroke: var(--her); stroke-width: 12; stroke-linecap: round; opacity: .85; }
+.m5 .m5-or { font: 800 64px/1 'Inter Tight', var(--cond); }
+.m5 .m5-or.loud { font-size: 96px; }
+
+/* her wire (already soldered) + the current */
+.m5 .m5-herwire path { fill: none; stroke-linecap: round; }
+.m5 .m5-herwire .shadow { stroke: rgba(0, 0, 0, .45); stroke-width: 22; }
+.m5 .m5-herwire .body { stroke: #c23a78; stroke-width: 20; }
+.m5 .m5-herwire .hot { stroke: #ff8cc0; stroke-width: 14; filter: drop-shadow(0 0 8px #ff5fa2); }
+.m5 .m5-herwire .hl { stroke: rgba(255, 255, 255, .35); stroke-width: 4; transform: translate(-3px, -4px); }
+.m5 .m5-herwire .solder { fill: #cfc7d6; stroke: #ff5fa2; stroke-width: 4; }
+
+/* your cable */
+.m5 .m5-cable path { fill: none; stroke-linecap: round; }
+.m5 .m5-cable .shadow { stroke: rgba(0, 0, 0, .45); stroke-width: 20; }
+.m5 .m5-cable .body { stroke-width: 18; }
+.m5 .m5-cable .hl { stroke: rgba(255, 255, 255, .5); stroke-width: 4; transform: translate(-3px, -4px); }
+.m5 .m5-cable .plug { fill: #111; stroke: #555; stroke-width: 2; }
+.m5 .m5-header rect { fill: #111; stroke: #444; stroke-width: 3; }
+.m5 .m5-header .gold { fill: #d4af37; }
+.m5 .m5-grab circle { fill: none; stroke: rgba(255, 255, 255, .45); stroke-width: 3; stroke-dasharray: 10 12; }
+
+.m5 .m5-disp .pcb { fill: #0f2a3a; stroke: #3b6f86; stroke-width: 3; }
+.m5 .m5-disp .hole { fill: #06121a; stroke: #c9a45a; stroke-width: 3; }
+.m5 .m5-disp .glass { fill: #0a0f14; }
+.m5 .m5-disp .tint { fill: url(#m5-lines); mix-blend-mode: multiply; }
+
+/* Lain veil: scanlines + a cold edge */
+.m5 .m5-scan { position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .12) 0 2px, transparent 2px 5px),
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 10, 20, .7)); }
+.m5 .m5-sub { position: absolute; left: 0; right: 0; bottom: 60px; margin: 0; text-align: center; pointer-events: none; z-index: 60;
+  font: 400 46px/1.2 'Inter Tight', var(--cond); color: #fff; text-shadow: 2px 0 0 rgba(240, 36, 63, .45), -2px 0 0 rgba(60, 200, 255, .35), 0 2px 8px #000; }
+.m5 .m5-who { font: 800 26px/1 'Inter Tight', var(--cond); letter-spacing: .14em; color: var(--pink); margin-right: 18px; vertical-align: 6px; }
+.m5 .m5-hint { right: 60px; bottom: 96px; }
+.m5 .m5-rewbtn { position: absolute; right: 40px; bottom: 40px; z-index: 70; }
+.m5 .m5-rew { position: absolute; inset: 0; z-index: 55; pointer-events: none; background: rgba(0, 0, 0, .55); display: grid; place-items: center; }
+.m5 .m5-rew b { font: 700 120px/1 var(--mono); color: #fff; text-shadow: 4px 0 0 #f0243f, -4px 0 0 #3af; }
+.m5.ph-purple .m5-traces polyline.on { stroke: #8a5cf6; opacity: .35; }

@@ -1,0 +1,34 @@
+/* anim-3 Ito creep. Nothing here animates by itself except the blink lids (a smooth 150 ms close). */
+.a3 .a3-hit { position: absolute; inset: 0; cursor: none; }
+.a3 .a3-art { position: absolute; inset: 0; }
+.a3 .a3-over { pointer-events: none; }
+.a3 .a3-over .k-sil { fill: #06050a; stroke: none; }
+.a3 .a3-over .k-eye { fill: #f0243f; }
+.a3 .a3-over .pinbub { fill: var(--pink); }
+.a3 .a3-spiral { fill: none; stroke-linecap: round; }
+.a3 .a3-spiral.cloud { stroke: #2a2440; opacity: .55; }
+.a3 .a3-spiral.ink { stroke: #120a12; }
+.a3 .a3-spiral.curry { stroke: #7a1e02; opacity: .85; }
+.a3 .a3-spiral.cream { stroke: #fff3dc; }
+.a3 .a3-spiral.eye { stroke: #1a0a10; }
+.a3 .a3-pupil { fill: #f0243f; }
+.a3 .a3-lit { fill: #ffcf7a; }
+.a3 .a3-gap { fill: #ffcf7a; opacity: .92; }
+.a3 .a3-eyegap { fill: #f0243f; }
+.a3 .a3-slip path { fill: #4a5f86; stroke: #22304a; stroke-width: 4px; }
+.a3 .a3-hatch { pointer-events: none; }
+.a3 .a3-hatch line { stroke: #0b0508; stroke-width: 2.2px; }
+.a3 .a3-gaze { position: absolute; width: 90px; height: 90px; margin: -45px 0 0 -45px; border-radius: 50%; pointer-events: none;
+  border: 3px solid rgba(255, 255, 255, .55); box-shadow: 0 0 0 2px rgba(0, 0, 0, .4); }
+.a3 .a3-gaze.on { border-color: var(--pink); }
+.a3 .a3-gaze::after { content: ''; position: absolute; left: 50%; top: 50%; width: 12px; height: 12px; margin: -6px; border-radius: 50%; background: rgba(255, 255, 255, .7); }
+.a3 .a3-lid { position: absolute; left: 0; right: 0; height: 0; background: #050204; z-index: 80; transition: height 150ms ease-in; }
+.a3 .a3-lid.top { top: 0; } .a3 .a3-lid.bot { bottom: 0; }
+.a3 .a3-lid.shut { height: 50.5%; }
+.a3 .a3-black { position: absolute; inset: 0; background: #050204; z-index: 80; }
+.a3 .a3-line { bottom: 110px; }
+.a3 .a3-nav { position: absolute; left: 28px; right: 28px; bottom: 24px; display: flex; gap: 8px; z-index: 85; }
+.a3 .a3-nav button { flex: 1; font-size: 19px; padding: 10px 4px; }
+.a3 .a3-nav button i { font-style: normal; color: var(--her); letter-spacing: .1em; margin-left: 4px; }
+.a3 .a3-nav button.on { background: #f4eef6; color: #120a12; }
+.a3 .a3-hint { left: 50%; transform: translateX(-50%); top: 34px; }

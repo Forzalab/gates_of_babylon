@@ -1,0 +1,42 @@
+// Builder B sound cue table. Pure data (node --test reads it): every cue = one synthesized Web Audio recipe (audio.js)
+// + the caption that shows on screen every time it plays, muted or not. Sound is feedback, never information.
+// kind: 'shot' = one-shot, 'bed' = a loop that runs until stopped, 'bus' = a change to the whole mix.
+export const CUES = Object.freeze({
+  tick: { kind: 'shot', caption: '[tick]' },
+  pink: { kind: 'shot', caption: '[soft bell, bright]' },
+  purple: { kind: 'shot', caption: '[low bell, detuned]' },
+  thump: { kind: 'shot', caption: '[heartbeat]' },
+  breath: { kind: 'shot', caption: '[her breath, close]' },
+  bell: { kind: 'shot', caption: '[the tower bell: 12:00]' },
+  static: { kind: 'shot', caption: '[CRT click, static]' },
+  sour: { kind: 'shot', caption: '[sour squeak]' },
+  bleed: { kind: 'shot', caption: '[purple rush]' },
+  steam: { kind: 'shot', caption: '[kettle steam hiss]' },
+  stab: { kind: 'shot', caption: '[strings stab]' },
+  wire: { kind: 'shot', caption: '[solder crackle]' },
+  spark: { kind: 'shot', caption: '[spark reaches the pad]' },
+  door: { kind: 'shot', caption: '[lock turns: two clicks]' },
+  steps: { kind: 'shot', caption: '[footsteps on metal]' },
+  rewind: { kind: 'shot', caption: '[tape rewinding]' },
+  whisper: { kind: 'shot', caption: 'whisper: "again?"' },
+  buzz: { kind: 'shot', caption: '[phone buzzes, face-down]' },
+  rec: { kind: 'shot', caption: '[camcorder beep: REC]' },
+  af: { kind: 'shot', caption: '[autofocus chirp]' },
+  croak: { kind: 'shot', caption: '[a throat rattle, very close]' },
+  lid: { kind: 'shot', caption: '[you blink]' },
+  creak: { kind: 'shot', caption: '[something shifted]' },
+  drum: { kind: 'shot', caption: '[parade drum]' },
+  chime: { kind: 'shot', caption: '[door chime]' },
+  cut: { kind: 'shot', caption: '[hard cut: silence]' },
+  rain: { kind: 'bed', caption: '[rain, steady]' },
+  hum: { kind: 'bed', caption: '[train hum]' },
+  drone: { kind: 'bed', caption: '[low drone rising]' },
+  tape: { kind: 'bed', caption: '[tape hiss, camcorder motor]' },
+  cicada: { kind: 'bed', caption: '[cicadas, power-line hum]' },
+  parade: { kind: 'bed', caption: '[toy march: forever AND ever]' },
+  room: { kind: 'bed', caption: '[room tone, fridge hum]' },
+  muffle: { kind: 'bus', caption: '[sound goes underwater]' },
+  surface: { kind: 'bus', caption: '[sound comes back]' },
+});
+
+export const CUE_IDS = Object.keys(CUES);

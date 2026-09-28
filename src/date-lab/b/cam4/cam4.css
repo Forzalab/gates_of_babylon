@@ -1,0 +1,21 @@
+/* cam-4 Hitchcock: Technicolor warmth, a Saul Bass title, film grain. Camera transforms are set per frame in JS. */
+.c4 .c4-cam { position: absolute; inset: 0; transform-origin: 0 0; }
+.c4 .c4-fg { position: absolute; inset: 0; pointer-events: none; }
+.c4 .c4-black { position: absolute; inset: 0; background: #000; }
+.c4 .c4-spiral { fill: none; stroke: #120608; stroke-width: 26px !important; stroke-linecap: round; }
+.c4 .c4-title .c4-t1 { font: 700 190px/1 var(--cond); letter-spacing: .02em; fill: #fff; }
+.c4 .c4-title .c4-t2 { font: 400 54px/1 'Yellowtail', cursive; fill: #120608; }
+.c4 .c4-title .c4-t3 { font: 700 28px/1 var(--cond); letter-spacing: .18em; fill: #fff; text-transform: none; }
+.c4 .c4-title .or-svg { fill: var(--her); stroke: #fff; stroke-width: 3px !important; paint-order: stroke; }
+.c4 .c4-faller .k-sil { fill: #fff; stroke: none; }
+.c4 .c4-faller .eyes { display: none; }
+.c4 .c4-her .k-sil { fill: #030305; stroke: none; }
+.c4 .c4-her .k-eye { fill: #f0243f; }
+.c4 .c4-her .pinbub { fill: var(--pink); }
+.c4 .c4-plate { font-family: var(--cond); font-weight: 700; fill: #3a302a; }
+.c4 .c4-grade { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(10, 0, 8, .55)); mix-blend-mode: multiply; }
+.c4.k-title .c4-grade, .c4.k-eye .c4-grade { background: radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(0, 0, 0, .35)); }
+.c4 .c4-grain { position: absolute; inset: 0; width: 1920px; height: 1080px; pointer-events: none; opacity: .06; mix-blend-mode: screen; }
+.c4 .c4-slate { position: absolute; right: 24px; bottom: 12px; margin: 0; z-index: 70; font: 400 16px/1 var(--mono); color: rgba(255, 255, 255, .35); }
+.c4.k-genkan3d .lb-sub, .c4.k-dolly .lb-sub { bottom: 40px; }

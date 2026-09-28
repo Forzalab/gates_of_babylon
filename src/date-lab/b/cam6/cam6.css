@@ -1,0 +1,36 @@
+/* cam-6 Anno: compressed heavy serif cards (white on black, L layout), static holds, MAGI orange UI. */
+.c6 .c6-cam { position: absolute; inset: 0; transform-origin: 0 0; }
+.c6 .c6-grade { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(255, 170, 60, .06), transparent 40%), radial-gradient(ellipse at 50% 50%, transparent 60%, rgba(0, 0, 0, .45)); }
+.c6 .c6-card { position: absolute; inset: 0; background: #000; color: #fff; }
+.c6 .c6-card .l { position: absolute; margin: 0; white-space: nowrap; transform-origin: 0 0; transform: scaleX(.72);
+  font-family: var(--serif); font-weight: 700; line-height: .86; letter-spacing: -.01em; }
+.c6 .c6-card.ep .ep1 { left: 150px; top: 130px; font-size: 92px; }
+.c6 .c6-card.ep .a { left: 150px; top: 290px; font-size: 330px; }
+.c6 .c6-card.ep .b { left: 640px; top: 560px; font-size: 380px; }
+.c6 .c6-card.ep .mid { left: 156px; top: 660px; font-size: 96px; }
+.c6 .c6-card.kanji .k1 { left: 160px; top: 140px; font-size: 150px; font-family: var(--jp-serif); transform: none; }
+.c6 .c6-card.kanji .k2 { left: 1000px; top: 360px; font-size: 380px; font-family: var(--jp-serif); transform: none; letter-spacing: .06em; }
+.c6 .c6-card.kanji .k3 { left: 166px; top: 860px; font-size: 90px; }
+.c6 .c6-card.next .n1 { left: 150px; top: 150px; font-size: 100px; }
+.c6 .c6-card.next .n2 { left: 150px; top: 300px; font-size: 300px; }
+.c6 .c6-card.next .n3 { left: 1080px; top: 560px; font-size: 380px; }
+.c6 .c6-card.next .n4 { left: 156px; top: 900px; font-size: 64px; font-weight: 400; color: #ffc6de; }
+.c6 .c6-eye { filter: contrast(1.1) saturate(.85); }
+
+/* MAGI */
+.c6 .c6-magi .grid line { stroke: rgba(255, 122, 24, .08); stroke-width: 2px !important; }
+.c6 .c6-magi .hd { font: 700 52px/1 var(--serif); fill: #ff7a18; letter-spacing: .04em; }
+.c6 .c6-magi .hd2 { font: 700 34px/1 var(--jp); fill: #ff7a18; opacity: .7; }
+.c6 .c6-magi .panel path { fill: #0e1f22; stroke: #3fd0c9; stroke-width: 5px !important; }
+.c6 .c6-magi .panel.yes path { fill: #3a0c22; stroke: var(--pink); }
+.c6 .c6-magi .nm { font: 700 64px/1 var(--serif); fill: #e8fffd; }
+.c6 .c6-magi .st { font: 900 110px/1 var(--jp); fill: #3fd0c9; }
+.c6 .c6-magi .st2 { font: 700 40px/1 var(--mono); fill: #3fd0c9; letter-spacing: .1em; }
+.c6 .c6-magi .panel.yes .st, .c6 .c6-magi .panel.yes .st2 { fill: var(--pink); }
+.c6 .c6-magi .warn path { fill: #2a0010; stroke: var(--her); stroke-width: 10px !important; }
+.c6 .c6-magi .warn .w1 { font: 900 90px/1 var(--jp); fill: var(--her); }
+.c6 .c6-magi .warn .w2 { font: 700 44px/1 var(--mono); fill: #fff; letter-spacing: .1em; }
+.c6 .c6-magi .warn .w3 { font: 700 54px/1 var(--mono); fill: var(--pink); letter-spacing: .2em; }
+.c6 .c6-magi .res { font: 700 60px/1 var(--serif); fill: var(--pink); }
+.c6 .c6-sub { font-family: var(--serif); font-size: 52px; }
