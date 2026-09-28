@@ -71,3 +71,32 @@
 .v-h1 .learned { bottom: 26px; }
 .v-h1 .learned .lw .big { font-size: calc(var(--u) * 3.6); }
 .v-h1 .learned .lw p { font-size: max(14px, calc(var(--u) * 1.4)); }
+
+/* polish 1: footer (NOT GATE) type >= 12 px optical at 1024 (Bangers caps read small: floor at 15 px) */
+.v-h1 .pctl { font-size: max(15px, calc(var(--u) * 1.35)); }
+/* polish 2: sign + modal trimmed ~10 px so it sits under .70 H at 1440 */
+.v-h1 .mf .plate { margin-bottom: max(calc(var(--u) * .6), 1.1vh); }
+/* polish 3: "fine." keeps >= 6 px clear of the compat bar */
+.v-h1 .btn.flee.fine { margin-bottom: 8px; }
+/* polish 4: the table font on the 100% card */
+.v-h1 .card > .tt { font-size: max(12px, calc(var(--u) * 1.1)); }
+.v-h1 .feednav .play { white-space: nowrap; }
+
+/* K1 interstitial (from h2): a static player centred on the grid page; nothing animates */
+.k1 { position: fixed; inset: var(--hdr) 0 0; display: grid; place-items: center; background: #003ec5; }
+.k1-player { width: min(92vw, calc(var(--u) * 46)); background: #001b62; color: #fff; border: calc(var(--u) * .45) solid var(--hot); border-radius: calc(var(--u) * 1.2);
+  box-shadow: inset 0 0 0 calc(var(--u) * .3) #fff, 0 calc(var(--u) * .8) 0 calc(var(--u) * .2) var(--plum); padding: calc(var(--u) * 1.2); }
+.k1-screen { position: relative; height: calc(var(--u) * 22); border-radius: calc(var(--u) * .6); display: grid; place-items: center;
+  background: #0d0414 linear-gradient(rgba(255, 110, 220, .16) 1px, transparent 1px) 0 0 / 14px 14px; }
+.k1-gate { height: calc(var(--u) * 12); width: calc(var(--u) * 18); }
+.k1-player .shape .body { fill: #fff0fb; stroke: #ff7fe0; stroke-width: 3.5; }
+.k1-q { position: absolute; left: calc(var(--u) * 1); top: calc(var(--u) * .8); font: 400 max(14px, calc(var(--u) * 2))/1 'Bangers', cursive; letter-spacing: .06em; color: #ff9ee6; }
+.k1-boom { position: absolute; inset: auto 0 calc(var(--u) * 1.2); text-align: center; font: 400 calc(var(--u) * 3.6)/1 'Bangers', cursive; color: #fff; background: var(--hot); padding: 4px 0; }
+.k1-title { margin: calc(var(--u) * 1) 0 calc(var(--u) * .6); font: 400 calc(var(--u) * 3.4)/1.02 'Bangers', cursive; letter-spacing: .03em; color: #fff; }
+.k1-title small { display: block; font-size: .62em; color: #ff9ee6; }
+.k1-ctl { display: flex; align-items: center; gap: calc(var(--u) * .8); font: 700 max(13px, calc(var(--u) * 1.5))/1 'Roboto Condensed', sans-serif; }
+.k1-seek { flex: 1; height: 6px; background: rgba(255, 255, 255, .25); border-radius: 99px; overflow: hidden; }
+.k1-seek i { display: block; height: 100%; background: var(--hot); }
+.k1-time { font-variant-numeric: tabular-nums; }
+.k1-skip { font: 400 max(14px, calc(var(--u) * 1.6))/1 'Bangers', cursive; letter-spacing: .05em; color: var(--hot); background: #fff; border: 0; border-radius: 99px; padding: 6px 12px; cursor: pointer; }
+.k1-skip:focus-visible { outline: 3px solid var(--neon); outline-offset: 2px; }

@@ -18,7 +18,7 @@ import './h1.css';
 import { F1, Feed } from './f1.jsx';
 
 const params = new URLSearchParams(location.search);
-const V = ['x1', 'x2', 'x3', 'f1', 'g2', 'h1'].includes(params.get('v')) ? params.get('v') : 'x1';
+const V = ['x1', 'x2', 'x3', 'f1', 'g2', 'h1'].includes(params.get('v')) ? params.get('v') : 'h1';
 export const STILL = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 export const LOGIC = import.meta.env.BASE_URL; // "/": the real app. "I'm not 18" lands here (the 4th-wall joke).
 

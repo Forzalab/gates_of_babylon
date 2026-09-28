@@ -6,7 +6,7 @@ const BASE = `${import.meta.env.BASE_URL}sfx/`;
 const FILES = {
   glitch: ['glitch_001', 'glitch_002'], error: ['error_001', 'error_002'], confirm: ['confirmation_001'],
   chips: ['chips-stack-1', 'chips-stack-2'], grade: ['jingles_HIT00'], click: ['click_001', 'click_002'],
-  match: ['jingles_SAX00'], hover: ['rollover2'],
+  match: ['jingles_SAX00'], hover: ['rollover2'], boom: ['vine-boom.mp3'],
 };
 const cache = {};
 let muted = false;
@@ -20,7 +20,7 @@ export function setMuted(m) {
 }
 export const onMute = (f) => { subs.add(f); return () => subs.delete(f); };
 
-const file = (f) => (cache[f] ??= Object.assign(new Audio(`${BASE}${f}.ogg`), { preload: 'auto' }));
+const file = (f) => (cache[f] ??= Object.assign(new Audio(`${BASE}${f}${f.includes('.') ? '' : '.ogg'}`), { preload: 'auto' }));
 Object.values(FILES).flat().forEach(file);
 
 let lastHover = 0;

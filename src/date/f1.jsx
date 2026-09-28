@@ -3,7 +3,8 @@
 // Design school: Atlus / Persona 5 "UI as character": tilted cut-out type, the dialog slams in, every
 // transition is a performance (the ENTER wipe). The red pen is the only non-palette ink.
 // &next=1 is the continue screen: a MATCH FEED of live gate pairs on the real simulator + real Shape.
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Shape, GATE_GEOM } from '../nodes/index.jsx';
 import { Pair, Portrait, Bar, Neon, Heart, Corners, useLanded, useTick, LOGIC, STILL } from './main.jsx';
 import { compat, pairRow } from './compat.js';
 import { play, then, isMuted, setMuted, onMute } from './sfx.js';
@@ -12,7 +13,7 @@ const params = new URLSearchParams(location.search);
 const CLEAN = params.has('clean'); // arbiter's overlap diff: the page without the red pen
 // g2 (pit4 r2) reuses this file: same surprise, JRPG-menu chrome (S5) and the r1 fix list. f1 stays as it was.
 // h1 (pit4 r3) = g2 + the r2 fix list + g3's HIGH SCORES + on-page credits + K7 (NO THANKS flees, gives up: "fine.").
-const H1 = params.get('v') === 'h1';
+const H1 = !['x1', 'x2', 'x3', 'f1', 'g2'].includes(params.get('v')); // h1 is the default
 const G2 = params.get('v') === 'g2' || H1;
 const VID = H1 ? 'h1' : G2 ? 'g2' : 'f1';
 const NEXT = `${location.pathname}?v=${VID}&next=1`;
@@ -196,7 +197,43 @@ function Scores({ liked }) {
   );
 }
 
+// K1 (ported from h2): a short interstitial between ENTER and the feed. Static frame, ticking text timer, the boom at
+// a random 4-9 s (vol 0.55), then the feed. Reduced motion: identical (nothing moves). SKIP is a real, focused button.
+const hms = (t) => `${Math.floor(t / 3600)}:${String(Math.floor(t / 60) % 60).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
+function Player({ onDone }) {
+  const [t, setT] = useState(0);
+  const [at] = useState(() => 4 + Math.floor(Math.random() * 6));
+  const skip = useRef(null);
+  useEffect(() => { skip.current?.focus(); const k = setInterval(() => setT((n) => n + 1), 1000); return () => clearInterval(k); }, []);
+  useEffect(() => { if (t === at) { play('boom', { vol: 0.55 }); const k = setTimeout(onDone, 900); return () => clearTimeout(k); } }, [t]);
+  const boomed = t >= at;
+  return (
+    <div className="k1">
+      <section className="k1-player" role="region" aria-label="Video: 10 hours of AND-chan waiting, no music">
+        <div className="k1-screen">
+          <svg className="k1-gate" viewBox={`-14 -8 ${GATE_GEOM.AND.w + 28} ${GATE_GEOM.AND.h + 16}`} aria-hidden="true"><Shape g={GATE_GEOM.AND} on lit={{ in: [true, true], out: true }} /></svg>
+          <b className="k1-q">OFFICE HOURS QUEUE &middot; A-047</b>
+          {boomed && <b className="k1-boom" aria-live="assertive">NOW SERVING A-047</b>}
+        </div>
+        <h2 className="k1-title">10 HOURS OF AND-CHAN WAITING <small>(NO MUSIC)</small></h2>
+        <div className="k1-ctl">
+          <span aria-hidden="true">&#10074;&#10074;</span>
+          <div className="k1-seek" aria-hidden="true"><i style={{ width: `${Math.max(0.4, (t / 36000) * 100)}%` }} /></div>
+          <span className="k1-time" role="timer">{hms(t)} / 10:00:00</span>
+          <button ref={skip} className="k1-skip" onClick={onDone}>SKIP &#9654;&#9654;</button>
+        </div>
+      </section>
+    </div>
+  );
+}
+
 export function Feed() {
+  const [vid, setVid] = useState(() => H1 && !CLEAN && !params.has('novid'));
+  if (vid) return <><Bar /><Player onDone={() => setVid(false)} /></>;
+  return <FeedBody />;
+}
+
+function FeedBody() {
   const t = useTick(900);
   const serving = 42 + Math.floor(t / 3) % 70;
   const [liked, setLiked] = useState(() => new Set(STILL ? [2] : []));
@@ -223,13 +260,14 @@ export function Feed() {
         <h1 className="warn cut"><span className="w1">MATCH FEED</span><small>LIVE GATES NEAR YOU &middot; {liked.size} MATCHED</small></h1>
         {/* the mundane lens (M2, the DMV): dating a gate means taking a number */}
         <div className="ticketwrap"><div className="ticket" role="status" aria-live="off">
-          <div><small>NOW SERVING</small><b>A-{String(serving).padStart(3, '0')}</b></div>
-          <div><small>YOUR NUMBER</small><b className="mine">A-117</b></div>
-          <div><small>EST. WAIT</small><b>{117 - serving} clock cycles</b></div></div>
+          <div><small>OFFICE HOURS &middot; NOW SERVING</small><b>A-{String(serving).padStart(3, '0')}</b></div>
+          <div><small>YOUR NUMBER</small><b className="mine">A-047</b></div>
+          <div><small>EST. WAIT</small><b>4 years (your degree)</b></div></div>
           {!CLEAN && <p className="feed-pen" aria-label="Prof. Kerney: still B+. show your truth tables.">still B+. show your truth tables. <span>&ndash; K.</span></p>}
         </div>
         <nav className="feednav">
           <a className="btn soft narrow" href={GATE} onClick={(e) => { play('click'); to(GATE)(e); }} onPointerEnter={hover}>&#9664; BACK TO GATE</a>
+          {H1 && <a className="btn hot play" href={`${location.pathname}?game=1`} onClick={() => play('click')} onPointerEnter={hover}>&#9654; PLAY</a>}
           <a className="btn hot" href={LOGIC} onPointerEnter={hover}>LOGIC MODE</a>
         </nav>
       </div>
@@ -237,7 +275,7 @@ export function Feed() {
         {cards.map(([A, B], i) => <Card key={i} i={i} A={A} B={B} row={t + i} liked={liked.has(i)} onLike={toggle(i)} />)}
         {H1 && <Scores liked={liked} />}
       </main>
-      {H1 && <p className="credits">Sound: Kenney.nl (CC0): Interface, UI Audio, Casino Audio, Music Jingles. Fonts: Bangers, Yellowtail, Roboto Condensed (OFL, @fontsource). <a href={`${import.meta.env.BASE_URL}sfx/CREDITS.md`}>full credits</a></p>}
+      {H1 && <p className="credits">Sound: Kenney.nl (CC0): Interface, UI Audio, Casino Audio, Music Jingles; &ldquo;Vine boom&rdquo; by Business Goose (CC BY-NC). Fonts: Bangers, Yellowtail, Roboto Condensed (OFL, @fontsource). <a href={`${import.meta.env.BASE_URL}sfx/CREDITS.md`}>full credits</a></p>}
       {G2 && <Learned m={match} onClose={() => setMatch(null)} />}
       <Wipe on={!!go} />
     </>
