@@ -69,3 +69,26 @@ Tests: `src/date-lab-b.test.js` (door state machine, cue table, timelines, shake
 **RM:** the blink is a hard cut to black for 400 ms (no sliding lids); every creep is already a cut; nothing else moves.
 **Self-critique:** a projector audience cannot see the presenter's gaze ring, so the "look away" rule needs the presenter to narrate it; the overlays are spirals and silhouettes stacked on main's art rather than Ito linework redrawn into it.
 **Round-2 carry-forward:** keep the gaze + blink grammar (it is the only interaction here that punishes looking away); add a "the room looks away" mode (creep on a 6 s timer when the mouse is idle, so the demo works hands-off) and redraw one scene fully in Ito hatching as the target style.
+
+## anim-4 · Paprika dream parade (horror 3)
+**Theme:** "the parade of everything she kept." Satoshi Kon's Paprika parade: objects march, and the dream swallows the day.
+**What it does (41 s loop, 9 scenes x 4.6 s):** each scene holds 2.6 s, then its key prop MORPHS into the next scene's prop in 4 drawn poses x 500 ms (Figur clock → train strap → NAND gate with a face → her clear umbrella → BUFFER vending machine → a lit window with her in it → the Unit 12 door → men's slippers → the three cups → back to the clock) while the backgrounds cross-dissolve. The finished prop hops into a toy parade marching along the bottom (steps on the 125 ms grid, legs and bob poses hold 500 ms, a toy march on the synth, a drum + caption each time one joins). Her silhouette leads it with a banner "fOR-ever AND ever" (OR in her red, AND in pink, per Tony edits 2). "collected: n / 9" counts her collection. Lines stay <= 12 words and sit at the top so the parade owns the bottom.
+**RM:** the parade stands still in formation, each morph is one hard cut at its midpoint, the dissolve is a cut.
+**Self-critique:** the props are my own simple toy drawings, not main's scene art, so the "props slide into each other" reads as a separate layer over the scene instead of the scene itself melting.
+**Round-2 carry-forward:** keep the growing-collection parade and the banner; morph actual scene elements (lift the clock face out of Rooftop, the strap out of Train) instead of redrawn props, and end a loop with the parade walking through her genkan door.
+
+---
+
+## Round-1 summary (Builder B)
+| id | theme | shipped | weakest point |
+|---|---|---|---|
+| menu-4 | Bandersnatch: the timer pours into her cup | full + replay + RM | reaction cut-in is a flat silhouette |
+| menu-5 | Lain circuit: her wire already soldered, the drag lies | full + replay + RM | cable can cross U12; the pull needs a tell |
+| cam-4 | Hitchcock: true 3D dolly-zooms on the door and the slippers | 33 s + RM | 3D shots are flat-shaded vs main's 2D art |
+| cam-5 | Ju-On found footage: the frame notices her | 33 s + RM | no real face at the end |
+| cam-6 | Anno: static holds, cut-ins, MAGI vote | 42 s (RM identical) | an edit of existing art, little new drawing |
+| fx-1 | every sound has a body (9 demo-path effects) | full + RM per beat | STEEPED has no Nanda in frame |
+| fx-2 | Kairo monitor wall (QA bench) | full + per-monitor RM | heavy; for integrators, not the room |
+| anim-3 | Ito creep: moves when you look away | 8 scenes x 4 stages + RM | gaze ring invisible to a projector audience |
+| anim-4 | Paprika parade of everything she kept | 41 s + RM | props are a separate layer, not the scene melting |
+All sound is synthesized (35 cues, `shared/cues.js`), unlocked by the first click, muted with the pill or M, captioned every time. Tests: `src/date-lab-b.test.js` (door machine, cue table, timelines, dolly-zoom invariant, shake cap). Shots: `research/date-lab/shots/<id>-*.png` via `research/date-lab/shots-b.mjs`.

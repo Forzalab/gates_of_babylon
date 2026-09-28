@@ -63,6 +63,9 @@ export const SHOTS = [
   ]),
   { id: 'anim-3', name: 'blink', q: 'scene=platform&stage=2&pause', wait: 900, steps: [['move', 1340, 560], ['click', 1340, 560], ['wait', 120]] },
   { id: 'anim-3', name: 'rm-stairs-3', q: 'scene=stairs&stage=3&pause&still', wait: 900 },
+  // anim-4 Paprika parade (scene = 4.6 s: hold 2.6 + morph 2.0)
+  ...[1.0, 3.2, 3.8, 4.4, 14.0, 17.4, 28.5, 40.2].map((s) => ({ id: 'anim-4', name: `t${s.toFixed(1).padStart(4, '0')}`, q: `t=${s}&pause`, wait: 900 })),
+  { id: 'anim-4', name: 'rm-t40.2', q: 't=40.2&pause&still', wait: 900 },
 ];
 
 const filter = process.argv[2];
