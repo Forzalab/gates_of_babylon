@@ -81,5 +81,27 @@ over); tunnel face -> window face; platform -> poster (5 sample pixels land on t
 count from my cam-5; the reflection-in-the-train-window and the platform-as-poster from the verdict spec.
 **Verdict answers:** cam-5 "no real face at the end" -> the end is her face at full frame with IR eyeshine, and it IS the
 opening shot; cam-3 "umeboshi->iris not scale-perfect" -> every match here is the same shape at the exact same scale.
-**Self-critique:** her body is still the flat silhouette (not the bust) — right for night shot, but the daylight
+**Self-critique (cam):** her body is still the flat silhouette (not the bust) — right for night shot, but the daylight
 reflection could use a real face; 37.8 s sits near the top of the 20-40 s window.
+
+## anim-3-r2 · Junji Ito creep, CROWD MODE (horror 5) — the verdict's BLOCKING item
+**Theme:** "it only moves when you are not looking", now for a room: when nobody touches the mouse, the ROOM is the eye.
+**What it does:** round-1 anim-3's eight scenes and four creep stages (imported, unchanged), plus `anim3r2/room.js`:
+- **ROOM mode** (default; no pointer movement for 6 s, or never): a big pill at the top shows the room's eye (an Ito eye,
+  spiral iris, her red pupil) and its attention draining in 4 held poses of 1.5 s — "THE ROOM IS WATCHING" -> "the room is
+  getting tired" -> "the room glances away" -> "the room is not looking" (4 dots count down). At 6 s the whole screen
+  blinks (lids) and the scene takes one step behind the blink, `[the room blinks] [something shifted]`. Fully crept scenes
+  hold 6 s and the tour moves to the next scene by itself -> the piece runs hands-off on a projector (verified live: stage
+  1 at 6.8 s, stage 3 at 19 s, no mouse).
+- **HAND mode** (someone moves the mouse): round-1 rule, gaze ring, 2.5 s off the anchor = a step; the pill reads
+  "YOU ARE WATCHING" (pink) / "you looked away". Idle 6 s -> back to ROOM mode.
+- Space / click = the presenter's blink (a step, the room's meter resets). ←/→ scenes, R resets a scene.
+- **Round-1 self-critique answered ("overlays stacked on main's art, not Ito linework"):** from stage 2 the scene greys; from
+  stage 3 the scene ITSELF is re-inked by an SVG filter: 8-bin luminance -> ink black / hatched grey / paper, an edge pass
+  draws Ito's pen line, hatching fills the night tones; her red and pink (OR on the platform sign, her pins, the red
+  pupils) are masked back in so every OR stays her red.
+**RM:** blink = 400 ms black cut; the room's eye poses are already stepped; the ink is a hard cut at the stage change.
+**Verdict answers:** "needs a room-looks-away 6 s idle timer so it works for a projector audience" -> ROOM mode is the
+default and the idle timer is exactly 6 s (node-tested: 3 steps in 18 s hands-off, 4 eye poses, tour after a 6 s hold).
+**Self-critique:** the ink filter flattens the day scenes (train, rooftop) to mostly paper; the room's eye is UI chrome,
+not in-world.

@@ -12,6 +12,7 @@ import Anim3 from './anim3/Anim3.jsx';
 import Anim4 from './anim4/Anim4.jsx';
 import Letterbox from './menur2/Letterbox.jsx';
 import CamH from './camh/CamH.jsx';
+import Anim3R2 from './anim3r2/Anim3R2.jsx';
 
 const MenuH2R2 = ({ rm }) => createElement(Letterbox, { rm, mode: 'h2' });
 const Menu4R2 = ({ rm }) => createElement(Letterbox, { rm, mode: 'm4' });
@@ -26,6 +27,7 @@ export const VARIANTS = [
   { id: 'anim-4', track: 'anim', title: 'Paprika parade: every prop morphs and joins her collection', theme: 'Satoshi Kon dream-morph parade: the parade of everything she kept', horror: 3, builder: 'B', Component: Anim4 },
   { id: 'menu-4', track: 'menu', title: 'Bandersnatch letterbox: the timer drains into her cup', theme: 'Bandersnatch x cinema scope x Ju-On quiet: the timer is hers', horror: 3, builder: 'B', Component: Menu4 },
   // ---- round 2 ----
+  { id: 'anim-3-r2', track: 'anim', title: 'Junji Ito creep, crowd mode: it moves when the ROOM looks away', theme: 'Uzumaki x Weeping-Angel rules for a projector: a 6 s room gaze, then the scene re-inks itself', horror: 5, builder: 'B', Component: Anim3R2 },
   { id: 'cam-h-r2-b', track: 'camera', title: 'The Frame Keeps Finding Her (B): the camcorder does the Kon reveals itself', theme: 'Satoshi Kon match cuts x Ju-On found footage: the AF box and the D.ZOOM find her, loop on her face', horror: 5, builder: 'B', Component: CamH },
   { id: 'menu-h2-r2', track: 'menu', title: 'Her Time, Her Cut: she retypes Goodnight to Stay while the time pours pink', theme: 'Bandersnatch letterbox x DDLC live edit: her collaborator cursor, then her film cut', horror: 4, builder: 'B', Component: MenuH2R2 },
   { id: 'menu-4-r2', track: 'menu', title: 'Bandersnatch, improved: the cup is pre-poured, the purple box is squeezed, her real face', theme: 'Bandersnatch x cinema scope: the timer is hers, visibly, from the first frame', horror: 3, builder: 'B', Component: Menu4R2 },

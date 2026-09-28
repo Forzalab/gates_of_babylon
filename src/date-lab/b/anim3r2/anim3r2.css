@@ -1,0 +1,27 @@
+/* anim-3-r2: crowd mode HUD + Ito re-ink. Builds on anim3.css (.a3). */
+.r3.mode-room .a3-hit { cursor: none; }
+.r3 .a3-art.greyed { filter: saturate(.35) contrast(1.15); }
+.r3 .a3-art.inked, .r3 .a3-over.inked { filter: url(#a3r2-ink); }
+.r3 .a3-over.greyed { filter: saturate(.35) contrast(1.15); }
+/* corner ink (hatching), denser each stage */
+.r3 .r3-corners { position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(35deg, #0b0508 0 2px, transparent 2px 13px), repeating-linear-gradient(-55deg, #0b0508 0 2px, transparent 2px 11px);
+  -webkit-mask: radial-gradient(ellipse 75% 75% at 50% 50%, transparent 55%, #000 100%); mask: radial-gradient(ellipse 75% 75% at 50% 50%, transparent 55%, #000 100%); }
+
+/* the room's eye (reads from the back row) */
+.r3 .r3-eye { position: absolute; left: 50%; top: 22px; transform: translateX(-50%); z-index: 70; display: flex; align-items: center; gap: 22px;
+  padding: 12px 28px 12px 18px; border-radius: 999px; background: rgba(250, 244, 232, .92); color: #120a12; box-shadow: 0 4px 0 rgba(0, 0, 0, .35); pointer-events: none; }
+.r3 .r3-eye svg { width: 132px; height: 60px; }
+.r3 .r3-eye .white { fill: #fffaf0; }
+.r3 .r3-eye .iris { fill: #1a0a10; }
+.r3 .r3-eye .spiral { fill: none; stroke: #fffaf0; stroke-width: 2.4px; }
+.r3 .r3-eye .pupil { fill: #f0243f; }
+.r3 .r3-eye .lid { fill: #2a1a22; }
+.r3 .r3-eye .rim { fill: none; stroke: #120a12; stroke-width: 6px; }
+.r3 .r3-eye p { margin: 0; font: 700 38px/1 var(--cond); letter-spacing: .06em; text-transform: uppercase; }
+.r3 .r3-eye.p-2 p, .r3 .r3-eye.p-3 p { color: #b0123e; }
+.r3 .r3-eye.m-hand.on p { color: #d6337f; }
+.r3 .r3-dots { display: flex; gap: 8px; }
+.r3 .r3-dots b { width: 16px; height: 16px; border-radius: 50%; border: 3px solid #120a12; }
+.r3 .r3-dots b.on { background: #120a12; }
+.r3 .r3-hint { left: 50%; transform: translateX(-50%); top: 128px; color: rgba(255, 255, 255, .85); background: rgba(10, 5, 8, .72); padding: 8px 16px; border-radius: 6px; white-space: nowrap; }

@@ -89,6 +89,15 @@ export const SHOTS = [
   { id: 'menu-4-r2', name: 'rm-first-frame', q: 'state=menu&mt=0&still', wait: 1200 },
   // cam-h-r2-b (train 0-5.6, platform 5.6-10.6, underpass 10.6-19.2, apartment 19.2-24.6, stairs 24.6-30.2, fall 30.2-37.8)
   ...[0.0, 1.8, 4.8, 7.0, 10.55, 10.65, 12.6, 14.8, 16.8, 19.15, 19.25, 21.8, 28.6, 31.4, 35.6, 37.75].map((s) => ({ id: 'cam-h-r2-b', name: `t${s.toFixed(2).padStart(5, '0')}`, q: `t=${s}&pause`, wait: 1000 })),
+  // anim-3-r2 crowd mode: the room's eye drains (paused poses), a live hands-off run (no mouse), re-inked stages, hand mode, RM
+  ...[0, 1600, 3100, 4600].map((ms, i) => ({ id: 'anim-3-r2', name: `1-room-eye-pose${i}`, q: `scene=platform&stage=1&room=${ms}&pause`, wait: 900 })),
+  { id: 'anim-3-r2', name: '2-live-handsoff-6.8s', q: 'scene=platform&stage=0', wait: 6800 },
+  { id: 'anim-3-r2', name: '3-live-handsoff-19s', q: 'scene=platform&stage=0', wait: 19000 },
+  { id: 'anim-3-r2', name: '4-platform-inked-4', q: 'scene=platform&stage=4&pause', wait: 900 },
+  { id: 'anim-3-r2', name: '5-genkan-inked-3', q: 'scene=genkan&stage=3&pause', wait: 900 },
+  { id: 'anim-3-r2', name: '6-apartment-inked-4', q: 'scene=apartment&stage=4&pause', wait: 900 },
+  { id: 'anim-3-r2', name: '7-hand-mode', q: 'scene=stairs&stage=2', wait: 900, steps: [['move', 400, 700], ['move', 420, 690], ['wait', 300]] },
+  { id: 'anim-3-r2', name: 'rm-room-eye', q: 'scene=underpass&stage=3&room=3100&pause&still', wait: 900 },
   { id: 'cam-h-r2-b', name: 'rm-t14.8', q: 't=14.8&pause&still', wait: 1000 },
   { id: 'cam-h-r2-b', name: 'rm-t37.75', q: 't=37.75&pause&still', wait: 1000 },
 ];

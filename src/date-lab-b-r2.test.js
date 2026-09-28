@@ -6,6 +6,7 @@ import { EDIT, editDone, purpleLabel, retyped, outcome, pinkFill, widths, tally,
 import { words } from './date-beta/engine.js';
 import { SHOTS as CH, TOTAL as CH_TOTAL, HER as CH_HER, NEST, eyeOf, toScreen as chScreen, poseFor, HEAD } from './date-lab/b/camh/shots.js';
 import { HANDHELD } from './date-lab/b/shared/timeline.js';
+import { ROOM, POSE_MS, initRoom, roomTick, roomBlink, eyePose } from './date-lab/b/anim3r2/room.js';
 
 const run = (s, ms) => { let x = s; for (let t = 0; t < ms; t += 25) x = tick(x, 25); return x; };
 
@@ -102,6 +103,42 @@ test('cam-h-r2-b: Kon match cut tunnel face -> lit-window face; platform -> post
   }
   assert.ok(Math.abs(p.dzoom(p.dur) - 1 / NEST.k) < 1e-9, 'the OSD already reads the poster zoom on the platform');
   assert.ok(near(HEAD, 3.2, 1e-9));
+});
+
+// ---------- anim-3-r2: the room looks away ----------
+test('anim-3-r2: hands-off, the room creeps one step every 6 s; the eye drains in 4 poses >= 500 ms', () => {
+  assert.ok(POSE_MS >= 500);
+  let s = initRoom(), steps = 0, poses = new Set();
+  for (let t = 0; t < 18000; t += 125) {
+    let a; [s, a] = roomTick(s, 125, {});
+    poses.add(eyePose(s));
+    if (a === 'step') steps++;
+  }
+  assert.equal(s.mode, 'room', 'no mouse = room mode from the start');
+  assert.equal(steps, 3);
+  assert.deepEqual([...poses].sort(), [0, 1, 2, 3]);
+});
+
+test('anim-3-r2: moving the mouse = hand mode (2.5 s off the anchor); idle 6 s hands it back to the room', () => {
+  let s = initRoom(), a;
+  [s, a] = roomTick(s, 125, { moved: true, onAnchor: true });
+  assert.equal(s.mode, 'hand');
+  for (let t = 0; t < 5000; t += 125) { [s, a] = roomTick(s, 125, { onAnchor: true }); assert.equal(a, null, 'looking at the anchor: nothing moves'); }
+  let fired = 0;
+  for (let t = 0; t < 1000; t += 125) { [s, a] = roomTick(s, 125, { onAnchor: false }); if (a) fired++; }
+  assert.equal(s.mode, 'room', 'idle >= 6 s -> the room takes over');
+  s = initRoom();
+  [s] = roomTick(s, 125, { moved: true, onAnchor: false });
+  for (let t = 0; t < 2600; t += 125) { [s, a] = roomTick(s, 125, { moved: true, onAnchor: false }); if (a) fired++; }
+  assert.ok(fired >= 1, 'off the anchor for 2.5 s = a step');
+  assert.equal(roomBlink(s).sinceStep, 0);
+});
+
+test('anim-3-r2: a fully crept scene holds 6 s, then the tour moves on', () => {
+  let s = initRoom(), a, next = 0;
+  for (let t = 0; t < 12000; t += 125) { [s, a] = roomTick(s, 125, { atMax: true }); if (a === 'next') next++; assert.notEqual(a, 'step'); }
+  assert.equal(next, 2);
+  assert.equal(ROOM.holdAtMax, 6000);
 });
 
 test('menu-4-r2: the room tally', () => {
