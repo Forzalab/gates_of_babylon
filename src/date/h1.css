@@ -80,7 +80,11 @@
 .v-h1 .btn.flee.fine { margin-bottom: 8px; }
 /* polish 4: the table font on the 100% card */
 .v-h1 .card > .tt { font-size: max(12px, calc(var(--u) * 1.1)); }
-.v-h1 .feednav .play { white-space: nowrap; }
+/* BACK on top, PLAY + LOGIC MODE under it: three buttons fit the header band at 1024 */
+.v-h1 .feednav { display: grid; grid-template-columns: auto auto; gap: calc(var(--u) * .5); flex: none; }
+.v-h1 .feedbar { gap: calc(var(--u) * 1.2); padding-right: calc(var(--u) * 2) !important; }
+.v-h1 .feednav .btn { font-size: max(13px, calc(var(--u) * 1.5)); padding: calc(var(--u) * .4) calc(var(--u) * .9); white-space: nowrap; margin: 0; }
+.v-h1 .feednav .btn:first-child { grid-column: 1 / -1; }
 
 /* K1 interstitial (from h2): a static player centred on the grid page; nothing animates */
 .k1 { position: fixed; inset: var(--hdr) 0 0; display: grid; place-items: center; background: #003ec5; }
