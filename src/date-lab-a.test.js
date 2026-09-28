@@ -131,6 +131,28 @@ test('retype (menu-3): she backspaces and retypes on the 8 fps grid; rm = one ha
   assert.throws(() => retype('abc', 'x', 'y'));
 });
 
+test('cam-2 corridor: a true dolly (near grows faster than far), tubes die far->near held >= 500 ms, she only steps nearer', async () => {
+  const { project, tubesOut, herZ, TUBES, HER_FAR, HER_LAST } = await import('./date-lab/a/camera/corridor.js');
+  assert.deepEqual(project(0, 0, 10, 0).slice(0, 2), [960, 540], 'the centre line projects to the vanishing point');
+  const grow = (z) => project(1, 0, z, 2)[2] / project(1, 0, z, 0)[2];
+  assert.ok(grow(4) > grow(30), 'dolly: a near plane scales up more than a far one (a zoom would scale both alike)');
+  let prev = 0;
+  for (let t = 0; t < 20000; t += 100) { const n = tubesOut(t); assert.ok(n >= prev); prev = n; }
+  assert.equal(tubesOut(0), 0);
+  assert.equal(tubesOut(1e9), TUBES.length);
+  assert.ok(tubesOut(5200 + 499) === tubesOut(5200), 'each dark step holds >= 500 ms');
+  assert.equal(herZ(0), HER_FAR);
+  assert.equal(herZ(TUBES.length), HER_LAST);
+  assert.ok(herZ(3) < herZ(2), 'she only ever comes nearer');
+});
+
+test('camera fit: frames never leave the 1920x1080 art', async () => {
+  const { fit } = await import('./date-lab/a/kit/fit.js');
+  assert.deepEqual(fit({ x: 1900, y: 1000, s: 2 }), { x: 1440, y: 810, s: 2 });
+  assert.deepEqual(fit({ x: 0, y: 0, s: 1 }), { x: 960, y: 540, s: 1 });
+  assert.deepEqual(fit({ x: 5, y: 5, s: 0.5 }), { x: 5, y: 5, s: 0.5 }, 'zoomed out = free');
+});
+
 test('registry: every builder-A variant is builder A with a unique id and a known track', () => {
   const src = readFileSync(new URL('./date-lab/a/index.js', import.meta.url), 'utf8');
   const rows = [...src.matchAll(/A\('([\w-]+)', '(\w+)'/g)].map((r) => ({ id: r[1], track: r[2] }));

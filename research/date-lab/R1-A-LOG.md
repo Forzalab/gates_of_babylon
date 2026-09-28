@@ -87,3 +87,20 @@ out-of-focus foreground petals falling in held 500 ms steps, raindrops on the le
   the sky banding reads "filtered", and the platform truck is the least motivated move.
 - **Carry-forward (R2)**: let main paint dusk/night sky variants (or give Rooftop a `sky` prop) so the time-lapse re-lights instead of
   tints; add a 2-3 s "ma" hold with only wind before the stairs; keep the heart-ghost flare as the horror-1 signature.
+
+## cam-2 · Kubrick symmetry (horror 3)
+- **School**: Kubrick (*The Shining* hallway tracks, intertitles, one-point dead-centre framing, the "Kubrick stare") x anime
+  corridor holds (Evangelion / Shaft symmetry) x slow corridor dread.
+- **Theme**: *everything in its place* — the world is symmetrical because she arranged it (mirrored ad pairs, the tactile line
+  dead centre, her shoes to the millimetre).
+- **What it does** (30.6 s): intertitle "THE UNDERPASS / 23 : 52" -> a TRUE one-point dolly down a procedurally drawn underpass
+  (every depth slice projected with F/(z-camZ), so near tiles grow faster than far ones; it is a track, not a zoom), identical
+  Figur / gate-pun ads on both walls (NOT Sweet, OR-SON, XOR Coffee, BUFFER), a yellow tactile line to the vanishing point.
+  From 5.2 s the ceiling tubes die far -> near, one per 600 ms (held); each time one dies her silhouette (main's `sil('nanda')`,
+  red eyes, pink pin) is one hard cut nearer, backlit by the exit; the ads stay lit. Intertitle "12 : 00" -> a patient dolly into
+  her genkan -> the stare: dead centre, symmetric door frames receding, wide-eyed, "Shoes off. Everything in its place."
+- **RM**: the corridor is two held frames (lit, far / dark, near); every other shot one held frame; hard cuts only.
+- **Self-critique**: the corridor is the best thing I shipped this round (real depth, clear horror escalation); the genkan shot is
+  main's asymmetric art so it breaks the symmetry theme, and the stare is a medium close-up, not a real Kubrick ECU.
+- **Carry-forward (R2)**: symmetrical genkan (mirror the shoe line, shrine dead centre) or cut it; push the stare to an ECU with a
+  head-tilt-down pose layer; add a single mirrored "twin" silhouette beat (two Nandas, one blinks) — the Grady twins, PG-13.
