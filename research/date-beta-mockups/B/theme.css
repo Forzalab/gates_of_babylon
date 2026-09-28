@@ -1,0 +1,145 @@
+/* VARIANT B — ANALOG / VHS. The date is a tape somebody keeps rewinding.
+   Material: CRT glass, scanlines, static grain, sepia picture, OSD in mono caps, handwritten cassette labels.
+   Spot colour: the world is sepia; ONLY pink / purple / her red stay saturated (her pin, the choices, every OR).
+   Dread 0 = clean tape (PLAY, timecode running). 1 = worn (tracking band, chroma bleed, timecode stuck at 12:00).
+   2 = chewed (dropouts, picture goes red-mono, OSD = REW). The dialogue band stays solid black: text never degrades. */
+:root {
+  --page-bg: #0b0806;
+  --bg: #231a12; --ink: #f3e6cf; --ink-2: #c8b38f;
+  --surface: rgba(8, 6, 4, .92); --surface-ink: #fbf3e2; --edge: #f3e6cf; --edge-w: 3px; --radius: 4px;
+  --shadow: 0 0 0 transparent;
+  --name-bg: var(--pink); --name-ink: #2a0615; --name-mc-bg: #f3e6cf; --name-mc-ink: #1c140c;
+  --cap-bg: #000; --cap-ink: #fff27a; --focus: #fff27a;
+  --font-display: 'JBM', 'DejaVu Sans Mono', monospace; --font-body: 'RC', 'Liberation Sans', sans-serif; --font-mono: 'JBM', 'DejaVu Sans Mono', monospace;
+  --hand: 'Yellowtail', 'RC', cursive;
+  --art-stroke: #2a1c12; --art-sw: 3px; --art-sw-thin: 2px; --art-sw-fat: 6px;
+  --chat-bg: #efe4cf; --chat-head: #f8f0de; --bub-in: #fffaf0; --bub-out: #e2d6bd; --notif-bg: #f8f0de; --notif-ink: #1c140c;
+  --flow-node: #0c0906; --flow-ink: #f3e6cf; --flow-edge: #c8b38f; --node-r: 2px;
+  --err-bg: #0c0906; --err-ink: #f3e6cf; --fx-bg: #231a12;
+
+  /* art roles: sepia world, spot colour on her */
+  --c-hair: #e8dcc8; --c-hair2: #a8977c; --c-hairhl: #fffaf0; --s-hair2: #a08e72;
+  --c-skin: #f1dfc6; --c-skin2: #d9bf9d; --c-white: #fffaf0; --c-iris: #d6336a; --c-iris2: #ff8fb4; --c-pupil: #2a0a18;
+  --c-lash: #2a1c12; --s-lash: #2a1c12; --c-blush: #ff8fb0; --c-mouth: #b8465a;
+  --c-cloth: #f6ecda; --c-cloth2: #cdbd9f; --c-collar: #5d4b3a; --c-stripe: #f6ecda; --s-stripe: #f6ecda; --c-ribbon: #ff5fa2;
+  --c-tie: #f6ecda; --c-pin: #ff5fa2; --c-tear: #c9e6f0; --s-tear: #86a9b5; --c-shade: rgba(40, 20, 10, .6);
+  --c-sil: #120c08; --s-sil: #120c08; --c-eye: #f0243f;
+  --c-metal: #b8a88c; --c-wall: #cdb89a; --c-wall2: #b39d7e; --c-floor: #8e7a60; --c-floor2: #6f5d47; --s-floor2: #6f5d47;
+  --c-glass: #3a3024; --c-seat: #8a5a4a; --c-light: #f7ecd3; --c-wood: #a47c56; --c-wood2: #7d5b3d; --c-tile: #d8c9ae;
+  --c-cup: #f6ecda; --c-tea: #b3a064; --c-steam: none; --s-steam: #fffaf0; --c-plum: #c73a52; --c-egg: #e8c35a; --c-mochi: #fbf3e6;
+  --c-phone: #1c140c; --c-screen: #efe4cf; --c-xhair: #8a5cf6; --c-xhair2: #6a45d6; --s-xhair2: #5a36c4;
+  --c-hood: #5d4b3a; --c-hood2: #3f3226; --c-cans: #1c140c; --c-hand: #f1dfc6; --c-hand2: #cdb08c; --c-sleeve: #7f6a52;
+  --c-paper: #fbf3e2; --c-frame: #6f5a44; --c-candle: #fffaf0; --c-flame: #ffc868; --c-night: #1d1812;
+  --c-shoe: #4a3426; --c-shoe2: #1c140c; --c-slipper: #9c8a70; --c-strap: #efe4cf; --c-accent: #ff5fa2; --s-accent: #ff5fa2;
+}
+.pin-hum .pinbub { fill: var(--pink); } .pin-hum .pinglow { fill: var(--pink); opacity: .5; }
+.pin-flicker .pinbub { fill: #ffc4dc; } .pin-flicker .pinglow { fill: var(--pink); opacity: .2; }
+.pin-red .pinbub { fill: var(--her); } .pin-red .pinglow { fill: var(--her); opacity: .55; }
+.pin-off .pinbub { fill: #9c8d78; } .pin-off .pinglow { opacity: 0; }
+
+/* ---------- tape material ---------- */
+.board { font-family: var(--font-body); }
+.board > .label { top: 34px; left: 40px; padding: 8px 12px; background: #000; color: #f3e6cf; font-family: var(--font-mono); text-shadow: 2px 0 rgba(255, 40, 80, .55), -2px 0 rgba(40, 200, 255, .45); }
+.board > .label b { color: #fff27a; }
+.vhs { position: absolute; inset: 0; pointer-events: none; z-index: 58; }
+.vhs.scan { background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .22) 0 2px, transparent 2px 5px); }
+.vhs.vig { background: radial-gradient(ellipse at 50% 50%, transparent 58%, rgba(0, 0, 0, .55) 100%); box-shadow: inset 0 0 0 16px #000; border-radius: 0; }
+.vhs.glass { border-radius: 60px; box-shadow: 0 0 0 60px #000; }
+.vhs.grain { opacity: .28; mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .4  0 0 0 1.4 -.2'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.vosd { position: absolute; z-index: 59; font: 700 34px/1 var(--font-mono); color: #fff; letter-spacing: .06em; text-shadow: 3px 3px 0 #000, 2px 0 rgba(255, 40, 80, .6), -2px 0 rgba(40, 200, 255, .5); pointer-events: none; }
+.vosd.play { left: 64px; top: 100px; }
+.vosd.tc { right: 64px; bottom: 30px; font-size: 30px; }
+.vosd.sp { right: 64px; top: 100px; font-size: 26px; }
+.vosd.date { left: 66px; top: 150px; font-size: 26px; color: #ffcf6a; }
+.vhs.track { left: 0; right: 0; height: 70px; inset: auto 0 auto 0; background: linear-gradient(transparent, rgba(255, 255, 255, .18) 30%, rgba(255, 255, 255, .5) 48%, rgba(0, 0, 0, .35) 60%, transparent);
+  mix-blend-mode: screen; }
+.vhs.drop { background:
+  linear-gradient(90deg, transparent 12%, rgba(255, 255, 255, .85) 12% 19%, transparent 19%) 0 212px / 100% 3px no-repeat,
+  linear-gradient(90deg, transparent 55%, rgba(255, 255, 255, .8) 55% 71%, transparent 71%) 0 488px / 100% 4px no-repeat,
+  linear-gradient(90deg, transparent 30%, rgba(255, 255, 255, .7) 30% 34%, transparent 34%) 0 731px / 100% 3px no-repeat,
+  linear-gradient(90deg, transparent 78%, rgba(255, 255, 255, .8) 78% 93%, transparent 93%) 0 612px / 100% 2px no-repeat; }
+.vhs.redmono { background: rgba(160, 0, 20, .38); mix-blend-mode: color; }
+
+/* components as tape */
+.dlg { background: #000; border: 0; border-top: 3px solid #f3e6cf; border-bottom: 3px solid #f3e6cf; border-radius: 0; padding: 40px 60px 34px; }
+.dlg .who { top: -24px; left: 40px; border-radius: 0; font-family: var(--font-mono); font-size: 26px; padding: 9px 16px; letter-spacing: .14em; }
+.dlg .who::before { content: 'CH03 · '; opacity: .7; }
+.dlg.mc .who::before { content: 'CH01 · '; }
+.dlg.crowd .who::before { content: 'CH?? · '; }
+.dlg .line { text-shadow: 2px 0 rgba(255, 40, 80, .35), -2px 0 rgba(40, 200, 255, .3); }
+.dlg .next { font-family: var(--font-mono); color: #c8b38f; }
+.dlg .next::after { content: ''; }
+.dlg.head { background: transparent; border-style: dashed; }
+.dlg.head .line { font-family: var(--hand); font-size: 58px; color: #ffcf6a; text-shadow: none; }
+.dlg.crowd .line { font-family: var(--font-mono); font-weight: 700; font-size: 64px; letter-spacing: .12em; text-transform: uppercase; }
+
+/* choices = two cassette spine labels; the pink one is already in the deck */
+.choice { border-radius: 6px; border: 4px solid #0c0906; box-shadow: 0 8px 0 #000; font-family: var(--hand); font-weight: 400; font-size: 60px; padding: 18px 30px 18px 26px;
+  background-image: linear-gradient(transparent 0 14px, rgba(0, 0, 0, .18) 14px 18px, transparent 18px), repeating-linear-gradient(0deg, transparent 0 22px, rgba(0, 0, 0, .06) 22px 23px); }
+.choice .key { font-family: var(--font-mono); background: #0c0906; color: #f3e6cf; border-radius: 4px; }
+.choice .def { font-family: var(--font-mono); font-size: 20px; }
+.choice.pink .def::before { content: '▶ IN DECK · '; }
+.choice.is-hover { outline-color: #fff27a; }
+.choice.is-disabled { font-family: var(--hand); }
+.timer { height: 30px; border-radius: 0; border: 3px solid #f3e6cf; background: #000; }
+.timer i { border-radius: 0; background: repeating-linear-gradient(90deg, var(--pink) 0 22px, transparent 22px 28px); background-size: auto; }
+.timer i::after { content: '◀'; color: #fff27a; font-size: 30px; right: -26px; text-shadow: none; }
+.timer::before { content: 'TAPE REMAINING'; position: absolute; left: 0; top: 36px; background: #000; padding: 4px 8px; font: 700 20px/1 var(--font-mono); letter-spacing: .14em; color: #f3e6cf; }
+.timer .secs { font-family: var(--font-mono); }
+.cap { border-radius: 0; font-family: var(--font-mono); font-size: 28px; }
+.chrome button { border-radius: 0; background: #000; font-family: var(--font-mono); }
+.chrome button.on { background: #f3e6cf; color: #000; }
+.cw, .pause { background: #0000ff; color: #fff; border: 0; border-radius: 0; font-family: var(--font-mono); }
+.cw h2, .pause h2 { font-family: var(--font-mono); font-weight: 700; font-size: 54px; letter-spacing: .08em; text-transform: uppercase; }
+.cw ul { font-family: var(--font-mono); font-size: 30px; }
+.cw li::before { content: '▸ '; color: #fff; }
+.pause li { font-family: var(--font-mono); font-size: 30px; text-transform: uppercase; }
+.pause li.sel { background: #fff; color: #0000ff; border-color: #fff; }
+.pause li.sel::before { content: '▶'; }
+.pause li kbd, .pause li .val { color: inherit; border-color: currentColor; }
+.btn { border-radius: 0; font-family: var(--font-mono); background: transparent; color: #fff; border-color: #fff; }
+.btn.primary { background: #fff; color: #0000ff; }
+.phone { background: #1c140c; border-color: #3a2c1e; }
+.phone .scr { filter: sepia(.35); }
+.pinerr { border-radius: 0; border: 0; box-shadow: 0 0 0 8px #000, 0 0 0 11px var(--her); }
+.pinerr .tb { font-family: var(--font-mono); background: var(--her); }
+.pinerr .msgx { font-family: var(--font-mono); font-size: 50px; text-transform: uppercase; letter-spacing: .02em; color: #fff; text-shadow: 3px 0 rgba(255, 40, 80, .6), -3px 0 rgba(40, 200, 255, .5); }
+.pinerr .btn { border-color: #fff; }
+.callout { background: #000; color: #f3e6cf; border: 2px solid #f3e6cf; border-radius: 0; font-family: var(--font-mono); }
+.dreadtag { background: #000; padding: 8px 12px; color: #fff27a; }
+.tag { background: #f3e6cf; color: #000; border-radius: 0; }
+.mini { border-radius: 26px; border-color: #3a2c1e; border-width: 6px; }
+
+/* sprite cards = cassette sleeves with a handwritten label */
+.card { background: #1c140c; border: 0; border-radius: 10px; box-shadow: 0 0 0 4px #000; }
+.card .cardbg { background: #cdb89a radial-gradient(ellipse at 50% 40%, #e9dcc3 0 40%, transparent 70%); }
+.card .cap2 { background: #f8f0de; border-top: 10px solid #1c140c; background-image: repeating-linear-gradient(0deg, transparent 0 34px, rgba(80, 110, 200, .25) 34px 36px); }
+.card .cap2 h3 { font-family: var(--hand); font-size: 54px; white-space: nowrap; color: #1c140c; letter-spacing: 0; }
+.card .cap2 p { font-family: var(--font-mono); font-size: 20px; color: #3a2c1e; }
+.card.c-wide .cardbg { background: #5a0c16 radial-gradient(ellipse at 50% 40%, #8a1f2a 0 40%, transparent 70%); }
+.panel { background: #efe4cf; color: #1c140c; border: 0; border-radius: 6px; box-shadow: 0 0 0 4px #000; }
+.panel h3 { font-family: var(--hand); font-size: 50px; color: #c7304f; }
+.panel.p-dark { background: #1d1812; color: #f3e6cf; } .panel.p-dark h3 { color: var(--her); }
+.panel.p-xor { background: #e2d8f5; }
+.fx { border-radius: 0; border-color: #000; }
+.fx .stage { background: #231a12; }
+.fx .ctl { background: #000; color: #f3e6cf; }
+.fx .ctl button { border-radius: 0; }
+.fxline { border-radius: 0; background: #000; color: #fff; border: 0; }
+.ovbox, .ovlines p { border-radius: 0; background: #000; color: #fff; }
+
+/* ---------- DREAD: the tape wears out ---------- */
+[data-dread="1"] { --edge: #ffcf6a; --c-wall: #bfa582; --c-wall2: #a58a68; --c-light: #f0dcb4; }
+[data-dread="1"] .dlg .line { text-shadow: 4px 0 rgba(255, 40, 80, .55), -4px 0 rgba(40, 200, 255, .5); }
+[data-dread="1"] .dlg { border-top-color: #ffcf6a; }
+[data-dread="2"] { --bg: #120407; --edge: var(--her); --ink-2: #ff9aa8;
+  --c-wall: #5a1a1e; --c-wall2: #45121a; --c-floor: #3a0f14; --c-floor2: #1f070a; --s-floor2: #7a2a30; --c-light: #d8a0a0; --c-glass: #120407;
+  --c-seat: #7a1422; --c-night: #0a0204; --c-metal: #9a7070; --c-strap: #e0b0b0; --c-tile: #6a2a2e; --c-wood: #7a3a34; --c-wood2: #561f22; --c-paper: #f0d8d0;
+  --art-stroke: #0a0204; }
+[data-dread="2"] .dlg { border-top: 3px solid var(--her); border-bottom: 3px solid var(--her); }
+[data-dread="2"] .dlg .line { text-shadow: 5px 0 rgba(255, 40, 80, .6), -5px 0 rgba(40, 200, 255, .45); }
+[data-dread="2"] .dlg .who::before { content: 'CH03 · CH03 · '; }
+[data-dread="2"] .choice { box-shadow: 0 8px 0 #000, 6px 0 0 rgba(40, 200, 255, .35); }
+[data-dread="2"] .timer { border-color: var(--her); }
+.dlg.head .who::before { content: ""; }

@@ -283,3 +283,6 @@ body.solo { padding: 0; overflow: hidden; height: 100vh; }
 .ovlines { position: absolute; left: 18px; right: 18px; bottom: 12px; display: flex; flex-direction: column; justify-content: flex-end; }
 .ovlines p { margin: 4px 0 0; font: 400 28px/1.15 var(--font-body); padding: 6px 10px; border-radius: 8px; background: var(--surface); }
 .ovlines p.last { font-weight: 700; background: var(--pink); color: var(--pink-ink); }
+
+/* Nanda placeholder marker: the real sprite comes from the ALT account's art; these slots keep the contract (600x900 viewBox, pin anchor, 4 face layers). */
+.phtag { display: inline-block; font: 700 20px/1 var(--font-mono); font-style: normal; letter-spacing: .08em; padding: 6px 10px; background: #111; color: #ffe95a; border: 2px dashed #ffe95a; z-index: 70; }

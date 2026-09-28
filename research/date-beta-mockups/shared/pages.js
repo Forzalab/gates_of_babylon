@@ -45,7 +45,7 @@
         <div class="abs" style="left:0;top:60px;width:1200px;height:230px;transform:scale(${k});transform-origin:0 0">${dlg({ who: 'NANDA', text: 'Did you just pun at me? On MY roof?', dock: 'bl', style: { left: 0, bottom: 'auto', top: 30 } })}</div>
         <div class="abs" style="left:0;top:190px;width:1200px;height:230px;transform:scale(${k});transform-origin:0 0">${dlg({ who: 'MC', kind: 'mc', text: 'Technically, rain wasn\'t f-OR-ecast.', dock: 'bl', style: { left: 0, bottom: 'auto', top: 30 } })}</div>
         <div class="abs" style="left:0;top:320px;width:1200px;height:230px;transform:scale(${k});transform-origin:0 0">${dlg({ kind: 'narr', text: 'He doesn\'t blink.', dock: 'bl', style: { left: 0, bottom: 'auto', top: 30 } })}</div>
-        <div class="abs" style="left:0;top:450px;width:1200px;height:230px;transform:scale(${k});transform-origin:0 0">${dlg({ who: 'CROWD', kind: 'crowd', text: 'forever AND ever', and: true, dock: 'bl', style: { left: 0, bottom: 'auto', top: 30 } })}</div>
+        <div class="abs" style="left:0;top:450px;width:1200px;height:230px;transform:scale(${k});transform-origin:0 0">${dlg({ who: 'CROWD', kind: 'crowd', text: 'fORever AND ever', and: true, dock: 'bl', style: { left: 0, bottom: 'auto', top: 30 } })}</div>
         <div class="abs" style="left:0;top:580px;width:1200px;height:230px;transform:scale(${k});transform-origin:0 0">${dlg({ kind: 'head', text: 'He came. He came. Act bored.', dock: 'bl', next: false, style: { left: 0, bottom: 'auto', top: 30 } })}</div>
         <div class="abs note" style="left:0;top:720px;width:600px">// her head = <b>director layer</b> (VA + animator). Never shown to the player.</div>
       </div>
@@ -113,7 +113,7 @@
     const faces = [['smile', 'SMILE', 'pin hums pink · "Good input."'], ['blank', 'BLANK', 'pin off · the 2 s "…fine."'], ['tears', 'CROC TEARS', 'pin flickers · mouth corner lifts'], ['wide', 'WIDE-EYED', 'pin solid red · "Mine."']];
     b.push(board(`<div class="faces">${faces.map(([f, n, d], i) => `<div class="card c-${f}"><div class="cardbg"></div>
       <div class="sp">${A.nanda({ face: f })}</div><div class="cap2"><h3>${n}</h3><p>${d}</p></div></div>`).join('')}</div>`,
-    { label: '<b>Nanda</b> · 4 faces · the pin (a tiny NAND gate) is her mood light', kind: 'faces' }));
+    { label: '<b>Nanda</b> · 4 faces · the pin (a tiny NAND gate) is her mood light · <i class="phtag">PLACEHOLDER · swap slot for ALT art</i>', kind: 'faces' }));
 
     const row = (eyes, nanda = true) => {
       let s = '';
@@ -151,6 +151,7 @@
     const sw = (c, n) => `<div class="sw"><i style="background:${c}"></i><span>${n}</span></div>`;
     return [board(`
       <div class="abs sheetN" style="left:40px;top:70px;width:700px;height:1010px">${A.nanda({ face: 'smile' })}</div>
+      <div class="abs phtag" style="left:40px;top:1020px">NANDA = PLACEHOLDER · swap slot 600×900 · pin anchor (372, 238) · face + pin = layers</div>
       <div class="abs callout note" style="left:600px;top:250px;width:250px">pin clip = a NAND gate; the output bubble is her mood light</div>
       <div class="abs callout note" style="left:40px;top:120px;width:220px">silver twin-tails, pink bows</div>
       <div class="abs callout note" style="left:40px;top:830px;width:230px">sailor collar in her lilac; ribbon = pink</div>
@@ -172,7 +173,7 @@
   function scenes() {
     const b = [];
     b.push(board(`<div class="fill">${A.sceneTrain({ rows: 4, nanda: true })}</div>${x('train')}
-      ${dlg({ who: 'CROWD', kind: 'crowd', text: 'forever AND ever', and: true, dock: 'tl', next: false, style: { top: 130 } })}
+      ${dlg({ who: 'CROWD', kind: 'crowd', text: 'fORever AND ever', and: true, dock: 'tl', next: false, style: { top: 130 } })}
       ${cap('[whispers · 8 voices · hum stops]', { style: { left: 96, top: 340, bottom: 'auto' } })}
       ${chrome({ on: ['cc'], faint: true })}`,
     { label: '<b>2X.5 · the chant</b> · every passenger turned · she is closest · box docks top: the aisle is the shot', kind: 'train', dread: 2 }));
