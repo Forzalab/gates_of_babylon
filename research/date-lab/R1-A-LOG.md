@@ -4,6 +4,13 @@ Worktree branch: `worktree-agent-a88d4b414cc46001d` (fast-forwarded onto the sca
 Run: `npm run build && npx vite preview --port 5481`, then `date-lab.html?v=<id>` (`&still` = reduced motion).
 Shots: `node research/date-lab/shots-a.mjs [id ...]` -> `research/date-lab/shots/<id>-*.png`.
 
+## Summary (round 1, builder A)
+Shipped 15 variants: menu-1/2/3, cam-1/2/3, closeup-1..5, nanda-1/2, anim-1/2. Each has >= 2 shots + 1 RM shot in
+`research/date-lab/shots/`. Node tests: `src/date-lab-a.test.js` (menu state machine, timelines, flash audit, retype, corridor
+dolly, camera fit, Nanda integration x3). Strongest: menu-3 DDLC, cam-2 Kubrick corridor, cam-3 Kon loop, closeup-3 third cup.
+Weakest: menu-2 (horror 1 barely unsettles), closeup-5 (a rules card), nanda-2 (a tool, not a scene), anim-2 (full-screen red
+impact frame needs an arbiter safety call).
+
 ## Shared kit (`src/date-lab/a/kit/`)
 - `menu.js` — the DOOR choice as a pure state machine: 5 s timer, timeout = pink, replay disables your last pick while the
   timer still runs, and if pink is the disabled one she still takes it on timeout (`forced`). Node-tested (`src/date-lab-a.test.js`).
