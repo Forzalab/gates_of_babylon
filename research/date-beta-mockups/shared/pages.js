@@ -152,9 +152,9 @@
     return [board(`
       <div class="abs sheetN" style="left:40px;top:70px;width:700px;height:1010px">${A.nanda({ face: 'smile' })}</div>
       <div class="abs phtag" style="left:40px;top:1020px">NANDA = PLACEHOLDER · swap slot 600×900 · pin anchor (372, 238) · face + pin = layers</div>
-      <div class="abs callout note" style="left:600px;top:250px;width:250px">pin clip = a NAND gate; the output bubble is her mood light</div>
+      <div class="abs callout note" style="left:556px;top:160px;width:236px">pin clip = a NAND gate; the output bubble is her mood light</div>
       <div class="abs callout note" style="left:40px;top:120px;width:220px">silver twin-tails, pink bows</div>
-      <div class="abs callout note" style="left:40px;top:830px;width:230px">sailor collar in her lilac; ribbon = pink</div>
+      <div class="abs callout note" style="left:40px;top:830px;width:230px">sailor collar = a theme token; ribbon = always pink</div>
       <div class="abs faceRow" style="left:800px;top:90px;width:680px;height:260px">
         ${['smile', 'blank', 'tears', 'wide'].map((f, i) => `<div class="abs fr" style="left:${i * 170}px;top:0;width:160px;height:250px;overflow:hidden"><div class="abs" style="left:-80px;top:-40px;width:320px;height:480px">${A.nanda({ face: f })}</div></div>`).join('')}</div>
       <div class="abs note" style="left:800px;top:360px;width:680px">smile · blank · croc tears · wide-eyed — 1 base PSD, 4 face layers + 4 pin layers</div>
