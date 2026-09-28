@@ -11,7 +11,7 @@ import '@fontsource/inter-tight/800.css';
 import '@fontsource/inter-tight/900-italic.css';
 import '@fontsource/jetbrains-mono/400.css';
 import { Ors } from '../../../date-beta/Say.jsx';
-import { unlock, onState, onCaption, soundState, setMuted, isMuted, stopAll, play } from './audio.js';
+import { unlock, onState, onCaption, soundState, setMuted, isMuted, stopAll, play, bed } from './audio.js';
 import './b.css';
 
 const Q = typeof location !== 'undefined' ? new URLSearchParams(location.search) : new URLSearchParams();
@@ -80,6 +80,17 @@ export function Line({ text, className = '', breath = true, style }) {
   );
 }
 
+// Cinema subtitle (no VN box): speaker in pink small caps, OR rule + breath.
+export function Sub({ text, className = '', style }) {
+  if (!text) return null;
+  const m = /^([A-Z][A-Z ]{0,11}):\s*(.*)$/.exec(text);
+  return (
+    <p className={`lb-sub${m ? '' : ' narration'} ${className}`} style={style}>
+      {m && <span className="who">{m[1]}</span>}<OrText text={m ? m[2] : text} />
+    </p>
+  );
+}
+
 // OR-rule text with a breath the first time it appears.
 export function OrText({ text, breath = true }) {
   useEffect(() => { if (breath && /OR/.test(text)) play('breath'); }, [text, breath]);
@@ -111,6 +122,22 @@ export function useClock(total, { loop = true, run = true } = {}) {
   }, [total, loop, run, gen]);
   const restart = useCallback(() => { setT(0); setGen((g) => g + 1); }, []);
   return [t, restart];
+}
+
+// Timeline sound: fire each shot's cues [[ms, id, opts]] once per loop, and hold the beds a shot lists.
+// A cue that is more than 600 ms stale (a ?t= seek landed past it) is skipped.
+export function useShotSound(shot, local, t, beds = []) {
+  const fired = useRef(new Set());
+  const lastT = useRef(-1);
+  useEffect(() => {
+    if (t < lastT.current) fired.current.clear();
+    lastT.current = t;
+    (shot.cues ?? []).forEach(([ms, id, opts], k) => {
+      const key = `${shot.i}:${k}`;
+      if (local >= ms && !fired.current.has(key)) { fired.current.add(key); if (local - ms < 600) play(id, opts); }
+    });
+  });
+  useEffect(() => { beds.forEach((b) => bed(b, (shot.beds ?? []).includes(b))); }, [shot.i]); // eslint-disable-line react-hooks/exhaustive-deps
 }
 
 // A setTimeout chain that is cancelled on unmount / reset: later(fn, ms).

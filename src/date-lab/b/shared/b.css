@@ -54,6 +54,12 @@
 .lb-say.who-nanda .speaker { background: var(--pink); color: #2a0615; }
 .lb-say.narration p { font-style: italic; color: #e6deea; }
 
+/* ---------- cinema subtitle ---------- */
+.lb-sub { position: absolute; left: 0; right: 0; bottom: 64px; margin: 0; text-align: center; z-index: 60; pointer-events: none;
+  font: 400 48px/1.2 'Inter Tight', var(--cond); color: #fff; text-shadow: 0 2px 0 #000, 0 0 14px rgba(0, 0, 0, .9); }
+.lb-sub .who { font: 800 26px/1 'Inter Tight', var(--cond); letter-spacing: .14em; color: var(--pink); margin-right: 18px; vertical-align: 7px; }
+.lb-sub.narration { color: #e6dcea; letter-spacing: .01em; }
+
 /* ---------- sound chrome ---------- */
 .lb-mute { position: absolute; right: 24px; top: 20px; z-index: 90; font: 700 22px/1 var(--cond); letter-spacing: .06em;
   color: #fff; background: rgba(0, 0, 0, .62); border: 2px solid rgba(255, 255, 255, .45); border-radius: 999px;

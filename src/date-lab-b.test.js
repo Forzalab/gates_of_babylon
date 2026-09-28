@@ -100,6 +100,18 @@ test('timeline: shots, hard-cut poses under reduced motion, lint', () => {
   assert.equal(lint(build([{ id: 'x', dur: 200, text: 'one two three four five six seven eight nine ten eleven twelve thirteen' }])).length, 2);
 });
 
+test('persp: a true dolly-zoom keeps the subject the same size on screen', async () => {
+  const { project, dollyF, clipNear } = await import('./date-lab/b/shared/persp.js');
+  const width = (cam) => project(cam, [0.5, 1, 16])[0] - project(cam, [-0.5, 1, 16])[0];
+  const c0 = { x: 0, y: 1.5, z: 6, f: 2000, cx: 960, cy: 540 };
+  const c1 = { ...c0, z: 13.8, f: dollyF(2000, 10, 16 - 13.8) };
+  assert.ok(Math.abs(width(c0) - width(c1)) < 1e-6, 'door width constant');
+  const near = (cam) => project(cam, [1, 0, 14])[0];
+  assert.ok(Math.abs(near(c0) - near(c1)) > 100, 'the walls move');
+  const clipped = clipNear([[0, 0, 0], [1, 0, 0], [1, 0, 5], [0, 0, 5]], 2);
+  assert.ok(clipped.every((p) => p[2] >= 2));
+});
+
 test('handheld drift: every component <= 3 Hz, bounded', () => {
   for (const h of HANDHELD) assert.ok(h.hz <= 3, `${h.axis} ${h.hz} Hz`);
   for (let t = 0; t < 20000; t += 37) {
