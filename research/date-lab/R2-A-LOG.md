@@ -45,3 +45,20 @@ Round-1 variants are untouched; round-2 code lives in new folders (`a/menu2/`, .
 - **Tests**: MC-line edit starts < 1 s, ends <= 3 s, on the 8 fps grid; RM = 3 cuts >= 1 s; lines <= 12 words.
 - **Self-critique**: the tell is now early and obvious; the ECU is cleaner but my own face drawing is flatter than main's bust
   (no hair shine) and the pin is cropped huge at top-right.
+
+## menu-1-r2 · Tarot, improved (horror 2)
+- **School**: CLAMP / Persona arcana x Argento's *Suspiria* candlelight (unchanged). **Theme**: *fate is dealt by her* — now
+  readable with the sound and captions off.
+- **What changed vs R1**: (1) **her hand is on your card**: from the deal on, her sleeve reaches out of the dark on her side of
+  the table and two red-nailed fingertips rest on your face-down card. Hover THE CUP: it lifts 22 px; hover yours: 6 px (she is
+  holding it down). (2) your card **warms toward her pink one step per burnt candle pip** (5 held 1 s steps; her candle, her
+  colour). (3) **the third place**: an empty chalk-cup card slot "III" on the cloth (the third cup; nobody deals into it). (4)
+  option text lives ONCE on a slip across each card (the R1 double label is gone). (5) **disabled from the back row**: the drawn
+  card is dimmed, nailed with her hair-pin at 5x (steel shaft, red puncture ring with tear lines), a rotated DRAWN stamp, the slip
+  struck through in 7 px her red, her script note under it. Timeout: the hand lets go of yours and slides THE CUP to you.
+- **RM**: no deal / flip / slide / lift; warmth jumps with the pips; bleed one 334 ms hold.
+- **Verdict criticisms answered**: "needs the 'Mine is face-up' line to land" -> hand-on-card + warming + lift asymmetry carry
+  it; that caption line was cut ("Pick one. Take your time." is now ironic flavour). "Pin reads as a stray mark at distance" ->
+  380 px pin + puncture + DRAWN + strike.
+- **Self-critique**: reads without words now; the arm's fade-from-dark sleeve is a bit of a cheat (no shoulder), and it shares
+  its disabled kit with menu-h1-r2 so the two look like siblings (they are: the hybrid is this table plus her cursor).

@@ -53,7 +53,7 @@ test('h1-r2: reduced motion = at most 3 hard cuts, each held >= 1 s', () => {
 });
 
 // every quoted "NANDA: ..." / "MC: ..." line in the r2 sources obeys <= 12 words per click
-export const R2_FILES = ['menu2/CupTypes.jsx', 'menu2/Ddlc2.jsx'];
+export const R2_FILES = ['menu2/CupTypes.jsx', 'menu2/Ddlc2.jsx', 'menu2/Tarot2.jsx'];
 test('r2: every builder-A r2 line is <= 12 words', () => {
   for (const f of R2_FILES) {
     const src = readFileSync(new URL(`./date-lab/a/${f}`, import.meta.url), 'utf8');

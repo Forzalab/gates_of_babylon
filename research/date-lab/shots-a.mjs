@@ -82,6 +82,21 @@ const SHOTS = {
     await open(true); await wait(1500); await snap('rm-mc-line-emptied');
     await page.waitForSelector('.ecu', { timeout: 15000 }); await wait(300); await snap('rm-ecu');
   },
+  'menu-1-r2': async (page, snap, open) => {
+    await open();
+    await wait(700); await snap('1-door');
+    await wait(2300); await snap('2-her-hand-on-your-card');
+    await page.hover('.card.her'); await wait(500); await snap('3-hover-hers-lifts');
+    await page.hover('.card.yours'); await wait(500); await snap('4-hover-yours-held-warm');
+    await page.mouse.move(10, 10);
+    await wait(2600); await snap('5-timeout-her-hand');
+    await wait(1800); await snap('6-timeout-pink');
+    await page.keyboard.press('r'); await wait(2200); await snap('7-replay-pink-nailed');
+    await open(); await wait(4000); await page.keyboard.press('2'); await wait(150); await snap('8-purple-bleed');
+    await wait(1600); await snap('9-purple-reversed');
+    await page.keyboard.press('r'); await wait(2400); await snap('10-replay-purple-nailed');
+    await open(true); await wait(2600); await snap('rm-table');
+  },
 };
 
 // camera pieces: freeze the clock at ?t=<ms> and shoot (deterministic frames)
