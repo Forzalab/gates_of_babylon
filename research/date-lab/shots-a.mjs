@@ -72,6 +72,7 @@ SHOTS['closeup-5'] = frames([['1-hum', 1300], ['2-flicker', 3900], ['3-red', 650
 SHOTS['nanda-1'] = frames([['1-platform-rim-reflection', 3000], ['2-door-lit', 8500], ['3-genkan-backlit', 14200], ['4-third-cup-behind-table', 20000], ['rm-door', 8000, true]]);
 SHOTS['nanda-2'] = frames([['1-bench', 500], ['2-bench-settled', 2500], ['rm-bench', 1000, true]]);
 SHOTS['anim-1'] = frames([['1-rooftop-petals', 6000], ['2-train-pole', 10500], ['3-platform-rings', 24000], ['4-genkan-candle-dust', 41500], ['5-her-idle', 45500], ['6-her-blink', 46800], ['rm-platform', 24000, true]]);
+SHOTS['anim-2'] = frames([['1-train-anticipation', 300], ['2-train-smear', 750], ['3-train-impact-frame', 1100], ['4-train-hold', 2200], ['5-naan-hold', 5600], ['6-door-hold', 9000], ['7-kira-hold', 12400], ['8-slippers-hold', 15800], ['rm-kira', 12400, true]]);
 
 const ids = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(SHOTS);
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });

@@ -214,3 +214,20 @@ skewed floor shadow for the silhouette). Placement = `bustScale()/silScale()` fr
 - **Self-critique**: covers every scene and the blink/breath on her is the most "alive" she looks anywhere; several overlays are
   small (moth, drips) and barely read on a projector. **R2**: fewer, bigger idle moves per scene (one hero motion each), hair
   strands that trail the sway by one pose (overlap = the KyoAni tell), and a blink that only happens when the viewer isn't clicking.
+
+## anim-2 · Trigger limited animation (horror 2)
+- **School**: Studio Trigger / Gainax (*Kill la Kill*, *Gurren Lagann*, *Promare*): anticipation -> one smear frame -> a flat
+  2-colour IMPACT FRAME -> impact hold with boiling focus lines and big katakana SFX, x Edgar Wright smash-cut-on-the-beat.
+- **Theme**: *every beat hits like she meant it* (a love-bomb that lands too hard). 5 beats x 3.4 s (17 s loop): the AND Line
+  slams into the platform "ガタン! KA-TANK" / the NAAN board punches in on the headline glitch "ドン! DON" ("NAAN. NAND. NANDA.") /
+  her door bangs open on warm light "ガチャ! CLACK" / Nanda on a pink sunburst, pin "キラッ KIRA" — "GOOD INPUT!" / the men's
+  slippers "!?". Per beat: 0-600 ms anticipation (camera pulls back 6%, held), 600-934 ms smear (one frame held 334 ms: speed
+  streaks, a red zoom burst, a light wedge, a star), 934-1300 ms impact frame (flat her-red + black lines + the SFX, held 366 ms),
+  then the hold: focus lines boil in 2 poses at 500 ms, a smooth damped camera shake, Bangers subtitles.
+- **Safety**: one impact frame per 3.4 s beat, every flat frame held >= 334 ms (well under 3 flashes/s). It IS a full-screen
+  saturated-red frame though — the arbiter may want it cut to < 25% of the screen or desaturated for the projector.
+- **RM**: no smear, no impact frame, no shake, focus lines still: a hard cut to the settled hold + SFX text.
+- **Self-critique**: the most energetic piece I shipped and it reads from the back row; tonally it's the least horror (it's a
+  gag reel), and the smear frames are generic shapes, not drawn smears of the actual objects. **R2**: use it only on 2-3 comedy
+  beats in the real demo (the "Good input." sting, the SOUR pucker), draw object-specific smears, and swap the red impact frame
+  for a black/pink one to keep her red meaning "OR".

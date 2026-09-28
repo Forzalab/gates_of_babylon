@@ -14,6 +14,7 @@ import Pin from './closeup/Pin.jsx';
 import Integrated from './nanda/Integrated.jsx';
 import Bench from './nanda/Bench.jsx';
 import Kyoani from './anim/Kyoani.jsx';
+import Trigger from './anim/Trigger.jsx';
 
 const A = (id, track, title, theme, horror, Component) => ({ id, track, title, theme, horror, builder: 'A', Component });
 
@@ -32,4 +33,5 @@ export const VARIANTS = [
   A('nanda-1', 'nanda', 'Lit like the room: platform, door, genkan, third cup', 'Ghibli/KyoAni compositing x Deakins motivated light x she is closer each time', 2, Integrated),
   A('nanda-2', 'nanda', 'Integration test bench: raw | lit split, 4 scenes', 'VFX compositing dailies x genga/douga comparison sheets: prove she is in the room', 0, Bench),
   A('anim-1', 'anim', 'KyoAni idle life: all 10 scenes + her, the world breathes', 'Kyoto Animation small-motion realism x Ozu pillow shots: the world breathes (and so does she)', 1, Kyoani),
+  A('anim-2', 'anim', 'Trigger limited anim: smear, impact frame, focus lines, SFX', 'Studio Trigger / Gainax x Edgar Wright smash cuts: every beat hits like she meant it', 2, Trigger),
 ];
