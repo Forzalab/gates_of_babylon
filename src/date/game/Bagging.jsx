@@ -64,7 +64,7 @@ export default function Bagging() {
       fallRows: 0, drops: 0, bestCombo: 0, talk: { who: null, text: '' } };
     const first = G.current.cur.t;
     // Dogfood fix 2: a "buddy" of the first gate waits in the middle column, so the first drop always makes a match.
-    G.current.cols[3].push(R.gate(first));
+    if (!params.has('notutor')) G.current.cols[3].push(R.gate(first)); // ?notutor: harness only (the lose-path test)
     G.current.talk = fromCanvas
       ? { who: first, text: `Your exes are in the bag. ${fromCanvas} of them, straight off your canvas. Me first.` }
       : { who: first, text: TALK[first] };
@@ -92,7 +92,10 @@ export default function Bagging() {
   // Notices (dogfood fix 1): ONE at a time, in the band above the grid (never over it), auto-dismissed in <= 2 s,
   // and a tap anywhere closes the current one. Same-kind notices replace each other; the queue holds at most 3.
   const [notes, setNotes] = useState([]);
-  const notify = (n) => setNotes((q) => [...q.filter((x) => x.kind !== n.kind), { ...n, id: ++fxId }].slice(-3));
+  const notify = (n) => setNotes((q) => {
+    const rest = q.filter((x) => x.kind !== n.kind), item = { ...n, id: ++fxId };
+    return n.kind === 'approval' ? [item, ...rest].slice(0, 3) : [...rest, item].slice(-3); // approval freezes input: it jumps the queue
+  });
   const closeNote = () => setNotes((q) => {
     if (q[0]?.kind === 'approval') { g.frozen = false; }
     return q.slice(1);
@@ -117,7 +120,7 @@ export default function Bagging() {
     if (!R.canDrop(g.cols, c)) { play('error'); setShakeCol(c); later(300, () => setShakeCol(null)); return; }
     const piece = g.cur;
     // The first drop is guaranteed to merge: if it wouldn't, it snaps onto the buddy in column 3.
-    if (g.drops === 0 && !R.preview(g.cols, c, piece.t)?.pairs.some((x) => x.glow)) c = 3;
+    if (g.drops === 0 && !params.has('notutor') && !R.preview(g.cols, c, piece.t)?.pairs.some((x) => x.glow)) c = 3;
     const res = R.dropAndResolve(g.cols, c, piece, rnd);
     g.busy = true; g.drops++;
     g.cols = res.placed; g.landed = piece.id; g.fallRows = R.H - res.landed.i;
@@ -363,7 +366,7 @@ export default function Bagging() {
                   <GateTile t={x.t} tier={x.tier} />
                 </div>
               )))}
-              {g.drops === 0 && !g.over && (
+              {g.drops === 0 && !g.over && !params.has('notutor') && (
                 <div className={`demo p${demo}`} style={{ '--c': 3, '--i': demo ? 1 : R.H }} aria-hidden="true">
                   <GateTile t={g.cur.t} />
                   <span className="demo-tag">{demo ? '♥ MATCH!' : 'TAP HERE ▼'}</span>

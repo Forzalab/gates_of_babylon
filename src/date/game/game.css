@@ -274,7 +274,7 @@
 
 /* dogfood fix 2: how-to line + the demo ghost (jumps between two states; motion mode just eases the jump) */
 .howto { width: calc(var(--cell) * var(--cols)); height: 32px; display: flex; align-items: center; justify-content: center; gap: 5px; border-radius: 6px;
-  background: #0f6fd6; color: #fff; font: 700 14px 'Roboto Condensed', sans-serif; white-space: nowrap; overflow: hidden; }
+  background: #0f6fd6; color: #fff; font: 700 13px/1.1 'Roboto Condensed', sans-serif; flex-wrap: wrap; column-gap: 5px; row-gap: 0; text-align: center; padding: 0 6px; overflow: hidden; }
 .howto b { font: 400 17px 'Bangers', cursive; letter-spacing: .05em; color: var(--yellow); }
 .howto i { font-style: normal; color: #cfe6ff; }
 .demo { position: absolute; left: calc(var(--c) * var(--cell)); bottom: calc(var(--i) * var(--cell)); width: var(--cell); height: var(--cell); z-index: 6; pointer-events: none; }
