@@ -24,7 +24,7 @@
   const FX = {
     or: {
       setup: (s) => { s.innerHTML = `<div class="fxsign"><small>FIGUR WEATHER</small><div class="big">f-<span class="orslot">${or('OR')}</span>-ecast</div></div>
-        <div class="fxrow"><span class="chip pink">f${or('OR')}ever</span><span class="chip purple">${or('OR')} leave?</span></div>
+        <div class="fxrow"><span class="chip pink hasor">f${or('OR')}ever</span><span class="chip purple hasor">${or('OR')} leave?</span></div>
         <div class="fxmsg devonly">every "${or('OR')}" = her red · 1 px offset · breath</div>`; },
       play: (s) => {
         const slot = s.querySelector('.orslot');
@@ -135,7 +135,7 @@
         const L = s.querySelector('.ovlines');
         L.innerHTML = '';
         const lines = ['I\'m not crying.', 'You were going to leave.', 'Everyone leaves.', 'Not you. Right?', 'Right?', 'Right??', 'I made a schedule.', 'He wakes at 7:00.', 'From now on…', 'can we be forever?'];
-        lines.forEach((t, i) => later(s, () => { const p = document.createElement('p'); p.innerHTML = or(t); if (i === lines.length - 1) p.className = 'last'; L.appendChild(p); }, i * 600));
+        lines.forEach((t, i) => later(s, () => { const p = document.createElement('p'); p.innerHTML = or(t); if (/OR/.test(t)) p.classList.add('has-or'); if (i === lines.length - 1) p.classList.add('last'); L.appendChild(p); }, i * 600));
         later(s, () => { L.innerHTML = '<p>I\'m not crying.</p>'; }, lines.length * 600 + 2200);
         return lines.length * 600 + 2200;
       },

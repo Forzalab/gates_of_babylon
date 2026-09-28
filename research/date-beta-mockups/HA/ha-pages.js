@@ -145,11 +145,11 @@
         ${choices({ pink: 'fORever.', purple: 'OR leave?', noTimer: true, style: { left: 120, right: 60, top: 330, bottom: 'auto' } })}</div>
       <div class="cmp" style="left:${x}px;top:${y + 330}px;width:880px">${title}<br>${note}</div>`;
     b.push(board(`
-      ${cmpP('orA', 40, 40, '<b>A · flip it</b> — red badge, cream text', 'text 8.76:1 · badge vs pink 3.31:1 · RECOMMENDED')}
+      ${cmpP('orA', 40, 40, '<b>A · flip it</b> — red badge, cream text', 'text 8.76:1 · badge vs pink 3.31:1')}
       ${cmpP('orB', 990, 40, '<b>B · darken</b> — crimson #8A0F22 text', 'on box 8.77:1 · on pink 3.41:1 (fails as text)')}
-      ${cmpP('orC', 40, 560, '<b>C · dark scrim</b> — OR lines on #1A0710', 'red #FF4A5F 5.91:1 · white 19.4:1')}
+      ${cmpP('orC', 40, 560, '<b>C · dark scrim</b> — PICKED (Tony) = PROD', 'OR #FF6B7D 7.07:1 · line #FFE9F1 16.8:1')}
       ${cmpP('orD', 990, 560, '<b>D · accent bar</b> — plum text + red bar', 'text 13.3:1 · OR #B0102C on box 6.44:1')}`,
-    { label: '<b>OR on pink</b> · A/B/C/D (was: #F0243F on pink = 1.47:1)', kind: 'cmp' }));
+    { label: '<b>OR on pink</b> · record only · C picked (was: #F0243F on pink = 1.47:1)', kind: 'cmp' }));
     return b;
   }
 
@@ -225,7 +225,7 @@
 
     b.push(board(`<div class="fill">${A.sceneGenkan()}</div>${layer(1, null, { paths: ['M240,0 C250,80 210,140 230,210', 'M860,0 C850,40 880,80 870,120'] })}
       ${dlg({ who: 'NANDA', text: 'I guessed your size. I\'m never wrong.', dock: 'tl', style: { left: 540, top: 150, width: 960 } })}
-      ${cap('[the door locks behind you]', { style: { left: 540, top: 380, bottom: 'auto' } })}
+      ${cap('[the door locks behind you]', { style: { left: 540, top: 440, bottom: 'auto' } })}
       ${chrome({ on: ['cc'] })}`,
     { label: '<b>Genkan</b> · 3 pairs to the millimetre · a 4th slot, yours · slippers · the shrine', kind: 'genkan', dread: 1 }));
 
@@ -250,7 +250,7 @@
         <b class="who">Nanda</b>
         <span class="bows"><i class="b0">${A.bow(0)}</i><i class="b1">${A.bow(1)}</i><i class="b2">${A.bow(2)}</i></span>
         <div class="stack">${ov.map((t, i) => `<p class="line${i === ov.length - 1 ? ' last' : ''}">${window.DB.or(t)}</p>`).join('')}</div></div>
-      ${cap('[café hum · a spoon, stirring]', { style: { left: 1320, bottom: 80 } })}
+      ${cap('[café hum · a spoon, stirring]', { style: { left: 1250, bottom: 80 } })}
       ${chrome({ on: ['cc'] })}
       <div class="abs callout" style="left:1320px;top:220px;width:500px">Lines stack one per 600 ms (RM: the same hard cuts).<br>The chip grows <b>upward</b>; the tag rides its top edge.<br>At max height the oldest line clips <b>under</b> the tag, never over it.</div>`,
     { label: '<b>LEAVE · 7:00 café</b> · the dialogue overflows · the name tag stays on top', kind: 'overflow', dread: 1 }));

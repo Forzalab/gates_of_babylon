@@ -16,7 +16,7 @@
   function dlg({ text, kind = 'nanda', dock = 'bl', style, next = true, and = false }) {
     const name = NAME[kind];
     const tag = name ? `<b class="who">${name}</b>` : '';
-    return `<div class="dlg ${kind} dock-${dock}" style="${st(style)}" role="status">
+    return `<div class="dlg ${kind} dock-${dock}${/OR/.test(text) ? ' has-or' : ''}" style="${st(style)}" role="status">
       <span class="pins top" aria-hidden="true"></span><span class="pins bot" aria-hidden="true"></span>
       ${tag}${kind === 'nanda' ? bows() : ''}<p class="line">${or(text, { and })}</p>
       ${next ? '<span class="next" aria-hidden="true">▸</span>' : ''}</div>`;

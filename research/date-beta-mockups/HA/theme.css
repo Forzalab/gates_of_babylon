@@ -62,24 +62,42 @@ html.dev .callout b, html.dev .note b, html.dev .board > .label b { color: #fff 
 .devbadge { position: fixed; left: 12px; bottom: 12px; z-index: 999; font: 700 16px/1 var(--font-mono); background: #111; color: #ffe95a; border: 2px dashed #ffe95a; padding: 6px 10px; display: none; }
 html.dev .devbadge { display: block; }
 
-/* ---------- the OR rule (R2b, Tony: never saturated red text on pink). DEFAULT = option A "flip it":
-   OR lives in a deep-red badge with cream text (8.76:1), badge vs pink 3.31:1 (non-text >= 3). + 1 px offset + breath cue. No glow. ---------- */
-.or { display: inline-block; position: relative; left: 1px; top: 1px; padding: 0 .12em; margin: 0 .04em; line-height: 1.05; border-radius: .18em;
-  background: #8e0f1e; color: #fff6e8 !important; box-shadow: 0 0 0 3px #3a1d3f; text-shadow: none !important; -webkit-text-stroke: 0 !important; font-weight: 700; }
-.cap .or, .fxcap .or { box-shadow: 0 0 0 2px #fff6e8; }
-.or-svg { fill: #8e0f1e !important; stroke: #fff6e8; stroke-width: 4px; paint-order: stroke fill; }
-[data-dread="2"] .or { box-shadow: 0 0 0 3px #fff6e8; }
+/* ---------- the OR rule — PROD = option C (Tony's pick, R2b): never saturated red on pink. Any line or choice that carries an OR
+   hard-cuts onto a near-black scrim panel (#1A0710); OR = #FF6B7D bold on it (7.07:1), the rest of the line cream #FFE9F1 (16.8:1).
+   Pink stays for her sweet lines. A stray OR on a light surface (signage, steam) gets its own mini scrim chip. + 1 px offset + breath cue.
+   Reduced motion: it already IS a hard cut (no fade exists). ---------- */
+:root { --scrim: #1a0710; --or-on-dark: #ff6b7d; --scrim-ink: #ffe9f1; }
+.or { display: inline-block; position: relative; left: 1px; top: 1px; padding: 0 .1em; margin: 0 .03em; line-height: 1.05; border-radius: .16em;
+  background: var(--scrim); color: var(--or-on-dark) !important; text-shadow: none !important; -webkit-text-stroke: 0 !important; font-weight: 700; }
+.has-or .or, .hasor .or, .cap .or, .fxcap .or, .adore .or, .orC .or { background: none; padding: 0; margin: 0; }
+.or-svg { fill: var(--or-on-dark) !important; stroke: var(--scrim); stroke-width: 6px; paint-order: stroke fill; }
+.dlg.has-or { --box: var(--scrim); --box-ink: var(--scrim-ink); border-color: var(--her); box-shadow: inset 0 0 0 3px #3a0d1c, 0 10px 0 #3a1d3f; background-image: none; background-color: var(--scrim); }
+.dlg.has-or .line, .dlg.has-or.narr .line { color: var(--scrim-ink); }
+.dlg.has-or .next { color: var(--or-on-dark); }
+.dlg.has-or .pins { background: repeating-linear-gradient(90deg, var(--scrim) 0 4px, #c890a8 4px 22px, var(--scrim) 22px 26px, transparent 26px 96px); }
+/* an OR choice keeps its side's colour on the border + key cap (pink = toward, purple = leave), the face goes dark */
+.choice.hasor { background: var(--scrim) !important; color: var(--scrim-ink) !important; text-shadow: none !important; border-width: 7px; }
+.choice.pink.hasor { border-color: var(--pink); } .choice.pink.hasor .key { background: var(--pink); color: #000; border-color: var(--pink); }
+.choice.purple.hasor { border-color: #8a5cf6; } .choice.purple.hasor .key { background: var(--purple-deep); color: #fff; border-color: #8a5cf6; }
+.choice.hasor .line { text-shadow: none !important; }
+.chip.hasor { background: var(--scrim) !important; color: var(--scrim-ink) !important; text-shadow: none !important; }
+.chip.pink.hasor { box-shadow: inset 0 0 0 4px var(--pink); } .chip.purple.hasor { box-shadow: inset 0 0 0 4px #8a5cf6; }
+.ovlines p.has-or, .dlg.overflow .stack .line.has-or { background: var(--scrim); color: var(--scrim-ink); }
+
 /* comparison board (ui-13): B darken, C dark scrim, D accent bar */
+.orA .or { background: #8e0f1e; color: #fff6e8 !important; box-shadow: 0 0 0 3px #3a1d3f; padding: 0 .12em; }
+.orA .dlg.has-or, .orB .dlg.has-or, .orD .dlg.has-or { --box: #fff0f6; --box-ink: #4a1238; background-color: #fff0f6; border-color: var(--rim); box-shadow: inset 0 0 0 3px #fff, 0 10px 0 #3a1d3f; }
+.orA .dlg.has-or .line, .orB .dlg.has-or .line, .orD .dlg.has-or .line { color: #4a1238; }
+.orA .choice.pink.hasor, .orB .choice.pink.hasor, .orD .choice.pink.hasor { background: var(--pink) !important; color: #000 !important; border-color: #3a1d3f; }
+.orA .choice.purple.hasor, .orB .choice.purple.hasor, .orD .choice.purple.hasor { background: var(--purple-deep) !important; color: #fff !important; border-color: #3a1d3f; }
+.orA .choice .key, .orB .choice .key, .orD .choice .key { background: #fffafd !important; color: #3a1d3f !important; border-color: #3a1d3f !important; }
 .orB .or { background: none; color: #8a0f22 !important; box-shadow: none; padding: 0; }
 .orB .choice.pink .or { color: #5c0a17 !important; }
-.orC .or { background: none; color: #ff4a5f !important; box-shadow: none; padding: 0; }
-.orC .dlg { background: #1a0710; color: #fff; border-color: var(--her); }
-.orC .dlg .line { color: #fff; }
-.orC .choice.purple, .orC .choice.pink.hasor { background: #1a0710; color: #fff; text-shadow: none; }
 .orD .or { background: none; color: #b0102c !important; box-shadow: none; padding: 0; text-decoration: underline 4px #f0243f; text-underline-offset: 6px; }
 .orD .dlg { border-left: 16px solid var(--her); }
 .orD .choice.pink .or { color: #3a1d3f !important; }
 .orD .choice.hasor { border-left: 16px solid var(--her); }
+.and { display: inline-block; padding: 0 .1em; border-radius: .16em; background: var(--pink); color: #000 !important; text-shadow: none !important; box-shadow: 0 0 0 3px #3a1d3f; }
 .cmp { position: absolute; font: 700 26px/1.3 var(--font-mono); color: #3a1d3f; background: #fffafd; border: 4px solid #3a1d3f; border-radius: 12px; padding: 10px 14px; }
 .cmp b { color: #8e0f1e; }
 
@@ -303,7 +321,7 @@ html.dev .devbadge { display: block; }
 .fxline .bowslot { display: inline-block; width: 30px; height: 40px; vertical-align: middle; margin-right: 10px; }
 .fxline .bowslot svg { width: 30px; height: 40px; }
 .rpl { position: absolute; inset: 0; padding: 90px 26px 0; display: grid; grid-template-columns: 1.28fr 1fr; gap: 14px; align-content: start; background: #ffc9e0; }
-.rpl .chip { border: 4px solid #3a1d3f; border-radius: 18px; box-shadow: 0 6px 0 #3a1d3f; padding: 16px 14px; font-size: 30px; }
+.rpl .chip { white-space: nowrap; border: 4px solid #3a1d3f; border-radius: 18px; box-shadow: 0 6px 0 #3a1d3f; padding: 16px 14px; font-size: 30px; }
 .rpdead { background: repeating-linear-gradient(135deg, #e3deeb 0 12px, #d6cfe2 12px 24px); color: #3a3346; border-color: #7a7189 !important; box-shadow: none !important; }
 .rpdead s { text-decoration-thickness: 4px; }
 .rpdead.nudge { outline: 6px solid var(--her); outline-offset: 5px; }
