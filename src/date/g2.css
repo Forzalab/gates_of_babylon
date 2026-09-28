@@ -1,0 +1,95 @@
+/* g2 (pit4 r2): f1 + the r1 fix list + S5 JRPG-menu classicism (cursor hand, FF-blue message window).
+   Every rule is scoped to .v-g2 (or to g2-only elements), so f1 renders exactly as before. */
+
+/* fix 3: WARNING cap .11-.13 H at both 1440 and 1024 (height-driven, not width-driven) */
+.v-g2 .mf { width: max(calc(var(--u) * 55), 55vw); }
+.v-g2 .mf .cols { grid-template-columns: calc(var(--u) * 13.5) 1fr; gap: calc(var(--u) * 1.4); }
+.v-g2 .mf .warn.cut { font-size: max(calc(var(--u) * 7.8), 13.4vh); }
+.v-g2 .mf .warn small { font-size: .43em; }
+.v-g2 .mf .warn .n { font-size: .31em; }
+
+/* fix 1: the plate rides higher and WARNING starts lower, so the Dejting glow core clears the cap by >= 8 px */
+.v-g2 .mf .plate { margin-bottom: max(calc(var(--u) * 1.3), 2.2vh); }
+.v-g2 .mf .plate .neon { transform: translateY(-24%); }
+.v-g2 .mf .copy { padding-top: max(calc(var(--u) * .9), 1.6vh); }
+.v-g2 .mf .plain { margin: calc(var(--u) * .4) 0; }
+.v-g2 .mf .btns.stack { gap: calc(var(--u) * .5); }
+.v-g2 .mf { padding-bottom: calc(var(--u) * .7); }
+
+/* fix 2: the stipple through "Dejting" was the plate's pink grid showing through the half-transparent
+   centred text-stroke. Paint the stroke under the fill. */
+.v-g2 .mf .plate .neon { paint-order: stroke fill; -webkit-text-stroke: 3px #ff7fe0; }
+
+/* fix 4: the pen note is >= 16 px at 1024 (ring unchanged) */
+.v-g2 .pen-note { font-size: max(calc(var(--u) * 2.05), 2.9vh); white-space: nowrap; }
+
+/* fix 5: badges never half-hide under the modal: column 1 mirrors column 4 (badge bottom-left) */
+.v-g2 .grid > :nth-child(4n + 1) .badge { right: auto; left: calc(var(--u) * .5); }
+
+/* S5: the JRPG command cursor, bobbing at the hovered/focused button */
+.v-g2 .tickrow.nrow { display: flex; justify-content: center; }
+.hand { position: absolute; top: 50%; width: calc(var(--u) * 3.6); transform: translate(-110%, -50%); overflow: visible; pointer-events: none; }
+.v-g2 .tickrow:first-child { padding-right: calc(var(--u) * 4); }
+.v-g2 .tickrow:first-child .hand { right: calc(var(--u) * 3.6); left: auto; transform: translate(100%, -50%) scaleX(-1); }
+.v-g2 .nrow .hand { left: 19%; }
+.hand path { fill: #fff; stroke: var(--navy); stroke-width: 2; stroke-linejoin: round; }
+.hand path.f { fill: none; stroke-width: 1.5; }
+.v-g2:not(.still) .hand { animation: bob .5s steps(2) infinite; }
+.v-g2:not(.still) .tickrow:first-child .hand { animation-name: bobr; }
+@keyframes bob { 50% { transform: translate(-125%, -50%); } }
+@keyframes bobr { 50% { transform: translate(115%, -50%) scaleX(-1); } }
+
+/* fix 7 (from f2): thin compat bar under the fine print */
+.cpill { position: relative; margin: calc(var(--u) * .5) auto 0; width: 80%; height: max(calc(var(--u) * 1.8), 18px); border-radius: 99px;
+  background: var(--lilac); box-shadow: inset 0 0 0 1.5px var(--rim); overflow: hidden; }
+.cpill i { position: absolute; inset: 0 auto 0 0; background: linear-gradient(#ff7cc6, var(--hot)); border-radius: 99px; }
+.cpill span { position: relative; display: block; text-align: center; font: 700 max(12px, calc(var(--u) * 1.15))/max(calc(var(--u) * 1.8), 18px) 'Roboto Condensed', sans-serif;
+  color: #9c1b8a; letter-spacing: .03em; }
+/* fix 8 (from f2): one-line modal footer */
+.pctl { margin: calc(var(--u) * .45) 0 0; font: 400 max(12px, calc(var(--u) * 1.35))/1 'Bangers', cursive; letter-spacing: .06em; color: #c2186b; }
+.pctl u { text-decoration-thickness: 1px; }
+
+/* ---------- continue ---------- */
+/* fix 6: 8 cards (4x2) with air, navy tubes */
+.v-g2 .feed { grid-template-rows: repeat(2, 1fr); gap: calc(var(--u) * 2.2) calc(var(--u) * 2); }
+.v-g2 .card .tube { background-color: var(--navy); background-image: linear-gradient(rgba(120, 170, 255, .16) 1px, transparent 1px), linear-gradient(90deg, rgba(120, 170, 255, .16) 1px, transparent 1px); }
+.v-g2 .card { padding: calc(var(--u) * .9) calc(var(--u) * 1.1) calc(var(--u) * .8); gap: calc(var(--u) * .6); }
+.v-g2 .card header { font-size: calc(var(--u) * 2.2) !important; }
+.v-g2 .card p { font-size: max(13px, calc(var(--u) * 1.35)); }
+/* the heart expand: the real truth table, a heart on each agreeing row */
+.tt { width: 100%; border-collapse: collapse; background: var(--navy); color: #fff; border-radius: calc(var(--u) * .4); overflow: hidden;
+  font: 700 max(12px, calc(var(--u) * 1.25))/1.35 'Roboto Condensed', sans-serif; text-align: center; }
+.tt th { color: #9fc0ff; font-weight: 700; letter-spacing: .06em; }
+.tt tr.y td { color: #ffb8e6; }
+.tt td:last-child { color: var(--neon); width: 18%; }
+/* the big moment: a Final-Fantasy message window, in the page's own navy + white-rim chrome */
+.learned { position: fixed; inset: 0; z-index: 25; display: grid; place-items: end center; padding-bottom: 7vh; background: rgba(0, 20, 80, .35); cursor: pointer; }
+.lw { min-width: calc(var(--u) * 48); padding: calc(var(--u) * 1.4) calc(var(--u) * 2.4); background: linear-gradient(#0a3fd6, var(--navy));
+  border: calc(var(--u) * .35) solid #fff; border-radius: calc(var(--u) * .7); outline: calc(var(--u) * .3) solid var(--navy);
+  box-shadow: 0 0 0 calc(var(--u) * .6) var(--rim), 0 0 calc(var(--u) * 3) rgba(255, 79, 216, .6); color: #fff; text-align: left; }
+.lw .big { display: block; font: 400 calc(var(--u) * 6)/1 'Bangers', cursive; color: var(--hot); letter-spacing: .03em;
+  text-shadow: calc(var(--u) * .2) calc(var(--u) * .2) 0 #fff, calc(var(--u) * .45) calc(var(--u) * .45) 0 #000a3a; transform: rotate(-2deg); }
+.lw p { margin: calc(var(--u) * .5) 0 0; font: 700 max(14px, calc(var(--u) * 1.9))/1.2 'Roboto Condensed', sans-serif; }
+.lw .lv b { color: var(--neon); }
+.lw .lv span { margin-left: .6em; color: #9fc0ff; }
+.lw .upd { font-weight: 400; font-size: max(12px, calc(var(--u) * 1.35)); color: #c9d8ff; display: flex; justify-content: space-between; }
+.v-g2:not(.still) .lw .upd span { animation: bob2 .6s steps(2) infinite; }
+@keyframes bob2 { 50% { transform: translateY(3px); } }
+.v-g2:not(.still) .lw { animation: stampin2 .3s cubic-bezier(.2, 1.6, .4, 1) both; }
+@keyframes stampin2 { from { transform: scale(.4); opacity: 0; } }
+
+/* height budget: modal + sign <= .70 H once the pill + footer are in */
+.v-g2 .mf .plate .neon { font-size: calc(var(--u) * 8.8); }
+.v-g2 .mf .btn.wide { padding: calc(var(--u) * .5) 0; }
+.v-g2 .mf .btn.narrow { padding: calc(var(--u) * .3) 0; }
+.v-g2 .sf { padding-top: calc(var(--u) * 3.2); }
+.v-g2 .mf .plate { height: calc(var(--u) * 4); }
+.v-g2 .mf .warn small { font-size: .4em; }
+.v-g2 .mf .plain { font-size: max(13px, calc(var(--u) * 1.45)); line-height: 1.15; margin: calc(var(--u) * .3) 0; }
+.v-g2 .cpill { height: max(calc(var(--u) * 1.5), 16px); }
+.v-g2 .cpill span { line-height: max(calc(var(--u) * 1.5), 16px); }
+.v-g2 .pctl { font-size: max(12px, calc(var(--u) * 1.2)); }
+.v-g2 .mf .plate .neon { font-size: calc(var(--u) * 8.2); transform: translateY(-20%); }
+.v-g2 .mf .left { padding-top: 0; }
+/* the red tick collided with the (now bigger) pen note at 1024; in g2 the B+ carries the gag alone */
+.v-g2 .tick { display: none; }

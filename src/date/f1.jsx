@@ -1,0 +1,283 @@
+// f1 (pit4): x3's layout (wide ENTER ANYWAY over narrow NO THANKS, the yellow 18+ is the only yellow)
+// + ONE surprise: Prof. Kerney has already graded the age gate in red pen ("B+ bold choice, see me after class").
+// Design school: Atlus / Persona 5 "UI as character": tilted cut-out type, the dialog slams in, every
+// transition is a performance (the ENTER wipe). The red pen is the only non-palette ink.
+// &next=1 is the continue screen: a MATCH FEED of live gate pairs on the real simulator + real Shape.
+import { useEffect, useRef, useState } from 'react';
+import { Shape, GATE_GEOM } from '../nodes/index.jsx';
+import { Pair, Portrait, Bar, Neon, Heart, Corners, useLanded, useTick, LOGIC, STILL } from './main.jsx';
+import { compat, pairRow } from './compat.js';
+import { play, then, isMuted, setMuted, onMute } from './sfx.js';
+
+const params = new URLSearchParams(location.search);
+const CLEAN = params.has('clean'); // arbiter's overlap diff: the page without the red pen
+// g2 (pit4 r2) reuses this file: same surprise, JRPG-menu chrome (S5) and the r1 fix list. f1 stays as it was.
+// h1 (pit4 r3) = g2 + the r2 fix list + g3's HIGH SCORES + on-page credits + K7 (NO THANKS flees, gives up: "fine.").
+const H1 = !['x1', 'x2', 'x3', 'f1', 'g2'].includes(params.get('v')); // h1 is the default
+const G2 = params.get('v') === 'g2' || H1;
+const VID = H1 ? 'h1' : G2 ? 'g2' : 'f1';
+const NEXT = `${location.pathname}?v=${VID}&next=1`;
+const GATE = `${location.pathname}?v=${VID}`;
+
+// P5-style exit: a tilted pink slash wipes the screen, then we navigate.
+function useWipe() {
+  const [go, set] = useState(null);
+  useEffect(() => {
+    if (!go) return;
+    const t = setTimeout(() => { location.href = go; }, STILL ? 0 : 520);
+    return () => clearTimeout(t);
+  }, [go]);
+  return [go, (href) => (e) => { e.preventDefault(); set(href); }];
+}
+// Refusal: the error buzz plays, then we bounce to Logic.
+const refuse = (e) => { e.preventDefault(); play('error'); setTimeout(() => { location.href = LOGIC; }, STILL ? 0 : 380); };
+const hover = () => play('hover', { vol: 0.2 });
+
+// Mute lives in the site's own top bar (Web-1.0 button, same as Search). Kenney's UI pack has no speaker icon, so it is drawn here.
+function Mute() {
+  const [m, set] = useState(isMuted());
+  useEffect(() => onMute(set), []);
+  return (
+    <button className="mute" onClick={() => setMuted(!m)} aria-pressed={m} aria-label={m ? 'Unmute sound' : 'Mute sound'} title={m ? 'Sound off' : 'Sound on'}>
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9h4l5-4v14l-5-4H3z" />
+        {m ? <path className="x" d="M16 9l5 6M21 9l-5 6" /> : <path className="x" d="M16 8.5c1.6 2 1.6 5 0 7M19 6c3 3.5 3 8.5 0 12" />}</svg>
+    </button>
+  );
+}
+
+// S5: the JRPG menu cursor (a white-gloved pointing hand, hand-drawn), bobbing at the chosen command.
+const Hand = () => (
+  <svg className="hand" viewBox="0 0 40 26" aria-hidden="true">
+    <path d="M2 9h18c2-4 6-6 8-4l-3 4h11c2.5 0 2.5 4 0 4h-3c2 0 2 4 0 4h-2c2 0 2 4 0 4H14C7 21 2 18 2 15z" />
+    <path className="f" d="M26 13h7M26 17h6M20 9l-3 3" /></svg>);
+
+const Wipe = ({ on }) => <div className={on ? 'wipe on' : 'wipe'} aria-hidden="true"><i /><i /></div>;
+
+// The red pen. Hand-drawn paths only (no new font: the note is the page's own Yellowtail script, in ink).
+function Grade({ on }) {
+  return ( // &clean=1 keeps the pen's box (so nothing reflows) but hides the ink
+    <div className={CLEAN ? 'pen clean' : on ? 'pen on' : 'pen'} aria-label="Graded by Prof. Kerney: B plus. Bold choice, see me after class.">
+      <svg className="pen-ring" viewBox="0 0 200 170" aria-hidden="true">
+        <path pathLength="1" d="M112 14C58 6 14 40 16 88c2 44 44 72 94 68 50-4 80-38 76-78C182 38 146 12 96 16 80 18 66 24 58 30" />
+        <text x="100" y="112" textAnchor="middle">B+</text>
+      </svg>
+      <p className="pen-note">bold choice.<br />see me after class.<span>&ndash; K.</span></p>
+    </div>
+  );
+}
+// The red tick on ENTER ANYWAY, in the gutter left of the button so it never covers the label.
+const Tick = ({ on }) => (
+  <svg className={CLEAN ? 'tick clean' : on ? 'tick on' : 'tick'} viewBox="0 0 60 50" aria-hidden="true"><path pathLength="1" d="M6 26l14 16C30 26 42 12 56 4" /></svg>);
+
+// K7, the punchline to the red pen (h1 only): NO THANKS runs from the cursor three times, then gives up, lies down
+// and says "fine." Reduced motion: no tween. It TELEPORTS to the far corner in one frame, then says "fine."
+// Keyboard focus never flees (you can always refuse with Tab + Enter).
+const FLEE = [[30, -.2], [-30, .3], [28, 1.6]]; // x in % of the button's own width, y in --u: all inside the copy column
+function NoThanks({ onHover, onFocus }) {
+  const [n, setN] = useState(0);
+  const done = STILL ? n >= 1 : n > FLEE.length;
+  const off = done ? [0, 0] : n ? FLEE[n - 1] : [0, 0]; // given up = parked at the far right end of the row (CSS)
+  const run = () => {
+    onHover();
+    if (done) return;
+    if (STILL) { setN(1); play('click', { vol: 0.3 }); return; }
+    setN(n + 1); play(n + 1 > FLEE.length ? 'error' : 'hover', { vol: 0.3 });
+  };
+  return (
+    <a className={`btn soft narrow flee${n ? ' moved' : ''}${done ? ' fine' : ''}`} href={LOGIC} onClick={refuse} onPointerEnter={run} onFocus={onFocus}
+      style={{ '--fx': off[0], '--fy': off[1] }} aria-label="No thanks">{done ? 'fine.' : 'NO THANKS'}</a>);
+}
+
+export function F1() {
+  const on = useLanded(1500);
+  const [go, to] = useWipe();
+  useEffect(() => { play('glitch', { vol: 0.3 }); }, []); // entering Dejting (silent until the browser allows audio)
+  useEffect(() => { if (on && !STILL && !CLEAN) play('grade', { vol: 0.35 }); }, [on]); // the red pen lands
+  const [cur, setCur] = useState(0); // g2: the JRPG cursor hand follows the hovered/focused button
+  const enter = (e) => { then('confirm', 'chips', 260); to(NEXT)(e); };
+  return (
+    <div className="stage sf">
+      <Mute />
+      <section className="modal mf" role="dialog" aria-modal="true" aria-labelledby="fh">
+        <Corners />
+        <div className="sign plate">
+          <svg viewBox="-12 -12 24 24" className="nh l"><Heart className="heart tube" /></svg>
+          <Neon word="Dejting" />
+          <svg viewBox="-12 -12 24 24" className="nh r"><Heart className="heart tube" /></svg>
+        </div>
+        <a className="close" href={LOGIC} onClick={refuse} aria-label="Close (back to Logic)">&#10005;</a>
+        <div className="cols">
+          <div className="left">
+            <Portrait />
+            <Grade on={on} />
+          </div>
+          <div className="copy">
+            <h1 id="fh" className="warn cut"><span className="w1">WARNING:</span>
+              <small>THESE GATES ARE <em className="y">18+</em></small>
+              <small className="n">... AND A FEW BITS NAUGHTY &#9825;</small></h1>
+            <p className="plain">By entering, I confirm I am 18 or older and<br />I know what a truth table is.</p>
+            <div className="btns stack">
+              <div className="tickrow"><Tick on={on} />
+                <a className="btn hot wide" href={NEXT} onClick={enter} onPointerEnter={hover} onFocus={() => setCur(0)} onMouseEnter={() => setCur(0)}>&#9829; ENTER ANYWAY &#9829;</a>
+                {G2 && cur === 0 && <Hand />}</div>
+              <div className="tickrow nrow">
+                {H1 ? <NoThanks onHover={() => { hover(); setCur(-1); }} onFocus={() => setCur(1)} />
+                  : <a className="btn soft narrow" href={LOGIC} onClick={refuse} onPointerEnter={hover} onFocus={() => setCur(1)} onMouseEnter={() => setCur(1)}>NO THANKS</a>}
+                {G2 && cur === 1 && <Hand />}</div>
+            </div>
+            {G2 && <div className="cpill" role="meter" aria-valuenow={25} aria-valuemin={0} aria-valuemax={100} aria-label="XOR and you (AND): 25% compatible">
+              <i style={{ width: '25%' }} /><span>XOR &amp; you (AND): 25% compatible</span></div>}
+          </div>
+        </div>
+        {G2 && <p className="pctl">&#9829; IF YOU HAVE CHILDREN, USE PARENTAL CONTROLS (<u>NOT GATE</u>) &#9829;</p>}
+      </section>
+      <Wipe on={!!go} />
+    </div>
+  );
+}
+
+// ---------- continue screen: MATCH FEED ----------
+const FEED = [['OR', 'AND'], ['XOR', 'NAND'], ['AND', 'AND'], ['NOR', 'OR'], ['NAND', 'AND'], ['OR', 'XOR'],
+  ['AND', 'NOT'], ['NOT', 'NOR'], ['XOR', 'OR'], ['NAND', 'NOT'], ['OR', 'OR'], ['NOR', 'XOR']];
+const LINES = {
+  100: 'same truth table. soulmates.', 75: 'agree on 3 of 4 rows', 50: 'it\u2019s complicated', 25: 'agree on 1 row. once.', 0: 'total opposites (hot)',
+};
+
+function Card({ A, B, row, i, liked, onLike }) {
+  const pct = Math.round(compat(A, B) * 100);
+  return (
+    <article className={liked ? 'card liked' : 'card'} style={{ '--i': i }}>
+      {G2 && liked ? <TT A={A} B={B} /> : <div className="tube"><Pair A={A} B={B} row={row} /></div>}
+      <header><b>{A} <span>&#9829;</span> {B}</b><em>{pct}%</em>
+        <button className="like" onClick={onLike} aria-pressed={liked} aria-label={liked ? 'Unmatch' : 'Swipe right'}>{liked ? '♥' : '♡'}</button></header>
+      <div className="meter" role="meter" aria-valuenow={pct} aria-valuemin={0} aria-valuemax={100} aria-label={`${A} and ${B} compatibility`}>
+        <i style={{ width: `${Math.max(pct, 4)}%` }} /></div>
+      <p>{LINES[pct]}</p>
+      {liked && !G2 && <strong className="stamp">IT&rsquo;S A MATCH!<small>please take a number: A-{118 + i}</small></strong>}
+    </article>
+  );
+}
+
+// g2 (stolen from f2's Tinder card): the ♡ expand state is the pair's real truth table, a heart on every row they agree on.
+function TT({ A, B }) {
+  return (
+    <table className="tt"><thead><tr><th>a</th><th>b</th><th>{A}</th><th>{B}</th><th /></tr></thead>
+      <tbody>{[0, 1, 2, 3].map((i) => { const r = pairRow(A, B, i); return (
+        <tr key={i} className={r.A === r.B ? (H1 ? 'ag' : 'y') : ''}><td>{+r.a}</td><td>{+r.b}</td><td>{+r.A}</td><td>{+r.B}</td><td>{r.A === r.B ? '\u2665' : ''}</td></tr>); })}</tbody></table>);
+}
+// g2: the big moment. A JRPG message window (S5): "Tony learned NAND!", with the M10 software-update line as the footnote.
+function Learned({ m, onClose }) {
+  if (!m) return null;
+  return (
+    <div className="learned" role="alertdialog" aria-label="It's a match" onClick={onClose}>
+      <div className="lw">
+        <strong className="big">IT&rsquo;S A MATCH!</strong>
+        <p><b>{m.A}</b> &amp; <b>{m.B}</b> agree on {m.pct / 25} of 4 rows.</p>
+        <p className="lv">&#9656; Tony learned <b>{m.B}</b>! <span>AFFECTION +{m.pct}</span></p>
+        <p className="upd">Restart required to apply your new relationship. <span>&#9660;</span></p>
+      </div>
+    </div>);
+}
+
+// h1: g3's attract-mode HIGH SCORES strip (ported), with Prof. Kerney's own entry in 5th: the age gate, B+.
+const INIT = ['ANN', 'ORA', 'XOX', 'NOR', 'NAN', 'ORR', 'ADA', 'XIO'];
+function Scores({ liked }) {
+  const rows = FEED.slice(0, 8).map(([A, B], i) => ({ A, B, i, pct: Math.round(compat(A, B) * 100) }))
+    .sort((a, b) => b.pct - a.pct || a.i - b.i).slice(0, 4);
+  return (
+    <section className="scores" aria-label="High scores">
+      <h2>HIGH SCORES</h2>
+      <ol>
+        {rows.map((r, k) => (
+          <li key={r.i} className={liked.has(r.i) ? 'you' : ''}><b>{['1ST', '2ND', '3RD', '4TH'][k]}</b>
+            <span>{r.A} &#9829; {r.B}</span><em>{String(r.pct).padStart(3, '0')}%</em><i>{liked.has(r.i) ? 'YOU' : INIT[r.i]}</i></li>))}
+        {!CLEAN && <li className="kerney"><b>5TH</b><span>the age gate</span><em>B+</em><i>&ndash; K.</i></li>}
+      </ol>
+    </section>
+  );
+}
+
+// K1 (ported from h2): a short interstitial between ENTER and the feed. Static frame, ticking text timer, the boom at
+// a random 4-9 s (vol 0.55), then the feed. Reduced motion: identical (nothing moves). SKIP is a real, focused button.
+const hms = (t) => `${Math.floor(t / 3600)}:${String(Math.floor(t / 60) % 60).padStart(2, '0')}:${String(t % 60).padStart(2, '0')}`;
+function Player({ onDone }) {
+  const [t, setT] = useState(0);
+  const [at] = useState(() => 4 + Math.floor(Math.random() * 6));
+  const skip = useRef(null);
+  useEffect(() => { skip.current?.focus(); const k = setInterval(() => setT((n) => n + 1), 1000); return () => clearInterval(k); }, []);
+  useEffect(() => { if (t === at) { play('boom', { vol: 0.55 }); const k = setTimeout(onDone, 900); return () => clearTimeout(k); } }, [t]);
+  const boomed = t >= at;
+  return (
+    <div className="k1">
+      <section className="k1-player" role="region" aria-label="Video: 10 hours of AND-chan waiting, no music">
+        <div className="k1-screen">
+          <svg className="k1-gate" viewBox={`-14 -8 ${GATE_GEOM.AND.w + 28} ${GATE_GEOM.AND.h + 16}`} aria-hidden="true"><Shape g={GATE_GEOM.AND} on lit={{ in: [true, true], out: true }} /></svg>
+          <b className="k1-q">OFFICE HOURS QUEUE &middot; A-047</b>
+          {boomed && <b className="k1-boom" aria-live="assertive">NOW SERVING A-047</b>}
+        </div>
+        <h2 className="k1-title">10 HOURS OF AND-CHAN WAITING <small>(NO MUSIC)</small></h2>
+        <div className="k1-ctl">
+          <span aria-hidden="true">&#10074;&#10074;</span>
+          <div className="k1-seek" aria-hidden="true"><i style={{ width: `${Math.max(0.4, (t / 36000) * 100)}%` }} /></div>
+          <span className="k1-time" role="timer">{hms(t)} / 10:00:00</span>
+          <button ref={skip} className="k1-skip" onClick={onDone}>SKIP &#9654;&#9654;</button>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export function Feed() {
+  const [vid, setVid] = useState(() => H1 && !CLEAN && !params.has('novid'));
+  if (vid) return <><Bar /><Player onDone={() => setVid(false)} /></>;
+  return <FeedBody />;
+}
+
+function FeedBody() {
+  const t = useTick(900);
+  const serving = 42 + Math.floor(t / 3) % 70;
+  const [liked, setLiked] = useState(() => new Set(STILL ? [2] : []));
+  const [go, to] = useWipe();
+  // each new match pitches the blip up (combo), capped in sfx.js
+  const [match, setMatch] = useState(() => (G2 && !H1 && STILL ? { A: FEED[2][0], B: FEED[2][1], pct: 100 } : null));
+  useEffect(() => { if (!match || (STILL && !H1)) return; const t = setTimeout(() => setMatch(null), 2600); return () => clearTimeout(t); }, [match]);
+  const toggle = (i) => () => {
+    const on = !liked.has(i);
+    setLiked((s) => {
+      const n = new Set(s);
+      if (n.has(i)) { n.delete(i); play('click'); } else { n.add(i); play('match', { rate: Math.min(1.6, 1 + 0.08 * (n.size - 1)) }); }
+      return n;
+    });
+    const [A, B] = FEED[i]; const pct = Math.round(compat(A, B) * 100);
+    if (G2 && on && pct >= 75) setMatch({ A, B, pct });
+  };
+  const cards = G2 ? FEED.slice(0, 8) : FEED;
+  return (
+    <>
+      <Bar />
+      <Mute />
+      <div className="feedbar">
+        <h1 className="warn cut"><span className="w1">MATCH FEED</span><small>LIVE GATES NEAR YOU &middot; {liked.size} MATCHED</small></h1>
+        {/* the mundane lens (M2, the DMV): dating a gate means taking a number */}
+        <div className="ticketwrap"><div className="ticket" role="status" aria-live="off">
+          <div><small>OFFICE HOURS &middot; NOW SERVING</small><b>A-{String(serving).padStart(3, '0')}</b></div>
+          <div><small>YOUR NUMBER</small><b className="mine">A-047</b></div>
+          <div><small>EST. WAIT</small><b>4 years (your degree)</b></div></div>
+          {!CLEAN && <p className="feed-pen" aria-label="Prof. Kerney: still B+. show your truth tables.">still B+. show your truth tables. <span>&ndash; K.</span></p>}
+        </div>
+        <nav className="feednav">
+          <a className="btn soft narrow" href={GATE} onClick={(e) => { play('click'); to(GATE)(e); }} onPointerEnter={hover}>&#9664; BACK TO GATE</a>
+          {H1 && <a className="btn hot play" href={`${location.pathname}?game=1`} onClick={() => play('click')} onPointerEnter={hover}>&#9654; PLAY</a>}
+          <a className="btn hot" href={LOGIC} onPointerEnter={hover}>LOGIC MODE</a>
+        </nav>
+      </div>
+      <main className="feed">
+        {cards.map(([A, B], i) => <Card key={i} i={i} A={A} B={B} row={t + i} liked={liked.has(i)} onLike={toggle(i)} />)}
+        {H1 && <Scores liked={liked} />}
+      </main>
+      {H1 && <p className="credits">Sound: Kenney.nl (CC0): Interface, UI Audio, Casino Audio, Music Jingles; &ldquo;Vine boom&rdquo; by Business Goose (CC BY-NC). Fonts: Bangers, Yellowtail, Roboto Condensed (OFL, @fontsource). <a href={`${import.meta.env.BASE_URL}sfx/CREDITS.md`}>full credits</a></p>}
+      {G2 && <Learned m={match} onClose={() => setMatch(null)} />}
+      <Wipe on={!!go} />
+    </>
+  );
+}
