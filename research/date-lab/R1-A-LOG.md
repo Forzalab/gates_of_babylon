@@ -186,3 +186,16 @@ skewed floor shadow for the silhouette). Placement = `bustScale()/silScale()` fr
 - **Self-critique**: grade + rim make her sit in the door and genkan shots; the kitchen is main's flat Kawaii palette so there
   is little to match, and the door-shot form shade reads a bit grey/flat. **R2**: add a bounce light (floor colour, from below)
   pass and a subtle key-colour hair highlight; draw a real lower body for the door so she can stand at the door's scale.
+
+## nanda-2 · Integration test bench (horror 0)
+- **School**: VFX compositing dailies (split-screen before/after with check chips) x anime genga/douga comparison sheets.
+- **Theme**: *prove she is in the room.* 2x2 grid (platform, door, genkan, kitchen); each cell split down the middle: LEFT = main's
+  sprite dropped in raw (Kawaii palette, no light), RIGHT = the integrated composite. Chips under each cell come from the same
+  functions the node tests run: scale from the reference object (158 cm vs bench / door / hall doorway / teacup), skin-vs-wall
+  contrast raw -> graded (platform 9.8 -> 3.6:1, door 3.0 -> 1.8:1, genkan 2.7 -> 1.0:1, kitchen 1.9 -> 1.6:1), rim colour, shadow direction.
+- **Integration tests (node, `src/date-lab-a.test.js`)**: (1) grade pulls her skin toward the wall she stands against in every
+  scene and never leaves a glowing cut-out (< 4:1); (2) scale derives from the reference object (doorway plane = 0.79 of its
+  height; bust/sil scales round-trip); (3) the cast shadow always opposes the key light.
+- **RM**: static, identical.
+- **Self-critique**: a useful arbitration tool more than a demo piece; the platform split is weak because main's silhouette is on
+  the lit half only. **R2**: a draggable divider, per-pass toggles (grade / shade / rim / shadow) as chips you can click.

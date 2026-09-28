@@ -12,6 +12,7 @@ import ThirdCup from './closeup/ThirdCup.jsx';
 import Shrine from './closeup/Shrine.jsx';
 import Pin from './closeup/Pin.jsx';
 import Integrated from './nanda/Integrated.jsx';
+import Bench from './nanda/Bench.jsx';
 
 const A = (id, track, title, theme, horror, Component) => ({ id, track, title, theme, horror, builder: 'A', Component });
 
@@ -28,4 +29,5 @@ export const VARIANTS = [
   A('closeup-4', 'closeup', "The shrine circuit: your circuit, today's time, kept", 'Mushishi reliquary macro x patient push-in x 4th-wall memory: she enshrines what you make', 3, Shrine),
   A('closeup-5', 'closeup', 'Her pin states: hum, flicker, red, dark', 'Magical-girl brooch macro x manga two-panel reaction x mood ring: the pin is the truth her face hides', 2, Pin),
   A('nanda-1', 'nanda', 'Lit like the room: platform, door, genkan, third cup', 'Ghibli/KyoAni compositing x Deakins motivated light x she is closer each time', 2, Integrated),
+  A('nanda-2', 'nanda', 'Integration test bench: raw | lit split, 4 scenes', 'VFX compositing dailies x genga/douga comparison sheets: prove she is in the room', 0, Bench),
 ];
