@@ -27,7 +27,7 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 
 | field | type | meaning |
 |---|---|---|
-| `text` | string, max 12 words | Button label. |
+| `text` | string, max 12 words | Button label. An action fragment ("Drink", "Stand up"), not a full sentence. No trailing period (the loader rejects it). |
 | `side` | `pink` or `purple` | Defaults by position (pink, then purple). |
 | `default` | bool | What the timer picks. At most one per beat. |
 | `if` | flags object | Enabled only when every key equals its flag. A missing flag reads as `null`. A disabled choice is shown but can't be picked. |
@@ -42,3 +42,8 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 | `defaults` | Flags object. Skipping the scene (Esc or S) merges these in, so the flags look as if the scene had played its default path. |
 
 Flag values are strings, numbers, booleans or `null`. Root keys: `version`, `note`, `scenes`.
+
+## Choice buttons (Tony, Mon 9/28)
+- No number key on the button. Keys 1/2 still pick, but nothing is drawn.
+- Label centred, 58px (was 44px left-aligned).
+- Label = action fragment. No trailing period. Applies to every choice.

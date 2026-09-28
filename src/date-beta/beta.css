@@ -62,22 +62,19 @@ body { font-family: var(--cond); color: var(--ink); }
 .stage:has(.db-choices) .db-say { bottom: 318px; }
 .db-choices { position: absolute; left: 150px; right: 150px; bottom: 70px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 64px; z-index: 5; }
-.db-choice { position: relative; isolation: isolate; display: flex; align-items: center; gap: 24px; min-width: 0; min-height: 150px;
-  padding: 22px 48px 26px 30px; border: 0; border-radius: 999px; cursor: pointer; text-align: left; color: #fff;
-  font: 900 44px/1.12 var(--btn); letter-spacing: .01em; text-shadow: var(--g-ring); background: var(--g-pink);
+.db-choice { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 150px;
+  padding: 22px 48px 26px; border: 0; border-radius: 999px; cursor: pointer; text-align: center; color: #fff;
+  font: 900 58px/1.08 var(--btn); letter-spacing: .01em; text-shadow: var(--g-ring); background: var(--g-pink);
   box-shadow: inset 0 0 0 3px var(--g-pink-edge), inset 0 -6px 0 rgba(90, 8, 50, .28), 0 0 0 9px var(--g-rim),
     0 0 0 11px var(--g-rim-edge), 0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(58, 10, 38, .32); }
 /* highlight band: kept thin + faint so wrapped white text on the top line stays readable */
 .db-choice::before { content: ''; position: absolute; left: 7%; right: 7%; top: 6%; height: 26%; border-radius: 999px; z-index: -1;
   pointer-events: none; background: linear-gradient(180deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0)); }
-.db-choice .key { flex: none; display: grid; place-items: center; width: 64px; height: 64px; border-radius: 50%;
-  background: var(--g-rim); color: #9c1458; font: 700 34px/1 var(--mono); text-shadow: none; box-shadow: 0 0 0 3px var(--g-pink-edge); }
 .db-choice .line { min-width: 0; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
   line-clamp: 2; overflow: hidden; }
 .db-choice.purple { background: var(--g-purple);
   box-shadow: inset 0 0 0 3px var(--g-purple-edge), inset 0 -6px 0 rgba(30, 10, 80, .3), 0 0 0 9px var(--g-rim),
     0 0 0 11px var(--g-rim-edge), 0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(30, 10, 60, .32); }
-.db-choice.purple .key { color: var(--purple-deep); box-shadow: 0 0 0 3px var(--g-purple-edge); }
 /* rule C on a choice: dark body, the side colour stays on the rim + key so pink/purple still reads */
 .db-choice.has-or { background: var(--g-dark); color: var(--scrim-ink); text-shadow: none; }
 .db-choice.has-or::before { background: linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0)); }
@@ -85,8 +82,6 @@ body { font-family: var(--cond); color: var(--ink); }
   0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(26, 7, 16, .4); }
 .db-choice.purple.has-or { box-shadow: inset 0 0 0 7px var(--purple), 0 0 0 9px var(--g-rim), 0 0 0 11px var(--g-rim-edge),
   0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(26, 7, 16, .4); }
-.db-choice.pink.has-or .key { background: var(--pink); color: #000; box-shadow: none; }
-.db-choice.purple.has-or .key { background: var(--purple-deep); color: #fff; box-shadow: none; }
 .db-choice:hover, .db-choice:focus-visible { outline: 6px solid var(--edge); outline-offset: 16px; }
 .db-choice:active { transform: translateY(8px); filter: brightness(.9); }
 [data-scare="2"] .db-choice { outline: 4px solid var(--scrim); }

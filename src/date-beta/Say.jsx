@@ -38,7 +38,6 @@ export function Choices({ choices, onPick, on = [], left = null }) {
       {choices.map((c, i) => (
         <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}`}
           disabled={on[i] === false} aria-label={`${i + 1}: ${c.plain}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
-          <span className="key" aria-hidden="true">{i + 1}</span>
           <span className="line"><Parts parts={c.parts} /></span>
         </button>
       ))}

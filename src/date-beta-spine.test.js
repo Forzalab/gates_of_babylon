@@ -29,11 +29,11 @@ function walk(picks, rm = false) {
 
 const SHARED = ['splash', 'rooftop', 'train', 'naan', 'blackout', 'door'];
 const PATHS = {
-  STEEPED: { picks: [null, 'Just one cup.', 'Drink.'], via: ['cup', 'steeped'], card: 'STEEPED.' },
-  'ESCAPE-win': { picks: [null, 'Just one cup.', 'Stand up.', '[win]'], via: ['cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
-  'ESCAPE-timeout': { picks: [null, 'Just one cup.', 'Stand up.', '[timeout]'], via: ['cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE.' },
-  'LEAVE (refuse)': { picks: [null, "It's late. Goodnight.", "FUCK YOU. I'm leaving."], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
-  'LEAVE (agree)': { picks: [null, "It's late. Goodnight.", 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
+  STEEPED: { picks: [null, 'Just one cup', 'Drink'], via: ['cup', 'steeped'], card: 'STEEPED.' },
+  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', '[win]'], via: ['cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
+  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', '[timeout]'], via: ['cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE.' },
+  'LEAVE (refuse)': { picks: [null, "It's late. Goodnight", "FUCK YOU. I'm leaving"], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
+  'LEAVE (agree)': { picks: [null, "It's late. Goodnight", 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
 };
 
 for (const [name, { picks, via, card }] of Object.entries(PATHS)) {

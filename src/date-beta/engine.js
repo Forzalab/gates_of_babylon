@@ -158,6 +158,7 @@ function loadChoices(list, at) {
     keys(c, 'choice', where);
     if (typeof c.text !== 'string' || !c.text.trim()) fail(where, 'needs text');
     if (words(c.text) > MAX_WORDS) fail(where, `text has ${words(c.text)} words, max ${MAX_WORDS}`);
+    if (/\.\s*$/.test(c.text)) fail(where, 'button text ends with "." (actions are fragments, no period)');
     const side = c.side ?? SIDES[i];
     if (!SIDES.includes(side)) fail(where, `side "${side}" is not one of ${SIDES.join('|')}`);
     if (sides.has(side)) fail(where, `two choices on the ${side} side`);

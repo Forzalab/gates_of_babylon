@@ -22,8 +22,8 @@
         { "props": { "clock": "noon" }, "text": "MC: Technically, rain wasn't f-{OR}-ecast.", "sfx": "bell" },
         { "props": { "clock": "noon" }, "text": "NANDA: Stay f{OR}ever? The rain can wait.", "scare": 1, "sfx": "breath", "timer": 10,
           "choices": [
-            { "text": "Just one more minute, then I really have to go.", "side": "pink", "default": true, "set": { "stayed": true } },
-            { "text": "{OR} I could leave now, before the rain starts.", "side": "purple", "set": { "stayed": false } }
+            { "text": "Just one more minute, then I really have to go", "side": "pink", "default": true, "set": { "stayed": true } },
+            { "text": "{OR} I could leave now, before the rain starts", "side": "purple", "set": { "stayed": false } }
           ] }
       ]
     },
@@ -76,8 +76,8 @@
         { "text": "NANDA: Come in? Just for tea.", "scare": 0, "sfx": "tick" },
         { "text": "NANDA: I already boiled the water. This morning. Just in case.", "sfx": "kettle", "timer": 5,
           "choices": [
-            { "text": "Just one cup.", "side": "pink", "default": true, "go": "cup" },
-            { "text": "It's late. Goodnight.", "side": "purple", "go": "leave" }
+            { "text": "Just one cup", "side": "pink", "default": true, "go": "cup" },
+            { "text": "It's late. Goodnight", "side": "purple", "go": "leave" }
           ] }
       ]
     },
@@ -92,8 +92,8 @@
         { "text": "MC: Who's the third cup for?", "sfx": "tick" },
         { "text": "NANDA: For Input B. Silly. It's always three of us.", "scare": 2, "sfx": "breath",
           "choices": [
-            { "text": "Drink.", "side": "pink", "go": "steeped" },
-            { "text": "Stand up.", "side": "purple", "go": "unknown" }
+            { "text": "Drink", "side": "pink", "go": "steeped" },
+            { "text": "Stand up", "side": "purple", "go": "unknown" }
           ] }
       ]
     },
@@ -169,7 +169,7 @@
         { "text": "NANDA: From now on… can we be f{OR}ever?", "scare": 2, "sfx": "breath",
           "choices": [
             { "text": "uhmmm yeah ig", "side": "pink", "go": "leave-yeah" },
-            { "text": "FUCK YOU. I'm leaving.", "side": "purple", "go": "leave-fu" }
+            { "text": "FUCK YOU. I'm leaving", "side": "purple", "go": "leave-fu" }
           ] }
       ]
     },
