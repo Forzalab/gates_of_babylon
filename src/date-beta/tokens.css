@@ -1,0 +1,28 @@
+/* date-beta design tokens (engine-owned). Loaded by theme.js for chrome AND art. Values: UXUI-SPEC R2b §3 + R2c. */
+:root {
+  /* fonts */
+  --cond: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+  --mono: 'JetBrains Mono', 'DejaVu Sans Mono', monospace;
+  --btn: 'Nunito', 'Roboto Condensed', sans-serif;
+  --jp: 'Hiragino Kaku Gothic StdN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', 'IPAGothic', sans-serif;
+  --jp-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK JP', 'IPAMincho', 'IPAPMincho', serif;
+  /* locks */
+  --pink: #ff5fa2;        /* toward her */
+  --purple: #8a5cf6;      /* leave (art + timer) */
+  --purple-deep: #5b37c4; /* text-bearing purple */
+  --her: #f0243f;         /* her red: art, traces, rims */
+  --her-deep: #b0102c;    /* text-bearing her red */
+  --ink: #f4eef6;
+  --edge: #3a1d3f;
+  /* HA dialogue chip */
+  --box: #fff0f6; --box-ink: #4a1238; --magenta: #a3135a; --rim: #d6337f;
+  /* OR rule C: the dark scrim */
+  --scrim: #1a0710; --or-on-dark: #ff6b7d; --scrim-ink: #ffe9f1;
+  /* R2c glossy buttons */
+  --g-rim: #fff8f0; --g-rim-edge: #e9d8de; --g-ol: #3a0a26;
+  --g-pink: linear-gradient(180deg, #f27fc0 0%, #e0409a 38%, #d0308a 60%, #b8287a 100%); --g-pink-edge: #9c1458;
+  --g-purple: linear-gradient(180deg, #a585f5 0%, #7a4fe0 38%, #6b45d0 60%, #5b37c4 100%); --g-purple-edge: #3e2596;
+  --g-dark: linear-gradient(180deg, #4a1a2e 0%, #2a0c18 40%, #1a0710 100%);
+  --g-ring: 1px 0 0 var(--g-ol), -1px 0 0 var(--g-ol), 0 1px 0 var(--g-ol), 0 -1px 0 var(--g-ol),
+    1px 1px 0 var(--g-ol), -1px -1px 0 var(--g-ol), 1px -1px 0 var(--g-ol), -1px 1px 0 var(--g-ol);
+}

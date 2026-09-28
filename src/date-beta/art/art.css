@@ -1,5 +1,8 @@
 /* Text inside the SVG/HTML scenes. Stage px. */
 
+/* OR rule C inside art signage (<OrSpans>, marked "{OR}"): #FF6B7D on a scrim stroke */
+.db-or-svg { fill: var(--or-on-dark); font-weight: 700; stroke: var(--scrim); stroke-width: 3px; paint-order: stroke fill; }
+
 /* rooftop */
 .rooftop .roman { font: 700 22px/1 Georgia, 'Times New Roman', serif; fill: #3b3350; }
 .rooftop .figur-clock { font: 400 30px/1 'Yellowtail', cursive; fill: #b0123e; }
@@ -79,4 +82,4 @@
 .blackout .l.on { opacity: 1; }
 .blackout .old.l { transition-duration: 1400ms; }
 .blackout .new .l { color: #e9e2ea; }
-.blackout .core { display: block; line-height: 1.2; font-weight: 700; color: var(--her); text-shadow: 2px 0 0 rgba(90, 0, 18, .7), 0 0 28px rgba(240, 36, 63, .35); }
+.blackout .core { display: block; position: relative; left: 1px; top: 1px; line-height: 1.2; font-weight: 700; color: var(--her); text-shadow: 2px 0 0 rgba(90, 0, 18, .7), 0 0 28px rgba(240, 36, 63, .35); }
