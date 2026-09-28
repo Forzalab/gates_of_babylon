@@ -4,6 +4,13 @@ Worktree branch: `worktree-agent-a88d4b414cc46001d` (fast-forwarded onto the sca
 Run: `npm run build && npx vite preview --port 5481`, then `date-lab.html?v=<id>` (`&still` = reduced motion).
 Shots: `node research/date-lab/shots-a.mjs [id ...]` -> `research/date-lab/shots/<id>-*.png`.
 
+## Summary (round 1, builder A)
+Shipped 15 variants: menu-1/2/3, cam-1/2/3, closeup-1..5, nanda-1/2, anim-1/2. Each has >= 2 shots + 1 RM shot in
+`research/date-lab/shots/`. Node tests: `src/date-lab-a.test.js` (menu state machine, timelines, flash audit, retype, corridor
+dolly, camera fit, Nanda integration x3). Strongest: menu-3 DDLC, cam-2 Kubrick corridor, cam-3 Kon loop, closeup-3 third cup.
+Weakest: menu-2 (horror 1 barely unsettles), closeup-5 (a rules card), nanda-2 (a tool, not a scene), anim-2 (full-screen red
+impact frame needs an arbiter safety call).
+
 ## Shared kit (`src/date-lab/a/kit/`)
 - `menu.js` — the DOOR choice as a pure state machine: 5 s timer, timeout = pink, replay disables your last pick while the
   timer still runs, and if pink is the disabled one she still takes it on timeout (`forced`). Node-tested (`src/date-lab-a.test.js`).
@@ -167,3 +174,67 @@ out-of-focus foreground petals falling in held 500 ms steps, raindrops on the le
   "W-wait. Not both at once—" / solid red "Don't lea—" / dark, silence. RM: flicker = a static half-lit bubble.
 - **Self-critique**: clearest "rules card" for the audience, least cinematic; the pin reads as a plain gate, not a jewel. **R2**: add
   enamel/metal shading and a glint, and use it as a HUD element in the real game instead of a standalone insert.
+
+## Nanda integration kit (`kit/integrate.js` pure + node-tested, `kit/Lit.jsx`)
+Each scene has a LIGHT RIG measured from main's art (ambient, key colour + direction, rim source, a sampled wall colour next to her,
+a scale reference at a known depth). Her role palette is DERIVED from the rig (multiply toward ambient + key lift), not hand-picked.
+`LitNanda` composites main's sprite with 4 toggleable passes: grade, form shade (key-direction gradient masked by her own alpha),
+rim (SVG edge filter on the lit side; all-round for backlit rigs), cast shadow (blurred black copy away from the key; a long
+skewed floor shadow for the silhouette). Placement = `bustScale()/silScale()` from the reference object, never eyeballed.
+
+## nanda-1 · Lit like the room (horror 2)
+- **School**: Ghibli / KyoAni cel-over-BG compositing (colour script) x Deakins motivated light x "she is closer each time".
+- **Theme**: *she belongs in every room.* 22 s, 4 shots, slow push each: (1) platform — main's own silhouette gets a cool rim
+  from the city, a wet-floor reflection and pin bloom ("Her stop. She waited in the rain."); (2) her door — bust graded to the
+  walkway, warm rim from the ajar door, cast shadow on the wall ("This is me. Unit 12."); (3) genkan — backlit silhouette in the
+  hall doorway, all-round warm rim, red eyes, a long shadow reaching toward you over the step ("Shoes off. The hall light is
+  for you."); (4) third cup — she sits BEHIND the table (kitchen split into back/front planes), pin red ("Drink while it's warm.").
+- **RM**: one held frame per shot, hard cuts.
+- **Self-critique**: grade + rim make her sit in the door and genkan shots; the kitchen is main's flat Kawaii palette so there
+  is little to match, and the door-shot form shade reads a bit grey/flat. **R2**: add a bounce light (floor colour, from below)
+  pass and a subtle key-colour hair highlight; draw a real lower body for the door so she can stand at the door's scale.
+
+## nanda-2 · Integration test bench (horror 0)
+- **School**: VFX compositing dailies (split-screen before/after with check chips) x anime genga/douga comparison sheets.
+- **Theme**: *prove she is in the room.* 2x2 grid (platform, door, genkan, kitchen); each cell split down the middle: LEFT = main's
+  sprite dropped in raw (Kawaii palette, no light), RIGHT = the integrated composite. Chips under each cell come from the same
+  functions the node tests run: scale from the reference object (158 cm vs bench / door / hall doorway / teacup), skin-vs-wall
+  contrast raw -> graded (platform 9.8 -> 3.6:1, door 3.0 -> 1.8:1, genkan 2.7 -> 1.0:1, kitchen 1.9 -> 1.6:1), rim colour, shadow direction.
+- **Integration tests (node, `src/date-lab-a.test.js`)**: (1) grade pulls her skin toward the wall she stands against in every
+  scene and never leaves a glowing cut-out (< 4:1); (2) scale derives from the reference object (doorway plane = 0.79 of its
+  height; bust/sil scales round-trip); (3) the cast shadow always opposes the key light.
+- **RM**: static, identical.
+- **Self-critique**: a useful arbitration tool more than a demo piece; the platform split is weak because main's silhouette is on
+  the lit half only. **R2**: a draggable divider, per-pass toggles (grade / shade / rim / shadow) as chips you can click.
+
+## anim-1 · KyoAni idle life (horror 1)
+- **School**: Kyoto Animation small-motion realism (*Hyouka*, *Violet Evergarden*, *Tamako Market*) x Ozu pillow shots (empty
+  rooms between scenes) x one wrong breath at the end.
+- **Theme**: *the world breathes (and so does she).* All 10 of main's scenes + her at the door, 4.4 s each (48 s loop), soft fades.
+  Idle overlays in scene coordinates, all stepped (8 fps grid, every pose >= 500 ms): START ring pulse; rooftop petals; a pole +
+  glass glint passing the train window (behind the ad); curry steam on the NAAN board; the blackout OR breathing; puddle rings,
+  umbrella drips and her pin glow on the platform; a moth at the one good tube + vending glow in the underpass; the lit curtain;
+  the door-light sliver breathing; candle + dust motes in the genkan hall light; then Nanda at her door: a 500 ms blink every 3 s
+  (a new `blink` pose added to my sprite port), twin-tail sway (2 poses, 1 s), breathing shoulders (2 poses, 1.5 s) —
+  "…You were staring. I noticed." Main's own motion (rain, straps, NAAN glitch) keeps running underneath.
+- **RM**: every overlay holds pose 0, main's scenes get `rm` (rain/straps still), no fades.
+- **Self-critique**: covers every scene and the blink/breath on her is the most "alive" she looks anywhere; several overlays are
+  small (moth, drips) and barely read on a projector. **R2**: fewer, bigger idle moves per scene (one hero motion each), hair
+  strands that trail the sway by one pose (overlap = the KyoAni tell), and a blink that only happens when the viewer isn't clicking.
+
+## anim-2 · Trigger limited animation (horror 2)
+- **School**: Studio Trigger / Gainax (*Kill la Kill*, *Gurren Lagann*, *Promare*): anticipation -> one smear frame -> a flat
+  2-colour IMPACT FRAME -> impact hold with boiling focus lines and big katakana SFX, x Edgar Wright smash-cut-on-the-beat.
+- **Theme**: *every beat hits like she meant it* (a love-bomb that lands too hard). 5 beats x 3.4 s (17 s loop): the AND Line
+  slams into the platform "ガタン! KA-TANK" / the NAAN board punches in on the headline glitch "ドン! DON" ("NAAN. NAND. NANDA.") /
+  her door bangs open on warm light "ガチャ! CLACK" / Nanda on a pink sunburst, pin "キラッ KIRA" — "GOOD INPUT!" / the men's
+  slippers "!?". Per beat: 0-600 ms anticipation (camera pulls back 6%, held), 600-934 ms smear (one frame held 334 ms: speed
+  streaks, a red zoom burst, a light wedge, a star), 934-1300 ms impact frame (flat her-red + black lines + the SFX, held 366 ms),
+  then the hold: focus lines boil in 2 poses at 500 ms, a smooth damped camera shake, Bangers subtitles.
+- **Safety**: one impact frame per 3.4 s beat, every flat frame held >= 334 ms (well under 3 flashes/s). It IS a full-screen
+  saturated-red frame though — the arbiter may want it cut to < 25% of the screen or desaturated for the projector.
+- **RM**: no smear, no impact frame, no shake, focus lines still: a hard cut to the settled hold + SFX text.
+- **Self-critique**: the most energetic piece I shipped and it reads from the back row; tonally it's the least horror (it's a
+  gag reel), and the smear frames are generic shapes, not drawn smears of the actual objects. **R2**: use it only on 2-3 comedy
+  beats in the real demo (the "Good input." sting, the SOUR pucker), draw object-specific smears, and swap the red impact frame
+  for a black/pink one to keep her red meaning "OR".

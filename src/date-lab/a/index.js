@@ -11,6 +11,10 @@ import Phone from './closeup/Phone.jsx';
 import ThirdCup from './closeup/ThirdCup.jsx';
 import Shrine from './closeup/Shrine.jsx';
 import Pin from './closeup/Pin.jsx';
+import Integrated from './nanda/Integrated.jsx';
+import Bench from './nanda/Bench.jsx';
+import Kyoani from './anim/Kyoani.jsx';
+import Trigger from './anim/Trigger.jsx';
 
 const A = (id, track, title, theme, horror, Component) => ({ id, track, title, theme, horror, builder: 'A', Component });
 
@@ -26,4 +30,8 @@ export const VARIANTS = [
   A('closeup-3', 'closeup', 'The third cup: steam writes OR, the cup slides to you', "Ozu low-table x Get Out teacup x Notorious rack focus: it's always three of us (you are Input B)", 4, ThirdCup),
   A('closeup-4', 'closeup', "The shrine circuit: your circuit, today's time, kept", 'Mushishi reliquary macro x patient push-in x 4th-wall memory: she enshrines what you make', 3, Shrine),
   A('closeup-5', 'closeup', 'Her pin states: hum, flicker, red, dark', 'Magical-girl brooch macro x manga two-panel reaction x mood ring: the pin is the truth her face hides', 2, Pin),
+  A('nanda-1', 'nanda', 'Lit like the room: platform, door, genkan, third cup', 'Ghibli/KyoAni compositing x Deakins motivated light x she is closer each time', 2, Integrated),
+  A('nanda-2', 'nanda', 'Integration test bench: raw | lit split, 4 scenes', 'VFX compositing dailies x genga/douga comparison sheets: prove she is in the room', 0, Bench),
+  A('anim-1', 'anim', 'KyoAni idle life: all 10 scenes + her, the world breathes', 'Kyoto Animation small-motion realism x Ozu pillow shots: the world breathes (and so does she)', 1, Kyoani),
+  A('anim-2', 'anim', 'Trigger limited anim: smear, impact frame, focus lines, SFX', 'Studio Trigger / Gainax x Edgar Wright smash cuts: every beat hits like she meant it', 2, Trigger),
 ];

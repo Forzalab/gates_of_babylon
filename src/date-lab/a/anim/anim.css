@@ -1,0 +1,21 @@
+/* animation track */
+.anim { cursor: pointer; }
+.anim .camfade { position: absolute; inset: 0; background: #000; pointer-events: none; z-index: 44; }
+.anim .a-sub { z-index: 46; }
+.anim .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+.kyo .kyo-breathe { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(circle at 50% 50%, rgba(240, 36, 63, .12), transparent 30%); opacity: .4; }
+.kyo .kyo-breathe.in { opacity: 1; }
+/* anim-2 trigger */
+.trigger .tg-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+.trigger .tg-pinkbg { background: repeating-conic-gradient(from 0deg at 67% 39%, #ff5fa2 0 6deg, #ff9ccc 6deg 12deg); }
+.trigger .tg-focus { pointer-events: none; }
+.trigger .tg-impact { position: absolute; inset: 0; background: var(--her); display: grid; place-items: center; z-index: 40; }
+.trigger .tg-impact span { position: relative; font: 900 360px/1 var(--jp); color: #000; transform: rotate(-8deg); }
+.trigger .tg-sfx { position: absolute; left: 110px; top: 120px; transform: rotate(-10deg); z-index: 42; display: flex; flex-direction: column; }
+.trigger .tg-sfx b { font: 900 200px/1 var(--jp); color: #fff; -webkit-text-stroke: 16px #000; paint-order: stroke fill; }
+.trigger .tg-sfx i { font: 400 90px/1 'Bangers', var(--cond); font-style: normal; color: #ffe100; -webkit-text-stroke: 8px #000; paint-order: stroke fill; margin-left: 20px; }
+.trigger.beat-kira .tg-sfx { left: auto; right: 140px; }
+.trigger .a-sub { font: 400 64px/1.2 'Bangers', var(--cond); letter-spacing: .03em; }
+
+/* splash needs main's splash css (imported by the art index) and a start button that does nothing here */
+.kyo.scene-splash .start { pointer-events: none; }

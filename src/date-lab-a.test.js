@@ -153,6 +153,35 @@ test('camera fit: frames never leave the 1920x1080 art', async () => {
   assert.deepEqual(fit({ x: 5, y: 5, s: 0.5 }), { x: 5, y: 5, s: 0.5 }, 'zoomed out = free');
 });
 
+test('nanda integration: the grade pulls her skin toward the wall she stands against, in every scene', async () => {
+  const I = await import('./date-lab/a/kit/integrate.js');
+  for (const k of Object.keys(I.RIGS)) {
+    const raw = I.contrast(I.RAW.skin, I.RIGS[k].sample), graded = I.contrast(I.gradeColour(I.RAW.skin, I.RIGS[k]), I.RIGS[k].sample);
+    assert.ok(graded < raw, `${k}: graded skin must sit closer to the scene than raw (${graded} vs ${raw})`);
+    assert.ok(graded < 4, `${k}: no glowing cut-out (contrast ${graded.toFixed(2)})`);
+    assert.match(I.gradeVars(k)['--c-skin'], /^#[0-9a-f]{6}$/);
+  }
+  assert.equal(I.luminance('#ffffff'), 1);
+  assert.equal(I.luminance('#000000'), 0);
+});
+
+test('nanda integration: scale comes from a reference object (158 cm vs door / doorway / bench / teacup)', async () => {
+  const I = await import('./date-lab/a/kit/integrate.js');
+  assert.ok(Math.abs(I.heightPx('genkan') - (158 / 200) * 560) < 1e-9, 'in the doorway plane she is 0.79 of its height');
+  assert.ok(Math.abs(I.silScale('genkan') * I.SIL_FULL - I.heightPx('genkan')) < 1e-9);
+  assert.ok(Math.abs(I.bustScale('door') * I.BUST_FULL - I.heightPx('door')) < 1e-9);
+  for (const k of Object.keys(I.RIGS)) assert.ok(I.heightPx(k) > 0);
+});
+
+test('nanda integration: the cast shadow falls away from the key light', async () => {
+  const I = await import('./date-lab/a/kit/integrate.js');
+  for (const k of Object.keys(I.RIGS)) {
+    const [sx, sy] = I.shadowDir(k), [kx, ky] = I.RIGS[k].keyFrom;
+    assert.ok(sx * kx + sy * ky < 0, `${k}: shadow direction opposes the key`);
+    assert.ok(Math.abs(Math.hypot(sx, sy) - 1) < 1e-9);
+  }
+});
+
 test('registry: every builder-A variant is builder A with a unique id and a known track', () => {
   const src = readFileSync(new URL('./date-lab/a/index.js', import.meta.url), 'utf8');
   const rows = [...src.matchAll(/A\('([\w-]+)', '(\w+)'/g)].map((r) => ({ id: r[1], track: r[2] }));
