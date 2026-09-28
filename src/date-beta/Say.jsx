@@ -30,12 +30,14 @@ export function Say({ line, next = true }) {
 }
 
 // Glossy choice pills (R2c). Pink = toward her, purple = leave; an OR choice keeps its side on the rim + key (rule C).
-export function Choices({ choices, onPick }) {
+// on[i] false = the choice's `if` fails (drawn, not pickable); left = timer seconds remaining (null = no timer).
+export function Choices({ choices, onPick, on = [], left = null }) {
   return (
     <div className="db-choices" role="group" aria-label="choose">
+      {left != null && <span className="db-timer" aria-live="off">{Math.ceil(left)}</span>}
       {choices.map((c, i) => (
         <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}`}
-          aria-label={`${i + 1}: ${c.plain}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
+          disabled={on[i] === false} aria-label={`${i + 1}: ${c.plain}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
           <span className="key" aria-hidden="true">{i + 1}</span>
           <span className="line"><Parts parts={c.parts} /></span>
         </button>

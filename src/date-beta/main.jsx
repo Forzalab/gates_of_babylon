@@ -1,11 +1,12 @@
 // date-beta: a thin scene player for the v5 script. Scenes live in scenes.json; engine.js sequences them.
-// Controls: click / Space / Enter / -> = next, 1 / 2 = pick a choice, Esc or S = skip scene, F = fullscreen.
+// Controls: click / Space / Enter / -> = next, 1 / 2 = pick a choice, Esc or S = skip scene, F = fullscreen, P = pause.
+// A choice beat with `timer` counts down (frozen while paused or the tab is hidden) and auto-picks at 0.
 // URL: ?scene=<id> starts there (&beat=<n> steps n beats in), ?still forces reduced motion (same as prefers-reduced-motion).
 import { createRoot } from 'react-dom/client';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import './theme.js';
 import data from './scenes.json';
-import { loadScenes, start, next, skip, choose, beatAt, canAdvance, canChoose } from './engine.js';
+import { loadScenes, start, next, skip, choose, beatAt, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
 import { ART } from './art/index.js';
 import { Say, Choices } from './Say.jsx';
 import manifest from './assets.json';
@@ -14,7 +15,7 @@ import './beta.css';
 
 const params = new URLSearchParams(location.search);
 const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
-const SCENES = loadScenes(data);
+const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
 
 // Sound: cue name -> asset id via assets.json (beep if the file is missing). Also exposed for tests + read as a caption.
@@ -49,6 +50,8 @@ function startPos() {
 function Player() {
   const [pos, setPos] = useState(startPos);
   const [full, setFull] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const [left, setLeft] = useState(null); // timer seconds left on this beat, null = no timer
   const since = useRef(0);
   const k = useFit();
   const scene = SCENES[pos.s], beat = beatAt(SCENES, pos);
@@ -57,20 +60,41 @@ function Player() {
     since.current = performance.now();
     cue(beat.sfx);
     document.documentElement.dataset.beat = `${beat.scene}:${beat.index}`;
+    setLeft(beat.timer && !pos.done ? beat.timer : null);
     if (beat.auto == null || pos.done) return undefined;
     const t = setTimeout(() => setPos((p) => next(SCENES, p, RM)), beat.auto);
     return () => clearTimeout(t);
   }, [pos, beat]);
 
+  // Timer: step on real elapsed time; paused or hidden tab = frozen. At 0, pick once (no pick if nothing is enabled).
+  const hasTimer = left != null;
+  useEffect(() => {
+    if (!hasTimer) return undefined;
+    let last = performance.now();
+    const id = setInterval(() => {
+      const now = performance.now(), dt = now - last;
+      last = now;
+      setLeft((l) => (l == null ? l : tick(l, dt, paused || document.hidden)));
+    }, 100);
+    return () => clearInterval(id);
+  }, [hasTimer, paused]);
+  useEffect(() => {
+    if (left !== 0 || pos.done) return;
+    setLeft(null);
+    const i = timeoutPick(beat, pos.flags);
+    if (i >= 0) setPos((p) => choose(SCENES, p, i, RM));
+  }, [left, pos, beat]);
+
   const advance = useCallback((button = false) => {
     if (pos.done) { setPos(start(SCENES, { rm: RM })); return; }
+    if (paused) return;
     if (!canAdvance(beat, performance.now() - since.current, { button })) return;
     setPos((p) => next(SCENES, p, RM));
-  }, [pos, beat]);
+  }, [pos, beat, paused]);
   const pick = useCallback((i) => {
-    if (pos.done || !canChoose(beat, performance.now() - since.current)) return;
+    if (pos.done || paused || !canChoose(beat, performance.now() - since.current)) return;
     setPos((p) => choose(SCENES, p, i, RM));
-  }, [pos, beat]);
+  }, [pos, beat, paused]);
   const skipScene = useCallback(() => setPos((p) => (p.done ? start(SCENES, { rm: RM }) : skip(SCENES, p, RM))), []);
 
   useEffect(() => {
@@ -79,6 +103,7 @@ function Player() {
       if (e.key === 'Escape' || e.key === 's' || e.key === 'S') { e.preventDefault(); skipScene(); }
       else if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') { e.preventDefault(); advance(true); }
       else if (e.key === 'f' || e.key === 'F') toggleFull();
+      else if (e.key === 'p' || e.key === 'P') setPaused((v) => !v);
       else if (/^[1-9]$/.test(e.key)) pick(+e.key - 1);
     };
     const onFull = () => setFull(!!document.fullscreenElement);
@@ -87,17 +112,21 @@ function Player() {
     return () => { removeEventListener('keydown', onKey); document.removeEventListener('fullscreenchange', onFull); };
   }, [advance, pick, skipScene]);
 
-  const Art = ART[beat.bg];
+  // bg / sprite: a manifest id draws the asset image (grey placeholder if missing); a name draws the art component.
+  const layer = (v, cls) => (isAssetId(v) ? <img className={cls} src={ASSETS.src(v)} alt="" />
+    : (() => { const Art = ART[v]; return <Art props={beat.props} rm={RM} onStart={() => advance(true)} />; })());
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <div className="stage" style={{ transform: `translate(-50%, -50%) scale(${k})` }} data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
-          {!pos.done && <Art props={beat.props} rm={RM} onStart={() => advance(true)} />}
+          {!pos.done && layer(beat.bg, 'db-bg')}
+          {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         {beat.text && !pos.done && <Say line={beat.line} next={waiting} key={`${beat.scene}${beat.index}`} />}
-        {beat.choices && !pos.done && <Choices choices={beat.choices} onPick={pick} key={`c${beat.scene}${beat.index}`} />}
+        {beat.choices && !pos.done && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} key={`c${beat.scene}${beat.index}`} />}
+        {paused && <div className="db-paused" role="status">paused (P)</div>}
         {waiting && !beat.text && <div className="nexthint" aria-hidden="true">click ▸</div>}
       </div>
       <div className="chrome">

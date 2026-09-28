@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "date-beta render test: 5 scenes, one choice beat. bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?: scene id }]; sfx = placeholder cue name; rmAlt = what reduced motion does (same | hard-cut | static | skip).",
+  "note": "date-beta render test: 5 scenes, one choice beat. bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip).",
   "scenes": [
     {
       "id": "splash",
@@ -16,13 +16,14 @@
       "title": "Rooftop / clock tower",
       "bg": "rooftop",
       "enter": "fade",
+      "defaults": { "stayed": false },
       "beats": [
         { "props": { "clock": "live" }, "text": "Lunch on the roof. The tower keeps your time.", "sfx": "wind", "hold": 1200 },
         { "props": { "clock": "noon" }, "text": "MC: Technically, rain wasn't f-{OR}-ecast.", "sfx": "bell" },
-        { "props": { "clock": "noon" }, "text": "NANDA: Stay f{OR}ever? The rain can wait.", "scare": 1, "sfx": "breath",
+        { "props": { "clock": "noon" }, "text": "NANDA: Stay f{OR}ever? The rain can wait.", "scare": 1, "sfx": "breath", "timer": 10,
           "choices": [
-            { "text": "Just one more minute, then I really have to go.", "side": "pink" },
-            { "text": "{OR} I could leave now, before the rain starts.", "side": "purple" }
+            { "text": "Just one more minute, then I really have to go.", "side": "pink", "default": true, "set": { "stayed": true } },
+            { "text": "{OR} I could leave now, before the rain starts.", "side": "purple", "set": { "stayed": false } }
           ] }
       ]
     },

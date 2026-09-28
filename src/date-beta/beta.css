@@ -104,3 +104,10 @@ body { font-family: var(--cond); color: var(--ink); }
 
 /* ---------- reduced motion: everything is a hard cut ---------- */
 .rm *, .rm *::before, .rm *::after { animation: none !important; transition: none !important; }
+
+/* beat contract: manifest-id bg/sprite layers, choice timer, pause, disabled (if fails) choices */
+.db-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.db-sprite { position: absolute; left: 50%; bottom: 0; max-height: 90%; transform: translateX(-50%); }
+.db-timer { position: absolute; top: -64px; left: 50%; transform: translateX(-50%); min-width: 2.4em; text-align: center; font: 700 40px/1 var(--cond, sans-serif); color: #fff; text-shadow: 0 2px 6px #000; }
+.db-paused { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); padding: 8px 20px; background: #000a; color: #fff; font: 700 32px/1 var(--cond, sans-serif); }
+.db-choice:disabled { opacity: 0.4; cursor: not-allowed; }

@@ -1,10 +1,10 @@
 // engine.js: date-beta scene loader + sequencer. Pure data in, pure data out, no DOM (node --test drives it).
-// A scene is a list of beats. Each beat = the layers the player draws for one click:
-//   bg (art id), props (art state, carried forward), text (<= 12 words), sfx (placeholder cue), rmAlt (reduced motion),
-//   scare (0|1|2 dread level; beat > scene > 0), choices ([{ text, side?, go? }], the beat then waits for a pick).
+// A scene is a list of beats. Each beat = the layers the player draws for one click. The full beat contract
+// (text, speaker, choices, timer, scare, set/if/go, bg/sprite/sfx asset ids) is the table in SCENES.md.
 // OR (UXUI R2b rule C): only an explicit "{OR}" token in a line or choice is an OR. The engine never guesses from words
 // like "for" / "sorry" / a bare "OR"; a line with a marked OR renders on the dark scrim box.
-// Position = { s, b, done }. next() walks beats then scenes; skip() (Esc) jumps to the next scene.
+// Position = { s, b, done, flags }. next() walks beats then scenes; skip() (Esc) jumps to the next scene.
+// Flags are one flat object: `set` merges into it, `if` tests it (every listed key must equal; missing reads as null).
 export const MAX_WORDS = 12;
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
@@ -12,10 +12,65 @@ export const WAITS = ['click', 'start', 'auto', 'choice']; // start = START butt
 export const SCARES = [0, 1, 2];
 export const SIDES = ['pink', 'purple']; // pink = toward her, purple = leave
 export const OR_MARK = '{OR}';
+export const ASSET_ID = /^[A-Z]{2}-[A-Z0-9]+$/; // manifest ids look like "BG-03" / "SX-37"; anything else is a name
+const KEYS = {
+  root: ['version', 'note', 'scenes'],
+  scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults'],
+  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set'],
+  choice: ['text', 'side', 'go', 'if', 'set', 'default'],
+};
 
 export const words = (text) => (text.trim() ? text.trim().split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length : 0);
 
 function fail(where, msg) { throw new Error(`date-beta scenes: ${where}: ${msg}`); }
+function keys(o, kind, where) {
+  for (const k of Object.keys(o)) if (!KEYS[kind].includes(k)) fail(where, `unknown ${kind} key "${k}" (allowed: ${KEYS[kind].join(', ')})`);
+}
+const isFlags = (v) => v != null && typeof v === 'object' && !Array.isArray(v)
+  && Object.values(v).every((x) => x === null || ['string', 'number', 'boolean'].includes(typeof x));
+function flagsField(v, where, name) {
+  if (v == null) return null;
+  if (!isFlags(v)) fail(where, `"${name}" must be a flat object of string/number/boolean/null flags`);
+  return Object.freeze({ ...v });
+}
+
+// Every key in `cond` must equal its flag (a missing flag reads as null, so { met: null } = "met not set").
+export const matches = (cond, flags = {}) => !cond || Object.entries(cond).every(([k, v]) => (flags[k] ?? null) === v);
+// go: "scene" | [ "scene" | { if, to }, ... ]. First matching entry wins; none = carry on to the next beat.
+export function resolveGo(go, flags = {}) {
+  if (go == null || typeof go === 'string') return go ?? null;
+  for (const g of go) {
+    if (typeof g === 'string') return g;
+    if (matches(g.if, flags)) return g.to;
+  }
+  return null;
+}
+function loadGo(go, where) {
+  if (go == null) return null;
+  if (typeof go === 'string') return go;
+  if (!Array.isArray(go) || !go.length) fail(where, '"go" must be a scene id or a non-empty list');
+  return Object.freeze(go.map((g, i) => {
+    if (typeof g === 'string') return g;
+    if (!g || typeof g !== 'object' || typeof g.to !== 'string') fail(where, `go[${i}] must be a scene id or { if, to }`);
+    for (const k of Object.keys(g)) if (k !== 'if' && k !== 'to') fail(where, `unknown go key "${k}" (allowed: if, to)`);
+    return Object.freeze({ if: flagsField(g.if, where, 'if'), to: g.to });
+  }));
+}
+const goTargets = (go) => (go == null ? [] : typeof go === 'string' ? [go] : go.map((g) => (typeof g === 'string' ? g : g.to)));
+
+// An asset field is a manifest id (must exist, with this kind) or a name (art component / sfx cue).
+// Checks run only against what the caller passed: manifest for ids, names for the rest.
+function assetField(v, kind, where, manifest, names) {
+  if (v == null) return;
+  if (typeof v !== 'string' || !v) fail(where, `${kind} must be a non-empty string`);
+  if (ASSET_ID.test(v)) {
+    if (!manifest) return;
+    const a = manifest.assets?.[v];
+    if (!a) fail(where, `${kind} "${v}" is not in the asset manifest`);
+    if (a.kind !== kind) fail(where, `${kind} "${v}" is a ${a.kind} asset, not ${kind}`);
+  } else if (names && !names.includes(v)) fail(where, `${kind} "${v}" is neither a manifest id nor one of ${names.join('|')}`);
+}
+export const isAssetId = (v) => typeof v === 'string' && ASSET_ID.test(v);
 
 // "f{OR}ever" -> [{ t: 'f' }, { t: 'OR', or: true }, { t: 'ever' }]. Any other brace is a typo and fails loudly.
 export function orParts(text, where = 'text') {
@@ -27,28 +82,42 @@ export function orParts(text, where = 'text') {
 }
 const plain = (parts) => parts.map((p) => p.t).join('');
 
-// "NANDA: line" -> speaker + line. No prefix = narration (who = null).
-export function parseLine(text, where) {
-  const m = /^([A-Z][A-Z ]{0,11}):\s*(.*)$/s.exec(text);
+// "NANDA: line" -> speaker + line. No prefix = narration (who = null). An explicit `speaker` wins and the text is
+// then taken as-is (no prefix parse).
+export function parseLine(text, where, speaker = null) {
+  const m = speaker ? null : /^([A-Z][A-Z ]{0,11}):\s*(.*)$/s.exec(text);
   const parts = orParts(m ? m[2] : text, where);
-  return Object.freeze({ who: m ? m[1] : null, parts: Object.freeze(parts), plain: plain(parts), hasOr: parts.some((p) => p.or) });
+  return Object.freeze({ who: speaker ?? (m ? m[1] : null), parts: Object.freeze(parts), plain: plain(parts), hasOr: parts.some((p) => p.or) });
 }
 
-export function loadScenes(data) {
+// opts.manifest (assets.json) validates id-shaped bg/sprite/sfx and supplies the cue names for non-id sfx;
+// opts.art (art component names) validates non-id bg/sprite. Without them only shapes are checked.
+export function loadScenes(data, { manifest = null, art = null } = {}) {
   if (!data || !Array.isArray(data.scenes) || !data.scenes.length) fail('root', 'need a non-empty "scenes" array');
+  keys(data, 'root', 'root');
+  const cueNames = manifest?.cues ? Object.keys(manifest.cues) : null;
   const ids = new Set(), pending = [];
   const scenes = data.scenes.map((s) => {
-    if (!s.id) fail('scene', 'missing id');
+    if (!s || !s.id) fail('scene', 'missing id');
+    keys(s, 'scene', s.id);
     if (ids.has(s.id)) fail(s.id, 'duplicate scene id');
     ids.add(s.id);
     if (!Array.isArray(s.beats) || !s.beats.length) fail(s.id, 'needs at least one beat');
     const sceneScare = s.scare ?? 0;
     if (!SCARES.includes(sceneScare)) fail(s.id, `scare ${sceneScare} is not one of ${SCARES.join('|')}`);
+    assetField(s.bg, 'bg', s.id, manifest, art);
+    const defaults = flagsField(s.defaults, s.id, 'defaults') ?? Object.freeze({});
     let bg = s.bg, props = {};
     const beats = s.beats.map((b, i) => {
       const at = `${s.id}[${i}]`;
+      if (!b || typeof b !== 'object') fail(at, 'a beat must be an object');
+      keys(b, 'beat', at);
+      assetField(b.bg, 'bg', at, manifest, art);
+      assetField(b.sprite, 'sprite', at, manifest, art);
+      assetField(b.sfx, 'sfx', at, manifest, cueNames);
       bg = b.bg ?? bg;
       if (!bg) fail(at, 'no bg (set it on the scene or the beat)');
+      if (b.speaker != null && (typeof b.speaker !== 'string' || !b.speaker.trim())) fail(at, 'speaker must be a non-empty string');
       props = { ...props, ...b.props };
       const text = b.text ?? '';
       if (words(text) > MAX_WORDS) fail(at, `text has ${words(text)} words, max ${MAX_WORDS}`);
@@ -66,11 +135,14 @@ export function loadScenes(data) {
       const auto = b.auto ?? null;
       if (auto !== null && auto < hold) fail(at, `auto ${auto} ms is shorter than the ${hold} ms hold`);
       if (wait === 'auto' && auto === null) fail(at, 'wait "auto" needs an auto time');
-      return Object.freeze({ scene: s.id, index: i, bg, props: Object.freeze({ ...props }), text, line: parseLine(text, at),
-        sfx: b.sfx ?? null, rmAlt, motion: !!b.motion, hold, auto, wait, scare, choices });
+      const timer = b.timer ?? null;
+      if (timer !== null && (!choices || typeof timer !== 'number' || !(timer > 0))) fail(at, 'timer must be a positive number of seconds, on a choice beat');
+      return Object.freeze({ scene: s.id, index: i, bg, sprite: b.sprite ?? null, props: Object.freeze({ ...props }), text,
+        speaker: b.speaker ?? null, line: parseLine(text, at, b.speaker ?? null), sfx: b.sfx ?? null, rmAlt,
+        motion: !!b.motion, hold, auto, wait, scare, choices, timer, set: flagsField(b.set, at, 'set') });
     });
-    for (const b of beats) for (const c of b.choices ?? []) if (c.go != null) pending.push([`${b.scene}[${b.index}]`, c.go]);
-    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', beats });
+    for (const b of beats) for (const c of b.choices ?? []) for (const t of goTargets(c.go)) pending.push([`${b.scene}[${b.index}]`, t]);
+    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats });
   });
   for (const [at, go] of pending) if (!ids.has(go)) fail(at, `choice goes to unknown scene "${go}"`);
   return scenes;
@@ -78,48 +150,71 @@ export function loadScenes(data) {
 
 function loadChoices(list, at) {
   if (!Array.isArray(list) || !list.length || list.length > SIDES.length) fail(at, `choices must be 1..${SIDES.length} items`);
+  if (list.filter((c) => c?.default).length > 1) fail(at, 'only one choice can be the default');
   const sides = new Set();
   return Object.freeze(list.map((c, i) => {
     const where = `${at}.choices[${i}]`;
-    if (!c || typeof c.text !== 'string' || !c.text.trim()) fail(where, 'needs text');
+    if (!c || typeof c !== 'object') fail(where, 'needs text');
+    keys(c, 'choice', where);
+    if (typeof c.text !== 'string' || !c.text.trim()) fail(where, 'needs text');
     if (words(c.text) > MAX_WORDS) fail(where, `text has ${words(c.text)} words, max ${MAX_WORDS}`);
     const side = c.side ?? SIDES[i];
     if (!SIDES.includes(side)) fail(where, `side "${side}" is not one of ${SIDES.join('|')}`);
     if (sides.has(side)) fail(where, `two choices on the ${side} side`);
     sides.add(side);
     const parts = Object.freeze(orParts(c.text, where));
-    return Object.freeze({ text: c.text, side, go: c.go ?? null, parts, plain: plain(parts), hasOr: parts.some((p) => p.or) });
+    return Object.freeze({ text: c.text, side, go: loadGo(c.go, where), if: flagsField(c.if, where, 'if'),
+      set: flagsField(c.set, where, 'set'), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or) });
   }));
 }
 
 export const beatAt = (scenes, pos) => scenes[pos.s].beats[pos.b];
 export const sceneIndex = (scenes, id) => scenes.findIndex((s) => s.id === id);
 
-// Move forward from (s, b) inclusive until a beat that plays under this motion setting.
-function settle(scenes, s, b, rm) {
+// Move forward from (s, b) inclusive until a beat that plays under this motion setting. Every beat reached,
+// including one reduced motion drops, merges its `set` into the flags.
+function settle(scenes, s, b, rm, flags = {}) {
   for (;;) {
-    if (s >= scenes.length) return { s: scenes.length - 1, b: scenes.at(-1).beats.length - 1, done: true };
+    if (s >= scenes.length) return { s: scenes.length - 1, b: scenes.at(-1).beats.length - 1, done: true, flags };
     if (b >= scenes[s].beats.length) { s += 1; b = 0; continue; }
-    if (rm && scenes[s].beats[b].rmAlt === 'skip') { b += 1; continue; }
-    return { s, b, done: false };
+    const beat = scenes[s].beats[b];
+    if (beat.set) flags = { ...flags, ...beat.set };
+    if (rm && beat.rmAlt === 'skip') { b += 1; continue; }
+    return { s, b, done: false, flags };
   }
 }
 
-export function start(scenes, { rm = false, at = null } = {}) {
+export function start(scenes, { rm = false, at = null, flags = {} } = {}) {
   const i = at == null ? 0 : sceneIndex(scenes, at);
-  return settle(scenes, i < 0 ? 0 : i, 0, rm);
+  return settle(scenes, i < 0 ? 0 : i, 0, rm, flags);
 }
-export const next = (scenes, pos, rm = false) => (pos.done ? pos : settle(scenes, pos.s, pos.b + 1, rm));
-// Pick choice i: jump to its scene when it has `go`, else carry on to the next beat.
+export const next = (scenes, pos, rm = false) => (pos.done ? pos : settle(scenes, pos.s, pos.b + 1, rm, pos.flags));
+export const enabled = (choice, flags = {}) => matches(choice.if, flags);
+// Pick choice i (only if enabled): merge its `set`, then jump to the first matching `go` scene, else carry on.
 export function choose(scenes, pos, i, rm = false) {
   const c = pos.done ? null : scenes[pos.s].beats[pos.b].choices?.[i];
-  if (!c) return pos;
-  return c.go ? start(scenes, { rm, at: c.go }) : next(scenes, pos, rm);
+  if (!c || !enabled(c, pos.flags)) return pos;
+  const flags = c.set ? { ...pos.flags, ...c.set } : pos.flags;
+  const go = resolveGo(c.go, flags);
+  return go ? start(scenes, { rm, at: go, flags }) : next(scenes, { ...pos, flags }, rm);
 }
-export const skip = (scenes, pos, rm = false) => (pos.done ? pos : settle(scenes, pos.s + 1, 0, rm));
+// Esc: leave this scene; the flags land on the skipped scene's declared defaults.
+export const skip = (scenes, pos, rm = false) => (pos.done ? pos
+  : settle(scenes, pos.s + 1, 0, rm, { ...pos.flags, ...scenes[pos.s].defaults }));
 
 // A pick is allowed once the beat's hold has passed.
 export const canChoose = (beat, ms) => !!beat.choices && ms >= beat.hold;
+
+// Timer hit 0: the `default` choice, else the pink one; if that one is disabled, the other enabled one; none = -1.
+export function timeoutPick(beat, flags = {}) {
+  const cs = beat.choices ?? [];
+  let i = cs.findIndex((c) => c.default);
+  if (i < 0) i = cs.findIndex((c) => c.side === 'pink');
+  if (i >= 0 && enabled(cs[i], flags)) return i;
+  return cs.findIndex((c, j) => j !== i && enabled(c, flags));
+}
+// Countdown step: seconds left after dt ms. Frozen (unchanged) while paused, a menu is open, or the tab is hidden.
+export const tick = (left, dt, frozen = false) => (frozen ? left : Math.max(0, left - dt / 1000));
 
 // May a click (or key) move on from this beat, `ms` after it appeared? `button` = the START button or a key.
 export function canAdvance(beat, ms, { button = false } = {}) {
