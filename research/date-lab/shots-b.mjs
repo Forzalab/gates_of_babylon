@@ -87,6 +87,10 @@ export const SHOTS = [
   { id: 'menu-4-r2', name: '6-already-seen', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 6200]] },
   { id: 'menu-4-r2', name: '7-room-chose-pink', q: 'state=replay', wait: 1000, steps: [['key', '1'], ['wait', 1500], ['key', 'r'], ['wait', 2000]] },
   { id: 'menu-4-r2', name: 'rm-first-frame', q: 'state=menu&mt=0&still', wait: 1200 },
+  // cam-h-r2-b (train 0-5.6, platform 5.6-10.6, underpass 10.6-19.2, apartment 19.2-24.6, stairs 24.6-30.2, fall 30.2-37.8)
+  ...[0.0, 1.8, 4.8, 7.0, 10.55, 10.65, 12.6, 14.8, 16.8, 19.15, 19.25, 21.8, 28.6, 31.4, 35.6, 37.75].map((s) => ({ id: 'cam-h-r2-b', name: `t${s.toFixed(2).padStart(5, '0')}`, q: `t=${s}&pause`, wait: 1000 })),
+  { id: 'cam-h-r2-b', name: 'rm-t14.8', q: 't=14.8&pause&still', wait: 1000 },
+  { id: 'cam-h-r2-b', name: 'rm-t37.75', q: 't=37.75&pause&still', wait: 1000 },
 ];
 
 const filter = process.argv[2];

@@ -54,3 +54,32 @@ Bandersnatch's `▸▸ 1.5× · ALREADY SEEN` re-intro, and from the second repl
 **Verdict answers:** "pink lean visible only after one timeout" → pre-pour + spout + squeezed purple box at t = 0;
 "reaction silhouette needs a real face" → Nanda bust, blank eyes, same light; carry-forward 1.5x + room stats → done.
 **Self-critique:** the pink lamp spill is subtle on a dim projector; the room tally counts this browser only.
+
+## cam-h-r2-b · "The Frame Keeps Finding Her" (cam-3 Kon x cam-5 found footage, horror 5)
+**Theme:** you are the one filming, so every Kon reveal is the camcorder's doing: the AF box finds a face, then the D.ZOOM
+moves by itself. The OSD frames all of it: REC (1 Hz), tape counter and date stamp FROZEN at 12:00:00 AM, scanlines,
+tracking band, NIGHT SHOT.
+**What it does (37.8 s seamless loop):**
+1. *train* — NIGHT SHOT, frame rolled 86 deg, tight on a face with IR eyeshine, red box `FACE 12`, `FACES: 12`
+   (this is the loop seam). The camera is lifted upright while it zooms out; NIGHT SHOT clicks off: a sunny carriage,
+   the face was a reflection in the window. Box relabels `FACE 1`. "Someone in the window. Nobody in the seat."
+2. *platform* — her under the umbrella, `FACE 1`. At 3.4 s the OSD reads `D.ZOOM 4.8x` although the frame looks 1:1 (the tell).
+3. *underpass* — the zoom pulls back by itself: the platform was a lit poster in the underpass
+   ("Figur · AND Line · last train 12:00"), a seamless nested pull-back (pixel-exact, tested). "That one's a poster."
+   She is at the tunnel mouth now, `FACE 2`; the camera pans and D.ZOOMs into her face. "This one's me."
+4. *apartment* — **Kon match cut**: same face, same box, same size, same D.ZOOM number, but now NIGHT SHOT green and she is
+   the silhouette in the one lit window; zoom out to the building.
+5. *stairs* — footfall bob (1.7 Hz), tracking dropout (one held frame), she is at the door: red `FACE 3`.
+6. *fall* — the camera drops, lies rolled on the genkan floor and counts `FACE 1..11` on an empty floor, one per 400 ms;
+   something nudges it toward the door: `FACE 12` is her. "Twelve. Keep filming." The zoom pushes into her face until it is
+   the train-window face at the same size and roll -> loop, no visible cut.
+**Seams (node-tested):** genkan face -> train face (same screen spot, size, roll, no handheld either side, counter 12 carries
+over); tunnel face -> window face; platform -> poster (5 sample pixels land on the same screen px). Handheld = round-1
+`HANDHELD` sines, all <= 3 Hz. Digital-zoom softness is capped at 3 px on screen.
+**RM:** no handheld/bob/band roll; each shot hard-cuts between held key poses, landing on the same seam framings (tested).
+**Borrowed:** the Kon language + log-space `zoomAbout` (copied, credited) from A's cam-3; the OSD, AF-box grammar and face
+count from my cam-5; the reflection-in-the-train-window and the platform-as-poster from the verdict spec.
+**Verdict answers:** cam-5 "no real face at the end" -> the end is her face at full frame with IR eyeshine, and it IS the
+opening shot; cam-3 "umeboshi->iris not scale-perfect" -> every match here is the same shape at the exact same scale.
+**Self-critique:** her body is still the flat silhouette (not the bust) — right for night shot, but the daylight
+reflection could use a real face; 37.8 s sits near the top of the 20-40 s window.

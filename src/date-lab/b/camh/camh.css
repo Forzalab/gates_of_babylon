@@ -1,0 +1,13 @@
+/* cam-h-r2-b: builds on cam5.css (.c5 OSD, tape, AF boxes). */
+.ch .ch-nest { position: absolute; width: 1920px; height: 1080px; transform-origin: 0 0; overflow: hidden; }
+.ch .ch-poster { font: 700 15px/1 var(--mono); fill: #cfd6e6; letter-spacing: .08em; }
+/* her in the train window: a reflection. In NIGHT SHOT she is solid (the seam frame); in daylight she is barely there. */
+.ch .c5-her.refl { opacity: .32; mix-blend-mode: multiply; }
+.ch .c5-her.refl.dark { opacity: 1; mix-blend-mode: normal; }
+.ch .ch-slate { position: absolute; left: 110px; bottom: 30px; margin: 0; z-index: 60; font: 400 16px/1 var(--mono); color: rgba(255, 255, 255, .35); }
+.ch .c5-cam { background: #030405; filter: saturate(.55) contrast(1.12) brightness(.95) blur(var(--bl, .6px)); }
+.ch.night .c5-cam { filter: grayscale(1) sepia(1) hue-rotate(55deg) saturate(2.4) contrast(1.25) brightness(.9) blur(var(--bl, .6px)); }
+.ch.drop .c5-cam { filter: grayscale(1) contrast(1.8) brightness(.7); }
+.ch .c5-sub.top { bottom: auto; top: 230px; }
+/* night shot: her eyes catch the infrared (eyeshine) */
+.ch.night .c5-her .k-eye { fill: #ffffff; }
