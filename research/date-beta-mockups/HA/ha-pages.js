@@ -36,7 +36,7 @@
       ${choices({ pink: '"Just one cup."', purple: '"It\'s late. Goodnight."', t: 0.58, secs: '3', state: { pink: 'hover' } })}
       ${datehud({ dread: 1 })}${chrome({ on: ['cc'] })}
       <div class="abs callout" style="right:96px;top:150px;width:600px">DEV · pink = squiggle from a heart (pull-up: no input = pink). Purple = dashed lead to an open pin. Timer drains toward pink. Keys 1 · 2. No text on either button but the line.</div>`,
-    { label: '<b>HUD 2 · choice</b> · 5 s · the thread creeps in from the edges (dread 1)', kind: 'hud', dread: 1 }));
+    { label: '<b>HUD 2 · choice</b> · 5 s · the thread drops from the ceiling (dread 1)', kind: 'hud', dread: 1 }));
 
     // states sheet
     const k = 0.5;

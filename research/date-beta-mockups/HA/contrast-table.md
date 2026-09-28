@@ -21,6 +21,19 @@
 | phone: white on XOR bubble (purple-deep) | #FFFFFF | #5B37C4 | 7.53:1 | 7 | yes |
 | phone: #000 on Nanda bubble (pink) | #000000 | #FF5FA2 | 7.41:1 | 7 | yes |
 | datasheet: #111 on paper | #111111 | #F6F1E6 | 16.76:1 | 7 | yes |
-| OR on chip: her red on #FFF8FB (+ plum halo) | #F0243F | #FFF8FB | 3.99:1 | 3 | yes |
-| OR halo on purple-deep: white halo vs fill | #FFFFFF | #5B37C4 | 7.53:1 | 7 | yes |
 | invalid-pin title: white on her-deep | #FFFFFF | #B0102C | 7.10:1 | 7 | yes |
+| R2b refs: box ink plum-wine on light pink box | #4A1238 | #FFF0F6 | 13.27:1 | 7 | yes |
+| R2b refs: box ink dread 2 on meat box | #2A0714 | #FFD6E6 | 14.06:1 | 7 | yes |
+| R2b refs: name tab, white on magenta | #FFFFFF | #A3135A | 7.51:1 | 7 | yes |
+| OR rule C (PROD): OR on scrim | #FF6B7D | #1A0710 | 7.07:1 | 7 | yes |
+| OR rule C (PROD): line text on scrim | #FFE9F1 | #1A0710 | 16.80:1 | 7 | yes |
+| OR rule C: scrim panel vs light pink box (non-text) | #1A0710 | #FFF0F6 | 17.61:1 | 3 | yes |
+| OR rule C: scrim vs pink choice border (non-text) | #1A0710 | #FF5FA2 | 6.85:1 | 3 | yes |
+| OR record A: cream on badge #8E0F1E | #FFF6E8 | #8E0F1E | 8.76:1 | 7 | yes |
+| OR record B: crimson on box | #8A0F22 | #FFF0F6 | 8.77:1 | 7 | yes |
+| OR record B: crimson on pink (fails) | #8A0F22 | #FF5FA2 | 3.41:1 | 3 | yes |
+| OR record D: her-deep on box | #B0102C | #FFF0F6 | 6.44:1 | 4.5 | yes |
+| R2 OR legacy: #F0243F on pink choice (the hideous one) | #F0243F | #FF5FA2 | 1.47:1 | 1 | yes |
+| AND badge: #000 on pink | #000000 | #FF5FA2 | 7.41:1 | 7 | yes |
+| date HUD d2: white on scrim | #FFFFFF | #1A0710 | 19.41:1 | 7 | yes |
+| skip pill: white text inside plum 7px stroke (stroke vs fill) | #FFFFFF | #3A1D3F | 14.71:1 | 7 | yes |

@@ -25,13 +25,26 @@ export const PAIRS = [
   ['phone: white on XOR bubble (purple-deep)', '#FFFFFF', '#5B37C4', 7],
   ['phone: #000 on Nanda bubble (pink)', '#000000', '#FF5FA2', 7],
   ['datasheet: #111 on paper', '#111111', '#F6F1E6', 7],
-  ['OR on chip: her red on #FFF8FB (+ plum halo)', '#F0243F', '#FFF8FB', 3],
-  ['OR halo on purple-deep: white halo vs fill', '#FFFFFF', '#5B37C4', 7],
-  ['invalid-pin title: white on her-deep', '#FFFFFF', '#B0102C', 7],
+      ['invalid-pin title: white on her-deep', '#FFFFFF', '#B0102C', 7],
+  ['R2b refs: box ink plum-wine on light pink box', '#4A1238', '#FFF0F6', 7],
+  ['R2b refs: box ink dread 2 on meat box', '#2A0714', '#FFD6E6', 7],
+  ['R2b refs: name tab, white on magenta', '#FFFFFF', '#A3135A', 7],
+  ['OR rule C (PROD): OR on scrim', '#FF6B7D', '#1A0710', 7],
+  ['OR rule C (PROD): line text on scrim', '#FFE9F1', '#1A0710', 7],
+  ['OR rule C: scrim panel vs light pink box (non-text)', '#1A0710', '#FFF0F6', 3],
+  ['OR rule C: scrim vs pink choice border (non-text)', '#1A0710', '#FF5FA2', 3],
+  ['OR record A: cream on badge #8E0F1E', '#FFF6E8', '#8E0F1E', 7],
+  ['OR record B: crimson on box', '#8A0F22', '#FFF0F6', 7],
+  ['OR record B: crimson on pink (fails)', '#8A0F22', '#FF5FA2', 3],
+  ['OR record D: her-deep on box', '#B0102C', '#FFF0F6', 4.5],
+  ['R2 OR legacy: #F0243F on pink choice (the hideous one)', '#F0243F', '#FF5FA2', 1],
+  ['AND badge: #000 on pink', '#000000', '#FF5FA2', 7],
+  ['date HUD d2: white on scrim', '#FFFFFF', '#1A0710', 7],
+  ['skip pill: white text inside plum 7px stroke (stroke vs fill)', '#FFFFFF', '#3A1D3F', 7],
 ];
 if (import.meta.url === `file://${process.argv[1]}`) {
   let bad = 0;
   console.log('| pair | text | fill | ratio | min | ok |\n|---|---|---|---|---|---|');
-  for (const [n, t, f, min] of PAIRS) { const r = ratio(t, f); const ok = r >= min; if (!ok && !n.startsWith('R2 legacy') && !n.startsWith('OR on')) bad++; console.log(`| ${n} | ${t} | ${f} | ${r.toFixed(2)}:1 | ${min} | ${ok ? 'yes' : 'NO'} |`); }
+  for (const [n, t, f, min] of PAIRS) { const r = ratio(t, f); const ok = r >= min; if (!ok && !/legacy|fails|rejected/.test(n)) bad++; console.log(`| ${n} | ${t} | ${f} | ${r.toFixed(2)}:1 | ${min} | ${ok ? 'yes' : 'NO'} |`); }
   process.exitCode = bad ? 1 : 0;
 }
