@@ -10,7 +10,7 @@ import { fileURLToPath } from 'node:url';
 const [PORT = 5391, TAG = 'after'] = process.argv.slice(2);
 const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), 'dogfood', TAG);
 fs.mkdirSync(OUT, { recursive: true });
-const URL = `http://localhost:${PORT}/date.html`;
+const URL = `http://localhost:${PORT}/date-aleph.html`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 let s = 12345; const rnd = () => ((s = (s * 1103515245 + 12345) % 2147483648) / 2147483648);
 const errs = [];

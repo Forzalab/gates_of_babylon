@@ -15,7 +15,7 @@ for (const v of ['x1', 'x2', 'x3']) {
       if (rm === 'reduce' && w !== 1440) continue;
       const page = await browser.newPage({ viewport: { width: w, height: h }, reducedMotion: rm });
       page.on('pageerror', (e) => errors.push(`${v} ${w}: ${e.message}`));
-      await page.goto(`${BASE}/date.html?v=${v}`);
+      await page.goto(`${BASE}/date-aleph.html?v=${v}`);
       await page.evaluate(() => document.fonts.ready);
       await page.waitForTimeout(rm === 'reduce' ? 400 : 2600);
       const name = `${v}-${w}${rm === 'reduce' ? '-still' : ''}.png`;
@@ -32,11 +32,11 @@ for (const v of ['x1', 'x2', 'x3']) {
 }
 // buttons: "not 18" -> Logic, ENTER -> stub
 const page = await browser.newPage({ viewport: { width: 1440, height: 810 } });
-await page.goto(`${BASE}/date.html?v=x1`);
+await page.goto(`${BASE}/date-aleph.html?v=x1`);
 await page.click('.btn.hot');
 console.log('enter ->', await page.evaluate(() => location.hash), await page.isVisible('text=COMING SOON (STUB)'));
 await page.screenshot({ path: path.join(OUT, 'stub-1440.png') });
-await page.goto(`${BASE}/date.html?v=x3`);
+await page.goto(`${BASE}/date-aleph.html?v=x3`);
 await page.click('.btn.soft.narrow');
 await page.waitForLoadState();
 console.log('not 18 ->', new URL(page.url()).pathname, await page.title());

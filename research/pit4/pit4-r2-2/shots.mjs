@@ -14,7 +14,7 @@ for (const [n, q] of shots) for (const [w, h] of [[1440, 810], [1024, 768]]) for
   p.on('pageerror', (e) => errors.push(`${n} ${w}: ${e.message}`));
   p.on('console', (m) => m.type() === 'error' && errors.push(`${n} ${w} console: ${m.text()}`));
   p.on('response', (r) => r.status() >= 400 && errors.push(`${n} ${w} ${r.status()} ${r.url()}`));
-  await p.goto(`${BASE}/date.html?v=g2${q}`);
+  await p.goto(`${BASE}/date-aleph.html?v=g2${q}`);
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(rm === 'reduce' ? 500 : 3500);
   const f = `g2-${n}-${w}${rm === 'reduce' ? '-still' : ''}.png`;
@@ -25,7 +25,7 @@ for (const [n, q] of shots) for (const [w, h] of [[1440, 810], [1024, 768]]) for
   await p.close();
 }
 const p = await b.newPage({ viewport: { width: 1440, height: 810 } });
-await p.goto(`${BASE}/date.html?v=g2`);
+await p.goto(`${BASE}/date-aleph.html?v=g2`);
 await p.waitForTimeout(1200);
 await p.click('.btn.hot.wide');
 await p.waitForURL(/next=1/);
