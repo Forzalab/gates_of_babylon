@@ -1,0 +1,53 @@
+/* cam-h-r2-a: camcorder tape look (cam-5 grammar) over builder-A's nested Kon frames. No flashing: REC dot 1 Hz, dropout = one hold. */
+.ffh { background: #020303; cursor: pointer; font-family: 'JetBrains Mono', monospace; }
+.ffh .ff-cam { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; will-change: transform; }
+.ffh .ff-scene { position: absolute; inset: 0; filter: saturate(.6) contrast(1.1) brightness(.96) blur(.5px); }
+.ffh.night .ff-scene { filter: grayscale(1) sepia(1) hue-rotate(55deg) saturate(2.4) contrast(1.25) brightness(.9) blur(.6px); }
+.ffh.drop .ff-cam { translate: 46px 0; }
+.ffh.drop .ff-scene { filter: grayscale(1) contrast(1.8) brightness(.6); }
+.ffh .ff-nest { position: absolute; width: 1920px; height: 1080px; overflow: hidden; }
+/* the phone screen is emissive: day tape grade, same as frame 1, so the loop cut is invisible */
+.ffh .ff-screen { transform-origin: 960px 540px; filter: saturate(.6) contrast(1.1) brightness(.96) blur(.5px); }
+.ffh .ff-her .k-sil { fill: #020203; stroke: none; }
+.ffh .ff-her .k-eye { fill: #f0243f; }
+.ffh .ff-her .pinbub { fill: var(--pink); }
+.ffh .ff-ad { pointer-events: none; --c-iris: #b0123e; --c-iris2: #e8335c; }
+.ffh .ff-ad-name { font: 400 96px/1 'Bangers', var(--cond); letter-spacing: .06em; fill: #fff; }
+.ffh .ff-ad-sub { font: 400 40px/1 'Yellowtail', cursive; fill: #ffe3f0; }
+.ffh .ff-ad-figur { font: 400 44px/1 'Yellowtail', cursive; fill: #fff; }
+
+.ffh .ff-tape { position: absolute; inset: 0; pointer-events: none; z-index: 30;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .2) 0 2px, transparent 2px 4px), radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 0, 0, .72)); }
+.ffh .ff-band { position: absolute; left: 0; right: 0; top: 470px; height: 150px; z-index: 31; pointer-events: none; opacity: .75;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .4) 0 3px, rgba(0, 0, 0, .25) 3px 11px); }
+
+.ffh .ff-osd { position: absolute; inset: 0; pointer-events: none; z-index: 50; font: 400 40px/1 'JetBrains Mono', monospace; color: #f4f4ee; text-shadow: 2px 2px 0 #000; letter-spacing: .04em; }
+.ffh .ff-osd p { position: absolute; margin: 0; }
+.ffh .ff-osd .rec { left: 110px; top: 96px; display: flex; align-items: center; gap: 14px; }
+.ffh .ff-osd .rec i { width: 26px; height: 26px; border-radius: 50%; background: #f0243f; display: inline-block; }
+.ffh .ff-osd .tc { right: 110px; top: 96px; }
+.ffh .ff-osd .bat { right: 110px; top: 150px; font-size: 30px; }
+.ffh .ff-osd .bat span { margin-left: 10px; }
+.ffh .ff-osd .night { left: 110px; top: 150px; font-size: 28px; color: #bfffc8; }
+.ffh .ff-osd .af { left: 110px; top: 196px; font-size: 26px; color: #9dff9d; }
+.ffh .ff-osd .zoom { left: 50%; top: 96px; transform: translateX(-50%); font-size: 34px; }
+.ffh .ff-osd .count { left: 50%; top: 150px; transform: translateX(-50%); font-size: 34px; color: #ffd0d8; }
+.ffh .ff-osd .stamp { right: 110px; bottom: 90px; text-align: right; font-size: 34px; line-height: 1.25; }
+.ffh .ff-osd .br { position: absolute; width: 70px; height: 50px; border: 0 solid rgba(255, 255, 255, .7); }
+.ffh .ff-osd .br.tl { left: 70px; top: 70px; border-left-width: 4px; border-top-width: 4px; }
+.ffh .ff-osd .br.tr { right: 70px; top: 70px; border-right-width: 4px; border-top-width: 4px; }
+.ffh .ff-osd .br.bl { left: 70px; bottom: 70px; border-left-width: 4px; border-bottom-width: 4px; }
+.ffh .ff-osd .br.bh { right: 70px; bottom: 70px; border-right-width: 4px; border-bottom-width: 4px; }
+
+.ffh .ff-face { position: absolute; z-index: 45; pointer-events: none; }
+.ffh .ff-face .c { position: absolute; width: 22%; height: 22%; border: 0 solid #9dff9d; }
+.ffh .ff-face.hunt .c { border-color: rgba(255, 255, 255, .8); }
+.ffh .ff-face.red .c { border-color: #ff3355; }
+.ffh .ff-face .tl { left: 0; top: 0; border-left-width: 5px; border-top-width: 5px; }
+.ffh .ff-face .tr { right: 0; top: 0; border-right-width: 5px; border-top-width: 5px; }
+.ffh .ff-face .bl { left: 0; bottom: 0; border-left-width: 5px; border-bottom-width: 5px; }
+.ffh .ff-face .br { right: 0; bottom: 0; border-right-width: 5px; border-bottom-width: 5px; }
+.ffh .ff-face b { position: absolute; left: 0; top: -36px; white-space: nowrap; font: 400 26px/1 'JetBrains Mono', monospace; color: #9dff9d; text-shadow: 2px 2px 0 #000; }
+.ffh .ff-face.red b { color: #ff3355; }
+.ffh .ff-sub { z-index: 55; bottom: 150px; font-family: 'JetBrains Mono', monospace; font-size: 40px; }
+.ffh .a-tag { z-index: 60; top: 36px; left: 160px; }

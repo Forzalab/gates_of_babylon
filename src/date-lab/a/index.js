@@ -18,6 +18,7 @@ import Trigger from './anim/Trigger.jsx';
 import CupTypes from './menu2/CupTypes.jsx';
 import Ddlc2 from './menu2/Ddlc2.jsx';
 import Tarot2 from './menu2/Tarot2.jsx';
+import FrameFinds from './camera2/FrameFinds.jsx';
 
 const A = (id, track, title, theme, horror, Component) => ({ id, track, title, theme, horror, builder: 'A', Component });
 
@@ -41,4 +42,5 @@ export const VARIANTS = [
   A('menu-h1-r2', 'menu', 'The Cup That Types: her cursor retypes your face-down card', 'hybrid menu-1 x menu-3: tarot candle table x DDLC live edit: she rewrites your card while the candle burns', 4, CupTypes),
   A('menu-3-r2', 'menu', 'DDLC r2: she rewrites YOUR line before the menu exists', 'DDLC / Monika x Funny Games x meta-horror: the choice UI (and your dialogue) is her territory', 5, Ddlc2),
   A('menu-1-r2', 'menu', 'Tarot r2: her hand is on your card; the drawn card is nailed', 'CLAMP arcana x Suspiria candlelight: fate is dealt by her (read without captions)', 2, Tarot2),
+  A('cam-h-r2-a', 'camera', 'The Frame Keeps Finding Her (A): camcorder AF + D.ZOOM drive Kon match cuts', 'hybrid cam-3 x cam-5: Satoshi Kon nested frames x Ju-On found footage: you are the one filming, every frame is hers', 5, FrameFinds),
 ];

@@ -75,3 +75,40 @@ test('menu-3-r2: the cold-open tell edits MC\'s own line inside the first 3 s, o
   const r = mcLine(true);
   assert.ok(r.length === 3 && gaps(r).every((g) => g >= 1000) && endOf(r) <= 3000);
 });
+
+test('cam-h-r2-a: the loop is seamless: the last frame (phone screen at D.ZOOM 6x, rolled 86) maps the nested train to 1:1', async () => {
+  const F = await import('./date-lab/a/camera2/frame.js');
+  const last = F.SHOTS.at(-1);
+  const end = F.poseOf(last, last.dur, false);
+  assert.ok(Math.abs(end.s - 1 / F.PHONE.k) < 1e-6 && end.r === F.ROLL);
+  // a train pixel q sits in the world at PHONE + R(phone.r) * k * (q - centre); the camera must put it back at q
+  const a = (F.PHONE.r * Math.PI) / 180;
+  for (const [qx, qy] of [[0, 0], [1920, 1080], [300, 900], [960, 540]]) {
+    const dx = (qx - 960) * F.PHONE.k, dy = (qy - 540) * F.PHONE.k;
+    const wx = F.PHONE.x + dx * Math.cos(a) - dy * Math.sin(a), wy = F.PHONE.y + dx * Math.sin(a) + dy * Math.cos(a);
+    const [sx, sy] = F.toScreen(end, wx, wy);
+    assert.ok(Math.hypot(sx - qx, sy - qy) < 1e-6, `${qx},${qy} -> ${sx},${sy}`);
+  }
+  const first = F.poseOf(F.SHOTS[0], 0, false);
+  assert.deepEqual([first.x, first.y, first.s], [960, 540, 1]);
+  // the D.ZOOM readout is continuous across the loop and across the nested cuts
+  assert.equal(F.zoomReadout(F.SHOTS[0], first), F.zoomReadout(last, end));
+  const irisEnd = F.poseOf(F.SHOTS[1], F.SHOTS[1].dur, false), posterStart = F.poseOf(F.SHOTS[2], 0, false);
+  assert.equal(F.zoomReadout(F.SHOTS[1], irisEnd), F.zoomReadout(F.SHOTS[2], posterStart));
+});
+
+test('cam-h-r2-a: handheld <= 3 Hz, AF hunt and face count hold >= 500 ms, lines <= 12 words, total 20-40 s', async () => {
+  const F = await import('./date-lab/a/camera2/frame.js');
+  assert.ok(F.HANDHELD.every((h) => h.hz <= 3));
+  assert.ok(F.total >= 20000 && F.total <= 40000, `${F.total}`);
+  const hunt = F.SHOTS[0].hunt.map((h) => h[0]).concat(F.SHOTS[0].lock.from);
+  assert.ok(gaps(hunt.map((at) => ({ at }))).every((g) => g >= POSE));
+  assert.ok(F.COUNT_EVERY >= POSE);
+  let prev = 0, since = 0;
+  const fl = F.SHOTS.at(-1);
+  for (let l = 0; l <= fl.dur; l += 25) { const n = F.countAt(fl, l); if (n !== prev) { if (prev) assert.ok(l - since >= POSE); prev = n; since = l; } }
+  assert.equal(prev, 12);
+  for (const s of F.SHOTS) for (const x of s.sub ?? []) assert.ok(words(x.text.replace(/^NANDA: /, '')) <= 12, x.text);
+  const drop = F.SHOTS.find((s) => s.dropout).dropout;
+  assert.ok(drop[1] - drop[0] >= 334, 'the dropout is one held state, not a strobe');
+});

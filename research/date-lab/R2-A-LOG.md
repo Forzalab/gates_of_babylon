@@ -62,3 +62,31 @@ Round-1 variants are untouched; round-2 code lives in new folders (`a/menu2/`, .
   380 px pin + puncture + DRAWN + strike.
 - **Self-critique**: reads without words now; the arm's fade-from-dark sleeve is a bit of a cheat (no shoulder), and it shares
   its disabled kit with menu-h1-r2 so the two look like siblings (they are: the hybrid is this table plus her cursor).
+
+## cam-h-r2-a · "The Frame Keeps Finding Her" (builder A's take on cam-3 x cam-5, horror 5)
+- **School**: Satoshi Kon (match cuts that slip reality, nested pull-backs) x Ju-On / found footage (camcorder OSD, handheld,
+  the camera notices her first). **Theme**: *you are the one filming — and every reality the camcorder shows you is one of her frames.*
+- **Key idea (A's take)**: every Kon move is *motivated by the camcorder's own automation*, and the **D.ZOOM readout is a
+  continuous, honest number across the nested cuts**. Every nested frame is exactly 1/6 of the stage, so "D.ZOOM 6.0x" on the very
+  first frame already tells a careful viewer they are filming a picture of a picture.
+  1. **train** (6 s): REC, handheld drift (B's cam-5 sines, all <= 2.6 Hz, copied). AF hunts in 3 held white boxes, then locks
+     "FACE 1" on the umeboshi (it is not a face). The D.ZOOM pushes in *by itself* until red fills the frame.
+  2. **iris** (6.5 s): match cut, the red is HER iris at "D.ZOOM 202x"; the zoom releases, AF locks her face — she IS the ad.
+     Hard-cut Kon slip smile -> wide.
+  3. **poster** (6.5 s): the release continues through 6.0x -> 1.0x: the carriage is a poster in the underpass (seamless nested
+     pull-back, readout continuous). The AF box DROPS the poster and jumps to the tunnel mouth, red: she is standing there.
+  4. **tunnel** (4 s): NIGHT SHOT; the D.ZOOM pushes on her by itself (4x); tracking dropout = one 800 ms held state.
+  5. **floor** (9.5 s): the camera falls, lies rolled 86° in her genkan; the date stamp is frozen at 12:00:00 AM the whole
+     piece; FACES 1..11 counted on an empty floor, one per 500 ms (held), all boxes go red at FACE 12 = her phone on the tataki.
+     "NANDA: Rewind it. I'm on the train." The D.ZOOM pushes 6x into the phone screen — the phone lies turned -86° so the fallen
+     camera sees it upright — and the last frame IS frame 1 (the train at 1:1, readout 6.0x): seamless loop, proven in a test.
+     The last 600 ms drop night-shot + AF so the OSD also matches frame 1.
+- **RM**: no handheld, no dropout band, one held frame per shot (the floor gets a second hard cut straight to the phone frame),
+  face count still steps (text, not motion), REC dot solid.
+- **Borrowed**: B's cam-5 OSD grammar + handheld sine table + face-box look (copied into `a/camera2/`, B's folder untouched);
+  my cam-3 train ad / nested-poster geometry.
+- **Tests**: loop seam maps 4 train pixels back to themselves under the final pose; D.ZOOM readout equal at the loop and at the
+  iris->poster cut; handheld <= 3 Hz; AF hunt + face count holds >= 500 ms; dropout >= 334 ms; 20-40 s; lines <= 12 words.
+- **Self-critique**: the strongest "only a camcorder can do this" logic of my camera pieces; the her-in-tunnel silhouette is big
+  and flat at 4x, the phone on the floor is oversized for the room (it has to be 1/6 of the stage for the readout maths), and the
+  genkan floor count repeats B's round-1 beat nearly 1:1 (by spec).
