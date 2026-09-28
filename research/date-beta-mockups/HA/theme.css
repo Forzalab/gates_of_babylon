@@ -408,3 +408,20 @@ html.dev .devbadge { display: block; }
 .gcap { position: absolute; font: 700 24px/1.2 var(--font-mono); color: #3a1d3f; }
 .gpill .lbl, .gpill > span { font: 900 52px/1 var(--font-btn); }
 .choice.gl .line { white-space: nowrap; }
+
+/* ---------- R2d props page ---------- */
+.pcap { font: 800 30px/1.1 var(--font-btn, 'Nunito'), sans-serif; color: #3a1d3f; background: #fffafd; padding: 6px 14px; border: 3px solid #3a1d3f; border-radius: 12px; white-space: nowrap; }
+.pcap b { color: #a3135a; }
+.pcap.dk { background: #1a0710; color: #ffe9f1; border-color: #f0243f; }
+.pframe { border: 5px solid #3a1d3f; border-radius: 18px; background: #fff0f6; box-shadow: 0 8px 0 #3a1d3f; overflow: hidden; }
+.pframe.dk { background: #1a0710; border-color: #f0243f; }
+.pframe > .abs { left: 0; top: 0; }
+.pdlg { display: flex; gap: 18px; align-items: center; width: 480px; padding: 12px 22px 12px 12px; background: #fff0f6; border: 5px solid #d6337f; border-radius: 22px; box-shadow: 0 8px 0 #3a1d3f; }
+.pdlg p { margin: 0; font: 800 34px/1.15 var(--font-btn, 'Nunito'), sans-serif; color: #4a1238; }
+.pdlg.dk { background: #1a0710; border-color: #f0243f; } .pdlg.dk p { color: #ffe9f1; }
+.pdlg svg, .ptile svg { border-radius: 14px; box-shadow: 0 0 0 3px #fff, 0 0 0 6px #d6337f; flex: none; }
+.pdlg.dk svg, .ptile.dk svg { box-shadow: 0 0 0 3px #1a0710, 0 0 0 6px #f0243f; }
+.ptile { display: grid; grid-template-columns: 76px auto; column-gap: 14px; align-items: center; padding: 10px 18px 10px 10px; background: #fff; border: 4px solid #d6337f; border-radius: 16px; box-shadow: 0 6px 0 #3a1d3f; }
+.ptile svg { grid-row: span 2; }
+.ptile b { font: 900 28px/1 var(--font-btn, 'Nunito'), sans-serif; color: #4a1238; } .ptile span { font: 700 20px/1 var(--font-btn, 'Nunito'); color: #a3135a; }
+.ptile.dk { background: #1a0710; border-color: #f0243f; } .ptile.dk b { color: #ffe9f1; } .ptile.dk span { color: #ff6b7d; }

@@ -26,7 +26,7 @@ async function open(url, rm = false, vw = 1920) {
 
 for (const v of VARIANTS) {
   const out = path.join(DIR, v, 'shots');
-  for (const pg of (v === 'HA' ? [...PAGES, 'buttons'] : PAGES)) {
+  for (const pg of (v === 'HA' ? [...PAGES, 'buttons', 'props'] : PAGES)) {
     if (onlyPage && pg !== onlyPage) continue;
     const probe = await open(`${BASE}/${v}/${pg}.html`);
     const n = await probe.evaluate(() => document.querySelectorAll('.board').length);
