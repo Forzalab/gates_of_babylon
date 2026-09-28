@@ -16,7 +16,7 @@ export default function Blackout({ props }) {
             <span className={`l old${on(!past('or'))}`}>f-</span>
             <span className="new"><span className={`l${on(past('ador'))}`}>A</span><span className={`l${on(past('dor'))}`}>D</span></span>
           </span>
-          <span className="or core">OR</span>
+          <span className="core">OR</span>
           <span className="half right">
             <span className={`l old${on(!past('or'))}`}>-ecast</span>
             <span className="new"><span className={`l${on(past('adore'))}`}>E</span><span className={`l${on(past('adoreme'))}`}>&nbsp;ME</span></span>

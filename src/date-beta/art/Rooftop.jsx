@@ -181,7 +181,7 @@ export default function Rooftop({ props, rm }) {
         <rect width="470" height="124" rx="10" fill="#fdfbf2" stroke="#2a2440" strokeWidth="5" />
         <path d="M0 10 a10 10 0 0 1 10 -10 h450 a10 10 0 0 1 10 10 v30 h-470z" fill="#2a2440" />
         <text x="20" y="31" className="sign-head">Figur Weather</text>
-        <text x="22" y="92" className="sign-body"><OrSpans text="Today's f-OR-ecast: rain" /></text>
+        <text x="22" y="92" className="sign-body"><OrSpans text="Today's f-{OR}-ecast: rain" /></text>
         <g transform="translate(422 76)">
           <path d="M-22 6 C-30 6 -32 -8 -20 -10 C-18 -24 4 -26 8 -12 C22 -14 26 6 12 6Z" fill="#8e9ab8" />
           {[-14, -2, 10].map((x) => <line key={x} x1={x} y1="14" x2={x - 4} y2="26" stroke="#4d78e2" strokeWidth="4" strokeLinecap="round" />)}

@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { loadScenes, start, next, skip, beatAt, canAdvance, words, MIN_HOLD } from './date-beta/engine.js';
+import { loadScenes, start, next, skip, choose, beatAt, canAdvance, canChoose, words, parseLine, MIN_HOLD } from './date-beta/engine.js';
 import data from './date-beta/scenes.json' with { type: 'json' };
 
 const tiny = (beats, extra = {}) => ({ scenes: [{ id: 'a', bg: 'x', beats, ...extra }] });
@@ -81,4 +81,46 @@ test('date-beta canAdvance: hold gate, START-only beats, auto beats ignore click
   assert.equal(canAdvance(s.beats[1], 900), false, 'a stray click does not press START');
   assert.equal(canAdvance(s.beats[1], 900, { button: true }), true);
   assert.equal(canAdvance(s.beats[2], 5000, { button: true }), false);
+});
+
+test('date-beta OR (rule C): only an explicit {OR} is an OR; words like for / sorry / a bare OR never are', () => {
+  assert.equal(parseLine('I am sorry, this is for you.').hasOr, false);
+  assert.equal(parseLine('ORANGE OR not').hasOr, false, 'a bare uppercase OR is text, not a mark');
+  const l = parseLine('NANDA: Stay f{OR}ever?');
+  assert.equal(l.who, 'NANDA');
+  assert.equal(l.hasOr, true);
+  assert.deepEqual(l.parts, [{ t: 'Stay f' }, { t: 'OR', or: true }, { t: 'ever?' }]);
+  assert.equal(l.plain, 'Stay fORever?');
+  assert.throws(() => loadScenes(tiny([{ text: 'f{or}ever' }])), /stray brace/);
+  const [s] = loadScenes(tiny([{ choices: [{ text: 'yes' }, { text: '{OR} no' }] }]));
+  assert.deepEqual(s.beats[0].choices.map((c) => [c.side, c.hasOr]), [['pink', false], ['purple', true]]);
+});
+
+test('date-beta scare: per beat, falls back to the scene, then 0; blackout is 2 from data', () => {
+  const [s] = loadScenes(tiny([{}, { scare: 2 }], { scare: 1 }));
+  assert.deepEqual(s.beats.map((b) => b.scare), [1, 2]);
+  assert.equal(loadScenes(tiny([{}]))[0].beats[0].scare, 0);
+  assert.throws(() => loadScenes(tiny([{ scare: 3 }])), /scare 3/);
+  const shipped = loadScenes(data);
+  assert.ok(shipped.find((x) => x.id === 'blackout').beats.every((b) => b.scare === 2));
+  assert.equal(shipped[0].beats[0].scare, 0);
+});
+
+test('date-beta choices: a choice beat waits for a pick; go jumps; validation', () => {
+  const scenes = loadScenes({ scenes: [
+    { id: 'a', bg: 'x', beats: [{ choices: [{ text: 'stay' }, { text: 'leave', go: 'c' }] }, {}] },
+    { id: 'b', bg: 'x', beats: [{}] }, { id: 'c', bg: 'x', beats: [{}] }] });
+  const b = scenes[0].beats[0];
+  assert.equal(b.wait, 'choice');
+  assert.equal(canAdvance(b, 9999, { button: true }), false, 'clicks do not skip a choice');
+  assert.equal(canChoose(b, 100), false);
+  assert.equal(canChoose(b, 600), true);
+  const p = start(scenes);
+  assert.deepEqual(choose(scenes, p, 0), { s: 0, b: 1, done: false });
+  assert.equal(scenes[choose(scenes, p, 1).s].id, 'c');
+  assert.deepEqual(choose(scenes, p, 5), p, 'no such choice = no move');
+  assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a', go: 'nope' }] }])), /unknown scene/);
+  assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a' }, { text: 'b', side: 'pink' }] }])), /two choices/);
+  assert.throws(() => loadScenes(tiny([{ choices: [] }])), /1\.\.2/);
+  assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a' }], auto: 900 }])), /auto-advance/);
 });
