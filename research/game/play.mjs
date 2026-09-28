@@ -101,8 +101,8 @@ async function lose(browser, w, h) {
   await page.mouse.down(); await page.mouse.move(x6 - cell * 0.8, yb, { steps: 4 }); await page.mouse.up(); await idle();
   const st2 = await page.evaluate(() => window.__bag.state().cols.map((c) => c.join(',')));
   const sw = await page.getByTestId('swipes').textContent();
-  for (let k = 0; k < 11; k++) {
-    await page.waitForFunction(() => !window.__bag.state().busy && !document.querySelector('.fx.approval'));
+  for (let k = 0; k < 24; k++) {
+    await page.waitForFunction(() => !window.__bag.state().busy && !document.querySelector('.n-approval'));
     if (await page.locator('[data-testid=pop]').count()) break;
     await page.mouse.move(board.x + cell * 0.5, board.y + cell * 0.5); await page.mouse.down(); await page.mouse.up();
     await sleep(150);

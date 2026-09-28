@@ -96,10 +96,9 @@ export default function Bagging() {
     const rest = q.filter((x) => x.kind !== n.kind), item = { ...n, id: ++fxId };
     return n.kind === 'approval' ? [item, ...rest].slice(0, 3) : [...rest, item].slice(-3); // approval freezes input: it jumps the queue
   });
-  const closeNote = () => setNotes((q) => {
-    if (q[0]?.kind === 'approval') { g.frozen = false; }
-    return q.slice(1);
-  });
+  const notesRef = useRef(notes); notesRef.current = notes;
+  // Unfreeze EAGERLY: the same tap that closes APPROVAL must be able to drop (a state updater would run too late).
+  const closeNote = () => { if (notesRef.current[0]?.kind === 'approval') g.frozen = false; setNotes((q) => q.slice(1)); };
   useEffect(() => {
     if (!notes.length) return;
     const t = setTimeout(closeNote, notes[0].ms ?? 1900);

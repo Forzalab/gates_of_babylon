@@ -38,3 +38,15 @@
 - Final: npm test 140 pass, build ok, e2e all pass. Shots in research/game/shots (1440, 1024, 1440-still, 1440-lose).
 - Gaps: the canvas is a card board, not React Flow, and has no decay/child-spawn rules (arbiter has none to hook into), so "bonded" is a label
   plus a glow. Logic persistence (JOINT step 6) is dropped. The clickable netlist receipt is cut (STRETCH). Sound is verified wired, not heard.
+- 2026-09-28 Dogfood round (DOGFOOD-SHARED.md), one commit per fix. research/game/dogfood.mjs re-runs both testers seeded:
+  dogfood/before (motion, f650a73) vs dogfood/after (reduced motion, the graded mode).
+  1. One notice at a time in a band ABOVE the grid (queue of 3, <= 2 s, tap anywhere closes). APPROVAL jumps the queue and has CALL ATTENDANT;
+     the closing tap unfreezes eagerly, so the same tap can drop. After: 0 overlays over the grid, at most 1 notice.
+  2. A how-to line, a ghost demo that jumps onto a "buddy" of your first gate in column 3, and a guaranteed first merge.
+  3. "tap a column or drag"; an off-board release is refused: error_ + a shake (a red flash under reduced motion) + a notice.
+  4. Both logos go to ?canvas=1, never the 18+ gate (the baby's "stuck" was a random tap on the logo). No debug text or SEED
+     (?debug only). "COUPLES YOU MADE", and a switch hint.
+  Solo: the 404 was the favicon (inline icon; 0 console errors after), BAG FULL only near full, CHECK OUT ♥, swipe caption, ending hints,
+  speaker icon + SOUND ON/OFF. Round-4 voice line (xserra, BY-NC) once per game (204 KB mp3, untrimmed: no encoder here).
+  Reduced motion: the same beats as instant swaps, a colour flash, ticking Affection; the default shots are reduced (+ one 1440-motion set).
+  ?notutor = harness only. npm test 140, build, e2e pass.
