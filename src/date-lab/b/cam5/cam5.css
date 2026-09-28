@@ -1,0 +1,51 @@
+/* cam-5 found footage: camcorder OSD, tape softness, night shot green, AF boxes. No flashing: the REC dot blinks at 1 Hz. */
+.c5 .c5-cam { position: absolute; inset: 0; transform-origin: 0 0; filter: saturate(.55) contrast(1.12) brightness(.95) blur(.6px); }
+.c5.night .c5-cam { filter: grayscale(1) sepia(1) hue-rotate(55deg) saturate(2.4) contrast(1.25) brightness(.9) blur(.6px); }
+.c5.drop .c5-cam { transform-origin: 0 0; translate: 46px 0; filter: grayscale(1) contrast(1.8) brightness(.7); }
+.c5 .c5-black { position: absolute; inset: 0; background: #020303; }
+.c5 .c5-her .k-sil { fill: #020203; stroke: none; }
+.c5 .c5-her .k-eye { fill: #f0243f; }
+.c5 .c5-her .pinbub { fill: var(--pink); }
+
+/* tape: scanlines, soft chroma edge, vignette */
+.c5 .c5-tape { position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .18) 0 2px, transparent 2px 4px),
+    radial-gradient(ellipse at 50% 50%, transparent 55%, rgba(0, 0, 0, .7)); }
+.c5 .c5-band { position: absolute; left: 0; right: 0; top: -60px; height: 26px; pointer-events: none; opacity: .35;
+  background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .35) 0 3px, rgba(0, 0, 0, .2) 3px 11px);
+  animation: c5-roll 7s linear infinite; }
+.c5 .c5-band.big { height: 140px; opacity: .8; animation: none; top: 520px; }
+@keyframes c5-roll { to { transform: translateY(1200px); } }
+
+/* OSD */
+.c5 .c5-osd { position: absolute; inset: 0; pointer-events: none; z-index: 50; font: 400 40px/1 var(--mono); color: #f4f4ee;
+  text-shadow: 2px 2px 0 #000; letter-spacing: .04em; }
+.c5 .c5-osd p { position: absolute; margin: 0; }
+.c5 .c5-osd .rec { left: 110px; top: 96px; display: flex; align-items: center; gap: 14px; }
+.c5 .c5-osd .rec i { width: 26px; height: 26px; border-radius: 50%; background: #f0243f; display: inline-block; }
+.c5 .c5-osd .tc { right: 110px; top: 96px; }
+.c5 .c5-osd .bat { right: 110px; top: 150px; font-size: 30px; }
+.c5 .c5-osd .bat span { margin-left: 10px; }
+.c5 .c5-osd .night { left: 110px; top: 150px; font-size: 28px; color: #bfffc8; }
+.c5 .c5-osd .zoom { left: 50%; top: 96px; transform: translateX(-50%); font-size: 30px; }
+.c5 .c5-osd .count { left: 50%; top: 150px; transform: translateX(-50%); font-size: 30px; color: #ffd0d8; }
+.c5 .c5-osd .stamp { right: 110px; bottom: 90px; text-align: right; font-size: 34px; line-height: 1.25; }
+.c5 .c5-osd .br { position: absolute; width: 70px; height: 50px; border: 0 solid rgba(255, 255, 255, .7); }
+.c5 .c5-osd .br.tl { left: 70px; top: 70px; border-left-width: 4px; border-top-width: 4px; }
+.c5 .c5-osd .br.tr { right: 70px; top: 70px; border-right-width: 4px; border-top-width: 4px; }
+.c5 .c5-osd .br.bl { left: 70px; bottom: 70px; border-left-width: 4px; border-bottom-width: 4px; }
+.c5 .c5-osd .br.bh { right: 70px; bottom: 70px; border-right-width: 4px; border-bottom-width: 4px; }
+
+/* face detection */
+.c5 .c5-face { position: absolute; z-index: 45; pointer-events: none; }
+.c5 .c5-face .c { position: absolute; width: 22%; height: 22%; border: 0 solid #9dff9d; }
+.c5 .c5-face.red .c { border-color: #ff3355; }
+.c5 .c5-face .tl { left: 0; top: 0; border-left-width: 4px; border-top-width: 4px; }
+.c5 .c5-face .tr { right: 0; top: 0; border-right-width: 4px; border-top-width: 4px; }
+.c5 .c5-face .bl { left: 0; bottom: 0; border-left-width: 4px; border-bottom-width: 4px; }
+.c5 .c5-face .br { right: 0; bottom: 0; border-right-width: 4px; border-bottom-width: 4px; }
+.c5 .c5-face b { position: absolute; left: 0; top: -34px; white-space: nowrap; font: 400 24px/1 var(--mono); color: #9dff9d; text-shadow: 2px 2px 0 #000; }
+.c5 .c5-face.red b { color: #ff3355; }
+.c5 .c5-face.edge b { color: #ffe36a; }
+.c5 .c5-sub { bottom: 170px; left: 50%; right: auto; transform: translateX(-50%); white-space: nowrap; font-family: var(--mono); font-size: 40px; background: rgba(0, 0, 0, .55); padding: 8px 20px; }
+.c5 .lb-caps.at-bl { bottom: 150px; left: 110px; }

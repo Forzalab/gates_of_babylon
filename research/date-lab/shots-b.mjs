@@ -33,6 +33,9 @@ export const SHOTS = [
   ...[0.9, 3.0, 5.8, 9.5, 12.0, 14.8, 16.6, 19.2, 21.6, 23.4, 24.3, 25.6, 28.0, 30.7, 32.0].map((s) => ({ id: 'cam-4', name: `t${s.toFixed(1).padStart(4, '0')}`, q: `t=${s}&pause`, wait: 900 })),
   { id: 'cam-4', name: 'rm-dolly-mid', q: 't=21.6&pause&still', wait: 900 },
   { id: 'cam-4', name: 'rm-inside-end', q: 't=30.7&pause&still', wait: 900 },
+  // cam-5 found footage
+  ...[3.4, 9.6, 14.0, 16.6, 20.4, 21.2, 23.6, 28.6, 31.2, 33.9].map((s) => ({ id: 'cam-5', name: `t${s.toFixed(1).padStart(4, '0')}`, q: `t=${s}&pause`, wait: 900 })),
+  { id: 'cam-5', name: 'rm-t21.2', q: 't=21.2&pause&still', wait: 900 },
 ];
 
 const filter = process.argv[2];
