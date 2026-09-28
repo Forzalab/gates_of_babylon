@@ -5,9 +5,10 @@ import data from './date-beta/scenes.json' with { type: 'json' };
 
 const tiny = (beats, extra = {}) => ({ scenes: [{ id: 'a', bg: 'x', beats, ...extra }] });
 
-test('date-beta: the shipped scenes.json loads, 5 scenes in demo order', () => {
+test('date-beta: the shipped scenes.json loads, 10 scenes in demo order', () => {
   const scenes = loadScenes(data);
-  assert.deepEqual(scenes.map((s) => s.id), ['splash', 'rooftop', 'train', 'naan', 'blackout']);
+  assert.deepEqual(scenes.map((s) => s.id), ['splash', 'rooftop', 'train', 'naan', 'blackout',
+    'platform', 'underpass', 'apartment', 'stairs', 'genkan']);
 });
 
 test('date-beta: every shipped beat obeys the hard rules (<=12 words, >=500 ms, motion has an RM alt)', () => {
@@ -60,14 +61,15 @@ test('date-beta sequencer: skip (Esc) jumps to the next scene; start can jump to
   assert.equal(scenes[p.s].id, 'rooftop');
   assert.equal(scenes[start(scenes, { at: 'naan' }).s].id, 'naan');
   assert.equal(start(scenes, { at: 'nope' }).s, 0, 'unknown id falls back to the first scene');
-  assert.equal(skip(scenes, start(scenes, { at: 'blackout' })).done, true);
+  assert.equal(scenes[skip(scenes, start(scenes, { at: 'blackout' })).s].id, 'platform');
+  assert.equal(skip(scenes, start(scenes, { at: scenes.at(-1).id })).done, true);
 });
 
 test('date-beta sequencer: reduced motion drops rmAlt "skip" beats (ADORE ME = 3 hard-cut states)', () => {
   const scenes = loadScenes(data);
   const phases = (rm) => {
     const out = [];
-    for (let p = start(scenes, { at: 'blackout', rm }); !p.done; p = next(scenes, p, rm)) out.push(beatAt(scenes, p).props.phase);
+    for (let p = start(scenes, { at: 'blackout', rm }); !p.done && scenes[p.s].id === 'blackout'; p = next(scenes, p, rm)) out.push(beatAt(scenes, p).props.phase);
     return out.filter((ph, i) => ph !== out[i - 1]);
   };
   assert.deepEqual(phases(true), ['dark', 'forecast', 'or', 'ador', 'adoreme', 'cut']);

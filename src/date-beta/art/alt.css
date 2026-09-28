@@ -1,0 +1,33 @@
+/* Scenes 6-10 (alt account): text inside the SVGs + the two camera/step moves. Stage px. */
+.platform > svg, .underpass > svg, .apartment > svg, .stairs > svg, .genkan > svg { width: 100%; height: 100%; display: block; }
+
+/* 6 platform: the train leaves on the stepped clock (3 poses x 500 ms), not a smooth slide */
+.platform .pl-train { transform: translate(120px, 470px); transition: transform 1500ms steps(3, end); }
+.platform .pl-train.gone { transform: translate(2100px, 470px); }
+.platform .pl-line { font: 800 28px/1 'Inter Tight', var(--cond); fill: #1b2140; }
+.platform .pl-sign-jp { font: 700 26px/1 var(--jp); fill: #9fb0e6; }
+.platform .pl-sign { font: 700 54px/1 var(--cond); letter-spacing: .06em; fill: #e8eeff; }
+
+/* 7 underpass */
+.underpass .up-not { font: 400 84px/1 'Bangers', var(--cond); letter-spacing: .04em; fill: #b0123e; }
+.underpass .up-sweet { font: 400 62px/1 'Yellowtail', cursive; fill: #2a1a1a; }
+.underpass .up-tm { font: 700 20px/1 var(--cond); }
+.underpass .up-sour-jp { font: 900 40px/1 var(--jp); fill: #d7102b; stroke: #ffe100; stroke-width: 7px; paint-order: stroke; }
+.underpass .up-figur { font: 400 34px/1 'Yellowtail', cursive; fill: #b0123e; }
+.underpass .up-orson { font: 400 76px/1 'Bangers', var(--cond); letter-spacing: .06em; fill: #fff; }
+.underpass .up-orson-sub { font: 700 20px/1 var(--cond); fill: #dfe9ff; letter-spacing: .04em; }
+.underpass .up-xor { font: 900 italic 50px/1 'Inter Tight', var(--cond); fill: #f3e2c4; }
+.underpass .up-xor-sub { font: 400 22px/1 var(--cond); fill: #c9a878; letter-spacing: .06em; }
+.underpass .up-buffer { font: 400 44px/1 'Bangers', var(--cond); letter-spacing: .08em; fill: #fff; }
+.underpass .up-buffer-sub { font: 700 22px/1 var(--cond); fill: #2a3036; }
+
+/* 8 apartment */
+.apartment .ap-name { font: 700 30px/1 var(--jp); fill: #8b8fa0; }
+.apartment .ap-buffer { font: 400 22px/1 'Bangers', var(--cond); letter-spacing: .06em; fill: #fff; }
+
+/* 9 stairs */
+.stairs .st-plate { font: 700 34px/1 var(--cond); fill: #3a302a; letter-spacing: .04em; }
+
+/* 10 genkan: the insert = a smooth camera crop onto the slippers + shrine (reduced motion: .rm kills the transition) */
+.genkan.cam { transform-origin: 1500px 720px; transition: transform 1400ms cubic-bezier(.45, 0, .2, 1); }
+.genkan.cam.insert { transform: scale(2.1); }

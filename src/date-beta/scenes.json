@@ -57,6 +57,57 @@
         { "props": { "phase": "cut" }, "sfx": "silence", "auto": 1000 },
         { "sfx": "static", "hold": 800 }
       ]
+    },
+    {
+      "id": "platform",
+      "title": "Platform / NEXT: OR",
+      "bg": "platform",
+      "enter": "fade",
+      "beats": [
+        { "props": { "train": "here" }, "text": "Her stop. The rain followed us off the train.", "sfx": "rain", "hold": 1200 },
+        { "props": { "train": "gone" }, "text": "The AND Line leaves. Just two of us now.", "sfx": "train-leave", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },
+        { "text": "NEXT: this OR that. The sign never picks.", "sfx": "breath" }
+      ]
+    },
+    {
+      "id": "underpass",
+      "title": "Underpass / ads",
+      "bg": "underpass",
+      "enter": "fade",
+      "beats": [
+        { "text": "Your steps, her steps. Always an even count.", "sfx": "footsteps-4", "hold": 1200 },
+        { "text": "NANDA: Don't read the ads. Read me.", "sfx": "footsteps-2" }
+      ]
+    },
+    {
+      "id": "apartment",
+      "title": "Her building / one lit window",
+      "bg": "apartment",
+      "enter": "fade",
+      "beats": [
+        { "text": "Four floors. One window lit.", "sfx": "rain-soft", "hold": 1000 },
+        { "text": "NANDA: That's mine. I left the light on for you.", "sfx": "rain-soft" }
+      ]
+    },
+    {
+      "id": "stairs",
+      "title": "Outdoor stairs / Unit 12",
+      "bg": "stairs",
+      "enter": "fade",
+      "beats": [
+        { "props": { "door": "shut" }, "text": "NANDA: This is me. Unit 12. Obviously you'll remember.", "sfx": "metal-steps", "hold": 1000 },
+        { "props": { "door": "ajar" }, "text": "NANDA: Just tea. Then you can go.", "sfx": "door-unlock" }
+      ]
+    },
+    {
+      "id": "genkan",
+      "title": "Genkan insert / slippers + shrine",
+      "bg": "genkan",
+      "beats": [
+        { "props": { "insert": false }, "text": "Her shoes. Lined up to the millimetre.", "sfx": "door-close", "hold": 1000 },
+        { "props": { "insert": true }, "text": "Men's slippers. Already set out.", "sfx": "thump", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },
+        { "text": "A tiny shrine. Inside: a circuit you built.", "sfx": "breath" }
+      ]
     }
   ]
 }
