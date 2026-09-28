@@ -1,0 +1,12 @@
+/* cam-3 Kon: Perfect Blue cool palette, her red is the only warm thing; nested frames are real DOM scenes scaled into boxes. */
+.kon .kon-nest { position: absolute; width: 1920px; height: 1080px; transform-origin: 0 0; overflow: hidden; }
+.kon .kon-ad { pointer-events: none; }
+.kon .kon-ad { --c-iris: #b0123e; --c-iris2: #e8335c; }
+.kon .kon-ad-name { font: 400 96px/1 'Bangers', var(--cond); letter-spacing: .06em; fill: #fff; }
+.kon .kon-ad-sub { font: 400 40px/1 'Yellowtail', cursive; fill: #ffe3f0; }
+.kon .kon-ad-figur { font: 400 44px/1 'Yellowtail', cursive; fill: #fff; }
+.kon .kon-slip { position: absolute; inset: 0; }
+.kon .kon-phone-back { fill: #ff9cc8; stroke: #3a1d3f; stroke-width: 10px; }
+.kon .kon-figur { font: 400 64px/1 'Yellowtail', cursive; fill: #3a1d3f; }
+.kon .kon-hand { --c-sleeve: #fbf7ff; --c-hand: #ffe2d6; --c-hand2: #e8b8a8; }
+.kon .camplane::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(rgba(60, 80, 140, .12), rgba(20, 20, 60, .2)); mix-blend-mode: multiply; }

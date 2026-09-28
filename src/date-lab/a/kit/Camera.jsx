@@ -6,12 +6,12 @@
 import { memo } from 'react';
 import { useClock } from './hooks.js';
 import { shotAt, keyAt, rmPose, total, camTransform, clamp } from './time.js';
-import { parallax, screen, fit } from './fit.js';
+import { parallax, screen, fit, zoomAbout } from './fit.js';
 import { Ors } from './ui.jsx';
 
 export const FADE = 450;
 
-export { parallax, screen, fit };
+export { parallax, screen, fit, zoomAbout };
 
 const Plane = memo(function Plane({ Scene, props, rm }) {
   return <Scene props={props} rm={rm} />;
@@ -29,7 +29,7 @@ export default function CameraPiece({ shots, rm, className = '', tag, children, 
   const len = total(shots);
   const [t, restart] = useClock({ loop: len });
   const { shot, i, local, k } = shotAt(shots, t);
-  const raw = rm ? (shot.rmKey ?? rmPose(shot.keys)) : keyAt(shot.keys, local);
+  const raw = rm ? (shot.rmKey ?? (shot.keys ? rmPose(shot.keys) : shot.pose(shot.dur))) : shot.pose ? shot.pose(local) : keyAt(shot.keys, local);
   const pose = shot.free ? raw : fit(raw);
   const next = shots[i + 1] ?? shots[0];
   // fade through black / white at shot boundaries (smooth), never in RM

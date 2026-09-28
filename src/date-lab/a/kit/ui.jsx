@@ -10,6 +10,7 @@ import '@fontsource/inter-tight/900-italic.css';
 import '@fontsource/jetbrains-mono/400.css';
 import { Ors, OrSpans, orParts } from '../../../date-beta/Say.jsx';
 import { words } from './time.js';
+import '../../../date-beta/art/art.css'; // main's scene text styles (clock numerals, ad type, ...)
 import './roles.css';
 import './a.css';
 

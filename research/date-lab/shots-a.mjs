@@ -62,6 +62,8 @@ SHOTS['cam-1'] = frames([['1-tilt-start', 400], ['2-tilt-sky-flare', 5200], ['3-
   ['6-window-match', 11700], ['7-rack-to-strap', 15600], ['8-platform-rain', 20500], ['9-door-flare', 30400], ['rm-window', 14000, true]]);
 SHOTS['cam-2'] = frames([['1-intertitle', 1200], ['2-dolly-lit', 4200], ['3-dolly-tubes-dying', 11000], ['4-dolly-she-is-near', 15200],
   ['5-intertitle-12', 16500], ['6-genkan-dolly', 20000], ['7-stare', 26800], ['rm-dolly-dark', 13000, true]]);
+SHOTS['cam-3'] = frames([['1-train', 800], ['2-push-umeboshi', 5200], ['3-match-iris', 6300], ['4-pull-her-face', 9400], ['5-her-ad-slip', 12700],
+  ['6-poster-pull', 15000], ['7-underpass-reveal', 19500], ['8-tunnel', 21400], ['9-phone-face-down', 23200], ['10-phone-train', 25500], ['11-into-screen', 29800], ['rm-her-ad', 8000, true]]);
 
 const ids = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(SHOTS);
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });

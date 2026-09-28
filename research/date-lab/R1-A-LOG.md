@@ -104,3 +104,20 @@ out-of-focus foreground petals falling in held 500 ms steps, raindrops on the le
   main's asymmetric art so it breaks the symmetry theme, and the stare is a medium close-up, not a real Kubrick ECU.
 - **Carry-forward (R2)**: symmetrical genkan (mirror the shoe line, shrine dead centre) or cut it; push the stare to an ECU with a
   head-tilt-down pose layer; add a single mirrored "twin" silhouette beat (two Nandas, one blinks) — the Grady twins, PG-13.
+
+## cam-3 · Satoshi Kon (horror 4)
+- **School**: Satoshi Kon (*Perfect Blue*, *Millennium Actress*, *Paprika*): match cuts that slip reality, pull-backs that reveal the
+  shot was a screen/poster; Perfect Blue's cool palette with her red as the only warm thing; image-horror.
+- **Theme**: *every frame is her frame* — each "real" shot turns out to be a picture she put there; the loop closes on her phone.
+- **What it does** (30.6 s seamless loop): (A) carriage, "Nobody reads the ads. You read this one." — log-space push into the
+  umeboshi on the NOT Sweet ad until red fills the frame; (B) match cut: the red is HER iris (iris re-graded to umeboshi red) —
+  pull back (zoom about a fixed point, `kit/fit.js zoomAbout`) to find her face IS the train ad now ("NANDA ♡ Good input. Figur"),
+  hard-cut slip smile -> wide eyes; (C) seamless nested pull-back: that whole carriage is a lit poster in the underpass —
+  "Don't read the ads. Read me."; (D1) push into the dark tunnel mouth; (D2) her phone face-down on her pleated skirt flips in
+  3 held poses, the screen shows the (clean) train, "You keep looking. So do I.", push into the screen until it IS the train at 1:1
+  -> loop to A with no visible cut. Nested frames are real scene components scaled into boxes, so every reveal is pixel-exact.
+- **RM**: one held frame per shot at its reveal pose, hard cuts, phone face-up at once.
+- **Self-critique**: the most "cinema" of my camera pieces and the loop really is seamless; the lap/phone set is my own quick
+  art and flatter than main's scenes, and the umeboshi -> iris match is shape+colour but not scale-perfect (iris is an ellipse).
+- **Carry-forward (R2)**: add one more Kon slip mid-shot (a *match on action*: MC's hand reaching for the strap = her hand reaching for
+  the phone); paint the lap/phone insert at main's quality; sound-bridge each cut (fx track) — Kon cuts on sound as much as shape.
