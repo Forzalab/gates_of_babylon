@@ -66,3 +66,24 @@ Shots: `node research/date-lab/shots-a.mjs [id ...]` -> `research/date-lab/shots
 - **Carry-forward (R2)**: keep the live edit + her cursor + lens ECU; draw a dedicated ECU eye layer (thicker line, highlight removed
   = yandere stare) instead of scaling the bust; let her edit the *dialogue box* too (MC's own line gets rewritten); tie the file list
   to real state (runs count from localStorage).
+
+## Camera rig (`kit/Camera.jsx`, `camera/lens.jsx`)
+A virtual camera over main's scene components: per-shot keyframes (x/y/zoom/roll/BG blur), cubic in-out "operator" easing,
+fade-through-black cuts, parallax planes (`parallax(pose, depth)`), `screen()` projection so optical effects track scene lights,
+and `fit()` so no move ever shows the art's edge. Lens layer: flare with ghosts on the light->centre axis (hex or heart ghosts),
+out-of-focus foreground petals falling in held 500 ms steps, raindrops on the lens, scene-space bloom. `?t=<ms>` freezes a frame.
+
+## cam-1 · Shinkai light (horror 1)
+- **School**: Makoto Shinkai (*Your Name*, *5 cm per Second*) x Terrence Malick magic-hour tilt-ups x one J-horror wrong detail.
+- **Theme**: *light tells time, except hers* — the sky goes noon -> dusk -> night; the tower clock never leaves 12:00.
+- **What it does** (31 s loop): (1) fade in on the rooftop railing, tilt up past the Figur clock to the sky, soft petals on a
+  near plane, a sun flare whose ghosts slide as the camera tilts; (2) locked-off time-lapse, three held match-cuts noon / dusk /
+  night (clouds re-lit at dusk, stars + moon at night, the clock face the only lit thing: "Night. The tower still said twelve.");
+  (3) match cut sky -> train-window sky at 10x, pull back to find the carriage, rack focus from the window to a hanging strap on a
+  near plane and back, dusk beam through the glass; (4) platform truck in the rain with drops on the lens and bloom on the tubes;
+  (5) tilt up her stairs into the door lamp; its flare ghosts are tiny pink hearts. "NANDA: Obviously you'll remember."
+- **RM**: one held frame per shot (the time-lapse keeps its three hard cuts), no fades, no flare drift, no petal fall.
+- **Self-critique**: the time-lapse and the rack focus are the strongest beats; the dusk grade is a multiply over main's noon art so
+  the sky banding reads "filtered", and the platform truck is the least motivated move.
+- **Carry-forward (R2)**: let main paint dusk/night sky variants (or give Rooftop a `sky` prop) so the time-lapse re-lights instead of
+  tints; add a 2-3 s "ma" hold with only wind before the stairs; keep the heart-ghost flare as the horror-1 signature.

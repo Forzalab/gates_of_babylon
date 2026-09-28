@@ -75,3 +75,10 @@
 /* main's scene components (date-beta/art) render as .art: pin them to the full stage */
 .aroot .art { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
 .aroot .art > svg { width: 100%; height: 100%; display: block; }
+/* camera pieces */
+.campiece { cursor: pointer; }
+.campiece .camplane { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; will-change: transform; }
+.campiece .camfade { position: absolute; inset: 0; pointer-events: none; z-index: 44; }
+.campiece .grade { position: absolute; inset: 0; pointer-events: none; }
+.campiece .a-sub { z-index: 46; }
+.campiece .fg { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; pointer-events: none; }

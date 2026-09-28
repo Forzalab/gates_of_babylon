@@ -54,6 +54,13 @@ const SHOTS = {
   },
 };
 
+// camera pieces: freeze the clock at ?t=<ms> and shoot (deterministic frames)
+const frames = (list) => async (page, snap, open) => {
+  for (const [name, t, still] of list) { await open(!!still, `&t=${t}`); await wait(700); await snap(name); }
+};
+SHOTS['cam-1'] = frames([['1-tilt-start', 400], ['2-tilt-sky-flare', 5200], ['3-noon', 6900], ['4-dusk', 8600], ['5-night-twelve', 10600],
+  ['6-window-match', 11700], ['7-rack-to-strap', 15600], ['8-platform-rain', 20500], ['9-door-flare', 30400], ['rm-window', 14000, true]]);
+
 const ids = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(SHOTS);
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
