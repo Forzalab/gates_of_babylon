@@ -9,7 +9,7 @@ const DIR = path.dirname(fileURLToPath(import.meta.url));
 const BASE = process.env.SHOTS_BASE || 'http://localhost:5490/research/date-beta-mockups';
 const want = process.argv[2] || 'all';
 const onlyPage = process.argv[3];
-const VARIANTS = want === 'all' ? ['A', 'B', 'C', 'H'] : [want];
+const VARIANTS = want === 'all' ? ['A', 'B', 'C', 'H', 'HA'] : [want];
 const PAGES = ['ui', 'sprites', 'sheet', 'scenes', 'fx'];
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const errors = [];
