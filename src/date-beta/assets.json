@@ -1,6 +1,7 @@
 {
   "note": "Asset slots. Drop the file in public/date-beta/assets/ (e.g. 01_SX-37_kettle-hiss.mp3) and point its id's path at it. Missing file = beep (sfx) or grey box with the id (bg/sprite). cues maps scenes.json sfx names to ids; null = no sound.",
-  "cues": { "static": "SX-06", "wind": "SX-15", "bell": "SX-23", "train-hum": "SX-21", "tick": "SX-45", "drone": "SX-27", "breath": "SX-28", "silence": null },
+  "cues": { "static": "SX-06", "wind": "SX-15", "bell": "SX-23", "train-hum": "SX-21", "tick": "SX-45", "drone": "SX-27", "breath": "SX-28", "silence": null,
+    "thump": "SX-04", "kettle": "SX-37", "rain": "SX-20" },
   "assets": {
     "SX-37": { "kind": "sfx", "path": "date-beta/assets/01_SX-37_kettle-hiss.mp3" },
     "SX-20": { "kind": "sfx", "path": "date-beta/assets/05_SX-20_rain-loop.mp3" },
@@ -13,6 +14,9 @@
     "SX-28": { "kind": "sfx", "path": "date-beta/assets/27_SX-28_breath.mp3" },
     "SX-45": { "kind": "sfx", "path": "date-beta/assets/20_SX-45_tick.mp3" },
     "BG-X1": { "kind": "bg", "path": "date-beta/assets/07_BG-X1_cafe-morning.png" },
-    "BG-03": { "kind": "bg", "path": "date-beta/assets/13_BG-03_rooftop-sunset.png" }
+    "BG-03": { "kind": "bg", "path": "date-beta/assets/13_BG-03_rooftop-sunset.png" },
+    "BG-D1": { "kind": "bg", "path": "date-beta/assets/BG-D1_her-door-night.png" },
+    "BG-D2": { "kind": "bg", "path": "date-beta/assets/BG-D2_sitting-room-third-cup.png" },
+    "BG-D3": { "kind": "bg", "path": "date-beta/assets/BG-D3_locked-room.png" }
   }
 }
