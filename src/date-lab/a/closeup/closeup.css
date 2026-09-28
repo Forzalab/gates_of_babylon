@@ -1,0 +1,59 @@
+/* Close-up inserts: letterboxed 2.39-ish (the "insert" aspect), tight framing, one demo line each. */
+.closeup { cursor: pointer; }
+.closeup > .a-bars { position: absolute; inset: 0; pointer-events: none; z-index: 45; }
+.closeup .cu-frame { position: absolute; inset: 0; transform-origin: 50% 60%; }
+.closeup .a-line { z-index: 47; }
+
+/* 1 bento */
+.bento .cu-note { font: 400 44px/1 'Yellowtail', cursive; fill: var(--her); }
+.bento .cu-sfx { position: absolute; left: 0; right: 0; top: 210px; display: flex; justify-content: center; align-items: center; gap: 40px; transform: rotate(-6deg); pointer-events: none; }
+.bento .cu-sfx .jp { font: 900 150px/1 var(--jp); color: #d7102b; -webkit-text-stroke: 14px #ffe100; paint-order: stroke fill; }
+.bento .cu-sfx .en { font: 400 170px/1 'Bangers', var(--cond); color: #ffe100; -webkit-text-stroke: 12px #d7102b; paint-order: stroke fill; letter-spacing: .04em; }
+/* 2 phone */
+.phone .ph-time { font: 700 96px/1 'Inter Tight', var(--cond); fill: #fff; }
+.phone .ph-date { font: 700 30px/1 var(--cond); fill: #fff; opacity: .85; }
+.phone .ph-from { font: 700 28px/1 var(--cond); fill: #2a1a44; }
+.phone .ph-msg { font: 400 28px/1 var(--cond); fill: #2a1a44; }
+.phone .ph-xor { font: 700 34px/1 var(--cond); fill: #fff; }
+.phone .ph-figur { font: 400 90px/1 'Yellowtail', cursive; fill: #3a1d3f; }
+.phone .ph-you .k-sil { fill: #1c1428; stroke: none; } .phone .ph-you .eyes { display: none; }
+.phone .ph-hand { --c-sleeve: #fbf7ff; --c-hand: #ffe2d6; --c-hand2: #e8b8a8; }
+.phone .ph-bzz { position: absolute; right: 360px; top: 300px; font: 400 80px/1 'Bangers', var(--cond); color: #ffe100; -webkit-text-stroke: 6px #3a1d3f; paint-order: stroke fill; transform: rotate(10deg); }
+.phone .ph-bust { filter: brightness(.9); }
+.phone.shot-face-blank .ph-bust { filter: brightness(.72) saturate(.7); }
+
+/* 3 third cup: her kitchen at night, a warm lamp, matcha-green tea */
+.thirdcup { --c-wall: #caa3b8; --c-wall2: #a9829a; --c-wood: #b98a6a; --c-wood2: #8a5f48; --c-night: #1c1733; --c-tea: #a8cf7a; --art-stroke: #3a1d3f; }
+.thirdcup .tc-bg .cup.third { display: none; }
+.thirdcup .tc-grade { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 50% 60% at 62% 38%, rgba(255, 210, 150, .25), rgba(40, 20, 60, .35) 70%, rgba(20, 10, 30, .6)); mix-blend-mode: multiply; }
+.thirdcup .tc-grade-4 { background: radial-gradient(ellipse 40% 50% at 50% 55%, rgba(255, 210, 150, .2), rgba(40, 10, 30, .5) 65%, rgba(10, 0, 10, .8)); }
+.thirdcup .tc-steam { fill: none; stroke: #fff; stroke-width: 7px; stroke-linecap: round; opacity: .8; filter: blur(1.5px); }
+.thirdcup .tc-or { font: 700 64px/1 var(--cond); fill: var(--her); stroke: #fff; stroke-width: 1.5px; paint-order: stroke fill; letter-spacing: .04em;
+  filter: drop-shadow(1px 1px 0 rgba(90, 0, 18, .7)) blur(.4px); }
+.thirdcup .tc-herhand { --c-sleeve: #fbf7ff; --c-hand: #ffe2d6; --c-hand2: #e8b8a8; }
+
+/* 4 shrine */
+.shrine .sh-lbl { font: 700 11px/1 'JetBrains Mono', monospace; fill: #4b4a52; }
+.shrine .sh-hand { font: 400 12px/1 'Yellowtail', cursive; fill: var(--her); }
+.shrine .sh-out { filter: drop-shadow(0 0 4px rgba(240, 36, 63, .9)); }
+.shrine .sh-grade { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 45% 55% at 50% 55%, rgba(255, 200, 120, .12), rgba(30, 15, 10, .55) 80%); mix-blend-mode: multiply; }
+
+/* 5 pin macro: manga two-panel split */
+.pinmacro { background: #fff; }
+.pinmacro .pm-top { position: absolute; left: 0; top: 0; width: 1920px; height: 640px; }
+.pinmacro .pm-eyes { position: absolute; left: 0; top: 654px; width: 1920px; height: 220px; overflow: hidden; }
+.pinmacro .pm-eyes > svg { width: 1920px; height: 220px; }
+.pinmacro .pm-gutter { position: absolute; left: 0; right: 0; top: 640px; height: 14px; background: #fff; }
+.pinmacro .pm-pin { --art-stroke: #3a1d3f; --art-sw: 5px; --art-sw-thin: 3px; }
+.pinmacro .pinglow { filter: blur(2.5px); }
+.pinmacro .pm-legend { position: absolute; right: 40px; top: 110px; margin: 0; padding: 22px 28px; list-style: none; background: rgba(20, 10, 26, .82);
+  border-radius: 16px; display: flex; flex-direction: column; gap: 14px; }
+.pinmacro .pm-legend li { font: 700 28px/1 var(--cond); color: rgba(255, 255, 255, .4); display: flex; align-items: center; gap: 14px; }
+.pinmacro .pm-legend li.on { color: #fff; }
+.pinmacro .dot { width: 24px; height: 24px; border-radius: 50%; display: inline-block; }
+.pinmacro .d-hum { background: var(--pink); box-shadow: 0 0 12px var(--pink); } .pinmacro .d-flicker { background: #ffd0e4; }
+.pinmacro .d-red { background: var(--her); box-shadow: 0 0 12px var(--her); } .pinmacro .d-off { background: #6b6475; }
+.pinmacro .a-line { bottom: 40px; }
+
+.bento .cu-tint { position: absolute; inset: 0; background: #c8e84a; mix-blend-mode: multiply; opacity: .55; pointer-events: none; z-index: 40; }

@@ -64,6 +64,11 @@ SHOTS['cam-2'] = frames([['1-intertitle', 1200], ['2-dolly-lit', 4200], ['3-doll
   ['5-intertitle-12', 16500], ['6-genkan-dolly', 20000], ['7-stare', 26800], ['rm-dolly-dark', 13000, true]]);
 SHOTS['cam-3'] = frames([['1-train', 800], ['2-push-umeboshi', 5200], ['3-match-iris', 6300], ['4-pull-her-face', 9400], ['5-her-ad-slip', 12700],
   ['6-poster-pull', 15000], ['7-underpass-reveal', 19500], ['8-tunnel', 21400], ['9-phone-face-down', 23200], ['10-phone-train', 25500], ['11-into-screen', 29800], ['rm-her-ad', 8000, true]]);
+SHOTS['closeup-1'] = frames([['1-hover-tamago', 1800], ['2-over-umeboshi', 3700], ['3-pucker-tint', 4300], ['4-sour-sfx', 5200], ['5-smile-anyway', 7500], ['6-echo-two-plums', 10500], ['rm-pucker', 4600, true]]);
+SHOTS['closeup-2'] = frames([['1-buzz-lockscreen', 1200], ['2-flip-edge', 2200], ['3-face-down', 3000], ['4-kuleshov-blank', 5000], ['5-nobody', 6400], ['6-buzz-again-leak', 8200], ['7-only-you', 10800], ['rm-lockscreen', 1200, true]]);
+SHOTS['closeup-3'] = frames([['1-table', 1800], ['2-rack-before', 3800], ['3-rack-third-sharp', 6600], ['4-steam-or', 7900], ['5-who', 10300], ['6-toward-you', 12800], ['7-three-of-us', 15000], ['rm-steam-or', 8800, true]]);
+SHOTS['closeup-4'] = frames([['1-shoes', 2000], ['2-shrine-push', 7000], ['3-your-circuit', 10500], ['4-offering', 14500], ['rm-circuit', 10500, true]]);
+SHOTS['closeup-5'] = frames([['1-hum', 1300], ['2-flicker', 3900], ['3-red', 6500], ['4-off', 9100], ['rm-flicker', 3900, true]]);
 
 const ids = process.argv.slice(2).length ? process.argv.slice(2) : Object.keys(SHOTS);
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });

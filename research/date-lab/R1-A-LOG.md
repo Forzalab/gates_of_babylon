@@ -121,3 +121,49 @@ out-of-focus foreground petals falling in held 500 ms steps, raindrops on the le
   art and flatter than main's scenes, and the umeboshi -> iris match is shape+colour but not scale-perfect (iris is an ellipse).
 - **Carry-forward (R2)**: add one more Kon slip mid-shot (a *match on action*: MC's hand reaching for the strap = her hand reaching for
   the phone); paint the lap/phone insert at main's quality; sound-bridge each cut (fx track) — Kon cuts on sound as much as shape.
+
+## Close-ups (5 inserts, letterboxed to an insert aspect; each has its own school + one demo line)
+### closeup-1 · Bento pick + SOUR (horror 1)
+- **School**: food anime (*Shokugeki no Soma* reaction, *Yuru Camp* inserts) x Itami's *Tampopo* top-down x the echo rule.
+- **Theme**: *what you pick, she packs forever.* Top-down lacquer bento on her gingham: rice + umeboshi, tamagoyaki, an octopus
+  sausage, HER mochi ("mine ♡"). "Pick one. Sweet OR sour." -> MC's chopsticks hover the tamagoyaki (pink glow), step to the
+  umeboshi (purple glow), pinch -> SOUR MUST READ: frame squashes to scaleY .92 (smooth camera), damped shiver, yellow-green tint
+  held 334 ms, "すっぱい！ SOUR!" -> "Sour, ne?" -> her smile on speed lines, "You smile for her anyway." -> back on the box her red
+  chopsticks have put a SECOND umeboshi in: "Good. I'll pack sour. Every day." RM: static tint 1 s + hard cut, no squash/shiver.
+- **Self-critique**: reads instantly and is funny; the "reaction" cut is her face, not MC's (MC is hands-only), so the pucker is
+  only carried by the camera + SFX. **R2**: add MC's hand trembling on the chopsticks in the pucker beat (2 held poses).
+
+### closeup-2 · Phone face-down (horror 3)
+- **School**: the Kuleshov effect x *Rear Window* inserts x yandere tells. **Theme**: *what she hides, she hides without looking.*
+- Her phone buzzes (2 held offsets, 2 Hz) — lock screen 12:00, wallpaper = a candid photo of YOU from behind on the roof railing,
+  "Unknown ⊕ · who's the new kid? 🙂" (XOR) — her thumb flips it face-down in 3 held poses -> Kuleshov cut to her face, blank,
+  pin dark, 2 s of nothing -> "Nobody. Nobody important." -> it buzzes again face-down, XOR-purple light leaks round the edge ->
+  her smile: "Only you tonight. Come in." RM: static "bzz", no offset, one-cut flip.
+- **Self-critique**: the wallpaper detail is the best horror-per-pixel of the set; the hand is main's MC hand re-coloured and reads
+  a bit mitten-like. **R2**: her own hand art (nails in her red); the purple leak should pulse once per buzz, not glow flat.
+
+### closeup-3 · The third cup (horror 4)
+- **School**: Ozu low-table framing / KyoAni quiet kitchens x *Get Out*'s teacup x *Notorious* rack focus. The tea is never named.
+- **Theme**: *it's always three of us* — the third cup is for YOU (Input B). Uses main's `sceneKitchen` string art with the third
+  cup lifted onto its own plane so focus can rack to it; ripples ring on its surface (stepped) — "Nobody poured it. You heard a
+  pour anyway." -> ECU: the steam writes OR in her red, rising in 3 held poses and fading ([her breath] caption) — "MC: Who's the
+  third cup for?" -> her hand slides the cup toward the lens in 3 held poses: "For Input B. Silly." / "It's always three of us."
+  RM: static OR cut in at 0.8 s, held 1 s, cut out (script rule); the push is one cut.
+- **Self-critique**: the OR-in-steam shot and the rack focus are strong; her hand is a fist, not a gentle push. **R2**: an open palm
+  sliding the saucer, and a 4th cup appearing on the last beat (the TRUE AND ending plant).
+
+### closeup-4 · The shrine circuit (horror 3)
+- **School**: *Mushishi* / *Mononoke* reliquary macro x a patient Kurosawa push-in x Undertale-style personal memory.
+- **Theme**: *she enshrines what you make.* Genkan -> push in on main's shrine (my candle flame steps in 3 held poses) -> ECU on
+  the circuit under glass: inputs "you" / "her", a NAND, the output lamp lit red, and her red handwriting "built today, HH:MM ·
+  kept ♡" with the VIEWER's real clock -> an umeboshi offering: "I keep everything you make."
+- **Honest note**: Logic mode doesn't persist the player's circuit anywhere (no localStorage key), so the circuit is fixed; only the
+  time is real. **R2**: have Logic mode write `gob.lastCircuit` and render it here (the script asks for exactly that).
+
+### closeup-5 · Her pin states (horror 2)
+- **School**: magical-girl brooch macro (*Sailor Moon* / *Madoka* soul gem) x the manga two-panel reaction split x mood ring.
+- **Theme**: *the pin is the truth her face hides.* Top panel: her NAND hair-pin in macro on silver hair; bottom panel: a letterbox
+  strip of her eyes; legend on the right. hum (pink glow) "Good input." / flicker (bright<->dim, 500 ms holds = 2 swaps/s)
+  "W-wait. Not both at once—" / solid red "Don't lea—" / dark, silence. RM: flicker = a static half-lit bubble.
+- **Self-critique**: clearest "rules card" for the audience, least cinematic; the pin reads as a plain gate, not a jewel. **R2**: add
+  enamel/metal shading and a glint, and use it as a HUD element in the real game instead of a standalone insert.
