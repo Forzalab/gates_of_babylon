@@ -1,0 +1,43 @@
+/* anim-4 Paprika parade: saturated dream grade, toy-like props with fat ink lines. */
+.a4 .a4-bg { position: absolute; inset: 0; }
+.a4 .a4-kitchen, .a4 .a4-kitchen > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.a4 .a4-kitchen { --c-wall: #ffd1e4; --c-wall2: #f7b6d2; --c-wood: #ffcfa8; --c-wood2: #f4a97e; --c-night: #6f63c9; --c-frame: #ff9cc8; --c-metal: #d9d2ea; --art-stroke: #4a2347; }
+.a4 .a4-dream { position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse at 50% 45%, rgba(255, 180, 230, .08), rgba(120, 40, 140, .35) 90%); mix-blend-mode: multiply; }
+.a4 .a4-layer * { stroke-linejoin: round; stroke-linecap: round; }
+.a4 .a4-road { fill: rgba(20, 8, 30, .55); }
+.a4 .p-rim { fill: #ff5fa2; stroke: #2a0e2a; stroke-width: 6px; }
+.a4 .p-face { fill: #fffaf2; stroke: #2a0e2a; stroke-width: 4px; }
+.a4 .p-hand { stroke: #2a0e2a; stroke-width: 7px; }
+.a4 .p-figur { font: 400 18px/1 'Yellowtail', cursive; fill: #b0123e; }
+.a4 .p-strapline { stroke: #e8e8f0; stroke-width: 10px; }
+.a4 .p-strap { fill: none; stroke: #e8e8f0; stroke-width: 10px; }
+.a4 .p-gate { fill: #fffaf0; stroke: #5a1f00; stroke-width: 6px; }
+.a4 .p-ink { fill: #5a1f00; }
+.a4 .p-inkline { fill: none; stroke: #5a1f00; stroke-width: 4px; }
+.a4 .p-umb { fill: rgba(207, 227, 255, .55); stroke: #e8f1ff; stroke-width: 5px; }
+.a4 .p-umbh { fill: none; stroke: #e8f1ff; stroke-width: 6px; }
+.a4 .p-vend { fill: #dfe8ee; stroke: #2a3036; stroke-width: 5px; }
+.a4 .p-vendtop { fill: #1e7fd6; }
+.a4 .p-buffer { font: 400 16px/1 'Bangers', var(--cond); fill: #fff; letter-spacing: .08em; }
+.a4 .p-can.c0 { fill: #ff5fa2; } .a4 .p-can.c1 { fill: #ffd84d; } .a4 .p-can.c2 { fill: #8a5cf6; }
+.a4 .p-win { fill: #ffcf7a; stroke: #2a2c36; stroke-width: 6px; }
+.a4 .p-win + g .k-sil { fill: #05060c; stroke: none; }
+.a4 .p-door { fill: #5a4a46; stroke: #2a1f1c; stroke-width: 6px; }
+.a4 .p-plate { fill: #eee8dc; }
+.a4 .p-twelve { font: 700 16px/1 var(--cond); fill: #3a302a; }
+.a4 .p-knob { fill: #c9c2b8; }
+.a4 .p-slip { fill: #4a5f86; stroke: #22304a; stroke-width: 5px; }
+.a4 .p-cup { fill: #fbf7f1; stroke: #2a0e2a; stroke-width: 4px; }
+.a4 .p-tea { fill: #b8c47a; stroke: #2a0e2a; stroke-width: 3px; }
+.a4 .p-steam { fill: none; stroke: #fff; stroke-width: 4px; opacity: .8; }
+.a4 .p-legs { stroke: #2a0e2a; stroke-width: 7px; fill: none; }
+.a4 .a4-morph { filter: drop-shadow(0 16px 20px rgba(40, 0, 40, .45)); }
+.a4 .a4-lead .k-sil { fill: #05060c; stroke: none; }
+.a4 .a4-lead .k-eye { fill: #f0243f; }
+.a4 .a4-lead .pinbub { fill: var(--pink); }
+.a4 .a4-banner { fill: #fffaf2; stroke: #2a0e2a; stroke-width: 5px; }
+.a4 .a4-bantext { font: 400 44px/1 'Bangers', var(--cond); letter-spacing: .06em; fill: #2a0e2a; }
+.a4 .a4-bantext .and { fill: var(--pink); }
+.a4 .a4-line { top: 150px; bottom: auto; }
+.a4 .a4-count { position: absolute; left: 30px; top: 30px; margin: 0; font: 700 22px/1 var(--mono); color: #fff; background: rgba(0, 0, 0, .55); padding: 8px 12px; border-radius: 6px; }

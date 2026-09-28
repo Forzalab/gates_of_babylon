@@ -8,6 +8,7 @@ import Cam6 from './cam6/Cam6.jsx';
 import Fx1 from './fx/Fx1.jsx';
 import Fx2 from './fx/Fx2.jsx';
 import Anim3 from './anim3/Anim3.jsx';
+import Anim4 from './anim4/Anim4.jsx';
 
 export const VARIANTS = [
   { id: 'cam-4', track: 'camera', title: 'Hitchcock: a true dolly-zoom on her door, then on the slippers', theme: 'Hitchcock suspense (show the bomb first) x Saul Bass x the Vertigo effect', horror: 4, builder: 'B', Component: Cam4 },
@@ -16,6 +17,7 @@ export const VARIANTS = [
   { id: 'fx-1', track: 'fx', title: 'Demo-path FX reel: every sound has a body', theme: 'Mushishi x Lynch room tone: each SFX gets a visible twin + a caption', horror: 3, builder: 'B', Component: Fx1 },
   { id: 'fx-2', track: 'fx', title: 'The monitor wall: nine effects, full vs still, side by side', theme: 'Kairo (Pulse): a room of CRTs, each playing one effect forever', horror: 2, builder: 'B', Component: Fx2 },
   { id: 'anim-3', track: 'anim', title: 'Junji Ito creep: it only moves when you look away', theme: 'Uzumaki spirals x Weeping-Angel gaze rules: your mouse is your eyes', horror: 5, builder: 'B', Component: Anim3 },
+  { id: 'anim-4', track: 'anim', title: 'Paprika parade: every prop morphs and joins her collection', theme: 'Satoshi Kon dream-morph parade: the parade of everything she kept', horror: 3, builder: 'B', Component: Anim4 },
   { id: 'menu-4', track: 'menu', title: 'Bandersnatch letterbox: the timer drains into her cup', theme: 'Bandersnatch x cinema scope x Ju-On quiet: the timer is hers', horror: 3, builder: 'B', Component: Menu4 },
   { id: 'menu-5', track: 'menu', title: 'Circuit wires: her wire is already soldered', theme: 'Serial Experiments Lain x circuit board: the drag lies, the OR gets desoldered', horror: 3, builder: 'B', Component: Menu5 },
 ];
