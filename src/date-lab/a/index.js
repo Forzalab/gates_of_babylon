@@ -16,6 +16,7 @@ import Bench from './nanda/Bench.jsx';
 import Kyoani from './anim/Kyoani.jsx';
 import Trigger from './anim/Trigger.jsx';
 import CupTypes from './menu2/CupTypes.jsx';
+import Ddlc2 from './menu2/Ddlc2.jsx';
 
 const A = (id, track, title, theme, horror, Component) => ({ id, track, title, theme, horror, builder: 'A', Component });
 
@@ -37,4 +38,5 @@ export const VARIANTS = [
   A('anim-2', 'anim', 'Trigger limited anim: smear, impact frame, focus lines, SFX', 'Studio Trigger / Gainax x Edgar Wright smash cuts: every beat hits like she meant it', 2, Trigger),
   // ---- round 2 ----
   A('menu-h1-r2', 'menu', 'The Cup That Types: her cursor retypes your face-down card', 'hybrid menu-1 x menu-3: tarot candle table x DDLC live edit: she rewrites your card while the candle burns', 4, CupTypes),
+  A('menu-3-r2', 'menu', 'DDLC r2: she rewrites YOUR line before the menu exists', 'DDLC / Monika x Funny Games x meta-horror: the choice UI (and your dialogue) is her territory', 5, Ddlc2),
 ];

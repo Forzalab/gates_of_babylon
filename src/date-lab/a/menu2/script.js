@@ -39,3 +39,8 @@ export function cupScript(run, disabled = [], rm = false) {
   }
   return { pink: [{ at: 0, text: OPTIONS.pink.text }], purple: slowRetype(OPTIONS.purple.text, "It's late. ", 'Stay.', 250, { rm }), typing: 'purple', warmFrom: 0 };
 }
+
+// menu-3-r2 cold open: before the menu even appears, her caret edits MC's OWN line (the first-3-seconds tell).
+export const MC_FROM = "It's late. I should go home.";
+export const MC_KEEP = "It's late. I should ";
+export const mcLine = (rm = false) => slowRetype(MC_FROM, MC_KEEP, 'stay.', 750, { rm, tick: TICK });

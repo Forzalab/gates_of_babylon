@@ -1,0 +1,10 @@
+/* menu-3-r2 additions on top of round-1 ddlc.css: MC's own line being edited, the dedicated ECU layer. */
+.ddlc2 .mcline { transition: border-color 200ms ease; }
+.ddlc2 .mcline.edited { border-color: var(--her); box-shadow: 0 0 0 2px rgba(240, 36, 63, .35), 0 0 40px rgba(240, 36, 63, .25); }
+.ddlc2 .mcline .caret { width: 7px; }
+.ddlc2 .boxtyping { position: absolute; right: 36px; top: -26px; padding: 8px 18px; border-radius: 999px; background: #1b0610; border: 2px solid var(--her);
+  font: italic 700 28px/1 var(--cond); color: #fff; }
+.ddlc2 .boxtyping b { color: var(--her); }
+.ddlc2.lens .lensgrade { opacity: .45; }
+.ddlc2.lens .chr { font-size: 28px; }
+.ddlc2.is-rm .caret { animation: none; }

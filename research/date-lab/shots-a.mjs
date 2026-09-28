@@ -65,6 +65,23 @@ const SHOTS = {
     await page.keyboard.press('r'); await wait(2500); await snap('9-replay-purple-pinned-struck');
     await open(true); await wait(3600); await snap('rm-stay');
   },
+  'menu-3-r2': async (page, snap, open) => {
+    await open();
+    await wait(300); await snap('0-cold-open-mc-line');
+    await wait(1100); await snap('1-her-caret-in-mc-line');
+    await wait(900); await snap('2-mc-line-says-stay');
+    await wait(2300); await snap('3-backspacing-goodnight');
+    await wait(2000); await snap('4-label-take-your-time');
+    await page.waitForSelector('.hercursor.p1'); await wait(100); await snap('5-her-cursor');
+    await page.waitForSelector('.ecu'); await wait(300); await snap('6-ecu-eyes-on-mc');
+    await wait(1300); await snap('7-ecu-eyes-on-you');
+    await page.keyboard.press('r'); await wait(3000); await snap('8-replay-pink-disabled-both-agree');
+    await open(); await wait(5600); await page.keyboard.press('2'); await wait(120); await snap('9-purple-bleed');
+    await wait(3200); await snap('10-purple-lea');
+    await page.keyboard.press('r'); await wait(2400); await snap('11-replay-purple-disabled');
+    await open(true); await wait(1500); await snap('rm-mc-line-emptied');
+    await page.waitForSelector('.ecu', { timeout: 15000 }); await wait(300); await snap('rm-ecu');
+  },
 };
 
 // camera pieces: freeze the clock at ?t=<ms> and shoot (deterministic frames)

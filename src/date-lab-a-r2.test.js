@@ -53,7 +53,7 @@ test('h1-r2: reduced motion = at most 3 hard cuts, each held >= 1 s', () => {
 });
 
 // every quoted "NANDA: ..." / "MC: ..." line in the r2 sources obeys <= 12 words per click
-export const R2_FILES = ['menu2/CupTypes.jsx'];
+export const R2_FILES = ['menu2/CupTypes.jsx', 'menu2/Ddlc2.jsx'];
 test('r2: every builder-A r2 line is <= 12 words', () => {
   for (const f of R2_FILES) {
     const src = readFileSync(new URL(`./date-lab/a/${f}`, import.meta.url), 'utf8');
@@ -62,4 +62,16 @@ test('r2: every builder-A r2 line is <= 12 words', () => {
       assert.ok(words(line) <= 12, `${f}: ${line}`);
     }
   }
+});
+
+test('menu-3-r2: the cold-open tell edits MC\'s own line inside the first 3 s, on the 8 fps grid; RM = held cuts', async () => {
+  const { mcLine, MC_FROM } = await import('./date-lab/a/menu2/script.js');
+  const f = mcLine(false);
+  assert.equal(textAt(f, 0), MC_FROM);
+  assert.ok(f[1].at < 1000, 'first visible edit inside 1 s');
+  assert.ok(endOf(f) <= 3000, `done by ${endOf(f)}`);
+  assert.equal(textAt(f, 3000), "It's late. I should stay.");
+  assert.ok(f.every((x) => x.at % TICK === 0));
+  const r = mcLine(true);
+  assert.ok(r.length === 3 && gaps(r).every((g) => g >= 1000) && endOf(r) <= 3000);
 });

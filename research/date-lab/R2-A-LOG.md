@@ -26,3 +26,22 @@ Round-1 variants are untouched; round-2 code lives in new folders (`a/menu2/`, .
 - **Tests**: retype finishes < 5 s, >= 250 ms per key on the 8 fps grid, warmth steps >= 500 ms, RM <= 3 cuts >= 1 s, lines <= 12 words.
 - **Self-critique**: strongest single-frame read of my menus; the brand print (Figur Arcana) had to go to make room for the slip,
   and her arrow is a UI glyph floating on a diegetic table (intended DDLC clash, but a purist could call it mixed grammar).
+
+## menu-3-r2 · DDLC 4th wall, improved (horror 5)
+- **School**: DDLC / Monika x Haneke's *Funny Games* x Pony Island meta-horror (unchanged). **Theme**: *she edits the menu while
+  you read it* — and now she starts before the menu exists.
+- **What changed vs R1**: (1) **cold-open tell**: the scene opens on MC's OWN line "It's late. I should go home."; at 0.75 s her
+  red caret appears in HIS dialogue box (box border goes her red, "NANDA is typing…" tab on the box) and backspaces "go home." ->
+  "stay." by 2.6 s. The menu appears at 3 s, already after the room has seen her rewrite the game. Her first line then answers
+  it: "You said stay. Come in? Just for tea." (2) **ECU layer** (`menu2/EyesEcu.jsx`): drawn for the ECU, not the bust at 3x —
+  lids ~19 px, face edge ~9 px, lower lid ~8 px, highlight removed, shrunken red iris + pinpoint pupil, heavy upper-face shade.
+  Pupils start on MC (screen-left) and after ONE held cut (1 s) snap dead-centre into the lens on "Not him. You." (3) file list
+  tied to real state: `visits N (i counted)` from localStorage (try/catch, private window = 1).
+  Kept: live retype of purple -> "Stay.", timer relabelled "take your time ♡", her cursor walks to pink in 3 held poses, purple =
+  "Cheater." + "It's late. lea—", replay notes, pink-disabled both-buttons-agree, console easter egg.
+- **RM**: MC-line edit = 3 hard cuts held 1 s; menu edits = held cuts; pupils start centred; no tear band; caret static.
+- **Verdict criticisms answered**: "first ~3 s a cold audience sees nothing scary" -> MC's line is rewritten inside 1-2.6 s;
+  "ECU bust thin line at 3x" -> dedicated ECU layer with authored line weights.
+- **Tests**: MC-line edit starts < 1 s, ends <= 3 s, on the 8 fps grid; RM = 3 cuts >= 1 s; lines <= 12 words.
+- **Self-critique**: the tell is now early and obvious; the ECU is cleaner but my own face drawing is flatter than main's bust
+  (no hair shine) and the pin is cropped huge at top-right.
