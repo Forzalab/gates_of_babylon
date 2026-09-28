@@ -9,13 +9,13 @@ const DIR = path.dirname(fileURLToPath(import.meta.url));
 const BASE = process.env.SHOTS_BASE || 'http://localhost:5490/research/date-beta-mockups';
 const want = process.argv[2] || 'all';
 const onlyPage = process.argv[3];
-const VARIANTS = want === 'all' ? ['A', 'B', 'C'] : [want];
+const VARIANTS = want === 'all' ? ['A', 'B', 'C', 'H'] : [want];
 const PAGES = ['ui', 'sprites', 'sheet', 'scenes', 'fx'];
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 const errors = [];
 
-async function open(url, rm = false) {
-  const page = await browser.newPage({ viewport: { width: 1920, height: 1080 }, reducedMotion: rm ? 'reduce' : 'no-preference' });
+async function open(url, rm = false, vw = 1920) {
+  const page = await browser.newPage({ viewport: { width: vw, height: Math.round(vw * 9 / 16) }, reducedMotion: rm ? 'reduce' : 'no-preference' });
   page.on('pageerror', (e) => errors.push(`${url}: ${e.message}`));
   page.on('console', (m) => { if (m.type() === 'error' || m.type() === 'warning') errors.push(`${url}: ${m.type()} ${m.text()}`); });
   await page.goto(url);
@@ -39,9 +39,9 @@ for (const v of VARIANTS) {
       console.log(v, file);
       await p.close();
     }
-    // extra states declared by the page: window.SHOTS = [{name, b, rm, run: 'fnName', wait}]
+    // extra states declared by the page: window.SHOTS = [{name, b, rm, fn: 'fnName', wait, vw}] (vw = viewport width, e.g. 1024 = projector sim)
     for (const s of extras) {
-      const p = await open(`${BASE}/${v}/${pg}.html?b=${s.b}${s.rm ? '&still' : ''}`, s.rm);
+      const p = await open(`${BASE}/${v}/${pg}.html?b=${s.b}${s.rm ? '&still' : ''}`, s.rm, s.vw || 1920);
       if (s.fn) await p.evaluate((fn) => window[fn](), s.fn);
       await p.waitForTimeout(s.wait || 0);
       const file = `${pg}-${s.name}.png`;
