@@ -56,6 +56,13 @@ export const SHOTS = [
   { id: 'fx-2', name: 'wall', wait: 3500 },
   { id: 'fx-2', name: 'wall-late', wait: 16500 },
   { id: 'fx-2', name: 'rm-wall', q: 'still', wait: 3500 },
+  // anim-3 Ito creep: stage 0 vs stage 4 per scene, one blink mid-close, one RM
+  ...['rooftop', 'train', 'naan', 'platform', 'underpass', 'apartment', 'stairs', 'genkan'].flatMap((sc) => [
+    { id: 'anim-3', name: `${sc}-0`, q: `scene=${sc}&stage=0&pause`, wait: 900 },
+    { id: 'anim-3', name: `${sc}-4`, q: `scene=${sc}&stage=4&pause`, wait: 900 },
+  ]),
+  { id: 'anim-3', name: 'blink', q: 'scene=platform&stage=2&pause', wait: 900, steps: [['move', 1340, 560], ['click', 1340, 560], ['wait', 120]] },
+  { id: 'anim-3', name: 'rm-stairs-3', q: 'scene=stairs&stage=3&pause&still', wait: 900 },
 ];
 
 const filter = process.argv[2];
