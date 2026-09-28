@@ -1,0 +1,102 @@
+/* VARIANT A — KAWAII POP. Candy dating-sim chrome that slowly goes wrong.
+   Material: sugar. Pastel panels, fat plum ink line, sticker drop-shadows, heart confetti.
+   Dread 0 = candy. Dread 1 = sugar-rot (saturation up, stitches show, hearts misalign).
+   Dread 2 = wrong (the candy is meat-pink, hearts turn into eyes, the ink line goes her-red). */
+:root {
+  --page-bg: #2a1830;
+  --bg: #ffe3f0; --ink: #3a1d3f; --ink-2: #7a4f7c;
+  --surface: #fffafd; --surface-ink: #3a1d3f; --edge: #3a1d3f; --edge-w: 5px; --radius: 34px;
+  --shadow: 0 12px 0 #3a1d3f;
+  --name-bg: var(--pink); --name-ink: #3a0c22; --name-mc-bg: #bfe3ff; --name-mc-ink: #10233d;
+  --cap-bg: #3a1d3f; --cap-ink: #fff; --focus: #3a1d3f;
+  --font-display: 'Bangers', 'RC', sans-serif; --font-body: 'RC', 'Liberation Sans', sans-serif;
+  --art-stroke: #4a2347; --art-sw: 4px; --art-sw-thin: 2.5px; --art-sw-fat: 7px;
+  --chat-bg: #fff0f7; --chat-head: #fff; --bub-in: #fff; --bub-out: #d8f0ff; --notif-bg: #fffafd;
+  --flow-node: #fffafd; --flow-ink: #3a1d3f; --flow-edge: #3a1d3f; --node-r: 26px;
+  --err-bg: #fffafd; --fx-bg: #ffe3f0;
+
+  /* art roles */
+  --c-hair: #e9ebf6; --c-hair2: #aeb3d3; --c-hairhl: #ffffff; --s-hair2: #9ea3c8;
+  --c-skin: #ffece3; --c-skin2: #f7cdc0; --c-white: #ffffff; --c-iris: #d6337f; --c-iris2: #ff9cc8; --c-pupil: #3d0b2c;
+  --c-lash: #3a1d3f; --s-lash: #3a1d3f; --c-blush: #ff8fb8; --c-mouth: #c93d64;
+  --c-cloth: #ffffff; --c-cloth2: #cfc7ff; --c-collar: #8a7ff0; --c-stripe: #fff; --s-stripe: #ffffff; --c-ribbon: #ff5fa2;
+  --c-tie: #ffffff; --c-pin: #ff5fa2; --c-tear: #9fe0ff; --s-tear: #5fb8e6; --c-shade: rgba(58, 29, 63, .55);
+  --c-sil: #1c0f1f; --s-sil: #1c0f1f; --c-eye: #f0243f;
+  --c-metal: #d9d2ea; --c-wall: #ffd1e4; --c-wall2: #f7b6d2; --c-floor: #ffc2dc; --c-floor2: #e893ba; --s-floor2: #e27fae;
+  --c-glass: #a9dcff; --c-seat: #ff7fb0; --c-light: #fff6fb; --c-wood: #ffcfa8; --c-wood2: #f4a97e; --c-tile: #fff0f6;
+  --c-cup: #ffffff; --c-tea: #b8e08a; --c-steam: none; --s-steam: #ffffff; --c-plum: #e8335c; --c-egg: #ffd84d; --c-mochi: #fff4f8;
+  --c-phone: #3a1d3f; --c-screen: #fff0f7; --c-xhair: #9b72ff; --c-xhair2: #6a45d6; --s-xhair2: #5a36c4;
+  --c-hood: #6b4fd8; --c-hood2: #4a33a8; --c-cans: #2a1a44; --c-hand: #ffe2d6; --c-hand2: #e8b8a8; --c-sleeve: #bfe3ff;
+  --c-paper: #fffdf6; --c-frame: #ff9cc8; --c-candle: #fff; --c-flame: #ffc53d; --c-night: #6f63c9;
+  --c-shoe: #6d3a2c; --c-shoe2: #3a1d3f; --c-slipper: #9fd4ff; --c-strap: #ffffff; --c-accent: #ff5fa2; --s-accent: #ff5fa2;
+}
+
+/* pin states (her mood light) */
+.pin-hum .pinbub { fill: var(--pink); } .pin-hum .pinglow { fill: var(--pink); opacity: .45; }
+.pin-flicker .pinbub { fill: #ffd0e4; } .pin-flicker .pinglow { fill: var(--pink); opacity: .2; }
+.pin-red .pinbub { fill: var(--her); } .pin-red .pinglow { fill: var(--her); opacity: .5; }
+.pin-off .pinbub { fill: #b9b2c4; } .pin-off .pinglow { opacity: 0; }
+
+/* candy material */
+.board { background: var(--bg) radial-gradient(circle at 20px 20px, rgba(255, 95, 162, .18) 5px, transparent 6px) 0 0 / 80px 80px; }
+.dlg { box-shadow: var(--shadow), inset 0 -10px 0 #ffe3f0; }
+.dlg::before { content: '♡'; position: absolute; right: 26px; top: -30px; font: 400 56px/1 var(--font-body); color: var(--pink); -webkit-text-stroke: 3px var(--ink); }
+.dlg .who { border: 4px solid var(--ink); box-shadow: 0 5px 0 var(--ink); font-family: var(--font-display); font-weight: 400; font-size: 38px; letter-spacing: .06em; }
+.choice { border-color: var(--ink); }
+.choice .key { background: #fff; color: #3a1d3f; border: 3px solid #3a1d3f; }
+.timer { height: 28px; border: 4px solid var(--ink); background: #fff; }
+.cap { border: 4px solid #fff; box-shadow: 0 6px 0 rgba(58, 29, 63, .35); }
+.chrome button { border-width: 4px; border-color: var(--ink); background: #fff; box-shadow: 0 5px 0 var(--ink); }
+.cw h2, .pause h2 { color: var(--pink); -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; }
+.btn { border-width: 4px; border-color: var(--ink); box-shadow: 0 6px 0 var(--ink); }
+.btn.primary { background: var(--pink); color: var(--pink-ink); }
+.phone { background: #ff9cc8; border-color: var(--ink); border-width: 8px; }
+.pinerr { border: 6px solid var(--ink); box-shadow: 0 16px 0 var(--ink); border-radius: 30px; overflow: hidden; }
+.pinerr .tb { background: var(--pink); color: var(--ink); font-family: var(--font-display); font-weight: 400; font-size: 34px; letter-spacing: .06em; border-bottom: 5px solid var(--ink); }
+.sticker { position: absolute; font: 400 44px/1 var(--font-display); color: #fff; -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; }
+
+/* ---------- DREAD: the candy goes wrong ---------- */
+[data-dread="1"] { --bg: #ffc9e0; --surface: #fff2f8; --edge: #6a1f4f; --shadow: 0 12px 0 #6a1f4f; --ink-2: #8b3a6e; }
+[data-dread="1"] .dlg { box-shadow: var(--shadow), inset 0 -10px 0 #ffb3d4; }
+[data-dread="1"] .dlg::after { content: ''; position: absolute; inset: 10px; border: 3px dashed rgba(106, 31, 79, .45); border-radius: calc(var(--radius) - 10px); pointer-events: none; }
+[data-dread="1"] .dlg::before { transform: rotate(18deg) translate(6px, 4px); }
+[data-dread="2"] { --bg: #3b0a1c; --ink: #ffe9f1; --ink-2: #ff9cc8; --surface: #ffd6e6; --surface-ink: #3b0a1c; --edge: var(--her); --shadow: 0 14px 0 #8b0f2c;
+  --cap-bg: #000; --focus: #fff; --flow-node: #ffd6e6; --flow-ink: #3b0a1c; --flow-edge: #ff9cc8; --err-bg: #ffd6e6;
+  --c-wall: #5b1430; --c-wall2: #7a1d41; --c-floor: #4a0f26; --c-floor2: #2b0715; --s-floor2: #8b2a52; --c-light: #ffb3cf;
+  --c-seat: #a3163f; --c-glass: #1b0610; --c-night: #1b0610; --c-metal: #c890a8; --c-strap: #ffb3cf; --c-tile: #6b1a38; --c-wood: #c26a78; --c-wood2: #8b3a4e;
+  --art-stroke: #1a0610; }
+.board[data-dread="2"] { background: var(--bg) radial-gradient(circle at 20px 20px, rgba(240, 36, 63, .22) 6px, transparent 7px) 0 0 / 80px 80px; }
+[data-dread="2"] .dlg { box-shadow: var(--shadow), inset 0 -10px 0 #ff9cc8; }
+[data-dread="2"] .dlg::before { content: '◉'; color: var(--her); -webkit-text-stroke: 0; transform: none; }
+[data-dread="2"] .dlg::after { content: ''; position: absolute; left: 40px; right: 40px; bottom: -34px; height: 34px; pointer-events: none;
+  background: radial-gradient(circle at 12px 0, #ffd6e6 11px, transparent 12px) 0 0 / 90px 34px repeat-x; filter: drop-shadow(0 4px 0 var(--her)); }
+[data-dread="2"] .dlg .who { box-shadow: 0 5px 0 var(--her); border-color: var(--her); }
+[data-dread="2"] .choice { border-color: var(--her); }
+[data-dread="2"] .timer { border-color: var(--her); background: #1b0610; }
+[data-dread="2"] .sticker { color: var(--her); -webkit-text-stroke-color: #fff; }
+
+/* ---------- A: board furniture ---------- */
+.scallop { position: absolute; left: 0; right: 0; height: 26px; z-index: 60; pointer-events: none;
+  background: radial-gradient(circle at 20px 0, var(--pink) 16px, transparent 17px) 0 0 / 40px 26px repeat-x; }
+.scallop.top { top: 0; }
+.scallop.bot { bottom: 0; transform: scaleY(-1); }
+.scallop.d1 { background-image: radial-gradient(circle at 20px 0, #e0467f 16px, transparent 17px); }
+.scallop.d2 { height: 44px; background: radial-gradient(ellipse 9px 30px at 20px 0, var(--her) 16px, transparent 17px) 0 0 / 70px 44px repeat-x; }
+.board > .label { top: 40px; background: #fff; color: #3a1d3f; padding: 10px 14px; border: 4px solid #3a1d3f; border-radius: 14px; box-shadow: 0 5px 0 #3a1d3f; }
+.board > .label b { color: #d6337f; }
+.sticker { z-index: 55; }
+.sticker.s2 { color: var(--her); font-size: 54px; }
+.card .cardbg { background: radial-gradient(circle at 50% 38%, #ffe3f0 0 34%, transparent 35%); }
+.card.c-smile .cap2 { background: var(--pink); } .card.c-blank .cap2 { background: #e6e0ee; } .card.c-tears .cap2 { background: #9fe0ff; }
+.card.c-wide { background: #3b0a1c; } .card.c-wide .cardbg { background: radial-gradient(circle at 50% 38%, #5b1430 0 34%, transparent 35%); }
+.card.c-wide .cap2 { background: var(--her); } .card.c-wide .cap2 p { color: #fff; }
+.card .cap2 h3 { color: #fff; -webkit-text-stroke: 3px var(--ink); paint-order: stroke fill; }
+.panel h3 { color: var(--pink); -webkit-text-stroke: 2.5px var(--ink); paint-order: stroke fill; }
+.panel.p-dark { background: #3b0a1c; } .panel.p-xor { background: #efe8ff; }
+.callout { box-shadow: 0 6px 0 var(--edge); }
+.dreadtag { background: #fff; color: #3a1d3f; padding: 8px 12px; border-radius: 10px; border: 3px solid #3a1d3f; }
+.mini[data-dread="2"] { border-color: var(--her); }
+.dlg.crowd .line { color: var(--surface-ink); }
+.fx { box-shadow: 0 8px 0 var(--ink); }
+.fx .stage { background: #ffe3f0; }
+.fx .ctl { background: #fff; border-top: 4px solid var(--ink); color: var(--ink); }
