@@ -1,0 +1,35 @@
+severity | scene + beat idx | shot file | what's wrong | where on screen
+MED | leave b03 (choice) | leave_b03_a.png (also leave_b03_b.png) | Nanda stands on top of the raised dialogue box in front of the cafe counter; her body covers the chalkboard menu text (drip/latte/or...both/xor) and her shadow lands on the wall/box, not a floor | right, x~1680-1870 y~660-830 (1920 frame)
+MED | leave b02 | leave_b02_a.png | Nanda floats mid-air in front of the counter, feet cut off by the dialogue box, shadow hidden; head/bow overlaps chalkboard bottom line and espresso machine | right, x~720-910 y~820-950 of the 960 quadrant scale (i.e. right of centre, lower half)
+MED | leave-fu b01 | leave-fu_b01_a.png | Nanda hovers in front of counter, covers menu line "xor .. one only", feet hidden, no floor contact | right, x~1680-1870 y~820-950
+LOW | leave-yeah b01 | leave-yeah_b01_a.png | Nanda floating over counter/menu board, feet hidden behind box, partly hides menu lines | centre-right, upper-middle
+LOW | leave b00 | leave_b00_a.png | Nanda floats at the door, feet hidden by box, no floor | right, upper-middle
+LOW | leave-fu/leave-yeah b02..b04 | leave-fu_b02_a.png | round cafe table top sits above the visible floor line, pedestal disappears under the dialogue box; second table clipped by the box | bottom-left
+MED | naan b01 | naan_b01_a.png | dialogue box sits over billboard price (yen 980 / tax incl.), NAND HOUSE footer and QR code, hiding them | bottom, left two-thirds, y~940-1080
+LOW | naan b00 | naan_b00_a.png | billboard is a flat card with no wall/perspective; "click" hint overlaps art bottom-right | bottom-right
+MED | train b00 | train_b00_a.png | "NOT Sweet" ad poster hangs in front of the window glass: overlaps window frame top and glass, not attached to a wall or rail | top-centre, x~360-690 y~60-215
+LOW | train b00 | train_b00_a.png | stray grey ledge sticks out of the window sill at bottom-left; window bottom and bench cut by dialogue box | bottom-left / bottom
+LOW | train b01 | train_b01_a.png | zoomed ad is cut by the dialogue box (body text hidden) | bottom half
+MED | door b01 | door_b01_a.png | Nanda floats beside the door with no floor visible (feet hidden behind dialogue box), shadow hidden; heart bubble overlaps the 12 number plate | right, x~720-910 y~285-410
+MED | door b02 (choice) | door_b02_a.png (door_b02_b.png) | Nanda stands on top of the raised dialogue box with her shadow drawn on the wall; head covers the 12 plate; stray "4" digit floats under the box on the door | right x~1680-1870 y~130-290; stray "4" ~x1440 y~408
+LOW | door b01, b02 | door_b02_a.png | umbrella leaning on the door has its base hidden by the dialogue box so the handle looks unsupported | left-centre, x~385 y~330-410
+MED | cup b01 | cup_b01_a.png | Nanda floats over the right end of the table, overlapping the tabletop; feet hidden by box, shadow detached on floor beside the table leg | right, x~720-910 y~285-410 (1920 frame: lower right)
+MED | cup b03 (choice) | cup_b03_a.png (cup_b03_b.png) | Nanda stands on top of the raised dialogue box, feet visible above box, shadow on wall/floor edge; hides kettle window and 3rd cup partly | right, x~1680-1870 y~130-290
+LOW | cup b02 | cup_b02_a.png | dialogue box covers the third (empty) cup and saucer; cups look cut off by the box | bottom row, right of centre
+MED | steeped b00 | steeped_b00_a.png | Nanda at table right end: body overlaps the tabletop and reaches the table front edge (reads as standing on the table) while her shadow is on the floor beside the leg, detached; feet hidden | right, x~720-910 y~285-410
+LOW | steeped b01 | steeped_b01_a.png | same as steeped b00 | right
+LOW | steeped b02..b04 | steeped_b04_a.png | dialogue box covers tabletop/cups; "Back to start" button overlaps table leg | centre / bottom-left
+LOW | unknown b01 | unknown_b01_a.png | text says a floor hatch under the table, but no hatch is drawn (area under table empty or hidden by box) | bottom centre
+LOW | unknown b02 | unknown_b02_a.png | text says a steep ladder down, but no ladder or opening is shown | bottom centre
+LOW | escape-timeout b00 | escape-timeout_b00_a.png | genkan door chain lock hangs loose from the handle area, dots floating below the handle | centre-right of door, x~1510-1580 y~700-830 (1920 frame of quadrant)
+LOW | escape-timeout b03 | escape-timeout_b03_a.png | umeboshi saucer squeezed against the 4th cup saucer, overlapping at table edge | table front, right
+LOW | escape-timeout b04..b06 | escape-timeout_b05_a.png | Nanda over table right end again, feet hidden, shadow off the table on the floor | right
+LOW | escape-win b04..b05 | escape-win_b04_a.png | Nanda floats on pure black void; shadow ellipse floats right of box with no ground; feet hidden | right, upper-middle
+MED | escape b05 | escape_b05_a.png | mallet handle end hangs in air above the lower shelf (rests on nothing) and passes through the middle shelf board; mallet on top shelf right is tilted with one end in the air | centre x~650-780 y~150-280; right x~800-840 y~135-150 (quadrant scale)
+LOW | escape b00..b13 | escape_b00_a.png | shelves float in a black void (no wall/floor); bottom shelf hidden behind box; "hers only" label floats under the shelf, not attached | full frame; label centre-left below bottom shelf
+LOW | escape b04 | escape_b04_a.png | mortar is much bigger than the jars (scale) though it sits on the bottom shelf | bottom-centre
+LOW | escape b12/b13 | escape_b13_a.png | timer digit floats between dialogue box and buttons in open air | bottom-centre
+LOW | rooftop b01, b06 (choice) | rooftop_b01_a.png | KNOWN/ACCEPTED: Nanda stands on top of the raised dialogue box; she also covers the tower's side clock face | right, x~1680-1870 y~130-290
+MED | rooftop b01, b06 (choice) | rooftop_b06_a.png | raised dialogue box and buttons cover the weather sign text ("Today's f-OR-ecast: rain") and tower base; timer "9" floats over the tower | left x~40-275 y~345-410
+LOW | rooftop b02..b05 | rooftop_b02_a.png | Nanda hovers over the tower base/blossoms, feet hidden by box, shadow at box edge; overlaps the side clock | right, lower
+LOW | rooftop all | rooftop_b00_a.png | tower spire cut by top frame edge; blossom tree has no trunk (clusters float); weather sign posts stand on the railing, not a floor | top-centre; right edge
