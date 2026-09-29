@@ -52,7 +52,7 @@ export default function Door({ rm }) {
       {Array.from({ length: 10 }, (_, i) => <rect key={i} x={i * 46 + 10} y="738" width="8" height="260" fill="#4b4a60" />)}
       <rect x="0" y="990" width="1920" height="90" fill="#3a3848" /><rect x="0" y="990" width="1920" height="6" fill="#57556a" />
       {/* umbrella left by the door, still wet */}
-      <path d="M760 1000 L780 700 L800 1000Z" fill="#8a5cf6" /><line x1="780" y1="700" x2="780" y2="660" stroke="#1a1924" strokeWidth="6" />
+      <path d="M745 990 Q760 820 780 700 Q800 820 815 990 Q780 1000 745 990Z" fill="#8a5cf6" /><path d="M780 700 L780 990" stroke="#5b37c4" strokeWidth="3" /><line x1="780" y1="700" x2="780" y2="660" stroke="#1a1924" strokeWidth="6" />
       <ellipse cx="780" cy="1010" rx="60" ry="8" fill="#6f7aa8" opacity=".5" />
     </svg>
   );

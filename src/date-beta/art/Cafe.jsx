@@ -14,9 +14,9 @@ export default function Cafe() {
       <path d="M80 140 H900 V700 H80 Z M490 140 V700" fill="none" stroke="#3a2a22" strokeWidth="18" />
       <polygon points="900,140 1300,1080 480,1080 80,700" fill="#fff4d8" opacity=".35" />
       {/* sign */}
-      <rect x="1040" y="90" width="700" height="170" rx="14" fill="#2a1a18" />
-      <text x="1390" y="200" className="sign">XOR Coffee</text>
-      <text x="1390" y="240" className="sign-sub">open 7:00</text>
+      <rect x="1040" y="70" width="700" height="210" rx="14" fill="#2a1a18" />
+      <text x="1390" y="170" className="sign">XOR Coffee</text>
+      <text x="1390" y="256" className="sign-sub">open 7:00</text>
       {/* clock at 7:00 */}
       <g transform="translate(1000 420)">
         <circle r="74" fill="#fbf7f1" stroke="#2a1a18" strokeWidth="8" />
