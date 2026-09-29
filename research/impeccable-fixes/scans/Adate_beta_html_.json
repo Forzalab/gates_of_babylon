@@ -1,0 +1,34 @@
+[
+  {
+    "antipattern": "radial-halo",
+    "name": "Radial-gradient background halo",
+    "description": "A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.",
+    "severity": "warning",
+    "category": "slop",
+    "file": "http://localhost:3000/research/impeccable-fixes/A/date-beta.html",
+    "line": 0,
+    "snippet": "radial-gradient halo (#ffd1e6 → transparent) on dark page"
+  },
+  {
+    "antipattern": "repeating-stripes-gradient",
+    "name": "Repeating-gradient stripes",
+    "description": "Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "http://localhost:3000/research/impeccable-fixes/A/date-beta.html",
+    "line": 0,
+    "snippet": "repeating-gradient decorative stripes",
+    "advisory": true
+  },
+  {
+    "antipattern": "codex-grid-background",
+    "name": "Decorative grid-line background",
+    "description": "A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.",
+    "severity": "advisory",
+    "category": "slop",
+    "file": "http://localhost:3000/research/impeccable-fixes/A/date-beta.html",
+    "line": 0,
+    "snippet": "two-axis grid-line gradient background",
+    "advisory": true
+  }
+]

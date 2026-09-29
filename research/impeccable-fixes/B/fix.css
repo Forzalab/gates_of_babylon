@@ -1,0 +1,39 @@
+/* FIX VARIANT B: type + colour token shift.
+   Idea: no new boxes. Fix the tokens the text is set in: ink darker/lighter to a 7:1 floor, alpha and opacity
+   banned on text-bearing chrome, a type scale with line-height built in so padding comes from the text itself,
+   washes replaced by flat colour. Specificity: html[data-mode] prefix beats Vite's runtime CSS. */
+
+html[data-mode="date-beta"] {
+  --t-chrome: 18px;        /* was 14px: projector floor (18px at 1080p ~ 0.5 deg at 4 m) */
+  --t-lead: 1.4;           /* leading token: every single-line label gets half-leading >= .2em as padding */
+  --ink-hi: #ffffff;       /* chrome ink over art */
+  --ink-bg-hi: #000000;    /* chrome ground: pure black, alpha 1 */
+  --card-ink: #2a0f24;     /* card ink, 15:1 on #fff3f8 */
+  --card-ink-2: #5a1440;   /* secondary card ink, >= 9:1 on #fff3f8 */
+  --card-surface: #fff3f8;
+}
+
+/* 1. chrome: opacity 1, alpha 1, bigger type, text-outline ring (the same --g-ring outline the glossy pills use) */
+html[data-mode="date-beta"] .chrome { opacity: 1; }
+html[data-mode="date-beta"] .chrome button {
+  font: 700 var(--t-chrome)/var(--t-lead) var(--cond); letter-spacing: .06em; color: var(--ink-hi);
+  background: var(--ink-bg-hi); border: 2px solid var(--ink-hi); border-radius: 4px; padding: 4px 14px;
+}
+html[data-mode="date-beta"] .nexthint { color: var(--ink-hi); background: var(--ink-bg-hi); padding: 6px 12px; text-shadow: none; }
+
+/* 2. splash: flat surface tokens (no radial wash), ink tokens darkened */
+
+html[data-mode="date-beta"] .splash .hero { background: var(--card-surface); background-image: none; }
+html[data-mode="date-beta"] .splash .kicker { color: var(--card-ink-2); line-height: var(--t-lead); }
+html[data-mode="date-beta"] .splash .sub { color: var(--card-ink); font-weight: 700; line-height: var(--t-lead); }
+
+/* 3. line-height token = padding: 34px text gets 1.6 leading => 10.2px half-leading each side */
+html[data-mode="date-beta"] .splash .nav nav { font-size: 34px; line-height: 1.6; }
+html[data-mode="date-beta"] .splash .nav nav span { display: inline-block; padding-block: calc(34px * .3); line-height: 1; }
+html[data-mode="date-beta"] .splash .strip .mini { padding-block: calc(34px * .3); }
+
+/* ---- Logic mode ("/"): Swiss token pass ----
+   Overflow: the frame keeps its crop via contain: paint (paint containment, not an overflow container), so
+   tooltips are not trapped by hidden overflow semantics. */
+html[data-mode="logic"] .app { overflow: visible; contain: paint; }
+html[data-mode="logic"] .react-flow { overflow: visible !important; contain: paint; }
