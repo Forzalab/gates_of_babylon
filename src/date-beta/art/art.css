@@ -32,7 +32,7 @@
 .naan-ad .na-naan-shadow { fill: #f47a0c; }
 .naan-ad .na-gl { fill: var(--her); stroke: none; }
 .naan-ad .na-area { font: 900 italic 84px/1 'Inter Tight', var(--cond); fill: #0b3431; letter-spacing: -.01em; }
-.naan-ad .na-tabe { font: 800 34px/1 var(--jp); fill: #fff4dc; }
+.naan-ad .na-tabe { font: 800 28px/1 var(--jp); fill: #fff4dc; }
 .naan-ad .na-price { font: 400 124px/1 'Bangers', var(--cond); fill: #fff4dc; stroke: #3a1500; stroke-width: 8px; paint-order: stroke fill; letter-spacing: .02em; }
 .naan-ad .na-tax { font: 800 26px/1 var(--jp); fill: #3a1500; }
 .naan-ad .na-tag { font: 800 46px/1 var(--jp); fill: #fff4dc; letter-spacing: 6px; }
