@@ -152,7 +152,7 @@ function Player() {
           {!pos.done && layer(beat.bg, 'db-bg')}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
-        {!pos.done && speaksNanda(beat.line) && <Nanda scare={beat.scare} />}
+        {!pos.done && speaksNanda(beat.line) && <Nanda scare={beat.scare} raised={!!beat.choices} />}
         {beat.text && !pos.done && <Say line={beat.line} next={waiting} key={`${beat.scene}${beat.index}`} />}
         {beat.choices && !pos.done && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} key={`c${beat.scene}${beat.index}`} />}
         {paused && <div className="db-paused" role="status">paused (P)</div>}

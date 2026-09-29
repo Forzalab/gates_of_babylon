@@ -3,11 +3,11 @@
 import { useMemo } from 'react';
 import { nandaSVG, stageFor } from './art/nanda.js';
 
-export function Nanda({ scare = 0 }) {
+export function Nanda({ scare = 0, raised = false }) {
   const stage = stageFor(scare);
   const svg = useMemo(() => nandaSVG({ stage }), [stage]);
   return (
-    <svg className={`db-nanda stage-${stage}`} viewBox="-130 -330 320 345" role="img" aria-label="Nanda"
+    <svg className={`db-nanda stage-${stage}${raised ? ' raised' : ''}`} viewBox="-130 -330 320 345" role="img" aria-label="Nanda"
       dangerouslySetInnerHTML={{ __html: svg }} />
   );
 }
