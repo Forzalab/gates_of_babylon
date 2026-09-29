@@ -22,8 +22,8 @@
         { "text": "MC: Technically, rain wasn't f-{OR}-ecast.", "sfx": "bell" },
         { "props": { "clock": "noon" }, "text": "NANDA: Stay f{OR}ever? The rain can wait.", "scare": 1, "sfx": "breath", "timer": 10,
           "choices": [
-            { "text": "Just one more minute, then I really have to go", "side": "pink", "default": true, "set": { "stayed": true } },
-            { "text": "{OR} I could leave now, before the rain starts", "side": "purple", "set": { "stayed": false } }
+            { "text": "Stay a minute", "side": "pink", "default": true, "set": { "stayed": true } },
+            { "text": "{OR} Leave before the rain", "side": "purple", "set": { "stayed": false } }
           ] }
       ]
     },
@@ -79,7 +79,7 @@
         { "text": "NANDA: I already boiled the water. This morning. Just in case.", "sfx": "kettle", "timer": 5,
           "choices": [
             { "text": "Just one cup", "side": "pink", "default": true, "go": "cup" },
-            { "text": "It's late. Goodnight", "side": "purple", "go": "leave" }
+            { "text": "Say goodnight", "side": "purple", "go": "leave" }
           ] }
       ]
     },
@@ -134,7 +134,7 @@
       "scare": 2,
       "beats": [
         { "props": { "shelf": null }, "text": "Concrete. One bulb. Rain at a high window.", "sfx": "drone", "motion": true, "rmAlt": "static",
-          "choices": [{ "text": "Go to the shelves", "side": "purple" }] },
+          "choices": [{ "text": "Look at the shelves", "side": "purple" }] },
         { "props": { "shelf": "jars" }, "text": "Jars on the shelves. Each one: a date, a name.", "sfx": "thump" },
         { "text": "The dates go back years. The names are all different." },
         { "props": { "shelf": "bentos" }, "text": "Bento boxes, one per day. Your name on each. Untouched.", "sfx": "tick" },
@@ -151,7 +151,7 @@
         { "text": "A heavy door. Behind it, stairs to the street.", "sfx": "rain", "timer": 12,
           "choices": [
             { "text": "Wait for her", "side": "pink", "default": true, "go": "escape-timeout" },
-            { "text": "Climb for the street door", "side": "purple", "go": "escape-win" }
+            { "text": "Leave her house", "side": "purple", "go": "escape-win" }
           ] }
       ]
     },

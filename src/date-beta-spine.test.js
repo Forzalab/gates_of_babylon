@@ -32,10 +32,10 @@ function walk(picks, rm = false, bento = 'umeboshi') {
 const SHARED = ['rooftop', 'train', 'naan', 'blackout', 'door'];
 const PATHS = {
   STEEPED: { picks: [null, 'Just one cup', 'Drink'], via: ['cup', 'steeped'], card: 'STEEPED.' },
-  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Go to the shelves', 'Keep looking', 'Climb for the street door'], via: ['cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
-  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Go to the shelves', 'Keep looking', 'Wait for her'], via: ['cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
-  'LEAVE (refuse)': { picks: [null, "It's late. Goodnight", "FUCK YOU. I'm leaving"], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
-  'LEAVE (agree)': { picks: [null, "It's late. Goodnight", 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
+  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Leave her house'], via: ['cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
+  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Wait for her'], via: ['cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
+  'LEAVE (refuse)': { picks: [null, "Say goodnight", "FUCK YOU. I'm leaving"], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
+  'LEAVE (agree)': { picks: [null, "Say goodnight", 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
 };
 
 for (const [name, { picks, via, card }] of Object.entries(PATHS)) {
@@ -78,7 +78,7 @@ test('date-beta basement: the door beat converges (timer -> wait -> timeout, cli
   const door = esc.beats.at(-1);
   assert.equal(door.timer, 12);
   assert.deepEqual(door.choices.map((c) => [c.plain, c.side, c.go, !!c.default]),
-    [['Wait for her', 'pink', 'escape-timeout', true], ['Climb for the street door', 'purple', 'escape-win', false]]);
+    [['Wait for her', 'pink', 'escape-timeout', true], ['Leave her house', 'purple', 'escape-win', false]]);
   const win = scenes.find((x) => x.id === 'escape-win');
   assert.ok(win.beats.some((b) => b.text === 'NANDA: You took the long way.'));
 });

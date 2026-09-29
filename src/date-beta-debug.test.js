@@ -19,7 +19,7 @@ function mockStore(init = {}) {
 test('debug: bento pick is branching; stay/leave and Back to start are not', () => {
   assert.ok(byText('Take the tamagoyaki').branching);
   assert.ok(byText('Take the umeboshi').branching);
-  assert.equal(byText('Just one more minute, then I really have to go').branching, false);
+  assert.equal(byText('Stay a minute').branching, false);
   assert.equal(edge('rooftop.6.1').branching, false, 'stay/leave: stayed is never read');
   for (const e of G.edges.filter((x) => x.text === 'Back to start')) { assert.equal(e.branching, false); assert.equal(e.kind, 'back'); }
 });
