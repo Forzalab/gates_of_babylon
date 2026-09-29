@@ -54,9 +54,9 @@ function trainBeats(bento) {
 test('train ad: adFor reads props.ad, else the adCopy, else the umeboshi default', () => {
   assert.equal(adFor({}), 'umeboshi');
   assert.equal(adFor({ ad: 'tamagoyaki' }), 'tamagoyaki');
-  assert.equal(adFor({ ad: 'umeboshi', adCopy: '甘い! SWEET!' }), 'umeboshi', 'props.ad wins');
-  assert.equal(adFor({ adCopy: '甘い! SWEET!' }), 'tamagoyaki');
-  assert.equal(adFor({ adCopy: 'すっぱい! SOUR!' }), 'umeboshi');
+  assert.equal(adFor({ ad: 'umeboshi', adCopy: '甘い！ SWEET!' }), 'umeboshi', 'props.ad wins');
+  assert.equal(adFor({ adCopy: '甘い！ SWEET!' }), 'tamagoyaki');
+  assert.equal(adFor({ adCopy: 'すっぱい！ SOUR!' }), 'umeboshi');
 });
 
 test('train ad: both train beats show the ad the line names, on both bento paths', () => {
