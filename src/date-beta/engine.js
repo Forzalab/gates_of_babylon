@@ -109,11 +109,11 @@ export function orParts(text, where = 'text') {
 const plain = (parts) => parts.map((p) => p.t).join('');
 
 // "NANDA: line" -> speaker + line. No prefix = narration (who = null). An explicit `speaker` wins and the text is
-// then taken as-is (no prefix parse).
+// then taken as-is (no prefix parse); speaker: false = narration even when the text starts "WORD:" (a sign read out).
 export function parseLine(text, where, speaker = null) {
-  const m = speaker ? null : /^([A-Z][A-Z ]{0,11}):\s*(.*)$/s.exec(text);
+  const m = speaker == null ? /^([A-Z][A-Z ]{0,11}):\s*(.*)$/s.exec(text) : null;
   const parts = orParts(m ? m[2] : text, where);
-  return Object.freeze({ who: speaker ?? (m ? m[1] : null), parts: Object.freeze(parts), plain: plain(parts), hasOr: parts.some((p) => p.or) });
+  return Object.freeze({ who: speaker === false ? null : (speaker ?? (m ? m[1] : null)), parts: Object.freeze(parts), plain: plain(parts), hasOr: parts.some((p) => p.or) });
 }
 
 // opts.manifest (assets.json) validates id-shaped bg/sprite/sfx and supplies the cue names for non-id sfx;
@@ -144,7 +144,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       assetField(b.sfx, 'sfx', at, manifest, cueNames);
       bg = b.bg ?? bg;
       if (!bg) fail(at, 'no bg (set it on the scene or the beat)');
-      if (b.speaker != null && (typeof b.speaker !== 'string' || !b.speaker.trim())) fail(at, 'speaker must be a non-empty string');
+      if (b.speaker != null && b.speaker !== false && (typeof b.speaker !== 'string' || !b.speaker.trim())) fail(at, 'speaker must be a non-empty string (or false)');
       props = { ...props, ...b.props };
       const text = b.text ?? '';
       if (words(text) > MAX_WORDS) fail(at, `text has ${words(text)} words, max ${MAX_WORDS}`);
@@ -204,7 +204,7 @@ function loadVary(v, base, at, decl, manifest, art, cueNames) {
       assetField(e.bg, 'bg', where, manifest, art);
       assetField(e.sprite, 'sprite', where, manifest, art);
       assetField(e.sfx, 'sfx', where, manifest, cueNames);
-      if (e.speaker != null && (typeof e.speaker !== 'string' || !e.speaker.trim())) fail(where, 'speaker must be a non-empty string');
+      if (e.speaker != null && e.speaker !== false && (typeof e.speaker !== 'string' || !e.speaker.trim())) fail(where, 'speaker must be a non-empty string (or false)');
       if (e.text != null && typeof e.text !== 'string') fail(where, 'text must be a string');
       if (e.props != null && (typeof e.props !== 'object' || Array.isArray(e.props))) fail(where, 'props must be an object');
       if (e.text != null && words(e.text) > MAX_WORDS) fail(where, `text has ${words(e.text)} words, max ${MAX_WORDS}`);

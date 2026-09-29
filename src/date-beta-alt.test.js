@@ -61,6 +61,7 @@ test('date-beta alt: the OR beats carry the breath cue', () => {
   for (const id of ['platform']) {
     const b = byId[id].beats.find((x) => x.text?.includes('{OR}'));
     assert.equal(b.sfx, 'breath', `${id}: OR without her breath`);
+    assert.equal(b.line.who, null, `${id}: the sign line is narration, not a speaker called NEXT`);
   }
 });
 

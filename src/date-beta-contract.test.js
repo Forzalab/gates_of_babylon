@@ -25,6 +25,9 @@ test('date-beta contract: explicit speaker wins; "NANDA:" prefix is the fallback
   assert.equal(s.beats[1].line.plain, 'Hi there.');
   assert.equal(s.beats[2].line.who, null);
   assert.throws(() => loadScenes(tiny([{ text: 'x', speaker: '' }])), /speaker/);
+  const [sign] = loadScenes(tiny([{ text: 'NEXT: this {OR} that.', speaker: false }]));
+  assert.equal(sign.beats[0].line.who, null, 'speaker: false = narration, no prefix parse');
+  assert.equal(sign.beats[0].line.plain, 'NEXT: this OR that.');
 });
 
 test('date-beta timer: 0 picks the default, else pink; disabled default -> the other; none enabled -> no pick', () => {

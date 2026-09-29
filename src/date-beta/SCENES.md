@@ -9,7 +9,7 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 | field | type | default | meaning |
 |---|---|---|---|
 | `text` | string, max 12 words | `""` | The line. `{OR}` is the only OR mark. |
-| `speaker` | string | from a `NAME:` prefix in `text`, else narration | Who says it. If set, `text` is used as written (no prefix parse). |
+| `speaker` | string \| `false` | from a `NAME:` prefix in `text`, else narration | Who says it. If set, `text` is used as written (no prefix parse). `false` = narration, text as written (a sign read out: `NEXT: this {OR} that.`). |
 | `choices` | 1-2 choices (below) | none | The beat waits for a pick. |
 | `timer` | seconds > 0, choice beats only | none | Counts down, frozen while paused (P) or the tab is hidden. At 0 it picks the `default` choice, else the pink one. If that choice is disabled it picks the other enabled one. If none is enabled, nothing is picked. |
 | `scare` | 0, 1 or 2 | scene's `scare`, else 0 | Dread level. |

@@ -76,7 +76,7 @@
       "beats": [
         { "props": { "train": "here" }, "text": "Her stop. The rain followed us off the train.", "sfx": "rain", "hold": 1200 },
         { "props": { "train": "gone" }, "text": "The AND Line leaves. Just two of us now.", "sfx": "train-hum", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },
-        { "text": "NEXT: this {OR} that. The sign never picks.", "sfx": "breath" }
+        { "text": "NEXT: this {OR} that. The sign never picks.", "speaker": false, "sfx": "breath" }
       ]
     },
     {
