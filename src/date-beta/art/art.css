@@ -106,3 +106,12 @@
 .basement .bento { fill: #5a1822; stroke: #2a0a0e; stroke-width: 3; } .basement .band { stroke: #d6b24a; stroke-width: 6; }
 .basement .usu, .basement .usu-top { fill: #6b4a2a; stroke: #2a1a10; stroke-width: 3; } .basement .kine { fill: #8a6238; } .basement .kine-h { stroke: #8a6238; stroke-width: 14; stroke-linecap: round; }
 .basement .plate { fill: #e8e2da; } .basement .mochi { fill: #fffaf2; }
+
+/* ---------- fallback art for missing BG files (fallbacks.js) ---------- */
+.door .unit { font: 800 72px/1 var(--cond); fill: #2a2440; text-anchor: middle; }
+.door .rain line { stroke: #9fb0d8; stroke-width: 2; opacity: .45; }
+.door .rain.on { animation: door-rain 500ms steps(4) infinite; }
+@keyframes door-rain { from { transform: translateY(-44px); } to { transform: translateY(0); } }
+.cafe .sign { font: 400 96px/1 'Yellowtail', cursive; fill: #fdf0dc; text-anchor: middle; }
+.cafe .sign-sub { font: 700 24px/1 var(--cond); letter-spacing: .2em; fill: #e8c46a; text-anchor: middle; text-transform: uppercase; }
+.cafe .menu { font: 700 34px/1 var(--mono); fill: #f4eef6; }

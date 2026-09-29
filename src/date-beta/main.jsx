@@ -10,6 +10,7 @@ import './theme.js';
 import data from './scenes.json';
 import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
 import { ART } from './art/index.js';
+import { BG_FALLBACK } from './art/fallbacks.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { Nanda, speaksNanda } from './Nanda.jsx';
@@ -126,8 +127,13 @@ function Player() {
   }, [advance, pick, skipScene]);
 
   // bg / sprite: a manifest id draws the asset image (grey placeholder if missing); a name draws the art component.
-  const layer = (v, cls) => (isAssetId(v) ? <img className={cls} src={ASSETS.src(v)} alt="" />
-    : (() => { const Art = ART[v]; return <Art props={beat.props} rm={RM} onStart={() => advance(true)} />; })());
+  // A loaded file always wins; a missing one draws its registered fallback art (art/fallbacks.js), else the grey box.
+  const layer = (v, cls) => {
+    const name = isAssetId(v) ? (ASSETS.has(v) ? null : BG_FALLBACK[v]) : v;
+    if (!name) return <img className={cls} src={ASSETS.src(v)} alt="" />;
+    const Art = ART[name];
+    return <Art props={beat.props} rm={RM} onStart={() => advance(true)} />;
+  };
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
   const closeTree = useCallback(() => setTree(false), []);

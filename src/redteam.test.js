@@ -1,5 +1,7 @@
 // redteam.test.js: adversarial checks for the Thu demo (research/redteam/REPORT.md). Tests marked KNOWN-FAIL
 // document a live demo risk; they are expected to fail until the matching REPORT item is fixed.
+import { SYNTH } from './date-beta/synth.js';
+import { BG_FALLBACK } from './date-beta/art/fallbacks.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
@@ -76,11 +78,32 @@ test('redteam KNOWN-FAIL R3: Esc on the cup scene does not drop the player strai
   assert.notEqual(id(p), 'steeped');
 });
 
-// KNOWN-FAIL (REPORT R1): every manifest file path points at a file that is not in the repo -> grey "BG-D1" boxes and
-// beeps for the whole second half of the demo.
-test('redteam KNOWN-FAIL R1: every asset path in assets.json exists under public/', () => {
-  const missing = Object.entries(manifest.assets).filter(([, a]) => a.path && !fs.existsSync(new URL(`../public/${a.path}`, import.meta.url)));
-  assert.deepEqual(missing.map(([k]) => k), []);
+// R1 (was KNOWN-FAIL): most asset files are not in the repo yet. Every id must still have EITHER its file under
+// public/ OR a registered fallback (sfx: a synth recipe in synth.js, bg: an art component via art/fallbacks.js), so the
+// demo never shows a grey box or plays the placeholder beep. A dropped-in file still wins (assets.js / main.jsx).
+test('redteam R1: every asset id has a file under public/ or a registered fallback', () => {
+  const art = fs.readFileSync(new URL('./date-beta/art/index.js', import.meta.url), 'utf8');
+  const uncovered = Object.entries(manifest.assets).filter(([k, a]) => {
+    if (a.path && fs.existsSync(new URL(`../public/${a.path}`, import.meta.url))) return false;
+    if (a.kind === 'sfx') return !(k in SYNTH);
+    const name = BG_FALLBACK[k];
+    return !(name && new RegExp(`\\b${name}:`).test(art));
+  });
+  assert.deepEqual(uncovered.map(([k]) => k), []);
+});
+
+test('redteam R1: synth recipes stay in the ceiling-speaker band and every one schedules without throwing', () => {
+  for (const [id, r] of Object.entries(SYNTH)) {
+    const hz = [];
+    const param = (v = 0) => ({ value: v, setValueAtTime(f) { if (this.freq) hz.push(f); }, linearRampToValueAtTime(f) { if (this.freq) hz.push(f); }, exponentialRampToValueAtTime(f) { if (this.freq) hz.push(f); } });
+    const node = () => ({ connect: (n) => n, start() {}, stop() {}, gain: param(), Q: param(), frequency: Object.defineProperty(Object.assign(param(), { freq: true }), 'value', { set(f) { hz.push(f); }, get() { return 0; } }) });
+    const ctx = { sampleRate: 8000, currentTime: 0, destination: node(), createGain: node, createOscillator: node, createBiquadFilter: node,
+      createBufferSource: node, createBuffer: (c, n) => ({ getChannelData: () => new Float32Array(n) }) };
+    const len = r(ctx, ctx.destination, 0);
+    assert.ok(len > 0 && len <= 6, `${id} length ${len}`);
+    assert.ok(hz.length > 0, `${id} sets no frequency`);
+    for (const f of hz) assert.ok(f >= 300 && f <= 4000, `${id} uses ${f} Hz`);
+  }
 });
 
 test('redteam: the collapse never changes frame faster than 334 ms', () => {

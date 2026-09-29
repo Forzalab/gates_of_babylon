@@ -1,3 +1,4 @@
+import { synth } from './synth.js';
 // assets.js: date-beta asset slots. One manifest (assets.json): id -> { kind: sfx|bg|sprite, path under public/ }.
 // Pure lookups (node --test drives them) + a tiny browser loader. Never throws: a missing file becomes
 // a short WebAudio beep (sfx) or a grey box labelled with the id (images). Audio waits for the first gesture.
@@ -57,10 +58,11 @@ export function createLoader(manifest, base = '/') {
       if (!id) return;
       if (!ctx) { pending = cue; return; }
       const b = buffers.get(id);
-      if (!b) { beep(id); return; }
+      if (!b) { if (!synth(ctx, id)) beep(id); return; } // missing file: the synth stand-in, else the beep
       const s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start();
     } catch { /* sound is never fatal */ }
   };
   const src = (id) => images.get(id) ?? placeholderImg(id);
-  return { preload, play, src, unlock };
+  const has = (id) => images.has(id); // true once the real image file has loaded (it then beats any fallback art)
+  return { preload, play, src, unlock, has };
 }
