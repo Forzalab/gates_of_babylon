@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HUD contact sheet</title>
+<link rel="stylesheet" href="../../../src/date-beta/tokens.css">
+<link rel="stylesheet" href="hud.css">
+<style>
+  html, body { margin: 0; background: #1a0710; }
+  .sheet { width: 1920px; margin: 0 auto; padding: 44px 40px 40px; color: var(--scrim-ink); font-family: var(--cond); box-sizing: border-box; }
+  .sheet h1 { margin: 0 0 8px; font: 900 48px/1.1 var(--btn); color: #fff; }
+  .sheet .lead { margin: 0 0 26px; font: 500 24px/1.4 var(--cond); color: #f3c6d6; }
+  .sheet h2 { margin: 26px 0 14px; font: 900 30px/1.1 var(--btn); color: #fff; }
+  .sheet h2 span { font: 500 24px/1 var(--cond); color: #f3c6d6; margin-left: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px 20px; }
+  figure { margin: 0; display: grid; gap: 8px; }
+  figure img { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 0 0 2px rgba(255, 233, 241, .35); }
+  figcaption { font: 700 22px/1.2 var(--cond); color: var(--scrim-ink); }
+  figcaption b { color: #ff9ccb; margin-right: 6px; }
+</style>
+</head>
+<body>
+<main class="sheet">
+  <h1>date-beta HUD · love score + route + NEXT</h1>
+  <p class="lead">Two bar variants, 8 states each, over real engine plates at 1920x1080. Static frames = the reduced-motion frame. Spec: SPEC.txt.</p>
+  <h2>A · top-edge ribbon <span>meter + AND Line route in one strip</span></h2>
+  <div class="grid" id="ga"></div>
+  <h2>B · love thermometer <span>beside Nanda, rides with her; route sign top-left</span></h2>
+  <div class="grid" id="gb"></div>
+</main>
+<script>
+  const S = [['goal', 'Goal card'], ['line', 'Nanda line + NEXT'], ['choice', 'Choice beat'], ['plus', 'Pop +3'],
+    ['minus', 'Pop −2'], ['none', 'No Nanda = no bar'], ['win', 'Win splash 100%'], ['low', 'Low score ending']];
+  for (const v of ['A', 'B']) {
+    document.getElementById(`g${v.toLowerCase()}`).innerHTML = S.map(([s, t]) =>
+      `<figure><img src="${v}-${s}.png" alt="Variant ${v}, ${t}" width="1920" height="1080"><figcaption><b>${v}-${s}</b>${t}</figcaption></figure>`).join('');
+  }
+  window.HUD_READY = document.fonts.ready.then(() => true);
+</script>
+</body>
+</html>

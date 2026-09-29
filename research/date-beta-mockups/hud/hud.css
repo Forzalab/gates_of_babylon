@@ -145,9 +145,9 @@
 .hud-card .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 22px; margin-top: 30px; font: 700 32px/1 var(--cond); color: var(--box-ink); }
 .hud-card .legend .lv-delta { font-size: 34px; padding: 8px 20px 10px 14px; }
 .hud-card .legend .lv-delta svg { width: 34px; height: 31px; }
-.hud-card .legend .minus { background-color: var(--lv-dark); background-image: var(--g-dark); color: var(--lv-dark-hot); text-shadow: none;
+.lv-delta.minus { background-color: var(--lv-dark); background-image: var(--g-dark); color: var(--lv-dark-hot); text-shadow: none;
   box-shadow: inset 0 0 0 4px var(--her), 0 0 0 6px var(--g-rim), 0 0 0 8px var(--g-rim-edge), 0 8px 0 2px var(--g-rim-edge); }
-.hud-card .legend .minus svg path { fill: none; stroke: var(--lv-dark-hot); stroke-width: 3.2; }
+.lv-delta.minus svg path { fill: none; stroke: var(--lv-dark-hot); stroke-width: 3.2; }
 .hud-card .legend .gap { width: 20px; }
 .hud-card .hud-next { right: 56px; bottom: -42px; }
 /* pointer: A = a notch on the top edge up at the ribbon; B = a notch on the right edge at the gauge */

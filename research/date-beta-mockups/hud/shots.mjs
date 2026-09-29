@@ -20,7 +20,12 @@ async function open(url, h = 1080) {
   page.on('console', (m) => { if (m.type() === 'error') errors.push(`${url}: ${m.text()}`); });
   page.on('requestfailed', (r) => errors.push(`${url}: failed ${r.url()}`));
   await page.goto(url);
-  await page.evaluate(() => window.HUD_READY || document.fonts.ready);
+  // a dev-server reload can land just after a file edit: wait it out and retry once
+  try { await page.evaluate(() => window.HUD_READY || document.fonts.ready); } catch {
+    await page.waitForLoadState('load');
+    await page.waitForTimeout(500);
+    await page.evaluate(() => window.HUD_READY || document.fonts.ready);
+  }
   await page.evaluate(() => Promise.all([...document.images].map((i) => (i.complete ? 0 : new Promise((r) => { i.onload = i.onerror = r; })))));
   await page.waitForTimeout(250);
   return page;

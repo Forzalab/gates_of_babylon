@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HUD emote scale</title>
+<link rel="stylesheet" href="../../../src/date-beta/tokens.css">
+<link rel="stylesheet" href="hud.css">
+<style>
+  html, body { margin: 0; background: #fbe3ee; }
+  .board { position: relative; width: 1920px; height: 1080px; margin: 0 auto; overflow: hidden; background: #fbe3ee; color: var(--box-ink); font-family: var(--cond); }
+  .board h1 { position: absolute; left: 80px; top: 60px; margin: 0; font: 900 64px/1 var(--btn); color: #5c0f3c; }
+  .board .lead { position: absolute; left: 80px; top: 144px; margin: 0; width: 1760px; font: 500 32px/1.35 var(--cond); color: var(--box-ink); }
+  .row { position: absolute; left: 60px; right: 60px; top: 262px; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+  .cell { display: grid; justify-items: center; gap: 18px; padding: 26px 10px 30px; border: 4px solid var(--rim); border-radius: 22px; background: var(--box);
+    box-shadow: inset 0 0 0 3px #fff, 0 8px 0 var(--edge); }
+  .cell.dk { border-color: var(--her); background: var(--scrim); box-shadow: inset 0 0 0 3px #5a0a1c, 0 8px 0 #8b0f2c; }
+  .cell svg.fig { width: 250px; height: 300px; overflow: visible; }
+  .cell .name { font: 800 34px/1 var(--cond); letter-spacing: .06em; color: #5c0f3c; }
+  .cell.dk .name { color: var(--scrim-ink); }
+  .cell .when { margin: 0; min-height: 3.9em; text-align: center; font: 500 24px/1.3 var(--cond); color: var(--box-ink); }
+  .cell.dk .when { color: #f3c6d6; }
+  .cell .new { padding: 4px 12px 5px; border-radius: 999px; background: var(--magenta); color: #fff; font: 800 20px/1 var(--cond); letter-spacing: .1em; }
+  .cell .lv-delta { font-size: 40px; }
+  .foot { position: absolute; left: 80px; bottom: 56px; margin: 0; width: 1760px; font: 500 26px/1.4 var(--cond); color: var(--box-ink); }
+  .foot b { color: var(--magenta); }
+</style>
+</head>
+<body>
+<main class="board" id="board">
+  <h1>Her reactions: one emote per amount</h1>
+  <p class="lead">Every choice carries <b>love</b> (the score change) and an optional <b>emote</b>. No emote given = picked from the amount. Four are her V1b stages; <b>sweat</b> and <b>pout</b> are new art.</p>
+  <div class="row" id="row"></div>
+  <p class="foot">On a reaction frame the bubble draws at <b>1.3x</b> so the change reads even when the scene's own stage bubble already shows hearts. The pill and "She'll remember that." appear with it. All static shapes: nothing blinks.</p>
+</main>
+<script type="module">
+  import { nandaSVG } from './nanda-emotes.js';
+  const HEART = 'M50 88C22 66 4 50 4 28C4 13 16 4 29 4C39 4 46 10 50 17C54 10 61 4 71 4C84 4 96 13 96 28C96 50 78 66 50 88Z';
+  const cracked = `<svg viewBox="0 0 100 92" aria-hidden="true"><path d="${HEART} M50 17L42 36L56 48L45 62L50 88"/></svg>`;
+  const plus = `<svg viewBox="0 0 100 92" aria-hidden="true"><path d="${HEART}"/></svg>`;
+  const E = [
+    ['hearts', 3, 'She loved that. Clingy eyes, three hearts.', false],
+    ['heart', 2, 'Sweet. The wink, one heart.', false],
+    ['sweat', 1, 'Flustered. Not what she expected.', true],
+    ['pout', -1, 'Hurt. Cheeks puffed, anger mark.', true],
+    ['or', -2, 'The stare. OR on the dark bubble.', false],
+    ['crack', -3, 'Her true form. Cracked heart. (-3 and worse)', false],
+  ];
+  document.getElementById('row').innerHTML = E.map(([em, d, when, isNew]) => `<section class="cell${d <= -2 ? ' dk' : ''}">
+    <span class="name">${em.toUpperCase()}</span>
+    <svg class="fig" viewBox="-130 -350 320 365" role="img" aria-label="Nanda ${em}">${nandaSVG({ emote: em, big: true })}</svg>
+    <b class="lv-delta${d < 0 ? ' minus' : ''}">${d > 0 ? plus : cracked}${d > 0 ? '+' : '−'}${Math.abs(d)}</b>
+    <p class="when">${when}</p>${isNew ? '<span class="new">NEW ART</span>' : ''}</section>`).join('');
+  window.HUD_READY = document.fonts.ready.then(() => true);
+</script>
+</body>
+</html>
