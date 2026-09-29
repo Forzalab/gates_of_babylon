@@ -4,18 +4,18 @@ Base: http://localhost:5481. Entry: index.html?demo -> click Figur -> date-beta.
 
 | run | beats | pass | fail | console/net |
 |---|---|---|---|---|
-| steeped__tamagoyaki | 36 | 36 | 0 | 0 |
-| steeped__umeboshi | 36 | 36 | 0 | 0 |
-| escape-win__tamagoyaki | 53 | 53 | 0 | 0 |
-| escape-win__umeboshi | 53 | 53 | 0 | 0 |
-| escape-timeout__tamagoyaki | 54 | 54 | 0 | 0 |
-| escape-timeout__umeboshi | 54 | 54 | 0 | 0 |
-| leave-fu__tamagoyaki | 36 | 36 | 0 | 0 |
-| leave-fu__umeboshi | 36 | 36 | 0 | 0 |
-| leave-yeah__tamagoyaki | 36 | 36 | 0 | 0 |
-| leave-yeah__umeboshi | 36 | 36 | 0 | 0 |
-| escape-win__tamagoyaki__1024 | 53 | 53 | 0 | 0 |
-| leave-fu__umeboshi__rm | 33 | 33 | 0 | 0 |
+| steeped__tamagoyaki | 47 | 47 | 0 | 0 |
+| steeped__umeboshi | 47 | 47 | 0 | 0 |
+| escape-win__tamagoyaki | 64 | 64 | 0 | 0 |
+| escape-win__umeboshi | 64 | 64 | 0 | 0 |
+| escape-timeout__tamagoyaki | 65 | 65 | 0 | 0 |
+| escape-timeout__umeboshi | 65 | 65 | 0 | 0 |
+| leave-fu__tamagoyaki | 44 | 44 | 0 | 0 |
+| leave-fu__umeboshi | 44 | 44 | 0 | 0 |
+| leave-yeah__tamagoyaki | 44 | 44 | 0 | 0 |
+| leave-yeah__umeboshi | 44 | 44 | 0 | 0 |
+| escape-win__tamagoyaki__1024 | 64 | 64 | 0 | 0 |
+| leave-fu__umeboshi__rm | 41 | 41 | 0 | 0 |
 
 ## steeped__tamagoyaki (1920x1080)
 
@@ -48,19 +48,30 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/steeped__tamagoyaki/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/steeped__tamagoyaki/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/steeped__tamagoyaki/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/steeped__tamagoyaki/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/steeped__tamagoyaki/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/steeped__tamagoyaki/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| cup:0 | [png](shots/steeped__tamagoyaki/26-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
-| cup:1 | [png](shots/steeped__tamagoyaki/27-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
-| cup:2 | [png](shots/steeped__tamagoyaki/28-cup_2.png) | pass | Who's the third cup for? |
-| cup:3 | [png](shots/steeped__tamagoyaki/29-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
-| steeped:0 | [png](shots/steeped__tamagoyaki/30-steeped_0.png) | pass | OR |
-| steeped:1 | [png](shots/steeped__tamagoyaki/31-steeped_1.png) | pass | Rest. I'll do the remembering. |
-| steeped:2 | [png](shots/steeped__tamagoyaki/32-steeped_2.png) | pass | Warm cup, sweet sleep. You're mine to keep. |
-| steeped:3 | [png](shots/steeped__tamagoyaki/33-steeped_3.png) | pass | ずっと。…FORever. Ne? |
-| steeped:4 | [png](shots/steeped__tamagoyaki/34-steeped_4.png) | pass | STEEPED. [Back to start] |
-| back-to-rooftop:0 | [png](shots/steeped__tamagoyaki/35-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/steeped__tamagoyaki/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/steeped__tamagoyaki/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/steeped__tamagoyaki/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/steeped__tamagoyaki/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/steeped__tamagoyaki/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/steeped__tamagoyaki/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/steeped__tamagoyaki/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/steeped__tamagoyaki/30-door_0.png) | pass |  |
+| door:1 | [png](shots/steeped__tamagoyaki/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/steeped__tamagoyaki/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/steeped__tamagoyaki/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| genkan-in:0 | [png](shots/steeped__tamagoyaki/34-genkan-in_0.png) | pass | Her shoes. Lined up to the millimetre. |
+| genkan-in:1 | [png](shots/steeped__tamagoyaki/35-genkan-in_1.png) | pass | Men's slippers. Already set out. |
+| genkan-in:2 | [png](shots/steeped__tamagoyaki/36-genkan-in_2.png) | pass | A tiny shrine. Inside: a circuit you built. |
+| cup:0 | [png](shots/steeped__tamagoyaki/37-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
+| cup:1 | [png](shots/steeped__tamagoyaki/38-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
+| cup:2 | [png](shots/steeped__tamagoyaki/39-cup_2.png) | pass | Who's the third cup for? |
+| cup:3 | [png](shots/steeped__tamagoyaki/40-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
+| steeped:0 | [png](shots/steeped__tamagoyaki/41-steeped_0.png) | pass | OR |
+| steeped:1 | [png](shots/steeped__tamagoyaki/42-steeped_1.png) | pass | Rest. I'll do the remembering. |
+| steeped:2 | [png](shots/steeped__tamagoyaki/43-steeped_2.png) | pass | Warm cup, sweet sleep. You're mine to keep. |
+| steeped:3 | [png](shots/steeped__tamagoyaki/44-steeped_3.png) | pass | ずっと。…FORever. Ne? |
+| steeped:4 | [png](shots/steeped__tamagoyaki/45-steeped_4.png) | pass | STEEPED. [Back to start] |
+| back-to-rooftop:0 | [png](shots/steeped__tamagoyaki/46-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## steeped__umeboshi (1920x1080)
 
@@ -91,19 +102,30 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/steeped__umeboshi/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/steeped__umeboshi/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/steeped__umeboshi/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/steeped__umeboshi/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/steeped__umeboshi/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/steeped__umeboshi/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| cup:0 | [png](shots/steeped__umeboshi/26-cup_0.png) | pass | I bought umeboshi. For no reason. Eat. |
-| cup:1 | [png](shots/steeped__umeboshi/27-cup_1.png) | pass | Third teacup. Nobody poured it. One umeboshi on its saucer. |
-| cup:2 | [png](shots/steeped__umeboshi/28-cup_2.png) | pass | Who's the third cup for? |
-| cup:3 | [png](shots/steeped__umeboshi/29-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
-| steeped:0 | [png](shots/steeped__umeboshi/30-steeped_0.png) | pass | OR |
-| steeped:1 | [png](shots/steeped__umeboshi/31-steeped_1.png) | pass | Rest. I'll do the remembering. |
-| steeped:2 | [png](shots/steeped__umeboshi/32-steeped_2.png) | pass | Bitter cup, sour hour. Every hour is ours. |
-| steeped:3 | [png](shots/steeped__umeboshi/33-steeped_3.png) | pass | ずっと。…FORever. Ne? |
-| steeped:4 | [png](shots/steeped__umeboshi/34-steeped_4.png) | pass | STEEPED. [Back to start] |
-| back-to-rooftop:0 | [png](shots/steeped__umeboshi/35-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/steeped__umeboshi/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/steeped__umeboshi/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/steeped__umeboshi/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/steeped__umeboshi/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/steeped__umeboshi/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/steeped__umeboshi/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/steeped__umeboshi/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/steeped__umeboshi/30-door_0.png) | pass |  |
+| door:1 | [png](shots/steeped__umeboshi/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/steeped__umeboshi/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/steeped__umeboshi/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| genkan-in:0 | [png](shots/steeped__umeboshi/34-genkan-in_0.png) | pass | Her shoes. Lined up to the millimetre. |
+| genkan-in:1 | [png](shots/steeped__umeboshi/35-genkan-in_1.png) | pass | Men's slippers. Already set out. |
+| genkan-in:2 | [png](shots/steeped__umeboshi/36-genkan-in_2.png) | pass | A tiny shrine. Inside: a circuit you built. |
+| cup:0 | [png](shots/steeped__umeboshi/37-cup_0.png) | pass | I bought umeboshi. For no reason. Eat. |
+| cup:1 | [png](shots/steeped__umeboshi/38-cup_1.png) | pass | Third teacup. Nobody poured it. One umeboshi on its saucer. |
+| cup:2 | [png](shots/steeped__umeboshi/39-cup_2.png) | pass | Who's the third cup for? |
+| cup:3 | [png](shots/steeped__umeboshi/40-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
+| steeped:0 | [png](shots/steeped__umeboshi/41-steeped_0.png) | pass | OR |
+| steeped:1 | [png](shots/steeped__umeboshi/42-steeped_1.png) | pass | Rest. I'll do the remembering. |
+| steeped:2 | [png](shots/steeped__umeboshi/43-steeped_2.png) | pass | Bitter cup, sour hour. Every hour is ours. |
+| steeped:3 | [png](shots/steeped__umeboshi/44-steeped_3.png) | pass | ずっと。…FORever. Ne? |
+| steeped:4 | [png](shots/steeped__umeboshi/45-steeped_4.png) | pass | STEEPED. [Back to start] |
+| back-to-rooftop:0 | [png](shots/steeped__umeboshi/46-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## escape-win__tamagoyaki (1920x1080)
 
@@ -134,36 +156,47 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/escape-win__tamagoyaki/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/escape-win__tamagoyaki/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/escape-win__tamagoyaki/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/escape-win__tamagoyaki/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/escape-win__tamagoyaki/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/escape-win__tamagoyaki/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| cup:0 | [png](shots/escape-win__tamagoyaki/26-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
-| cup:1 | [png](shots/escape-win__tamagoyaki/27-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
-| cup:2 | [png](shots/escape-win__tamagoyaki/28-cup_2.png) | pass | Who's the third cup for? |
-| cup:3 | [png](shots/escape-win__tamagoyaki/29-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
-| unknown:0 | [png](shots/escape-win__tamagoyaki/30-unknown_0.png) | pass | You stand. The floor tilts a little. |
-| unknown:1 | [png](shots/escape-win__tamagoyaki/31-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
-| unknown:2 | [png](shots/escape-win__tamagoyaki/32-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
-| escape:0 | [png](shots/escape-win__tamagoyaki/33-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
-| escape:1 | [png](shots/escape-win__tamagoyaki/34-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
-| escape:2 | [png](shots/escape-win__tamagoyaki/35-escape_2.png) | pass | The dates go back years. The names are all different. |
-| escape:3 | [png](shots/escape-win__tamagoyaki/36-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
-| escape:4 | [png](shots/escape-win__tamagoyaki/37-escape_4.png) | pass | The oldest is dated before you met. |
-| escape:5 | [png](shots/escape-win__tamagoyaki/38-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
-| escape:6 | [png](shots/escape-win__tamagoyaki/39-escape_6.png) | pass | Newest jar: today, your name, tamagoyaki. Lid off. Empty. |
-| escape:7 | [png](shots/escape-win__tamagoyaki/40-escape_7.png) | pass |  |
-| escape:9 | [png](shots/escape-win__tamagoyaki/41-escape_9.png) | pass |  |
-| escape:11 | [png](shots/escape-win__tamagoyaki/42-escape_11.png) | pass |  |
-| escape:12 | [png](shots/escape-win__tamagoyaki/43-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
-| escape:13 | [png](shots/escape-win__tamagoyaki/44-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
-| escape-win:0 | [png](shots/escape-win__tamagoyaki/45-escape-win_0.png) | pass | She's waiting at the outside door. |
-| escape-win:1 | [png](shots/escape-win__tamagoyaki/46-escape-win_1.png) | pass | You took the long way. |
-| escape-win:2 | [png](shots/escape-win__tamagoyaki/47-escape-win_2.png) | pass | Home is warm, and sweet. |
-| escape-win:3 | [png](shots/escape-win__tamagoyaki/48-escape-win_3.png) | pass | Sleep now. You're mine to keep. |
-| escape-win:4 | [png](shots/escape-win__tamagoyaki/49-escape-win_4.png) | pass |  |
-| escape-win:5 | [png](shots/escape-win__tamagoyaki/50-escape-win_5.png) | pass | Mine. |
-| escape-win:6 | [png](shots/escape-win__tamagoyaki/51-escape-win_6.png) | pass | ESCAPE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/escape-win__tamagoyaki/52-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/escape-win__tamagoyaki/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/escape-win__tamagoyaki/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/escape-win__tamagoyaki/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/escape-win__tamagoyaki/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/escape-win__tamagoyaki/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/escape-win__tamagoyaki/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/escape-win__tamagoyaki/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/escape-win__tamagoyaki/30-door_0.png) | pass |  |
+| door:1 | [png](shots/escape-win__tamagoyaki/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/escape-win__tamagoyaki/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/escape-win__tamagoyaki/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| genkan-in:0 | [png](shots/escape-win__tamagoyaki/34-genkan-in_0.png) | pass | Her shoes. Lined up to the millimetre. |
+| genkan-in:1 | [png](shots/escape-win__tamagoyaki/35-genkan-in_1.png) | pass | Men's slippers. Already set out. |
+| genkan-in:2 | [png](shots/escape-win__tamagoyaki/36-genkan-in_2.png) | pass | A tiny shrine. Inside: a circuit you built. |
+| cup:0 | [png](shots/escape-win__tamagoyaki/37-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
+| cup:1 | [png](shots/escape-win__tamagoyaki/38-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
+| cup:2 | [png](shots/escape-win__tamagoyaki/39-cup_2.png) | pass | Who's the third cup for? |
+| cup:3 | [png](shots/escape-win__tamagoyaki/40-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
+| unknown:0 | [png](shots/escape-win__tamagoyaki/41-unknown_0.png) | pass | You stand. The floor tilts a little. |
+| unknown:1 | [png](shots/escape-win__tamagoyaki/42-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
+| unknown:2 | [png](shots/escape-win__tamagoyaki/43-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
+| escape:0 | [png](shots/escape-win__tamagoyaki/44-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
+| escape:1 | [png](shots/escape-win__tamagoyaki/45-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
+| escape:2 | [png](shots/escape-win__tamagoyaki/46-escape_2.png) | pass | The dates go back years. The names are all different. |
+| escape:3 | [png](shots/escape-win__tamagoyaki/47-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
+| escape:4 | [png](shots/escape-win__tamagoyaki/48-escape_4.png) | pass | The oldest is dated before you met. |
+| escape:5 | [png](shots/escape-win__tamagoyaki/49-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
+| escape:6 | [png](shots/escape-win__tamagoyaki/50-escape_6.png) | pass | Newest jar: today, your name, tamagoyaki. Lid off. Empty. |
+| escape:7 | [png](shots/escape-win__tamagoyaki/51-escape_7.png) | pass |  |
+| escape:9 | [png](shots/escape-win__tamagoyaki/52-escape_9.png) | pass |  |
+| escape:11 | [png](shots/escape-win__tamagoyaki/53-escape_11.png) | pass |  |
+| escape:12 | [png](shots/escape-win__tamagoyaki/54-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
+| escape:13 | [png](shots/escape-win__tamagoyaki/55-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
+| escape-win:0 | [png](shots/escape-win__tamagoyaki/56-escape-win_0.png) | pass | She's waiting at the outside door. |
+| escape-win:1 | [png](shots/escape-win__tamagoyaki/57-escape-win_1.png) | pass | You took the long way. |
+| escape-win:2 | [png](shots/escape-win__tamagoyaki/58-escape-win_2.png) | pass | Home is warm, and sweet. |
+| escape-win:3 | [png](shots/escape-win__tamagoyaki/59-escape-win_3.png) | pass | Sleep now. You're mine to keep. |
+| escape-win:4 | [png](shots/escape-win__tamagoyaki/60-escape-win_4.png) | pass |  |
+| escape-win:5 | [png](shots/escape-win__tamagoyaki/61-escape-win_5.png) | pass | Mine. |
+| escape-win:6 | [png](shots/escape-win__tamagoyaki/62-escape-win_6.png) | pass | ESCAPE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/escape-win__tamagoyaki/63-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## escape-win__umeboshi (1920x1080)
 
@@ -194,36 +227,47 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/escape-win__umeboshi/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/escape-win__umeboshi/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/escape-win__umeboshi/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/escape-win__umeboshi/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/escape-win__umeboshi/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/escape-win__umeboshi/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| cup:0 | [png](shots/escape-win__umeboshi/26-cup_0.png) | pass | I bought umeboshi. For no reason. Eat. |
-| cup:1 | [png](shots/escape-win__umeboshi/27-cup_1.png) | pass | Third teacup. Nobody poured it. One umeboshi on its saucer. |
-| cup:2 | [png](shots/escape-win__umeboshi/28-cup_2.png) | pass | Who's the third cup for? |
-| cup:3 | [png](shots/escape-win__umeboshi/29-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
-| unknown:0 | [png](shots/escape-win__umeboshi/30-unknown_0.png) | pass | You stand. The floor tilts a little. |
-| unknown:1 | [png](shots/escape-win__umeboshi/31-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
-| unknown:2 | [png](shots/escape-win__umeboshi/32-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
-| escape:0 | [png](shots/escape-win__umeboshi/33-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
-| escape:1 | [png](shots/escape-win__umeboshi/34-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
-| escape:2 | [png](shots/escape-win__umeboshi/35-escape_2.png) | pass | The dates go back years. The names are all different. |
-| escape:3 | [png](shots/escape-win__umeboshi/36-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
-| escape:4 | [png](shots/escape-win__umeboshi/37-escape_4.png) | pass | The oldest is dated before you met. |
-| escape:5 | [png](shots/escape-win__umeboshi/38-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
-| escape:6 | [png](shots/escape-win__umeboshi/39-escape_6.png) | pass | Newest jar: today, your name, umeboshi. Lid off. Empty. |
-| escape:7 | [png](shots/escape-win__umeboshi/40-escape_7.png) | pass |  |
-| escape:10 | [png](shots/escape-win__umeboshi/41-escape_10.png) | pass |  |
-| escape:11 | [png](shots/escape-win__umeboshi/42-escape_11.png) | pass |  |
-| escape:12 | [png](shots/escape-win__umeboshi/43-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
-| escape:13 | [png](shots/escape-win__umeboshi/44-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
-| escape-win:0 | [png](shots/escape-win__umeboshi/45-escape-win_0.png) | pass | She's waiting at the outside door. |
-| escape-win:1 | [png](shots/escape-win__umeboshi/46-escape-win_1.png) | pass | You took the long way. |
-| escape-win:2 | [png](shots/escape-win__umeboshi/47-escape-win_2.png) | pass | You picked sour. |
-| escape-win:3 | [png](shots/escape-win__umeboshi/48-escape-win_3.png) | pass | Now every hour is ours. |
-| escape-win:4 | [png](shots/escape-win__umeboshi/49-escape-win_4.png) | pass |  |
-| escape-win:5 | [png](shots/escape-win__umeboshi/50-escape-win_5.png) | pass | Mine. |
-| escape-win:6 | [png](shots/escape-win__umeboshi/51-escape-win_6.png) | pass | ESCAPE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/escape-win__umeboshi/52-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/escape-win__umeboshi/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/escape-win__umeboshi/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/escape-win__umeboshi/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/escape-win__umeboshi/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/escape-win__umeboshi/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/escape-win__umeboshi/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/escape-win__umeboshi/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/escape-win__umeboshi/30-door_0.png) | pass |  |
+| door:1 | [png](shots/escape-win__umeboshi/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/escape-win__umeboshi/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/escape-win__umeboshi/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| genkan-in:0 | [png](shots/escape-win__umeboshi/34-genkan-in_0.png) | pass | Her shoes. Lined up to the millimetre. |
+| genkan-in:1 | [png](shots/escape-win__umeboshi/35-genkan-in_1.png) | pass | Men's slippers. Already set out. |
+| genkan-in:2 | [png](shots/escape-win__umeboshi/36-genkan-in_2.png) | pass | A tiny shrine. Inside: a circuit you built. |
+| cup:0 | [png](shots/escape-win__umeboshi/37-cup_0.png) | pass | I bought umeboshi. For no reason. Eat. |
+| cup:1 | [png](shots/escape-win__umeboshi/38-cup_1.png) | pass | Third teacup. Nobody poured it. One umeboshi on its saucer. |
+| cup:2 | [png](shots/escape-win__umeboshi/39-cup_2.png) | pass | Who's the third cup for? |
+| cup:3 | [png](shots/escape-win__umeboshi/40-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
+| unknown:0 | [png](shots/escape-win__umeboshi/41-unknown_0.png) | pass | You stand. The floor tilts a little. |
+| unknown:1 | [png](shots/escape-win__umeboshi/42-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
+| unknown:2 | [png](shots/escape-win__umeboshi/43-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
+| escape:0 | [png](shots/escape-win__umeboshi/44-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
+| escape:1 | [png](shots/escape-win__umeboshi/45-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
+| escape:2 | [png](shots/escape-win__umeboshi/46-escape_2.png) | pass | The dates go back years. The names are all different. |
+| escape:3 | [png](shots/escape-win__umeboshi/47-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
+| escape:4 | [png](shots/escape-win__umeboshi/48-escape_4.png) | pass | The oldest is dated before you met. |
+| escape:5 | [png](shots/escape-win__umeboshi/49-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
+| escape:6 | [png](shots/escape-win__umeboshi/50-escape_6.png) | pass | Newest jar: today, your name, umeboshi. Lid off. Empty. |
+| escape:7 | [png](shots/escape-win__umeboshi/51-escape_7.png) | pass |  |
+| escape:9 | [png](shots/escape-win__umeboshi/52-escape_9.png) | pass |  |
+| escape:11 | [png](shots/escape-win__umeboshi/53-escape_11.png) | pass |  |
+| escape:12 | [png](shots/escape-win__umeboshi/54-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
+| escape:13 | [png](shots/escape-win__umeboshi/55-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
+| escape-win:0 | [png](shots/escape-win__umeboshi/56-escape-win_0.png) | pass | She's waiting at the outside door. |
+| escape-win:1 | [png](shots/escape-win__umeboshi/57-escape-win_1.png) | pass | You took the long way. |
+| escape-win:2 | [png](shots/escape-win__umeboshi/58-escape-win_2.png) | pass | You picked sour. |
+| escape-win:3 | [png](shots/escape-win__umeboshi/59-escape-win_3.png) | pass | Now every hour is ours. |
+| escape-win:4 | [png](shots/escape-win__umeboshi/60-escape-win_4.png) | pass |  |
+| escape-win:5 | [png](shots/escape-win__umeboshi/61-escape-win_5.png) | pass | Mine. |
+| escape-win:6 | [png](shots/escape-win__umeboshi/62-escape-win_6.png) | pass | ESCAPE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/escape-win__umeboshi/63-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## escape-timeout__tamagoyaki (1920x1080)
 
@@ -254,37 +298,48 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/escape-timeout__tamagoyaki/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/escape-timeout__tamagoyaki/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/escape-timeout__tamagoyaki/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/escape-timeout__tamagoyaki/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/escape-timeout__tamagoyaki/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/escape-timeout__tamagoyaki/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| cup:0 | [png](shots/escape-timeout__tamagoyaki/26-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
-| cup:1 | [png](shots/escape-timeout__tamagoyaki/27-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
-| cup:2 | [png](shots/escape-timeout__tamagoyaki/28-cup_2.png) | pass | Who's the third cup for? |
-| cup:3 | [png](shots/escape-timeout__tamagoyaki/29-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
-| unknown:0 | [png](shots/escape-timeout__tamagoyaki/30-unknown_0.png) | pass | You stand. The floor tilts a little. |
-| unknown:1 | [png](shots/escape-timeout__tamagoyaki/31-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
-| unknown:2 | [png](shots/escape-timeout__tamagoyaki/32-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
-| escape:0 | [png](shots/escape-timeout__tamagoyaki/33-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
-| escape:1 | [png](shots/escape-timeout__tamagoyaki/34-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
-| escape:2 | [png](shots/escape-timeout__tamagoyaki/35-escape_2.png) | pass | The dates go back years. The names are all different. |
-| escape:3 | [png](shots/escape-timeout__tamagoyaki/36-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
-| escape:4 | [png](shots/escape-timeout__tamagoyaki/37-escape_4.png) | pass | The oldest is dated before you met. |
-| escape:5 | [png](shots/escape-timeout__tamagoyaki/38-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
-| escape:6 | [png](shots/escape-timeout__tamagoyaki/39-escape_6.png) | pass | Newest jar: today, your name, tamagoyaki. Lid off. Empty. |
-| escape:7 | [png](shots/escape-timeout__tamagoyaki/40-escape_7.png) | pass |  |
-| escape:9 | [png](shots/escape-timeout__tamagoyaki/41-escape_9.png) | pass |  |
-| escape:11 | [png](shots/escape-timeout__tamagoyaki/42-escape_11.png) | pass |  |
-| escape:12 | [png](shots/escape-timeout__tamagoyaki/43-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
-| escape:13 | [png](shots/escape-timeout__tamagoyaki/44-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
-| escape-timeout:0 | [png](shots/escape-timeout__tamagoyaki/45-escape-timeout_0.png) | pass | The ladder creaks. She's coming down. |
-| escape-timeout:1 | [png](shots/escape-timeout__tamagoyaki/46-escape-timeout_1.png) | pass |  |
-| escape-timeout:2 | [png](shots/escape-timeout__tamagoyaki/47-escape-timeout_2.png) | pass | You wake at the tea table. Four cups now. |
-| escape-timeout:3 | [png](shots/escape-timeout__tamagoyaki/48-escape-timeout_3.png) | pass | She holds out the tamagoyaki. You eat. |
-| escape-timeout:4 | [png](shots/escape-timeout__tamagoyaki/49-escape-timeout_4.png) | pass | 甘い？…ね。 |
-| escape-timeout:5 | [png](shots/escape-timeout__tamagoyaki/50-escape-timeout_5.png) | pass | One sweet bite… |
-| escape-timeout:6 | [png](shots/escape-timeout__tamagoyaki/51-escape-timeout_6.png) | pass | …then sleep. You're mine to keep. |
-| escape-timeout:7 | [png](shots/escape-timeout__tamagoyaki/52-escape-timeout_7.png) | pass | ESCAPE? [Back to start] |
-| back-to-rooftop:0 | [png](shots/escape-timeout__tamagoyaki/53-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/escape-timeout__tamagoyaki/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/escape-timeout__tamagoyaki/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/escape-timeout__tamagoyaki/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/escape-timeout__tamagoyaki/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/escape-timeout__tamagoyaki/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/escape-timeout__tamagoyaki/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/escape-timeout__tamagoyaki/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/escape-timeout__tamagoyaki/30-door_0.png) | pass |  |
+| door:1 | [png](shots/escape-timeout__tamagoyaki/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/escape-timeout__tamagoyaki/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/escape-timeout__tamagoyaki/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| genkan-in:0 | [png](shots/escape-timeout__tamagoyaki/34-genkan-in_0.png) | pass | Her shoes. Lined up to the millimetre. |
+| genkan-in:1 | [png](shots/escape-timeout__tamagoyaki/35-genkan-in_1.png) | pass | Men's slippers. Already set out. |
+| genkan-in:2 | [png](shots/escape-timeout__tamagoyaki/36-genkan-in_2.png) | pass | A tiny shrine. Inside: a circuit you built. |
+| cup:0 | [png](shots/escape-timeout__tamagoyaki/37-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
+| cup:1 | [png](shots/escape-timeout__tamagoyaki/38-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
+| cup:2 | [png](shots/escape-timeout__tamagoyaki/39-cup_2.png) | pass | Who's the third cup for? |
+| cup:3 | [png](shots/escape-timeout__tamagoyaki/40-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
+| unknown:0 | [png](shots/escape-timeout__tamagoyaki/41-unknown_0.png) | pass | You stand. The floor tilts a little. |
+| unknown:1 | [png](shots/escape-timeout__tamagoyaki/42-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
+| unknown:2 | [png](shots/escape-timeout__tamagoyaki/43-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
+| escape:0 | [png](shots/escape-timeout__tamagoyaki/44-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
+| escape:1 | [png](shots/escape-timeout__tamagoyaki/45-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
+| escape:2 | [png](shots/escape-timeout__tamagoyaki/46-escape_2.png) | pass | The dates go back years. The names are all different. |
+| escape:3 | [png](shots/escape-timeout__tamagoyaki/47-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
+| escape:4 | [png](shots/escape-timeout__tamagoyaki/48-escape_4.png) | pass | The oldest is dated before you met. |
+| escape:5 | [png](shots/escape-timeout__tamagoyaki/49-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
+| escape:6 | [png](shots/escape-timeout__tamagoyaki/50-escape_6.png) | pass | Newest jar: today, your name, tamagoyaki. Lid off. Empty. |
+| escape:7 | [png](shots/escape-timeout__tamagoyaki/51-escape_7.png) | pass |  |
+| escape:9 | [png](shots/escape-timeout__tamagoyaki/52-escape_9.png) | pass |  |
+| escape:11 | [png](shots/escape-timeout__tamagoyaki/53-escape_11.png) | pass |  |
+| escape:12 | [png](shots/escape-timeout__tamagoyaki/54-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
+| escape:13 | [png](shots/escape-timeout__tamagoyaki/55-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
+| escape-timeout:0 | [png](shots/escape-timeout__tamagoyaki/56-escape-timeout_0.png) | pass | The ladder creaks. She's coming down. |
+| escape-timeout:1 | [png](shots/escape-timeout__tamagoyaki/57-escape-timeout_1.png) | pass |  |
+| escape-timeout:2 | [png](shots/escape-timeout__tamagoyaki/58-escape-timeout_2.png) | pass | You wake at the tea table. Four cups now. |
+| escape-timeout:3 | [png](shots/escape-timeout__tamagoyaki/59-escape-timeout_3.png) | pass | She holds out the tamagoyaki. You eat. |
+| escape-timeout:4 | [png](shots/escape-timeout__tamagoyaki/60-escape-timeout_4.png) | pass | 甘い？…ね。 |
+| escape-timeout:5 | [png](shots/escape-timeout__tamagoyaki/61-escape-timeout_5.png) | pass | One sweet bite… |
+| escape-timeout:6 | [png](shots/escape-timeout__tamagoyaki/62-escape-timeout_6.png) | pass | …then sleep. You're mine to keep. |
+| escape-timeout:7 | [png](shots/escape-timeout__tamagoyaki/63-escape-timeout_7.png) | pass | ESCAPE? [Back to start] |
+| back-to-rooftop:0 | [png](shots/escape-timeout__tamagoyaki/64-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## escape-timeout__umeboshi (1920x1080)
 
@@ -315,37 +370,48 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/escape-timeout__umeboshi/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/escape-timeout__umeboshi/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/escape-timeout__umeboshi/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/escape-timeout__umeboshi/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/escape-timeout__umeboshi/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/escape-timeout__umeboshi/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| cup:0 | [png](shots/escape-timeout__umeboshi/26-cup_0.png) | pass | I bought umeboshi. For no reason. Eat. |
-| cup:1 | [png](shots/escape-timeout__umeboshi/27-cup_1.png) | pass | Third teacup. Nobody poured it. One umeboshi on its saucer. |
-| cup:2 | [png](shots/escape-timeout__umeboshi/28-cup_2.png) | pass | Who's the third cup for? |
-| cup:3 | [png](shots/escape-timeout__umeboshi/29-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
-| unknown:0 | [png](shots/escape-timeout__umeboshi/30-unknown_0.png) | pass | You stand. The floor tilts a little. |
-| unknown:1 | [png](shots/escape-timeout__umeboshi/31-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
-| unknown:2 | [png](shots/escape-timeout__umeboshi/32-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
-| escape:0 | [png](shots/escape-timeout__umeboshi/33-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
-| escape:1 | [png](shots/escape-timeout__umeboshi/34-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
-| escape:2 | [png](shots/escape-timeout__umeboshi/35-escape_2.png) | pass | The dates go back years. The names are all different. |
-| escape:3 | [png](shots/escape-timeout__umeboshi/36-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
-| escape:4 | [png](shots/escape-timeout__umeboshi/37-escape_4.png) | pass | The oldest is dated before you met. |
-| escape:5 | [png](shots/escape-timeout__umeboshi/38-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
-| escape:6 | [png](shots/escape-timeout__umeboshi/39-escape_6.png) | pass | Newest jar: today, your name, umeboshi. Lid off. Empty. |
-| escape:7 | [png](shots/escape-timeout__umeboshi/40-escape_7.png) | pass |  |
-| escape:9 | [png](shots/escape-timeout__umeboshi/41-escape_9.png) | pass |  |
-| escape:11 | [png](shots/escape-timeout__umeboshi/42-escape_11.png) | pass |  |
-| escape:12 | [png](shots/escape-timeout__umeboshi/43-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
-| escape:13 | [png](shots/escape-timeout__umeboshi/44-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
-| escape-timeout:0 | [png](shots/escape-timeout__umeboshi/45-escape-timeout_0.png) | pass | The ladder creaks. She's coming down. |
-| escape-timeout:1 | [png](shots/escape-timeout__umeboshi/46-escape-timeout_1.png) | pass |  |
-| escape-timeout:2 | [png](shots/escape-timeout__umeboshi/47-escape-timeout_2.png) | pass | You wake at the tea table. Four cups now. |
-| escape-timeout:3 | [png](shots/escape-timeout__umeboshi/48-escape-timeout_3.png) | pass | She holds out an umeboshi. You eat. |
-| escape-timeout:4 | [png](shots/escape-timeout__umeboshi/49-escape-timeout_4.png) | pass | すっぱい？…ね。 |
-| escape-timeout:5 | [png](shots/escape-timeout__umeboshi/50-escape-timeout_5.png) | pass | One sour hour… |
-| escape-timeout:6 | [png](shots/escape-timeout__umeboshi/51-escape-timeout_6.png) | pass | …then every hour is ours. |
-| escape-timeout:7 | [png](shots/escape-timeout__umeboshi/52-escape-timeout_7.png) | pass | ESCAPE? [Back to start] |
-| back-to-rooftop:0 | [png](shots/escape-timeout__umeboshi/53-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/escape-timeout__umeboshi/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/escape-timeout__umeboshi/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/escape-timeout__umeboshi/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/escape-timeout__umeboshi/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/escape-timeout__umeboshi/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/escape-timeout__umeboshi/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/escape-timeout__umeboshi/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/escape-timeout__umeboshi/30-door_0.png) | pass |  |
+| door:1 | [png](shots/escape-timeout__umeboshi/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/escape-timeout__umeboshi/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/escape-timeout__umeboshi/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| genkan-in:0 | [png](shots/escape-timeout__umeboshi/34-genkan-in_0.png) | pass | Her shoes. Lined up to the millimetre. |
+| genkan-in:1 | [png](shots/escape-timeout__umeboshi/35-genkan-in_1.png) | pass | Men's slippers. Already set out. |
+| genkan-in:2 | [png](shots/escape-timeout__umeboshi/36-genkan-in_2.png) | pass | A tiny shrine. Inside: a circuit you built. |
+| cup:0 | [png](shots/escape-timeout__umeboshi/37-cup_0.png) | pass | I bought umeboshi. For no reason. Eat. |
+| cup:1 | [png](shots/escape-timeout__umeboshi/38-cup_1.png) | pass | Third teacup. Nobody poured it. One umeboshi on its saucer. |
+| cup:2 | [png](shots/escape-timeout__umeboshi/39-cup_2.png) | pass | Who's the third cup for? |
+| cup:3 | [png](shots/escape-timeout__umeboshi/40-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
+| unknown:0 | [png](shots/escape-timeout__umeboshi/41-unknown_0.png) | pass | You stand. The floor tilts a little. |
+| unknown:1 | [png](shots/escape-timeout__umeboshi/42-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
+| unknown:2 | [png](shots/escape-timeout__umeboshi/43-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
+| escape:0 | [png](shots/escape-timeout__umeboshi/44-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
+| escape:1 | [png](shots/escape-timeout__umeboshi/45-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
+| escape:2 | [png](shots/escape-timeout__umeboshi/46-escape_2.png) | pass | The dates go back years. The names are all different. |
+| escape:3 | [png](shots/escape-timeout__umeboshi/47-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
+| escape:4 | [png](shots/escape-timeout__umeboshi/48-escape_4.png) | pass | The oldest is dated before you met. |
+| escape:5 | [png](shots/escape-timeout__umeboshi/49-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
+| escape:6 | [png](shots/escape-timeout__umeboshi/50-escape_6.png) | pass | Newest jar: today, your name, umeboshi. Lid off. Empty. |
+| escape:7 | [png](shots/escape-timeout__umeboshi/51-escape_7.png) | pass |  |
+| escape:9 | [png](shots/escape-timeout__umeboshi/52-escape_9.png) | pass |  |
+| escape:11 | [png](shots/escape-timeout__umeboshi/53-escape_11.png) | pass |  |
+| escape:12 | [png](shots/escape-timeout__umeboshi/54-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
+| escape:13 | [png](shots/escape-timeout__umeboshi/55-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
+| escape-timeout:0 | [png](shots/escape-timeout__umeboshi/56-escape-timeout_0.png) | pass | The ladder creaks. She's coming down. |
+| escape-timeout:1 | [png](shots/escape-timeout__umeboshi/57-escape-timeout_1.png) | pass |  |
+| escape-timeout:2 | [png](shots/escape-timeout__umeboshi/58-escape-timeout_2.png) | pass | You wake at the tea table. Four cups now. |
+| escape-timeout:3 | [png](shots/escape-timeout__umeboshi/59-escape-timeout_3.png) | pass | She holds out an umeboshi. You eat. |
+| escape-timeout:4 | [png](shots/escape-timeout__umeboshi/60-escape-timeout_4.png) | pass | すっぱい？…ね。 |
+| escape-timeout:5 | [png](shots/escape-timeout__umeboshi/61-escape-timeout_5.png) | pass | One sour hour… |
+| escape-timeout:6 | [png](shots/escape-timeout__umeboshi/62-escape-timeout_6.png) | pass | …then every hour is ours. |
+| escape-timeout:7 | [png](shots/escape-timeout__umeboshi/63-escape-timeout_7.png) | pass | ESCAPE? [Back to start] |
+| back-to-rooftop:0 | [png](shots/escape-timeout__umeboshi/64-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## leave-fu__tamagoyaki (1920x1080)
 
@@ -376,19 +442,27 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/leave-fu__tamagoyaki/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/leave-fu__tamagoyaki/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/leave-fu__tamagoyaki/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/leave-fu__tamagoyaki/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/leave-fu__tamagoyaki/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/leave-fu__tamagoyaki/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| leave:0 | [png](shots/leave-fu__tamagoyaki/26-leave_0.png) | pass | Leaving is not an option. |
-| leave:1 | [png](shots/leave-fu__tamagoyaki/27-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
-| leave:2 | [png](shots/leave-fu__tamagoyaki/28-leave_2.png) | pass | He wakes at 7:00. |
-| leave:3 | [png](shots/leave-fu__tamagoyaki/29-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
-| leave-fu:0 | [png](shots/leave-fu__tamagoyaki/30-leave-fu_0.png) | pass | Her hand rises. Time freezes. The café turns. |
-| leave-fu:1 | [png](shots/leave-fu__tamagoyaki/31-leave-fu_1.png) | pass | You said leave. I heard 'lea—'. |
-| leave-fu:2 | [png](shots/leave-fu__tamagoyaki/32-leave-fu_2.png) | pass | fORever and ever |
-| leave-fu:3 | [png](shots/leave-fu__tamagoyaki/33-leave-fu_3.png) | pass | fORever and ever and ever |
-| leave-fu:4 | [png](shots/leave-fu__tamagoyaki/34-leave-fu_4.png) | pass | LEAVE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/leave-fu__tamagoyaki/35-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/leave-fu__tamagoyaki/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/leave-fu__tamagoyaki/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/leave-fu__tamagoyaki/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/leave-fu__tamagoyaki/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/leave-fu__tamagoyaki/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/leave-fu__tamagoyaki/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/leave-fu__tamagoyaki/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/leave-fu__tamagoyaki/30-door_0.png) | pass |  |
+| door:1 | [png](shots/leave-fu__tamagoyaki/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/leave-fu__tamagoyaki/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/leave-fu__tamagoyaki/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| leave:0 | [png](shots/leave-fu__tamagoyaki/34-leave_0.png) | pass | Leaving is not an option. |
+| leave:1 | [png](shots/leave-fu__tamagoyaki/35-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
+| leave:2 | [png](shots/leave-fu__tamagoyaki/36-leave_2.png) | pass | He wakes at 7:00. |
+| leave:3 | [png](shots/leave-fu__tamagoyaki/37-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
+| leave-fu:0 | [png](shots/leave-fu__tamagoyaki/38-leave-fu_0.png) | pass | Her hand rises. Time freezes. The café turns. |
+| leave-fu:1 | [png](shots/leave-fu__tamagoyaki/39-leave-fu_1.png) | pass | You said leave. I heard 'lea—'. |
+| leave-fu:2 | [png](shots/leave-fu__tamagoyaki/40-leave-fu_2.png) | pass | fORever and ever |
+| leave-fu:3 | [png](shots/leave-fu__tamagoyaki/41-leave-fu_3.png) | pass | fORever and ever and ever |
+| leave-fu:4 | [png](shots/leave-fu__tamagoyaki/42-leave-fu_4.png) | pass | LEAVE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/leave-fu__tamagoyaki/43-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## leave-fu__umeboshi (1920x1080)
 
@@ -419,19 +493,27 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/leave-fu__umeboshi/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/leave-fu__umeboshi/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/leave-fu__umeboshi/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/leave-fu__umeboshi/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/leave-fu__umeboshi/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/leave-fu__umeboshi/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| leave:0 | [png](shots/leave-fu__umeboshi/26-leave_0.png) | pass | Leaving is not an option. |
-| leave:1 | [png](shots/leave-fu__umeboshi/27-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
-| leave:2 | [png](shots/leave-fu__umeboshi/28-leave_2.png) | pass | He wakes at 7:00. |
-| leave:3 | [png](shots/leave-fu__umeboshi/29-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
-| leave-fu:0 | [png](shots/leave-fu__umeboshi/30-leave-fu_0.png) | pass | Her hand rises. Time freezes. The café turns. |
-| leave-fu:1 | [png](shots/leave-fu__umeboshi/31-leave-fu_1.png) | pass | You said leave. I heard 'lea—'. |
-| leave-fu:2 | [png](shots/leave-fu__umeboshi/32-leave-fu_2.png) | pass | fORever and ever |
-| leave-fu:3 | [png](shots/leave-fu__umeboshi/33-leave-fu_3.png) | pass | fORever and ever and ever |
-| leave-fu:4 | [png](shots/leave-fu__umeboshi/34-leave-fu_4.png) | pass | LEAVE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/leave-fu__umeboshi/35-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/leave-fu__umeboshi/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/leave-fu__umeboshi/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/leave-fu__umeboshi/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/leave-fu__umeboshi/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/leave-fu__umeboshi/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/leave-fu__umeboshi/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/leave-fu__umeboshi/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/leave-fu__umeboshi/30-door_0.png) | pass |  |
+| door:1 | [png](shots/leave-fu__umeboshi/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/leave-fu__umeboshi/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/leave-fu__umeboshi/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| leave:0 | [png](shots/leave-fu__umeboshi/34-leave_0.png) | pass | Leaving is not an option. |
+| leave:1 | [png](shots/leave-fu__umeboshi/35-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
+| leave:2 | [png](shots/leave-fu__umeboshi/36-leave_2.png) | pass | He wakes at 7:00. |
+| leave:3 | [png](shots/leave-fu__umeboshi/37-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
+| leave-fu:0 | [png](shots/leave-fu__umeboshi/38-leave-fu_0.png) | pass | Her hand rises. Time freezes. The café turns. |
+| leave-fu:1 | [png](shots/leave-fu__umeboshi/39-leave-fu_1.png) | pass | You said leave. I heard 'lea—'. |
+| leave-fu:2 | [png](shots/leave-fu__umeboshi/40-leave-fu_2.png) | pass | fORever and ever |
+| leave-fu:3 | [png](shots/leave-fu__umeboshi/41-leave-fu_3.png) | pass | fORever and ever and ever |
+| leave-fu:4 | [png](shots/leave-fu__umeboshi/42-leave-fu_4.png) | pass | LEAVE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/leave-fu__umeboshi/43-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## leave-yeah__tamagoyaki (1920x1080)
 
@@ -462,19 +544,27 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/leave-yeah__tamagoyaki/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/leave-yeah__tamagoyaki/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/leave-yeah__tamagoyaki/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/leave-yeah__tamagoyaki/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/leave-yeah__tamagoyaki/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/leave-yeah__tamagoyaki/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| leave:0 | [png](shots/leave-yeah__tamagoyaki/26-leave_0.png) | pass | Leaving is not an option. |
-| leave:1 | [png](shots/leave-yeah__tamagoyaki/27-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
-| leave:2 | [png](shots/leave-yeah__tamagoyaki/28-leave_2.png) | pass | He wakes at 7:00. |
-| leave:3 | [png](shots/leave-yeah__tamagoyaki/29-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
-| leave-yeah:0 | [png](shots/leave-yeah__tamagoyaki/30-leave-yeah_0.png) | pass | Hooray! FORever and ever! |
-| leave-yeah:1 | [png](shots/leave-yeah__tamagoyaki/31-leave-yeah_1.png) | pass | Good input. |
-| leave-yeah:2 | [png](shots/leave-yeah__tamagoyaki/32-leave-yeah_2.png) | pass | fORever and ever |
-| leave-yeah:3 | [png](shots/leave-yeah__tamagoyaki/33-leave-yeah_3.png) | pass | fORever and ever and ever |
-| leave-yeah:4 | [png](shots/leave-yeah__tamagoyaki/34-leave-yeah_4.png) | pass | LEAVE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/leave-yeah__tamagoyaki/35-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/leave-yeah__tamagoyaki/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/leave-yeah__tamagoyaki/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/leave-yeah__tamagoyaki/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/leave-yeah__tamagoyaki/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/leave-yeah__tamagoyaki/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/leave-yeah__tamagoyaki/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/leave-yeah__tamagoyaki/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/leave-yeah__tamagoyaki/30-door_0.png) | pass |  |
+| door:1 | [png](shots/leave-yeah__tamagoyaki/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/leave-yeah__tamagoyaki/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/leave-yeah__tamagoyaki/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| leave:0 | [png](shots/leave-yeah__tamagoyaki/34-leave_0.png) | pass | Leaving is not an option. |
+| leave:1 | [png](shots/leave-yeah__tamagoyaki/35-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
+| leave:2 | [png](shots/leave-yeah__tamagoyaki/36-leave_2.png) | pass | He wakes at 7:00. |
+| leave:3 | [png](shots/leave-yeah__tamagoyaki/37-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
+| leave-yeah:0 | [png](shots/leave-yeah__tamagoyaki/38-leave-yeah_0.png) | pass | Hooray! FORever and ever! |
+| leave-yeah:1 | [png](shots/leave-yeah__tamagoyaki/39-leave-yeah_1.png) | pass | Good input. |
+| leave-yeah:2 | [png](shots/leave-yeah__tamagoyaki/40-leave-yeah_2.png) | pass | fORever and ever |
+| leave-yeah:3 | [png](shots/leave-yeah__tamagoyaki/41-leave-yeah_3.png) | pass | fORever and ever and ever |
+| leave-yeah:4 | [png](shots/leave-yeah__tamagoyaki/42-leave-yeah_4.png) | pass | LEAVE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/leave-yeah__tamagoyaki/43-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## leave-yeah__umeboshi (1920x1080)
 
@@ -505,19 +595,27 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/leave-yeah__umeboshi/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/leave-yeah__umeboshi/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/leave-yeah__umeboshi/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/leave-yeah__umeboshi/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/leave-yeah__umeboshi/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/leave-yeah__umeboshi/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| leave:0 | [png](shots/leave-yeah__umeboshi/26-leave_0.png) | pass | Leaving is not an option. |
-| leave:1 | [png](shots/leave-yeah__umeboshi/27-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
-| leave:2 | [png](shots/leave-yeah__umeboshi/28-leave_2.png) | pass | He wakes at 7:00. |
-| leave:3 | [png](shots/leave-yeah__umeboshi/29-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
-| leave-yeah:0 | [png](shots/leave-yeah__umeboshi/30-leave-yeah_0.png) | pass | Hooray! FORever and ever! |
-| leave-yeah:1 | [png](shots/leave-yeah__umeboshi/31-leave-yeah_1.png) | pass | Good input. |
-| leave-yeah:2 | [png](shots/leave-yeah__umeboshi/32-leave-yeah_2.png) | pass | fORever and ever |
-| leave-yeah:3 | [png](shots/leave-yeah__umeboshi/33-leave-yeah_3.png) | pass | fORever and ever and ever |
-| leave-yeah:4 | [png](shots/leave-yeah__umeboshi/34-leave-yeah_4.png) | pass | LEAVE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/leave-yeah__umeboshi/35-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/leave-yeah__umeboshi/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/leave-yeah__umeboshi/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/leave-yeah__umeboshi/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/leave-yeah__umeboshi/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/leave-yeah__umeboshi/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/leave-yeah__umeboshi/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/leave-yeah__umeboshi/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/leave-yeah__umeboshi/30-door_0.png) | pass |  |
+| door:1 | [png](shots/leave-yeah__umeboshi/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/leave-yeah__umeboshi/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/leave-yeah__umeboshi/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| leave:0 | [png](shots/leave-yeah__umeboshi/34-leave_0.png) | pass | Leaving is not an option. |
+| leave:1 | [png](shots/leave-yeah__umeboshi/35-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
+| leave:2 | [png](shots/leave-yeah__umeboshi/36-leave_2.png) | pass | He wakes at 7:00. |
+| leave:3 | [png](shots/leave-yeah__umeboshi/37-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
+| leave-yeah:0 | [png](shots/leave-yeah__umeboshi/38-leave-yeah_0.png) | pass | Hooray! FORever and ever! |
+| leave-yeah:1 | [png](shots/leave-yeah__umeboshi/39-leave-yeah_1.png) | pass | Good input. |
+| leave-yeah:2 | [png](shots/leave-yeah__umeboshi/40-leave-yeah_2.png) | pass | fORever and ever |
+| leave-yeah:3 | [png](shots/leave-yeah__umeboshi/41-leave-yeah_3.png) | pass | fORever and ever and ever |
+| leave-yeah:4 | [png](shots/leave-yeah__umeboshi/42-leave-yeah_4.png) | pass | LEAVE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/leave-yeah__umeboshi/43-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## escape-win__tamagoyaki__1024 (1024x768)
 
@@ -548,36 +646,47 @@ Audio context on arrival: carried
 | blackout:7 | [png](shots/escape-win__tamagoyaki__1024/20-blackout_7.png) | pass |  |
 | blackout:8 | [png](shots/escape-win__tamagoyaki__1024/21-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/escape-win__tamagoyaki__1024/22-blackout_9.png) | pass |  |
-| door:0 | [png](shots/escape-win__tamagoyaki__1024/23-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/escape-win__tamagoyaki__1024/24-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/escape-win__tamagoyaki__1024/25-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| cup:0 | [png](shots/escape-win__tamagoyaki__1024/26-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
-| cup:1 | [png](shots/escape-win__tamagoyaki__1024/27-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
-| cup:2 | [png](shots/escape-win__tamagoyaki__1024/28-cup_2.png) | pass | Who's the third cup for? |
-| cup:3 | [png](shots/escape-win__tamagoyaki__1024/29-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
-| unknown:0 | [png](shots/escape-win__tamagoyaki__1024/30-unknown_0.png) | pass | You stand. The floor tilts a little. |
-| unknown:1 | [png](shots/escape-win__tamagoyaki__1024/31-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
-| unknown:2 | [png](shots/escape-win__tamagoyaki__1024/32-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
-| escape:0 | [png](shots/escape-win__tamagoyaki__1024/33-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
-| escape:1 | [png](shots/escape-win__tamagoyaki__1024/34-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
-| escape:2 | [png](shots/escape-win__tamagoyaki__1024/35-escape_2.png) | pass | The dates go back years. The names are all different. |
-| escape:3 | [png](shots/escape-win__tamagoyaki__1024/36-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
-| escape:4 | [png](shots/escape-win__tamagoyaki__1024/37-escape_4.png) | pass | The oldest is dated before you met. |
-| escape:5 | [png](shots/escape-win__tamagoyaki__1024/38-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
-| escape:6 | [png](shots/escape-win__tamagoyaki__1024/39-escape_6.png) | pass | Newest jar: today, your name, tamagoyaki. Lid off. Empty. |
-| escape:7 | [png](shots/escape-win__tamagoyaki__1024/40-escape_7.png) | pass |  |
-| escape:9 | [png](shots/escape-win__tamagoyaki__1024/41-escape_9.png) | pass |  |
-| escape:11 | [png](shots/escape-win__tamagoyaki__1024/42-escape_11.png) | pass |  |
-| escape:12 | [png](shots/escape-win__tamagoyaki__1024/43-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
-| escape:13 | [png](shots/escape-win__tamagoyaki__1024/44-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
-| escape-win:0 | [png](shots/escape-win__tamagoyaki__1024/45-escape-win_0.png) | pass | She's waiting at the outside door. |
-| escape-win:1 | [png](shots/escape-win__tamagoyaki__1024/46-escape-win_1.png) | pass | You took the long way. |
-| escape-win:2 | [png](shots/escape-win__tamagoyaki__1024/47-escape-win_2.png) | pass | Home is warm, and sweet. |
-| escape-win:3 | [png](shots/escape-win__tamagoyaki__1024/48-escape-win_3.png) | pass | Sleep now. You're mine to keep. |
-| escape-win:4 | [png](shots/escape-win__tamagoyaki__1024/49-escape-win_4.png) | pass |  |
-| escape-win:5 | [png](shots/escape-win__tamagoyaki__1024/50-escape-win_5.png) | pass | Mine. |
-| escape-win:6 | [png](shots/escape-win__tamagoyaki__1024/51-escape-win_6.png) | pass | ESCAPE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/escape-win__tamagoyaki__1024/52-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/escape-win__tamagoyaki__1024/23-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/escape-win__tamagoyaki__1024/24-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/escape-win__tamagoyaki__1024/25-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/escape-win__tamagoyaki__1024/26-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/escape-win__tamagoyaki__1024/27-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/escape-win__tamagoyaki__1024/28-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/escape-win__tamagoyaki__1024/29-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/escape-win__tamagoyaki__1024/30-door_0.png) | pass |  |
+| door:1 | [png](shots/escape-win__tamagoyaki__1024/31-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/escape-win__tamagoyaki__1024/32-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/escape-win__tamagoyaki__1024/33-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| genkan-in:0 | [png](shots/escape-win__tamagoyaki__1024/34-genkan-in_0.png) | pass | Her shoes. Lined up to the millimetre. |
+| genkan-in:1 | [png](shots/escape-win__tamagoyaki__1024/35-genkan-in_1.png) | pass | Men's slippers. Already set out. |
+| genkan-in:2 | [png](shots/escape-win__tamagoyaki__1024/36-genkan-in_2.png) | pass | A tiny shrine. Inside: a circuit you built. |
+| cup:0 | [png](shots/escape-win__tamagoyaki__1024/37-cup_0.png) | pass | I made tamagoyaki. For no reason. Eat. |
+| cup:1 | [png](shots/escape-win__tamagoyaki__1024/38-cup_1.png) | pass | Third teacup. Nobody poured it. Tamagoyaki on its saucer. |
+| cup:2 | [png](shots/escape-win__tamagoyaki__1024/39-cup_2.png) | pass | Who's the third cup for? |
+| cup:3 | [png](shots/escape-win__tamagoyaki__1024/40-cup_3.png) | pass | For Input B. Silly. It's always three of us. [Drink / Stand up] |
+| unknown:0 | [png](shots/escape-win__tamagoyaki__1024/41-unknown_0.png) | pass | You stand. The floor tilts a little. |
+| unknown:1 | [png](shots/escape-win__tamagoyaki__1024/42-unknown_1.png) | pass | Under the table: a floor hatch. Too big for storage. [Open the hatch] |
+| unknown:2 | [png](shots/escape-win__tamagoyaki__1024/43-unknown_2.png) | pass | A steep wooden ladder. Down into the dark. [Climb down] |
+| escape:0 | [png](shots/escape-win__tamagoyaki__1024/44-escape_0.png) | pass | Concrete. One bulb. Rain at a high window. [Look at the shelves] |
+| escape:1 | [png](shots/escape-win__tamagoyaki__1024/45-escape_1.png) | pass | Jars on the shelves. Each one: a date, a name. |
+| escape:2 | [png](shots/escape-win__tamagoyaki__1024/46-escape_2.png) | pass | The dates go back years. The names are all different. |
+| escape:3 | [png](shots/escape-win__tamagoyaki__1024/47-escape_3.png) | pass | Bento boxes, one per day. Your name on each. Untouched. |
+| escape:4 | [png](shots/escape-win__tamagoyaki__1024/48-escape_4.png) | pass | The oldest is dated before you met. |
+| escape:5 | [png](shots/escape-win__tamagoyaki__1024/49-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
+| escape:6 | [png](shots/escape-win__tamagoyaki__1024/50-escape_6.png) | pass | Newest jar: today, your name, tamagoyaki. Lid off. Empty. |
+| escape:7 | [png](shots/escape-win__tamagoyaki__1024/51-escape_7.png) | pass |  |
+| escape:9 | [png](shots/escape-win__tamagoyaki__1024/52-escape_9.png) | pass |  |
+| escape:11 | [png](shots/escape-win__tamagoyaki__1024/53-escape_11.png) | pass |  |
+| escape:12 | [png](shots/escape-win__tamagoyaki__1024/54-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
+| escape:13 | [png](shots/escape-win__tamagoyaki__1024/55-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
+| escape-win:0 | [png](shots/escape-win__tamagoyaki__1024/56-escape-win_0.png) | pass | She's waiting at the outside door. |
+| escape-win:1 | [png](shots/escape-win__tamagoyaki__1024/57-escape-win_1.png) | pass | You took the long way. |
+| escape-win:2 | [png](shots/escape-win__tamagoyaki__1024/58-escape-win_2.png) | pass | Home is warm, and sweet. |
+| escape-win:3 | [png](shots/escape-win__tamagoyaki__1024/59-escape-win_3.png) | pass | Sleep now. You're mine to keep. |
+| escape-win:4 | [png](shots/escape-win__tamagoyaki__1024/60-escape-win_4.png) | pass |  |
+| escape-win:5 | [png](shots/escape-win__tamagoyaki__1024/61-escape-win_5.png) | pass | Mine. |
+| escape-win:6 | [png](shots/escape-win__tamagoyaki__1024/62-escape-win_6.png) | pass | ESCAPE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/escape-win__tamagoyaki__1024/63-back-to-rooftop_0.png) | pass | returned to scene 1 |
 
 ## leave-fu__umeboshi__rm (1920x1080, reduced motion)
 
@@ -605,16 +714,24 @@ Audio context on arrival: carried
 | blackout:6 | [png](shots/leave-fu__umeboshi__rm/17-blackout_6.png) | pass |  |
 | blackout:8 | [png](shots/leave-fu__umeboshi__rm/18-blackout_8.png) | pass |  |
 | blackout:9 | [png](shots/leave-fu__umeboshi__rm/19-blackout_9.png) | pass |  |
-| door:0 | [png](shots/leave-fu__umeboshi__rm/20-door_0.png) | pass | This is me. Unit 12. Obviously you'll remember. |
-| door:1 | [png](shots/leave-fu__umeboshi__rm/21-door_1.png) | pass | Come in? Just for tea. |
-| door:2 | [png](shots/leave-fu__umeboshi__rm/22-door_2.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
-| leave:0 | [png](shots/leave-fu__umeboshi__rm/23-leave_0.png) | pass | Leaving is not an option. |
-| leave:1 | [png](shots/leave-fu__umeboshi__rm/24-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
-| leave:2 | [png](shots/leave-fu__umeboshi__rm/25-leave_2.png) | pass | He wakes at 7:00. |
-| leave:3 | [png](shots/leave-fu__umeboshi__rm/26-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
-| leave-fu:0 | [png](shots/leave-fu__umeboshi__rm/27-leave-fu_0.png) | pass | Her hand rises. Time freezes. The café turns. |
-| leave-fu:1 | [png](shots/leave-fu__umeboshi__rm/28-leave-fu_1.png) | pass | You said leave. I heard 'lea—'. |
-| leave-fu:2 | [png](shots/leave-fu__umeboshi__rm/29-leave-fu_2.png) | pass | fORever and ever |
-| leave-fu:3 | [png](shots/leave-fu__umeboshi__rm/30-leave-fu_3.png) | pass | fORever and ever and ever |
-| leave-fu:4 | [png](shots/leave-fu__umeboshi__rm/31-leave-fu_4.png) | pass | LEAVE. [Back to start] |
-| back-to-rooftop:0 | [png](shots/leave-fu__umeboshi__rm/32-back-to-rooftop_0.png) | pass | returned to scene 1 |
+| platform:0 | [png](shots/leave-fu__umeboshi__rm/20-platform_0.png) | pass | Her stop. The rain followed us off the train. |
+| platform:1 | [png](shots/leave-fu__umeboshi__rm/21-platform_1.png) | pass | The AND Line leaves. Just two of us now. |
+| platform:2 | [png](shots/leave-fu__umeboshi__rm/22-platform_2.png) | pass | NEXT: this OR that. The sign never picks. |
+| underpass:0 | [png](shots/leave-fu__umeboshi__rm/23-underpass_0.png) | pass | Your steps, her steps. Always an even count. |
+| underpass:1 | [png](shots/leave-fu__umeboshi__rm/24-underpass_1.png) | pass | Don't read the ads. Read me. |
+| apartment:0 | [png](shots/leave-fu__umeboshi__rm/25-apartment_0.png) | pass | Four floors. One window lit. |
+| apartment:1 | [png](shots/leave-fu__umeboshi__rm/26-apartment_1.png) | pass | That's mine. I left the light on for you. |
+| door:0 | [png](shots/leave-fu__umeboshi__rm/27-door_0.png) | pass |  |
+| door:1 | [png](shots/leave-fu__umeboshi__rm/28-door_1.png) | pass | This is me. Unit 12. Obviously you'll remember. |
+| door:2 | [png](shots/leave-fu__umeboshi__rm/29-door_2.png) | pass | Come in? Just for tea. |
+| door:3 | [png](shots/leave-fu__umeboshi__rm/30-door_3.png) | pass | I already boiled the water. This morning. Just in case. [Just one cup / Say goodnight] |
+| leave:0 | [png](shots/leave-fu__umeboshi__rm/31-leave_0.png) | pass | Leaving is not an option. |
+| leave:1 | [png](shots/leave-fu__umeboshi__rm/32-leave_1.png) | pass | XOR Coffee. 7:00 AM. |
+| leave:2 | [png](shots/leave-fu__umeboshi__rm/33-leave_2.png) | pass | He wakes at 7:00. |
+| leave:3 | [png](shots/leave-fu__umeboshi__rm/34-leave_3.png) | pass | From now on… can we be fORever? [uhmmm yeah ig / FUCK YOU. I'm leaving] |
+| leave-fu:0 | [png](shots/leave-fu__umeboshi__rm/35-leave-fu_0.png) | pass | Her hand rises. Time freezes. The café turns. |
+| leave-fu:1 | [png](shots/leave-fu__umeboshi__rm/36-leave-fu_1.png) | pass | You said leave. I heard 'lea—'. |
+| leave-fu:2 | [png](shots/leave-fu__umeboshi__rm/37-leave-fu_2.png) | pass | fORever and ever |
+| leave-fu:3 | [png](shots/leave-fu__umeboshi__rm/38-leave-fu_3.png) | pass | fORever and ever and ever |
+| leave-fu:4 | [png](shots/leave-fu__umeboshi__rm/39-leave-fu_4.png) | pass | LEAVE. [Back to start] |
+| back-to-rooftop:0 | [png](shots/leave-fu__umeboshi__rm/40-back-to-rooftop_0.png) | pass | returned to scene 1 |
