@@ -12,6 +12,7 @@ import { loadScenes, start, next, skip, choose, jumpTo, beatAt, beatView, canAdv
 import { ART } from './art/index.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
+import { Nanda, speaksNanda } from './Nanda.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
 import { createLoader } from './assets.js';
@@ -149,6 +150,7 @@ function Player() {
           {!pos.done && layer(beat.bg, 'db-bg')}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
+        {!pos.done && speaksNanda(beat.line) && <Nanda scare={beat.scare} />}
         {beat.text && !pos.done && <Say line={beat.line} next={waiting} key={`${beat.scene}${beat.index}`} />}
         {beat.choices && !pos.done && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} key={`c${beat.scene}${beat.index}`} />}
         {paused && <div className="db-paused" role="status">paused (P)</div>}
