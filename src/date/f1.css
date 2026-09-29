@@ -102,7 +102,7 @@
 .ticket > div { padding: calc(var(--u) * .45) calc(var(--u) * 1.4); display: grid; align-content: center; border-right: 2px dashed var(--lilac); }
 .ticket > div:nth-child(3) { border-right: 0; }
 .ticket > div:nth-child(3) b { font-size: calc(var(--u) * 2); }
-.ticket small { font: 700 max(12px, calc(var(--u) * 1.05))/1 'Roboto Condensed', sans-serif; letter-spacing: .12em; color: #b33ccf; }
+.ticket small { font: 700 max(12px, calc(var(--u) * 1.05))/1 'Roboto Condensed', sans-serif; letter-spacing: .12em; color: #8f2aa8; }
 .ticket b { font: 400 calc(var(--u) * 2.5)/1.05 'Bangers', cursive; letter-spacing: .04em; }
 .ticket b.mine { color: #fff; background: var(--hot); padding: 0 .3em; border-radius: 3px; }
 .feed-pen { position: absolute; right: calc(var(--u) * -.4); top: calc(100% + var(--u) * .15); z-index: 1; margin: 0; white-space: nowrap;
@@ -132,9 +132,9 @@
 .meter i { display: block; height: 100%; background: linear-gradient(#ff7cc6, var(--hot)); border-radius: 99px; }
 .card p { margin: 0; font: 400 max(12px, calc(var(--u) * 1.2))/1.1 'Roboto Condensed', sans-serif; color: #c2186b; }
 .card footer { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--u) * .6); }
-.like { flex: none; width: calc(var(--u) * 2.8); height: calc(var(--u) * 2.3); font: 700 calc(var(--u) * 1.7)/1 'Roboto Condensed', sans-serif; letter-spacing: .05em; color: #b33ccf; background: var(--btn-fill);
+.like { flex: none; width: calc(var(--u) * 2.8); height: calc(var(--u) * 2.3); font: 700 calc(var(--u) * 1.7)/1 'Roboto Condensed', sans-serif; letter-spacing: .05em; color: #8f2aa8; background: var(--btn-fill);
   border: 2px solid var(--rim); border-radius: 99px; padding: 0; color: var(--hot); box-shadow: 0 calc(var(--u) * .25) 0 var(--rim-2); cursor: pointer; }
-.liked .like { background: linear-gradient(#ff63b8, #f0268f); color: #fff; border-color: #fff; box-shadow: 0 calc(var(--u) * .25) 0 var(--plum); }
+.liked .like { background: linear-gradient(#e0308f, #c41874); color: #fff; border-color: #fff; box-shadow: 0 calc(var(--u) * .25) 0 var(--plum); }
 .like:active { transform: translateY(2px); box-shadow: none; }
 .stamp { position: absolute; left: 50%; top: 19%; text-align: center; transform: translate(-50%, -50%) rotate(-10deg) skewX(-8deg); white-space: nowrap;
   font: 400 calc(var(--u) * 3)/1 'Bangers', cursive; color: #fff; background: var(--hot); padding: .1em .5em;
