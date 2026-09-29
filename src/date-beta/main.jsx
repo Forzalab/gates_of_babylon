@@ -8,7 +8,7 @@ import { createRoot } from 'react-dom/client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './theme.js';
 import data from './scenes.json';
-import { loadScenes, start, next, skip, choose, jumpTo, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
+import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
 import { ART } from './art/index.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
@@ -47,11 +47,7 @@ function toggleFull() {
   else document.documentElement.requestFullscreen?.().catch(() => {});
 }
 
-function startPos() {
-  let p = start(SCENES, { rm: RM, at: params.get('scene') });
-  for (let i = 0; i < +(params.get('beat') || 0); i++) p = next(SCENES, p, RM);
-  return p;
-}
+const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat') });
 
 function Player() {
   const [pos, setPos] = useState(startPos);

@@ -8,7 +8,7 @@ import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
 import { timeline, FLOOR_MS } from './collapseFrames.js';
 
-const ART = ['splash', 'rooftop', 'train', 'naan', 'blackout'];
+const ART = ['splash', 'rooftop', 'train', 'naan', 'blackout', 'basement'];
 const scenes = loadScenes(data, { manifest, art: ART });
 const id = (p) => scenes[p.s].id;
 const ENDINGS = ['steeped', 'escape-win', 'escape-timeout', 'leave-fu', 'leave-yeah'];
@@ -126,4 +126,54 @@ test('redteam: timeoutPick falls to the other enabled choice when the default is
   const b = sc.find((s) => s.id === 'door').beats[2];
   assert.equal(timeoutPick(b, { bento: 'umeboshi' }), 1);
   assert.equal(timeoutPick(b, { bento: 'tamagoyaki' }), 0);
+});
+
+test('redteam R3: Esc before the door choice lands on it; Esc on a branch beat stays put', () => {
+  const p = skip(scenes, start(scenes, { at: 'door' }));
+  assert.equal(id(p), 'door');
+  assert.ok(beatAt(scenes, p).choices.some((c) => c.go === 'leave'));
+  assert.deepEqual(skip(scenes, p), p);
+  const e = skip(scenes, start(scenes, { at: 'escape' }));
+  assert.equal(id(e), 'escape');
+  assert.deepEqual(beatAt(scenes, e).choices.map((c) => c.go), ['escape-timeout', 'escape-win']);
+});
+
+test('redteam R2: Esc on the done stage restarts at scene 1', () => {
+  const done = { ...start(scenes), done: true };
+  assert.equal(skip(scenes, done).s, 0);
+  assert.equal(skip(scenes, done).done, false);
+});
+
+test('redteam R5: a cue asked for before the first gesture plays once the audio unlocks', async () => {
+  const { createLoader } = await import('./date-beta/assets.js');
+  const played = [];
+  class Ctx {
+    constructor() { this.state = 'running'; this.currentTime = 0; this.destination = {}; }
+    decodeAudioData() { return Promise.resolve({}); }
+    createOscillator() { return { frequency: {}, connect: (g) => g, start: () => played.push('beep'), stop() {} }; }
+    createGain() { return { gain: {}, connect: (d) => d }; }
+    createBufferSource() { return { connect() {}, start: () => played.push('buffer') }; }
+  }
+  const saved = globalThis.AudioContext;
+  globalThis.AudioContext = Ctx;
+  try {
+    const L = createLoader({ assets: { 'SX-1': { kind: 'sfx' } }, cues: { wind: 'SX-1' } });
+    L.play('wind'); // mount: no context yet
+    assert.deepEqual(played, []);
+    await L.unlock(); // first click / key
+    assert.equal(played.length, 1, 'the pending first-beat cue plays after unlock');
+    await L.unlock();
+    assert.equal(played.length, 1, 'and only once');
+  } finally { globalThis.AudioContext = saved; }
+});
+
+test('redteam: ?beat is clamped (1e9, negative, junk) and never walks off into done', async () => {
+  const { startAt } = await import('./date-beta/engine.js');
+  const t = Date.now();
+  const big = startAt(scenes, { at: 'door', beat: 1e9 });
+  assert.ok(Date.now() - t < 500);
+  assert.equal(big.done, false);
+  assert.deepEqual(startAt(scenes, { at: 'door', beat: -3 }), start(scenes, { at: 'door' }));
+  assert.deepEqual(startAt(scenes, { at: 'door', beat: 'x' }), start(scenes, { at: 'door' }));
+  assert.equal(beatAt(scenes, startAt(scenes, { at: 'door', beat: 2 })).index, 2);
 });

@@ -284,6 +284,18 @@ export function start(scenes, { rm = false, at = null, flags = {} } = {}) {
   const i = at == null ? 0 : sceneIndex(scenes, at);
   return settle(scenes, i < 0 ? 0 : i, 0, rm, flags);
 }
+// ?scene=<id>&beat=<n>: n beats in, clamped to the beats that exist (a huge or junk n never hangs the tab).
+export function startAt(scenes, { rm = false, at = null, beat = 0 } = {}) {
+  let p = start(scenes, { rm, at });
+  const max = scenes.reduce((n, sc) => n + sc.beats.length, 0);
+  const n = Math.min(Math.max(0, Math.floor(Number(beat)) || 0), max);
+  for (let i = 0; i < n && !p.done; i++) {
+    const q = next(scenes, p, rm);
+    if (q.done) break;
+    p = q;
+  }
+  return p;
+}
 export const next = (scenes, pos, rm = false) => (pos.done ? pos : settle(scenes, pos.s, pos.b + 1, rm, pos.flags));
 export const enabled = (choice, flags = {}) => matches(choice.if, flags);
 // Pick choice i (only if enabled): merge its `set`, then jump to the first matching `go` scene, else carry on.
@@ -305,9 +317,25 @@ export function jumpTo(scenes, edge, flags = {}, rm = false) {
   const pos = take(scenes, { s: edge.s, b: edge.b, done: false, flags: { ...flags } }, c, rm);
   return enabled(c, flags) ? pos : { ...pos, warn: `choice "${c.plain}" has an if that these flags fail (taken anyway)` };
 }
-// Esc: leave this scene; the flags land on the skipped scene's declared defaults.
-export const skip = (scenes, pos, rm = false) => (pos.done ? pos
-  : settle(scenes, pos.s + 1, 0, rm, { ...pos.flags, ...scenes[pos.s].defaults }));
+// Esc: leave this scene; the flags land on the skipped scene's declared defaults. Skip never walks past a branch:
+// if a beat at or after this one has a choice with a `go`, Esc lands on it (and does nothing when already there).
+// An ending card (a choice back to scene 1) or a scene that ends in one goes back to start(), never into the next
+// scene in file order (red-team R2/R3).
+export function skip(scenes, pos, rm = false) {
+  if (pos.done) return start(scenes, { rm });
+  const sc = scenes[pos.s], first = scenes[0].id;
+  const home = (b) => b.choices?.some((c) => goTargets(c.go).includes(first));
+  const branch = sc.beats.findIndex((b, i) => i >= pos.b && b.choices?.some((c) => c.go != null) && !home(b));
+  if (branch === pos.b) return pos;
+  if (branch > pos.b) {
+    let flags = pos.flags;
+    for (let i = pos.b + 1; i < branch; i++) if (sc.beats[i].set) flags = { ...flags, ...sc.beats[i].set };
+    return settle(scenes, pos.s, branch, false, flags);
+  }
+  if (sc.beats.some(home)) return start(scenes, { rm });
+  const p = settle(scenes, pos.s + 1, 0, rm, { ...pos.flags, ...sc.defaults });
+  return p.done ? start(scenes, { rm }) : p;
+}
 
 // A pick is allowed once the beat's hold has passed.
 export const canChoose = (beat, ms) => !!beat.choices && ms >= beat.hold;
