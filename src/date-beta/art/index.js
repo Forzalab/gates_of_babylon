@@ -2,7 +2,7 @@
 import Splash from './Splash.jsx';
 import Rooftop from './Rooftop.jsx';
 import Train from './Train.jsx';
-import NaanBoard from './Naan.jsx';
+import NaanPlatform from './Platform.jsx'; // the naan scene: ?platform=v1|v2|v3 (Naan.jsx = the old full-screen board)
 import Blackout from './Blackout.jsx';
 import Basement from './Basement.jsx';
 import Door from './Door.jsx';
@@ -13,6 +13,6 @@ import '../theme.js'; // fonts + --cond/--jp tokens: the art must not depend on 
 import './art.css';
 
 // splash = the old fake-site START page: kept registered (Tony may reuse it), no scene points at it any more.
-export const ART = { splash: Splash, rooftop: Rooftop, train: Train, naan: NaanBoard, blackout: Blackout, basement: Basement,
+export const ART = { splash: Splash, rooftop: Rooftop, train: Train, naan: NaanPlatform, blackout: Blackout, basement: Basement,
   // fallback art for missing BG files (fallbacks.js maps the ids here)
   door: Door, genkan: Genkan, teatable: TeaTable, cafe: Cafe };
