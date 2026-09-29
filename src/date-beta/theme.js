@@ -11,5 +11,8 @@ import '@fontsource/inter-tight/900-italic.css';
 import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
 import '@fontsource/nunito/900.css';
+import '@fontsource-variable/nunito/wght.css';
+import '@fontsource/m-plus-rounded-1c/500.css';
+import '@fontsource/m-plus-rounded-1c/800.css';
 import './tokens.css';
 import '../fontTrial.js';

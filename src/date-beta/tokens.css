@@ -1,9 +1,9 @@
 /* date-beta design tokens (engine-owned). Loaded by theme.js for chrome AND art. Values: UXUI-SPEC R2b §3 + R2c. */
 :root {
   /* fonts */
-  --cond: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+  --cond: 'M PLUS Rounded 1c', 'Arial Narrow', sans-serif;
   --mono: 'JetBrains Mono', 'DejaVu Sans Mono', monospace;
-  --btn: 'Nunito', 'Roboto Condensed', sans-serif;
+  --btn: 'Nunito Variable', 'Nunito', sans-serif;
   --jp: 'Hiragino Kaku Gothic StdN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', 'IPAGothic', sans-serif;
   --jp-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK JP', 'IPAMincho', 'IPAPMincho', serif;
   /* locks */
