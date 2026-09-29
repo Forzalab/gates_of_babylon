@@ -1,0 +1,20 @@
+/* Round-3 menu layer (menu-h1-r3 on top of tarot2.css). */
+.t3 .slip { font-size: 54px; min-height: 104px; }
+.t3 .typing { font-size: 40px; top: 796px; }
+/* her selection: the doomed words go her red before they vanish (one held swap) */
+.aroot mark.hsel { background: var(--her); color: #fff; border-radius: 4px; padding: 0 4px; box-shadow: 0 0 0 2px rgba(240, 36, 63, .35); }
+/* her hand-drawn pointer: the fingertip sits on the caret */
+.t3 .herpointer { position: absolute; left: -16px; top: 30px; width: 176px; height: 223px; z-index: 5;
+  filter: drop-shadow(0 6px 5px rgba(0, 0, 0, .55)); transition: none; }
+/* the maker's print, restored: bottom edge of each card, under the slip */
+.t3 .print { position: absolute; left: 34px; right: 34px; bottom: 6px; display: flex; justify-content: space-between; align-items: baseline;
+  z-index: 2; pointer-events: none; }
+.t3 .print i { font: 400 32px/1 'Yellowtail', cursive; color: #b0123e; font-style: normal; }
+.t3 .print b { font: 400 26px/1 Georgia, serif; letter-spacing: .1em; color: #8a3a3a; margin-right: 8px; }
+.t3 .card.yours .print { left: 22px; right: 22px; padding: 2px 12px; border-radius: 8px; background: rgba(12, 4, 16, .78); }
+.t3 .card.yours .print i { color: color-mix(in srgb, #d9ccff, #ffc6de calc(var(--warm, 0) * 100%)); }
+.t3 .card.yours .print b { color: #d9ccff; }
+.t3 .card.yours.flipped .print { background: none; }
+.t3 .card.yours.flipped .print i, .t3 .card.yours.flipped .print b { color: #5a36c4; }
+.t3 .card.off .print { opacity: .45; }
+.t3 .card .key { left: 50%; }

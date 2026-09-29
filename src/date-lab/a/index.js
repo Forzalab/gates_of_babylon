@@ -20,6 +20,7 @@ import Ddlc2 from './menu2/Ddlc2.jsx';
 import Tarot2 from './menu2/Tarot2.jsx';
 import FrameFinds from './camera2/FrameFinds.jsx';
 import ThirdCup2 from './closeup2/ThirdCup2.jsx';
+import CupTypes3 from './menu3/CupTypes3.jsx';
 
 const A = (id, track, title, theme, horror, Component) => ({ id, track, title, theme, horror, builder: 'A', Component });
 
@@ -45,4 +46,6 @@ export const VARIANTS = [
   A('menu-1-r2', 'menu', 'Tarot r2: her hand is on your card; the drawn card is nailed', 'CLAMP arcana x Suspiria candlelight: fate is dealt by her (read without captions)', 2, Tarot2),
   A('closeup-3-r2', 'closeup', 'The third cup r2: her open hand slides it to you', "Ozu low-table x Get Out teacup x Notorious rack focus: it's always three of us (a gentle hand)", 4, ThirdCup2),
   A('cam-h-r2-a', 'camera', 'The Frame Keeps Finding Her (A): camcorder AF + D.ZOOM drive Kon match cuts', 'hybrid cam-3 x cam-5: Satoshi Kon nested frames x Ju-On found footage: you are the one filming, every frame is hers', 5, FrameFinds),
+  // ---- round 3 ----
+  A('menu-h1-r3', 'menu', 'The Cup That Types r3: her hand retypes your card, word by word', 'hybrid menu-1 x menu-3: tarot candle table x DDLC live edit: she rewrites your card while the candle burns (<= 2 swaps/s, her own hand)', 4, CupTypes3),
 ];

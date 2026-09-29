@@ -97,6 +97,20 @@ const SHOTS = {
     await page.keyboard.press('r'); await wait(2400); await snap('10-replay-purple-nailed');
     await open(true); await wait(2600); await snap('rm-table');
   },
+  'menu-h1-r3': async (page, snap, open) => {
+    await open();
+    await wait(1500); await snap('1-deal-her-hand-parked');
+    await wait(750); await snap('2-her-red-selection');
+    await wait(1750); await snap('3-sta-typed');
+    await wait(1000); await snap('4-stay-card-warm');
+    await wait(2500); await snap('5-timeout-her-hand');
+    await wait(1800); await snap('6-timeout-pink');
+    await page.keyboard.press('r'); await wait(4000); await snap('7-replay-pink-pinned-she-retypes-yours');
+    await open(); await wait(4500); await page.keyboard.press('2'); await wait(120); await snap('8-purple-bleed');
+    await wait(2700); await snap('9-purple-reversed-lea');
+    await page.keyboard.press('r'); await wait(2500); await snap('10-replay-purple-pinned-struck');
+    await open(true); await wait(3600); await snap('rm-stay');
+  },
 };
 
 // camera pieces: freeze the clock at ?t=<ms> and shoot (deterministic frames)
