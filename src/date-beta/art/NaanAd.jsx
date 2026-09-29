@@ -260,12 +260,15 @@ function Letter({ ch, x, glitch }) {
     </g>
   );
 }
-function Headline({ rm }) {
-  const f = useStep(GLITCH.length, 4, !rm);
-  const letters = rm ? [['N'], ['A'], ['N'], ['D', true]] : [['N'], ['A'], ...GLITCH[f].map((c) => [c, GLITCH[f][0] !== 'A'])];
+// hold = a GLITCH index to freeze on (the night platform holds the NANDA frame, 6): static, no loop, in both modes.
+function Headline({ rm, hold }) {
+  const held = hold != null;
+  const f = useStep(GLITCH.length, 4, !rm && !held);
+  const fr = held ? GLITCH[hold] : GLITCH[f];
+  const letters = rm && !held ? [['N'], ['A'], ['N'], ['D', true]] : [['N'], ['A'], ...fr.map((c) => [c, fr[0] !== 'A'])];
   const n = letters.length, x0 = WORD_X - (n * CELL) / 2 + CELL / 2;
   return (
-    <g className="hl" data-glitch={rm ? 'NAN D' : `NA${GLITCH[f].join('')}`} transform="translate(0 174)">
+    <g className="hl" data-glitch={rm && !held ? 'NAN D' : `NA${fr.join('')}`} transform="translate(0 174)">
       <path d={HEART} transform="translate(156 -62) scale(4.2)" fill={C.pink} stroke={C.brown} strokeWidth="1.2" />
       <text x="342" y="-22" textAnchor="middle" className="na-hot" transform="rotate(-7 342 -22)">Hot</text>
       <g transform={n > 4 ? `translate(${WORD_X} 0) scale(.86 1) translate(${-WORD_X} 0)` : undefined}>
@@ -287,8 +290,11 @@ const POOL_CHUNKS = [[1010, 690, 0.8], [1300, 648, 0.7]];
 const POOL_SWIRLS = [['M-10 660 C200 640 500 664 760 650', 10], ['M1000 628 C1150 640 1320 624 1460 636 C1520 640 1570 634 1610 636', 10], ['M1080 700 C1200 690 1330 706 1440 696', 12]];
 // curry droplets flung into the sky off the bends (ref 1): [x, y, scale, angle]
 const DROPS = [[1080, 214, 9, -30], [1036, 250, 6, -50], [1410, 300, 8, 30], [1460, 350, 6, 50], [1010, 470, 7, -60]];
-export default function NaanAd({ x = 0, y = 0, width = NAAN_AD_W, rm = false, label = 'Ad: Hot NAAN in your area. Naan and a bowl of curry on a black plate, a curry river with swimming NAND gates. 980 yen, all-you-can-eat naan.' }) {
-  const bob = useStep(2, 4, !rm);
+// hold: freeze the headline on that GLITCH frame and stop the bob (the night platform passes 6 = NANDA).
+export const NANDA_FRAME = 6;
+export default function NaanAd({ x = 0, y = 0, width = NAAN_AD_W, rm = false, hold, label = 'Ad: Hot NAAN in your area. Naan and a bowl of curry on a black plate, a curry river with swimming NAND gates. 980 yen, all-you-can-eat naan.' }) {
+  const still = rm || hold != null;
+  const bob = useStep(2, 4, !still);
   return (
     <svg className="naan-ad" x={x} y={y} width={width} height={width / 2} viewBox={`0 0 ${NAAN_AD_W} ${NAAN_AD_H}`} role="img" aria-label={label}>
       <defs><clipPath id="na-frame"><rect width={NAAN_AD_W} height={NAAN_AD_H} /></clipPath></defs>
@@ -320,7 +326,7 @@ export default function NaanAd({ x = 0, y = 0, width = NAAN_AD_W, rm = false, la
         <path d="M160 520 C200 460 360 424 560 418" fill="none" stroke={C.blackHi} strokeWidth="6" strokeLinecap="round" />
         <Naan id="na-n1" x={380} y={470} a={250} b={140} rot={-16} seed={7} />
         <Naan id="na-n2" x={430} y={580} a={270} b={150} rot={7} seed={11} />
-        <Bowl x={830} y={500} bob={bob} rm={rm} />
+        <Bowl x={830} y={500} bob={bob} rm={still} />
         {/* motion swooshes (ref 2) */}
         <path d="M190 350 Q270 310 350 318" fill="none" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" />
         <path d="M214 380 Q300 340 390 350" fill="none" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" />
@@ -341,7 +347,7 @@ export default function NaanAd({ x = 0, y = 0, width = NAAN_AD_W, rm = false, la
           <text x="42" y="34" className="na-tag" writingMode="tb">本格インドカレー</text>
         </g>
 
-        <Headline rm={rm} />
+        <Headline rm={rm} hold={hold} />
 
         {/* footer band */}
         <rect y="716" width={NAAN_AD_W} height="84" fill={C.ink} />

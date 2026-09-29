@@ -1,5 +1,5 @@
 // shoot.mjs: the naan platform shots, 1920x1080, with the dialogue box on the MC line (beat 1).
-// usage: node research/date-beta-demo/naan/shoot.mjs <base-url> <round> [v1 v2 v3]
+// usage: node research/date-beta-demo/naan/shoot.mjs <base-url> <round|night> [v1 v2 v3]   (round 'night' shoots ?time=night)
 //   -> research/date-beta-demo/naan/V{n}-r{round}.png. Also checks the layout rule: the ad and the station sign end
 //   above the dialogue box (and its speaker chip), and fail loudly if not.
 import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
@@ -16,10 +16,12 @@ for (const v of only.length ? only : ['v1', 'v2', 'v3']) {
   const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
   page.on('pageerror', (e) => errors.push(`${v}: ${e.message}`));
   page.on('console', (m) => { if (m.type() === 'error') errors.push(`${v}: console ${m.text()}`); });
-  await page.goto(`${BASE}/date-beta.html?scene=naan&beat=1&platform=${v}`);
+  await page.goto(`${BASE}/date-beta.html?scene=naan&beat=1&platform=${v}${ROUND === 'night' ? '&time=night' : ''}`);
   await page.evaluate(() => document.fonts.ready);
   await page.waitForSelector('.db-say');
   await page.waitForTimeout(1200);
+  // dusk: shoot on the NAND frame of the ad's glitch, the frame the MC's line answers (night holds NANDA anyway)
+  if (ROUND !== 'night') await page.waitForSelector('.naan-platform .hl[data-glitch="NAND"]', { timeout: 6000 }).catch(() => console.log(`  ${v}: no NAND frame seen`));
   const box = await page.evaluate(() => {
     const r = (el) => { const b = el.getBoundingClientRect(); return { top: b.top, bottom: b.bottom, left: b.left, right: b.right }; };
     const say = document.querySelector('.db-say'), who = document.querySelector('.db-say .who');
@@ -34,7 +36,7 @@ for (const v of only.length ? only : ['v1', 'v2', 'v3']) {
     if (!ok) bad++;
     console.log(`  ${v} ${k}: ${Math.round(b.left)},${Math.round(b.top)} -> ${Math.round(b.right)},${Math.round(b.bottom)}  (box zone from y=${Math.round(zone)}) ${ok ? 'ok' : 'VIOLATION'}`);
   }
-  const name = `${v.toUpperCase()}-r${ROUND}`;
+  const name = ROUND === 'night' ? `${v.toUpperCase()}-night` : `${v.toUpperCase()}-r${ROUND}`;
   await page.screenshot({ path: path.join(OUT, `${name}.png`) });
   console.log(name);
   await page.close();

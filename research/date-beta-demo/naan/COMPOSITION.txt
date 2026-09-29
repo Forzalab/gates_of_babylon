@@ -111,3 +111,40 @@ V3  long perspective (ref 3)
 
 Sign <-> variant mapping follows the refs: the "1 Nakano" box is from ref 4 (V1), the
 "2 Shinjuku" box is from ref 3 (V3), so Ike-NOR-kuro goes to V2 as a station name board.
+
+
+ROUNDS (draw -> critique against the ref -> revise)
+---------------------------------------------------
+Shots: V{1,2,3}-r{1,2,3}.png, 1920x1080, dialogue box on the MC line. shoot.mjs also measures the ad + sign
+boxes against the dialogue box (and its speaker chip) and fails on overlap. r1 used a 2.2:1 placeholder; from r2 on
+the real NaanAd (merged from naan-ad) is mounted, so the slots are 2:1. r3 is shot on the ad's NAND glitch frame.
+V1  r1 canopy beams read as random lines; flat dark strip under the far canopy; light came from the wrong side.
+    r2 purlins parallel to the edge + rafters; far platform surface, yellow line, pillars; right faces warm-lit;
+       ad 1000 px wide (was 780). Crit: tube crossed the fascia, the sign seemed to hang off the exit sign.
+    r3 tubes on a purlin, exit sign moved clear of the sign's hanger, ad pulled in from the right edge.
+V2  r1 pink sky showed through the fence (no ground); rails were random diagonals; the train was a slab.
+    r2 track bed + projected rails; ladder cable tray (ref 2); lighter train glass; vending machine; bay widened
+       so the light-box clears both pillars. Crit: Latin in the signs fell to the JP mono font.
+    r3 Latin-first font stack for sign type; door split lines on the train.
+V3  r1 the stair house hid the VP (no long view); open sky right of the house; a near tube read as a slash.
+    r2 house moved right of the VP (x 0.3 m) and to 5.5 m; station wall on the right; lit timetable panels.
+    r3 a tube row just inside the canopy edge (ref 3's receding lights), door split lines.
+
+
+NIGHT (time="night", same geometry: the station after the blackout)
+-------------------------------------------------------------------
+Every non-emitting colour goes through k() = nightify (navy ramp + 11% of the original hue), so dusk and night
+share one drawing. Light sources skip k: tubes (with a halo), signs, lit city + train windows, exit sign, signal
+lamp, vending machine, timetable panels. Rain: stepped (3 poses x 500 ms), clipped to outside the canopy, still
+under reduced motion. Wet floor: faint strips of tube light on the floor (v2, v3), the vending machine mirrored
+(v2), light pools on the far platform (v1). The ad: navy scrim (unlit) + NaanAd hold={NANDA_FRAME} (static).
+Shots: V{1,2,3}-night.png and V{1,2,3}-dusk-vs-night.png (r3 left, night right).
+
+REUSABLE FOR ALT'S NIGHT PLATFORM
+---------------------------------
+- Mount the whole station: import { NaanPlatform } from './NaanPlatform.jsx';
+  <NaanPlatform variant="v2" time="night" rm={rm} />  (same place as the naan scene, by construction).
+- Or build from stationParts.jsx: cam / sideQuad / flatQuad (the camera model), Sky (night stops built in),
+  Blocks (city, lit windows at night), PerspTrain (lit windows at night), Rain, Tube, LineSign, NameBoard,
+  Vending, AdSlot, nightify / tint. Canopy + pillar geometry lives in each variant (V1/V2/V3 in NaanPlatform.jsx)
+  because it is the composition; the parts are the pieces that carry across.
