@@ -6,7 +6,7 @@ import { loadScenes, start, next, skip, choose, beatAt, beatView, enabled } from
 import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
 
-const scenes = loadScenes(data, { manifest, art: ['splash', 'rooftop', 'train', 'naan', 'blackout'] });
+const scenes = loadScenes(data, { manifest, art: ['splash', 'rooftop', 'train', 'naan', 'blackout', 'basement'] });
 
 // picks: choice labels in the order they come up (the rooftop bento pick is taken from `bento`, not the queue).
 // Returns the scene ids visited, every line shown (after vary), and the final card position.
@@ -32,8 +32,8 @@ function walk(picks, rm = false, bento = 'umeboshi') {
 const SHARED = ['rooftop', 'train', 'naan', 'blackout', 'door'];
 const PATHS = {
   STEEPED: { picks: [null, 'Just one cup', 'Drink'], via: ['cup', 'steeped'], card: 'STEEPED.' },
-  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', '[win]'], via: ['cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
-  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', '[timeout]'], via: ['cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
+  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Go to the shelves', 'Keep looking', 'Climb for the street door'], via: ['cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
+  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Go to the shelves', 'Keep looking', 'Wait for her'], via: ['cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
   'LEAVE (refuse)': { picks: [null, "It's late. Goodnight", "FUCK YOU. I'm leaving"], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
   'LEAVE (agree)': { picks: [null, "It's late. Goodnight", 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
 };
@@ -52,12 +52,35 @@ for (const [name, { picks, via, card }] of Object.entries(PATHS)) {
   }
 }
 
-test('date-beta spine: the ??? beat is one marked placeholder, and it falls through to the escape stub', () => {
+test('date-beta basement: hatch -> ladder are single-choice steps, then unknown falls through to the basement', () => {
   const s = scenes.find((x) => x.id === 'unknown');
-  assert.equal(s.beats.length, 1);
-  assert.equal(s.beats[0].text, '[??? — RP pending]');
-  const p = next(scenes, start(scenes, { at: 'unknown' }));
+  const steps = s.beats.filter((b) => b.choices);
+  assert.deepEqual(steps.map((b) => b.choices.map((c) => [c.plain, c.go])), [[['Open the hatch', null]], [['Climb down', null]]]);
+  let p = start(scenes, { at: 'unknown' });
+  for (let i = 0; i < 10 && scenes[p.s].id === 'unknown'; i++) p = beatAt(scenes, p).choices ? choose(scenes, p, 0) : next(scenes, p);
   assert.equal(scenes[p.s].id, 'escape');
+  assert.equal(beatAt(scenes, p).bg, 'basement');
+});
+
+test('date-beta basement: shelves in SCRIPT-v5 order, then 3 slow blinks (500 ms, 1 s, 2 s of black)', () => {
+  const esc = scenes.find((x) => x.id === 'escape');
+  const shelves = [...new Set(esc.beats.map((b) => b.props.shelf).filter(Boolean))];
+  assert.deepEqual(shelves, ['jars', 'bentos', 'usu', 'newest']);
+  assert.deepEqual(esc.beats.filter((b) => b.bg === 'blackout').map((b) => b.auto), [500, 1000, 2000]);
+  for (const b of esc.beats) for (const c of b.choices ?? []) {
+    assert.doesNotMatch(c.plain, /\.\s*$/);
+    assert.doesNotMatch(c.plain, /^\d/);
+  }
+});
+
+test('date-beta basement: the door beat converges (timer -> wait -> timeout, climb -> win), both cards go back to start', () => {
+  const esc = scenes.find((x) => x.id === 'escape');
+  const door = esc.beats.at(-1);
+  assert.equal(door.timer, 12);
+  assert.deepEqual(door.choices.map((c) => [c.plain, c.side, c.go, !!c.default]),
+    [['Wait for her', 'pink', 'escape-timeout', true], ['Climb for the street door', 'purple', 'escape-win', false]]);
+  const win = scenes.find((x) => x.id === 'escape-win');
+  assert.ok(win.beats.some((b) => b.text === 'NANDA: You took the long way.'));
 });
 
 test('date-beta spine: the DOOR timer defaults to going in (pink)', () => {
@@ -101,12 +124,12 @@ test('date-beta echo: the rooftop pick is a real two-way choice with no timer an
     [['Take the tamagoyaki', 'pink', 'tamagoyaki', null], ['Take the umeboshi', 'purple', 'umeboshi', null]]);
 });
 
-test('date-beta echo: basement old jars stay umeboshi; only the newest jar follows the pick', () => {
+test('date-beta echo: basement old jars are other people; only the newest jar follows the pick', () => {
   const esc = scenes.find((x) => x.id === 'escape');
-  const old = esc.beats.find((b) => b.props.jars);
+  const old = esc.beats.find((b) => b.props.shelf === 'jars');
   const newest = esc.beats.find((b) => b.vary?.bento.umeboshi.props?.jar);
   for (const bento of ['umeboshi', 'tamagoyaki']) {
-    assert.equal(beatView(old, { bento }).props.jars, 'umeboshi');
+    assert.equal(beatView(old, { bento }).props.jar, undefined);
     assert.equal(beatView(newest, { bento }).props.jar, bento);
     assert.match(beatView(newest, { bento }).text, new RegExp(bento));
   }

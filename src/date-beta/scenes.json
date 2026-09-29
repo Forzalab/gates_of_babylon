@@ -115,25 +115,43 @@
     },
     {
       "id": "unknown",
-      "title": "??? (unwritten, RP pending)",
+      "title": "Hatch / ladder",
       "bg": "BG-D2",
       "scare": 1,
       "beats": [
-        { "text": "[??? — RP pending]" }
+        { "text": "You stand. The floor tilts a little.", "sfx": "thump" },
+        { "text": "Under the table: a floor hatch. Too big for storage.", "sfx": "tick",
+          "choices": [{ "text": "Open the hatch", "side": "purple" }] },
+        { "text": "A steep wooden ladder. Down into the dark.", "sfx": "drone",
+          "choices": [{ "text": "Climb down", "side": "purple" }] }
       ]
     },
     {
       "id": "escape",
-      "title": "ESCAPE / 4x4 puzzle (stub)",
-      "bg": "BG-D3",
+      "title": "ESCAPE / basement (choice steps; 4x4 puzzle later)",
+      "bg": "basement",
+      "enter": "fade",
       "scare": 2,
       "beats": [
-        { "props": { "jars": "umeboshi" }, "text": "Jars on the shelves. Each one: a date, a name.", "sfx": "drone" },
-        { "sfx": "thump", "vary": {"bento": {"umeboshi": {"text": "Newest jar: today, your name, umeboshi. Lid off. Empty.", "props": {"jar": "umeboshi"}}, "tamagoyaki": {"text": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.", "props": {"jar": "tamagoyaki"}}}} },
-        { "text": "Locked in.", "sfx": "thump",
+        { "props": { "shelf": null }, "text": "Concrete. One bulb. Rain at a high window.", "sfx": "drone", "motion": true, "rmAlt": "static",
+          "choices": [{ "text": "Go to the shelves", "side": "purple" }] },
+        { "props": { "shelf": "jars" }, "text": "Jars on the shelves. Each one: a date, a name.", "sfx": "thump" },
+        { "text": "The dates go back years. The names are all different." },
+        { "props": { "shelf": "bentos" }, "text": "Bento boxes, one per day. Your name on each. Untouched.", "sfx": "tick" },
+        { "text": "The oldest is dated before you met." },
+        { "props": { "shelf": "usu" }, "text": "A mortar and a mallet. One fresh mochi. Hers only.", "sfx": "tick",
+          "choices": [{ "text": "Keep looking", "side": "purple" }] },
+        { "props": { "shelf": "newest" }, "sfx": "thump", "vary": {"bento": {"umeboshi": {"text": "Newest jar: today, your name, umeboshi. Lid off. Empty.", "props": {"jar": "umeboshi"}}, "tamagoyaki": {"text": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.", "props": {"jar": "tamagoyaki"}}}} },
+        { "bg": "blackout", "props": { "phase": "dark" }, "sfx": "silence", "auto": 500 },
+        { "bg": "basement", "props": { "shelf": "newest" }, "auto": 700 },
+        { "bg": "blackout", "props": { "phase": "dark" }, "auto": 1000 },
+        { "bg": "basement", "props": { "shelf": "newest" }, "auto": 700 },
+        { "bg": "blackout", "props": { "phase": "dark" }, "auto": 2000 },
+        { "bg": "basement", "props": { "shelf": null }, "text": "Minutes gone. A clock upstairs chimed. You lost count.", "sfx": "bell" },
+        { "text": "A heavy door. Behind it, stairs to the street.", "sfx": "rain", "timer": 12,
           "choices": [
-            { "text": "[win]", "side": "pink", "go": "escape-win" },
-            { "text": "[timeout]", "side": "purple", "go": "escape-timeout" }
+            { "text": "Wait for her", "side": "pink", "default": true, "go": "escape-timeout" },
+            { "text": "Climb for the street door", "side": "purple", "go": "escape-win" }
           ] }
       ]
     },

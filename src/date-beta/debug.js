@@ -63,6 +63,8 @@ export function graph(scenes) {
         const back = goTargets(c.go).includes(first);
         const branching = !back && (split || sets.some((f) => read.has(f)));
         // A choice with no go lands later in its own scene; the drawn edge goes to where the scene falls through to.
+        // A lone no-go, non-branching pick is a step (open the hatch, climb down): nothing to draw.
+        if (beat.choices.length === 1 && c.go == null && !branching) return;
         const to = goTargets(c.go)[0] ?? scenes[s + 1]?.id ?? null;
         edges.push({ id: `${sc.id}.${b}.${i}`, from: sc.id, to, s, b, i, text: c.plain, side: c.side, set: c.set ?? null,
           kind: back ? 'back' : branching ? 'branch' : 'choice', branching });

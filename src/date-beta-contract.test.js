@@ -5,7 +5,7 @@ import { loadScenes, start, next, skip, choose, beatAt, beatView, timeoutPick, t
 import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
 
-const ART_NAMES = ['splash', 'rooftop', 'train', 'naan', 'blackout'];
+const ART_NAMES = ['splash', 'rooftop', 'train', 'naan', 'blackout', 'basement'];
 const tiny = (beats, extra = {}) => ({ scenes: [{ id: 'a', bg: 'x', beats, ...extra }] });
 const pair = (a = {}, b = {}, beat = {}) =>
   loadScenes(tiny([{ timer: 5, ...beat, choices: [{ text: 'stay', ...a }, { text: 'leave', ...b }] }]))[0].beats[0];

@@ -83,3 +83,26 @@
 .blackout .old.l { transition-duration: 1400ms; }
 .blackout .new .l { color: #e9e2ea; }
 .blackout .core { display: block; position: relative; left: 1px; top: 1px; line-height: 1.2; font-weight: 700; color: var(--her); text-shadow: 2px 0 0 rgba(90, 0, 18, .7), 0 0 28px rgba(240, 36, 63, .35); }
+
+/* ---------- basement: black + one CSS bulb + SVG shelves (Basement.jsx) ---------- */
+.art.basement { position: absolute; inset: 0; background: #050203; overflow: hidden; }
+.basement .bulb-wire { position: absolute; left: 960px; top: 0; width: 2px; height: 250px; background: #2a1a1a; transform-origin: 50% 0;
+  animation: bulb-sway 5s steps(40) infinite alternate; }
+.basement .bulb { position: absolute; left: -17px; bottom: -40px; width: 36px; height: 48px; border-radius: 50% 50% 46% 46%;
+  background: radial-gradient(circle at 50% 40%, #fff8dc, #ffd98a 60%, #c9923a); box-shadow: 0 0 40px 12px #ffd98a88; }
+.basement .bulb::after { content: ''; position: absolute; left: 50%; top: 50%; width: 2400px; height: 2400px; transform: translate(-50%, -50%);
+  background: radial-gradient(circle, #ffd98a40 0, #ffd98a18 18%, transparent 42%); pointer-events: none; }
+@keyframes bulb-sway { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
+.basement .shelves { position: absolute; inset: 0; width: 100%; height: 100%; }
+.basement .plank { fill: #3a2418; }
+.basement .window { fill: #1b2230; } .basement .bars { stroke: #0a0506; stroke-width: 6; }
+.basement .row { opacity: .28; transition: opacity 700ms ease; } .basement .row.on { opacity: 1; }
+.basement .glass { fill: #ffffff14; stroke: #d8c8b8aa; stroke-width: 3; } .basement .glass.empty { fill: #ffffff08; }
+.basement .plums { fill: #9e1c3a; } .basement .lid { fill: #6b4a2a; }
+.basement .label { fill: #f4ead8; }
+.basement .lbl-date, .basement .lbl-name { text-anchor: middle; font: 700 15px/1 var(--mono, monospace); fill: #3a1a10; }
+.basement .lbl-name { font: 800 17px/1 var(--cond, sans-serif); }
+.basement .lt { fill: #f4ead8; }
+.basement .bento { fill: #5a1822; stroke: #2a0a0e; stroke-width: 3; } .basement .band { stroke: #d6b24a; stroke-width: 6; }
+.basement .usu, .basement .usu-top { fill: #6b4a2a; stroke: #2a1a10; stroke-width: 3; } .basement .kine { fill: #8a6238; } .basement .kine-h { stroke: #8a6238; stroke-width: 14; stroke-linecap: round; }
+.basement .plate { fill: #e8e2da; } .basement .mochi { fill: #fffaf2; }

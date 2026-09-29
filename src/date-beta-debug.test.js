@@ -29,7 +29,7 @@ test('debug: edge snapshot', () => {
     'rooftop.1.0>train:branch', 'rooftop.1.1>train:branch', 'rooftop.6.0>train:choice', 'rooftop.6.1>train:choice',
     'train.fall>naan:fall', 'naan.fall>blackout:fall', 'blackout.fall>door:fall', 'door.2.0>cup:branch', 'door.2.1>leave:branch',
     'cup.3.0>steeped:branch', 'cup.3.1>unknown:branch', 'steeped.4.0>rooftop:back', 'unknown.fall>escape:fall',
-    'escape.2.0>escape-win:branch', 'escape.2.1>escape-timeout:branch', 'escape-win.6.0>rooftop:back', 'escape-timeout.7.0>rooftop:back',
+    'escape.13.0>escape-timeout:branch', 'escape.13.1>escape-win:branch', 'escape-win.6.0>rooftop:back', 'escape-timeout.7.0>rooftop:back',
     'leave.3.0>leave-yeah:branch', 'leave.3.1>leave-fu:branch', 'leave-fu.4.0>rooftop:back', 'leave-yeah.4.0>rooftop:back']);
 });
 
@@ -49,7 +49,7 @@ test('debug: layout keeps every node and edge pill inside 1920x1080, columns fol
 });
 
 test('debug: jumping to escape-timeout needs bento; the bento edge itself does not', () => {
-  const t = edge('escape.2.1');
+  const t = edge('escape.13.0');
   assert.deepEqual(prereqs(S, t, decl).map((n) => n.flag), ['bento']);
   assert.deepEqual(prereqs(S, t, decl)[0].options.map((o) => o.value), ['tamagoyaki', 'umeboshi']);
   assert.deepEqual(prereqs(S, edge('rooftop.1.0'), decl), [], "the edge's own set covers it");
@@ -63,7 +63,7 @@ test('debug: saved picks fill the prompts; a schema change drops them', () => {
   savePicks(store, h, { remember: true, choices: { bento: 'tamagoyaki' } });
   const p = loadPicks(store, h, S, decl);
   assert.deepEqual(p, { remember: true, choices: { bento: 'tamagoyaki' } });
-  assert.deepEqual(missing(prereqs(S, edge('escape.2.1'), decl), p.choices), []);
+  assert.deepEqual(missing(prereqs(S, edge('escape.13.0'), decl), p.choices), []);
   const flip = { bento: ['tamagoyaki', 'umeboshi'] };
   const other = loadScenes({ ...data, flags: flip });
   const h2 = schemaHash(other, flip);
@@ -88,7 +88,7 @@ test('debug: session trash clears picks, remember toggle persists', () => {
 });
 
 test('debug: jumpTo lands where choose would, with the flags given', () => {
-  const p = jumpTo(S, edge('escape.2.1'), { bento: 'tamagoyaki' });
+  const p = jumpTo(S, edge('escape.13.0'), { bento: 'tamagoyaki' });
   assert.equal(S[p.s].id, 'escape-timeout');
   assert.equal(p.b, 0);
   assert.deepEqual(p.flags, { bento: 'tamagoyaki' });
