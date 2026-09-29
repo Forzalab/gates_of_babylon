@@ -7,7 +7,7 @@ const V = (q.get('v') || 'A').toUpperCase() === 'B' ? 'B' : 'A';
 const S = q.get('s') || 'line';
 const GOAL = 15; // love points on the best path (see SPEC.txt): 100% = GOAL
 
-const SPINE = ['ROOFTOP', 'TRAIN', 'NAAN', 'DARK', 'DOOR'];
+const SPINE = ['ROOF', 'TRAIN', 'STATION', 'NIGHT', 'HER HOME'];
 const PATH_TEA = [...SPINE, 'TEA', 'END'];
 const PATH_CAFE = [...SPINE, 'CAFÉ', 'END'];
 
@@ -82,7 +82,7 @@ function pop(delta) {
   const plus = delta > 0;
   const icon = plus ? `<svg viewBox="0 0 100 92" aria-hidden="true"><path d="${HEART}"/></svg>` : cracked;
   return `<div class="lv-pop ${plus ? 'plus' : 'minus'} at-${V.toLowerCase()}" role="status"><b class="lv-delta${plus ? '' : ' minus'}">${icon}${plus ? '+' : '−'}${Math.abs(delta)}</b>
-    <span class="lv-tell"><i></i>She'll remember that.</span></div>`;
+    <span class="lv-tell"><i></i>${plus ? 'She liked that.' : 'She did not like that.'}</span></div>`;
 }
 
 // ---------------------------------------------------------------- variant A: top-edge ribbon
@@ -132,9 +132,9 @@ function goalCard() {
   const minusChip = `<b class="lv-delta minus">${cracked}−2</b>`;
   const at = V === 'A' ? 'left:250px;top:210px;width:1000px' : 'left:170px;top:250px;width:1000px';
   return `<section class="hud-card to-${V.toLowerCase()}" style="${at}" aria-label="Goal"><i class="notch" aria-hidden="true"></i><b class="tag">GOAL</b>
-    <h2>Fill her heart to 100%.</h2>
-    <p>Every choice moves her heart.<br><b>Choose carefully.</b>${heartLine()}</p>
-    <div class="legend">${plusChip}<span>she loved that</span><i class="gap"></i>${minusChip}<span>she'll remember</span></div>
+    <h2>Make Nanda like you.</h2>
+    <p>Her LOVE score must reach 100%.<br><b>Each choice changes it.<br>Choose carefully.</b>${heartLine()}</p>
+    <div class="legend">${plusChip}<span>she liked it</span><i class="gap"></i>${minusChip}<span>she did not like it</span></div>
     ${nextBtn('GOT IT')}</section>`;
 }
 function endCard(kind, s) {
@@ -145,10 +145,10 @@ function endCard(kind, s) {
         <path class="shell" d="${HEART}"/><path class="part" d="${HEART}" clip-path="url(#lvLowClip)"/><path class="crack" d="M50 17L44 26L52 31"/></svg>`;
   return `<div class="hud-scrim" aria-hidden="true"></div>
     <section class="hud-end ${kind}" style="${at}" aria-label="${win ? 'You win' : 'Ending'}">
-    <p class="kicker">${win ? 'ENDING · STEEPED' : 'ENDING · LEAVE'}</p>
+    <p class="kicker">${win ? 'YOU WIN' : 'GAME OVER'}</p>
     <div class="bigheart">${heart}<b class="lv-num">${pct(s.score)}</b></div>
-    <h2>${win ? "She's yours. Forever." : "She'll try again tomorrow."}</h2>
-    <p class="sub">${win ? 'Her heart is full. So is the teapot.' : `Not enough. ${pct(s.score)} of her heart.`}</p>
+    <h2>${win ? 'She loves you.' : 'She does not love you enough.'}</h2>
+    <p class="sub">${win ? 'You drank all her tea. You are not leaving.' : `LOVE ${pct(s.score)}. You needed 100%.`}</p>
     ${nextBtn(win ? 'PLAY AGAIN' : 'TRY AGAIN')}</section>`;
 }
 
