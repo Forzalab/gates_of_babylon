@@ -13,10 +13,10 @@
 
 .splash .hero { left: 60px; top: 190px; width: 1150px; height: 620px; padding: 56px 72px;
   background: #fff3f8 radial-gradient(circle at 88% 30%, #ffd1e6 0 180px, transparent 181px); }
-.splash .kicker { margin: 0; font: 700 34px/1 var(--cond); letter-spacing: .18em; text-transform: uppercase; color: #8a2d5c; }
+.splash .kicker { margin: 0; font: 700 34px/1 var(--cond); letter-spacing: .18em; text-transform: uppercase; color: #6e1f48; }
 .splash h1 { margin: 22px 0 0; font: 400 172px/.9 'Bangers', var(--cond); letter-spacing: .02em; color: #2a0f24;
   text-shadow: 8px 8px 0 #ff5fa2; }
-.splash .sub { margin: 18px 0 0; font: italic 400 40px/1 var(--cond); color: #5a2a48; }
+.splash .sub { margin: 18px 0 0; font: italic 400 40px/1 var(--cond); color: #3f1a33; }
 .splash .start { position: absolute; right: 64px; bottom: 60px; display: flex; align-items: center; gap: 18px;
   font: 400 88px/1 'Bangers', var(--cond); letter-spacing: .06em; color: #2a0f24; background: #ff5fa2;
   border: 6px solid #2a0f24; border-radius: 22px; padding: 22px 52px 18px 40px; box-shadow: 10px 10px 0 #2a0f24; cursor: pointer; }
