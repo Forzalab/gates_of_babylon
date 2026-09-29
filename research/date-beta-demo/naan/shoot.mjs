@@ -23,7 +23,7 @@ for (const v of only.length ? only : ['v1', 'v2', 'v3']) {
   const box = await page.evaluate(() => {
     const r = (el) => { const b = el.getBoundingClientRect(); return { top: b.top, bottom: b.bottom, left: b.left, right: b.right }; };
     const say = document.querySelector('.db-say'), who = document.querySelector('.db-say .who');
-    const ad = document.querySelector('.platform [data-ad]'), sign = document.querySelector('.platform .pf-sign');
+    const ad = document.querySelector('.naan-platform [data-ad]'), sign = document.querySelector('.naan-platform .np-sign');
     return { say: r(say), who: who ? r(who) : null, ad: ad ? r(ad) : null, sign: sign ? r(sign) : null };
   });
   const zone = Math.min(box.say.top, box.who?.top ?? 1e9);

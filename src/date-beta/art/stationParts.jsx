@@ -1,4 +1,4 @@
-// Shared pieces for the naan station platform (Platform.jsx): dusk palette, sky, clouds, skyline, the ad slot, signs.
+// stationParts.jsx: reusable station pieces for the naan platform (NaanPlatform.jsx) and any later station scene: dusk palette, sky, clouds, skyline, the ad slot, signs.
 // Flat fills + one gradient per sky, like Rooftop / Train. Traced by eye from Tony's 4 BY-NC refs (never committed,
 // see research/date-beta-demo/naan/COMPOSITION.txt + CREDITS.txt).
 import { rng } from './util.js';
@@ -38,7 +38,7 @@ export const Cloud = ({ x, y, s = 1, flip = false }) => (
 export function Blocks({ b, base, tone = 'mid', seed = 1, win = 0.18 }) {
   const rnd = rng(seed);
   const face = { far: P.far, mid: P.mid, near: P.near }[tone];
-  const side = { far: '#7563b4', mid: P.shade, near: '#7b4f8a' }[tone];
+  const side = { far: '#b48fd0', mid: P.lit, near: '#f4b0c6' }[tone]; // low sun from the right (refs 1 + 2): right faces glow
   return b.map(([x, w, top, sd = 0], i) => {
     const cols = Math.max(1, Math.floor((w - 16) / 26)), rows = Math.max(1, Math.floor((base - top - 20) / 30));
     return (
@@ -79,7 +79,7 @@ export function AdSlot({ x, y, w }) {
 export function LineSign({ x, y, w, h, num, jp, jp2, en, dark = false, rods }) {
   const bg = dark ? '#1d2c3e' : '#f4f1ea', ink = dark ? '#f4f1ea' : '#1c1830', rim = dark ? '#0e1622' : '#23202c';
   return (
-    <g className="pf-sign">
+    <g className="np-sign">
       {rods.map(([dx, top]) => <rect key={dx} x={x + dx - 4} y={top} width="8" height={y - top} fill={P.ink} />)}
       <rect x={x - 8} y={y - 8} width={w + 16} height={h + 16} rx="6" fill={rim} />
       <rect x={x} y={y} width={w} height={h} rx="2" fill={bg} />
@@ -97,7 +97,7 @@ export function LineSign({ x, y, w, h, num, jp, jp2, en, dark = false, rods }) {
 export function NameBoard({ x, y, w = 400, h = 160, rods }) {
   const g = '#6cbb3c';
   return (
-    <g className="pf-sign">
+    <g className="np-sign">
       {rods.map(([dx, top]) => <rect key={dx} x={x + dx - 4} y={top} width="8" height={y - top} fill={P.ink} />)}
       <rect x={x - 6} y={y - 6} width={w + 12} height={h + 12} rx="6" fill="#23202c" />
       <rect x={x} y={y} width={w} height={h} fill="#f6f4ee" />
@@ -112,6 +112,25 @@ export function NameBoard({ x, y, w = 400, h = 160, rods }) {
       <rect x={x + w / 2 - 22} y={y + h - 44} width="44" height="44" fill="#4f9a2a" />
       <text x={x + 14} y={y + h - 15} className="nb-next">◀ 目白 Mejiro</text>
       <text x={x + w - 14} y={y + h - 15} textAnchor="end" className="nb-next">Ōtsuka 大塚 ▶</text>
+    </g>
+  );
+}
+
+// Platform vending machine. kind = props.vending (the bento echo): that drink's slot is lit, the rest stay plain.
+export function Vending({ x, y, w, h, kind }) {
+  const hot = kind === 'tamagoyaki' ? '#ffd23f' : '#d7263d';
+  const cols = 5, bw = (w - 16) / cols;
+  return (
+    <g>
+      <rect x={x} y={y} width={w} height={h} rx="4" fill="#c8243c" />
+      <rect x={x + w - 8} y={y} width="8" height={h} fill="#f28a9a" />
+      <rect x={x + 8} y={y + 10} width={w - 16} height={h * 0.5} fill="#f4f1ea" />
+      {[0, 1, 2].map((r) => Array.from({ length: cols }, (_, c) => (
+        <rect key={`${r}${c}`} x={x + 8 + c * bw + bw * 0.25} y={y + 18 + r * h * 0.16} width={bw * 0.5} height={h * 0.1} rx="2"
+          fill={r === 0 && c === 2 ? hot : ['#5b7fc0', '#6fae6a', '#e0a24e', '#a57cc6', '#6c8aa8'][(r + c) % 5]} />
+      )))}
+      <rect x={x + 8} y={y + h * 0.66} width={w * 0.34} height={h * 0.1} fill="#3a1a22" />
+      <rect x={x + w * 0.2} y={y + h * 0.84} width={w * 0.5} height={h * 0.08} fill="#2a1016" />
     </g>
   );
 }

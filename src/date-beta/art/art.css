@@ -67,21 +67,21 @@
 .naan .foot-figur { right: 44px; top: 964px; font: 400 56px/1 'Yellowtail', cursive; color: #ff5fa2; }
 .naan .qr { position: absolute; right: 200px; top: 950px; width: 104px; height: 104px; }
 
-/* naan platform (Platform.jsx): station signs + the ad placeholder */
-.platform .sg-num { font: 800 100px/1 'Inter Tight', var(--cond); }
-.platform .sg-jp { font: 700 40px/1 var(--jp); letter-spacing: .08em; }
-.platform .sg-jp2 { font: 700 30px/1 var(--jp); letter-spacing: .06em; }
-.platform .sg-en { font: 400 28px/1 'Inter Tight', var(--cond); }
-.platform .nb-code { font: 800 18px/1 'Inter Tight', var(--cond); fill: #1c1830; }
-.platform .nb-codenum { font: 800 22px/1 'Inter Tight', var(--cond); fill: #1c1830; }
-.platform .nb-jp { font: 700 52px/1 var(--jp); letter-spacing: .12em; fill: #1c1830; }
-.platform .nb-en { font: 400 26px/1 'Inter Tight', var(--cond); fill: #1c1830; }
-.platform .nb-next { font: 700 20px/1 var(--jp); fill: #fff; }
-.platform .pf-roof { font: 700 30px/1 var(--jp); fill: #f4f1ea; }
-.platform .pf-plate { font: 700 30px/1 var(--jp); fill: #c8102e; }
-.platform .ad-ph-hl { font: 400 64px/1 'Bangers', var(--cond); letter-spacing: .03em; fill: #e60012; }
-.platform .ad-ph-foot { font: 900 italic 30px/1 'Inter Tight', var(--cond); fill: #fff; }
-.platform .ad-ph-tag { font: 700 20px/1 'Inter Tight', var(--cond); fill: #ffe100; }
+/* naan platform (NaanPlatform.jsx + stationParts.jsx): station signs + the ad placeholder */
+.naan-platform .sg-num { font: 800 100px/1 'Inter Tight', var(--cond); }
+.naan-platform .sg-jp { font: 700 40px/1 var(--jp); letter-spacing: .08em; }
+.naan-platform .sg-jp2 { font: 700 30px/1 var(--jp); letter-spacing: .06em; }
+.naan-platform .sg-en { font: 400 28px/1 'Inter Tight', var(--cond); }
+.naan-platform .nb-code { font: 800 18px/1 'Inter Tight', var(--cond); fill: #1c1830; }
+.naan-platform .nb-codenum { font: 800 22px/1 'Inter Tight', var(--cond); fill: #1c1830; }
+.naan-platform .nb-jp { font: 700 52px/1 var(--jp); letter-spacing: .12em; fill: #1c1830; }
+.naan-platform .nb-en { font: 400 26px/1 'Inter Tight', var(--cond); fill: #1c1830; }
+.naan-platform .nb-next { font: 700 20px/1 var(--jp); fill: #fff; }
+.naan-platform .np-roof { font: 700 30px/1 var(--jp); fill: #f4f1ea; }
+.naan-platform .np-plate { font: 700 30px/1 var(--jp); fill: #c8102e; }
+.naan-platform .ad-ph-hl { font: 400 64px/1 'Bangers', var(--cond); letter-spacing: .03em; fill: #e60012; }
+.naan-platform .ad-ph-foot { font: 900 italic 30px/1 'Inter Tight', var(--cond); fill: #fff; }
+.naan-platform .ad-ph-tag { font: 700 20px/1 'Inter Tight', var(--cond); fill: #ffe100; }
 
 /* blackout */
 .blackout { background: #000; display: grid; place-items: center; }
