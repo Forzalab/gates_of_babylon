@@ -5,6 +5,7 @@ import { nandaSVG, stageFor, PAL } from './date-beta/art/nanda.js';
 import { loadScenes, beatView } from './date-beta/engine.js';
 import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
+import { ART_NAMES } from './date-beta-art-names.js';
 
 test('nanda: SVG only (no <image>, no url() to files, no raster), ids unique per call', () => {
   const a = nandaSVG({ stage: 1 }), b = nandaSVG({ stage: 1 });
@@ -28,7 +29,7 @@ test('nanda: stage follows scare (0 sweet, 1 clingy, 2 possessive); possessive t
 });
 
 test('nanda: she speaks in the rooftop, door, cup, steeped, escape-win, escape-timeout and leave scenes', () => {
-  const S = loadScenes(data, { manifest, art: ['splash', 'rooftop', 'train', 'naan', 'blackout', 'basement'] });
+  const S = loadScenes(data, { manifest, art: ART_NAMES });
   const who = new Set();
   for (const sc of S) for (const b of sc.beats) for (const v of ['umeboshi', 'tamagoyaki']) {
     if (beatView(b, { bento: v }).line.who === 'NANDA') who.add(sc.id);

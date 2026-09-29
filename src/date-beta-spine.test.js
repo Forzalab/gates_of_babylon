@@ -5,8 +5,9 @@ import assert from 'node:assert/strict';
 import { loadScenes, start, next, skip, choose, beatAt, beatView, enabled } from './date-beta/engine.js';
 import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
+import { ART_NAMES } from './date-beta-art-names.js';
 
-const scenes = loadScenes(data, { manifest, art: ['splash', 'rooftop', 'train', 'naan', 'blackout', 'basement'] });
+const scenes = loadScenes(data, { manifest, art: ART_NAMES });
 
 // picks: choice labels in the order they come up (the rooftop bento pick is taken from `bento`, not the queue).
 // Returns the scene ids visited, every line shown (after vary), and the final card position.
@@ -29,11 +30,11 @@ function walk(picks, rm = false, bento = 'umeboshi') {
   assert.fail('no ending within 200 steps');
 }
 
-const SHARED = ['rooftop', 'train', 'naan', 'blackout', 'door'];
+const SHARED = ['rooftop', 'train', 'naan', 'blackout', 'platform', 'underpass', 'apartment', 'door'];
 const PATHS = {
-  STEEPED: { picks: [null, 'Just one cup', 'Drink'], via: ['cup', 'steeped'], card: 'STEEPED.' },
-  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Leave her house'], via: ['cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
-  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Wait for her'], via: ['cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
+  STEEPED: { picks: [null, 'Just one cup', 'Drink'], via: ['genkan-in', 'cup', 'steeped'], card: 'STEEPED.' },
+  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Leave her house'], via: ['genkan-in', 'cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
+  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Wait for her'], via: ['genkan-in', 'cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
   'LEAVE (refuse)': { picks: [null, "Say goodnight", "FUCK YOU. I'm leaving"], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
   'LEAVE (agree)': { picks: [null, "Say goodnight", 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
 };
@@ -86,7 +87,7 @@ test('date-beta basement: the door beat converges (timer -> wait -> timeout, cli
 test('date-beta spine: the DOOR timer defaults to going in (pink)', () => {
   const b = scenes.find((x) => x.id === 'door').beats.find((x) => x.choices);
   assert.equal(b.timer, 5);
-  assert.equal(b.choices.find((c) => c.default).go, 'cup');
+  assert.equal(b.choices.find((c) => c.default).go, 'genkan-in'); // alt's arrival insert, then cup
 });
 
 // Echo rule: the rooftop pick changes what every ending says. Same path, other bento = other lines.

@@ -9,8 +9,9 @@ import { loadScenes, start, next, skip, choose, beatAt, enabled, timeoutPick } f
 import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
 import { timeline, FLOOR_MS } from './collapseFrames.js';
+import { ART_NAMES } from './date-beta-art-names.js';
 
-const ART = ['splash', 'rooftop', 'train', 'naan', 'blackout', 'basement'];
+const ART = ART_NAMES;
 const scenes = loadScenes(data, { manifest, art: ART });
 const id = (p) => scenes[p.s].id;
 const ENDINGS = ['steeped', 'escape-win', 'escape-timeout', 'leave-fu', 'leave-yeah'];
@@ -127,26 +128,29 @@ test('redteam: an unknown ?scene= id falls back to scene 1 instead of crashing',
   assert.equal(p.s, 0); assert.equal(p.done, false);
 });
 
+// the door scene in a raw scenes.json clone: beat 0 = the stairs, 3 = the kettle pick
+const door = (d) => d.scenes.find((s) => s.id === 'door');
+
 test('redteam: malformed scenes.json fails loudly at load (missing go target, bad vary, bad flag value)', () => {
   const clone = () => structuredClone(data);
-  let d = clone(); d.scenes.find((s) => s.id === 'door').beats[2].choices[0].go = 'cupp';
+  let d = clone(); door(d).beats[3].choices[0].go = 'cupp';
   assert.throws(() => loadScenes(d, { manifest, art: ART }), /unknown scene "cupp"/);
   d = clone(); delete d.scenes[0].beats[2].vary.bento.tamagoyaki;
   assert.throws(() => loadScenes(d, { manifest, art: ART }), /missing the variant/);
   d = clone(); d.scenes[0].beats[1].choices[0].set.bento = 'natto';
   assert.throws(() => loadScenes(d, { manifest, art: ART }), /not one of/);
-  d = clone(); d.scenes[4].bg = 'BG-ZZ';
+  d = clone(); door(d).bg = 'BG-ZZ';
   assert.throws(() => loadScenes(d, { manifest, art: ART }), /not in the asset manifest/);
-  d = clone(); d.scenes[4].beats[2].choices[0].default = true; d.scenes[4].beats[2].choices[1].default = true;
+  d = clone(); door(d).beats[3].choices[0].default = true; door(d).beats[3].choices[1].default = true;
   assert.throws(() => loadScenes(d, { manifest, art: ART }), /only one choice/);
 });
 
 test('redteam: timeoutPick falls to the other enabled choice when the default is disabled', () => {
   const d = structuredClone(data);
-  const door = d.scenes.find((s) => s.id === 'door').beats[2];
-  door.choices[0].if = { bento: 'tamagoyaki' };
+  const pick = door(d).beats[3];
+  pick.choices[0].if = { bento: 'tamagoyaki' };
   const sc = loadScenes(d, { manifest, art: ART });
-  const b = sc.find((s) => s.id === 'door').beats[2];
+  const b = sc.find((s) => s.id === 'door').beats[3];
   assert.equal(timeoutPick(b, { bento: 'umeboshi' }), 1);
   assert.equal(timeoutPick(b, { bento: 'tamagoyaki' }), 0);
 });

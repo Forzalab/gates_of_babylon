@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "note": "date-beta demo spine: shared scenes -> door -> cup (steeped | unknown -> escape) | leave; every ending card goes back to scene 1, the rooftop (the Figur collapse in Logic mode lands there, as if START was pressed; the old fake-site Splash art is kept but out of the play path). bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
+  "note": "date-beta demo spine: shared scenes (rooftop, train, naan at dusk, blackout, then alt's night walk: platform = the same station at night, underpass, apartment) -> door (stairs beat first) -> genkan-in -> cup (steeped | unknown -> escape) | leave; every ending card goes back to scene 1, the rooftop (the Figur collapse in Logic mode lands there, as if START was pressed; the old fake-site Splash art is kept but out of the play path). bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
   "flags": { "bento": ["umeboshi", "tamagoyaki"] },
   "scenes": [
     {
@@ -68,19 +68,65 @@
       ]
     },
     {
+      "id": "platform",
+      "title": "Platform / NEXT: {OR} (alt)",
+      "bg": "platform",
+      "enter": "fade",
+      "scare": 1,
+      "beats": [
+        { "props": { "train": "here" }, "text": "Her stop. The rain followed us off the train.", "sfx": "rain", "hold": 1200 },
+        { "props": { "train": "gone" }, "text": "The AND Line leaves. Just two of us now.", "sfx": "train-hum", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },
+        { "text": "NEXT: this {OR} that. The sign never picks.", "sfx": "breath" }
+      ]
+    },
+    {
+      "id": "underpass",
+      "title": "Underpass / ads (alt)",
+      "bg": "underpass",
+      "enter": "fade",
+      "scare": 1,
+      "beats": [
+        { "text": "Your steps, her steps. Always an even count.", "sfx": "tick", "hold": 1200 },
+        { "text": "NANDA: Don't read the ads. Read me.", "sfx": "tick" }
+      ]
+    },
+    {
+      "id": "apartment",
+      "title": "Her building / one lit window (alt)",
+      "bg": "apartment",
+      "enter": "fade",
+      "scare": 1,
+      "beats": [
+        { "text": "Four floors. One window lit.", "sfx": "rain", "hold": 1000 },
+        { "text": "NANDA: That's mine. I left the light on for you.", "sfx": "rain" }
+      ]
+    },
+    {
       "id": "door",
       "title": "DOOR / Unit 12",
       "bg": "BG-D1",
       "enter": "fade",
       "scare": 1,
       "beats": [
-        { "text": "NANDA: This is me. Unit 12. Obviously you'll remember.", "scare": 0, "sfx": "rain" },
+        { "bg": "stairs", "props": { "door": "shut" }, "sfx": "tick", "hold": 1000 },
+        { "bg": "BG-D1", "text": "NANDA: This is me. Unit 12. Obviously you'll remember.", "scare": 0, "sfx": "rain" },
         { "text": "NANDA: Come in? Just for tea.", "scare": 0, "sfx": "tick" },
         { "text": "NANDA: I already boiled the water. This morning. Just in case.", "sfx": "kettle", "timer": 5,
           "choices": [
-            { "text": "Just one cup", "side": "pink", "default": true, "go": "cup" },
+            { "text": "Just one cup", "side": "pink", "default": true, "go": "genkan-in" },
             { "text": "Say goodnight", "side": "purple", "go": "leave" }
           ] }
+      ]
+    },
+    {
+      "id": "genkan-in",
+      "title": "Genkan arrival insert (alt)",
+      "bg": "genkan-in",
+      "scare": 1,
+      "beats": [
+        { "props": { "insert": false }, "text": "Her shoes. Lined up to the millimetre.", "sfx": "thump", "hold": 1000 },
+        { "props": { "insert": true }, "text": "Men's slippers. Already set out.", "sfx": "thump", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },
+        { "text": "A tiny shrine. Inside: a circuit you built.", "sfx": "breath" }
       ]
     },
     {
