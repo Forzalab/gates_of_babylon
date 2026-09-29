@@ -192,7 +192,7 @@ const pr3 = cam(900, 600, 1000, 1.6);
 const SH = { x0: 0.3, x1: 5.3, z: 5.5 }; // stair house front face
 const ROWS3 = [-0.4, 0.8, 3.2, 5.6];
 
-function V3({ k, night, rm }) {
+function V3({ k, night, rm, train }) {
   const pr = pr3;
   const [hx0, hy0] = pr(SH.x0, 4.2, SH.z), [hx1, hy1] = pr(SH.x1, 0, SH.z);
   const [ax, ay] = pr(0.5, 0.9 + 4.4 / AD_RATIO, SH.z), [bx] = pr(4.9, 0, SH.z);
@@ -209,7 +209,10 @@ function V3({ k, night, rm }) {
       <polygon points={flatQuad(pr, 0, -2.2, -2.08, 0.4, 200)} fill={k('#e8e2ef')} />
       <polygon points={flatQuad(pr, 0, -1.8, -1.5, 0.4, 200)} fill={k('#c9a444')} />
       {/* the train, receding to the VP (Chiyo-DA green line) */}
-      <PerspTrain pr={pr} x={-2.4} z0={0.6} cars={8} body="#b9b0cc" shade="#8c82a8" stripe={[0.72, 0.86, '#3fae7a']} win="#2c2f4a" sky="#d77bb8" k={k} night={night} />
+      {/* train='gone' (alt's night platform): it pulls away down the track, scaled into the VP on the stepped clock */}
+      <g className={`np-train${train === 'gone' ? ' gone' : ''}`}>
+        <PerspTrain pr={pr} x={-2.4} z0={0.6} cars={8} body="#b9b0cc" shade="#8c82a8" stripe={[0.72, 0.86, '#3fae7a']} win="#2c2f4a" sky="#d77bb8" k={k} night={night} />
+      </g>
       {night && <defs><clipPath id="np3-rain"><polygon points="0,0 627,0 900,600 240,1080 0,1080" /></clipPath></defs>}
       {night && <Rain clip="np3-rain" rm={rm} seed={13} />}
       {/* right wall of the station (closes the platform), with lit timetable panels */}
@@ -244,15 +247,16 @@ const LABEL = {
 };
 const VARIANT = { v1: V1, v2: V2, v3: V3 };
 
-// The station itself. Exported for other scenes (alt's night platform): <NaanPlatform variant="v2" time="night" rm />.
-export function NaanPlatform({ variant = 'v3', time = 'dusk', rm = false, vending }) {
+// The station itself. Exported for other scenes (alt's night platform): <NaanPlatform variant="v3" time="night" rm train="gone" />.
+// train: 'here' (default) | 'gone' (v3 only: the train leaves in 3 stepped poses; reduced motion = hard cut).
+export function NaanPlatform({ variant = 'v3', time = 'dusk', rm = false, vending, train = 'here' }) {
   const v = VARIANT[variant] ? variant : 'v3';
   const V = VARIANT[v], night = time === 'night';
   const when = night ? 'At night, in the rain; the ad is dark and stuck on NANDA.' : 'Pink dusk.';
   return (
     <svg className={`art naan-platform np-${v}${night ? ' np-night' : ''}`} viewBox="0 0 1920 1080" data-variant={v} data-time={night ? 'night' : 'dusk'}
       role="img" aria-label={`${LABEL[v]} ${when}`}>
-      <V k={tint(night)} night={night} rm={rm} vending={vending} />
+      <V k={tint(night)} night={night} rm={rm} vending={vending} train={train} />
     </svg>
   );
 }

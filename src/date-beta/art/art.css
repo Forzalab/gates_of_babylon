@@ -53,6 +53,9 @@
 .naan-platform .nb-next { font: 700 20px/1 'Inter Tight', var(--jp); fill: #fff; }
 .naan-platform .np-roof { font: 700 30px/1 'Inter Tight', var(--jp); fill: #f4f1ea; }
 .naan-platform .np-plate { font: 700 30px/1 'Inter Tight', var(--jp); fill: #c8102e; }
+/* train='gone' (alt's night platform): the train pulls away into the VP in 3 stepped poses (500 ms each); .rm = hard cut */
+.naan-platform .np-train { transform-box: view-box; transform-origin: 900px 600px; transition: transform 1500ms steps(3, end); }
+.naan-platform .np-train.gone { transform: scale(0); }
 .naan-platform .ad-ph-hl { font: 400 64px/1 'Bangers', var(--cond); letter-spacing: .03em; fill: #e60012; }
 .naan-platform .ad-ph-foot { font: 900 italic 30px/1 'Inter Tight', var(--cond); fill: #fff; }
 .naan-platform .ad-ph-tag { font: 700 20px/1 'Inter Tight', var(--cond); fill: #ffe100; }
