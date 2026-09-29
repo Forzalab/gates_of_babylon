@@ -13,7 +13,9 @@ import { draftPoints, polyD } from './Draft.jsx';
 export const VARIANT = 'a';
 export const TOUR_KEY = 'gob.tour';
 export const TOUR_MS = 3000;
-const seen = () => { try { return localStorage.getItem(TOUR_KEY) === 'done'; } catch { return false; } };
+// ?demo (projector demo on a fresh guest browser): no first-visit tour, nothing dims the page.
+const DEMO = typeof location !== 'undefined' && new URLSearchParams(location.search).has('demo');
+const seen = () => { if (DEMO) return true; try { return localStorage.getItem(TOUR_KEY) === 'done'; } catch { return false; } };
 const markSeen = () => { try { localStorage.setItem(TOUR_KEY, 'done'); localStorage.setItem('gob.paletteHint', '1'); } catch { /* private mode */ } };
 export const tourPending = () => !seen();
 
