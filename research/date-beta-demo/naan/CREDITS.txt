@@ -1,0 +1,10 @@
+NAAN PLATFORM: reference photo credits
+======================================
+The platform art (src/date-beta/art/Platform.jsx) is hand-drawn SVG, traced by eye from four
+photos Tony supplied. They are CC BY-NC: the photos themselves are NOT in the repo. Each needs
+its author, title, source URL and licence filled in before anything ships.
+
+TODO ref 1 (09ef0c2f, elevated platform, rooftop billboards, train passing; used by V1): author / title / URL / licence
+TODO ref 2 (2d0e34e8, wide canopy platform, pillars, train on the right; used by V2): author / title / URL / licence
+TODO ref 3 (ea41d573, long platform, hanging "2 Shinjuku" sign; used by V3): author / title / URL / licence
+TODO ref 4 (cd9c74d0, platform edge, "1 Nakano" sign, rooftop billboards; used by V1): author / title / URL / licence

@@ -1,0 +1,113 @@
+NAAN PLATFORM: composition notes from the 4 reference photos
+=============================================================
+Refs are BY-NC photos: viewed only, never committed (see CREDITS.txt). Numbers are fractions of
+the frame (x across, y down) so they carry over to the 1920x1080 stage. Colours were sampled with
+Pillow (box average) and then lifted to flat fills, so they match the flat rooftop / train scenes.
+
+Stage rule for every variant: the dialogue box owns y >= 780 (box top 826, speaker chip 796).
+The ad and the station sign must end above y = 780. Background (train, floor, fence) may run
+under the box, the same way the rooftop railing does.
+
+
+REF 1  09ef0c2f  elevated platform, rooftop billboards, train passing  (514x389, 4:3)
+-----------------------------------------------------------------------------
+- Camera: standing under the canopy, looking ACROSS the tracks, slightly oblique (to the left).
+- Horizon: ~0.68 (roof line of the far platform canopy, 255-275 px). Everything important sits
+  above it: the city is a band from 0.25 to 0.68.
+- Vanishing point: off-frame left, on the horizon (the train roof and the far canopy converge
+  gently to the left). Nearly frontal, so the billboards read as flat rectangles, no keystone.
+- Canopy: dark underside fills the top-left triangle; its front edge is one strong diagonal from
+  (0.65, 0) down to (0.25, 0.30). Exit sign + lamp + a purple LED light hang from it.
+- Rhythm: overhead wires run in 3-4 parallel diagonals from top-right to lower-left; catenary
+  poles and gantries stand on the far platform at ~0.12 W intervals.
+- Billboards: on ROOFTOPS across the tracks, all in the 0.28-0.55 band. The biggest (red,
+  portrait) at x 0.57-0.67. Small green + white signs further right at 0.80-0.95. They face us.
+- Train: a long silver car with green/orange stripes fills the bottom 0.30 (0.70-1.0), moving
+  left. At our stage size that band is exactly the dialogue zone, so the train can live behind
+  the box and the ad sits above it.
+- Light: dusk, sun just gone, behind and to the right. Warm pink rims on the right faces of
+  buildings, violet shadow faces. Sky: violet-blue top, pink cumulus, clear #968cfa patches.
+- Palette: sky #968cfa / #be80d7, cloud #e298d9, canopy #2b2a33, building #9f6269,
+  red billboard #ca4e70, green sign #647c74, train body #6c435d (under shade).
+
+REF 2  2d0e34e8  wide canopy platform, pillars, train on the right  (2048x1332)
+-----------------------------------------------------------------------------
+- Camera: on the platform, eye height, looking across it to the fence and city; a train
+  stands along the right edge and recedes to the left of centre.
+- Horizon: ~0.57 (fence top, far rooftops). VP: ~(0.40, 0.57), where the train's roof and
+  sill lines meet behind the fence.
+- Canopy: fills the top 0.25 at the centre (0.30 at the sides); heavy ribbed ceiling, a ladder
+  walkway and a curved fascia beam that dips between the two pillars. Strong magenta cast.
+- Pillar rhythm: two pillars frame the view, at x 0.18-0.23 (fat, near) and 0.60-0.63 (thin,
+  further). The bay between them is the "picture": fence, grass, the city skyline.
+- Billboards: none large; the bay between the pillars is the natural slot for a platform
+  light-box (JP platforms put free-standing light-box ads right there, facing the platform).
+- Floor: asphalt purple from 0.75 down; a yellow tactile strip runs across at ~0.92, and a
+  second one runs along the train edge to the VP.
+- Light: low sun from the right: the train's red/orange stripe glows, the pillars' right faces
+  are pale pink, their left faces violet. Sky: deep violet top, pink-lilac at the horizon.
+- Palette: sky top #482856 -> horizon #9b7fc7, canopy #561d44, pillar #6e4e7e, floor #391e4f,
+  tactile (in shade) #6c3b5c, train body #8b638d, stripe #cb2859, city #686099.
+
+REF 3  ea41d573  long perspective platform, hanging "2 Shinjuku" sign  (502x377)
+-----------------------------------------------------------------------------
+- Camera: on the platform near the edge, looking down its length. One-point perspective.
+- Horizon ~0.65, VP ~(0.88, 0.65), far right. Every line (train roof, windows, canopy lights,
+  tactile strip, gantries) runs into it.
+- Train fills the left half, from full height at x=0 down to a point at the VP. A pink /
+  magenta sky wedge sits between the train roof and the canopy edge (top-left quarter).
+- Canopy: dark, over the right half; rows of lights recede to the VP. Pillars on the right.
+- Sign: the foreground hero. A dark navy box hangs from the canopy, x 0.53-0.98, y 0.10-0.29:
+  big white "2", then "新宿 / 千代田線 方面" and "for Shinjuku, Chiyoda Line". A green
+  signal lamp hangs just below-left of it.
+- Far wall / end: the platform ends in lights and a stair house at the VP. That end is where
+  the eye lands, so the ad goes on the END FACE of a stair house at mid-depth (JP island
+  platforms put ad panels on exactly those faces). All the perspective lines then point at it.
+- Light: the sky is the only warm source (hot pink); the platform itself is cool
+  (teal/navy lights). High contrast, dark foreground.
+- Palette: sky #a864d9 -> #ff9ab0 near the horizon, canopy #2a2c31, train #36353d / #25415b,
+  sign #305264 (navy), floor #3a4249, tactile #283e1c (dim yellow-green).
+
+REF 4  cd9c74d0  platform edge, "1 Nakano" sign, billboards on the left  (655x468)
+-----------------------------------------------------------------------------
+- Camera: at the platform edge, looking along the track. One-point, VP ~(0.79, 0.69).
+- Horizon ~0.69. The track and the parapet wall run from bottom-left into the VP.
+- Canopy + pillars on the right (canopy edge from (0.52, 0) down to the VP); pillar rhythm
+  closes up fast toward the VP.
+- Sign: white box with a black frame hanging at the top right, x 0.67-0.98, y 0.13-0.33:
+  big "1", "中野 三鷹 / 高尾 方面", "for Nakano, Mitaka & Takao".
+- Billboards: on ROOFTOPS to the LEFT, across the track, y 0.33-0.60, facing us, lit by lamps
+  on arms above them. Low-rise town between them and the track.
+- Light: clear sky, blue at the top (#457cc5) -> lilac -> pink at the horizon. Buildings lit
+  warm pink on the side toward the camera.
+- Palette: sky #457cc5 / #7992c9 / #796fa7, billboard #9882a4, lit building #92608a,
+  canopy #4d2b49, floor #44457f, parapet #44305e, far tower #3e5a98.
+
+
+WHAT EACH VARIANT TAKES
+-----------------------
+V1  elevated platform (refs 1 + 4)
+    - Ref 1's camera: across the tracks. Canopy diagonal top-left, exit sign, LED lamp.
+    - Horizon at ~0.64 (y 690): the far platform canopy. City band y 300-690.
+    - Hot NAAN = the big rooftop billboard across the tracks, frontal, lamps on arms above it
+      (ref 4). Right of centre (ref 1 puts its red billboard at 0.57-0.67).
+    - Sign: ref 4's white "1" box, hung from our canopy:
+      「1 NAND-kano 中NAND / for NAND-kano, Mitaka」.
+    - Train: ref 1's green/orange stripe car in the bottom band (under the dialogue box).
+V2  canopy platform (ref 2)
+    - Ref 2's camera and pillar pair framing the centre bay.
+    - Hot NAAN = a free-standing light-box in the centre bay, at the back of the platform in
+      front of the fence. The horizon (~0.57) runs behind it.
+    - Sign: station name board (駅名標) hung from the canopy in the left bay:
+      「池NOR袋 / Ike-NOR-kuro」.
+    - Train: right bay, red/orange stripe, receding toward the centre bay (VP behind the ad).
+V3  long perspective (ref 3)
+    - One-point perspective computed from a small camera model (eye 1.6 m, f in px), so every
+      line is true. VP pulled in from 0.88 W toward the centre so the stair house fits.
+    - Hot NAAN = the end face of a stair house at mid-depth: the far wall. Every line points at it.
+    - Sign: ref 3's navy hanging box in the foreground, top right:
+      「2 新XOR / Shin-XOR-ku · Chiyo-DA Line」.
+    - Train: left, receding to the VP; pink sky wedge above it.
+
+Sign <-> variant mapping follows the refs: the "1 Nakano" box is from ref 4 (V1), the
+"2 Shinjuku" box is from ref 3 (V3), so Ike-NOR-kuro goes to V2 as a station name board.
