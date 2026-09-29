@@ -90,3 +90,18 @@ Round-1 variants are untouched; round-2 code lives in new folders (`a/menu2/`, .
 - **Self-critique**: the strongest "only a camcorder can do this" logic of my camera pieces; the her-in-tunnel silhouette is big
   and flat at 4x, the phone on the floor is oversized for the room (it has to be 1/6 of the stage for the readout maths), and the
   genkan floor count repeats B's round-1 beat nearly 1:1 (by spec).
+
+## closeup-3-r2 · The third cup, her open hand (horror 4)
+- **School**: Ozu low tatami-height table / KyoAni quiet-kitchen inserts x *Get Out*'s teacup x *Notorious* rack focus (unchanged).
+- **Theme**: *it's always three of us* (you are Input B) — now delivered by a gentle hand, which is worse.
+- **Kept (verdict 89)**: table -> rack focus onto the ripples of the cup nobody poured -> ECU, the steam writes OR in her red
+  (3 held rises, [her breath]) -> "For Input B. Silly." / "It's always three of us." Same 16.8 s loop, same RM OR rule.
+- **The fix**: R1 reused main's MC fist sprite gripping the cup. R2 draws HER hand (`closeup2/HerHand.jsx`): open, flat, red
+  nails, pink cuff, laid on the table plane. The cup now sits on a saucer; her fingertips rest on its rim and slide it toward the
+  lens in held poses (0 / 1000 / 1500 ms), then she lets go and turns her palm up beside it (2250 ms): "for you". The last
+  shot gets its own light pool so the hand is lit with the cup (R1's grade crushed the hand).
+- **RM**: the slide is one cut straight to the palm-up pose; OR = static, cut in at 0.8 s, held 1 s, cut out.
+- **Tests** (`src/date-lab-a-r2-closeup.test.js`): poses on the 8 fps grid, holds >= 500 ms, push only moves toward you, ends
+  palm up, no fist sprite in the r2 source, RM = the palm pose, the payoff lines kept and <= 12 words, the tea never named.
+- **Self-critique**: the palm-up reads as an offering and the nails sell "her"; the hand is big and cropped at the right
+  edge on the last beat (the camera cannot pan further without showing the art's edge), and the palm-up thumb is stiff.
