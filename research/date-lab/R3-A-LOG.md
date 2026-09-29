@@ -23,3 +23,18 @@ window holds more than 2 swaps (R1 rule: typing/glitch <= 2 glyph swaps per seco
   source, brand print present, lines <= 12 words.
 - **Self-critique**: the red selection is the new best frame (`-2`); her hand is big and hangs below the card edge, which
   crowds the "NANDA is typing…" label on the right.
+
+## menu-3-r3 · DDLC 4th wall (horror 5)
+- **Theme**: unchanged, *she edits the menu while you read it*, starting on MC's own line before the menu exists.
+- **R2 defects fixed**: (1) ECU occlusion: in the lens beat the menu used to shrink to 45 % into the bottom-left and the
+  dialogue box clipped it ("take yo"). Now it stays full size, docked top-left (y 92-400) above her eyes and clear of the
+  box; timer 54 px tall, label 36 px, red on white in the lens (`-6`, `rm-ecu`). (2) all three edits (MC's line, purple,
+  timer label) are chunk swaps: MC's "go home." red-selected 1.0 s -> gone 1.5 s -> "sta" -> "stay." 2.5 s; purple
+  "Goodnight." selected at t 1.0 s -> "Stay." at 2.5 s; label countdown -> emptied 3.0 s -> "take " -> "take your time ♡"
+  4.0 s. Merged, never more than 2 swaps in any second (tested).
+- Kept: cold open, "NANDA is typing…" tab, her DDLC cursor on timeout (UI arrow is right here: this one IS the game UI),
+  ECU eye layer with the held look-cut MC -> lens, visits counter (own key `gob.lab.menu3r3.visits`), replay notes.
+- **Tests**: MC edit inside 3 s, merged swaps <= 2/s on all run states, lens CSS has `transform: none` and ends above y 890,
+  label >= 34 px, lines <= 12 words, no per-key retype.
+- **Self-critique**: menu and her eyes now share the frame cleanly; the ECU face is still my flatter drawing, and the
+  "4th-wall" count in the demo stays high (Tony lifted the cap).

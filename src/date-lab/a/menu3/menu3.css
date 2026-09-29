@@ -1,8 +1,6 @@
 /* Round-3 menu layer (menu-h1-r3 on top of tarot2.css). */
 .t3 .slip { font-size: 54px; min-height: 104px; }
 .t3 .typing { font-size: 40px; top: 796px; }
-/* her selection: the doomed words go her red before they vanish (one held swap) */
-.aroot mark.hsel { background: var(--her); color: #fff; border-radius: 4px; padding: 0 4px; box-shadow: 0 0 0 2px rgba(240, 36, 63, .35); }
 /* her hand-drawn pointer: the fingertip sits on the caret */
 .t3 .herpointer { position: absolute; left: -16px; top: 30px; width: 176px; height: 223px; z-index: 5;
   filter: drop-shadow(0 6px 5px rgba(0, 0, 0, .55)); transition: none; }

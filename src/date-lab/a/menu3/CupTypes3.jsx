@@ -10,10 +10,11 @@ import { useMemo, useState } from 'react';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
 import { useDoorMenu, useBeats, useClock } from '../kit/hooks.js';
 import { OPTIONS, BLEED, progress, isDisabled } from '../kit/menu.js';
-import { Line, Hud, Tag, Ors } from '../kit/ui.jsx';
+import { Line, Hud, Tag } from '../kit/ui.jsx';
 import { Nanda } from '../kit/Sprite.jsx';
 import { HerFace, Back, DoorFace, Candle, HerHand, Disabled } from '../menu2/cards.jsx';
 import HerPointer from './HerPointer.jsx';
+import Sel from './Sel.jsx';
 import { frameAt, endOf, doneAt } from './chunks.js';
 import { cupScript, leaEdit, STAY } from './script3.js';
 import '../menu2/tarot2.css';
@@ -22,11 +23,6 @@ import './menu3.css';
 const STAIRS = { door: 'ajar' };
 const INTRO = 1000, DEAL = 900;
 
-// Text with the trailing `sel` chars in her red selection.
-export function Sel({ text, sel }) {
-  if (!sel) return <Ors text={text} />;
-  return <><Ors text={text.slice(0, text.length - sel)} /><mark className="hsel">{text.slice(text.length - sel)}</mark></>;
-}
 // Her caret + her hand at the end of the text. `tap` flips on every swap (a held pose).
 export function Cursor({ tap }) {
   return <span className="curs"><i className="caret" /><HerPointer tap={tap} /></span>;

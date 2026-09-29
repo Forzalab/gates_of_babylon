@@ -100,7 +100,7 @@ const SHOTS = {
   'menu-h1-r3': async (page, snap, open) => {
     await open();
     await wait(1500); await snap('1-deal-her-hand-parked');
-    await wait(750); await snap('2-her-red-selection');
+    await page.waitForSelector('.card.yours mark.hsel'); await wait(100); await snap('2-her-red-selection');
     await wait(1750); await snap('3-sta-typed');
     await wait(1000); await snap('4-stay-card-warm');
     await wait(2500); await snap('5-timeout-her-hand');
@@ -110,6 +110,22 @@ const SHOTS = {
     await wait(2700); await snap('9-purple-reversed-lea');
     await page.keyboard.press('r'); await wait(2500); await snap('10-replay-purple-pinned-struck');
     await open(true); await wait(3600); await snap('rm-stay');
+  },
+  'menu-3-r3': async (page, snap, open) => {
+    await open();
+    await page.waitForSelector('.mcline mark.hsel'); await wait(100); await snap('1-her-red-selection-in-mc-line');
+    await wait(1400); await snap('2-mc-line-says-stay');
+    await page.waitForSelector('.opt.purple mark.hsel'); await wait(100); await snap('3-purple-goodnight-selected');
+    await wait(2600); await snap('4-label-take-your-time');
+    await page.waitForSelector('.hercursor.p1'); await wait(100); await snap('5-her-cursor');
+    await page.waitForSelector('.ecu'); await wait(300); await snap('6-ecu-menu-readable-eyes-on-mc');
+    await wait(1300); await snap('7-ecu-eyes-on-you');
+    await page.keyboard.press('r'); await wait(3000); await snap('8-replay-pink-disabled-both-agree');
+    await open(); await wait(5600); await page.keyboard.press('2'); await wait(120); await snap('9-purple-bleed');
+    await wait(1400); await snap('10-purple-lea');
+    await page.keyboard.press('r'); await wait(2400); await snap('11-replay-purple-disabled');
+    await open(true); await wait(1700); await snap('rm-mc-line-emptied');
+    await page.waitForSelector('.ecu', { timeout: 15000 }); await wait(300); await snap('rm-ecu');
   },
 };
 

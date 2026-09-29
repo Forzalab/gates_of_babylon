@@ -48,3 +48,31 @@ test('menu-h1-r3: the source keeps the brand print, her drawn hand (no UI arrow 
   assert.ok(!/\bretype\(/.test(s), 'no per-key retype in r3');
   for (const l of lines('menu3/CupTypes3.jsx')) assert.ok(words(l) <= 12, l);
 });
+
+test('menu-3-r3: cold open edits the MC line in chunk swaps inside 3 s; menu + label edits never exceed 2 swaps/s', () => {
+  const mc = mcLine(false);
+  assert.equal(textAt(mc, 0), MC_FROM);
+  assert.equal(textAt(mc, 99999), "It's late. I should stay.");
+  assert.ok(mc[1].at < 1500 && endOf(mc) <= 3000, `mc edit ${mc[1].at}..${endOf(mc)}`);
+  assert.ok(swapsSafe([mc]));
+  const s = ddlcScript(1, [], false);
+  // the label's first frame (countdown -> emptied) is a swap too, so count it: prepend a dummy frame
+  const label = [{ at: -1, text: '' }, ...s.label];
+  assert.ok(swapsSafe([s.purple, s.pink, label]), 'purple + label together stay <= 2 swaps/s');
+  assert.equal(textAt(s.label, 99999), 'take your time ♡');
+  assert.ok(endOf(s.label) < DUR && endOf(s.purple) < DUR);
+  for (const dis of [['purple'], ['pink']]) { const r = ddlcScript(2, dis, false); assert.ok(swapsSafe([r.purple, r.pink])); }
+  const rm = mcLine(true);
+  assert.ok(rm.length <= 3 && gaps(rm).every((g) => g >= 1000));
+});
+
+test('menu-3-r3: the lens beat keeps the menu full size above the box (no scale-down), label >= 34 px', () => {
+  const css = src('menu3/ddlc3.css');
+  const lens = /\.ddlc3\.lens \.menu \{([^}]*)\}/.exec(css)[1];
+  assert.match(lens, /transform: none/);
+  const top = Number(/top: (\d+)px/.exec(lens)[1]);
+  assert.ok(top + 360 < 890, 'menu (timer + 2 options) ends above the dialogue box at y 890');
+  assert.ok(Number(/\.ddlc3 \.tlabel \{ font-size: (\d+)px/.exec(css)[1]) >= 34);
+  for (const l of lines('menu3/Ddlc3.jsx')) assert.ok(words(l) <= 12, l);
+  assert.ok(!/\bretype\(/.test(src('menu3/Ddlc3.jsx')));
+});
