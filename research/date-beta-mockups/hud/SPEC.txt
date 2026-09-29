@@ -1,0 +1,174 @@
+date-beta HUD: love score + route minimap + NEXT + goal / win / low cards
+Mockups only (src/ untouched). Tue 2026-09-29. Shots: hud/{A,B}-*.png, hud-sheet.png, emotes.png.
+Open: hud/index.html (npx vite, then /research/date-beta-mockups/hud/). Any state: hud.html?v=A|B&s=goal|line|choice|plus|minus|none|win|low
+Add &play for the stepped motion. Default (no &play) = the reduced-motion frame.
+
+PICK: A (top-edge ribbon). Why:
+  1. One strip carries both the score and the route, and the beat pips move on every click, so reduced-motion play
+     always shows progress in the same place. That fixes the "PowerPoint" feel.
+  2. It never moves. B's gauge has to jump 292 px up on every choice beat (the chip rises), which adds a jolt.
+  3. It leaves Nanda and the scene art alone. B stands over the middle of the art (door, clock tower) and crowds her bubble.
+  4. The pop has room for the Telltale line without covering her.
+  B's best idea is the delta pill right next to her face. Keep it as an option for A later (the pop can anchor to the
+  sprite instead of the ribbon with no contract change).
+
+
+1. ENGINE CONTRACT (proposal for scenes.json + engine.js)
+------------------------------------------------------------------
+Choice fields (new, all optional):
+  love:  int, -5..+5. The score change. Default 0 (no pop, no reaction frame).
+  emote: heart | hearts | sweat | pout | or | crack. Default from love:
+           +3 and up = hearts, +2 = heart, +1 = sweat, -1 = pout, -2 = or, -3 and down = crack.
+         heart / hearts / or / crack = her existing V1b stages 1 / 2 / 3 / 4 (face + bubble).
+         sweat + pout = NEW art (face + bubble), drawn in hud/nanda-emotes.js. Port it into art/nanda.js as
+         nandaSVG({ emote, big }). `big` = reaction size bubble (x1.3).
+  react: string, <= 12 words, spoken by NANDA. Her line on the reaction frame. If missing, the chip keeps the question line.
+  tell:  bool, default true when love != 0. false = no "She'll remember that." line.
+
+Scene fields (new):
+  nanda: bool. Is she on screen for this scene? Default = true if any beat's speaker is NANDA.
+  short: string, <= 8 chars, uppercase. The name on the route trail (ROOFTOP, TRAIN, NAAN, DARK, DOOR, TEA, CAFE, END...).
+Beat fields (new):
+  card: "goal". The goal card (see 4). Replaces rooftop beat 0 (the wind hold).
+  end:  "steeped" | "escape" | "leave". Marks the ending title beat (STEEPED. / ESCAPE. / ESCAPE? / LEAVE.).
+        The engine swaps its "Back to start" choice for the result card (see 5).
+
+Root field (new):
+  love: { "start": 0, "goal": "auto" }
+        goal "auto" = the loader walks the graph and takes the MAX total love on any path from the first scene to an
+        ending. If an author writes a number, the loader checks it equals that max, so a new branch can never make
+        100% unreachable (or reachable by accident). Score is clamped to 0..goal.
+
+Runtime:
+  pos.love = running score (int). Picks add love. Skip (Esc / S) adds the love of the choice the timer would pick
+  (the same `default` rule), so skipping gives no free points. jumpTo (debug map) replays love along the path.
+  Timer auto-pick applies love like a click.
+
+"Nanda present" (drives the bar AND the sprite):
+  present(beat) = scene.nanda && beat.bg !== "blackout".
+  Present now: rooftop, door, cup, steeped, leave, leave-fu, leave-yeah, escape-win, escape-timeout.
+  Absent:      train, naan, blackout, unknown, escape (the basement: she is not there, that is the point).
+  Blackout beats inside escape-win / escape-timeout hide the bar (bg = blackout).
+  Companion change: the sprite stays up through MC / narration beats in a present scene (talk: false = no bubble).
+  Today she pops in and out per NANDA line; with a scene-level rule the bar and the sprite only change at scene
+  cuts, so nothing flickers mid-scene.
+
+Reaction frame (after a pick with love != 0):
+  Same bg. Choices removed, chip back down, NEXT shown. Chip = `react` line (or the question line).
+  Nanda = emote, big bubble. Pop = delta pill + "She'll remember that." Cells step in / out.
+  Min hold 500 ms, then click / Space / NEXT continues to the choice's `go`.
+  If the pick was made where she is absent (a future basement choice), the score changes at once and the pop +
+  emote wait for the next present beat ("she knows what you did down there").
+
+Endings (score -> card), shown on the `end` beat:
+  100%        WIN    "♥ 100% - She's yours. Forever."  sub: "Her heart is full. So is the teapot."  [PLAY AGAIN ▸]
+  60..99%     ALMOST "♥ 87% - So close. She'll wait for you."                                    [TRY AGAIN ▸]
+  0..59%      LOW    "💔 27% - She'll try again tomorrow."  sub: "Not enough. 27% of her heart."   [TRY AGAIN ▸]
+  (all copy DRAFT, Tony edits. Alt for the win line: "She's yours. F{OR}ever." with the OR rule C token.)
+  Both buttons go back to the rooftop and reset love to 0. The kicker names the ending: "ENDING · STEEPED".
+  With the numbers below, only the STEEPED route can reach 100%. Filling her heart IS the trap.
+
+Draft love values for the EXISTING choices (DRAFT):
+  rooftop  bento     Take the tamagoyaki  +3 hearts   | Take the umeboshi  +1 sweat
+  rooftop  stay      Stay a minute        +3 hearts   | {OR} Leave before the rain  -2 or   react "…Fine. The rain can have you."
+  door     tea       Just one cup         +2 heart    | Say goodnight  -3 crack   (leave b0 "Leaving is not an option." is her reaction)
+  cup      third cup Drink                +3 hearts   | Stand up  -2 or   react "Sit. The tea isn't finished."
+  escape   door      Wait for her         +1 sweat    | Leave her house  -3 crack   (basement = absent: pop waits for escape-win / -timeout)
+  leave    forever   uhmmm yeah ig        +1 sweat    | FUCK YOU. I'm leaving  -5 crack
+  Single-option steps (Open the hatch, Climb down, Look at the shelves, Keep looking, Back to start): 0.
+  Max totals: STEEPED 11 (15 with draft points A + B below), escape 7 (11), leave 4 (6 with A). With goal 15:
+  STEEPED 100% (87% if you took umeboshi); escape <= 73% (ALMOST at best); leave <= 40%.
+
+Route trail (the minimap):
+  Stops = scenes visited so far + the shortest remaining route to an ending (engine knows the graph). Future = hollow
+  dot, done = filled dot, ending = heart. Absent scenes still count as stops, so the trail jumps ahead when she
+  comes back ("you were gone 3 stops").
+  Current stop = a capsule with `short` + one pip per beat (lit up to the current beat). More than 8 beats (escape
+  has 14) = "n/N" text instead of pips.
+  A: inside the ribbon, right of the meter. B: a separate "ROUTE" sign top-left.
+
+NEXT ▸:
+  HA glossy pill (one notch darker pink so white text passes 4.5:1 on its flat colour), white Nunito 900 with the
+  1 px #3A0A26 ring, straddling the chip's bottom-right edge (mirror of the name tag, top-left). Replaces the tiny ▸
+  glyph and the "click ▸" hint. Shown on every click-to-continue beat, including narration. Hidden on choice beats,
+  auto beats and before `hold` has passed (hard cut in). Keys unchanged (Space / Enter / ->). The goal card says
+  GOT IT ▸, the end cards PLAY AGAIN ▸ / TRY AGAIN ▸. The OR-rule dark chip gets a dark NEXT with the her-red rim.
+
+Goal card (after the Figur collapse lands on the rooftop):
+  "GOAL" tag. "Fill her heart to 100%." / "Every choice moves her heart." / "Choose carefully. ♥"
+  Legend: [♥ +3] she loved that   [💔 -2] she'll remember.   [GOT IT ▸]   (copy DRAFT)
+  Nanda present (sweet, heart bubble), bar at 0% with a static white ring; the card's notch points at it.
+  Once per run.
+
+Layout (stage px, 1920x1080). The chips live at x >= 1606, y 10-42. shots.mjs checks every state for overlap
+between HUD parts and the chips, the chip / name tag, the choice pills and the cards: 16 / 16 clear.
+  A ribbon  x 32-1580, y 8-120 (with the heart badge and drop). Pop hangs below it at y >= 124, x from the fill head.
+  B gauge   x 1262-1418. Normal beats y 312-798 (above the chip's pins at 804). Choice beats y 20-506 (above the
+            raised chip). Route sign x 32-~700, y 16-92.
+  End cards sit left of Nanda, x 120-1290, on a 55% scrim. HUD and Nanda stay above the scrim.
+
+Motion / reduced motion:
+  Static by default = the RM frame. Normal play (&play in the mockup):
+    new / lost cells appear one per 334 ms step; pop = 3 steps x 334 ms (rise 18 px + alpha); scrim = 3 x 334 ms
+    to 55%; cards = 2 x 334 ms. No step is shorter than 334 ms (3 Hz max). Nothing loops or pulses; the goal ring
+    is static. No flashes. The only full-screen change is the end scrim: 55% max, reached over 1 s in 3 steps,
+    and the scene stays visible under it. HUD show / hide = hard cut, only at scene cuts.
+  RM (?still / prefers-reduced-motion): show the final frame (hard cut), or keep the same >= 334 ms steps.
+
+Accessibility:
+  Meter: role="meter", aria-valuenow = points, aria-valuemax = goal, label "Her heart". Pop: role="status"
+  ("+3. She'll remember that."). Trail: role="img" with "Scene 5 of 7: Door". Text sizes >= 22 px on stage.
+  White on pink always sits on #C42A82 or darker (5.2:1).
+
+
+2. DRAFT NEW CHOICE POINTS (existing scenes, no new art, no new scenes)
+------------------------------------------------------------------
+Cheap because both options continue to the next beat (no `go`): each is one choices array + love + emote + react.
+All DRAFT for Tony. Lines <= 12 words, labels have no trailing period.
+
+A. DOOR, beat 0 (after "This is me. Unit 12. Obviously you'll remember.")
+     pink    "I'll never forget it"    love +2 heart   react "Good. I wrote it on your hand anyway."
+     purple  "Which unit again?"       love -1 pout    react "Twelve. Twelve. Twelve. Say it back."
+
+B. CUP, beat 0 (after "I bought umeboshi / I made tamagoyaki. For no reason. Eat.")
+     pink    "Eat it all"              love +2 hearts  react "See? You needed me."
+     purple  "I'm not hungry"          love -1 pout    react "You will be. Later."
+     (labels never name the food, so the bento echo lint stays happy; the beat already varies on bento)
+
+C. ROOFTOP, beat 3 (after "Sweet, ne? I rolled it myself." / "Sour, ne?")
+     pink    "Best I've ever had"      love +1 sweat   react "…Obviously. Don't stare."
+     purple  "Bit salty, honestly"     love -2 or      react "Say that again. Slowly."
+
+D. LEAVE, beat 2 (after "He wakes at 7:00.")
+     pink    "Who's 'he'?"             love +1 sweat   react "Nobody. Not anymore."
+     purple  "Stop following me"       love -2 or      react "I was here first."
+
+With A + B the STEEPED max is 15 (the shots use goal 15). C adds 1 (16), D only moves the leave route.
+goal "auto" absorbs any of this.
+
+
+3. BUILD NOTES (for the engine owner, one PR)
+------------------------------------------------------------------
+  engine.js    loader: love / emote / react / tell / nanda / short / card / end + root love; goal walk; lint
+               (react <= 12 words, emote name, love range, love on an absent beat = allowed, pop deferred).
+               pos.love, reaction frame, skip + timer + jumpTo love.
+  art/nanda.js nandaSVG({ emote, big }) from hud/nanda-emotes.js (sweat + pout faces and bubbles; big bubble).
+  Nanda.jsx    emote prop; stays up on MC / narration beats in a present scene (talk: false).
+  Say.jsx      NEXT pill replaces span.next.  main.jsx: <Hud> (ribbon + trail), <Pop>, goal card, end card.
+  beta.css     the hud.css rules (lv- / hud- prefixed). Tree.jsx: show love on each edge pill.
+  scenes.json  love values above (+ drafts Tony keeps).
+  Tests: goal walk (15 with A + B), clamp 0..goal, skip = default love, deferred pop, tier cut-offs 60 / 100.
+
+
+4. IMPECCABLE (npx impeccable detect, viewport 1920x1080, IMPECCABLE_BROWSER=/tmp/claude-0/chrome-ns.sh)
+------------------------------------------------------------------
+  Static  research/date-beta-mockups/hud/                 0
+  Live    hud.html x 16 states + index + sheet + emotes    before: 40 findings over 19 pages. After: 0 on all 19.
+  Fixed: white numbers on hearts (now backed by the heart's flat #C42A82 band, 5.2:1), pop nested in the HUD card
+  (now its own layer), B pill tail overflow (tail removed, the pill points at the marker heart), line length on
+  index / sheet / emotes, an inherited dark text colour on the emote board's dark cards.
+  Waived (1 rule, narrow): shape-assembled-illustration on the Nanda V1b SVG = Tony's locked hand-built character
+  art, not placeholder clip art. Scoped to **/research/date-beta-mockups/hud/** in .impeccable/config.json with
+  that reason (URL scans ignore inline comments; the inline comment is in hud.html + emotes.html for file scans).
+  Rules the repo already ignores (side-tab = the HA glossy key shadow, same as .db-choice; repeating stripes = the
+  lost-cell hatch + the chip pins; dark-glow = drop shadows) would show with --no-config. Intentional look.

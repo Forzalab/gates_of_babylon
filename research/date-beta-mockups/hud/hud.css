@@ -41,6 +41,8 @@
 .lv-heart-svg path.rim { fill: none; stroke: #fff; stroke-width: 7; stroke-linejoin: round; }
 .lv-heart-svg path.gloss { fill: #fff; opacity: .5; }
 .lv-num { color: #fff; font: 900 30px/1 var(--btn); letter-spacing: .01em; text-shadow: var(--g-ring); }
+/* white text on a heart: backed by the heart's own flat mid-band colour (#c42a82, 5.3:1) so a contrast checker sees what the eye sees */
+.lv-badge .lv-num, .lv-bulb .lv-num, .lv-bulb .lv-label, .hud-end.win .bigheart .lv-num { background-color: #c42a82; border-radius: 8px; padding: 0 4px; }
 
 /* segmented meter (both variants): one cell per love point. filled = glossy pink, new (+) = pale pink ring, lost (-) = dark hatch */
 .lv-cell { display: block; border-radius: 6px; background: var(--lv-empty); box-shadow: inset 0 2px 0 var(--lv-empty-in); }
@@ -100,8 +102,8 @@
 .lv-tell i { font-style: normal; width: 12px; height: 12px; border-radius: 50%; background: var(--pink); flex: none; }
 .lv-pop.minus .lv-tell i { background: var(--her); }
 /* A: tail up to the marker */
-.hud-a .lv-pop { top: calc(100% + 34px); left: calc(2.5px + var(--n) * (100% - 5px) / var(--goal) - 48px); }
-.hud-a .lv-delta::before { content: ''; position: absolute; left: 34px; top: -24px; border: 14px solid transparent; border-bottom: 16px solid var(--g-rim); }
+.lv-pop.at-a { left: 200px; top: 124px; }
+.lv-pop.at-a .lv-delta::before { content: ''; position: absolute; left: 34px; top: -24px; border: 14px solid transparent; border-bottom: 16px solid var(--g-rim); }
 
 /* ============ VARIANT B: the love thermometer, standing at Nanda's left (her heart, beside her). It rides with her:
    normal beats top 312 (bulb ends at 798, above the chip's pins at 804); choice beats top 20 (ends 506, above the raised chip). */
@@ -124,9 +126,8 @@
 .hud-b .lv-bulb .lv-label { position: relative; top: -10px; font: 900 18px/1 var(--btn); letter-spacing: .16em; color: #fff; text-shadow: var(--g-ring); }
 .hud-b .lv-bulb .lv-num { position: relative; top: -8px; font-size: 38px; }
 /* B pop: the delta pill points at the fill head from the left; the Telltale line hangs under it */
-.hud-b .lv-pop { right: calc(100% + 66px); bottom: calc(2.5px + var(--n) * (100% - 5px) / var(--goal)); transform: translateY(50%); }
-.hud-b .lv-delta::after { content: ''; position: absolute; right: -28px; top: 50%; transform: translateY(-50%); border: 14px solid transparent; border-left: 16px solid var(--g-rim); }
-.hud-b .lv-tell { position: absolute; right: 0; top: calc(100% + 22px); }
+.lv-pop.at-b { left: 1000px; top: 500px; }
+.lv-pop.at-b .lv-tell { position: absolute; right: 0; top: calc(100% + 22px); }
 /* B trail: the AND Line station sign, top-left (the gauge carries the score; the sign carries the route) */
 .hud-b-trail { position: absolute; left: 32px; top: 16px; z-index: 6; display: flex; align-items: center; gap: 16px; padding: 12px 24px 12px 20px;
   border: 4px solid var(--lv-rim); border-radius: 999px; background: var(--lv-panel); box-shadow: inset 0 0 0 3px #fff, 0 7px 0 var(--lv-edge); pointer-events: none; }
@@ -168,9 +169,9 @@
 .hud-end .kicker { margin: 0 0 8px; font: 800 30px/1 var(--cond); letter-spacing: .2em; }
 .hud-end.win .kicker { color: var(--magenta); }
 .hud-end.low .kicker { color: var(--lv-dark-hot); }
-.hud-end .bigheart { position: relative; width: 300px; height: 272px; display: grid; place-items: center; margin: 6px 0 4px; }
+.hud-end .bigheart { position: relative; width: 330px; height: 300px; display: grid; place-items: center; margin: 6px 0 4px; }
 .hud-end .bigheart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
-.hud-end .bigheart .lv-num { position: relative; top: -14px; font-size: 84px; }
+.hud-end .bigheart .lv-num { position: relative; top: -22px; font-size: 72px; }
 .hud-end.low .bigheart .lv-num { top: 4px; color: var(--lv-dark-hot); text-shadow: none; }
 .hud-end h2 { margin: 0; font: 900 88px/1.04 var(--btn); letter-spacing: -.005em; }
 .hud-end.win h2 { color: #5c0f3c; }
@@ -198,7 +199,7 @@
 .hub { max-width: 1760px; margin: 0 auto; padding: 48px 40px 80px; color: #ffe9f1; font: 500 22px/1.45 var(--cond); }
 .hub h1 { margin: 0 0 10px; font: 900 48px/1.1 var(--btn); color: #fff; }
 .hub h2 { margin: 40px 0 14px; font: 900 32px/1.1 var(--btn); color: #fff; }
-.hub p { margin: 0 0 12px; max-width: 70ch; color: #f3d7e3; }
+.hub p { margin: 0 0 12px; max-width: 56ch; color: #f3d7e3; }
 .hub a { color: #ffb3d6; }
 .hub .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
 .hub .tile { display: grid; gap: 8px; color: #ffe9f1; text-decoration: none; font: 700 20px/1.2 var(--cond); }

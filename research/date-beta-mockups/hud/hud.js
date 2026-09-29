@@ -44,7 +44,7 @@ const marker = () => `<span class="lv-marker" aria-hidden="true"><svg viewBox="0
 const cracked = `<svg viewBox="0 0 100 92" aria-hidden="true"><path d="${HEART} M50 17L42 36L56 48L45 62L50 88" /></svg>`;
 const tri = '<svg viewBox="0 0 26 30" aria-hidden="true"><path d="M3 3L23 15L3 27Z"/></svg>';
 const defs = `<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
-  <linearGradient id="lvHeartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f27fc0"/><stop offset=".45" stop-color="#e0409a"/><stop offset="1" stop-color="#b8287a"/></linearGradient>
+  <linearGradient id="lvHeartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ef66b2"/><stop offset=".27" stop-color="#c42a82"/><stop offset=".72" stop-color="#c42a82"/><stop offset="1" stop-color="#a31d6c"/></linearGradient>
   <linearGradient id="lvLowFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6b7d"/><stop offset="1" stop-color="#b0102c"/></linearGradient></defs></svg>`;
 
 // ---------------------------------------------------------------- the meter cells (1 cell = 1 love point)
@@ -81,7 +81,7 @@ function pop(delta) {
   if (!delta) return '';
   const plus = delta > 0;
   const icon = plus ? `<svg viewBox="0 0 100 92" aria-hidden="true"><path d="${HEART}"/></svg>` : cracked;
-  return `<div class="lv-pop ${plus ? 'plus' : 'minus'}" role="status"><b class="lv-delta">${icon}${plus ? '+' : '−'}${Math.abs(delta)}</b>
+  return `<div class="lv-pop ${plus ? 'plus' : 'minus'} at-${V.toLowerCase()}" role="status"><b class="lv-delta${plus ? '' : ' minus'}">${icon}${plus ? '+' : '−'}${Math.abs(delta)}</b>
     <span class="lv-tell"><i></i>She'll remember that.</span></div>`;
 }
 
@@ -91,7 +91,7 @@ function hudA(s) {
   return `<div class="hud-a" style="--goal:${GOAL};--n:${s.score}">
     <div class="lv-badge">${heartSvg()}<b class="lv-num">${pct(s.score)}</b></div>
     <span class="lv-label">LOVE</span>
-    <div class="lv-meter" role="meter" aria-label="Her heart" aria-valuemin="0" aria-valuemax="${GOAL}" aria-valuenow="${s.score}">${cells(s.score, s.delta).join('')}${marker()}${pop(s.delta)}</div>
+    <div class="lv-meter" role="meter" aria-label="Her heart" aria-valuemin="0" aria-valuemax="${GOAL}" aria-valuenow="${s.score}">${cells(s.score, s.delta).join('')}${marker()}</div>
     <span class="lv-goal${full}">${heartLine()}100%</span>
     <i class="lv-sep"></i>${trail(s)}</div>`;
 }
@@ -102,7 +102,7 @@ function hudB(s) {
   return `<div class="hud-b-trail"><span class="lv-label">ROUTE</span>${trail(s)}</div>
     <div class="hud-b" style="--goal:${GOAL};--n:${s.score}">
     <span class="lv-goal${full}">${heartLine()}100%</span>
-    <div class="lv-tube"><div class="lv-cells" role="meter" aria-label="Her heart" aria-valuemin="0" aria-valuemax="${GOAL}" aria-valuenow="${s.score}">${cells(s.score, s.delta).reverse().join('')}${marker()}${pop(s.delta)}</div></div>
+    <div class="lv-tube"><div class="lv-cells" role="meter" aria-label="Her heart" aria-valuemin="0" aria-valuemax="${GOAL}" aria-valuenow="${s.score}">${cells(s.score, s.delta).reverse().join('')}${marker()}</div></div>
     <div class="lv-bulb">${heartSvg()}<span class="lv-label">LOVE</span><b class="lv-num">${pct(s.score)}</b></div></div>`;
 }
 
@@ -160,7 +160,7 @@ root.innerHTML = `${defs}<div class="viewport${q.has('play') ? ' play' : ' rm'}"
   <div class="stage${st.card === 'goal' ? ' is-goal' : ''}" data-scare="${st.scare ?? 0}" data-hud="${V}" data-state="${S}">
     <img class="plate" src="plates/${st.plate}.jpg" alt="">
     ${st.card === 'win' || st.card === 'low' ? card : ''}
-    ${nanda(st)}${say(st)}${choices(st)}${hud}${st.card === 'goal' ? card : ''}
+    ${nanda(st)}${say(st)}${choices(st)}${hud}${st.hidden ? '' : pop(st.delta)}${st.card === 'goal' ? card : ''}
   </div>
   <div class="chrome"><a href="../../../index.html" title="Back to Logic mode">◂ LOGIC</a><button type="button" title="Fullscreen (F)">⛶ fullscreen</button><button type="button" title="Skip scene (Esc or S)">skip ▸▸</button></div>
 </div>`;
@@ -170,4 +170,21 @@ const stage = root.querySelector('.stage');
 const fit = () => { stage.style.transform = `translate(-50%, -50%) scale(${Math.min(innerWidth / 1920, innerHeight / 1080)})`; };
 fit();
 addEventListener('resize', fit);
-window.HUD_READY = document.fonts.ready.then(() => true);
+// the pop hangs off the fill head: A = under the ribbon, tail up; B = left of the tube, pointing at the marker. Placed after
+// fonts load (the meter's x depends on label widths). Stage px = (client px - stage origin) / scale.
+function placePop() {
+  const popEl = stage.querySelector('.lv-pop'), mk = stage.querySelector('.lv-marker');
+  if (!popEl || !mk) return;
+  const o = stage.getBoundingClientRect(), k = o.width / 1920, m = mk.getBoundingClientRect();
+  const cx = (m.left + m.width / 2 - o.left) / k, cy = (m.top + m.height / 2 - o.top) / k;
+  if (V === 'A') {
+    const rib = stage.querySelector('.hud-a').getBoundingClientRect();
+    popEl.style.left = `${cx - 48}px`;
+    popEl.style.top = `${(rib.bottom - o.top) / k + 30}px`;
+  } else {
+    const pill = popEl.querySelector('.lv-delta').getBoundingClientRect();
+    popEl.style.left = `${(m.left - o.left) / k - 14 - pill.width / k}px`;
+    popEl.style.top = `${cy - pill.height / k / 2}px`;
+  }
+}
+window.HUD_READY = document.fonts.ready.then(() => { placePop(); return true; });
