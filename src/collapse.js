@@ -32,9 +32,14 @@ addEventListener('pageshow', (e) => {
   running = false;
 });
 
+// App registers what to keep before Logic is left (the circuit, logicSave.js). Returns the unregister function.
+let leaveHook = null;
+export const onLeave = (fn) => { leaveHook = fn; return () => { if (leaveHook === fn) leaveHook = null; }; };
+
 export function collapse({ base = import.meta.env.BASE_URL } = {}) {
   if (running) return;
   running = true;
+  try { leaveHook?.(); } catch { /* saving is never fatal */ }
   const html = document.documentElement;
   const sfx = createLoader(SFX_MANIFEST, base);
   sfx.unlock(); // inside the click / key gesture, so the context may start

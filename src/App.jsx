@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { wordmarkProps } from './collapse.js'; // the ONLY way into Date mode (Figur collapse)
+import { wordmarkProps, onLeave } from './collapse.js';
+import { saveLogic, loadLogic, maxSuffix } from './logicSave.js'; // the ONLY way into Date mode (Figur collapse)
 import { ReactFlow, Background, useNodesState, ViewportPortal } from '@xyflow/react';
 import { canConnect, canAddSwitch, evaluate } from './sim.js';
 import { nodeTypes, pinYs, portGeom } from './nodes/index.jsx';
@@ -40,9 +41,13 @@ const VIEW = [
 ];
 
 // Dev-only test hook (stripped from the build): a harness may preset window.__GOB = { circuit, view }.
-const BOOT = import.meta.env.DEV ? window.__GOB : null;
+// Otherwise: the circuit saved when the Figur collapse left for Date (logicSave.js), if this tab has one.
+const store = () => { try { return sessionStorage; } catch { return null; } };
+const BOOT = (import.meta.env.DEV ? window.__GOB : null) ?? loadLogic(store());
 
-let nextWire = 1, nextNode = 1, nextToast = 1;
+let nextWire = 1 + maxSuffix(Object.keys(BOOT?.circuit?.wires ?? {}), /^w(\d+)$/);
+let nextNode = 1 + maxSuffix(Object.keys(BOOT?.circuit?.nodes ?? {}), /_(\d+)$/);
+let nextToast = 1;
 
 // Per-figure spans: each figure gets its own width fit against ref3 (see theme.css, table figures).
 // Glyph spans are aria-hidden; one visually hidden run carries the whole word ("01", not "0 1").
@@ -52,6 +57,10 @@ const fig = (v) => [<span key="t" className="sr">{String(v)}</span>,
 export default function App() {
   const [circuit, setCircuit] = useState(BOOT?.circuit ?? START);
   const [view, setView, onViewChange] = useNodesState(BOOT?.view ?? VIEW);
+  // The Figur wordmark leaves for Date: save this circuit first, for the way back ("◂ LOGIC").
+  const latest = useRef(null);
+  latest.current = { circuit, view };
+  useEffect(() => onLeave(() => saveLogic(store(), latest.current.circuit, latest.current.view)), []);
   const [showGrid, setShowGrid] = useState(false);
   const [reject, setReject] = useState(null); // inline error beside the failed port (GOV.UK error message)
   const [edgeSel, setEdgeSel] = useState(() => new Set()); // controlled wire selection, so Backspace can delete a wire
