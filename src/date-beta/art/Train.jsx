@@ -1,5 +1,6 @@
 // Train interior, day (composition + palette from Tony's CC0 ref 7a955d70: big window left, red bench right).
-// The hanging ad (中吊り) is the umeboshi echo: 「NOT Sweet™」 「すっぱい！」 SOUR! by Figur.
+// The hanging ad (中吊り) echoes the bento pick (adFor: props.ad on train:0, props.adCopy on train:1): umeboshi (default) =
+// 「NOT Sweet™」 「すっぱい！」 SOUR!; tamagoyaki = 「YES Sweet™」 「甘い！」 SWEET!. Both by Figur, same frame.
 // props.zoom: the camera pushes in on the ad (smooth 1.6 s; reduced motion = hard cut to the crop).
 // Straps sway on the stepped clock: 4 poses, 500 ms each (8 fps grid, 4 ticks a pose). Reduced motion: still.
 import { rng, useStep } from './util.js';
@@ -42,7 +43,74 @@ function Strap({ x, deg }) {
   );
 }
 
-function Ad() {
+// Rounded square spiral: the rolled layers on a tamagoyaki's cut face. Box (cx, cy, w, h), one lap = 4 sides, step s.
+function spiral(cx, cy, w, h, s, rr = 7) {
+  let l = cx - w / 2, r = cx + w / 2, t = cy - h / 2, b = cy + h / 2;
+  const pts = [[l, b]];
+  while (r - l > s * 2.2 && b - t > s * 2.2) {
+    pts.push([r, b], [r, t]); l += s; pts.push([l, t]); b -= s; pts.push([l, b]); r -= s; t += s;
+  }
+  pts.push([cx, b]);
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length - 1; i++) {
+    const [[ax, ay], [px, py], [bx, by]] = [pts[i - 1], pts[i], pts[i + 1]];
+    const k1 = Math.min(rr, Math.hypot(px - ax, py - ay) / 2), k2 = Math.min(rr, Math.hypot(bx - px, by - py) / 2);
+    const u = (x, y, k) => { const n = Math.hypot(x, y) || 1; return [x / n * k, y / n * k]; };
+    const [ux, uy] = u(px - ax, py - ay, k1), [vx, vy] = u(bx - px, by - py, k2);
+    d += ` L${(px - ux).toFixed(1)} ${(py - uy).toFixed(1)} Q${px} ${py} ${(px + vx).toFixed(1)} ${(py + vy).toFixed(1)}`;
+  }
+  const [ex, ey] = pts[pts.length - 1];
+  return `${d} L${ex} ${ey}`;
+}
+
+// One cut slice of tamagoyaki, face-on: seared skin, pale cut face, the rolled spiral, a gloss.
+function Slice({ cx, cy, w = 76, h = 88, deg = 0 }) {
+  return (
+    <g transform={`rotate(${deg} ${cx} ${cy})`}>
+      <rect x={cx - w / 2} y={cy - h / 2} width={w} height={h} rx="16" fill="#f2b21e" stroke="#9a5a12" strokeWidth="3" />
+      <rect x={cx - w / 2 + 6} y={cy - h / 2 + 6} width={w - 12} height={h - 12} rx="11" fill="#ffe27a" />
+      <path d={spiral(cx, cy + 1, w - 20, h - 20, 7, 9)} fill="none" stroke="#e9a414" strokeWidth="3" strokeLinecap="round" />
+      <ellipse cx={cx - w / 4} cy={cy - h / 3 + 2} rx="10" ry="5" fill="#fffbe6" opacity=".8" />
+    </g>
+  );
+}
+
+// The sweet echo (props.ad = 'tamagoyaki'): same Figur series, same frame and grid as the umeboshi ad.
+// 「YES Sweet™」 is the buffer gate (triangle, no bubble): input passes straight through. 「甘い！」 SWEET!
+function AdTamago() {
+  return (
+    <g transform="translate(720 118)">
+      <rect width="660" height="310" fill="#fff8ea" stroke="#b0123e" strokeWidth="6" />
+      {/* left: a tamagoyaki roll, two slices cut off it, on a lacquer tray */}
+      <rect x="3" y="3" width="228" height="304" fill="#d92b6e" />
+      <text x="117" y="78" textAnchor="middle" className="ad-ama">甘</text>
+      <path d="M86 150 L100 96 L114 124 L130 88 L144 118 L160 84 L174 116 L190 90 L200 120 L216 100 L214 150Z" fill="#3f8f3a" />
+      <path d="M22 234 H212 L200 256 C160 264 74 264 34 256Z" fill="#1d2b22" />
+      <rect x="96" y="116" width="112" height="116" rx="22" fill="#f2b21e" stroke="#9a5a12" strokeWidth="3" />
+      <path d="M104 146 C132 136 170 136 200 146 M104 190 C132 180 170 180 200 190" stroke="#c9801a" strokeWidth="5" fill="none" strokeLinecap="round" />
+      <Slice cx={62} cy={190} deg={-5} />
+      <Slice cx={128} cy={196} deg={4} />
+      {/* centre: YES Sweet™, the buffer-gate brand mark */}
+      <text x="250" y="120" className="ad-not">YES</text>
+      <path transform="translate(434 60)" d="M20 44 C4 30 -6 20 -6 10 C-6 -2 8 -8 20 4 C32 -8 46 -2 46 10 C46 20 36 30 20 44Z" fill="#d92b6e" />
+      <text x="252" y="196" className="ad-sweet">Sweet<tspan className="ad-tm" dx="8" dy="-46">™</tspan></text>
+      <text x="252" y="232" className="ad-small">甘い玉子焼き ¥180</text>
+      <g transform="translate(252 250)">
+        <path d="M0 0 L40 20 L0 40Z" fill="none" stroke="#b0123e" strokeWidth="5" strokeLinejoin="round" />
+        <line x1="40" y1="20" x2="56" y2="20" stroke="#b0123e" strokeWidth="5" strokeLinecap="round" />
+        <text x="66" y="34" className="ad-figur">Figur</text>
+      </g>
+      {/* right: 甘い！ vertical + SWEET! */}
+      <text x="606" y="24" className="ad-ama-jp" writingMode="tb">甘い！</text>
+      <g transform="rotate(-8 500 268)">
+        <rect x="428" y="242" width="144" height="54" rx="8" fill="#d92b6e" />
+        <text x="500" y="282" textAnchor="middle" className="ad-sour">SWEET!</text>
+      </g>
+    </g>
+  );
+}
+
+function AdUme() {
   return (
     <g transform="translate(720 118)">
       <rect width="660" height="310" fill="#fff8ea" stroke="#b0123e" strokeWidth="6" />
@@ -75,12 +143,25 @@ function Ad() {
   );
 }
 
+export const AD_LABEL = {
+  umeboshi: 'An umeboshi ad hangs from the ceiling: NOT Sweet, SOUR.',
+  tamagoyaki: 'A tamagoyaki ad hangs from the ceiling: YES Sweet, SWEET.',
+};
+
+// Which ad hangs: props.ad if the beat names it (train:0), else read it off props.adCopy (train:1 only sets the copy,
+// and `vary` props do not carry to the next beat). Anything else = the umeboshi default.
+export function adFor(props = {}) {
+  if (props.ad === 'tamagoyaki' || props.ad === 'umeboshi') return props.ad;
+  return /SWEET|甘/i.test(props.adCopy ?? '') ? 'tamagoyaki' : 'umeboshi';
+}
+
 export default function Train({ props, rm }) {
   const pose = useStep(4, 4, !rm);
   const deg = [0, 1.4, 0, -1.4][pose];
+  const ad = adFor(props);
   return (
-    <div className={`art train cam${props.zoom ? ' zoom' : ''}`}>
-      <svg viewBox="0 0 1920 1080" role="img" aria-label="Inside a train on a sunny day. An umeboshi ad hangs from the ceiling: NOT Sweet, SOUR.">
+    <div className={`art train cam${props.zoom ? ' zoom' : ''}`} data-ad={ad}>
+      <svg viewBox="0 0 1920 1080" role="img" aria-label={`Inside a train on a sunny day. ${AD_LABEL[ad]}`}>
         <defs>
           <linearGradient id="tr-sky" x1="0" y1="200" x2="0" y2="640" gradientUnits="userSpaceOnUse">
             <stop offset="0" stopColor="#3a6cae" /><stop offset=".55" stopColor="#9dbfe2" /><stop offset="1" stopColor="#f6dcb6" />
@@ -123,7 +204,7 @@ export default function Train({ props, rm }) {
         {/* strap bar, straps, the hanging ad */}
         <rect x="0" y="56" width="1920" height="12" rx="6" fill="#b9c1c1" />
         <line x1="770" y1="66" x2="770" y2="120" stroke="#b9c1c1" strokeWidth="4" /><line x1="1330" y1="66" x2="1330" y2="120" stroke="#b9c1c1" strokeWidth="4" />
-        <Ad />
+        {ad === 'tamagoyaki' ? <AdTamago /> : <AdUme />}
         {[250, 480, 1830].map((x) => <Strap key={x} x={x} deg={deg} />)}
       </svg>
     </div>

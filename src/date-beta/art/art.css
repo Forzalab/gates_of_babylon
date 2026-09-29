@@ -108,3 +108,7 @@
 .cafe .sign { font: 400 96px/1 'Yellowtail', cursive; fill: #fdf0dc; text-anchor: middle; }
 .cafe .sign-sub { font: 700 24px/1 var(--cond); letter-spacing: .2em; fill: #e8c46a; text-anchor: middle; text-transform: uppercase; }
 .cafe .menu { font: 700 34px/1 var(--mono); fill: #f4eef6; }
+
+/* train, tamagoyaki ad (Train.jsx AdTamago): the sweet echo, same Figur series as the umeboshi ad */
+.train .ad-ama { font: 900 64px/1 var(--jp-serif); fill: #fff8ea; }
+.train .ad-ama-jp { font: 900 70px/1 var(--jp); fill: #d92b6e; stroke: #ffe100; stroke-width: 9px; paint-order: stroke; letter-spacing: 2px; }
