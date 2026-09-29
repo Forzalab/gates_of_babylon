@@ -15,7 +15,7 @@
 .underpass .up-orson { font: 400 76px/1 'Bangers', var(--cond); letter-spacing: .06em; fill: #fff; }
 .underpass .up-orson-sub { font: 700 20px/1 var(--cond); fill: #dfe9ff; letter-spacing: .04em; }
 .underpass .up-xor { font: 900 italic 50px/1 'Inter Tight', var(--cond); fill: #f3e2c4; }
-.underpass .up-xor-sub { font: 400 22px/1 var(--cond); fill: #c9a878; letter-spacing: .06em; }
+.underpass .up-xor-sub { font: 400 22px/1 var(--cond); fill: #c9a878; letter-spacing: .04em; }
 .underpass .up-buffer { font: 400 44px/1 'Bangers', var(--cond); letter-spacing: .08em; fill: #fff; }
 .underpass .up-buffer-sub { font: 700 22px/1 var(--cond); fill: #2a3036; }
 
