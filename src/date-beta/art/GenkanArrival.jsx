@@ -2,7 +2,7 @@
 //   BG   = slate tataki, the raised wood step (agari-kamachi) with its lip, a landing, then a hallway that falls into
 //          the dark toward a shoji at the end. Shoe cabinet on the right wall, umbrella stand + empty coat pegs on the
 //          left. One paper pendant is the only light. Her shoes: 4 pairs, heels to the step, toes on a tape line.
-//   PROP = men's slippers set out on the step, facing the door (for you), and a tiny floor shrine at the cabinet end.
+//   PROP = men's slippers set out on the step, toes into the house (for you), and a tiny floor shrine at the cabinet end.
 // The shrine frames a logic circuit. PLACEHOLDER: a fixed A,B -> NAND -> OUT. Later = the player's last Logic-mode circuit.
 // props.insert: false (wide) | true (camera crops in on slippers + shrine; smooth 1.4 s, reduced motion = hard cut).
 //
@@ -64,13 +64,13 @@ function hull(ps) {
   return lo.slice(0, -1).concat(up.slice(0, -1));
 }
 
-// Footprint of a shoe/slipper (toe toward the door = -z). Returns [x, z, t] with t in -1 (toe) .. 1 (heel).
-function footprint(cx, cz, w, l, taper = 0.35, n = 28) {
+// Footprint of a shoe/slipper. dir 1 = toe toward the door (-z), dir -1 = toe into the house (+z). Returns [x, z, t] with t in -1 (toe) .. 1 (heel).
+function footprint(cx, cz, w, l, taper = 0.35, n = 28, dir = 1) {
   return Array.from({ length: n }, (_, i) => {
     const a = (i / n) * Math.PI * 2, c = Math.cos(a), s = Math.sin(a);
     const t = Math.sign(s) * Math.abs(s) ** 0.8;
     const k = t < 0 ? 1 - taper * t * t : 1 - 0.12 * t * t;
-    return [cx + Math.sign(c) * Math.abs(c) ** 0.7 * (w / 2) * k, cz + t * (l / 2), t];
+    return [cx + Math.sign(c) * Math.abs(c) ** 0.7 * (w / 2) * k, cz + dir * t * (l / 2), t];
   });
 }
 
@@ -111,19 +111,19 @@ function Shoe({ x, z, kind, fill, side, y = 0, w = 0.09, l = 0.24 }) {
   );
 }
 
-// Men's slipper on the step, toe toward the door. Body #4a5f86, toe cover #33466a, outline #22304a.
-function Slipper({ x, z, y = STEP_H, w = 0.115, l = 0.285 }) {
-  const fp = footprint(x, z, w, l, 0.08);
+// Men's slipper on the step, toe INTO the house (guest custom: step out of your shoes straight into them). Body #4a5f86, toe cover #33466a, outline #22304a.
+function Slipper({ x, z, y = STEP_H, w = 0.115, l = 0.285, dir = -1 }) {
+  const fp = footprint(x, z, w, l, 0.08, 28, dir);
   const sole = fp.map(([px, pz]) => P(px, y, pz));
   const bed = fp.map(([px, pz]) => P(px, y + 0.022, pz));
   // toe cover: the front 45 % of the outline, arched up to 5 cm at the throat (a U over the foot)
   const TH = -0.2, hMax = 0.04, yb = y + 0.022;
   const front = fp.filter((p) => p[2] < TH).sort((p, q) => Math.atan2(p[1] - z, p[0] - x) - Math.atan2(q[1] - z, q[0] - x));
-  const zT = z + TH * (l / 2);
+  const zT = z + dir * TH * (l / 2);
   const ends = [front[0], front.at(-1)].sort((p, q) => p[0] - q[0]);
   const [L, R] = ends.map(([px, pz]) => P(px, yb, pz));
   const arch = P(x, yb + 2 * hMax, zT);                   // quadratic control: the curve peaks at hMax
-  const bedBehind = P(x, yb, zT + 0.05);
+  const bedBehind = P(x, yb, zT + dir * 0.05);
   const edge = front.map(([px, pz]) => P(px, yb, pz));
   const toeFirst = edge[0][0] < edge.at(-1)[0] ? edge : [...edge].reverse();   // left end -> around the toe -> right end
   return (
@@ -131,7 +131,7 @@ function Slipper({ x, z, y = STEP_H, w = 0.115, l = 0.285 }) {
       <path d={contact(fp, y, 1.15, 0.03)} fill="#000" opacity=".5" filter="url(#gk-soft)" />
       <path d={path2(hull([...sole, ...bed]))} fill={PAL.slipLine} />
       <path d={path2(bed)} fill={PAL.slipBody} stroke={PAL.slipLine} strokeWidth="1.2" />
-      <path d={path2(footprint(x, z + l * 0.12, w * 0.7, l * 0.66, 0.08, 20).map(([px, pz]) => P(px, yb + 0.001, pz)))} fill="#566c95" />
+      <path d={path2(footprint(x, z + dir * l * 0.12, w * 0.7, l * 0.66, 0.08, 20, dir).map(([px, pz]) => P(px, yb + 0.001, pz)))} fill="#566c95" />
       <path d={`M${pt(L)}Q${pt(arch)} ${pt(R)}Q${pt(bedBehind)} ${pt(L)}Z`} fill="#161e30" />
       <path d={`M${toeFirst.map(pt).join('L')}Q${pt(arch)} ${pt(toeFirst[0])}Z`} fill={PAL.slipToe} stroke={PAL.slipLine} strokeWidth="1.2" strokeLinejoin="round" />
       <path d={`M${pt(L)}Q${pt(arch)} ${pt(R)}`} fill="none" stroke="#6b82ad" strokeWidth="1.3" />
@@ -485,7 +485,7 @@ export default function GenkanArrival({ props }) {
           <Lamp />
         </g>
         <g className="gk-prop">
-          {/* men's slippers on the step, toes toward the door = set out for a guest */}
+          {/* men's slippers on the step, toes into the house = set out for a guest */}
           {ROOM.SLIPPERS.x.map((x) => <Slipper key={x} x={x} z={ROOM.SLIPPERS.z} />)}
           <Shrine />
         </g>

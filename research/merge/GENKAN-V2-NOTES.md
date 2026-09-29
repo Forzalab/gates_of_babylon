@@ -88,7 +88,7 @@ const PR = (x, y, z) => { const d = CAM_R.z - z;         // depth grows toward t
 - In the wide shot the slippers are small (~30 px each): it is an honest 2.7 m view, and the insert carries them.
   They read as slippers mainly from the throat arch. A lighter insole would help if they need more contrast.
 - **Slipper direction:** Japanese custom sets a guest's slippers with toes pointing **into** the house. The spec asks
-  for toes to the door, and the code keeps that. Flipping them is a one-line change in `Slipper` (mirror the
+  for toes into the house (guest custom; flipped by alt after v2), and the code keeps that. Flipping them is a one-line change in `Slipper` (mirror the
   footprint's t).
 - The left wall is a large plain plane on purpose (the house is too tidy). If it feels empty on the projector, a
   mirror on the left wall at z 2.4..3.2 is the obvious addition.
