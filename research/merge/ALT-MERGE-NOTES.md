@@ -26,3 +26,13 @@ Proposal file: `research/merge/alt-scenes.json` = main's scenes.json @ 7f544ec +
 - Does main's Door fallback read OK after alt's stairs beat (two doors in a row)? If not: alt's stairs replaces BG-D1 in `door` and `escape-win`/`leave`.
 - The genkan pair: OK to recolour the slippers / empty spot so they match?
 - Order of the merge: main merges alt's branch, or alt merges main's (a merge commit, no rebase)? One PR either way (Tony's rule).
+
+## Tony's rulings (Tue 09:20 PT)
+- **Two platforms = same station, dusk → night.** Naan scene = dusk station (main's naan-platform, art id `naan-platform`), ADORE ME blackout, then alt's night `platform` on the same canopy (ad dark or reading NANDA). Alt reuses main's station geometry after Tony picks the dusk variant.
+- **Scenes only in the PR.** date-lab stays on alt's branch. So main does NOT merge alt's whole branch; it takes these paths from alt (`git checkout origin/claude/date-beta-alt-spec-review-4gdzab -- <path>`):
+  - `src/date-beta/art/{Platform,Underpass,ApartmentExt,Stairs,Rain,GenkanArrival}.jsx`, `src/date-beta/art/alt.css`
+  - `research/merge/alt-scenes.json` → becomes `src/date-beta/scenes.json`
+  - `src/date-beta/art/index.js`: add the 5 ids (`platform, underpass, apartment, stairs, 'genkan-in'`) to main's ART (union, by hand)
+  - `src/date-beta-alt.test.js`: rewrite to the new `loadScenes(data,{manifest,art})` contract
+  - optional: `research/date-beta-demo/scene-0*.png`, `scene-10*.png` (alt's shots)
+- **Port fixes needed on main's engine** (main's OrSpans only reds an explicit `{OR}`): Platform sign text `"NEXT: ―― OR ――"` → `"NEXT: ―― {OR} ――"`; Underpass ad `"OR-SON"` → `"{OR}-SON"`. alt's `.or-svg` class → main's `db-or-svg`.
