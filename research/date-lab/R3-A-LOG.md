@@ -38,3 +38,25 @@ window holds more than 2 swaps (R1 rule: typing/glitch <= 2 glyph swaps per seco
   label >= 34 px, lines <= 12 words, no per-key retype.
 - **Self-critique**: menu and her eyes now share the frame cleanly; the ECU face is still my flatter drawing, and the
   "4th-wall" count in the demo stays high (Tony lifted the cap).
+
+## menu-h4-r3 · The Draft Folder (NEW hybrid: menu-h1 object edit x menu-3 cold open x menu-h2 pour, horror 4)
+- **School**: Kurosawa's *Pulse* (the machine in your hand is how she gets in) x *Unfriended* screen-horror x the CLAMP
+  candle table. **Theme**: *she is on your phone*: the wall-break becomes in-world, no game cursor, no menu chrome.
+- **What it does** (`menu3/Draft.jsx`, pure beats in `menu3/draft.js`): MC's phone lies face-up on the tarot cloth between
+  her card (VI THE CUP, Figur Arcana) and the candle + the empty "III" place. Chat with "Nanda ♡", carrier "Figur 5G",
+  clock 12:00. **Cold open (0-3 s)**: his unsent reply "It's late. I should go home." sits in the composer, header says
+  "typing…" in her red, her dots bubble steps; "go home." goes red-selected (1.25 s), vanishes, "stay." types in HER red
+  (2.75 s). MC: "Wait. I didn't type that." **3.0 s** the Drafts folder slides up: two drafts (pink "Just one cup.", purple
+  "It's late. Goodnight.", 48 px), "auto-send in N s ♡". **Timer**: the send bar drains and its spout pours into the pink
+  draft (fill grows); the candle only marks the pips. **Pink / timeout**: the pink bubble sends, "Delivered ♡", 1 s later
+  "Read 12:00" ("You didn't say no. It sent itself." / "Read at twelve. I always am."). **Purple**: the bubble sends,
+  "! Not delivered" at 0.5 s, 334 ms purple bleed, her hair-pin goes through the glass at 1 s (crack lines), "Oh. It
+  bounced. Bad signal on my stairs." **Replay**: the picked draft is greyed and struck, "Message already sent"; the phone is
+  nailed to the cloth by her pin through its bottom-right corner; the last bubble stays in the thread; timer runs. Pink
+  already sent -> she chunk-edits the purple draft into "Just one cup." (menu-3-r3 script).
+- **RM**: no slide, pour = 5 held one-second blocks, spout hidden, edits = <= 3 hard cuts held 1 s, dots hold, status lines
+  cut straight to their end state.
+- **Tests**: composer edit ends before the folder opens, <= 2 swaps/s on every run, pour monotone, RM blocks, status beats
+  (Delivered -> Read 12:00, Not delivered -> pin), brand + "Message already sent" present, lines <= 12 words.
+- **Self-critique**: reads instantly as "she's on his phone" and needs no UI cursor; the thread area is a bit empty while the
+  timer runs (by design, the eye goes to the drafts), and the replay pin through the corner reads more "stuck" than "nailed".

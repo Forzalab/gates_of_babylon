@@ -22,6 +22,7 @@ import FrameFinds from './camera2/FrameFinds.jsx';
 import ThirdCup2 from './closeup2/ThirdCup2.jsx';
 import CupTypes3 from './menu3/CupTypes3.jsx';
 import Ddlc3 from './menu3/Ddlc3.jsx';
+import DraftFolder from './menu3/Draft.jsx';
 
 const A = (id, track, title, theme, horror, Component) => ({ id, track, title, theme, horror, builder: 'A', Component });
 
@@ -50,4 +51,5 @@ export const VARIANTS = [
   // ---- round 3 ----
   A('menu-h1-r3', 'menu', 'The Cup That Types r3: her hand retypes your card, word by word', 'hybrid menu-1 x menu-3: tarot candle table x DDLC live edit: she rewrites your card while the candle burns (<= 2 swaps/s, her own hand)', 4, CupTypes3),
   A('menu-3-r3', 'menu', 'DDLC r3: she rewrites your line, then the menu; the ECU keeps it readable', 'DDLC / Monika x Funny Games x meta-horror: the choice UI (and your dialogue) is her territory', 5, Ddlc3),
+  A('menu-h4-r3', 'menu', 'The Draft Folder: she edits your reply on your own phone', 'hybrid menu-h1 x menu-3 x menu-h2: Pulse / Unfriended screen-horror x CLAMP candle table: she is on your phone (the wall-break is in-world)', 4, DraftFolder),
 ];

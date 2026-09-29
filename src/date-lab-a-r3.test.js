@@ -76,3 +76,32 @@ test('menu-3-r3: the lens beat keeps the menu full size above the box (no scale-
   for (const l of lines('menu3/Ddlc3.jsx')) assert.ok(words(l) <= 12, l);
   assert.ok(!/\bretype\(/.test(src('menu3/Ddlc3.jsx')));
 });
+
+test('menu-h4-r3: the draft edit lands before the folder opens, <= 2 swaps/s; pour is monotone; RM pour = 5 held blocks', async () => {
+  const d = await import('./date-lab/a/menu3/draft.js');
+  const c = d.composer(false);
+  assert.equal(textAt(c, 0), d.MC_FROM);
+  assert.equal(textAt(c, 99999), "It's late. I should stay.");
+  assert.ok(endOf(c) < d.SHOW && d.SHOW < d.HOLD);
+  assert.ok(swapsSafe([c]));
+  let prev = -1;
+  for (let k = 0; k <= 1; k += 0.01) { const p = d.pourAt(k); assert.ok(p >= prev); prev = p; }
+  const blocks = new Set(); for (let k = 0; k <= 1; k += 0.01) blocks.add(d.pourAt(k, true));
+  assert.ok(blocks.size <= 6, 'RM: whole-second blocks only');
+  for (const [run, dis] of [[1, []], [2, ['pink']], [2, ['purple']]]) { const s = d.draftScript(run, dis, false); assert.ok(swapsSafe([s.pink, s.purple])); }
+  assert.equal(textAt(d.draftScript(2, ['pink'], false).purple, 99999), OPTIONS.pink.text, 'pink sent: she rewrites the other draft into pink');
+});
+
+test('menu-h4-r3: pink/timeout = Delivered then Read 12:00; purple bounces then her pin; lines <= 12 words, Figur brand', async () => {
+  const d = await import('./date-lab/a/menu3/draft.js');
+  assert.equal(d.sentAt('timeout', 0).status, 'delivered');
+  assert.equal(d.sentAt('timeout', 1200).status, 'read');
+  assert.equal(d.STATUS.read, 'Read 12:00');
+  assert.equal(d.sentAt('purple', 600).status, 'fail');
+  assert.ok(!d.sentAt('purple', 600).pin && d.sentAt('purple', 1000).pin);
+  assert.equal(d.sentAt(null, 0), null);
+  const s = src('menu3/Draft.jsx');
+  assert.match(s, /Figur/);
+  assert.match(s, /Message already sent/);
+  for (const l of lines('menu3/Draft.jsx')) assert.ok(words(l) <= 12, l);
+});

@@ -127,6 +127,21 @@ const SHOTS = {
     await open(true); await wait(1700); await snap('rm-mc-line-emptied');
     await page.waitForSelector('.ecu', { timeout: 15000 }); await wait(300); await snap('rm-ecu');
   },
+  'menu-h4-r3': async (page, snap, open) => {
+    await open();
+    await wait(600); await snap('1-cold-open-mc-draft');
+    await page.waitForSelector('.composer mark.hsel'); await wait(100); await snap('2-her-red-selection-in-his-draft');
+    await page.waitForSelector('.composer .hers:not(:empty)'); await wait(700); await snap('3-stay-in-her-red');
+    await page.waitForSelector('.drafts'); await wait(2600); await snap('4-drafts-pour-into-pink');
+    await page.waitForSelector('.st.delivered'); await wait(200); await snap('5-timeout-delivered');
+    await page.waitForSelector('.st.read'); await wait(1500); await snap('6-read-12');
+    await page.keyboard.press('r'); await wait(2500); await snap('7-replay-pink-sent-nailed');
+    await open(); await wait(4800); await page.keyboard.press('2'); await wait(120); await snap('8-purple-bleed');
+    await page.waitForSelector('.inscreen'); await wait(600); await snap('9-not-delivered-pin-in-screen');
+    await page.keyboard.press('r'); await wait(2400); await snap('10-replay-purple-sent-nailed');
+    await open(true); await wait(1300); await snap('rm-cold-open');
+    await wait(4000); await snap('rm-drafts');
+  },
 };
 
 // camera pieces: freeze the clock at ?t=<ms> and shoot (deterministic frames)

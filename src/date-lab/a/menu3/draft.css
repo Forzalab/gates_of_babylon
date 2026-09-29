@@ -1,0 +1,101 @@
+/* menu-h4-r3 "The Draft Folder": MC's phone face-up on the tarot cloth. Stage px. Text on the phone >= 40 px for the back row. */
+.draft .bg { filter: blur(9px) brightness(.4) saturate(.8); }
+.draft .dim { opacity: 1; }
+.draft .cloth { opacity: 1; top: 520px; }
+.draft .her { opacity: 1; }
+.draft .her .bust { filter: brightness(.6) sepia(.3) saturate(1.1) blur(1px); }
+.draft.k-purple .her .bust { filter: brightness(.45) saturate(.4) blur(1px); }
+
+/* her card, face-up on her side of the cloth */
+.draft .hercard { position: absolute; left: 150px; top: 440px; width: 240px; height: 404px; transform: rotate(-9deg); border-radius: 14px;
+  box-shadow: 0 0 0 3px #ffd8e8, 0 0 50px 8px rgba(255, 95, 162, .45), 0 22px 30px rgba(0, 0, 0, .6); }
+.draft .hercard svg { width: 100%; height: 100%; display: block; border-radius: 14px; }
+.draft .hercard .print { position: absolute; left: 0; right: 0; bottom: 8px; text-align: center; font: 400 26px/1 'Yellowtail', cursive; color: #b0123e; }
+
+/* candle = pips only; the empty third place */
+.draft .candlewrap { left: 1390px; top: 150px; }
+.draft .third { position: absolute; left: 1610px; top: 560px; width: 230px; height: 360px; transform: perspective(900px) rotateX(34deg) rotate(7deg);
+  border: 5px dashed rgba(214, 169, 63, .55); border-radius: 18px; background: rgba(20, 4, 14, .35); display: grid; place-items: center; }
+.draft .third span { font: 400 64px/1 Georgia, serif; color: #d6a93f; opacity: .7; letter-spacing: .12em; }
+
+/* the phone */
+.draft .phone { position: absolute; left: 650px; top: 26px; width: 620px; height: 1030px; padding: 20px; border-radius: 66px; transform: rotate(-1.5deg);
+  background: linear-gradient(160deg, #2c3354, #151a30); box-shadow: 0 0 0 4px #0b0d18, 0 40px 60px rgba(0, 0, 0, .7), 0 0 90px rgba(255, 150, 200, .18); z-index: 5; }
+.draft .screen { position: relative; width: 100%; height: 100%; border-radius: 48px; overflow: hidden; background: #fff4f9; color: #2a1830;
+  display: flex; flex-direction: column; font-family: var(--cond); }
+.draft .status { display: flex; justify-content: space-between; padding: 18px 40px 6px; font: 700 28px/1 var(--cond); color: #3a2a44; }
+.draft .status span { font-weight: 400; letter-spacing: .04em; }
+.draft .head { display: flex; align-items: center; gap: 18px; padding: 12px 28px 16px; border-bottom: 2px solid #f2d3e2; background: #fff; }
+.draft .avatar { width: 74px; height: 74px; border-radius: 50%; background: radial-gradient(circle at 50% 38%, #fff 0 26%, #e9ebf6 27% 60%, #aeb3d3 61%);
+  position: relative; box-shadow: 0 0 0 3px #ff9cc8; }
+.draft .avatar i { position: absolute; right: 8px; top: 10px; width: 16px; height: 16px; border-radius: 50%; background: var(--pink); box-shadow: 0 0 8px var(--pink); }
+.draft .who { display: flex; flex-direction: column; gap: 6px; }
+.draft .who b { font: 700 42px/1 var(--cond); }
+.draft .who em { font: italic 400 30px/1 var(--cond); color: #8a7a90; }
+.draft .who em.typ { color: var(--her); font-weight: 700; }
+.draft .thread { position: relative; flex: 1; padding: 24px 26px; display: flex; flex-direction: column; gap: 14px; }
+.draft .bub { margin: 0; max-width: 440px; padding: 16px 24px; border-radius: 30px; font: 400 42px/1.12 var(--cond); }
+.draft .bub.hers { align-self: flex-start; background: #ffe0ee; border-bottom-left-radius: 8px; color: #6a1f4f; }
+.draft .bub.dotsbub { padding: 18px 26px; }
+.draft .thread .tstamp { align-self: center; font: 700 24px/1 var(--cond); letter-spacing: .08em; color: #b09aae; }
+.draft .dots { display: flex; gap: 12px; }
+.draft .dots i { width: 18px; height: 18px; border-radius: 50%; background: #e6a6c4; }
+.draft .dots i.on { background: var(--her); }
+.draft .sent { position: relative; align-self: flex-end; display: flex; flex-direction: column; align-items: flex-end; gap: 8px; }
+.draft .bub.mine { border-bottom-right-radius: 8px; color: #fff; font-weight: 700; }
+.draft .bub.mine.pink { background: var(--pink); }
+.draft .bub.mine.purple { background: var(--purple); }
+.draft .bub.mine.failed { opacity: .75; }
+.draft .st { font: 700 32px/1 var(--cond); color: #c2306f; }
+.draft .st.fail { color: var(--her); }
+.draft .st.read { color: #7a2a52; }
+.draft .inscreen { position: absolute; left: -137px; top: -43px; width: 280px; height: 280px; transform: rotate(180deg); pointer-events: none; z-index: 4; }
+.draft .inscreen .crack { position: absolute; left: -29px; top: 85px; width: 224px; height: 224px; }
+.draft .inscreen .bigpin { position: absolute; inset: 0; width: 280px; height: 280px; filter: drop-shadow(0 14px 8px rgba(0, 0, 0, .6)) drop-shadow(0 0 18px rgba(240, 36, 63, .5)); }
+
+/* cold open: MC's composer, his words in ink, hers in her red */
+.draft .composer { display: flex; align-items: center; gap: 14px; margin: 0 20px 26px; padding: 20px 24px; border-radius: 30px; background: #fff;
+  border: 4px solid var(--her); box-shadow: 0 0 0 3px rgba(240, 36, 63, .25); font: 400 42px/1.15 var(--cond); min-height: 150px; }
+.draft .composer .ctxt { flex: 1; }
+.draft .composer .hers { color: var(--her); font-weight: 700; }
+.draft .sendbtn { flex: none; width: 64px; height: 64px; border-radius: 50%; display: grid; place-items: center; background: #d9d2ea; color: #fff; font-size: 30px; }
+.draft .caret { display: inline-block; width: 5px; height: 1em; margin-left: 4px; vertical-align: -.12em; background: var(--her); animation: dr-blink 1s step-end infinite; }
+@keyframes dr-blink { 50% { opacity: 0; } }
+.draft.is-rm .caret { animation: none; }
+
+/* the drafts folder: the auto-send bar drains and pours into the pink draft */
+.draft .drafts { margin: 0 18px 22px; padding: 16px 18px 20px; border-radius: 30px; background: #fff; box-shadow: 0 -6px 20px rgba(120, 40, 80, .12);
+  display: flex; flex-direction: column; gap: 14px; animation: dr-up 500ms cubic-bezier(.3, .7, .2, 1) both; }
+.draft.is-rm .drafts { animation: none; }
+@keyframes dr-up { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
+.draft .dhead { display: flex; justify-content: space-between; align-items: baseline; padding: 0 8px; }
+.draft .dhead b { font: 700 30px/1 var(--cond); letter-spacing: .12em; color: #8a7a90; }
+.draft .dhead span { font: 700 34px/1 var(--cond); color: #c2306f; }
+.draft .sendbar { position: relative; height: 22px; border-radius: 999px; background: #f6e4ee; overflow: visible; }
+.draft .sendbar i { position: absolute; inset: 0; border-radius: 999px; background: linear-gradient(90deg, #ff9ccc, var(--pink)); transform-origin: 0 50%; }
+.draft .sendbar .spout { position: absolute; top: 12px; width: 14px; height: 44px; margin-left: -7px; border-radius: 0 0 8px 8px; background: var(--pink); opacity: .9; }
+.draft.is-rm .sendbar .spout { display: none; }
+.draft .draftrow { position: relative; display: flex; align-items: center; gap: 20px; min-height: 118px; padding: 16px 22px; border-radius: 24px; text-align: left;
+  cursor: pointer; overflow: hidden; font: 700 48px/1.08 var(--cond); background: #fff; transition: transform 160ms ease; }
+.draft .draftrow.pink { border: 5px solid var(--pink); color: #b0245f; }
+.draft .draftrow.purple { border: 5px solid var(--purple); color: #5a36c4; }
+.draft .draftrow .fill { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255, 95, 162, .18), rgba(255, 95, 162, .42)); transform-origin: 0 50%; pointer-events: none; }
+.draft .draftrow .k { position: relative; flex: none; width: 52px; height: 52px; border-radius: 50%; display: grid; place-items: center; font: 700 28px/1 var(--cond); color: #fff; }
+.draft .draftrow.pink .k { background: var(--pink); } .draft .draftrow.purple .k { background: var(--purple); }
+.draft .draftrow .dtxt { position: relative; }
+.draft .draftrow:not(:disabled):hover, .draft .draftrow:focus-visible { transform: translateX(8px); outline: none; }
+.draft .draftrow.off { background: #eee8ee; border-color: #b8aab8; color: #8a7a8a; cursor: not-allowed; }
+.draft .draftrow.off .dtxt { text-decoration: line-through; text-decoration-color: var(--her); text-decoration-thickness: 5px; }
+.draft .draftrow.off .k { background: #b8aab8; }
+.draft .draftrow .note { position: absolute; right: 18px; bottom: 8px; font: italic 700 26px/1 var(--cond); color: var(--her); }
+.draft.picked-purple .draftrow.purple { background: #efe8ff; }
+.draft.picked-pink .draftrow.pink { background: #ffe1f0; }
+
+/* replay: the phone is nailed to the cloth through its top-right corner */
+.draft .nail { position: absolute; left: 1132px; top: 640px; width: 400px; height: 400px; z-index: 8; pointer-events: none; }
+.draft .nail .bigpin { width: 400px; height: 400px; filter: drop-shadow(0 16px 10px rgba(0, 0, 0, .7)) drop-shadow(0 0 22px rgba(240, 36, 63, .55)); }
+
+/* dialogue: a narrow box on her side of the table, so the phone stays clear */
+.draft .a-line { left: 40px; transform: none; width: 580px; bottom: 36px; min-height: 120px; padding: 26px 32px; font-size: 40px;
+  background: rgba(20, 6, 16, .9); border-color: rgba(214, 169, 63, .55); animation: none; }
+.draft .a-line b.who { left: 28px; }
