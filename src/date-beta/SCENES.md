@@ -59,3 +59,9 @@ Rooftop sets `bento` with a no-timer pick. Skipping the rooftop defaults it to `
 - No number key on the button. Keys 1/2 still pick, but nothing is drawn.
 - Label centred, 58px (was 44px left-aligned).
 - Label = action fragment. No trailing period. Applies to every choice.
+
+## Branch map (debug, Tony's test tool)
+- `~` (Shift+Backquote) or `?debug` opens it. Esc, `~` or the Close button closes it. Timer and auto beats freeze; game keys do nothing.
+- Click a pink/purple pill (an edge) to play that choice from its beat. Only branching choices get a pill: different scenes, or a flag something reads (`bento`). Stay/leave and Back to start stay thin lines.
+- If the branch reads an earlier pick you have not made (e.g. `bento`), a dialog asks for it. "Remember this choice at reload" keeps picks in `localStorage` (`dateBeta.debug.<schema hash>`); off by default. Reset picks clears them.
+- A normal boot (no `?debug`, no `~`) never reads saved picks. Code: `debug.js` (pure), `Tree.jsx`, `jumpTo` in engine.js.

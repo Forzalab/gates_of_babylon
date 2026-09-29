@@ -2,13 +2,17 @@
 // Controls: click / Space / Enter / -> = next, 1 / 2 = pick a choice, Esc or S = skip scene, F = fullscreen, P = pause.
 // A choice beat with `timer` counts down (frozen while paused or the tab is hidden) and auto-picks at 0.
 // URL: ?scene=<id> starts there (&beat=<n> steps n beats in), ?still forces reduced motion (same as prefers-reduced-motion).
+// Secret: ~ (Shift+Backquote) or ?debug opens the branch map (Tree.jsx). While it is open the timer and auto beats freeze
+// and game keys are swallowed. Only the map ever reads its saved picks; a normal boot starts fresh.
 import { createRoot } from 'react-dom/client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './theme.js';
 import data from './scenes.json';
-import { loadScenes, start, next, skip, choose, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
+import { loadScenes, start, next, skip, choose, jumpTo, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
 import { ART } from './art/index.js';
 import { Say, Choices } from './Say.jsx';
+import { Tree } from './Tree.jsx';
+import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
 import { createLoader } from './assets.js';
 import './beta.css';
@@ -17,6 +21,7 @@ const params = new URLSearchParams(location.search);
 const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
+const DEBUG = createSession(() => localStorage, SCENES, data.flags ?? {});
 
 // Sound: cue name -> asset id via assets.json (beep if the file is missing). Also exposed for tests + read as a caption.
 const ASSETS = createLoader(manifest, import.meta.env.BASE_URL);
@@ -52,6 +57,10 @@ function Player() {
   const [full, setFull] = useState(false);
   const [paused, setPaused] = useState(false);
   const [left, setLeft] = useState(null); // timer seconds left on this beat, null = no timer
+  const [tree, setTree] = useState(() => bootDebug(params, DEBUG));
+  const treeRef = useRef(tree);
+  treeRef.current = tree;
+  const frozen = paused || tree;
   const since = useRef(0);
   const k = useFit();
   const scene = SCENES[pos.s];
@@ -63,10 +72,13 @@ function Player() {
     cue(beat.sfx);
     document.documentElement.dataset.beat = `${beat.scene}:${beat.index}`;
     setLeft(beat.timer && !pos.done ? beat.timer : null);
-    if (beat.auto == null || pos.done) return undefined;
+  }, [pos, beat]);
+  // Auto beats wait while the map is open (the full wait restarts when it closes).
+  useEffect(() => {
+    if (beat.auto == null || pos.done || tree) return undefined;
     const t = setTimeout(() => setPos((p) => next(SCENES, p, RM)), beat.auto);
     return () => clearTimeout(t);
-  }, [pos, beat]);
+  }, [pos, beat, tree]);
 
   // Timer: step on real elapsed time; paused or hidden tab = frozen. At 0, pick once (no pick if nothing is enabled).
   const hasTimer = left != null;
@@ -76,10 +88,10 @@ function Player() {
     const id = setInterval(() => {
       const now = performance.now(), dt = now - last;
       last = now;
-      setLeft((l) => (l == null ? l : tick(l, dt, paused || document.hidden)));
+      setLeft((l) => (l == null ? l : tick(l, dt, frozen || document.hidden)));
     }, 100);
     return () => clearInterval(id);
-  }, [hasTimer, paused]);
+  }, [hasTimer, frozen]);
   useEffect(() => {
     if (left !== 0 || pos.done) return;
     setLeft(null);
@@ -101,6 +113,8 @@ function Player() {
 
   useEffect(() => {
     const onKey = (e) => {
+      if (e.code === 'Backquote' && e.shiftKey) { e.preventDefault(); if (!e.repeat) setTree((v) => !v); return; }
+      if (treeRef.current) return; // the map owns the keyboard (its own handler does Esc + Tab)
       if (e.repeat) return;
       if (e.key === 'Escape' || e.key === 's' || e.key === 'S') { e.preventDefault(); skipScene(); }
       else if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') { e.preventDefault(); advance(true); }
@@ -119,6 +133,15 @@ function Player() {
     : (() => { const Art = ART[v]; return <Art props={beat.props} rm={RM} onStart={() => advance(true)} />; })());
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
+  const closeTree = useCallback(() => setTree(false), []);
+  const jump = useCallback((edge, choices) => {
+    ASSETS.unlock();
+    const { warn, ...p } = jumpTo(SCENES, edge, choices, RM);
+    if (warn) console.warn(`date-beta debug: ${warn}`);
+    setPaused(false);
+    setPos(p);
+    setTree(false);
+  }, []);
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <div className="stage" style={{ transform: `translate(-50%, -50%) scale(${k})` }} data-scene={scene.id} data-scare={beat.scare}>
@@ -135,6 +158,7 @@ function Player() {
         {canFull && <button type="button" onClick={stop(toggleFull)} title="Fullscreen (F)">{full ? '✕ exit full' : '⛶ fullscreen'}</button>}
         <button type="button" onClick={stop(skipScene)} title="Skip scene (Esc or S)">skip ▸▸</button>
       </div>
+      {tree && <Tree scenes={SCENES} decl={data.flags ?? {}} sess={DEBUG} k={k} here={scene.id} onJump={jump} onClose={closeTree} />}
       <div className="sr" aria-live="polite">{beat.sfx ? `[sound: ${beat.sfx}]` : ''}</div>
     </div>
   );

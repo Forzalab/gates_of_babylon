@@ -20,7 +20,7 @@ export function createLoader(manifest, base = '/') {
   const bytes = new Map(), buffers = new Map(), images = new Map();
   let ctx = null;
   const unlock = () => {
-    if (ctx) return;
+    if (ctx) { if (ctx.state === 'suspended') ctx.resume?.().catch(() => {}); return; }
     try { ctx = new (globalThis.AudioContext || globalThis.webkitAudioContext)(); } catch { return; }
     for (const [id, ab] of bytes) ctx.decodeAudioData(ab).then((b) => buffers.set(id, b), () => {});
   };

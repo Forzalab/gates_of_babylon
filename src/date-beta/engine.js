@@ -290,9 +290,20 @@ export const enabled = (choice, flags = {}) => matches(choice.if, flags);
 export function choose(scenes, pos, i, rm = false) {
   const c = pos.done ? null : scenes[pos.s].beats[pos.b].choices?.[i];
   if (!c || !enabled(c, pos.flags)) return pos;
+  return take(scenes, pos, c, rm);
+}
+function take(scenes, pos, c, rm) {
   const flags = c.set ? { ...pos.flags, ...c.set } : pos.flags;
   const go = resolveGo(c.go, flags);
   return go ? start(scenes, { rm, at: go, flags }) : next(scenes, { ...pos, flags }, rm);
+}
+// Debug tree: stand on the edge's beat ({ s, b, i }) with these flags and take choice i, exactly as choose() would,
+// except the choice's own `if` is not checked (a warning is returned instead of a silent no-op).
+export function jumpTo(scenes, edge, flags = {}, rm = false) {
+  const c = scenes[edge.s]?.beats[edge.b]?.choices?.[edge.i];
+  if (!c) throw new Error(`jumpTo: no choice ${edge.s}/${edge.b}/${edge.i}`);
+  const pos = take(scenes, { s: edge.s, b: edge.b, done: false, flags: { ...flags } }, c, rm);
+  return enabled(c, flags) ? pos : { ...pos, warn: `choice "${c.plain}" has an if that these flags fail (taken anyway)` };
 }
 // Esc: leave this scene; the flags land on the skipped scene's declared defaults.
 export const skip = (scenes, pos, rm = false) => (pos.done ? pos
