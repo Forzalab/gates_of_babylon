@@ -28,6 +28,8 @@ export const ROOM = {
   CAB: { x0: 1.05, z0: 0.3, z1: 2.0, h: 0.9 },   // shoe cabinet on the right wall, on the tataki
   LAMP: { x: 0, y: 1.9, z: 1.6, r: 0.2 },         // paper pendant, the only light
   TAPE_Z: 1.72,       // her tape line (toe line of her shoes)
+  DOOR: { x0: -0.45, x1: 0.45, h: 2.0 },          // front door in the z = 0 plane (behind this camera; for the reverse shot)
+  SLIPPERS: { x: [0.3, 0.46], z: 2.2 },           // slipper centres on the step (main's "empty spot")
 };
 export const PAL = {
   plaster: '#bea37e', plasterDim: '#6a5a45', plasterDark: '#4e4234',
@@ -328,6 +330,7 @@ function LeftWall() {
         <path key={z} d={line([-W, 1.74, z], [-W + 0.1, 1.76, z])} stroke="#3e2a18" strokeWidth={0.03 * S(z)} strokeLinecap="round" />
       ))}
       <path d={poly([[-W, 1.1, 1.0], [-W, 1.24, 1.0], [-W, 1.24, 1.08], [-W, 1.1, 1.08]])} fill="#e9e2d2" stroke="#8a7a62" strokeWidth="1.5" />
+      {[1.02, 1.055].map((z) => <path key={z} d={poly([[-W, 1.14, z], [-W, 1.2, z], [-W, 1.2, z + 0.02], [-W, 1.14, z + 0.02]])} fill="#cfc6b2" stroke="#9a8a70" strokeWidth="1" />)}
       <g transform={`translate(${f1(ux)} ${f1(uy)}) scale(${(us / 100).toFixed(4)})`}>
         <ellipse cx="0" cy="1" rx="17" ry="3.4" fill="#000" opacity=".45" />
         <ellipse cx="4" cy="3" rx="14" ry="2.2" fill="#6f7c8e" opacity=".35" />
@@ -483,8 +486,7 @@ export default function GenkanArrival({ props }) {
         </g>
         <g className="gk-prop">
           {/* men's slippers on the step, toes toward the door = set out for a guest */}
-          <Slipper x={0.3} z={STEP_Z + 0.2} />
-          <Slipper x={0.46} z={STEP_Z + 0.2} />
+          {ROOM.SLIPPERS.x.map((x) => <Slipper key={x} x={x} z={ROOM.SLIPPERS.z} />)}
           <Shrine />
         </g>
         <rect className="gk-dim" width="1920" height="1080" fill="url(#gk-dim)" pointerEvents="none" />
