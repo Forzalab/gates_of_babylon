@@ -27,27 +27,39 @@ const space = async (page) => { await page.waitForTimeout(1300); await page.keyb
 const shot = async (page, name) => { const f = path.join(OUT, `${TAG}-${name}.png`); await page.screenshot({ path: f }); files.push(f); console.log(path.basename(f)); };
 const box = (page, sel) => page.evaluate((s) => { const r = document.querySelector(s)?.getBoundingClientRect(); return r && [r.x, r.y, r.right, r.bottom].map(Math.round); }, sel);
 
-// rooftop: beat 0 (no box), beat 1 (choice), beat 2 (plain box), beat 6 (choice + timer)
+// Walk to beat `id`: Space on plain beats and reaction frames, the first (pink) choice on choice beats.
+async function walk(page, id) {
+  for (let i = 0; i < 20; i++) {
+    await page.waitForTimeout(1300);
+    if (await page.evaluate((v) => document.documentElement.dataset.beat === v, id)) return page.waitForTimeout(500);
+    if (await page.$('.db-choices button')) await page.click('.db-choices button'); else await page.keyboard.press('Space');
+  }
+  throw new Error(`never reached ${id}`);
+}
+
+// rooftop: beat 0 (no box), beat 1 (choice), beat 2 (plain box), beat 6 (choice + timer), + beat 3 if it has choices
 let p = await open('rooftop');
 await shot(p, 'rooftop0');
 await space(p); await at(p, 'rooftop:1');
 await shot(p, 'rooftop1-choice');
 console.log('  lifted box', await box(p, '.db-say'), 'sign', await box(p, '.rooftop .sign-head'));
-await p.getByRole('button', { name: 'Take the tamagoyaki' }).click(); await at(p, 'rooftop:2');
+await p.getByRole('button', { name: 'Take the tamagoyaki' }).click(); await walk(p, 'rooftop:2');
 await shot(p, 'rooftop2-plain');
 console.log('  plain box', await box(p, '.db-say'));
-for (const b of [3, 4, 5, 6]) { await space(p); await at(p, `rooftop:${b}`); }
+await walk(p, 'rooftop:3');
+if (await p.$('.db-choices')) await shot(p, 'rooftop3-choice');
+await walk(p, 'rooftop:6');
 await shot(p, 'rooftop6-choice');
 // on into the train with the tamagoyaki pick
-await p.getByRole('button', { name: 'Stay a minute' }).click(); await at(p, 'train:0');
+await p.getByRole('button', { name: 'Stay a minute' }).click(); await walk(p, 'train:0');
 await shot(p, 'train0-tamagoyaki');
-await space(p); await at(p, 'train:1'); await p.waitForTimeout(1600);
+await walk(p, 'train:1'); await p.waitForTimeout(1600);
 await shot(p, 'train1-zoom-tamagoyaki');
 await p.close();
 
 // train, default pick (umeboshi)
 p = await open('train');
-await space(p); await at(p, 'train:1'); await p.waitForTimeout(1600);
+await walk(p, 'train:1'); await p.waitForTimeout(1600);
 await shot(p, 'train1-zoom-umeboshi');
 await p.close();
 

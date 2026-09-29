@@ -42,6 +42,7 @@ function trainBeats(bento) {
   p = choose(scenes, p, i);
   const out = [];
   while (!p.done && out.length < 2) {
+    if (p.react) { p = next(scenes, p); continue; } // a scored pick's reaction frame: still the picking beat on screen
     const b = beatView(beatAt(scenes, p), p.flags);
     if (b.scene === 'train') out.push(b);
     const c = scenes[p.s].beats[p.b].choices;
