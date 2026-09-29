@@ -1,15 +1,8 @@
 /* date-beta: one 1920x1080 stage scaled to fit any screen (projector). Art is authored in stage px.
    Motion rule: drawn things step on an 8 fps grid and hold every pose >= 500 ms; camera + fades are smooth.
-   .rm (prefers-reduced-motion or ?still) turns every animation/transition into a hard cut. */
-:root {
-  --pink: #ff5fa2;   /* toward her */
-  --purple: #8a5cf6; /* leave */
-  --her: #f0243f;    /* her red: every OR */
-  --ink: #f4eef6;
-  --jp: 'Hiragino Kaku Gothic StdN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', 'IPAGothic', sans-serif;
-  --jp-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK JP', 'IPAMincho', 'IPAPMincho', serif;
-  --cond: 'Roboto Condensed', 'Arial Narrow', sans-serif;
-}
+   .rm (prefers-reduced-motion or ?still) turns every animation/transition into a hard cut.
+   Tokens (fonts, colours) live in tokens.css (loaded by theme.js for chrome AND art). Chrome classes are `db-` prefixed.
+   Look = HA (UXUI-SPEC R2b + R2c): candy dialogue chip, glossy choice pills, OR rule C (dark scrim). */
 * { box-sizing: border-box; }
 html, body { margin: 0; height: 100%; background: #000; overflow: hidden; }
 body { font-family: var(--cond); color: var(--ink); }
@@ -22,31 +15,131 @@ body { font-family: var(--cond); color: var(--ink); }
 .enter-fade { animation: enter-fade 700ms ease-out both; }
 @keyframes enter-fade { from { opacity: 0; } to { opacity: 1; } }
 
-/* the OR rule */
-.or { color: var(--her); position: relative; left: 1px; top: 1px; text-shadow: 2px 0 0 rgba(90, 0, 18, .55); }
-.or-svg { fill: var(--her); }
+/* ---------- the OR rule (C): OR = bold #FF6B7D, +1 px offset. On a light surface it gets its own mini scrim chip. ---------- */
+.db-or { display: inline-block; position: relative; left: 1px; top: 1px; padding: 0 .1em; margin: 0 .03em; line-height: 1.05;
+  border-radius: .16em; background: var(--scrim); color: var(--or-on-dark); font-weight: 700; text-shadow: none; }
+.has-or .db-or { background: none; padding: 0; margin: 0; }
 
-/* ---------- dialogue ---------- */
-.say { position: absolute; left: 50%; bottom: 56px; transform: translateX(-50%); width: 1380px; min-height: 150px;
-  background: rgba(14, 8, 20, .86); border: 2px solid rgba(255, 255, 255, .22); border-radius: 18px;
-  padding: 34px 56px 30px; display: flex; align-items: center; gap: 28px; pointer-events: none;
-  animation: say-in 260ms ease-out both; }
-.say p { margin: 0; font: 400 50px/1.25 var(--cond); letter-spacing: .005em; }
-.say .speaker { position: absolute; top: -26px; left: 48px; font: 700 30px/1 var(--cond); letter-spacing: .08em;
-  padding: 10px 22px; border-radius: 999px; background: #d9e6ff; color: #0e1630; }
-.say.who-nanda .speaker { background: var(--pink); color: #2a0615; }
-.say.narration p { font-style: italic; color: #e6deea; }
+/* ---------- dialogue: the candy chip (R2b §5). Opaque pink box, magenta rim + white inner stroke, pins = shape only ---------- */
+.db-say { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); width: 1400px; min-height: 190px;
+  padding: 58px 150px 50px 78px; border: 5px solid var(--rim); border-radius: 18px; color: var(--box-ink); pointer-events: none;
+  background:
+    radial-gradient(circle at 0 50%, var(--edge) 0 20px, transparent 21px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cpath d='M60 78 C40 62 38 46 50 42 C56 40 60 46 60 50 C60 46 64 40 70 42 C82 46 80 62 60 78Z' fill='%23d6337f' fill-opacity='.045'/%3E%3C/svg%3E") 0 0 / 120px 120px,
+    var(--box);
+  box-shadow: inset 0 0 0 3px #fff, 0 10px 0 var(--edge); animation: say-in 260ms ease-out both; }
+.db-say .pins { position: absolute; left: 110px; right: 110px; height: 18px;
+  background: repeating-linear-gradient(90deg, var(--edge) 0 4px, #d4cbe0 4px 22px, var(--edge) 22px 26px, transparent 26px 96px); }
+.db-say .pins.top { top: -22px; } .db-say .pins.bot { bottom: -22px; }
+.db-say .who { position: absolute; top: -30px; left: 46px; z-index: 3; padding: 10px 26px 9px; border: 4px solid #fff; border-radius: 999px;
+  background: var(--magenta); color: #fff; box-shadow: 0 5px 0 var(--edge); font: 700 36px/1 var(--cond); letter-spacing: .02em; }
+.db-say.who-mc .who { background: #bfe3ff; color: #10233d; }
+.db-say .line { margin: 0; font: 400 52px/1.3 var(--cond); letter-spacing: .005em; overflow-wrap: anywhere; }
+.db-say.narration { padding-top: 46px; }
+.db-say.narration .line { font-style: italic; color: #5a2a50; }
+.db-say .next { position: absolute; right: 34px; bottom: 18px; font: 400 30px/1 var(--cond); color: var(--rim); }
 @keyframes say-in { from { opacity: 0; } to { opacity: 1; } }
+/* a line with a marked {OR}: hard-cut to the scrim box (no fade exists, so RM is the same) */
+.db-say.has-or { animation: none; background: var(--scrim); color: var(--scrim-ink); border-color: var(--her);
+  box-shadow: inset 0 0 0 3px #3a0d1c, 0 10px 0 var(--edge); }
+.db-say.has-or .line, .db-say.has-or.narration .line { color: var(--scrim-ink); }
+.db-say.has-or .db-or { color: var(--or-on-dark); }
+.db-say.has-or .next { color: var(--or-on-dark); }
+.db-say.has-or .pins { background: repeating-linear-gradient(90deg, var(--scrim) 0 4px, #c890a8 4px 22px, var(--scrim) 22px 26px, transparent 26px 96px); }
+
+/* ---------- scare (dread) per beat: 0 sweet, 1 uneasy, 2 hers. The OR box gets heavier with it. ---------- */
+[data-scare="1"] .db-say::after { content: ''; position: absolute; inset: 14px 16px; border: 3px dashed rgba(106, 31, 79, .45);
+  border-radius: 10px; pointer-events: none; }
+[data-scare="1"] .db-say { border-color: #9c1458; }
+[data-scare="1"] .db-say.has-or { border-color: var(--her); box-shadow: inset 0 0 0 3px #3a0d1c, 0 12px 0 #8b0f2c; }
+[data-scare="1"] .db-say.has-or::after { border-color: rgba(255, 107, 125, .35); }
+[data-scare="2"] .db-say { --box: #ffd6e6; --box-ink: #2a0714; border-color: var(--her); box-shadow: inset 0 0 0 3px #fff, 0 12px 0 #8b0f2c; }
+[data-scare="2"] .db-say .who { background: var(--her-deep); border-color: #ffd6e6; box-shadow: 0 5px 0 #8b0f2c; }
+[data-scare="2"] .db-say.has-or { border-width: 8px; box-shadow: inset 0 0 0 3px #5a0a1c, 0 14px 0 #8b0f2c, 0 0 0 6px var(--scrim); }
+[data-scare="2"] .db-say.has-or .db-or { text-decoration: underline 4px var(--her); text-underline-offset: 8px; }
+
+/* ---------- choices: glossy candy pills (R2c). Pink = toward, purple = leave. Text wraps, clamped to 2 lines. ---------- */
+.stage:has(.db-choices) .db-say { bottom: 318px; }
+.db-choices { position: absolute; left: 150px; right: 150px; bottom: 70px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 64px; z-index: 5; }
+.db-choice { position: relative; isolation: isolate; display: flex; align-items: center; justify-content: center; min-width: 0; min-height: 150px;
+  padding: 22px 48px 26px; border: 0; border-radius: 999px; cursor: pointer; text-align: center; color: #fff;
+  font: 900 58px/1.08 var(--btn); letter-spacing: .01em; text-shadow: var(--g-ring); background: var(--g-pink);
+  box-shadow: inset 0 0 0 3px var(--g-pink-edge), inset 0 -6px 0 rgba(90, 8, 50, .28), 0 0 0 9px var(--g-rim),
+    0 0 0 11px var(--g-rim-edge), 0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(58, 10, 38, .32); }
+/* highlight band: kept thin + faint so wrapped white text on the top line stays readable */
+.db-choice::before { content: ''; position: absolute; left: 7%; right: 7%; top: 6%; height: 26%; border-radius: 999px; z-index: -1;
+  pointer-events: none; background: linear-gradient(180deg, rgba(255, 255, 255, .55), rgba(255, 255, 255, 0)); }
+.db-choice .line { min-width: 0; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2;
+  line-clamp: 2; overflow: hidden; }
+.db-choice.purple { background: var(--g-purple);
+  box-shadow: inset 0 0 0 3px var(--g-purple-edge), inset 0 -6px 0 rgba(30, 10, 80, .3), 0 0 0 9px var(--g-rim),
+    0 0 0 11px var(--g-rim-edge), 0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(30, 10, 60, .32); }
+/* rule C on a choice: dark body, the side colour stays on the rim + key so pink/purple still reads */
+.db-choice.has-or { background: var(--g-dark); color: var(--scrim-ink); text-shadow: none; }
+.db-choice.has-or::before { background: linear-gradient(180deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, 0)); }
+.db-choice.pink.has-or { box-shadow: inset 0 0 0 7px var(--pink), 0 0 0 9px var(--g-rim), 0 0 0 11px var(--g-rim-edge),
+  0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(26, 7, 16, .4); }
+.db-choice.purple.has-or { box-shadow: inset 0 0 0 7px var(--purple), 0 0 0 9px var(--g-rim), 0 0 0 11px var(--g-rim-edge),
+  0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(26, 7, 16, .4); }
+.db-choice:hover, .db-choice:focus-visible { outline: 6px solid var(--edge); outline-offset: 16px; }
+.db-choice:active { transform: translateY(8px); filter: brightness(.9); }
+[data-scare="2"] .db-choice { outline: 4px solid var(--scrim); }
+
 .nexthint { position: absolute; right: 44px; bottom: 18px; font: 700 26px/1 var(--cond); letter-spacing: .1em;
   color: rgba(255, 255, 255, .55); text-shadow: 0 1px 2px #000; pointer-events: none; }
 
 /* ---------- chrome (outside the stage, never scaled) ---------- */
-.chrome { position: fixed; top: 10px; right: 10px; display: flex; gap: 8px; z-index: 10; opacity: .4; transition: opacity .2s; }
-.chrome:hover, .chrome:focus-within { opacity: 1; }
-.chrome button { font: 700 14px/1 var(--cond); letter-spacing: .06em; color: #fff; background: rgba(0, 0, 0, .55);
-  border: 1px solid rgba(255, 255, 255, .35); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
-.chrome button:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.chrome { position: fixed; top: 10px; right: 10px; display: flex; gap: 8px; z-index: 10; }
+.chrome button, .chrome a { font: 700 14px/1 var(--cond); letter-spacing: .06em; color: #fff; background: #000;
+  border: 1px solid rgba(255, 255, 255, .6); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
+.chrome a { display: inline-block; text-decoration: none; }
+.chrome button:focus-visible, .chrome a:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 /* ---------- reduced motion: everything is a hard cut ---------- */
 .rm *, .rm *::before, .rm *::after { animation: none !important; transition: none !important; }
+
+/* beat contract: manifest-id bg/sprite layers, choice timer, pause, disabled (if fails) choices */
+.db-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.db-sprite { position: absolute; left: 50%; bottom: 0; max-height: 90%; transform: translateX(-50%); }
+.db-timer { position: absolute; top: -64px; left: 50%; transform: translateX(-50%); min-width: 2.4em; text-align: center; font: 700 40px/1 var(--cond, sans-serif); color: #fff; text-shadow: 0 2px 6px #000; }
+.db-paused { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); padding: 8px 20px; background: #000a; color: #fff; font: 700 32px/1 var(--cond, sans-serif); }
+.db-choice:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ---------- debug branch map (~ or ?debug). Own 1920x1080 layer, scaled like the stage. ---------- */
+.db-tree { position: fixed; inset: 0; z-index: 50; background: rgba(26, 7, 16, .94); cursor: default; }
+.db-tree-stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; }
+.db-tree-head { position: absolute; left: 60px; right: 60px; top: 40px; display: flex; align-items: center; gap: 24px; }
+.db-tree-head h2 { margin: 0 auto 0 0; font: 700 44px/1 var(--cond); letter-spacing: .14em; color: var(--scrim-ink); }
+.db-tree-picks { display: flex; gap: 10px; }
+.db-tree-chip { padding: 8px 16px; border-radius: 999px; background: var(--box); color: var(--box-ink); font: 700 22px/1 var(--mono); }
+.db-tree-chip.off { background: none; color: rgba(255, 233, 241, .5); border: 2px dashed rgba(255, 233, 241, .3); }
+.db-remember { display: flex; align-items: center; gap: 10px; font: 700 24px/1 var(--cond); color: var(--scrim-ink); cursor: pointer; }
+.db-remember input { width: 26px; height: 26px; accent-color: var(--pink); cursor: pointer; }
+.db-tree-btn { padding: 12px 22px; border-radius: 999px; border: 3px solid var(--g-rim); background: var(--g-dark); color: var(--scrim-ink);
+  font: 700 24px/1 var(--cond); letter-spacing: .04em; cursor: pointer; }
+.db-tree-btn:hover, .db-tree-btn:focus-visible, .db-remember:focus-within { outline: 4px solid var(--pink); outline-offset: 4px; }
+.db-tree-hint { position: absolute; left: 60px; top: 108px; margin: 0; font: 400 24px/1 var(--cond); color: rgba(255, 233, 241, .7); }
+.db-tree-lines { position: absolute; inset: 0; pointer-events: none; }
+.db-tree-lines path { fill: none; stroke: rgba(255, 233, 241, .35); stroke-width: 3; }
+.db-tree-lines path.br { stroke-width: 5; }
+.db-tree-lines path.br.pink { stroke: var(--pink); }
+.db-tree-lines path.br.purple { stroke: var(--purple); }
+.db-tree-node { position: absolute; transform: translate(-50%, -50%); padding: 11px 18px; border-radius: 999px; white-space: nowrap;
+  background: var(--g-dark); color: var(--scrim-ink); border: 3px solid rgba(255, 233, 241, .55); font: 400 18px/1.1 var(--mono);
+  text-align: center; z-index: 1; }
+.db-tree-node.here { border-color: var(--or-on-dark); box-shadow: 0 0 0 5px rgba(255, 107, 125, .35); }
+.db-tree-edge { position: absolute; transform: translate(-50%, -50%); z-index: 2; max-width: 142px; padding: 7px 14px 8px; border: 0;
+  border-radius: 999px; cursor: pointer; text-align: center; color: #fff; font: 900 17px/1.1 var(--btn); text-shadow: var(--g-ring);
+  background: var(--g-pink); box-shadow: inset 0 0 0 2px var(--g-pink-edge), 0 0 0 4px var(--g-rim), 0 5px 0 3px var(--g-rim-edge); }
+.db-tree-edge.purple { background: var(--g-purple); box-shadow: inset 0 0 0 2px var(--g-purple-edge), 0 0 0 4px var(--g-rim), 0 5px 0 3px var(--g-rim-edge); }
+.db-tree-edge:hover, .db-tree-edge:focus-visible { outline: 4px solid var(--or-on-dark); outline-offset: 6px; }
+.db-tree-edge:active { transform: translate(-50%, calc(-50% + 3px)); filter: brightness(.9); }
+.db-ask-scrim { position: absolute; inset: 0; z-index: 5; background: rgba(26, 7, 16, .6); display: grid; place-items: center; }
+.db-ask { width: 1180px; padding: 56px 72px 48px; border: 5px solid var(--rim); border-radius: 18px; background: var(--box); color: var(--box-ink);
+  box-shadow: inset 0 0 0 3px #fff, 0 10px 0 var(--edge); display: grid; justify-items: center; gap: 30px; }
+.db-ask-kicker { margin: 0; font: 700 28px/1 var(--cond); letter-spacing: .12em; text-transform: uppercase; color: var(--magenta); }
+.db-ask h3 { margin: 0; font: 700 64px/1 var(--mono); }
+.db-ask-opts { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; padding: 12px 20px 22px; }
+.db-ask .db-remember { color: var(--box-ink); }

@@ -1,0 +1,9 @@
+
+http://localhost:3100/?coach=c
+  [clipped-overflow-container] div.app clips a positioned child
+    → A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip.
+  [clipped-overflow-container] div.react-flow.light clips a positioned child
+    → A clipping container (overflow hidden or clip) wrapping an absolutely-positioned child cuts off tooltips, menus, and popovers that need to escape. Let the overflow be visible, or move the positioned layer out of the clip.
+
+2 anti-patterns found.
+exit=2

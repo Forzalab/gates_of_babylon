@@ -1,24 +1,46 @@
-// Say.jsx: the dialogue box + the OR rule (Tony edits 2): every "OR" on screen renders in her red, offset 1px.
-export const orParts = (text) => text.split(/(OR)/).filter(Boolean).map((t) => ({ t, or: t === 'OR' }));
+// Say.jsx: the HA chrome for one beat: the dialogue chip, the choice buttons, and the OR rule (UXUI R2b rule C).
+// The engine hands over parsed parts ({ t, or }); an OR exists only where the data wrote "{OR}". Nothing here
+// pattern-matches words. A line or choice with an OR renders on the dark scrim (#1A0710, OR #FF6B7D, cream text).
+import { orParts } from './engine.js';
+// Class names are prefixed `db-` so they can never collide with art classes (R2b finding 2: the art used `.or`).
 
-export function Ors({ text }) {
-  return orParts(text).map((p, i) => (p.or ? <span key={i} className="or">OR</span> : p.t));
+export function Parts({ parts }) {
+  return parts.map((p, i) => (p.or ? <span key={i} className="db-or">OR</span> : p.t));
 }
 
-// SVG twin of <Ors>: tspans inside a <text>.
+// SVG twin of <Parts> for signage inside art: tspans in a <text>, OR offset 1 px. Same explicit "{OR}" mark.
 export function OrSpans({ text }) {
-  return orParts(text).map((p, i) => (p.or ? <tspan key={i} className="or-svg" dx="1" dy="1">OR</tspan>
-    : <tspan key={i} dy={i && orParts(text)[i - 1].or ? -1 : 0}>{p.t}</tspan>));
+  const parts = orParts(text, 'svg text');
+  return parts.map((p, i) => (p.or ? <tspan key={i} className="db-or-svg" dx="1" dy="1">OR</tspan>
+    : <tspan key={i} dy={i && parts[i - 1].or ? -1 : 0}>{p.t}</tspan>));
 }
 
-// "NANDA: line" -> a speaker chip + the line. No prefix = narration.
-export function Say({ text }) {
-  const m = /^([A-Z][A-Z ]{0,11}):\s*(.*)$/.exec(text);
-  const who = m?.[1], line = m ? m[2] : text;
+// line = engine beat.line: { who, parts, hasOr }. No speaker = narration.
+export function Say({ line, next = true }) {
+  const who = line.who;
+  const cls = ['db-say', who ? `who-${who.toLowerCase().replace(/\s+/g, '-')}` : 'narration', line.hasOr && 'has-or'];
   return (
-    <div className={`say${who ? ` who-${who.toLowerCase()}` : ' narration'}`} role="status">
-      {who && <b className="speaker">{who}</b>}
-      <p><Ors text={line} /></p>
+    <div className={cls.filter(Boolean).join(' ')} role="status">
+      <span className="pins top" aria-hidden="true" /><span className="pins bot" aria-hidden="true" />
+      {who && <b className="who">{who}</b>}
+      <p className="line"><Parts parts={line.parts} /></p>
+      {next && <span className="next" aria-hidden="true">▸</span>}
+    </div>
+  );
+}
+
+// Glossy choice pills (R2c). Pink = toward her, purple = leave; an OR choice keeps its side on the rim + key (rule C).
+// on[i] false = the choice's `if` fails (drawn, not pickable); left = timer seconds remaining (null = no timer).
+export function Choices({ choices, onPick, on = [], left = null }) {
+  return (
+    <div className="db-choices" role="group" aria-label="choose">
+      {left != null && <span className="db-timer" aria-live="off">{Math.ceil(left)}</span>}
+      {choices.map((c, i) => (
+        <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}`}
+          disabled={on[i] === false} aria-label={`${i + 1}: ${c.plain}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
+          <span className="line"><Parts parts={c.parts} /></span>
+        </button>
+      ))}
     </div>
   );
 }

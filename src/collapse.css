@@ -1,0 +1,46 @@
+/* Figur collapse (collapse.js). Everything below the wordmark block is scoped to html[data-collapse] / html[data-frame]
+   or to the .cx-* pile, which only exist after the wordmark is pressed: Logic mode's normal look is untouched. Always on:
+   the wordmark's pointer cursor, its hit box, and a keyboard focus ring (it is focusable now). No hover change. */
+.wordmark { cursor: pointer; } /* the h1 stays pointer-events: none; this hit box stops at the row-01 rule, so the g's */
+.wordmark::after { content: ''; position: absolute; inset: 0 0 calc(30 * var(--u)) 0; pointer-events: auto; } /* descender never eats canvas clicks */
+.wordmark:focus { outline: none; }
+.wordmark:focus-visible { outline: 3px solid var(--ink); outline-offset: 4px; }
+
+/* Hard cuts only, for everyone (and so also under reduced motion): no tween between frames. */
+html[data-collapse] *, html[data-collapse] *::before, html[data-collapse] *::after { transition: none !important; animation: none !important; }
+html[data-collapse] #root { pointer-events: none; overflow: visible; }
+html[data-collapse] .app { overflow: visible; }
+html[data-collapse] .wordmark:focus-visible { outline: none; }
+html[data-collapse] .app > * { transform-origin: 50% 50%; }
+
+/* f1 tilt: each panel its own few degrees. */
+html[data-frame="f1"] .wordmark { transform: rotate(-5deg); transform-origin: 10% 90%; }
+html[data-frame="f1"] .c-side.r1 { transform: rotate(3deg); }
+html[data-frame="f1"] .canvas { transform: rotate(-1.5deg); }
+html[data-frame="f1"] .truth { transform: rotate(2.5deg); }
+html[data-frame="f1"] .status { transform: rotate(-2deg); }
+html[data-frame="f1"] .c-margin { transform: rotate(6deg); }
+html[data-frame="f1"] .help { transform: rotate(-4deg); }
+
+/* f2 slip (and what the f3/f4 tiles are cut from): panels drop and slide over each other. */
+html[data-frame="f2"] .wordmark, html[data-frame="f3"] .wordmark, html[data-frame="f4"] .wordmark { transform: translate(4vh, 14vh) rotate(-14deg); transform-origin: 10% 90%; }
+:is(html[data-frame="f2"], html[data-frame="f3"], html[data-frame="f4"]) .c-side.r1 { transform: translate(6vh, 5vh) rotate(9deg); }
+:is(html[data-frame="f2"], html[data-frame="f3"], html[data-frame="f4"]) .canvas { transform: translate(-3vh, 7vh) rotate(-4deg); }
+:is(html[data-frame="f2"], html[data-frame="f3"], html[data-frame="f4"]) .truth { transform: translate(5vh, 15vh) rotate(7deg); }
+:is(html[data-frame="f2"], html[data-frame="f3"], html[data-frame="f4"]) .status { transform: translate(-2vh, 9vh) rotate(-6deg); }
+:is(html[data-frame="f2"], html[data-frame="f3"], html[data-frame="f4"]) .c-margin { transform: translate(-1vh, 12vh) rotate(14deg); }
+:is(html[data-frame="f2"], html[data-frame="f3"], html[data-frame="f4"]) .help { transform: translate(3vh, 6vh) rotate(-9deg); }
+
+/* f3 / f4: the real page goes; its tiles lie in a pile over the void. */
+html[data-frame="f3"] body > #root, html[data-frame="f4"] body > #root, html[data-frame="f5"] body > #root { visibility: hidden; }
+html[data-frame="f5"] body, html[data-frame="f3"] body, html[data-frame="f4"] body { background: #000; }
+.cx-pile { position: fixed; inset: 0; z-index: 1000; background: #000; overflow: hidden; pointer-events: none; }
+.cx-tile { position: absolute; overflow: hidden; transform-origin: 50% 100%; box-shadow: 0 0 0 2px #000; }
+.cx-inner { position: absolute; }
+.cx-inner > #root { overflow: visible; }
+/* f4 palette glitch: tokens swapped at similar luminance (white -> pale mint / pink, near-black -> deep plum / teal). */
+.cx-glitch { --paper: #e6fff4; --ink: #2d0b3a; --ink-2: #6a4a78; --grid: #b9e8d5; }
+.cx-glitch:nth-child(6) { --paper: #ffe9f3; --ink: #06302c; --ink-2: #3f6c66; --grid: #f2c5da; }
+
+/* f5 void: black, nothing left standing. */
+html[data-frame="f5"] .cx-tile { display: none; } /* not visibility: xyflow nodes set visibility: visible and would leak */

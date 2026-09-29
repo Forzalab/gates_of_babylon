@@ -1,0 +1,21 @@
+{
+  "detector": {
+    "ignoreRules": [
+      "side-tab",
+      "bounce-easing",
+      "repeating-stripes-gradient",
+      "radial-halo",
+      "codex-grid-background",
+      "dark-glow"
+    ],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "overused-font",
+        "value": "roboto",
+        "createdAt": "2026-09-29T00:39:17.386Z",
+        "reason": "intentional-fonts-tested-separately"
+      }
+    ]
+  }
+}

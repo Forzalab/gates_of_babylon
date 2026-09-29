@@ -4,19 +4,22 @@
   background-size: 60px 60px; overflow: hidden; }
 .splash .card { position: absolute; background: #fff3f8; color: #2a0f24; border: 5px solid #2a0f24; border-radius: 14px;
   box-shadow: 12px 12px 0 #ff5fa2; }
-.splash .nav { left: 60px; top: 40px; width: 1800px; height: 100px; display: flex; align-items: center; gap: 60px; padding: 0 40px; }
+.splash .nav { left: 60px; top: 40px; width: 1800px; height: 100px; display: flex; align-items: center; gap: 60px; padding: 14px 40px; }
 .splash .logo { display: flex; align-items: center; gap: 14px; font: 400 56px/1 'Bangers', var(--cond); letter-spacing: .04em; }
 .splash .nav nav { display: flex; gap: 44px; font: 700 34px/1 var(--cond); }
-.splash .nav nav .on { color: #d81b6a; border-bottom: 5px solid #ff5fa2; }
+.splash .nav nav .on { color: #d81b6a; border-bottom: 5px solid #ff5fa2; padding-bottom: 10px; }
 .splash .sponsor { margin-left: auto; font: 400 26px/1 var(--cond); }
 .splash .sponsor b { font: 400 44px/1 'Yellowtail', cursive; color: #d81b6a; margin-left: 6px; }
 
 .splash .hero { left: 60px; top: 190px; width: 1150px; height: 620px; padding: 56px 72px;
-  background: #fff3f8 radial-gradient(circle at 88% 30%, #ffd1e6 0 180px, transparent 181px); }
-.splash .kicker { margin: 0; font: 700 34px/1 var(--cond); letter-spacing: .18em; text-transform: uppercase; color: #8a2d5c; }
+  background-color: #fff3f8; isolation: isolate; }
+/* halo on its own layer so the card's solid colour is what sits behind the text (keeps contrast checks honest) */
+.splash .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(circle at 88% 30%, #ffd1e6 0 180px, transparent 181px); }
+.splash .kicker { margin: 0; font: 700 34px/1 var(--cond); letter-spacing: .18em; text-transform: uppercase; color: #6e1f48; }
 .splash h1 { margin: 22px 0 0; font: 400 172px/.9 'Bangers', var(--cond); letter-spacing: .02em; color: #2a0f24;
   text-shadow: 8px 8px 0 #ff5fa2; }
-.splash .sub { margin: 18px 0 0; font: italic 400 40px/1 var(--cond); color: #5a2a48; }
+.splash .sub { margin: 18px 0 0; font: italic 400 40px/1 var(--cond); color: #3f1a33; }
 .splash .start { position: absolute; right: 64px; bottom: 60px; display: flex; align-items: center; gap: 18px;
   font: 400 88px/1 'Bangers', var(--cond); letter-spacing: .06em; color: #2a0f24; background: #ff5fa2;
   border: 6px solid #2a0f24; border-radius: 22px; padding: 22px 52px 18px 40px; box-shadow: 10px 10px 0 #2a0f24; cursor: pointer; }
@@ -41,7 +44,7 @@
 .splash .sil i:nth-child(even) { background: #000; box-shadow: 0 0 0 3px #ff5fa2 inset; height: 116px; }
 
 .splash .strip .mini { top: 860px; width: 560px; height: 150px; display: flex; align-items: center; justify-content: center; gap: 12px;
-  font: 700 34px/1.1 var(--cond); text-align: center; padding: 0 24px; background: #ffe3ef; }
+  font: 700 34px/1.1 var(--cond); text-align: center; padding: 16px 24px; background: #ffe3ef; }
 .splash .strip .mini:nth-child(1) { left: 60px; }
 .splash .strip .mini:nth-child(2) { left: 680px; }
 .splash .strip .mini:nth-child(3) { left: 1300px; }
