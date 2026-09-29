@@ -29,5 +29,5 @@
 .stairs .st-plate { font: 700 34px/1 var(--cond); fill: #3a302a; letter-spacing: .04em; }
 
 /* 10 genkan: the insert = a smooth camera crop onto the slippers + shrine (reduced motion: .rm kills the transition) */
-.genkan.cam { transform-origin: 1500px 720px; transition: transform 1400ms cubic-bezier(.45, 0, .2, 1); }
-.genkan.cam.insert { transform: scale(2.1); }
+.genkan.cam { transform-origin: 1202px 731px; transition: transform 1400ms cubic-bezier(.45, 0, .2, 1); }
+.genkan.cam.insert { transform: scale(3.6); }
