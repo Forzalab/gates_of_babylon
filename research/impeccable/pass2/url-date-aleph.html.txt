@@ -1,0 +1,41 @@
+
+http://localhost:3100/date-aleph.html
+  [ai-color-palette] Purple/violet neon text on dark background
+    → Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette.
+  [border-accent-on-rounded] border-top: 7px + border-radius: 8.96px
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  [border-accent-on-rounded] border-bottom: 2px + border-radius: 6.4px
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  [text-occlusion] span.neon "Dejting" overhangs a.tile by 140px — the headline and the card collide
+    → Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it.
+  [oversized-h1] 119px h1, 55 chars, 28vh "WARNING:THESE GATES ARE 18+... AND A FEW BITS NAUGHTY ♡"
+    → A full-sentence headline set at display size ends up dominating the viewport, leaving no room for anything else above the fold. A punchy one- or two-word headline at that size is fine — the problem is a long headline blown up too large. Set long headlines smaller, or tighten the copy.
+  [low-contrast] 1.2:1 (need 3:1) — text #fee51f on #fdf6fd
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [tight-leading] line-height 1.15x (need >=1.3)
+    → Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.
+  [ai-color-palette] Purple/violet text (#8f2aa8) on heading
+    → Purple/violet gradients and cyan-on-dark are the most recognizable tells of AI-generated UIs. Choose a distinctive, intentional palette.
+  [cramped-padding] <div> "cpill": children flush against bg on top/bottom/left (no inset)
+    → Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.
+  [tight-leading] line-height 1.00x (need >=1.3)
+    → Line height below 1.3x the font size makes multi-line text hard to read. Use 1.5 to 1.7 for body text so lines have room to breathe.
+  [wide-tracking] letter-spacing: 0.06em on body text
+    → Letter spacing above 0.05em on body text disrupts natural character groupings and slows reading. Reserve wide tracking for short uppercase labels only.
+  [text-occlusion] span.badge "60,375" is 100% covered by overlapping text (span.neon)
+    → Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it.
+  [text-occlusion] span.badge "260,050" is 100% covered by overlapping text (p.plain)
+    → Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it.
+  [text-occlusion] span.badge "181,100" is 96% covered by overlapping text (p.plain)
+    → Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it.
+  [text-occlusion] span.w1 "WARNING:" overhangs a.tile by 99px — the headline and the card collide
+    → Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it.
+  [text-occlusion] small "THESE GATES ARE" overhangs a.tile by 162px — the headline and the card collide
+    → Text is painted under an opaque element or a second text run, so part of it cannot be read. A decorative box, a stacked layer, or an inline element with leaked padding lands on the words instead of beside them. Give overlapping layers room, or move the text out from under the layer above it.
+  [marquee] .v-g2:not(.still) .hand — infinite horizontal loop animation "bob"
+    → Continuously auto-scrolling content demands attention it has not earned and hides half its content at any moment. Reserve motion for content that changes; let readers move at their own pace.
+  [content-hidden-at-rest] 40% of page text (248 of 616 chars) stays at opacity 0 / visibility hidden after reveal handlers ran (e.g. "OR ♥ AND · 75% compat")
+    → A large share of the page text sits at opacity 0 or visibility hidden even after every reveal handler had a chance to run. This is the failed-reveal signature: the content shipped but never becomes visible. Make content visible by default and let JavaScript enhance its entrance instead of gating its existence.
+
+18 anti-patterns found.
+exit=2

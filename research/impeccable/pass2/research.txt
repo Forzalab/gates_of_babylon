@@ -1,0 +1,138 @@
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/A/fx.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/A/index.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/A/scenes.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/A/sheet.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/A/sprites.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/A/theme.css
+  line 55: [border-accent-on-rounded] border-bottom: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/A/ui.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/B/theme.css
+  line 65: [border-accent-on-rounded] border-top: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 65: [border-accent-on-rounded] border-bottom: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 117: [border-accent-on-rounded] border-top: 10px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/C/theme.css
+  line 91: [border-accent-on-rounded] border-top: 8px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 91: [border-accent-on-rounded] border-bottom: 8px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 119: [border-accent-on-rounded] border-bottom: 4px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 148: [border-accent-on-rounded] border-top: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/H/fx.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/H/index.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/H/scenes.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/H/sheet.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/H/sprites.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/H/theme.css
+  line 155: [border-accent-on-rounded] border-bottom: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 171: [border-accent-on-rounded] border-bottom: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 180: [border-accent-on-rounded] border-top: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 195: [border-accent-on-rounded] border-top: 4px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/H/ui.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/buttons.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/fx.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/index.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/nanda.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/props.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/scenes.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/sheet.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/sprites.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/theme.css
+  line 220: [border-accent-on-rounded] border-bottom: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 243: [border-accent-on-rounded] border-top: 4px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/HA/ui.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+/home/user/gates_of_babylon/.claude/worktrees/agent-aa56dfbf66fb87bcf/research/date-beta-mockups/index.html
+  [all-caps-body] text-transform: uppercase on 49 chars of body text
+    → Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.
+  [all-caps-body] text-transform: uppercase on 34 chars of body text
+    → Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.
+
+41 anti-patterns found.

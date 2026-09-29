@@ -10,7 +10,7 @@
 .grp header { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; margin-bottom: 6px; }
 .grp header b { font: 400 22px/1 'Bangers', cursive; letter-spacing: .04em; color: #fff; }
 .grp header span { font: 700 13px 'Roboto Condensed', sans-serif; color: #ffb3e3; }
-.grp header i { font: 700 11px 'Roboto Condensed', sans-serif; font-style: normal; padding: 2px 7px; border-radius: 999px; background: #ec1a86; color: #fff; letter-spacing: .06em; }
+.grp header i { font: 700 11px 'Roboto Condensed', sans-serif; font-style: normal; padding: 2px 7px; border-radius: 999px; background: #c8126f; color: #fff; letter-spacing: .06em; }
 .grp header i.red { background: #c4123a; }
 .grp header i.end { background: var(--yellow); color: #7a0b45; }
 .grp.bonded { border-color: #ff7fe0; box-shadow: 0 0 16px rgba(255, 60, 200, .4); }
