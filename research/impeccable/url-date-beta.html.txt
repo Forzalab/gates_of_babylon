@@ -1,0 +1,28 @@
+
+http://localhost:3000/date-beta.html
+  [cramped-padding] 0px vertical padding (need ≥10.2px for 34px text)
+    → Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.
+  [cramped-padding] 0px vertical padding (need ≥10.2px for 34px text)
+    → Text is too close to the edge of its container. Two shapes: (1) an element with its own text where the padding is too low for the font size, and (2) a wrapper with text-bearing children and near-zero padding against a visible boundary (border, outline, or non-transparent background) — children land flush against the boundary line. Add at least 8px (ideally 12–16px) of padding inside bordered, outlined, or colored containers.
+  [radial-halo] radial-gradient halo (#ffd1e6 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+  [low-contrast] browser contrast 2.6:1 median 2.6:1 (need 3:1) via analytic-gradient+alpha "Chapter 1 · Signal"
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] browser contrast 1.9:1 median 1.9:1 (need 3:1) via analytic-gradient+alpha "a date with a logic gate"
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] pixel contrast 1.1:1 median 2.0:1 (need 4.5:1) on opacity stack "⛶ fullscreen"
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] pixel contrast 1.0:1 median 2.7:1 (need 4.5:1) on opacity stack "skip ▸▸"
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+
+7 anti-patterns found.
+
+── Advisory (not counted as failures) ──
+
+http://localhost:3000/date-beta.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+  [codex-grid-background] two-axis grid-line gradient background
+    → A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.
+
+2 advisory notes. Suppress with --no-advisory.

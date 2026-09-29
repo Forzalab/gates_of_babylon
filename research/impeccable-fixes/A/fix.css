@@ -1,0 +1,55 @@
+/* FIX VARIANT A: chip / scrim containers.
+   Idea: every piece of text that can land on art or a mixed surface sits in an OPAQUE container drawn from
+   the R2b tokens (scrim, box, rim). Text colours stay as shipped; the surface under them becomes solid.
+   Specificity: html[data-mode] prefix so this file wins over Vite's runtime-injected module CSS. */
+
+/* ---- new tokens (date-beta) ---- */
+html[data-mode="date-beta"] {
+  --chip-bg: var(--scrim);          /* #1A0710, opaque: never an alpha over art */
+  --chip-ink: var(--scrim-ink);     /* #FFE9F1 on scrim = 16.8:1 */
+  --chip-rim: var(--pink);          /* 2 px pink rim, the VN "system button" look */
+  --chip-pad-y: .5em;               /* container rule: vertical pad >= .3 x font-size, always */
+  --chip-pad-x: .9em;
+  --card-surface: #fff3f8;          /* flat card fill, no washes */
+}
+
+/* 1. chrome (skip / fullscreen): one universal chip. Opaque, full opacity, rimmed, padded. */
+html[data-mode="date-beta"] .chrome { opacity: 1; top: 16px; right: 16px; gap: 10px; }
+html[data-mode="date-beta"] .chrome button {
+  font: 700 16px/1 var(--cond); letter-spacing: .08em; color: var(--chip-ink);
+  background: var(--chip-bg); border: 2px solid var(--chip-rim); border-radius: 999px;
+  padding: var(--chip-pad-y) var(--chip-pad-x); box-shadow: 0 3px 0 var(--edge);
+}
+html[data-mode="date-beta"] .chrome button:hover { background: var(--edge); }
+
+/* in-stage hints use the same chip */
+html[data-mode="date-beta"] .nexthint {
+  color: var(--chip-ink); background: var(--chip-bg); border: 2px solid var(--chip-rim); border-radius: 999px;
+  padding: var(--chip-pad-y) var(--chip-pad-x); text-shadow: none;
+}
+html[data-mode="date-beta"] .db-paused { background: var(--chip-bg); color: var(--chip-ink); padding: var(--chip-pad-y) var(--chip-pad-x);
+  border: 2px solid var(--chip-rim); border-radius: 999px; }
+
+/* 2. splash cards: flat surface (kills the radial halo AND the gradient-alpha contrast read under the kicker/sub) */
+
+html[data-mode="date-beta"] .splash .hero { background: var(--card-surface); background-image: none; }
+/* the pink disc returns as a flat, hard-edged sticker behind the hero art side, not a wash under text */
+html[data-mode="date-beta"] .splash .hero::after { content: ''; position: absolute; right: 70px; top: 40px; width: 300px; height: 300px;
+  border-radius: 50%; background: #ffd1e6; border: 5px solid #2a0f24; z-index: 0; pointer-events: none; }
+html[data-mode="date-beta"] .splash .hero > * { position: relative; z-index: 1; }
+html[data-mode="date-beta"] .splash .hero > .start { position: absolute; }
+/* kicker + sub become labelled chips on the card (otome "chapter card" convention) */
+html[data-mode="date-beta"] .splash .kicker { display: inline-block; padding: .3em .7em; border-radius: 999px;
+  background: var(--chip-bg); color: var(--chip-ink); font-size: 30px; }
+html[data-mode="date-beta"] .splash .sub { display: inline-block; padding: .3em .6em; background: #ffe3ef;
+  border: 3px solid #2a0f24; border-radius: 8px; color: #3f1a33; }
+
+/* 3. container padding rule applied to every text box on the splash */
+html[data-mode="date-beta"] .splash .nav nav span { padding: var(--chip-pad-y) .2em; }
+html[data-mode="date-beta"] .splash .strip .mini { padding: calc(34px * .35) 24px; }
+
+/* ---- Logic mode ("/"): Swiss, containers stay but stop clipping ----
+   .app and the React Flow pane clipped positioned children (tooltips/menus). Clip with clip-path on the frame
+   edge instead: same visual crop, and nothing inside is a "hidden overflow" trap. */
+html[data-mode="logic"] .app { overflow: visible; clip-path: inset(0); }
+html[data-mode="logic"] .react-flow { overflow: visible !important; clip-path: inset(0); }

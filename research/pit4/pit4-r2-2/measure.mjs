@@ -3,7 +3,7 @@ import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium' });
 for (const [w, h] of [[1440, 810], [1024, 768]]) {
   const p = await b.newPage({ viewport: { width: w, height: h }, reducedMotion: 'reduce' });
-  await p.goto(`${process.argv[2]}/date.html?v=g2`); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(400);
+  await p.goto(`${process.argv[2]}/date-aleph.html?v=g2`); await p.evaluate(() => document.fonts.ready); await p.waitForTimeout(400);
   const r = await p.evaluate(() => {
     const q = (s) => document.querySelector(s).getBoundingClientRect();
     const n = q('.mf .neon'), m = q('.mf');

@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sugar Chip HA · engine proof</title>
+<link rel="stylesheet" href="../shared/base.css"><link rel="stylesheet" href="theme.css">
+<!-- HA chrome builders (classic scripts), reused verbatim so the proof renders the exact HA markup -->
+<script src="../shared/core.js"></script><script src="../shared/art.js"></script><script src="ha-art.js"></script>
+<script src="../shared/ui.js"></script><script src="ha-ui.js"></script>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; padding: 0; }
+  .viewport { position: fixed; inset: 0; background: #000; cursor: pointer; user-select: none; }
+  .stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; overflow: hidden; transform-origin: 50% 50%; background: #000; }
+  .scene { position: absolute; inset: 0; }
+  .scene > svg, .scene .art { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+  .hachrome { position: absolute; inset: 0; pointer-events: none; z-index: 30; }
+  .hachrome .meta, .hachrome .datehud { pointer-events: auto; }
+  .rm *, .rm *::before, .rm *::after { animation: none !important; transition: none !important; }
+  /* INTEGRATION FINDING 1: the art's CSS reads tokens that only beta.css defines. Without them every `font:` shorthand using var(--cond)
+     is invalid and the art text collapses to 16px (the blackout ADORE ME). The engine must keep these tokens even when the chrome is swapped. */
+  :root { --cond: 'Roboto Condensed', 'Arial Narrow', sans-serif;
+    --jp: 'Hiragino Kaku Gothic StdN', 'Hiragino Sans', 'Yu Gothic', 'Meiryo', 'Noto Sans CJK JP', 'IPAGothic', sans-serif;
+    --jp-serif: 'Hiragino Mincho ProN', 'Yu Mincho', 'Noto Serif CJK JP', 'IPAMincho', 'IPAPMincho', serif; }
+  /* INTEGRATION FINDING 2: the art uses class "or" too (blackout .or.core, Say's OrSpans). HA's chip-style .or must not reach it:
+     inside .scene the engine's own OR look wins. In the engine, rename HA's to .ha-or or scope it to .dlg/.choice/.cap. */
+  .scene .or { display: inline; padding: 0; margin: 0; background: none; border-radius: 0; box-shadow: none; left: 1px; top: 1px; font-weight: inherit; color: var(--her) !important; }
+  .scene .blackout .core { display: block; font-weight: 700; }
+  .scene .or-svg { stroke: none; }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="module" src="ha-engine.jsx"></script>
+</body>
+</html>

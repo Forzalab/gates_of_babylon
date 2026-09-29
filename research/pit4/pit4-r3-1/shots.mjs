@@ -15,7 +15,7 @@ async function page(w, h, rm, q, n) {
   p.on('pageerror', (e) => errors.push(`${n}: ${e.message}`));
   p.on('console', (m) => m.type() === 'error' && errors.push(`${n} console: ${m.text()}`));
   p.on('response', (r) => r.status() >= 400 && errors.push(`${n} ${r.status()} ${r.url()}`));
-  await p.goto(`${BASE}/date.html?v=h1${q}`);
+  await p.goto(`${BASE}/date-aleph.html?v=h1${q}`);
   await p.evaluate(() => document.fonts.ready);
   await p.waitForTimeout(rm === 'reduce' ? 600 : 3500);
   return p;

@@ -1,0 +1,78 @@
+
+/tmp/claude-0/imp/src/date/date.css
+  line 198: [side-tab] border-left: 4px solid #2ea98d
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 199: [side-tab] border-left: 4px solid #3a8bff
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 12: [overused-font] font-family: 'Roboto
+    → Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.
+  line 180: [bounce-easing] cubic-bezier(.2, 1.6, .5, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 209: [bounce-easing] cubic-bezier(.2, 1.4, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+
+/tmp/claude-0/imp/src/date/f1.css
+  line 66: [bounce-easing] cubic-bezier(.2, 1.8, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 76: [bounce-easing] cubic-bezier(.2, 1.4, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 77: [bounce-easing] cubic-bezier(.2, 1.9, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 120: [bounce-easing] cubic-bezier(.2, 1.5, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 142: [bounce-easing] cubic-bezier(.2, 1.9, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+
+/tmp/claude-0/imp/src/date/g2.css
+  line 78: [bounce-easing] cubic-bezier(.2, 1.6, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+
+/tmp/claude-0/imp/src/date/game/game.css (imported by Bagging.jsx, DateCanvas.jsx)
+  line 96: [bounce-easing] cubic-bezier(.3, 1.4, .6, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 151: [bounce-easing] cubic-bezier(.2, 1.6, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 206: [bounce-easing] cubic-bezier(.2, 1.5, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 230: [bounce-easing] cubic-bezier(.2, 1.4, .4, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+
+/tmp/claude-0/imp/src/date/h1.css
+  line 21: [bounce-easing] cubic-bezier(.3, 1.6, .5, 1)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+  line 27: [bounce-easing] cubic-bezier(.5, -0.4, .6, 1.4)
+    → Bounce and elastic easing feel dated and tacky. Real objects decelerate smoothly — use exponential easing (ease-out-quart/quint/expo) instead.
+
+/tmp/claude-0/imp/src/date-beta/beta.css (imported by main.jsx)
+  line 65: [side-tab] .db-choice — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 75: [side-tab] .db-choice.purple — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+
+/tmp/claude-0/imp/src/theme.css
+  line 12: [overused-font] font-family: 'Roboto
+    → Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.
+  line 113: [overused-font] font-family: 'Roboto
+    → Inter, Roboto, Fraunces, Geist, Plus Jakarta Sans, and Space Grotesk are used on so many sites they no longer feel distinctive. Each new wave of AI-generated UIs converges on the same handful of faces. Choose a face that gives your interface personality.
+
+21 anti-patterns found.
+
+── Advisory (not counted as failures) ──
+
+/tmp/claude-0/imp/src/date/date.css
+  line 22: [codex-grid-background] two-axis grid-line gradient background
+    → A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.
+
+/tmp/claude-0/imp/src/date/game/canvas.css (imported by DateCanvas.jsx)
+  line 6: [codex-grid-background] two-axis grid-line gradient background
+    → A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.
+
+/tmp/claude-0/imp/src/date/game/game.css (imported by Bagging.jsx, DateCanvas.jsx)
+  line 231: [codex-grid-background] two-axis grid-line gradient background
+    → A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.
+
+/tmp/claude-0/imp/src/date-beta/art/splash.css (imported by Splash.jsx)
+  line 2: [codex-grid-background] two-axis grid-line gradient background
+    → A decorative grid or line-field background drawn with hairline linear-gradient layers tiled by a fixed pixel cell is a recurring generated-UI signature. Reserve grid overlays for actual canvas, map, blueprint, or measurement surfaces; elsewhere use product structure or a plain surface.
+
+4 advisory notes. Suppress with --no-advisory.

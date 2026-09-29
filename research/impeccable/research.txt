@@ -1,0 +1,524 @@
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/fx.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] [data-dread="1"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] [data-dread="2"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/index.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] [data-dread="1"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] [data-dread="2"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/scenes.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] [data-dread="1"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] [data-dread="2"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/sheet.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] [data-dread="1"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] [data-dread="2"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/sprites.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] [data-dread="1"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] [data-dread="2"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/theme.css
+  line 55: [border-accent-on-rounded] border-bottom: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 60: [side-tab] [data-dread="1"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 69: [side-tab] [data-dread="2"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/ui.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] [data-dread="1"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] [data-dread="2"] .dlg — inset box-shadow 10px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/fx.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#e9dcc3 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/index.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#e9dcc3 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/scenes.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#e9dcc3 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/sheet.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#e9dcc3 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/sprites.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#e9dcc3 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/theme.css
+  line 65: [border-accent-on-rounded] border-top: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 65: [border-accent-on-rounded] border-bottom: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 117: [border-accent-on-rounded] border-top: 10px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/ui.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#e9dcc3 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/fx.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#1b5a3e → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/index.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#1b5a3e → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/scenes.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#1b5a3e → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/sheet.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#1b5a3e → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/sprites.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#1b5a3e → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/theme.css
+  line 60: [side-tab] border-left: 3px solid var(--silk)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 110: [side-tab] border-left: 10px solid var(--copper)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 91: [border-accent-on-rounded] border-top: 8px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 91: [border-accent-on-rounded] border-bottom: 8px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 119: [border-accent-on-rounded] border-bottom: 4px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 148: [border-accent-on-rounded] border-top: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/ui.html
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#1b5a3e → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/fx.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/index.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/scenes.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/sheet.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/sprites.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/theme.css
+  line 155: [border-accent-on-rounded] border-bottom: 3px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 171: [border-accent-on-rounded] border-bottom: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 180: [border-accent-on-rounded] border-top: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 195: [border-accent-on-rounded] border-top: 4px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/ui.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/buttons.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/engine.html
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/fx.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/index.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/nanda.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/props.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/scenes.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/sheet.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/sprites.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/theme.css
+  line 97: [side-tab] border-left: 16px solid var(--her)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 220: [border-accent-on-rounded] border-bottom: 5px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 243: [border-accent-on-rounded] border-top: 4px solid
+    → Thick accent border on a rounded card — the border clashes with the rounded corners. Remove the border or the border-radius.
+  line 357: [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  line 363: [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/ui.html
+  [low-contrast] 1.1:1 (need 3:1) — text #3a1d3f on #2a1830
+    → Text does not meet WCAG AA contrast requirements (4.5:1 for body, 3:1 for large text). Increase the contrast between text and background.
+  [side-tab] .gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [side-tab] .gl.purple, .choice.purple.gl — inset box-shadow 6px stripe (bottom)
+    → Thick colored border on one side of a card — the most recognizable tell of AI-generated UIs. Use a subtler accent or remove it entirely.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+  [radial-halo] radial-gradient halo (#ffe3f0 → transparent) on dark page
+    → A chromatic radial-gradient wash — saturated at the center, fading to transparent — used as a decorative background glow on a dark page. Same tell as glowing shadows, drawn with a gradient instead of a shadow. Ground the surface with a solid or subtly shifted background instead.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/index.html
+  [all-caps-body] text-transform: uppercase on 49 chars of body text
+    → Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.
+  [all-caps-body] text-transform: uppercase on 34 chars of body text
+    → Long passages in uppercase are hard to read. We recognize words by shape (ascenders and descenders), which all-caps removes. Reserve uppercase for short labels and headings.
+  [dark-glow] Zero-offset text-shadow glow (#f0243f)
+    → Colored glow shadows — a zero-offset chromatic halo (box- or text-shadow) on any background, or any colored blurred shadow on a dark background — are the default "cool" look of AI-generated UIs. Use neutral elevation shadows and subtle, purposeful lighting instead.
+
+149 anti-patterns found.
+
+── Advisory (not counted as failures) ──
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/fx.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/index.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/scenes.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/sheet.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/sprites.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/A/ui.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/fx.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/index.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/scenes.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/sheet.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/sprites.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/B/ui.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/fx.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/index.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/scenes.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/sheet.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/sprites.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/C/ui.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/fx.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/index.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/scenes.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/sheet.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/sprites.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/H/ui.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/buttons.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/engine.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/fx.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/index.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/nanda.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/props.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/scenes.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/sheet.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/sprites.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/HA/ui.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+/home/user/gates_of_babylon/research/date-beta-mockups/index.html
+  [repeating-stripes-gradient] repeating-gradient decorative stripes
+    → Repeating-gradient stripes used as surface decoration are a recurring generated-UI signature. Reach for a deliberate texture or leave the surface plain.
+
+35 advisory notes. Suppress with --no-advisory.

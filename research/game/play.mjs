@@ -8,7 +8,7 @@ import { fileURLToPath } from 'node:url';
 const { chromium } = pkg;
 const PORT = process.argv[2] || 5391;
 const OUT = path.join(path.dirname(fileURLToPath(import.meta.url)), 'shots');
-const URL = `http://localhost:${PORT}/date.html`;
+const URL = `http://localhost:${PORT}/date-aleph.html`;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const errors = [];
 

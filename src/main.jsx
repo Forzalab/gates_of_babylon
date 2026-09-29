@@ -1,6 +1,8 @@
 import { createRoot } from 'react-dom/client';
 import '@xyflow/react/dist/style.css';
 import './theme.css';
+import './collapse.css';
+import './fontTrial.js';
 import App from './App.jsx';
 
 createRoot(document.getElementById('root')).render(<App />);

@@ -1,0 +1,7 @@
+/* Trial A: Inter Tight throughout, 900 italic as display. */
+@import '@fontsource-variable/inter-tight/wght.css';
+@import '@fontsource-variable/inter-tight/wght-italic.css';
+[data-font='inter'] { --font: 'Inter Tight Variable', Arial, sans-serif; --font-help: var(--font); --font-label: var(--font);
+  --cond: 'Inter Tight Variable', 'Arial Narrow', sans-serif; --btn: 'Inter Tight Variable', sans-serif; }
+[data-font='inter'] .wordmark { font-family: 'Inter Tight Variable', sans-serif; font-weight: 900; }
+[data-font='inter'] .splash h1, [data-font='inter'] .splash .logo { font-family: 'Inter Tight Variable', sans-serif; font-weight: 900; font-style: italic; letter-spacing: -.02em; }

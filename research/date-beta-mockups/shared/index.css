@@ -1,0 +1,8 @@
+.hub { max-width: 1500px; margin: 0 auto; padding: 24px; font-family: var(--font-body); }
+.hub h1 { font: 400 72px/1 var(--font-display); margin: 20px 0 6px; }
+.hub p.lead { font: 400 24px/1.4 var(--font-body); max-width: 1000px; }
+.hub .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.hub a.tile { display: block; color: inherit; text-decoration: none; background: var(--surface); border: 3px solid var(--edge); border-radius: 14px; overflow: hidden; }
+.hub a.tile img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.hub a.tile span { display: block; padding: 10px 14px; font: 700 18px/1.2 var(--font-mono); color: var(--surface-ink); }
+.hub h2 { font: 700 22px/1 var(--font-mono); margin: 34px 0 12px; text-transform: uppercase; letter-spacing: .1em; }
