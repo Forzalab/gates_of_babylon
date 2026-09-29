@@ -22,6 +22,7 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 | `auto` | ms, at least `hold` | none | Auto-advance. Not allowed on a choice beat. |
 | `wait` | `click`, `start`, `auto`, `choice` | inferred | What moves the beat on. |
 | `motion` + `rmAlt` | bool; `same`, `hard-cut`, `static`, `skip` | `false`, `same` | A motion beat needs a reduced-motion alt. |
+| `vary` | `{ flag: { value: { text?, speaker?, props?, sprite?, bg?, sfx? } } }` | none | Per-value overlay for a declared flag (see Flags). Only these six look fields can vary; `choices`, `timer`, `set`, `wait` etc. cannot, so the scene graph is the same for every value. |
 
 ## Choice
 
@@ -41,7 +42,18 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 | `id`, `title`, `enter` (`cut`/`fade`), `bg`, `scare`, `beats` | As before. |
 | `defaults` | Flags object. Skipping the scene (Esc or S) merges these in, so the flags look as if the scene had played its default path. |
 
-Flag values are strings, numbers, booleans or `null`. Root keys: `version`, `note`, `scenes`.
+Flag values are strings, numbers, booleans or `null`. Root keys: `version`, `note`, `flags`, `scenes`.
+
+## Flags and `vary` (echo rule)
+
+| field | where | meaning |
+|---|---|---|
+| `flags` | root | Declared pick flags: `{ "bento": ["umeboshi", "tamagoyaki"] }`. Each is a non-empty list of distinct strings. The first value is the fallback. A declared flag can only be `set`, tested (`if`, `go` `if`) or defaulted to one of its values, or `null`. |
+| `vary` | beat | One entry per declared value, all required, no extras (`{}` = same as the base beat). Entries are checked like beats: 12-word text, `{OR}` rule, speaker, asset ids. |
+| `beatView(beat, flags)` | engine | What the player sees: each varied flag's entry laid over the beat. An unset or unknown value uses the first declared value. Variant `props` merge over the beat's carried props for that beat only. Nothing a variant sets carries to the next beat. |
+| echo lint | loader | Text containing `umeboshi`, `tamagoyaki`, `sour`, `sweet`, `すっぱい` or `甘い` (whole words, any case) fails unless the beat varies on `bento` and every value has its own `text`. Choice labels are linted too, except on a choice that sets the flag (the rooftop pick). |
+
+Rooftop sets `bento` with a no-timer pick. Skipping the rooftop defaults it to `umeboshi`.
 
 ## Choice buttons (Tony, Mon 9/28)
 - No number key on the button. Keys 1/2 still pick, but nothing is drawn.

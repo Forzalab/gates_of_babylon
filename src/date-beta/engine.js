@@ -5,6 +5,8 @@
 // like "for" / "sorry" / a bare "OR"; a line with a marked OR renders on the dark scrim box.
 // Position = { s, b, done, flags }. next() walks beats then scenes; skip() (Esc) jumps to the next scene.
 // Flags are one flat object: `set` merges into it, `if` tests it (every listed key must equal; missing reads as null).
+// Declared flags (root `flags`, e.g. bento) may drive `vary`: per-value overlays of a beat's look/words (never its
+// choices, timer or set, so the scene graph stays static). beatView(beat, flags) applies them; unset = first value.
 export const MAX_WORDS = 12;
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
@@ -13,10 +15,14 @@ export const SCARES = [0, 1, 2];
 export const SIDES = ['pink', 'purple']; // pink = toward her, purple = leave
 export const OR_MARK = '{OR}';
 export const ASSET_ID = /^[A-Z]{2}-[A-Z0-9]+$/; // manifest ids look like "BG-03" / "SX-37"; anything else is a name
+export const VARY_KEYS = ['text', 'speaker', 'props', 'sprite', 'bg', 'sfx'];
+// Echo rule (script v5): a line naming the bento pick must vary on it. Text that uses these words without a `vary`
+// on the flag (or with a variant that falls back to that text) fails at load. The picking choices are exempt.
+export const ECHO = { bento: /\b(umeboshi|tamagoyaki|sour|sweet)\b|すっぱい|甘い/iu };
 const KEYS = {
-  root: ['version', 'note', 'scenes'],
+  root: ['version', 'note', 'flags', 'scenes'],
   scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults'],
-  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set'],
+  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary'],
   choice: ['text', 'side', 'go', 'if', 'set', 'default'],
 };
 
@@ -34,6 +40,26 @@ function flagsField(v, where, name) {
   return Object.freeze({ ...v });
 }
 
+// A declared flag may only be set/tested with one of its declared values (or null).
+function declared(decl, obj, where) {
+  for (const [k, v] of Object.entries(obj ?? {})) {
+    if (decl[k] && v !== null && !decl[k].includes(v)) fail(where, `flag ${k} = ${JSON.stringify(v)} is not one of ${decl[k].join('|')}`);
+  }
+  return obj;
+}
+function loadFlagDecl(v) {
+  if (v == null) return Object.freeze({});
+  if (typeof v !== 'object' || Array.isArray(v)) fail('root', '"flags" must be an object of flag -> [values]');
+  const out = {};
+  for (const [k, vals] of Object.entries(v)) {
+    if (!Array.isArray(vals) || !vals.length || vals.some((x) => typeof x !== 'string' || !x) || new Set(vals).size !== vals.length) {
+      fail('root', `flags.${k} must be a non-empty list of distinct non-empty strings`);
+    }
+    out[k] = Object.freeze([...vals]);
+  }
+  return Object.freeze(out);
+}
+
 // Every key in `cond` must equal its flag (a missing flag reads as null, so { met: null } = "met not set").
 export const matches = (cond, flags = {}) => !cond || Object.entries(cond).every(([k, v]) => (flags[k] ?? null) === v);
 // go: "scene" | [ "scene" | { if, to }, ... ]. First matching entry wins; none = carry on to the next beat.
@@ -45,7 +71,7 @@ export function resolveGo(go, flags = {}) {
   }
   return null;
 }
-function loadGo(go, where) {
+function loadGo(go, where, decl = {}) {
   if (go == null) return null;
   if (typeof go === 'string') return go;
   if (!Array.isArray(go) || !go.length) fail(where, '"go" must be a scene id or a non-empty list');
@@ -53,7 +79,7 @@ function loadGo(go, where) {
     if (typeof g === 'string') return g;
     if (!g || typeof g !== 'object' || typeof g.to !== 'string') fail(where, `go[${i}] must be a scene id or { if, to }`);
     for (const k of Object.keys(g)) if (k !== 'if' && k !== 'to') fail(where, `unknown go key "${k}" (allowed: if, to)`);
-    return Object.freeze({ if: flagsField(g.if, where, 'if'), to: g.to });
+    return Object.freeze({ if: declared(decl, flagsField(g.if, where, 'if'), where), to: g.to });
   }));
 }
 const goTargets = (go) => (go == null ? [] : typeof go === 'string' ? [go] : go.map((g) => (typeof g === 'string' ? g : g.to)));
@@ -95,6 +121,7 @@ export function parseLine(text, where, speaker = null) {
 export function loadScenes(data, { manifest = null, art = null } = {}) {
   if (!data || !Array.isArray(data.scenes) || !data.scenes.length) fail('root', 'need a non-empty "scenes" array');
   keys(data, 'root', 'root');
+  const decl = loadFlagDecl(data.flags);
   const cueNames = manifest?.cues ? Object.keys(manifest.cues) : null;
   const ids = new Set(), pending = [];
   const scenes = data.scenes.map((s) => {
@@ -106,7 +133,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
     const sceneScare = s.scare ?? 0;
     if (!SCARES.includes(sceneScare)) fail(s.id, `scare ${sceneScare} is not one of ${SCARES.join('|')}`);
     assetField(s.bg, 'bg', s.id, manifest, art);
-    const defaults = flagsField(s.defaults, s.id, 'defaults') ?? Object.freeze({});
+    const defaults = declared(decl, flagsField(s.defaults, s.id, 'defaults'), s.id) ?? Object.freeze({});
     let bg = s.bg, props = {};
     const beats = s.beats.map((b, i) => {
       const at = `${s.id}[${i}]`;
@@ -126,7 +153,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       if (b.motion && rmAlt === 'same') fail(at, 'a beat with motion needs a reduced-motion alt');
       const scare = b.scare ?? sceneScare;
       if (!SCARES.includes(scare)) fail(at, `scare ${scare} is not one of ${SCARES.join('|')}`);
-      const choices = b.choices == null ? null : loadChoices(b.choices, at);
+      const choices = b.choices == null ? null : loadChoices(b.choices, at, decl);
       const wait = b.wait ?? (choices ? 'choice' : b.auto ? 'auto' : 'click');
       if (!WAITS.includes(wait)) fail(at, `wait "${wait}" is not one of ${WAITS.join('|')}`);
       if ((wait === 'choice') !== !!choices) fail(at, 'a beat with choices waits for a pick (wait "choice"), and only that beat');
@@ -137,9 +164,15 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       if (wait === 'auto' && auto === null) fail(at, 'wait "auto" needs an auto time');
       const timer = b.timer ?? null;
       if (timer !== null && (!choices || typeof timer !== 'number' || !(timer > 0))) fail(at, 'timer must be a positive number of seconds, on a choice beat');
-      return Object.freeze({ scene: s.id, index: i, bg, sprite: b.sprite ?? null, props: Object.freeze({ ...props }), text,
-        speaker: b.speaker ?? null, line: parseLine(text, at, b.speaker ?? null), sfx: b.sfx ?? null, rmAlt,
-        motion: !!b.motion, hold, auto, wait, scare, choices, timer, set: flagsField(b.set, at, 'set') });
+      const base = { bg, sprite: b.sprite ?? null, props: Object.freeze({ ...props }), text, speaker: b.speaker ?? null,
+        line: parseLine(text, at, b.speaker ?? null), sfx: b.sfx ?? null };
+      const vary = loadVary(b.vary, base, at, decl, manifest, art, cueNames);
+      echoLint(text, vary, at);
+      for (const [j, c] of (choices ?? []).entries()) {
+        if (!Object.keys(c.set ?? {}).some((k) => ECHO[k])) echoLint(c.text, null, `${at}.choices[${j}]`);
+      }
+      return Object.freeze({ scene: s.id, index: i, ...base, rmAlt, motion: !!b.motion, hold, auto, wait, scare, choices, timer,
+        set: declared(decl, flagsField(b.set, at, 'set'), at), vary });
     });
     for (const b of beats) for (const c of b.choices ?? []) for (const t of goTargets(c.go)) pending.push([`${b.scene}[${b.index}]`, t]);
     return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats });
@@ -148,7 +181,69 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
   return scenes;
 }
 
-function loadChoices(list, at) {
+// vary: { flag: { value: { text?, speaker?, props?, sprite?, bg?, sfx? } } }. Every declared value needs an entry
+// (an empty {} = same as the base). Entries are checked like beats. Loaded form: flag -> value -> the entry's own
+// fields, keyed in declared order so the first key is the unset fallback. Variant props merge over the beat's carried
+// props for that beat only; nothing a variant sets carries to the next beat.
+function loadVary(v, base, at, decl, manifest, art, cueNames) {
+  if (v == null) return null;
+  if (typeof v !== 'object' || Array.isArray(v) || !Object.keys(v).length) fail(at, '"vary" must be { flag: { value: {...} } }');
+  const out = {};
+  for (const [flag, byValue] of Object.entries(v)) {
+    const vals = decl[flag];
+    if (!vals) fail(at, `vary on undeclared flag "${flag}" (declare it in the root "flags")`);
+    if (!byValue || typeof byValue !== 'object' || Array.isArray(byValue)) fail(at, `vary.${flag} must be { value: {...} }`);
+    for (const k of Object.keys(byValue)) if (!vals.includes(k)) fail(at, `vary.${flag} has unknown value "${k}" (declared: ${vals.join('|')})`);
+    const m = {};
+    for (const val of vals) {
+      const where = `${at}.vary.${flag}.${val}`;
+      if (!Object.hasOwn(byValue, val)) fail(at, `vary.${flag} is missing the variant for "${val}"`);
+      const e = byValue[val];
+      if (!e || typeof e !== 'object' || Array.isArray(e)) fail(where, 'a variant must be an object');
+      for (const k of Object.keys(e)) if (!VARY_KEYS.includes(k)) fail(where, `"${k}" cannot vary (allowed: ${VARY_KEYS.join(', ')})`);
+      assetField(e.bg, 'bg', where, manifest, art);
+      assetField(e.sprite, 'sprite', where, manifest, art);
+      assetField(e.sfx, 'sfx', where, manifest, cueNames);
+      if (e.speaker != null && (typeof e.speaker !== 'string' || !e.speaker.trim())) fail(where, 'speaker must be a non-empty string');
+      if (e.text != null && typeof e.text !== 'string') fail(where, 'text must be a string');
+      if (e.props != null && (typeof e.props !== 'object' || Array.isArray(e.props))) fail(where, 'props must be an object');
+      if (e.text != null && words(e.text) > MAX_WORDS) fail(where, `text has ${words(e.text)} words, max ${MAX_WORDS}`);
+      parseLine(e.text ?? base.text, where, e.speaker ?? base.speaker);
+      const own = {};
+      for (const k of VARY_KEYS) if (e[k] != null) own[k] = k === 'props' ? Object.freeze({ ...e.props }) : e[k];
+      m[val] = Object.freeze(own);
+    }
+    out[flag] = Object.freeze(m);
+  }
+  return Object.freeze(out);
+}
+// Echo lint: base text naming a pick word must be replaced by a `text` variant for every value of that flag.
+function echoLint(text, vary, at) {
+  for (const [flag, re] of Object.entries(ECHO)) {
+    const hit = re.exec(text);
+    if (!hit) continue;
+    const m = vary?.[flag];
+    if (!m || !Object.values(m).every((e) => e.text != null)) {
+      fail(at, `"${hit[0]}" is an echo word: this line needs a text variant per ${flag} value (vary.${flag})`);
+    }
+  }
+}
+
+// What the player sees for this beat under these flags: each varied flag's overlay (unset or unknown value = the
+// flag's first declared value). Only look fields change; choices/timer/set are the beat's own.
+export function beatView(beat, flags = {}) {
+  if (!beat.vary) return beat;
+  const view = { ...beat };
+  for (const [flag, m] of Object.entries(beat.vary)) {
+    const v = flags[flag];
+    const e = typeof v === 'string' && Object.hasOwn(m, v) ? m[v] : Object.values(m)[0];
+    for (const [k, x] of Object.entries(e)) view[k] = k === 'props' ? Object.freeze({ ...view.props, ...x }) : x;
+  }
+  if (view.text !== beat.text || view.speaker !== beat.speaker) view.line = parseLine(view.text, `${beat.scene}[${beat.index}]`, view.speaker);
+  return Object.freeze(view);
+}
+
+function loadChoices(list, at, decl = {}) {
   if (!Array.isArray(list) || !list.length || list.length > SIDES.length) fail(at, `choices must be 1..${SIDES.length} items`);
   if (list.filter((c) => c?.default).length > 1) fail(at, 'only one choice can be the default');
   const sides = new Set();
@@ -164,8 +259,8 @@ function loadChoices(list, at) {
     if (sides.has(side)) fail(where, `two choices on the ${side} side`);
     sides.add(side);
     const parts = Object.freeze(orParts(c.text, where));
-    return Object.freeze({ text: c.text, side, go: loadGo(c.go, where), if: flagsField(c.if, where, 'if'),
-      set: flagsField(c.set, where, 'set'), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or) });
+    return Object.freeze({ text: c.text, side, go: loadGo(c.go, where, decl), if: declared(decl, flagsField(c.if, where, 'if'), where),
+      set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or) });
   }));
 }
 

@@ -1,7 +1,7 @@
 // Beat contract (src/date-beta/SCENES.md): speaker, timer, set/if, go conditions, defaults on skip, asset ids, validation.
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { loadScenes, start, next, skip, choose, beatAt, timeoutPick, tick, enabled, resolveGo } from './date-beta/engine.js';
+import { loadScenes, start, next, skip, choose, beatAt, beatView, timeoutPick, tick, enabled, resolveGo } from './date-beta/engine.js';
 import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
 
@@ -12,7 +12,7 @@ const pair = (a = {}, b = {}, beat = {}) =>
 
 test('date-beta contract: the shipped scenes validate against the manifest and art names', () => {
   assert.doesNotThrow(() => loadScenes(data, { manifest, art: ART_NAMES }));
-  const roof = loadScenes(data)[1].beats[2];
+  const roof = loadScenes(data)[1].beats.find((b) => b.timer);
   assert.equal(roof.timer, 10);
   assert.equal(timeoutPick(roof), 0);
 });
@@ -105,4 +105,70 @@ test('date-beta validation: unknown keys, bad go targets, bad asset ids fail at 
   const ok = loadScenes(one({ bg: 'BG-03', sfx: 'SX-37', text: 'x' }), opts)[0].beats[0];
   assert.equal(ok.bg, 'BG-03');
   assert.equal(ok.sfx, 'SX-37');
+});
+
+// vary + flags (bento echo rule). A declared flag's values drive per-beat overlays of look/words only.
+const FLAGS = { bento: ['umeboshi', 'tamagoyaki'] };
+const flagged = (beats, extra = {}) => ({ flags: FLAGS, ...tiny(beats), ...extra });
+const both = (u, t) => ({ bento: { umeboshi: u, tamagoyaki: t } });
+
+test('date-beta vary: load failures (missing variant, undeclared flag, unknown value, non-look key, bad entry)', () => {
+  assert.throws(() => loadScenes(flagged([{ vary: { bento: { umeboshi: {} } } }])), /a\[0\]: vary\.bento is missing the variant for "tamagoyaki"/);
+  assert.throws(() => loadScenes(tiny([{ vary: both({}, {}) }])), /vary on undeclared flag "bento"/);
+  assert.throws(() => loadScenes(flagged([{ vary: { mood: { a: {} } } }])), /undeclared flag "mood"/);
+  assert.throws(() => loadScenes(flagged([{ vary: { bento: { umeboshi: {}, tamagoyaki: {}, mochi: {} } } }])), /unknown value "mochi"/);
+  assert.throws(() => loadScenes(flagged([{ choices: [{ text: 'a' }], vary: both({ choices: [] }, {}) }])), /vary\.bento\.umeboshi: "choices" cannot vary/);
+  assert.throws(() => loadScenes(flagged([{ vary: both({ timer: 3 }, {}) }])), /"timer" cannot vary/);
+  assert.throws(() => loadScenes(flagged([{ vary: both({ set: { x: 1 } }, {}) }])), /"set" cannot vary/);
+  assert.throws(() => loadScenes(flagged([{ vary: both({ text: 'one two three four five six seven eight nine ten eleven twelve thirteen' }, {}) }])), /umeboshi: text has 13 words/);
+  assert.throws(() => loadScenes(flagged([{ vary: both({ text: 'f{or}' }, {}) }])), /stray brace/);
+  assert.throws(() => loadScenes(flagged([{ vary: both({ speaker: '' }, {}) }])), /speaker/);
+  assert.throws(() => loadScenes(flagged([{ vary: both({ props: [1] }, {}) }])), /props must be an object/);
+  assert.throws(() => loadScenes(flagged([{ vary: {} }])), /"vary" must be/);
+  const one = (beat) => ({ flags: FLAGS, scenes: [{ id: 'a', bg: 'rooftop', beats: [beat] }] });
+  assert.throws(() => loadScenes(one({ vary: both({ sfx: 'kazoo' }, {}) }), { manifest, art: ART_NAMES }), /umeboshi: sfx "kazoo"/);
+  assert.throws(() => loadScenes(one({ vary: both({}, { bg: 'BG-99' }) }), { manifest, art: ART_NAMES }), /tamagoyaki: bg "BG-99"/);
+});
+
+test('date-beta flags: the root declaration is checked, and declared flags only take declared values', () => {
+  assert.throws(() => loadScenes(flagged([{}], { flags: { bento: [] } })), /flags\.bento must be a non-empty list/);
+  assert.throws(() => loadScenes(flagged([{}], { flags: { bento: ['a', 'a'] } })), /distinct/);
+  assert.throws(() => loadScenes(flagged([{}], { flags: [] })), /"flags" must be an object/);
+  assert.throws(() => loadScenes(flagged([{ set: { bento: 'mochi' } }])), /flag bento = "mochi" is not one of umeboshi\|tamagoyaki/);
+  assert.throws(() => loadScenes(flagged([{ choices: [{ text: 'a', set: { bento: 'egg' } }] }])), /not one of/);
+  assert.throws(() => loadScenes(flagged([{ choices: [{ text: 'a', if: { bento: 'egg' } }] }])), /not one of/);
+  assert.throws(() => loadScenes({ flags: FLAGS, scenes: [{ id: 'a', bg: 'x', defaults: { bento: 'egg' }, beats: [{}] }] }), /not one of/);
+  assert.doesNotThrow(() => loadScenes(flagged([{ set: { bento: null, other: 'anything' } }])));
+});
+
+test('date-beta echo lint: pick words need a text variant per value; the picking choices are exempt', () => {
+  for (const w of ['umeboshi', 'Tamagoyaki', 'SOUR', 'sweet', 'すっぱい', '甘い']) {
+    assert.throws(() => loadScenes(flagged([{ text: `NANDA: so ${w}!` }])), /is an echo word/, w);
+  }
+  assert.doesNotThrow(() => loadScenes(flagged([{ text: 'sweetheart, sourdough' }])), 'whole words only');
+  assert.throws(() => loadScenes(tiny([{ text: 'Sour.' }])), /echo word/, 'lints even with no flags declared');
+  assert.throws(() => loadScenes(flagged([{ text: 'Sour.', vary: both({ props: { a: 1 } }, { text: 'Sweet.' }) }])), /echo word/,
+    'a variant without its own text would show the base echo word');
+  assert.doesNotThrow(() => loadScenes(flagged([{ text: 'Sour.', vary: both({ text: 'Sour!' }, { text: 'Sweet!' }) }])));
+  assert.throws(() => loadScenes(flagged([{ choices: [{ text: 'Eat the umeboshi' }] }])), /choices\[0\]: "umeboshi" is an echo word/);
+  assert.doesNotThrow(() => loadScenes(flagged([{ choices: [{ text: 'Take the umeboshi', set: { bento: 'umeboshi' } },
+    { text: 'Take the tamagoyaki', set: { bento: 'tamagoyaki' } }] }])));
+});
+
+test('date-beta beatView: overlays text/speaker/props/bg/sfx per value; unset or unknown = first value; no vary = same beat', () => {
+  const [s] = loadScenes(flagged([
+    { props: { clock: 'noon', ad: 'none' }, text: 'Base.', sfx: 'tick',
+      vary: both({ text: 'NANDA: Sour.', props: { ad: 'ume' } }, { text: 'Sweet.', speaker: 'MC', props: { ad: 'egg' }, bg: 'y', sfx: 'bell' }) },
+    { text: 'Plain.' }]));
+  const [b, plain] = s.beats;
+  const u = beatView(b, { bento: 'umeboshi' }), t = beatView(b, { bento: 'tamagoyaki' });
+  assert.deepEqual([u.line.who, u.line.plain, u.props, u.bg, u.sfx], ['NANDA', 'Sour.', { clock: 'noon', ad: 'ume' }, 'x', 'tick']);
+  assert.deepEqual([t.line.who, t.line.plain, t.props, t.bg, t.sfx], ['MC', 'Sweet.', { clock: 'noon', ad: 'egg' }, 'y', 'bell']);
+  assert.deepEqual(beatView(b, {}).line.plain, 'Sour.', 'unset -> first declared value');
+  assert.deepEqual(beatView(b, { bento: 'mochi' }).line.plain, 'Sour.', 'unknown -> first declared value');
+  assert.deepEqual(b.props, { clock: 'noon', ad: 'none' }, 'the loaded beat is not mutated');
+  assert.equal(beatView(plain, { bento: 'tamagoyaki' }), plain);
+  assert.deepEqual(plain.props, { clock: 'noon', ad: 'none' }, 'variant props do not carry to the next beat');
+  assert.equal(u.choices, b.choices);
+  assert.equal(u.hold, b.hold);
 });

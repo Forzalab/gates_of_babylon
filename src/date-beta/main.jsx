@@ -3,10 +3,10 @@
 // A choice beat with `timer` counts down (frozen while paused or the tab is hidden) and auto-picks at 0.
 // URL: ?scene=<id> starts there (&beat=<n> steps n beats in), ?still forces reduced motion (same as prefers-reduced-motion).
 import { createRoot } from 'react-dom/client';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './theme.js';
 import data from './scenes.json';
-import { loadScenes, start, next, skip, choose, beatAt, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
+import { loadScenes, start, next, skip, choose, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
 import { ART } from './art/index.js';
 import { Say, Choices } from './Say.jsx';
 import manifest from './assets.json';
@@ -54,7 +54,9 @@ function Player() {
   const [left, setLeft] = useState(null); // timer seconds left on this beat, null = no timer
   const since = useRef(0);
   const k = useFit();
-  const scene = SCENES[pos.s], beat = beatAt(SCENES, pos);
+  const scene = SCENES[pos.s];
+  // The beat as this run sees it: `vary` overlays (bento echo) applied. Memoized on pos so effects don't re-fire.
+  const beat = useMemo(() => beatView(beatAt(SCENES, pos), pos.flags), [pos]);
 
   useEffect(() => {
     since.current = performance.now();
