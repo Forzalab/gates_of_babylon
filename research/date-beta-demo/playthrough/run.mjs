@@ -17,11 +17,11 @@ fs.mkdirSync(SHOTS, { recursive: true });
 
 // Which button to press at each choice beat, per ending. null = let the timer run out.
 const ENDINGS = {
-  steeped: { 'door:2': 'Just one cup', 'cup:3': 'Drink' },
-  'escape-win': { 'door:2': 'Just one cup', 'cup:3': 'Stand up', 'escape:13': 'Leave her house' },
-  'escape-timeout': { 'door:2': 'Just one cup', 'cup:3': 'Stand up', 'escape:13': null },
-  'leave-fu': { 'door:2': 'Say goodnight', 'leave:3': "FUCK YOU. I'm leaving" },
-  'leave-yeah': { 'door:2': 'Say goodnight', 'leave:3': 'uhmmm yeah ig' },
+  steeped: { 'door:3': 'Just one cup', 'cup:3': 'Drink' },
+  'escape-win': { 'door:3': 'Just one cup', 'cup:3': 'Stand up', 'escape:13': 'Leave her house' },
+  'escape-timeout': { 'door:3': 'Just one cup', 'cup:3': 'Stand up', 'escape:13': null },
+  'leave-fu': { 'door:3': 'Say goodnight', 'leave:3': "FUCK YOU. I'm leaving" },
+  'leave-yeah': { 'door:3': 'Say goodnight', 'leave:3': 'uhmmm yeah ig' },
 };
 const BENTO = { tamagoyaki: 'Take the tamagoyaki', umeboshi: 'Take the umeboshi' };
 
