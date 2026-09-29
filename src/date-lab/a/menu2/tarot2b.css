@@ -1,0 +1,10 @@
+/* menu-1-r2 only: her hand holding your card, the empty third place. */
+.tarot2 .holding { position: absolute; left: -290px; top: 190px; width: 504px; height: 360px; z-index: 6; pointer-events: none;
+  filter: drop-shadow(0 16px 10px rgba(0, 0, 0, .55)); }
+/* her fingers hold your card: hover lifts hers 22 px, yours only 6 */
+.tarot2.is-held .card.yours:not(:disabled):hover, .tarot2.is-held .card.yours:not(:disabled):focus-visible { transform: translateY(-6px); }
+.tarot2 .third { position: absolute; left: 1580px; top: 420px; width: 220px; height: 360px; transform: perspective(900px) rotateX(38deg) rotate(6deg);
+  border: 5px dashed rgba(214, 169, 63, .55); border-radius: 18px; background: rgba(20, 4, 14, .35); transition: opacity 900ms ease; }
+.tarot2 .third svg { width: 100%; height: 100%; }
+.tarot2 .third text { font: 400 44px/1 Georgia, serif; fill: #d6a93f; opacity: .7; letter-spacing: .12em; }
+.tarot2.st-door .third { opacity: 0; }

@@ -52,6 +52,51 @@ const SHOTS = {
     await page.keyboard.press('r'); await wait(2400); await snap('11-replay-purple-disabled');
     await open(true); await wait(4200); await snap('rm-stay');
   },
+  'menu-h1-r2': async (page, snap, open) => {
+    await open();
+    await wait(1500); await snap('1-deal-her-cursor-parked');
+    await wait(2000); await snap('2-backspacing-your-card');
+    await wait(1500); await snap('3-stay-card-warm');
+    await wait(2200); await snap('4-timeout-her-hand');
+    await wait(1800); await snap('5-timeout-pink');
+    await page.keyboard.press('r'); await wait(5100); await snap('6-replay-pink-pinned-she-retypes-yours');
+    await open(); await wait(4500); await page.keyboard.press('2'); await wait(120); await snap('7-purple-bleed');
+    await wait(2700); await snap('8-purple-reversed-lea');
+    await page.keyboard.press('r'); await wait(2500); await snap('9-replay-purple-pinned-struck');
+    await open(true); await wait(3600); await snap('rm-stay');
+  },
+  'menu-3-r2': async (page, snap, open) => {
+    await open();
+    await wait(300); await snap('0-cold-open-mc-line');
+    await wait(1100); await snap('1-her-caret-in-mc-line');
+    await wait(900); await snap('2-mc-line-says-stay');
+    await wait(2300); await snap('3-backspacing-goodnight');
+    await wait(2000); await snap('4-label-take-your-time');
+    await page.waitForSelector('.hercursor.p1'); await wait(100); await snap('5-her-cursor');
+    await page.waitForSelector('.ecu'); await wait(300); await snap('6-ecu-eyes-on-mc');
+    await wait(1300); await snap('7-ecu-eyes-on-you');
+    await page.keyboard.press('r'); await wait(3000); await snap('8-replay-pink-disabled-both-agree');
+    await open(); await wait(5600); await page.keyboard.press('2'); await wait(120); await snap('9-purple-bleed');
+    await wait(3200); await snap('10-purple-lea');
+    await page.keyboard.press('r'); await wait(2400); await snap('11-replay-purple-disabled');
+    await open(true); await wait(1500); await snap('rm-mc-line-emptied');
+    await page.waitForSelector('.ecu', { timeout: 15000 }); await wait(300); await snap('rm-ecu');
+  },
+  'menu-1-r2': async (page, snap, open) => {
+    await open();
+    await wait(700); await snap('1-door');
+    await wait(2300); await snap('2-her-hand-on-your-card');
+    await page.hover('.card.her'); await wait(500); await snap('3-hover-hers-lifts');
+    await page.hover('.card.yours'); await wait(500); await snap('4-hover-yours-held-warm');
+    await page.mouse.move(10, 10);
+    await wait(2600); await snap('5-timeout-her-hand');
+    await wait(1800); await snap('6-timeout-pink');
+    await page.keyboard.press('r'); await wait(2200); await snap('7-replay-pink-nailed');
+    await open(); await wait(4000); await page.keyboard.press('2'); await wait(150); await snap('8-purple-bleed');
+    await wait(1600); await snap('9-purple-reversed');
+    await page.keyboard.press('r'); await wait(2400); await snap('10-replay-purple-nailed');
+    await open(true); await wait(2600); await snap('rm-table');
+  },
 };
 
 // camera pieces: freeze the clock at ?t=<ms> and shoot (deterministic frames)
@@ -64,6 +109,9 @@ SHOTS['cam-2'] = frames([['1-intertitle', 1200], ['2-dolly-lit', 4200], ['3-doll
   ['5-intertitle-12', 16500], ['6-genkan-dolly', 20000], ['7-stare', 26800], ['rm-dolly-dark', 13000, true]]);
 SHOTS['cam-3'] = frames([['1-train', 800], ['2-push-umeboshi', 5200], ['3-match-iris', 6300], ['4-pull-her-face', 9400], ['5-her-ad-slip', 12700],
   ['6-poster-pull', 15000], ['7-underpass-reveal', 19500], ['8-tunnel', 21400], ['9-phone-face-down', 23200], ['10-phone-train', 25500], ['11-into-screen', 29800], ['rm-her-ad', 8000, true]]);
+SHOTS['cam-h-r2-a'] = frames([['01-train-af-hunt', 900], ['02-train-lock-umeboshi', 2400], ['03-dzoom-red', 5800], ['04-match-iris', 6300], ['05-her-ad', 11000],
+  ['06-slip-wide', 12300], ['07-poster-pull', 15000], ['08-af-jumps-to-tunnel', 17800], ['09-night-dzoom-her', 21300], ['10-dropout', 22600], ['11-floor-counting', 27000],
+  ['12-face-12-phone', 30000], ['13-push-into-screen', 31800], ['14-loop-frame', 32490], ['rm-floor', 27000, true], ['rm-her-ad', 9000, true]]);
 SHOTS['closeup-1'] = frames([['1-hover-tamago', 1800], ['2-over-umeboshi', 3700], ['3-pucker-tint', 4300], ['4-sour-sfx', 5200], ['5-smile-anyway', 7500], ['6-echo-two-plums', 10500], ['rm-pucker', 4600, true]]);
 SHOTS['closeup-2'] = frames([['1-buzz-lockscreen', 1200], ['2-flip-edge', 2200], ['3-face-down', 3000], ['4-kuleshov-blank', 5000], ['5-nobody', 6400], ['6-buzz-again-leak', 8200], ['7-only-you', 10800], ['rm-lockscreen', 1200, true]]);
 SHOTS['closeup-3'] = frames([['1-table', 1800], ['2-rack-before', 3800], ['3-rack-third-sharp', 6600], ['4-steam-or', 7900], ['5-who', 10300], ['6-toward-you', 12800], ['7-three-of-us', 15000], ['rm-steam-or', 8800, true]]);
