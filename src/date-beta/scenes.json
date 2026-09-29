@@ -1,17 +1,8 @@
 {
   "version": 1,
-  "note": "date-beta demo spine: shared scenes -> door -> cup (steeped | unknown -> escape) | leave; every ending card goes back to splash. bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
+  "note": "date-beta demo spine: shared scenes -> door -> cup (steeped | unknown -> escape) | leave; every ending card goes back to scene 1, the rooftop (the Figur collapse in Logic mode lands there, as if START was pressed; the old fake-site Splash art is kept but out of the play path). bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
   "flags": { "bento": ["umeboshi", "tamagoyaki"] },
   "scenes": [
-    {
-      "id": "splash",
-      "title": "START / house of cards",
-      "bg": "splash",
-      "beats": [
-        { "props": { "collapsed": false }, "wait": "start" },
-        { "props": { "collapsed": true }, "sfx": "static", "motion": true, "rmAlt": "hard-cut", "hold": 2000 }
-      ]
-    },
     {
       "id": "rooftop",
       "title": "Rooftop / clock tower",
@@ -119,7 +110,7 @@
         { "text": "NANDA: Rest. I'll do the remembering.", "sfx": "silence" },
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: Bitter cup, sour hour. Every hour is ours."}, "tamagoyaki": {"text": "NANDA: Warm cup, sweet sleep. You're mine to keep."}}} },
         { "text": "NANDA: ずっと。…F{OR}ever. Ne?", "sfx": "breath" },
-        { "text": "STEEPED.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "splash" }] }
+        { "text": "STEEPED.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
@@ -158,7 +149,7 @@
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: Now every hour is ours."}, "tamagoyaki": {"text": "NANDA: Sleep now. You're mine to keep."}}} },
         { "bg": "blackout", "props": { "phase": "dark" }, "sfx": "drone", "auto": 1200 },
         { "text": "NANDA: Mine.", "sfx": "silence" },
-        { "text": "ESCAPE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "splash" }] }
+        { "text": "ESCAPE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
@@ -174,7 +165,7 @@
         { "vary": {"bento": {"umeboshi": {"text": "NANDA: すっぱい？…ね。"}, "tamagoyaki": {"text": "NANDA: 甘い？…ね。"}}} },
         { "vary": {"bento": {"umeboshi": {"text": "NANDA: One sour hour…"}, "tamagoyaki": {"text": "NANDA: One sweet bite…"}}} },
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: …then every hour is ours."}, "tamagoyaki": {"text": "NANDA: …then sleep. You're mine to keep."}}} },
-        { "text": "ESCAPE?", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "splash" }] }
+        { "text": "ESCAPE?", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
@@ -203,7 +194,7 @@
         { "text": "NANDA: You said leave. I heard 'lea—'.", "sfx": "breath" },
         { "text": "CROWD: f{OR}ever and ever", "sfx": "drone" },
         { "text": "CROWD: f{OR}ever and ever and ever", "sfx": "drone" },
-        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "splash" }] }
+        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
@@ -216,7 +207,7 @@
         { "text": "NANDA: Good input.", "sfx": "breath" },
         { "text": "CROWD: f{OR}ever and ever", "sfx": "drone" },
         { "text": "CROWD: f{OR}ever and ever and ever", "sfx": "drone" },
-        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "splash" }] }
+        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     }
   ]

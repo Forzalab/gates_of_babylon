@@ -7,7 +7,7 @@ const tiny = (beats, extra = {}) => ({ scenes: [{ id: 'a', bg: 'x', beats, ...ex
 
 test('date-beta: the shipped scenes.json loads, shared scenes then the demo spine', () => {
   const scenes = loadScenes(data);
-  assert.deepEqual(scenes.map((s) => s.id), ['splash', 'rooftop', 'train', 'naan', 'blackout', 'door', 'cup', 'steeped',
+  assert.deepEqual(scenes.map((s) => s.id), ['rooftop', 'train', 'naan', 'blackout', 'door', 'cup', 'steeped',
     'unknown', 'escape', 'escape-win', 'escape-timeout', 'leave', 'leave-fu', 'leave-yeah']);
 });
 
@@ -57,8 +57,9 @@ test('date-beta sequencer: next walks beats, then scenes, then reports done', ()
 
 test('date-beta sequencer: skip (Esc) jumps to the next scene; start can jump to a scene id', () => {
   const scenes = loadScenes(data);
+  assert.equal(scenes[start(scenes).s].id, 'rooftop', 'scene 1 = the rooftop (the Figur collapse lands here)');
   const p = skip(scenes, start(scenes));
-  assert.equal(scenes[p.s].id, 'rooftop');
+  assert.equal(scenes[p.s].id, 'train');
   assert.equal(scenes[start(scenes, { at: 'naan' }).s].id, 'naan');
   assert.equal(start(scenes, { at: 'nope' }).s, 0, 'unknown id falls back to the first scene');
   assert.equal(scenes[skip(scenes, start(scenes, { at: 'blackout' })).s].id, 'door');

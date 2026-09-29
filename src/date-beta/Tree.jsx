@@ -70,7 +70,7 @@ export function Tree({ scenes, decl, sess, k, here, onJump, onClose }) {
           <button type="button" className="db-tree-btn" onClick={trash} title="Clear every pick">🗑 Reset picks</button>
           <button type="button" className="db-tree-btn db-tree-close" onClick={onClose} title="Close (Esc or ~)">✕ Close</button>
         </header>
-        <p className="db-tree-hint">Click a pink or purple pill to play that choice · thin lines play on their own · every ending returns to splash</p>
+        <p className="db-tree-hint">Click a pink or purple pill to play that choice · thin lines play on their own · every ending returns to the rooftop</p>
         <svg className="db-tree-lines" width={LAYOUT.W} height={LAYOUT.H} aria-hidden="true">
           {drawn.map((e) => {
             const a = L.pos[e.from], b = L.pos[e.to], m = place[e.id];

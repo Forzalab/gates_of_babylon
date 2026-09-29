@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { wordmarkProps } from './collapse.js'; // the ONLY way into Date mode (Figur collapse)
 import { ReactFlow, Background, useNodesState, ViewportPortal } from '@xyflow/react';
 import { canConnect, canAddSwitch, evaluate } from './sim.js';
 import { nodeTypes, pinYs, portGeom } from './nodes/index.jsx';
@@ -441,7 +442,7 @@ export default function App() {
         </button>
         <p className="lockup">Circuit<br /> editor</p>
       </div>
-      <h1 className="wordmark" lang="sv" aria-label="Figur"><span className="sr">Figur</span><span aria-hidden="true"><span className="wF">F</span><span className="wi">i</span><span className="wg">g</span><span className="wu">u</span><span className="wr">r</span></span></h1>
+      <h1 className="wordmark" lang="sv" aria-label="Figur" {...wordmarkProps}><span className="sr">Figur</span><span aria-hidden="true"><span className="wF">F</span><span className="wi">i</span><span className="wg">g</span><span className="wu">u</span><span className="wr">r</span></span></h1>
       {/* Status lines are spoken by the logo: a balloon whose tail points at the wordmark. */}
       {status.phrase ? <Say phrase={status.phrase} className="say-logo" /> : <p className="sr" role="status">{status.text}</p>}
 

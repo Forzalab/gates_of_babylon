@@ -14,6 +14,9 @@ export const placeholderImg = (id, w = 320, h = 180) => `data:image/svg+xml,${en
   `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="100%" height="100%" fill="#888"/>`
   + `<text x="50%" y="50%" fill="#fff" font-family="monospace" font-size="24" text-anchor="middle" dominant-baseline="middle">${String(id).replace(/[<&>]/g, '')}</text></svg>`)}`;
 
+// Placeholder pitch: 440..880 Hz in 55 Hz steps, fixed per id.
+export const beepHz = (id) => 440 + ([...String(id)].reduce((h, c) => (h * 31 + c.charCodeAt(0)) >>> 0, 7) % 9) * 55;
+
 // Browser side: preload everything once, play by cue or id, image src by id.
 export function createLoader(manifest, base = '/') {
   const A = makeAssets(manifest);
@@ -38,9 +41,9 @@ export function createLoader(manifest, base = '/') {
     }
     for (const ev of ['pointerdown', 'keydown']) addEventListener(ev, unlock, { once: true });
   };
-  const beep = () => {
+  const beep = (id) => { // placeholder: a short beep, pitched per id so each missing cue is still told apart
     const o = ctx.createOscillator(), g = ctx.createGain();
-    o.frequency.value = 660; g.gain.value = 0.05;
+    o.frequency.value = beepHz(id); g.gain.value = 0.05;
     o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.08);
   };
   const play = (cue) => {
@@ -48,7 +51,7 @@ export function createLoader(manifest, base = '/') {
       const id = A.cueId(cue);
       if (!id || !ctx) return;
       const b = buffers.get(id);
-      if (!b) { beep(); return; }
+      if (!b) { beep(id); return; }
       const s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start();
     } catch { /* sound is never fatal */ }
   };

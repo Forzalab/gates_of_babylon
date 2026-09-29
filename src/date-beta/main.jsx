@@ -155,6 +155,8 @@ function Player() {
         {waiting && !beat.text && <div className="nexthint" aria-hidden="true">click ▸</div>}
       </div>
       <div className="chrome">
+        {/* The way back to Logic mode. The only way in is the Figur wordmark there (src/collapse.js). */}
+        <a href={import.meta.env.BASE_URL} onClick={(e) => e.stopPropagation()} title="Back to Logic mode">◂ LOGIC</a>
         {canFull && <button type="button" onClick={stop(toggleFull)} title="Fullscreen (F)">{full ? '✕ exit full' : '⛶ fullscreen'}</button>}
         <button type="button" onClick={stop(skipScene)} title="Skip scene (Esc or S)">skip ▸▸</button>
       </div>

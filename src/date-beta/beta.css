@@ -91,9 +91,10 @@ body { font-family: var(--cond); color: var(--ink); }
 
 /* ---------- chrome (outside the stage, never scaled) ---------- */
 .chrome { position: fixed; top: 10px; right: 10px; display: flex; gap: 8px; z-index: 10; }
-.chrome button { font: 700 14px/1 var(--cond); letter-spacing: .06em; color: #fff; background: #000;
+.chrome button, .chrome a { font: 700 14px/1 var(--cond); letter-spacing: .06em; color: #fff; background: #000;
   border: 1px solid rgba(255, 255, 255, .6); border-radius: 6px; padding: 8px 12px; cursor: pointer; }
-.chrome button:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
+.chrome a { display: inline-block; text-decoration: none; }
+.chrome button:focus-visible, .chrome a:focus-visible { outline: 2px solid var(--pink); outline-offset: 2px; }
 .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
 
 /* ---------- reduced motion: everything is a hard cut ---------- */
