@@ -1,0 +1,52 @@
+/* round-3 letterbox menus (menu-h2-r3, menu-h3-r3). Builds on menu4.css (.m4) + menur2.css (.r2). */
+/* the options row: pink slab, OR, purple slab (widths set by the component; row = 1300 + 160 OR) */
+.r3 .r3-opts { left: 230px; width: 1460px; top: 86px; height: 124px; }
+.r3 .m4-or { flex: 0 0 140px; font-size: 46px; }
+
+/* SAME fat, high-contrast slab for both: only colour and squeeze differ */
+.r3 .m4-opt.r3-slab { height: 124px; border: 0; border-radius: 8px; overflow: visible; font: 400 50px/1 'Inter Tight', var(--cond);
+  color: #fff; text-shadow: 0 2px 0 rgba(20, 0, 20, .55), 0 0 10px rgba(20, 0, 20, .35); transition: transform 180ms ease-out, box-shadow 180ms ease-out; }
+.r3 .m4-opt.r3-slab.pink { background: #9c2f63; box-shadow: 0 0 0 4px #ff5fa2, 0 0 34px rgba(255, 95, 162, .55); }
+.r3 .m4-opt.r3-slab.pink .m4-fill { border-radius: 8px; background: linear-gradient(0deg, #ff5fa2, #ff86bc); }
+.r3 .m4-opt.r3-slab.purple { background: #8a5cf6; box-shadow: 0 0 0 4px #b89bff; }
+.r3 .m4-opt.r3-slab .m4-key { border-color: #fff; opacity: 1; color: #fff; }
+.r3 .m4-opt.r3-slab.focus { box-shadow: 0 0 0 5px #fff, 0 0 40px rgba(255, 255, 255, .45); }
+.r3 .m4-opt.r3-slab.pink.focus { box-shadow: 0 0 0 5px #fff, 0 0 44px rgba(255, 95, 162, .8); }
+.r3 .m4-opt.r3-slab.purple .m4-label { white-space: nowrap; }
+.r3 .m4-opt.r3-slab.off { opacity: .55; border: 0; }
+.r3 .m4-opt.r3-slab.off .m4-label { text-decoration: line-through; text-decoration-color: var(--her); text-decoration-thickness: 7px; }
+.r3 .m4-opt.r3-slab.off.pink { background: #4a1a33; box-shadow: 0 0 0 3px rgba(255, 95, 162, .5); }
+.r3 .m4-opt.r3-slab.off.pink .m4-fill { display: none; }
+/* her edit on a solid purple slab: the finished word in white-hot pink needs a dark ground */
+.r3.mode-h2 .st-done .r2-w { color: #fff; background: #d6337f; padding: 0 8px; border-radius: 6px; text-shadow: none; }
+.r3.mode-h2 .st-select .r2-w { background: var(--her); }
+.r3.mode-h2 .r2-caret { background: var(--her); box-shadow: 0 0 0 2px #fff; }
+.r3.mode-h2 .r2-caret::before { font-size: 20px; }
+.r3.mode-h2 .r2-stamp { top: -50px; right: 12px; }
+
+/* h2 edit line: >= 32 px, in her red, under the purple slab */
+.r3 .r3-edit { position: absolute; right: 230px; top: 216px; margin: 0; font: 700 34px/1 var(--mono); letter-spacing: .04em; color: var(--her); }
+.r3 .r3-edit.done { color: #ffb0cf; }
+.r3 .r3-edit s { color: #d9d2ea; text-decoration-color: var(--her); text-decoration-thickness: 4px; }
+
+/* h3: her hold */
+.r3 .r3-hand { position: absolute; inset: 0; width: 1920px; height: 1080px; z-index: 67; pointer-events: none; overflow: visible; }
+.r3 .m4-opt.r3-slab.purple.held { box-shadow: 0 0 0 4px #b89bff, inset 0 10px 0 rgba(20, 0, 30, .35); }
+.r3 .r3-spout { position: absolute; left: 166px; top: 22px; width: 140px; height: 110px; z-index: 3; overflow: visible; pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255, 95, 162, .7)); }
+.r3 .r3-under { position: absolute; left: 0; right: 0; top: 218px; margin: 0; text-align: center; font: 700 36px/1 'Inter Tight', var(--cond);
+  letter-spacing: .06em; color: var(--her); text-shadow: 1px 1px 0 rgba(90, 0, 18, .7); }
+.r3 .r3-under.dim { font: 400 30px/1 'Yellowtail', cursive; color: #ffb0cf; letter-spacing: 0; }
+/* her pin through the picked box (A's BigPin, read-only) */
+.r3 .r3-pinned { position: absolute; left: 50%; top: 50%; width: 210px; height: 210px; transform: translate(-40%, -50%); z-index: 3; pointer-events: none; }
+.r3 .r3-pinned .bigpin { width: 100%; height: 100%; filter: drop-shadow(0 10px 6px rgba(0, 0, 0, .7)) drop-shadow(0 0 18px rgba(240, 36, 63, .55)); }
+
+/* the ECU (hard cut): covers the picture only; the bars and the full-size menu stay on top */
+.r3 .r3-ecuwrap { position: absolute; inset: 0; z-index: 20; background: #000; }
+.r3 .r3-ecuwrap svg { width: 100%; height: 100%; display: block; }
+.r3.ph-ecu .m4-grade { background: none; }
+
+/* room tally in the top bar */
+.r3 .r3-room { position: absolute; left: 0; right: 0; top: 52px; margin: 0; z-index: 60; text-align: center; font: 800 34px/1 'Inter Tight', var(--cond);
+  letter-spacing: .16em; color: #e6e0ee; pointer-events: none; }
+.r3 .r3-room b { color: var(--pink); }
