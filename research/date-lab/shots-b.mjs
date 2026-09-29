@@ -100,6 +100,27 @@ export const SHOTS = [
   { id: 'anim-3-r2', name: 'rm-room-eye', q: 'scene=underpass&stage=3&room=3100&pause&still', wait: 900 },
   { id: 'cam-h-r2-b', name: 'rm-t14.8', q: 't=14.8&pause&still', wait: 1000 },
   { id: 'cam-h-r2-b', name: 'rm-t37.75', q: 't=37.75&pause&still', wait: 1000 },
+  // ---------------- round 3 ----------------
+  // menu-h2-r3 (word swaps, equal slabs, room tally)
+  { id: 'menu-h2-r3', name: '1-t1s-caret', q: 'state=menu&mt=1000', wait: 1200 },
+  { id: 'menu-h2-r3', name: '2-t3.2s-glitch', q: 'state=menu&mt=3200', wait: 1200 },
+  { id: 'menu-h2-r3', name: '3-t3.7s-select', q: 'state=menu&mt=3700', wait: 1200 },
+  { id: 'menu-h2-r3', name: '4-t4.2s-swapped', q: 'state=menu&mt=4200', wait: 1200 },
+  { id: 'menu-h2-r3', name: '5-leave-her-cut', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 5200]] },
+  { id: 'menu-h2-r3', name: '6-take-two-tally', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 7600]] },
+  { id: 'menu-h2-r3', name: 'rm-t3.2s', q: 'state=menu&mt=3200&still', wait: 1200 },
+  // menu-h3-r3 Her Hold (?et=<ms> freezes the ECU clock)
+  { id: 'menu-h3-r3', name: '1-t0.2s-reaching', q: 'state=menu&mt=200', wait: 1200 },
+  { id: 'menu-h3-r3', name: '2-t2.5s-held', q: 'state=menu&mt=2500', wait: 1200 },
+  { id: 'menu-h3-r3', name: '3-hover-purple', q: 'state=menu&mt=2500', wait: 1200, steps: [['move', 1450, 960], ['wait', 400]] },
+  { id: 'menu-h3-r3', name: '4-hover-pink', q: 'state=menu&mt=2500', wait: 1200, steps: [['move', 560, 960], ['wait', 400]] },
+  { id: 'menu-h3-r3', name: '5-ecu-on-box', q: 'state=ecu&et=600', wait: 1500 },
+  { id: 'menu-h3-r3', name: '6-ecu-into-lens', q: 'state=ecu&et=2000', wait: 1500 },
+  { id: 'menu-h3-r3', name: '7-live-timeout-lens', q: 'state=menu', wait: 7200 },
+  { id: 'menu-h3-r3', name: '8-leave-ecu', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 2600]] },
+  { id: 'menu-h3-r3', name: '9-replay-pinned-tally', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 5600]] },
+  { id: 'menu-h3-r3', name: 'rm-t2.5s', q: 'state=menu&mt=2500&still', wait: 1200 },
+  { id: 'menu-h3-r3', name: 'rm-ecu-lens', q: 'state=ecu&et=2000&still', wait: 1500 },
 ];
 
 const filter = process.argv[2];

@@ -13,9 +13,12 @@ import Anim4 from './anim4/Anim4.jsx';
 import Letterbox from './menur2/Letterbox.jsx';
 import CamH from './camh/CamH.jsx';
 import Anim3R2 from './anim3r2/Anim3R2.jsx';
+import Letterbox3 from './menur3/Letterbox3.jsx';
 
 const MenuH2R2 = ({ rm }) => createElement(Letterbox, { rm, mode: 'h2' });
 const Menu4R2 = ({ rm }) => createElement(Letterbox, { rm, mode: 'm4' });
+const MenuH2R3 = ({ rm }) => createElement(Letterbox3, { rm, mode: 'h2' });
+const MenuH3R3 = ({ rm }) => createElement(Letterbox3, { rm, mode: 'h3' });
 
 export const VARIANTS = [
   { id: 'cam-4', track: 'camera', title: 'Hitchcock: a true dolly-zoom on her door, then on the slippers', theme: 'Hitchcock suspense (show the bomb first) x Saul Bass x the Vertigo effect', horror: 4, builder: 'B', Component: Cam4 },
@@ -32,4 +35,7 @@ export const VARIANTS = [
   { id: 'menu-h2-r2', track: 'menu', title: 'Her Time, Her Cut: she retypes Goodnight to Stay while the time pours pink', theme: 'Bandersnatch letterbox x DDLC live edit: her collaborator cursor, then her film cut', horror: 4, builder: 'B', Component: MenuH2R2 },
   { id: 'menu-4-r2', track: 'menu', title: 'Bandersnatch, improved: the cup is pre-poured, the purple box is squeezed, her real face', theme: 'Bandersnatch x cinema scope: the timer is hers, visibly, from the first frame', horror: 3, builder: 'B', Component: Menu4R2 },
   { id: 'menu-5', track: 'menu', title: 'Circuit wires: her wire is already soldered', theme: 'Serial Experiments Lain x circuit board: the drag lies, the OR gets desoldered', horror: 3, builder: 'B', Component: Menu5 },
+  // ---- round 3 ----
+  { id: 'menu-h2-r3', track: 'menu', title: 'Her Time, Her Cut r3: two equal slabs, she swaps Goodnight for Stay (word swaps)', theme: 'Bandersnatch letterbox x DDLC live edit, calmed: whole-word swaps, room tally', horror: 4, builder: 'B', Component: MenuH2R3 },
+  { id: 'menu-h3-r3', track: 'menu', title: 'Her Hold: her fingers keep the purple box down; timeout = her eyes, on you', theme: 'Bandersnatch pour timer x tarot hand-on-card x lens gaze: no text edit, a hand and a stare', horror: 4, builder: 'B', Component: MenuH3R3 },
 ];
