@@ -47,9 +47,9 @@ test('date-beta loader: word count ignores lone punctuation; hold is clamped up 
 test('date-beta sequencer: next walks beats, then scenes, then reports done', () => {
   const scenes = loadScenes({ scenes: [{ id: 'a', bg: 'x', beats: [{}, {}] }, { id: 'b', bg: 'y', beats: [{}] }] });
   let p = start(scenes);
-  assert.deepEqual(p, { s: 0, b: 0, done: false, flags: {} });
-  p = next(scenes, p); assert.deepEqual(p, { s: 0, b: 1, done: false, flags: {} });
-  p = next(scenes, p); assert.deepEqual(p, { s: 1, b: 0, done: false, flags: {} });
+  assert.deepEqual(p, { s: 0, b: 0, done: false, flags: {}, love: 0, path: ['a'] });
+  p = next(scenes, p); assert.deepEqual(p, { s: 0, b: 1, done: false, flags: {}, love: 0, path: ['a'] });
+  p = next(scenes, p); assert.deepEqual(p, { s: 1, b: 0, done: false, flags: {}, love: 0, path: ['a', 'b'] });
   assert.equal(beatAt(scenes, p).bg, 'y');
   p = next(scenes, p); assert.equal(p.done, true);
   assert.deepEqual(next(scenes, p), p, 'done is sticky');
@@ -119,7 +119,7 @@ test('date-beta choices: a choice beat waits for a pick; go jumps; validation', 
   assert.equal(canChoose(b, 100), false);
   assert.equal(canChoose(b, 600), true);
   const p = start(scenes);
-  assert.deepEqual(choose(scenes, p, 0), { s: 0, b: 1, done: false, flags: {} });
+  assert.deepEqual(choose(scenes, p, 0), { s: 0, b: 1, done: false, flags: {}, love: 0, path: ['a'] });
   assert.equal(scenes[choose(scenes, p, 1).s].id, 'c');
   assert.deepEqual(choose(scenes, p, 5), p, 'no such choice = no move');
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a', go: 'nope' }] }])), /unknown scene/);

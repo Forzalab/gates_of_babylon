@@ -7,6 +7,10 @@
 // Flags are one flat object: `set` merges into it, `if` tests it (every listed key must equal; missing reads as null).
 // Declared flags (root `flags`, e.g. bento) may drive `vary`: per-value overlays of a beat's look/words (never its
 // choices, timer or set, so the scene graph stays static). beatView(beat, flags) applies them; unset = first value.
+// Love (HUD SPEC, research/date-beta-mockups/hud/SPEC.txt): a choice may carry `love` (-5..+5) + `emote` / `react` / `tell`.
+// pos.love is the running score, clamped 0..goal; goal = the best total any path can reach (loader walk), so 100% is
+// always reachable and never by accident. A scored pick returns a reaction frame (pos.react) that next() clears; a pick
+// made where she is absent carries its pop (pos.pending) to the next beat where she is present.
 export const MAX_WORDS = 12;
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
@@ -19,12 +23,21 @@ export const VARY_KEYS = ['text', 'speaker', 'props', 'sprite', 'bg', 'sfx'];
 // Echo rule (script v5): a line naming the bento pick must vary on it. Text that uses these words without a `vary`
 // on the flag (or with a variant that falls back to that text) fails at load. The picking choices are exempt.
 export const ECHO = { bento: /\b(umeboshi|tamagoyaki|sour|sweet)\b|すっぱい|甘い/iu };
+export const LOVE_MIN = -5, LOVE_MAX = 5;
+export const EMOTES = ['heart', 'hearts', 'sweat', 'pout', 'or', 'crack'];
+export const CARDS = ['goal'];
+export const END_ID = /^[a-z][a-z-]{0,15}$/; // the ending's name (steeped | escape | leave), for the card's label
+export const SHORT = /^[A-Z0-9ÉÈ .'-]{1,8}$/u; // a scene's name on the route trail
+export const TIER = { win: 100, almost: 60 }; // ending cards: 100% = win, 60..99% = almost, below = low
 const KEYS = {
-  root: ['version', 'note', 'flags', 'scenes'],
-  scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults'],
-  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary'],
-  choice: ['text', 'side', 'go', 'if', 'set', 'default'],
+  root: ['version', 'note', 'flags', 'love', 'scenes'],
+  scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short'],
+  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end'],
+  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell'],
 };
+// Default emote for a score change: +3 and up hearts, +2 heart, +1 sweat, -1 pout, -2 or, -3 and down crack.
+export const emoteFor = (love) => (love >= 3 ? 'hearts' : love === 2 ? 'heart' : love === 1 ? 'sweat'
+  : love === -1 ? 'pout' : love === -2 ? 'or' : love <= -3 ? 'crack' : null);
 
 export const words = (text) => (text.trim() ? text.trim().split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length : 0);
 
@@ -164,6 +177,12 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       if (wait === 'auto' && auto === null) fail(at, 'wait "auto" needs an auto time');
       const timer = b.timer ?? null;
       if (timer !== null && (!choices || typeof timer !== 'number' || !(timer > 0))) fail(at, 'timer must be a positive number of seconds, on a choice beat');
+      const card = b.card ?? null;
+      if (card !== null && !CARDS.includes(card)) fail(at, `card "${card}" is not one of ${CARDS.join('|')}`);
+      if (card && wait !== 'click') fail(at, 'a card beat waits for a click (no choices, no auto)');
+      const end = b.end ?? null;
+      if (end !== null && (typeof end !== 'string' || !END_ID.test(end))) fail(at, 'end must be a lowercase ending name like "steeped"');
+      if (end && !choices) fail(at, 'an end beat needs its "Back to start" choice (the result card\'s button takes choice 0)');
       const base = { bg, sprite: b.sprite ?? null, props: Object.freeze({ ...props }), text, speaker: b.speaker ?? null,
         line: parseLine(text, at, b.speaker ?? null), sfx: b.sfx ?? null };
       const vary = loadVary(b.vary, base, at, decl, manifest, art, cueNames);
@@ -172,13 +191,70 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
         if (!Object.keys(c.set ?? {}).some((k) => ECHO[k])) echoLint(c.text, null, `${at}.choices[${j}]`);
       }
       return Object.freeze({ scene: s.id, index: i, ...base, rmAlt, motion: !!b.motion, hold, auto, wait, scare, choices, timer,
-        set: declared(decl, flagsField(b.set, at, 'set'), at), vary });
+        set: declared(decl, flagsField(b.set, at, 'set'), at), vary, card, end });
     });
     for (const b of beats) for (const c of b.choices ?? []) for (const t of goTargets(c.go)) pending.push([`${b.scene}[${b.index}]`, t]);
-    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats });
+    if (s.nanda != null && typeof s.nanda !== 'boolean') fail(s.id, '"nanda" must be true or false');
+    const nanda = s.nanda ?? beats.some((b) => views(b, decl).some((v) => v.line.who === 'NANDA'));
+    const ending = beats.some((b) => b.end);
+    const short = s.short ?? (ending ? 'END' : s.id.toUpperCase().replace(/-/g, ' ').slice(0, 8).trim());
+    if (typeof short !== 'string' || !SHORT.test(short)) fail(s.id, `short "${short}" must be 1-8 uppercase characters`);
+    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats, nanda, short, ending });
   });
   for (const [at, go] of pending) if (!ids.has(go)) fail(at, `choice goes to unknown scene "${go}"`);
-  return scenes;
+  scenes.love = loadLove(data.love, scenes);
+  return Object.freeze(scenes);
+}
+
+// Every look of a beat: the base, plus one view per declared value of each flag it varies on.
+function views(b, decl) {
+  if (!b.vary) return [b];
+  return [b, ...Object.keys(b.vary).flatMap((f) => (decl[f] ?? []).map((v) => beatView(b, { [f]: v })))];
+}
+
+// Root `love`: { start: 0, goal: "auto" | n }. goal = the best score any path from scene 1 to an ending reaches; a written
+// number must equal it (a new branch can never make 100% unreachable, or reachable by accident).
+function loadLove(v, scenes) {
+  if (v != null && (typeof v !== 'object' || Array.isArray(v))) fail('root', '"love" must be { start, goal }');
+  for (const k of Object.keys(v ?? {})) if (k !== 'start' && k !== 'goal') fail('root', `unknown love key "${k}" (allowed: start, goal)`);
+  const start = v?.start ?? 0, want = v?.goal ?? 'auto';
+  if (!Number.isInteger(start) || start < 0) fail('root', 'love.start must be a whole number >= 0');
+  if (want !== 'auto' && (!Number.isInteger(want) || want < 0)) fail('root', 'love.goal must be "auto" or a whole number');
+  const goal = bestLove(scenes, start);
+  if (want !== 'auto' && want !== goal) fail('root', `love.goal is ${want} but the best reachable score is ${goal}`);
+  return Object.freeze({ start, goal });
+}
+const flagKey = (f) => JSON.stringify(Object.entries(f).sort(([a], [b]) => (a < b ? -1 : 1)));
+// Walk every path from scene 1 (beat sets, enabled choices, go resolution) to an ending: an `end` beat, a choice back to
+// scene 1, or the end of the last scene. The score clamps at 0 on the way, like play. A loop has no best score: fail.
+function bestLove(scenes, start) {
+  const first = scenes[0].id, index = new Map(scenes.map((sc, i) => [sc.id, i]));
+  const seen = new Set(), onPath = new Set();
+  let best = null;
+  const land = (n) => { best = Math.max(best ?? n, n); };
+  const visit = (s, b, flags, love) => {
+    while (s < scenes.length && b >= scenes[s].beats.length) { s += 1; b = 0; }
+    if (s >= scenes.length) { land(love); return; }
+    const beat = scenes[s].beats[b];
+    if (beat.set) flags = { ...flags, ...beat.set };
+    if (beat.end) { land(love); return; }
+    const node = `${s}/${b}/${flagKey(flags)}`;
+    if (onPath.has(node)) fail(`${scenes[s].id}[${b}]`, 'love: the scene graph loops back here, so no best score exists');
+    if (seen.has(`${node}/${love}`)) return;
+    seen.add(`${node}/${love}`);
+    onPath.add(node);
+    if (!beat.choices) visit(s, b + 1, flags, love);
+    for (const c of beat.choices ?? []) {
+      if (!enabled(c, flags)) continue;
+      const f = c.set ? { ...flags, ...c.set } : flags, l = Math.max(0, love + c.love), go = resolveGo(c.go, f);
+      if (go === first) land(l);
+      else if (go) visit(index.get(go), 0, f, l);
+      else visit(s, b + 1, f, l);
+    }
+    onPath.delete(node);
+  };
+  visit(0, 0, {}, start);
+  return best ?? start;
 }
 
 // vary: { flag: { value: { text?, speaker?, props?, sprite?, bg?, sfx? } } }. Every declared value needs an entry
@@ -259,34 +335,80 @@ function loadChoices(list, at, decl = {}) {
     if (sides.has(side)) fail(where, `two choices on the ${side} side`);
     sides.add(side);
     const parts = Object.freeze(orParts(c.text, where));
+    const love = c.love ?? 0;
+    if (!Number.isInteger(love) || love < LOVE_MIN || love > LOVE_MAX) fail(where, `love ${JSON.stringify(c.love)} must be a whole number ${LOVE_MIN}..${LOVE_MAX}`);
+    if (!love && (c.emote != null || c.react != null || c.tell != null)) fail(where, 'emote / react / tell need a non-zero love');
+    if (c.emote != null && !EMOTES.includes(c.emote)) fail(where, `emote "${c.emote}" is not one of ${EMOTES.join('|')}`);
+    if (c.tell != null && typeof c.tell !== 'boolean') fail(where, 'tell must be true or false');
+    let react = null;
+    if (c.react != null) {
+      if (typeof c.react !== 'string' || !c.react.trim()) fail(where, 'react must be a non-empty string (her line)');
+      if (words(c.react) > MAX_WORDS) fail(where, `react has ${words(c.react)} words, max ${MAX_WORDS}`);
+      react = parseLine(c.react, `${where}.react`, 'NANDA');
+      echoLint(c.react, null, `${where}.react`);
+    }
     return Object.freeze({ text: c.text, side, go: loadGo(c.go, where, decl), if: declared(decl, flagsField(c.if, where, 'if'), where),
-      set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or) });
+      set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or),
+      love, emote: love ? c.emote ?? emoteFor(love) : null, react, tell: love ? c.tell ?? true : false });
   }));
 }
 
 export const beatAt = (scenes, pos) => scenes[pos.s].beats[pos.b];
 export const sceneIndex = (scenes, id) => scenes.findIndex((s) => s.id === id);
 
+// ---------- love
+const loveOf = (scenes) => scenes.love ?? { start: 0, goal: 0 };
+export const clampLove = (n, goal) => Math.min(Math.max(0, n), Math.max(0, goal));
+// The shown percentage. 100 only when the heart is full, so a near miss never rounds up to a win.
+export function lovePct(love, goal) {
+  if (!(goal > 0)) return 0;
+  if (love >= goal) return 100;
+  return Math.max(0, Math.min(99, Math.round((100 * love) / goal)));
+}
+export const tierFor = (pct) => (pct >= TIER.win ? 'win' : pct >= TIER.almost ? 'almost' : 'low');
+// The result card for an `end` beat: { kind, pct, tier, love, goal }. null off an ending, or when the script has no love.
+export function ending(scenes, pos) {
+  if (pos.done || pos.react) return null;
+  const beat = beatAt(scenes, pos), { goal } = loveOf(scenes);
+  if (!beat.end || !(goal > 0)) return null;
+  const pct = lovePct(pos.love ?? 0, goal);
+  return Object.freeze({ kind: beat.end, pct, tier: tierFor(pct), love: pos.love ?? 0, goal });
+}
+// Is she on screen? Her scene (`nanda`) and not a blackout beat. Drives the HUD bar and the sprite.
+export const present = (scene, beat) => !!scene?.nanda && !!beat && beat.bg !== 'blackout';
+
+// ---------- positions: { s, b, done, flags, love, path } (+ react = the reaction frame, + pending = a pop waiting for her)
+// path = the scene ids entered this run, in order (the route trail's filled stops).
+const mk = (s, b, done, { flags, love, path, pending }) => (pending ? { s, b, done, flags, love, path, pending } : { s, b, done, flags, love, path });
+const runOf = (scenes, pos) => ({ flags: pos.flags ?? {}, love: pos.love ?? loveOf(scenes).start, path: pos.path ?? [], pending: pos.pending ?? null });
+const dropReact = ({ react, ...p }) => p;
+
 // Move forward from (s, b) inclusive until a beat that plays under this motion setting. Every beat reached,
 // including one reduced motion drops, merges its `set` into the flags.
-function settle(scenes, s, b, rm, flags = {}) {
+function settle(scenes, s, b, rm, st) {
+  let { flags, path } = st;
   for (;;) {
-    if (s >= scenes.length) return { s: scenes.length - 1, b: scenes.at(-1).beats.length - 1, done: true, flags };
+    if (s >= scenes.length) return mk(scenes.length - 1, scenes.at(-1).beats.length - 1, true, { ...st, flags, path });
     if (b >= scenes[s].beats.length) { s += 1; b = 0; continue; }
     const beat = scenes[s].beats[b];
+    if (path.at(-1) !== scenes[s].id) path = [...path, scenes[s].id];
     if (beat.set) flags = { ...flags, ...beat.set };
     if (rm && beat.rmAlt === 'skip') { b += 1; continue; }
-    return { s, b, done: false, flags };
+    return mk(s, b, false, { ...st, flags, path });
   }
 }
 
-export function start(scenes, { rm = false, at = null, flags = {} } = {}) {
-  const i = at == null ? 0 : sceneIndex(scenes, at);
-  return settle(scenes, i < 0 ? 0 : i, 0, rm, flags);
+// A fresh run from scene `at` (default: scene 1). love = love.start unless given; path = the shortest route to `at`,
+// so ?scene=door shows the trail it would have after playing up to the door.
+export function start(scenes, { rm = false, at = null, flags = {}, love = null } = {}) {
+  let i = at == null ? 0 : sceneIndex(scenes, at);
+  if (i < 0) i = 0;
+  const { start: l0, goal } = loveOf(scenes);
+  return settle(scenes, i, 0, rm, { flags, love: clampLove(love ?? l0, goal), path: routeTo(scenes, i), pending: null });
 }
 // ?scene=<id>&beat=<n>: n beats in, clamped to the beats that exist (a huge or junk n never hangs the tab).
-export function startAt(scenes, { rm = false, at = null, beat = 0 } = {}) {
-  let p = start(scenes, { rm, at });
+export function startAt(scenes, { rm = false, at = null, beat = 0, love = null } = {}) {
+  let p = start(scenes, { rm, at, love });
   const max = scenes.reduce((n, sc) => n + sc.beats.length, 0);
   const n = Math.min(Math.max(0, Math.floor(Number(beat)) || 0), max);
   for (let i = 0; i < n && !p.done; i++) {
@@ -296,45 +418,134 @@ export function startAt(scenes, { rm = false, at = null, beat = 0 } = {}) {
   }
   return p;
 }
-export const next = (scenes, pos, rm = false) => (pos.done ? pos : settle(scenes, pos.s, pos.b + 1, rm, pos.flags));
+// next: the reaction frame closes first; a pending pop is spent once it has shown on a beat where she is present.
+export function next(scenes, pos, rm = false) {
+  if (pos.done) return pos;
+  if (pos.react) return dropReact(pos);
+  const st = runOf(scenes, pos);
+  if (st.pending && present(scenes[pos.s], beatAt(scenes, pos))) st.pending = null;
+  return settle(scenes, pos.s, pos.b + 1, rm, st);
+}
 export const enabled = (choice, flags = {}) => matches(choice.if, flags);
-// Pick choice i (only if enabled): merge its `set`, then jump to the first matching `go` scene, else carry on.
+// Pick choice i (only if enabled): merge its `set`, add its `love`, then jump to the first matching `go` scene, else carry on.
+// On a reaction frame the pick applies to the beat behind it (the frame shows no choices, so the player never does this).
 export function choose(scenes, pos, i, rm = false) {
+  if (pos.react) pos = dropReact(pos);
   const c = pos.done ? null : scenes[pos.s].beats[pos.b].choices?.[i];
   if (!c || !enabled(c, pos.flags)) return pos;
   return take(scenes, pos, c, rm);
 }
+// A go back to scene 1 is a new run (love back to start). A scored pick where she is present returns the reaction frame
+// (pos.react); where she is absent the score changes at once and the pop waits for her (pos.pending).
 function take(scenes, pos, c, rm) {
+  const { start: l0, goal } = loveOf(scenes);
   const flags = c.set ? { ...pos.flags, ...c.set } : pos.flags;
   const go = resolveGo(c.go, flags);
-  return go ? start(scenes, { rm, at: go, flags }) : next(scenes, { ...pos, flags }, rm);
+  if (go != null && go === scenes[0].id) return start(scenes, { rm, flags });
+  const was = pos.love ?? l0, love = clampLove(was + c.love, goal);
+  const here = present(scenes[pos.s], beatAt(scenes, pos));
+  const st = { ...runOf(scenes, pos), flags, love, pending: here ? null : pos.pending ?? null };
+  const dest = settle(scenes, go ? sceneIndex(scenes, go) : pos.s, go ? 0 : pos.b + 1, rm, st);
+  if (!c.love) return dest;
+  const react = Object.freeze({ love: c.love, from: was, to: love, emote: c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b });
+  return here ? { ...dest, react } : { ...dest, pending: react };
 }
-// Debug tree: stand on the edge's beat ({ s, b, i }) with these flags and take choice i, exactly as choose() would,
-// except the choice's own `if` is not checked (a warning is returned instead of a silent no-op).
-export function jumpTo(scenes, edge, flags = {}, rm = false) {
+// Debug tree: stand on the edge's beat ({ s, b, i }) with these flags (and score) and take choice i, exactly as choose()
+// would, except the choice's own `if` is not checked (a warning is returned instead of a silent no-op).
+export function jumpTo(scenes, edge, flags = {}, rm = false, love = null) {
   const c = scenes[edge.s]?.beats[edge.b]?.choices?.[edge.i];
   if (!c) throw new Error(`jumpTo: no choice ${edge.s}/${edge.b}/${edge.i}`);
-  const pos = take(scenes, { s: edge.s, b: edge.b, done: false, flags: { ...flags } }, c, rm);
+  const { start: l0, goal } = loveOf(scenes);
+  const at = { s: edge.s, b: edge.b, done: false, flags: { ...flags }, love: clampLove(love ?? l0, goal), path: [...routeTo(scenes, edge.s), scenes[edge.s].id] };
+  const pos = take(scenes, at, c, rm);
   return enabled(c, flags) ? pos : { ...pos, warn: `choice "${c.plain}" has an if that these flags fail (taken anyway)` };
 }
 // Esc: leave this scene; the flags land on the skipped scene's declared defaults. Skip never walks past a branch:
 // if a beat at or after this one has a choice with a `go`, Esc lands on it (and does nothing when already there).
 // An ending card (a choice back to scene 1) or a scene that ends in one goes back to start(), never into the next
-// scene in file order (red-team R2/R3).
+// scene in file order (red-team R2/R3). Every pick skipped over scores as the timer would have picked it (the
+// `default`, else pink), so skipping earns nothing a wait would not. On a reaction frame, Esc just closes it.
 export function skip(scenes, pos, rm = false) {
   if (pos.done) return start(scenes, { rm });
-  const sc = scenes[pos.s], first = scenes[0].id;
+  if (pos.react) return dropReact(pos);
+  const sc = scenes[pos.s], first = scenes[0].id, { goal } = loveOf(scenes);
   const home = (b) => b.choices?.some((c) => goTargets(c.go).includes(first));
   const branch = sc.beats.findIndex((b, i) => i >= pos.b && b.choices?.some((c) => c.go != null) && !home(b));
   if (branch === pos.b) return pos;
-  if (branch > pos.b) {
-    let flags = pos.flags;
-    for (let i = pos.b + 1; i < branch; i++) if (sc.beats[i].set) flags = { ...flags, ...sc.beats[i].set };
-    return settle(scenes, pos.s, branch, false, flags);
+  if (branch < 0 && sc.beats.some(home)) return start(scenes, { rm });
+  const st = runOf(scenes, pos);
+  if (st.pending && present(sc, sc.beats[pos.b])) st.pending = null;
+  let flags = st.flags;
+  for (let i = pos.b; i < (branch > pos.b ? branch : sc.beats.length); i++) {
+    const bt = sc.beats[i];
+    if (i > pos.b && bt.set) flags = { ...flags, ...bt.set };
+    const k = bt.choices ? timeoutPick(bt, flags) : -1;
+    if (k >= 0) st.love = clampLove(st.love + bt.choices[k].love, goal);
   }
-  if (sc.beats.some(home)) return start(scenes, { rm });
-  const p = settle(scenes, pos.s + 1, 0, rm, { ...pos.flags, ...sc.defaults });
+  if (branch > pos.b) return settle(scenes, pos.s, branch, false, { ...st, flags });
+  const p = settle(scenes, pos.s + 1, 0, rm, { ...st, flags: { ...st.flags, ...sc.defaults } });
   return p.done ? start(scenes, { rm }) : p;
+}
+
+// ---------- the reaction frame: the pick's beat with its choices gone, her `react` line (else the question line),
+// no sound, no timer. A click moves on after the minimum hold.
+export function reactView(scenes, pos) {
+  const r = pos.react;
+  if (!r) return null;
+  const base = beatView(scenes[r.s].beats[r.b], pos.flags);
+  return Object.freeze({ ...base, choices: null, timer: null, auto: null, wait: 'click', hold: MIN_HOLD, sfx: null, card: null, end: null,
+    text: r.line ? r.line.plain : base.text, line: r.line ?? base.line, react: r });
+}
+
+// ---------- route trail
+const GRAPH = new WeakMap();
+const always = (go) => typeof go === 'string' || (Array.isArray(go) && go.some((g) => typeof g === 'string'));
+// scene index -> the scene indexes it can lead to: every choice `go`, plus the next scene when play can fall through.
+// An ending scene (one with an `end` beat) and a choice back to scene 1 lead nowhere.
+function sceneGraph(scenes) {
+  if (GRAPH.has(scenes)) return GRAPH.get(scenes);
+  const first = scenes[0].id;
+  const g = scenes.map((sc, i) => {
+    if (sc.ending) return [];
+    const out = new Set();
+    let falls = true;
+    for (const b of sc.beats) {
+      if (!b.choices) continue;
+      for (const c of b.choices) for (const t of goTargets(c.go)) if (t !== first) out.add(sceneIndex(scenes, t));
+      if (b.choices.every((c) => always(c.go))) { falls = false; break; }
+    }
+    if (falls && i + 1 < scenes.length) out.add(i + 1);
+    return [...out];
+  });
+  GRAPH.set(scenes, g);
+  return g;
+}
+function bfs(scenes, from, goal) {
+  const g = sceneGraph(scenes), prev = new Map([[from, -1]]), q = [from];
+  while (q.length) {
+    const i = q.shift();
+    if (i !== from && goal(i)) { const out = []; for (let k = i; k !== from; k = prev.get(k)) out.unshift(k); return out; }
+    for (const j of g[i]) if (!prev.has(j)) { prev.set(j, i); q.push(j); }
+  }
+  return null;
+}
+// The scene ids on the shortest route from scene 1 to scene i (i itself left out).
+export function routeTo(scenes, i) {
+  if (i <= 0) return [];
+  const r = bfs(scenes, 0, (k) => k === i);
+  return r ? [0, ...r.slice(0, -1)].map((k) => scenes[k].id) : [];
+}
+// The scene indexes on the shortest route from scene i to an ending (i left out; [] when i is an ending).
+export const routeFrom = (scenes, i) => (scenes[i].ending ? [] : bfs(scenes, i, (k) => scenes[k].ending) ?? []);
+// The trail: scenes entered this run (done), this one (here, with its beat count), then the shortest way to an ending.
+// On a reaction frame "here" is the pick's scene, even when the pick already jumped on.
+export function trail(scenes, pos) {
+  const s = pos.react ? pos.react.s : pos.s, b = pos.react ? pos.react.b : pos.b, path = pos.path ?? [];
+  const cut = path.lastIndexOf(scenes[s].id);
+  const done = (cut < 0 ? path : path.slice(0, cut)).map((id) => scenes[sceneIndex(scenes, id)]);
+  const stop = (sc, state) => ({ id: sc.id, short: sc.short, state, end: sc.ending });
+  return { stops: [...done.map((sc) => stop(sc, 'done')), stop(scenes[s], 'here'), ...routeFrom(scenes, s).map((k) => stop(scenes[k], 'next'))],
+    beat: b, beats: scenes[s].beats.length };
 }
 
 // A pick is allowed once the beat's hold has passed.

@@ -26,12 +26,13 @@ test('debug: bento pick is branching; stay/leave and Back to start are not', () 
 
 test('debug: edge snapshot', () => {
   assert.deepEqual(G.edges.map((e) => `${e.id}>${e.to}:${e.kind}`), [
-    'rooftop.1.0>train:branch', 'rooftop.1.1>train:branch', 'rooftop.6.0>train:choice', 'rooftop.6.1>train:choice',
+    'rooftop.1.0>train:branch', 'rooftop.1.1>train:branch', 'rooftop.3.0>train:choice', 'rooftop.3.1>train:choice',
+    'rooftop.6.0>train:choice', 'rooftop.6.1>train:choice',
     'train.fall>naan:fall', 'naan.fall>blackout:fall', 'blackout.fall>platform:fall', 'platform.fall>underpass:fall',
-    'underpass.fall>apartment:fall', 'apartment.fall>door:fall', 'door.3.0>genkan-in:branch', 'door.3.1>leave:branch', 'genkan-in.fall>cup:fall',
-    'cup.3.0>steeped:branch', 'cup.3.1>unknown:branch', 'steeped.4.0>rooftop:back', 'unknown.fall>escape:fall',
+    'underpass.fall>apartment:fall', 'apartment.fall>door:fall', 'door.1.0>genkan-in:choice', 'door.1.1>genkan-in:choice', 'door.3.0>genkan-in:branch', 'door.3.1>leave:branch', 'genkan-in.fall>cup:fall',
+    'cup.0.0>steeped:choice', 'cup.0.1>steeped:choice', 'cup.3.0>steeped:branch', 'cup.3.1>unknown:branch', 'steeped.4.0>rooftop:back', 'unknown.fall>escape:fall',
     'escape.13.0>escape-timeout:branch', 'escape.13.1>escape-win:branch', 'escape-win.6.0>rooftop:back', 'escape-timeout.7.0>rooftop:back',
-    'leave.3.0>leave-yeah:branch', 'leave.3.1>leave-fu:branch', 'leave-fu.4.0>rooftop:back', 'leave-yeah.4.0>rooftop:back']);
+    'leave.2.0>leave-fu:choice', 'leave.2.1>leave-fu:choice', 'leave.3.0>leave-yeah:branch', 'leave.3.1>leave-fu:branch', 'leave-fu.4.0>rooftop:back', 'leave-yeah.4.0>rooftop:back']);
 });
 
 test('debug: layout keeps every node and edge pill inside 1920x1080, columns follow the longest path', () => {
