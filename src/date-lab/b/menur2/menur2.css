@@ -1,0 +1,63 @@
+/* round-2 letterbox menus (menu-4-r2, menu-h2-r2). Builds on menu4.css (.m4). Smooth = camera/bars/UI; drawn = 125 ms steps. */
+.r2 .r2-her { z-index: 1; }
+.r2.mode-h2 .m4-cam.in { transform-origin: 960px 470px; transform: scale(1.1); }
+
+/* m4: her lamp throws pink onto her option; the purple one is in shadow */
+.r2 .r2-spill { position: absolute; left: 0; right: 0; bottom: 0; height: 520px; pointer-events: none; z-index: 2;
+  background: radial-gradient(ellipse 40% 60% at 28% 100%, rgba(255, 95, 162, .55), rgba(255, 95, 162, .18) 55%, transparent 75%),
+    linear-gradient(90deg, transparent 45%, rgba(0, 0, 10, .6)); mix-blend-mode: screen; }
+.r2.mode-m4 .m4-opt.purple { background: rgba(0, 0, 0, .65); color: #cfc6e6; font-size: 40px; line-height: 1.05; padding: 0 14px; text-align: center; transition: none; }
+.r2.mode-m4 .m4-opt.pink { transition: none; }
+.r2.mode-m4 .m4-opt.purple .m4-label { white-space: normal; }
+.r2 .m4-opt { white-space: nowrap; }
+
+/* the pour spout: time runs out of the bar and down into her cup */
+.r2 .r2-spout { position: absolute; left: 196px; top: 20px; width: 140px; height: 110px; z-index: 3; overflow: visible; pointer-events: none;
+  filter: drop-shadow(0 0 8px rgba(255, 95, 162, .7)); }
+
+/* h2: her edit */
+.r2 .r2-edit { position: relative; }
+.r2 .r2-word { position: relative; display: inline-block; }
+.r2 .r2-w { display: inline-block; }
+.r2 .st-typing .r2-w, .r2 .st-done .r2-w { color: var(--pink); text-shadow: 0 0 14px rgba(255, 95, 162, .6); }
+.r2 .st-glitch .r2-w { color: #fff; text-shadow: -7px 0 0 var(--her), 7px 0 0 var(--pink); transform: skewX(-14deg) translateX(4px); }
+.r2 .st-select .r2-w { background: var(--her); color: #fff; box-shadow: 0 0 0 4px var(--her); }
+.r2 .r2-ghost { position: absolute; left: 0; bottom: 100%; margin-bottom: -2px; font: 400 26px/1 'Inter Tight', var(--cond); color: #cfc6e6;
+  text-decoration: line-through; text-decoration-color: var(--her); text-decoration-thickness: 4px; white-space: nowrap; }
+.r2 .r2-caret { position: relative; display: inline-block; width: 6px; height: 54px; margin-left: 5px; vertical-align: -10px; background: var(--her);
+  animation: r2-blink 1000ms steps(1) infinite; }
+/* a collaborator cursor: her name flag rides on the caret (reads from the back row before anything happens) */
+.r2 .r2-caret::before { content: 'NANDA'; position: absolute; left: 0; bottom: 100%; margin-bottom: 4px; padding: 4px 8px; border-radius: 4px 4px 4px 0;
+  background: var(--her); color: #fff; font: 700 17px/1 var(--mono); letter-spacing: .08em; }
+@keyframes r2-blink { 50% { background: transparent; } }
+.lb-rm .r2-caret { animation: none; }
+.r2 .r2-typing { position: absolute; right: 260px; top: 204px; margin: 0; font: 700 22px/1 var(--mono); letter-spacing: .08em; color: var(--her); }
+.r2 .r2-typing.done { color: #ffb0cf; }
+.r2 .r2-typing s { color: #cfc6e6; text-decoration-color: var(--her); text-decoration-thickness: 3px; }
+.r2.mode-h2 .m4-opt.purple { overflow: visible; }
+
+/* disabled option: m4 = LOCKED stamp, h2 = her grease-pencil CUT */
+.r2 .m4-opt.off::after { content: none; }
+.r2 .r2-stamp { position: absolute; right: 14px; top: 10px; z-index: 2; font: 700 16px/1 var(--mono); letter-spacing: .2em; color: var(--her); }
+.r2.mode-h2 .m4-opt.off .m4-label { text-decoration-thickness: 7px; }
+.r2.mode-h2 .r2-stamp { right: 10px; top: -44px; font: 400 54px/1 'Yellowtail', cursive; letter-spacing: 0; transform: rotate(-7deg); }
+.r2.mode-h2 .m4-opt.off { opacity: .6; }
+
+/* the reaction cut-in: her real face (hard cut) */
+.r2 .r2-react { position: absolute; inset: 0; z-index: 20; background: #0b0a10; }
+.r2 .r2-react-bg { position: absolute; inset: 0; transform-origin: 1180px 420px; transform: scale(2.4); filter: blur(10px) brightness(.55); }
+.r2.reacting .m4-grade { background: radial-gradient(ellipse 60% 55% at 50% 45%, transparent 40%, rgba(0, 0, 10, .8)); z-index: 21; }
+
+/* her cut: film stops, grease pencil X, sprockets, splice label */
+.r2.mode-h2.rew .m4-cam { filter: saturate(.15) sepia(.35) contrast(1.1); }
+.r2 .r2-cut { position: absolute; inset: 0; z-index: 56; pointer-events: none; }
+.r2 .r2-cut svg { width: 100%; height: 100%; }
+.r2 .r2-cut .gp { fill: none; stroke: var(--her); stroke-width: 30px; stroke-linecap: round; opacity: .92; }
+.r2 .r2-cut .sprockets rect { fill: #000; stroke: rgba(255, 255, 255, .5); stroke-width: 2px; }
+.r2 .r2-splice { position: absolute; left: 50%; top: 210px; transform: translateX(-50%) rotate(-3deg); padding: 10px 26px;
+  font: 700 54px/1 var(--mono); letter-spacing: .1em; color: #fff; background: var(--her); }
+
+/* Bandersnatch replay chrome, in the top bar */
+.r2 .r2-seen { position: absolute; left: 0; right: 0; top: 40px; margin: 0; z-index: 60; text-align: center; font: 700 30px/1 var(--mono); letter-spacing: .22em; color: #fff; }
+.r2 .r2-room { position: absolute; left: 0; right: 0; top: 84px; margin: 0; z-index: 60; text-align: center; font: 800 32px/1 'Inter Tight', var(--cond); letter-spacing: .16em; color: #ddd; }
+.r2 .r2-room b { color: var(--pink); }

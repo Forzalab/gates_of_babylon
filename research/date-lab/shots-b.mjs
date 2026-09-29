@@ -66,6 +66,40 @@ export const SHOTS = [
   // anim-4 Paprika parade (scene = 4.6 s: hold 2.6 + morph 2.0)
   ...[1.0, 3.2, 3.8, 4.4, 14.0, 17.4, 28.5, 40.2].map((s) => ({ id: 'anim-4', name: `t${s.toFixed(1).padStart(4, '0')}`, q: `t=${s}&pause`, wait: 900 })),
   { id: 'anim-4', name: 'rm-t40.2', q: 't=40.2&pause&still', wait: 900 },
+  // ---------------- round 2 ----------------
+  // menu-h2-r2 "Her Time, Her Cut" (?mt=<ms> freezes the menu clock)
+  { id: 'menu-h2-r2', name: '1-caret-tell-t1s', q: 'state=menu&mt=1000', wait: 1200 },
+  { id: 'menu-h2-r2', name: '2-glitch-t3.1s', q: 'state=menu&mt=3100', wait: 1200 },
+  { id: 'menu-h2-r2', name: '3-select-t3.6s', q: 'state=menu&mt=3600', wait: 1200 },
+  { id: 'menu-h2-r2', name: '4-typing-t4.0s', q: 'state=menu&mt=4000', wait: 1200 },
+  { id: 'menu-h2-r2', name: '5-stay-t4.6s', q: 'state=menu&mt=4600', wait: 1200 },
+  { id: 'menu-h2-r2', name: '6-live-timeout-pink', q: 'state=menu', wait: 6000 },
+  { id: 'menu-h2-r2', name: '7-leave-her-face', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 2500]] },
+  { id: 'menu-h2-r2', name: '8-her-cut', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 5200]] },
+  { id: 'menu-h2-r2', name: '9-take-two-cut', q: 'state=replay&mt=2000', wait: 1400 },
+  { id: 'menu-h2-r2', name: 'rm-edit', q: 'state=menu&mt=3200&still', wait: 1200 },
+  // menu-4-r2 Bandersnatch improved
+  { id: 'menu-4-r2', name: '1-first-frame-lean', q: 'state=menu&mt=0', wait: 1200 },
+  { id: 'menu-4-r2', name: '2-t2.5s', q: 'state=menu&mt=2500', wait: 1200 },
+  { id: 'menu-4-r2', name: '3-t4.5s', q: 'state=menu&mt=4500', wait: 1200 },
+  { id: 'menu-4-r2', name: '4-reaction-real-face', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 2600]] },
+  { id: 'menu-4-r2', name: '5-rewind', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 4800]] },
+  { id: 'menu-4-r2', name: '6-already-seen', q: 'state=menu', wait: 1000, steps: [['key', '2'], ['wait', 6200]] },
+  { id: 'menu-4-r2', name: '7-room-chose-pink', q: 'state=replay', wait: 1000, steps: [['key', '1'], ['wait', 1500], ['key', 'r'], ['wait', 2000]] },
+  { id: 'menu-4-r2', name: 'rm-first-frame', q: 'state=menu&mt=0&still', wait: 1200 },
+  // cam-h-r2-b (train 0-5.6, platform 5.6-10.6, underpass 10.6-19.2, apartment 19.2-24.6, stairs 24.6-30.2, fall 30.2-37.8)
+  ...[0.0, 1.8, 4.8, 7.0, 10.55, 10.65, 12.6, 14.8, 16.8, 19.15, 19.25, 21.8, 28.6, 31.4, 35.6, 37.75].map((s) => ({ id: 'cam-h-r2-b', name: `t${s.toFixed(2).padStart(5, '0')}`, q: `t=${s}&pause`, wait: 1000 })),
+  // anim-3-r2 crowd mode: the room's eye drains (paused poses), a live hands-off run (no mouse), re-inked stages, hand mode, RM
+  ...[0, 1600, 3100, 4600].map((ms, i) => ({ id: 'anim-3-r2', name: `1-room-eye-pose${i}`, q: `scene=platform&stage=1&room=${ms}&pause`, wait: 900 })),
+  { id: 'anim-3-r2', name: '2-live-handsoff-6.8s', q: 'scene=platform&stage=0', wait: 6800 },
+  { id: 'anim-3-r2', name: '3-live-handsoff-19s', q: 'scene=platform&stage=0', wait: 19000 },
+  { id: 'anim-3-r2', name: '4-platform-inked-4', q: 'scene=platform&stage=4&pause', wait: 900 },
+  { id: 'anim-3-r2', name: '5-genkan-inked-3', q: 'scene=genkan&stage=3&pause', wait: 900 },
+  { id: 'anim-3-r2', name: '6-apartment-inked-4', q: 'scene=apartment&stage=4&pause', wait: 900 },
+  { id: 'anim-3-r2', name: '7-hand-mode', q: 'scene=stairs&stage=2', wait: 900, steps: [['move', 400, 700], ['move', 420, 690], ['wait', 300]] },
+  { id: 'anim-3-r2', name: 'rm-room-eye', q: 'scene=underpass&stage=3&room=3100&pause&still', wait: 900 },
+  { id: 'cam-h-r2-b', name: 'rm-t14.8', q: 't=14.8&pause&still', wait: 1000 },
+  { id: 'cam-h-r2-b', name: 'rm-t37.75', q: 't=37.75&pause&still', wait: 1000 },
 ];
 
 const filter = process.argv[2];
