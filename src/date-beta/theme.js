@@ -12,3 +12,4 @@ import '@fontsource/jetbrains-mono/400.css';
 import '@fontsource/jetbrains-mono/700.css';
 import '@fontsource/nunito/900.css';
 import './tokens.css';
+import '../fontTrial.js';

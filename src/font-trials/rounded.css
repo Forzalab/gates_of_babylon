@@ -1,0 +1,8 @@
+/* Trial B: M PLUS Rounded 1c body/UI, Nunito 900 display + buttons. */
+@import '@fontsource-variable/nunito/wght.css';
+@import '@fontsource/m-plus-rounded-1c/500.css';
+@import '@fontsource/m-plus-rounded-1c/800.css';
+[data-font='rounded'] { --font: 'M PLUS Rounded 1c', Arial, sans-serif; --font-help: var(--font); --font-label: var(--font);
+  --cond: 'M PLUS Rounded 1c', 'Arial Narrow', sans-serif; --btn: 'Nunito Variable', sans-serif; }
+[data-font='rounded'] .wordmark { font-family: 'Nunito Variable', sans-serif; font-weight: 900; }
+[data-font='rounded'] .splash h1, [data-font='rounded'] .splash .logo { font-family: 'Nunito Variable', sans-serif; font-weight: 900; letter-spacing: -.01em; }

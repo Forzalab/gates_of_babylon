@@ -1,0 +1,12 @@
+/* Trial C: Barlow body, Barlow Condensed labels + 900 italic display. */
+@import '@fontsource/barlow/500.css';
+@import '@fontsource/barlow/700.css';
+@import '@fontsource/barlow/800.css';
+@import '@fontsource/barlow-condensed/600.css';
+@import '@fontsource/barlow-condensed/800.css';
+@import '@fontsource/barlow-condensed/900-italic.css';
+@import '@fontsource/barlow-condensed/900.css';
+[data-font='barlow'] { --font: 'Barlow', Arial, sans-serif; --font-help: 'Barlow Condensed', sans-serif; --font-label: 'Barlow Condensed', sans-serif;
+  --cond: 'Barlow Condensed', 'Arial Narrow', sans-serif; --btn: 'Barlow', sans-serif; }
+[data-font='barlow'] .wordmark { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; }
+[data-font='barlow'] .splash h1, [data-font='barlow'] .splash .logo { font-family: 'Barlow Condensed', sans-serif; font-weight: 900; font-style: italic; }

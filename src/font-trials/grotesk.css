@@ -1,0 +1,7 @@
+/* Trial D: Space Grotesk body/UI + display, Nunito buttons. */
+@import '@fontsource-variable/space-grotesk/wght.css';
+@import '@fontsource-variable/nunito/wght.css';
+[data-font='grotesk'] { --font: 'Space Grotesk Variable', Arial, sans-serif; --font-help: var(--font); --font-label: var(--font);
+  --cond: 'Space Grotesk Variable', 'Arial Narrow', sans-serif; --btn: 'Nunito Variable', sans-serif; }
+[data-font='grotesk'] .wordmark { font-family: 'Space Grotesk Variable', sans-serif; font-weight: 700; }
+[data-font='grotesk'] .splash h1, [data-font='grotesk'] .splash .logo { font-family: 'Space Grotesk Variable', sans-serif; font-weight: 700; letter-spacing: -.03em; }
