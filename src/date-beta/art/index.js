@@ -2,7 +2,7 @@
 import Splash from './Splash.jsx';
 import Rooftop from './Rooftop.jsx';
 import Train from './Train.jsx';
-import NaanPlatform from './NaanPlatform.jsx'; // the naan scene: ?platform=v1|v2|v3 (Naan.jsx = the old full-screen board)
+import NaanPlatform from './NaanPlatform.jsx'; // the naan scene: ?platform=v1|v2|v3, default v3
 import Blackout from './Blackout.jsx';
 import Basement from './Basement.jsx';
 import Door from './Door.jsx';

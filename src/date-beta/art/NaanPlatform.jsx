@@ -245,8 +245,8 @@ const LABEL = {
 const VARIANT = { v1: V1, v2: V2, v3: V3 };
 
 // The station itself. Exported for other scenes (alt's night platform): <NaanPlatform variant="v2" time="night" rm />.
-export function NaanPlatform({ variant = 'v1', time = 'dusk', rm = false, vending }) {
-  const v = VARIANT[variant] ? variant : 'v1';
+export function NaanPlatform({ variant = 'v3', time = 'dusk', rm = false, vending }) {
+  const v = VARIANT[variant] ? variant : 'v3';
   const V = VARIANT[v], night = time === 'night';
   const when = night ? 'At night, in the rain; the ad is dark and stuck on NANDA.' : 'Pink dusk.';
   return (
@@ -257,8 +257,8 @@ export function NaanPlatform({ variant = 'v1', time = 'dusk', rm = false, vendin
   );
 }
 
-// The naan scene's art (ART.naan): ?platform=v1|v2|v3 picks the variant (default v1), ?time=night previews the night.
+// The naan scene's art (ART.naan): ?platform=v1|v2|v3 picks the variant (default v3), ?time=night previews the night.
 export default function NaanPlatformScene({ props = {}, rm }) {
   const q = typeof location === 'undefined' ? new URLSearchParams() : new URLSearchParams(location.search);
-  return <NaanPlatform variant={props.platform ?? q.get('platform') ?? 'v1'} time={props.time ?? q.get('time') ?? 'dusk'} rm={rm} vending={props.vending} />;
+  return <NaanPlatform variant={props.platform ?? q.get('platform') ?? 'v3'} time={props.time ?? q.get('time') ?? 'dusk'} rm={rm} vending={props.vending} />;
 }

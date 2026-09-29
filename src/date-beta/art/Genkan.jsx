@@ -41,7 +41,7 @@ export default function Genkan() {
       {/* the row: five pairs, then one empty spot, swept */}
       {SHOES.map((c, i) => <Pair key={i} x={120 + i * 250} c={c} />)}
       <rect x="1370" y="650" width="180" height="96" rx="8" fill="#8a8680" />
-      <rect x="1370" y="650" width="180" height="96" rx="8" fill="none" stroke="#f4eef6" strokeWidth="3" strokeDasharray="10 8" opacity=".7" />
+      <rect x="1370" y="650" width="180" height="96" rx="8" fill="none" stroke="#4a5f86" strokeWidth="3" strokeDasharray="4 12" />
     </svg>
   );
 }
