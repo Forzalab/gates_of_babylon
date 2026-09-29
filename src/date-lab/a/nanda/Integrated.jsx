@@ -7,7 +7,7 @@
 import { memo } from 'react';
 import Platform from '../../../date-beta/art/Platform.jsx';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import CameraPiece from '../kit/Camera.jsx';
 import LitNanda from '../kit/Lit.jsx';
 import { StrScene, ART } from '../kit/Sprite.jsx';

@@ -8,7 +8,7 @@ const tiny = (beats, extra = {}) => ({ scenes: [{ id: 'a', bg: 'x', beats, ...ex
 test('date-beta: the shipped scenes.json loads, 10 scenes in demo order', () => {
   const scenes = loadScenes(data);
   assert.deepEqual(scenes.map((s) => s.id), ['splash', 'rooftop', 'train', 'naan', 'blackout',
-    'platform', 'underpass', 'apartment', 'stairs', 'genkan']);
+    'platform', 'underpass', 'apartment', 'stairs', 'genkan-in']);
 });
 
 test('date-beta: every shipped beat obeys the hard rules (<=12 words, >=500 ms, motion has an RM alt)', () => {

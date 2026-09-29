@@ -7,7 +7,7 @@
 // -> the Kubrick stare, dead centre, chin down, eyes up.
 // RM: the corridor is two held frames (lit / dark with her near); every other shot one held frame; hard cuts only.
 import { memo } from 'react';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import CameraPiece from '../kit/Camera.jsx';
 import { Frag, Nanda, ART } from '../kit/Sprite.jsx';
 import { clamp, lerp, ease } from '../kit/time.js';

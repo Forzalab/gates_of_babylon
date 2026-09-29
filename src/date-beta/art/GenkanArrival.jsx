@@ -1,4 +1,4 @@
-// Scene 10, GENKAN (entryway) INSERT. Two layers:
+// Scene 10, GENKAN ARRIVAL insert (art id 'genkan-in'). Setup for main's BG-D3 locked room (Genkan.jsx): the slippers set out here fill its empty spot.
 //   BG   = the entry: stone tataki, the raised wood step, a shoe cabinet, her shoes lined up to the millimetre on a tape line.
 //   PROP = a pair of men's slippers set out on the step, facing the door (for you), and a tiny shrine right by the shoes.
 // The shrine frames a logic circuit. PLACEHOLDER: a fixed A,B -> NAND -> OUT. Later = the player's last Logic-mode circuit.

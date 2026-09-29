@@ -100,9 +100,9 @@
       ]
     },
     {
-      "id": "genkan",
+      "id": "genkan-in",
       "title": "Genkan insert / slippers + shrine",
-      "bg": "genkan",
+      "bg": "genkan-in",
       "beats": [
         { "props": { "insert": false }, "text": "Her shoes. Lined up to the millimetre.", "sfx": "door-close", "hold": 1000 },
         { "props": { "insert": true }, "text": "Men's slippers. Already set out.", "sfx": "thump", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },

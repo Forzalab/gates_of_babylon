@@ -8,7 +8,7 @@ import Platform from '../../../date-beta/art/Platform.jsx';
 import Rooftop from '../../../date-beta/art/Rooftop.jsx';
 import Train from '../../../date-beta/art/Train.jsx';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import Blackout from '../../../date-beta/art/Blackout.jsx';
 import { rng, useStep } from '../../../date-beta/art/util.js';
 import { Markup, Line } from '../shared/ui.jsx';

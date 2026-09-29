@@ -10,7 +10,7 @@
 import Platform from '../../../date-beta/art/Platform.jsx';
 import NaanBoard from '../../../date-beta/art/Naan.jsx';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import { useClock } from '../kit/hooks.js';
 import { Nanda } from '../kit/Sprite.jsx';
 import { stepAt, camTransform } from '../kit/time.js';

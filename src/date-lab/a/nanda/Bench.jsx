@@ -6,7 +6,7 @@
 // Static (no motion) = identical in RM.
 import Platform from '../../../date-beta/art/Platform.jsx';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import { PlatformPass, KitchenBack, KitchenFront, DoorNanda, GenkanNanda, KitchenNanda } from './Integrated.jsx';
 import { RIGS, RAW, gradeColour, contrast, heightPx, shadowDir } from '../kit/integrate.js';
 

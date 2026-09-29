@@ -8,7 +8,7 @@
 // Logic mode does not persist circuits yet (no localStorage key exists), so the circuit is a fixed NAND with your clock.
 // RM: one held frame per shot, the flame is still.
 import { memo, useMemo } from 'react';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import CameraPiece from '../kit/Camera.jsx';
 import { stepAt } from '../kit/time.js';
 import { NAND_BODY } from '../../../date-beta/art/util.js';

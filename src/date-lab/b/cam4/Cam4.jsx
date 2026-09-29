@@ -8,7 +8,7 @@
 import { useMemo } from 'react';
 import ApartmentExt from '../../../date-beta/art/ApartmentExt.jsx';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import Rain from '../../../date-beta/art/Rain.jsx';
 import { LabRoot, Markup, Sub, useClock, useShotSound } from '../shared/ui.jsx';
 import { build, shotAt, poseAt, camTransform } from '../shared/timeline.js';

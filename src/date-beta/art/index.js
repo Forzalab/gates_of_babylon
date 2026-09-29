@@ -9,8 +9,8 @@ import Platform from './Platform.jsx';
 import Underpass from './Underpass.jsx';
 import ApartmentExt from './ApartmentExt.jsx';
 import Stairs from './Stairs.jsx';
-import Genkan from './Genkan.jsx';
+import GenkanArrival from './GenkanArrival.jsx';
 import './art.css';
 
 export const ART = { splash: Splash, rooftop: Rooftop, train: Train, naan: NaanBoard, blackout: Blackout,
-  platform: Platform, underpass: Underpass, apartment: ApartmentExt, stairs: Stairs, genkan: Genkan };
+  platform: Platform, underpass: Underpass, apartment: ApartmentExt, stairs: Stairs, 'genkan-in': GenkanArrival };

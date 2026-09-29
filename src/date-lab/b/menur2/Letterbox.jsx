@@ -12,7 +12,7 @@
 // Keys: 1 / 2, <- -> + Enter, R = her rewind / her cut. Shots: ?state=menu|replay|pink|purple, ?mt=<ms> freezes the menu clock.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import { LabRoot, Markup, OrText, useLater, param } from '../shared/ui.jsx';
 import LitBust from '../shared/LitBust.jsx';
 import { play, bed } from '../shared/audio.js';

@@ -16,7 +16,7 @@
 import { memo, useMemo } from 'react';
 import Train from '../../../date-beta/art/Train.jsx';
 import Underpass from '../../../date-beta/art/Underpass.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import { useClock } from '../kit/hooks.js';
 import { camTransform } from '../kit/time.js';
 import { Nanda, Frag, ART } from '../kit/Sprite.jsx';

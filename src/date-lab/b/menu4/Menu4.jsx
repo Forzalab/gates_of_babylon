@@ -7,7 +7,7 @@
 // second, rewind = one held frame. Keys: 1 / 2 or <- -> + Enter; R = rewind. ?state=menu|replay|pink|purple for shots.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import { LabRoot, Markup, OrText, useLater, param } from '../shared/ui.jsx';
 import { play, bed } from '../shared/audio.js';
 import { ART } from '../shared/art.js';

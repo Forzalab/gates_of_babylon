@@ -14,7 +14,7 @@ import Platform from '../../../date-beta/art/Platform.jsx';
 import Underpass from '../../../date-beta/art/Underpass.jsx';
 import ApartmentExt from '../../../date-beta/art/ApartmentExt.jsx';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import { LabRoot, Markup, Line, useClock } from '../shared/ui.jsx';
 import { play, bed } from '../shared/audio.js';
 import { ART } from '../shared/art.js';

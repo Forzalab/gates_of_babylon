@@ -8,7 +8,7 @@ import ApartmentExt from '../../../date-beta/art/ApartmentExt.jsx';
 import Platform from '../../../date-beta/art/Platform.jsx';
 import Train from '../../../date-beta/art/Train.jsx';
 import Stairs from '../../../date-beta/art/Stairs.jsx';
-import Genkan from '../../../date-beta/art/Genkan.jsx';
+import Genkan from '../../../date-beta/art/GenkanArrival.jsx';
 import { LabRoot, Markup, Sub, OrText, useClock, useShotSound } from '../shared/ui.jsx';
 import { build, shotAt, camTransform } from '../shared/timeline.js';
 import { ART, placed } from '../shared/art.js';
