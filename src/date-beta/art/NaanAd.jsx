@@ -15,7 +15,7 @@ const C = {
   teal: '#46d9d1', tealMid: '#2fbfb7', tealDeep: '#1c9a93', ink: '#0b3431',
   cloud: '#fbfffd', cloudShade: '#c7efe9',
   dough: '#f9eacd', doughEdge: '#e2bd84', doughRim: '#f0d7a8', puff: '#fffaf0',
-  toast: '#e6aa66', char: '#b35e27', burnt: '#733211', freckle: '#d49a5c',
+  toast: '#ebb77c', char: '#c47435', burnt: '#86401a', freckle: '#d9a466',
   curry: '#f47a0c', curryDeep: '#c2520f', curryLight: '#fb9d3a', cream: '#fff3dc',
   black: '#17140f', blackRim: '#2c2721', blackHi: '#4a443b',
   leaf: '#3e8a28', leafLight: '#78b83a', brown: '#3a1500', pink: '#ff5fa2', gateInk: '#5a1f00',
@@ -52,13 +52,26 @@ function naanPts(a, b, rnd) {
 // is (x, y) inside the teardrop, with a margin (0..1)?
 const inNaan = (x, y, a, b, m) => { const t = Math.acos(Math.max(-1, Math.min(1, x / (a * m)))); return Math.abs(y) < b * m * Math.sin(t) * (0.74 + 0.26 * Math.cos(t)); };
 
+// A tandoor blister: toasted halo, brown body, and a scorched crescent on one side (a dark blob partly covered by
+// the body colour again), plus the pale puff of the bubble top (ref 2).
 function Blister({ x, y, r, rnd }) {
+  const a = rnd() * Math.PI * 2, cx = Math.cos(a), cy = Math.sin(a);
   return (
     <g>
-      <path d={blob(x + r * 0.15, y + r * 0.1, r * 1.45, r * 1.2, rnd, 9, 0.16)} fill={C.toast} />
-      <path d={blob(x, y, r, r * 0.82, rnd, 8, 0.22)} fill={C.char} />
-      <path d={blob(x - r * 0.22, y - r * 0.12, r * 0.52, r * 0.42, rnd, 7, 0.25)} fill={C.burnt} />
+      <path d={blob(x + r * 0.15, y + r * 0.1, r * 1.45, r * 1.15, rnd, 9, 0.16)} fill={C.toast} />
+      <path d={blob(x, y, r, r * 0.8, rnd, 8, 0.22)} fill={C.char} />
+      <path d={blob(x + cx * r * 0.2, y + cy * r * 0.16, r * 0.66, r * 0.52, rnd, 8, 0.2)} fill={C.burnt} />
+      <path d={blob(x + cx * r * 0.42, y + cy * r * 0.34, r * 0.56, r * 0.44, rnd, 8, 0.2)} fill={C.char} />
       <ellipse cx={x + r * 0.5} cy={y - r * 1.1} rx={r * 0.38} ry={r * 0.17} fill={C.puff} transform={`rotate(-14 ${x} ${y})`} />
+    </g>
+  );
+}
+// a stretched scorch where the dough dragged on the tandoor wall
+function Streak({ x, y, r, a0, rnd }) {
+  return (
+    <g transform={`rotate(${f1(a0)} ${f1(x)} ${f1(y)})`}>
+      <path d={blob(x, y, r * 1.5, r * 0.5, rnd, 10, 0.18)} fill={C.toast} />
+      <path d={blob(x - r * 0.1, y, r * 0.8, r * 0.16, rnd, 9, 0.22)} fill={C.char} />
     </g>
   );
 }
@@ -73,12 +86,13 @@ function Flecks({ spots }) {
 
 function Naan({ id, x, y, a, b, rot, seed }) {
   const rnd = rng(seed), outline = smooth(naanPts(a, b, rnd));
-  const spots = [], big = [], dots = [], flecks = [];
+  const spots = [], big = [], dots = [], flecks = [], streaks = [];
   const pick = (m) => { for (let k = 0; k < 40; k++) { const px = (rnd() * 2 - 1) * a, py = (rnd() * 2 - 1) * b; if (inNaan(px, py, a, b, m)) return [px, py]; } return [0, 0]; };
-  for (let i = 0; i < 40 && big.length < 9; i++) { const [px, py] = pick(0.74); if (big.every(([qx, qy]) => Math.hypot(px - qx, py - qy) > a * 0.28)) big.push([px, py, 13 + rnd() * 17]); }
+  for (let i = 0; i < 40 && big.length < 9; i++) { const [px, py] = pick(0.74); if (big.every(([qx, qy]) => Math.hypot(px - qx, py - qy) > a * 0.28)) big.push([px, py, 12 + rnd() * 18]); }
   // satellites: small toasted spots hugging the big blisters, so they read as bubbled clusters (ref 2), not polka dots
   big.forEach(([bx, by, r]) => { for (let k = 0; k < 2; k++) { const ang = rnd() * 6.28, d = r * (1.7 + rnd() * 0.6); spots.push([bx + Math.cos(ang) * d, by + Math.sin(ang) * d * 0.8, 3 + rnd() * 5]); } });
   for (let i = 0; i < 10; i++) { const [px, py] = pick(0.84); spots.push([px, py, 4 + rnd() * 6]); }
+  for (let i = 0; i < 3; i++) { const [px, py] = pick(0.7); streaks.push([px, py, 14 + rnd() * 12, rnd() * 180]); }
   for (let i = 0; i < 30; i++) { const [px, py] = pick(0.92); dots.push([px, py, 1.4 + rnd() * 2.4]); }
   for (let i = 0; i < 20; i++) { const [px, py] = pick(0.86); flecks.push([px, py, 0.8 + rnd() * 0.8, rnd() * 360, rnd() < 0.4]); }
   return (
@@ -91,6 +105,7 @@ function Naan({ id, x, y, a, b, rot, seed }) {
         <path d={smooth([[-a * 0.55, -b * 0.25], [-a * 0.1, -b * 0.62], [a * 0.45, -b * 0.6], [a * 0.78, -b * 0.2]], false)} fill="none" stroke={C.puff} strokeWidth="16" strokeLinecap="round" opacity=".85" />
         {dots.map(([px, py, r], i) => <circle key={i} cx={f1(px)} cy={f1(py)} r={f1(r)} fill={C.freckle} />)}
         {spots.map(([px, py, r], i) => <g key={i}><path d={blob(px, py, r * 1.3, r, rnd, 7, 0.25)} fill={C.toast} /><path d={blob(px, py, r * 0.7, r * 0.55, rnd, 6, 0.3)} fill={C.char} /></g>)}
+        {streaks.map(([px, py, r, a0], i) => <Streak key={i} x={px} y={py} r={r} a0={a0} rnd={rnd} />)}
         {big.map(([px, py, r], i) => <Blister key={i} x={px} y={py} r={r} rnd={rnd} />)}
         <Flecks spots={flecks} />
       </g>
@@ -156,14 +171,17 @@ const BANK_D = `${poly(drop(bank(0.5, 0.5, 0, 0.8)))}${poly(drop(bank(-0.5, -0.5
 const SWIRLS = [[0.2, 0.02, 0.24, 3], [-0.22, 0.1, 0.4, 4], [0.16, 0.3, 0.6, 5], [-0.26, 0.46, 0.76, 7], [0.3, 0.58, 0.9, 8],
   [0.04, 0.7, 0.97, 9], [-0.24, 0.8, 0.9, 9]]
   .map(([o, a, b, w]) => ({ d: smooth(bank(o, o * 0.7, a, b, 24).filter((_, i) => i % 3 === 0), false), w }));
+const GLOSS = [[0.3, 0.05, 0.3, 4], [-0.1, 0.2, 0.46, 6], [0.36, 0.4, 0.62, 8], [-0.05, 0.52, 0.8, 12], [0.4, 0.72, 0.96, 12]]
+  .map(([o, a, b, w]) => ({ d: smooth(bank(o, o, a, b, 24).filter((_, i) => i % 3 === 0), false), w }));
 const onRiver = (u, off) => { const p = at(u); return { x: p.x + p.nx * p.w * off, y: p.y + p.ny * p.w * off, s: 0.3 + p.w / 700 }; };
 
 function Chunk({ x, y, s, seed }) {
   const rnd = rng(seed);
   return (
     <g transform={`translate(${f1(x)} ${f1(y)}) scale(${f1(s)})`}>
-      <path d={blob(0, -10, 42, 30, rnd, 8, 0.18)} fill={C.curryDeep} />
-      <path d={blob(-8, -18, 22, 12, rnd, 7, 0.2)} fill="#e06a1c" />
+      <path d={blob(0, -10, 42, 30, rnd, 8, 0.18)} fill="#a8430c" />
+      <path d={blob(-4, -16, 34, 22, rnd, 8, 0.16)} fill="#d45e14" />
+      <path d={blob(-12, -24, 15, 8, rnd, 7, 0.2)} fill="#f59a45" />
       <path d="M-58 4 Q-10 -6 56 4" fill="none" stroke={C.cream} strokeWidth="5" strokeLinecap="round" opacity=".8" />
     </g>
   );
@@ -251,7 +269,7 @@ function Headline({ rm }) {
       <path d={HEART} transform="translate(156 -62) scale(4.2)" fill={C.pink} stroke={C.brown} strokeWidth="1.2" />
       <text x="342" y="-22" textAnchor="middle" className="na-hot" transform="rotate(-7 342 -22)">Hot</text>
       <g transform={n > 4 ? `translate(${WORD_X} 0) scale(.86 1) translate(${-WORD_X} 0)` : undefined}>
-        {letters.map(([ch, g], i) => <Letter key={i} ch={ch} glitch={!!g} x={x0 + i * CELL + (rm && i === 3 ? 24 : 0)} />)}
+        {letters.map(([ch, g], i) => <Letter key={i} ch={ch} glitch={!!g} x={x0 + i * CELL + (rm ? (i === 3 ? 12 : -12) : 0)} />)}
       </g>
       <text x="904" y="-24" className="na-area">in your area</text>
       <path d={HEART} transform="translate(1444 -62) scale(4.2)" fill={C.pink} stroke={C.brown} strokeWidth="1.2" />
@@ -282,8 +300,11 @@ export default function NaanAd({ x = 0, y = 0, width = NAAN_AD_W, rm = false, la
         <path d={BANK_D} fill={C.curryDeep} />
         <path d={POOL_D} fill={C.curry} />
         <path d={RIVER_D} fill={C.curry} />
+        {GLOSS.map(({ d, w }, i) => <path key={`gl${i}`} d={d} fill="none" stroke={C.curryLight} strokeWidth={w} strokeLinecap="round" />)}
+        <path d="M-10 684 C300 670 640 690 980 676 M1180 668 C1300 660 1420 676 1610 664" fill="none" stroke={C.curryLight} strokeWidth="14" strokeLinecap="round" />
         {SWIRLS.map(({ d, w }, i) => <path key={i} d={d} fill="none" stroke={C.cream} strokeWidth={w} strokeLinecap="round" opacity=".92" />)}
         {POOL_SWIRLS.map(([d, w], i) => <path key={`p${i}`} d={d} fill="none" stroke={C.cream} strokeWidth={w} strokeLinecap="round" opacity=".92" />)}
+        {[[0.46, 0.3, 4], [0.58, -0.3, 5], [0.7, 0.3, 6], [0.8, -0.34, 7], [0.94, 0.38, 8]].map(([u, o, r], i) => { const p = onRiver(u, o); return <ellipse key={`cd${i}`} cx={f1(p.x)} cy={f1(p.y)} rx={r * 1.6} ry={r} fill={C.cream} />; })}
         {DROPS.map(([dx, dy, r, a], i) => <path key={`d${i}`} d="M0 -1.6 C.9 -.6 1 .4 1 .7 A1 1 0 0 1 -1 .7 C-1 .4 -.9 -.6 0 -1.6Z" fill={C.curry} transform={`translate(${dx} ${dy}) rotate(${a}) scale(${r})`} />)}
         {RIVER_CHUNKS.map(([u, o], i) => <Chunk key={i} {...onRiver(u, o)} seed={20 + i} />)}
         {POOL_CHUNKS.map(([cx, cy, cs], i) => <Chunk key={`pc${i}`} x={cx} y={cy} s={cs} seed={40 + i} />)}
