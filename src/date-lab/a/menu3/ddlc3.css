@@ -1,0 +1,8 @@
+/* menu-3-r3: the ECU no longer parks the menu under the dialogue box. Full size, docked top-left, above her eyes. */
+.ddlc3 .timer { height: 54px; }
+.ddlc3 .tlabel { font-size: 36px; right: 20px; }
+.ddlc3 .typing { font-size: 36px; }
+.ddlc3.lens .menu { transform: none; left: 64px; top: 92px; width: 780px; opacity: 1; z-index: 30; gap: 20px; transition: none; }
+.ddlc3.lens .opt { background: #fff6f8; }
+.ddlc3.lens .tlabel { color: var(--her); }
+.ddlc3.lens .chr { top: 92px; }

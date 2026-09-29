@@ -97,6 +97,51 @@ const SHOTS = {
     await page.keyboard.press('r'); await wait(2400); await snap('10-replay-purple-nailed');
     await open(true); await wait(2600); await snap('rm-table');
   },
+  'menu-h1-r3': async (page, snap, open) => {
+    await open();
+    await wait(1500); await snap('1-deal-her-hand-parked');
+    await page.waitForSelector('.card.yours mark.hsel'); await wait(100); await snap('2-her-red-selection');
+    await wait(1750); await snap('3-sta-typed');
+    await wait(1000); await snap('4-stay-card-warm');
+    await wait(2500); await snap('5-timeout-her-hand');
+    await wait(1800); await snap('6-timeout-pink');
+    await page.keyboard.press('r'); await wait(4000); await snap('7-replay-pink-pinned-she-retypes-yours');
+    await open(); await wait(4500); await page.keyboard.press('2'); await wait(120); await snap('8-purple-bleed');
+    await wait(2700); await snap('9-purple-reversed-lea');
+    await page.keyboard.press('r'); await wait(2500); await snap('10-replay-purple-pinned-struck');
+    await open(true); await wait(3600); await snap('rm-stay');
+  },
+  'menu-3-r3': async (page, snap, open) => {
+    await open();
+    await page.waitForSelector('.mcline mark.hsel'); await wait(100); await snap('1-her-red-selection-in-mc-line');
+    await wait(1400); await snap('2-mc-line-says-stay');
+    await page.waitForSelector('.opt.purple mark.hsel'); await wait(100); await snap('3-purple-goodnight-selected');
+    await wait(2600); await snap('4-label-take-your-time');
+    await page.waitForSelector('.hercursor.p1'); await wait(100); await snap('5-her-cursor');
+    await page.waitForSelector('.ecu'); await wait(300); await snap('6-ecu-menu-readable-eyes-on-mc');
+    await wait(1300); await snap('7-ecu-eyes-on-you');
+    await page.keyboard.press('r'); await wait(3000); await snap('8-replay-pink-disabled-both-agree');
+    await open(); await wait(5600); await page.keyboard.press('2'); await wait(120); await snap('9-purple-bleed');
+    await wait(1400); await snap('10-purple-lea');
+    await page.keyboard.press('r'); await wait(2400); await snap('11-replay-purple-disabled');
+    await open(true); await wait(1700); await snap('rm-mc-line-emptied');
+    await page.waitForSelector('.ecu', { timeout: 15000 }); await wait(300); await snap('rm-ecu');
+  },
+  'menu-h4-r3': async (page, snap, open) => {
+    await open();
+    await wait(600); await snap('1-cold-open-mc-draft');
+    await page.waitForSelector('.composer mark.hsel'); await wait(100); await snap('2-her-red-selection-in-his-draft');
+    await page.waitForSelector('.composer .hers:not(:empty)'); await wait(700); await snap('3-stay-in-her-red');
+    await page.waitForSelector('.drafts'); await wait(2600); await snap('4-drafts-pour-into-pink');
+    await page.waitForSelector('.st.delivered'); await wait(200); await snap('5-timeout-delivered');
+    await page.waitForSelector('.st.read'); await wait(1500); await snap('6-read-12');
+    await page.keyboard.press('r'); await wait(2500); await snap('7-replay-pink-sent-nailed');
+    await open(); await wait(4800); await page.keyboard.press('2'); await wait(120); await snap('8-purple-bleed');
+    await page.waitForSelector('.inscreen'); await wait(600); await snap('9-not-delivered-pin-in-screen');
+    await page.keyboard.press('r'); await wait(2400); await snap('10-replay-purple-sent-nailed');
+    await open(true); await wait(1300); await snap('rm-cold-open');
+    await wait(4000); await snap('rm-drafts');
+  },
 };
 
 // camera pieces: freeze the clock at ?t=<ms> and shoot (deterministic frames)

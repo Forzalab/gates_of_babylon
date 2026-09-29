@@ -1,0 +1,2 @@
+/* her selection: the doomed words go her red before they vanish (one held swap) */
+.aroot mark.hsel { background: var(--her); color: #fff; border-radius: 4px; padding: 0 4px; box-shadow: 0 0 0 2px rgba(240, 36, 63, .35); }
