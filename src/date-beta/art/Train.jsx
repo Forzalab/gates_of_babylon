@@ -13,10 +13,10 @@ function Land() {
       {/* three cumulus heads on a flat base, sky left open above (ref: ~55% sky) */}
       {[[330, 150], [700, 210], [1060, 130]].map(([cx, span], k) => Array.from({ length: 9 }, (_, i) => {
         const x = cx - span / 2 + (i / 8) * span + (rnd() - 0.5) * 20, r = 26 + rnd() * 22 + (4 - Math.abs(i - 4)) * 9;
-        return <circle key={`${k}-${i}`} cx={x} cy={566 - r * 0.8} r={r} fill="#f7fbf5" />;
+        return <circle key={`${k}-${i}`} cx={x} cy={566 - r * 0.8} r={r} fill="#fff0dc" />;
       }))}
-      {Array.from({ length: 30 }, (_, i) => <circle key={`b${i}`} cx={180 + i * 36} cy={560} r={18 + rnd() * 12} fill="#f7fbf5" />)}
-      <rect x="170" y="560" width="1040" height="22" fill="#f7fbf5" />
+      {Array.from({ length: 30 }, (_, i) => <circle key={`b${i}`} cx={180 + i * 36} cy={560} r={18 + rnd() * 12} fill="#fff0dc" />)}
+      <rect x="170" y="560" width="1040" height="22" fill="#fff0dc" />
       <path d="M170 576 H1210 V600 H170Z" fill="#d0e7d3" />
       <path d="M178 612 L260 586 L360 598 L470 560 L560 590 L640 572 L760 600 L870 566 L980 596 L1080 580 L1160 600 V620 H178Z" fill="#7f9fc0" />
       <path d="M178 620 L300 604 L420 614 L560 598 L700 618 L860 606 L1000 620 L1160 610 V628 H178Z" fill="#5f86a8" />
@@ -83,7 +83,7 @@ export default function Train({ props, rm }) {
       <svg viewBox="0 0 1920 1080" role="img" aria-label="Inside a train on a sunny day. An umeboshi ad hangs from the ceiling: NOT Sweet, SOUR.">
         <defs>
           <linearGradient id="tr-sky" x1="0" y1="200" x2="0" y2="640" gradientUnits="userSpaceOnUse">
-            <stop offset="0" stopColor="#2f6fb0" /><stop offset=".55" stopColor="#7cbbea" /><stop offset="1" stopColor="#d7ecf2" />
+            <stop offset="0" stopColor="#3a6cae" /><stop offset=".55" stopColor="#9dbfe2" /><stop offset="1" stopColor="#f6dcb6" />
           </linearGradient>
           <clipPath id="tr-glass"><rect x="178" y="208" width="974" height="634" /></clipPath>
           <clipPath id="tr-glass2"><rect x="1462" y="236" width="236" height="330" /></clipPath>

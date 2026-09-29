@@ -8,11 +8,11 @@ import './alt.css';
 function Tiles() {
   return (
     <g>
-      <rect x="0" y="150" width="1920" height="700" fill="#cfd3cc" />
-      {Array.from({ length: 28 }, (_, r) => <line key={`h${r}`} x1="0" y1={150 + r * 26} x2="1920" y2={150 + r * 26} stroke="#b3b8b0" strokeWidth="2" />)}
-      {Array.from({ length: 49 }, (_, c) => <line key={`v${c}`} x1={c * 40} y1="150" x2={c * 40} y2="850" stroke="#b3b8b0" strokeWidth="2" />)}
-      <rect x="0" y="690" width="1920" height="12" fill="#8e958c" />
-      {[0, 1].map((k) => <line key={k} x1="0" y1={640 + k * 26} x2="1920" y2={640 + k * 26} stroke="#9aa39a" strokeWidth="8" strokeLinecap="round" />)}
+      <rect x="0" y="150" width="1920" height="700" fill="#7c847f" />
+      {Array.from({ length: 28 }, (_, r) => <line key={`h${r}`} x1="0" y1={150 + r * 26} x2="1920" y2={150 + r * 26} stroke="#616a65" strokeWidth="2" />)}
+      {Array.from({ length: 49 }, (_, c) => <line key={`v${c}`} x1={c * 40} y1="150" x2={c * 40} y2="850" stroke="#616a65" strokeWidth="2" />)}
+      <rect x="0" y="690" width="1920" height="12" fill="#4d5551" />
+      {[0, 1].map((k) => <line key={k} x1="0" y1={640 + k * 26} x2="1920" y2={640 + k * 26} stroke="#566059" strokeWidth="8" strokeLinecap="round" />)}
     </g>
   );
 }
