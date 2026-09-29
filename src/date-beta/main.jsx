@@ -27,6 +27,26 @@ const DEBUG = createSession(() => localStorage, SCENES, data.flags ?? {});
 // Sound: cue name -> asset id via assets.json (beep if the file is missing). Also exposed for tests + read as a caption.
 const ASSETS = createLoader(manifest, import.meta.env.BASE_URL);
 ASSETS.preload();
+// The Figur click in Logic already counted as a gesture for this origin, so the browser may let sound start now
+// (Chrome carries same-origin activation across the navigation). Probe for that; if allowed, unlock without waiting for
+// a second click, once the first sound file (rooftop wind) has arrived, so the first beat's sfx plays on arrival.
+// Otherwise the loader's own first-gesture unlock stays in charge.
+function earlyAudio() {
+  let probe;
+  try { probe = new (globalThis.AudioContext || globalThis.webkitAudioContext)(); } catch { return; }
+  const ok = probe.state === 'running';
+  probe.close?.().catch(() => {});
+  document.documentElement.dataset.audio = ok ? 'carried' : 'wait-gesture';
+  if (!ok) return;
+  const first = manifest.assets[manifest.cues[data.scenes[0].beats[0].sfx]]?.path;
+  const t0 = performance.now();
+  const wait = () => {
+    const got = !first || performance.getEntriesByType('resource').some((r) => r.name.endsWith(first) && r.responseEnd > 0);
+    if (got || performance.now() - t0 > 3000) setTimeout(() => ASSETS.unlock(), 50); else setTimeout(wait, 50);
+  };
+  wait();
+}
+earlyAudio();
 function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
 
 function useFit() {
@@ -46,6 +66,13 @@ function toggleFull() {
   if (document.fullscreenElement) document.exitFullscreen?.();
   else document.documentElement.requestFullscreen?.().catch(() => {});
 }
+
+// Esc while fullscreen (API or F11 / kiosk, where the window fills the screen), or just after leaving it, belongs to the
+// browser. S still skips there.
+let fullAt = 0;
+if (typeof document !== 'undefined') document.addEventListener('fullscreenchange', () => { fullAt = performance.now(); });
+const escIsForFullscreen = () => !!document.fullscreenElement || performance.now() - fullAt < 800
+  || (innerHeight >= screen.height - 1 && innerWidth >= screen.width - 1);
 
 const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat') });
 
@@ -113,6 +140,7 @@ function Player() {
       if (e.code === 'Backquote' && e.shiftKey) { e.preventDefault(); if (!e.repeat) setTree((v) => !v); return; }
       if (treeRef.current) return; // the map owns the keyboard (its own handler does Esc + Tab)
       if (e.repeat) return;
+      if (e.key === 'Escape' && escIsForFullscreen()) return; // Esc leaving fullscreen is not a skip (demo: no chain-skip)
       if (e.key === 'Escape' || e.key === 's' || e.key === 'S') { e.preventDefault(); skipScene(); }
       else if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') { e.preventDefault(); advance(true); }
       else if (e.key === 'f' || e.key === 'F') toggleFull();
