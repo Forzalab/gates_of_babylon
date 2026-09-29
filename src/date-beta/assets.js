@@ -22,10 +22,15 @@ export function createLoader(manifest, base = '/') {
   const A = makeAssets(manifest);
   const bytes = new Map(), buffers = new Map(), images = new Map();
   let ctx = null;
+  let pending = null; // the last cue asked for before the context existed (the first beat's sound, red-team R5)
+  // Start (or resume) the context inside a user gesture, then play the cue that was asked for before it: the first
+  // beat's sfx fires on mount, before any gesture, and would otherwise never be heard.
   const unlock = () => {
-    if (ctx) { if (ctx.state === 'suspended') ctx.resume?.().catch(() => {}); return; }
-    try { ctx = new (globalThis.AudioContext || globalThis.webkitAudioContext)(); } catch { return; }
-    for (const [id, ab] of bytes) ctx.decodeAudioData(ab).then((b) => buffers.set(id, b), () => {});
+    if (ctx) { if (ctx.state === 'suspended') ctx.resume?.().catch(() => {}); return Promise.resolve(); }
+    try { ctx = new (globalThis.AudioContext || globalThis.webkitAudioContext)(); } catch { return Promise.resolve(); }
+    const decoding = [...bytes].map(([id, ab]) => Promise.resolve(ctx.decodeAudioData(ab)).then((b) => buffers.set(id, b), () => {}));
+    bytes.clear();
+    return Promise.all(decoding).then(() => { const c = pending; pending = null; if (c) play(c); });
   };
   const preload = () => {
     for (const id of A.ids()) {
@@ -49,7 +54,8 @@ export function createLoader(manifest, base = '/') {
   const play = (cue) => {
     try {
       const id = A.cueId(cue);
-      if (!id || !ctx) return;
+      if (!id) return;
+      if (!ctx) { pending = cue; return; }
       const b = buffers.get(id);
       if (!b) { beep(id); return; }
       const s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start();
