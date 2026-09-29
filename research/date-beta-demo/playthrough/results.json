@@ -1,0 +1,3219 @@
+[
+ {
+  "name": "steeped__tamagoyaki",
+  "end": "steeped",
+  "bento": "tamagoyaki",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/steeped__tamagoyaki/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/steeped__tamagoyaki/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/steeped__tamagoyaki/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/steeped__tamagoyaki/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/steeped__tamagoyaki/04-rooftop_2.png",
+    "note": "Sweet. Like me. Good input.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/steeped__tamagoyaki/05-rooftop_3.png",
+    "note": "Sweet, ne? I rolled it myself.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/steeped__tamagoyaki/06-rooftop_4.png",
+    "note": "You smile for her. It's easy.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/steeped__tamagoyaki/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/steeped__tamagoyaki/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/steeped__tamagoyaki/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/steeped__tamagoyaki/10-train_1.png",
+    "note": "Nobody reads the ads. This one says 甘い! SWEET!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/steeped__tamagoyaki/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/steeped__tamagoyaki/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/steeped__tamagoyaki/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/steeped__tamagoyaki/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/steeped__tamagoyaki/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/steeped__tamagoyaki/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/steeped__tamagoyaki/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/steeped__tamagoyaki/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/steeped__tamagoyaki/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/steeped__tamagoyaki/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/steeped__tamagoyaki/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/steeped__tamagoyaki/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/steeped__tamagoyaki/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/steeped__tamagoyaki/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/steeped__tamagoyaki/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "cup:0",
+    "shot": "shots/steeped__tamagoyaki/26-cup_0.png",
+    "note": "I made tamagoyaki. For no reason. Eat.",
+    "fail": null
+   },
+   {
+    "beat": "cup:1",
+    "shot": "shots/steeped__tamagoyaki/27-cup_1.png",
+    "note": "Third teacup. Nobody poured it. Tamagoyaki on its saucer.",
+    "fail": null
+   },
+   {
+    "beat": "cup:2",
+    "shot": "shots/steeped__tamagoyaki/28-cup_2.png",
+    "note": "Who's the third cup for?",
+    "fail": null
+   },
+   {
+    "beat": "cup:3",
+    "shot": "shots/steeped__tamagoyaki/29-cup_3.png",
+    "note": "For Input B. Silly. It's always three of us. [Drink | Stand up]",
+    "fail": null
+   },
+   {
+    "beat": "steeped:0",
+    "shot": "shots/steeped__tamagoyaki/30-steeped_0.png",
+    "note": "OR",
+    "fail": null
+   },
+   {
+    "beat": "steeped:1",
+    "shot": "shots/steeped__tamagoyaki/31-steeped_1.png",
+    "note": "Rest. I'll do the remembering.",
+    "fail": null
+   },
+   {
+    "beat": "steeped:2",
+    "shot": "shots/steeped__tamagoyaki/32-steeped_2.png",
+    "note": "Warm cup, sweet sleep. You're mine to keep.",
+    "fail": null
+   },
+   {
+    "beat": "steeped:3",
+    "shot": "shots/steeped__tamagoyaki/33-steeped_3.png",
+    "note": "ずっと。…FORever. Ne?",
+    "fail": null
+   },
+   {
+    "beat": "steeped:4",
+    "shot": "shots/steeped__tamagoyaki/34-steeped_4.png",
+    "note": "STEEPED. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/steeped__tamagoyaki/35-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": "Esc in fullscreen: rooftop:0 -> rooftop:0",
+  "audio": "carried"
+ },
+ {
+  "name": "steeped__umeboshi",
+  "end": "steeped",
+  "bento": "umeboshi",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/steeped__umeboshi/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/steeped__umeboshi/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/steeped__umeboshi/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/steeped__umeboshi/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/steeped__umeboshi/04-rooftop_2.png",
+    "note": "Sour. Hm. You like things that bite?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/steeped__umeboshi/05-rooftop_3.png",
+    "note": "Sour, ne?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/steeped__umeboshi/06-rooftop_4.png",
+    "note": "You smile for her anyway.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/steeped__umeboshi/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/steeped__umeboshi/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/steeped__umeboshi/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/steeped__umeboshi/10-train_1.png",
+    "note": "Nobody reads the ads. This one says すっぱい! SOUR!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/steeped__umeboshi/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/steeped__umeboshi/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/steeped__umeboshi/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/steeped__umeboshi/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/steeped__umeboshi/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/steeped__umeboshi/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/steeped__umeboshi/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/steeped__umeboshi/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/steeped__umeboshi/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/steeped__umeboshi/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/steeped__umeboshi/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/steeped__umeboshi/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/steeped__umeboshi/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/steeped__umeboshi/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/steeped__umeboshi/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "cup:0",
+    "shot": "shots/steeped__umeboshi/26-cup_0.png",
+    "note": "I bought umeboshi. For no reason. Eat.",
+    "fail": null
+   },
+   {
+    "beat": "cup:1",
+    "shot": "shots/steeped__umeboshi/27-cup_1.png",
+    "note": "Third teacup. Nobody poured it. One umeboshi on its saucer.",
+    "fail": null
+   },
+   {
+    "beat": "cup:2",
+    "shot": "shots/steeped__umeboshi/28-cup_2.png",
+    "note": "Who's the third cup for?",
+    "fail": null
+   },
+   {
+    "beat": "cup:3",
+    "shot": "shots/steeped__umeboshi/29-cup_3.png",
+    "note": "For Input B. Silly. It's always three of us. [Drink | Stand up]",
+    "fail": null
+   },
+   {
+    "beat": "steeped:0",
+    "shot": "shots/steeped__umeboshi/30-steeped_0.png",
+    "note": "OR",
+    "fail": null
+   },
+   {
+    "beat": "steeped:1",
+    "shot": "shots/steeped__umeboshi/31-steeped_1.png",
+    "note": "Rest. I'll do the remembering.",
+    "fail": null
+   },
+   {
+    "beat": "steeped:2",
+    "shot": "shots/steeped__umeboshi/32-steeped_2.png",
+    "note": "Bitter cup, sour hour. Every hour is ours.",
+    "fail": null
+   },
+   {
+    "beat": "steeped:3",
+    "shot": "shots/steeped__umeboshi/33-steeped_3.png",
+    "note": "ずっと。…FORever. Ne?",
+    "fail": null
+   },
+   {
+    "beat": "steeped:4",
+    "shot": "shots/steeped__umeboshi/34-steeped_4.png",
+    "note": "STEEPED. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/steeped__umeboshi/35-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "escape-win__tamagoyaki",
+  "end": "escape-win",
+  "bento": "tamagoyaki",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/escape-win__tamagoyaki/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/escape-win__tamagoyaki/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/escape-win__tamagoyaki/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/escape-win__tamagoyaki/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/escape-win__tamagoyaki/04-rooftop_2.png",
+    "note": "Sweet. Like me. Good input.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/escape-win__tamagoyaki/05-rooftop_3.png",
+    "note": "Sweet, ne? I rolled it myself.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/escape-win__tamagoyaki/06-rooftop_4.png",
+    "note": "You smile for her. It's easy.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/escape-win__tamagoyaki/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/escape-win__tamagoyaki/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/escape-win__tamagoyaki/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/escape-win__tamagoyaki/10-train_1.png",
+    "note": "Nobody reads the ads. This one says 甘い! SWEET!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/escape-win__tamagoyaki/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/escape-win__tamagoyaki/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/escape-win__tamagoyaki/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/escape-win__tamagoyaki/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/escape-win__tamagoyaki/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/escape-win__tamagoyaki/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/escape-win__tamagoyaki/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/escape-win__tamagoyaki/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/escape-win__tamagoyaki/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/escape-win__tamagoyaki/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/escape-win__tamagoyaki/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/escape-win__tamagoyaki/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/escape-win__tamagoyaki/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/escape-win__tamagoyaki/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/escape-win__tamagoyaki/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "cup:0",
+    "shot": "shots/escape-win__tamagoyaki/26-cup_0.png",
+    "note": "I made tamagoyaki. For no reason. Eat.",
+    "fail": null
+   },
+   {
+    "beat": "cup:1",
+    "shot": "shots/escape-win__tamagoyaki/27-cup_1.png",
+    "note": "Third teacup. Nobody poured it. Tamagoyaki on its saucer.",
+    "fail": null
+   },
+   {
+    "beat": "cup:2",
+    "shot": "shots/escape-win__tamagoyaki/28-cup_2.png",
+    "note": "Who's the third cup for?",
+    "fail": null
+   },
+   {
+    "beat": "cup:3",
+    "shot": "shots/escape-win__tamagoyaki/29-cup_3.png",
+    "note": "For Input B. Silly. It's always three of us. [Drink | Stand up]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:0",
+    "shot": "shots/escape-win__tamagoyaki/30-unknown_0.png",
+    "note": "You stand. The floor tilts a little.",
+    "fail": null
+   },
+   {
+    "beat": "unknown:1",
+    "shot": "shots/escape-win__tamagoyaki/31-unknown_1.png",
+    "note": "Under the table: a floor hatch. Too big for storage. [Open the hatch]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:2",
+    "shot": "shots/escape-win__tamagoyaki/32-unknown_2.png",
+    "note": "A steep wooden ladder. Down into the dark. [Climb down]",
+    "fail": null
+   },
+   {
+    "beat": "escape:0",
+    "shot": "shots/escape-win__tamagoyaki/33-escape_0.png",
+    "note": "Concrete. One bulb. Rain at a high window. [Look at the shelves]",
+    "fail": null
+   },
+   {
+    "beat": "escape:1",
+    "shot": "shots/escape-win__tamagoyaki/34-escape_1.png",
+    "note": "Jars on the shelves. Each one: a date, a name.",
+    "fail": null
+   },
+   {
+    "beat": "escape:2",
+    "shot": "shots/escape-win__tamagoyaki/35-escape_2.png",
+    "note": "The dates go back years. The names are all different.",
+    "fail": null
+   },
+   {
+    "beat": "escape:3",
+    "shot": "shots/escape-win__tamagoyaki/36-escape_3.png",
+    "note": "Bento boxes, one per day. Your name on each. Untouched.",
+    "fail": null
+   },
+   {
+    "beat": "escape:4",
+    "shot": "shots/escape-win__tamagoyaki/37-escape_4.png",
+    "note": "The oldest is dated before you met.",
+    "fail": null
+   },
+   {
+    "beat": "escape:5",
+    "shot": "shots/escape-win__tamagoyaki/38-escape_5.png",
+    "note": "A mortar and a mallet. One fresh mochi. Hers only. [Keep looking]",
+    "fail": null
+   },
+   {
+    "beat": "escape:6",
+    "shot": "shots/escape-win__tamagoyaki/39-escape_6.png",
+    "note": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.",
+    "fail": null
+   },
+   {
+    "beat": "escape:7",
+    "shot": "shots/escape-win__tamagoyaki/40-escape_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:9",
+    "shot": "shots/escape-win__tamagoyaki/41-escape_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:11",
+    "shot": "shots/escape-win__tamagoyaki/42-escape_11.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:12",
+    "shot": "shots/escape-win__tamagoyaki/43-escape_12.png",
+    "note": "Minutes gone. A clock upstairs chimed. You lost count.",
+    "fail": null
+   },
+   {
+    "beat": "escape:13",
+    "shot": "shots/escape-win__tamagoyaki/44-escape_13.png",
+    "note": "A heavy door. Behind it, stairs to the street. [Wait for her | Leave her house]",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:0",
+    "shot": "shots/escape-win__tamagoyaki/45-escape-win_0.png",
+    "note": "She's waiting at the outside door.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:1",
+    "shot": "shots/escape-win__tamagoyaki/46-escape-win_1.png",
+    "note": "You took the long way.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:2",
+    "shot": "shots/escape-win__tamagoyaki/47-escape-win_2.png",
+    "note": "Home is warm, and sweet.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:3",
+    "shot": "shots/escape-win__tamagoyaki/48-escape-win_3.png",
+    "note": "Sleep now. You're mine to keep.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:4",
+    "shot": "shots/escape-win__tamagoyaki/49-escape-win_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:5",
+    "shot": "shots/escape-win__tamagoyaki/50-escape-win_5.png",
+    "note": "Mine.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:6",
+    "shot": "shots/escape-win__tamagoyaki/51-escape-win_6.png",
+    "note": "ESCAPE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/escape-win__tamagoyaki/52-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "escape-win__umeboshi",
+  "end": "escape-win",
+  "bento": "umeboshi",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/escape-win__umeboshi/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/escape-win__umeboshi/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/escape-win__umeboshi/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/escape-win__umeboshi/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/escape-win__umeboshi/04-rooftop_2.png",
+    "note": "Sour. Hm. You like things that bite?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/escape-win__umeboshi/05-rooftop_3.png",
+    "note": "Sour, ne?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/escape-win__umeboshi/06-rooftop_4.png",
+    "note": "You smile for her anyway.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/escape-win__umeboshi/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/escape-win__umeboshi/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/escape-win__umeboshi/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/escape-win__umeboshi/10-train_1.png",
+    "note": "Nobody reads the ads. This one says すっぱい! SOUR!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/escape-win__umeboshi/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/escape-win__umeboshi/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/escape-win__umeboshi/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/escape-win__umeboshi/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/escape-win__umeboshi/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/escape-win__umeboshi/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/escape-win__umeboshi/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/escape-win__umeboshi/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/escape-win__umeboshi/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/escape-win__umeboshi/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/escape-win__umeboshi/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/escape-win__umeboshi/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/escape-win__umeboshi/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/escape-win__umeboshi/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/escape-win__umeboshi/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "cup:0",
+    "shot": "shots/escape-win__umeboshi/26-cup_0.png",
+    "note": "I bought umeboshi. For no reason. Eat.",
+    "fail": null
+   },
+   {
+    "beat": "cup:1",
+    "shot": "shots/escape-win__umeboshi/27-cup_1.png",
+    "note": "Third teacup. Nobody poured it. One umeboshi on its saucer.",
+    "fail": null
+   },
+   {
+    "beat": "cup:2",
+    "shot": "shots/escape-win__umeboshi/28-cup_2.png",
+    "note": "Who's the third cup for?",
+    "fail": null
+   },
+   {
+    "beat": "cup:3",
+    "shot": "shots/escape-win__umeboshi/29-cup_3.png",
+    "note": "For Input B. Silly. It's always three of us. [Drink | Stand up]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:0",
+    "shot": "shots/escape-win__umeboshi/30-unknown_0.png",
+    "note": "You stand. The floor tilts a little.",
+    "fail": null
+   },
+   {
+    "beat": "unknown:1",
+    "shot": "shots/escape-win__umeboshi/31-unknown_1.png",
+    "note": "Under the table: a floor hatch. Too big for storage. [Open the hatch]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:2",
+    "shot": "shots/escape-win__umeboshi/32-unknown_2.png",
+    "note": "A steep wooden ladder. Down into the dark. [Climb down]",
+    "fail": null
+   },
+   {
+    "beat": "escape:0",
+    "shot": "shots/escape-win__umeboshi/33-escape_0.png",
+    "note": "Concrete. One bulb. Rain at a high window. [Look at the shelves]",
+    "fail": null
+   },
+   {
+    "beat": "escape:1",
+    "shot": "shots/escape-win__umeboshi/34-escape_1.png",
+    "note": "Jars on the shelves. Each one: a date, a name.",
+    "fail": null
+   },
+   {
+    "beat": "escape:2",
+    "shot": "shots/escape-win__umeboshi/35-escape_2.png",
+    "note": "The dates go back years. The names are all different.",
+    "fail": null
+   },
+   {
+    "beat": "escape:3",
+    "shot": "shots/escape-win__umeboshi/36-escape_3.png",
+    "note": "Bento boxes, one per day. Your name on each. Untouched.",
+    "fail": null
+   },
+   {
+    "beat": "escape:4",
+    "shot": "shots/escape-win__umeboshi/37-escape_4.png",
+    "note": "The oldest is dated before you met.",
+    "fail": null
+   },
+   {
+    "beat": "escape:5",
+    "shot": "shots/escape-win__umeboshi/38-escape_5.png",
+    "note": "A mortar and a mallet. One fresh mochi. Hers only. [Keep looking]",
+    "fail": null
+   },
+   {
+    "beat": "escape:6",
+    "shot": "shots/escape-win__umeboshi/39-escape_6.png",
+    "note": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+    "fail": null
+   },
+   {
+    "beat": "escape:7",
+    "shot": "shots/escape-win__umeboshi/40-escape_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:9",
+    "shot": "shots/escape-win__umeboshi/41-escape_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:11",
+    "shot": "shots/escape-win__umeboshi/42-escape_11.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:12",
+    "shot": "shots/escape-win__umeboshi/43-escape_12.png",
+    "note": "Minutes gone. A clock upstairs chimed. You lost count.",
+    "fail": null
+   },
+   {
+    "beat": "escape:13",
+    "shot": "shots/escape-win__umeboshi/44-escape_13.png",
+    "note": "A heavy door. Behind it, stairs to the street. [Wait for her | Leave her house]",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:0",
+    "shot": "shots/escape-win__umeboshi/45-escape-win_0.png",
+    "note": "She's waiting at the outside door.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:1",
+    "shot": "shots/escape-win__umeboshi/46-escape-win_1.png",
+    "note": "You took the long way.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:2",
+    "shot": "shots/escape-win__umeboshi/47-escape-win_2.png",
+    "note": "You picked sour.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:3",
+    "shot": "shots/escape-win__umeboshi/48-escape-win_3.png",
+    "note": "Now every hour is ours.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:4",
+    "shot": "shots/escape-win__umeboshi/49-escape-win_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:5",
+    "shot": "shots/escape-win__umeboshi/50-escape-win_5.png",
+    "note": "Mine.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:6",
+    "shot": "shots/escape-win__umeboshi/51-escape-win_6.png",
+    "note": "ESCAPE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/escape-win__umeboshi/52-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "escape-timeout__tamagoyaki",
+  "end": "escape-timeout",
+  "bento": "tamagoyaki",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/escape-timeout__tamagoyaki/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/escape-timeout__tamagoyaki/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/escape-timeout__tamagoyaki/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/escape-timeout__tamagoyaki/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/escape-timeout__tamagoyaki/04-rooftop_2.png",
+    "note": "Sweet. Like me. Good input.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/escape-timeout__tamagoyaki/05-rooftop_3.png",
+    "note": "Sweet, ne? I rolled it myself.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/escape-timeout__tamagoyaki/06-rooftop_4.png",
+    "note": "You smile for her. It's easy.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/escape-timeout__tamagoyaki/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/escape-timeout__tamagoyaki/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/escape-timeout__tamagoyaki/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/escape-timeout__tamagoyaki/10-train_1.png",
+    "note": "Nobody reads the ads. This one says 甘い! SWEET!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/escape-timeout__tamagoyaki/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/escape-timeout__tamagoyaki/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/escape-timeout__tamagoyaki/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/escape-timeout__tamagoyaki/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/escape-timeout__tamagoyaki/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/escape-timeout__tamagoyaki/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/escape-timeout__tamagoyaki/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/escape-timeout__tamagoyaki/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/escape-timeout__tamagoyaki/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/escape-timeout__tamagoyaki/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/escape-timeout__tamagoyaki/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/escape-timeout__tamagoyaki/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/escape-timeout__tamagoyaki/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/escape-timeout__tamagoyaki/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/escape-timeout__tamagoyaki/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "cup:0",
+    "shot": "shots/escape-timeout__tamagoyaki/26-cup_0.png",
+    "note": "I made tamagoyaki. For no reason. Eat.",
+    "fail": null
+   },
+   {
+    "beat": "cup:1",
+    "shot": "shots/escape-timeout__tamagoyaki/27-cup_1.png",
+    "note": "Third teacup. Nobody poured it. Tamagoyaki on its saucer.",
+    "fail": null
+   },
+   {
+    "beat": "cup:2",
+    "shot": "shots/escape-timeout__tamagoyaki/28-cup_2.png",
+    "note": "Who's the third cup for?",
+    "fail": null
+   },
+   {
+    "beat": "cup:3",
+    "shot": "shots/escape-timeout__tamagoyaki/29-cup_3.png",
+    "note": "For Input B. Silly. It's always three of us. [Drink | Stand up]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:0",
+    "shot": "shots/escape-timeout__tamagoyaki/30-unknown_0.png",
+    "note": "You stand. The floor tilts a little.",
+    "fail": null
+   },
+   {
+    "beat": "unknown:1",
+    "shot": "shots/escape-timeout__tamagoyaki/31-unknown_1.png",
+    "note": "Under the table: a floor hatch. Too big for storage. [Open the hatch]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:2",
+    "shot": "shots/escape-timeout__tamagoyaki/32-unknown_2.png",
+    "note": "A steep wooden ladder. Down into the dark. [Climb down]",
+    "fail": null
+   },
+   {
+    "beat": "escape:0",
+    "shot": "shots/escape-timeout__tamagoyaki/33-escape_0.png",
+    "note": "Concrete. One bulb. Rain at a high window. [Look at the shelves]",
+    "fail": null
+   },
+   {
+    "beat": "escape:1",
+    "shot": "shots/escape-timeout__tamagoyaki/34-escape_1.png",
+    "note": "Jars on the shelves. Each one: a date, a name.",
+    "fail": null
+   },
+   {
+    "beat": "escape:2",
+    "shot": "shots/escape-timeout__tamagoyaki/35-escape_2.png",
+    "note": "The dates go back years. The names are all different.",
+    "fail": null
+   },
+   {
+    "beat": "escape:3",
+    "shot": "shots/escape-timeout__tamagoyaki/36-escape_3.png",
+    "note": "Bento boxes, one per day. Your name on each. Untouched.",
+    "fail": null
+   },
+   {
+    "beat": "escape:4",
+    "shot": "shots/escape-timeout__tamagoyaki/37-escape_4.png",
+    "note": "The oldest is dated before you met.",
+    "fail": null
+   },
+   {
+    "beat": "escape:5",
+    "shot": "shots/escape-timeout__tamagoyaki/38-escape_5.png",
+    "note": "A mortar and a mallet. One fresh mochi. Hers only. [Keep looking]",
+    "fail": null
+   },
+   {
+    "beat": "escape:6",
+    "shot": "shots/escape-timeout__tamagoyaki/39-escape_6.png",
+    "note": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.",
+    "fail": null
+   },
+   {
+    "beat": "escape:7",
+    "shot": "shots/escape-timeout__tamagoyaki/40-escape_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:9",
+    "shot": "shots/escape-timeout__tamagoyaki/41-escape_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:11",
+    "shot": "shots/escape-timeout__tamagoyaki/42-escape_11.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:12",
+    "shot": "shots/escape-timeout__tamagoyaki/43-escape_12.png",
+    "note": "Minutes gone. A clock upstairs chimed. You lost count.",
+    "fail": null
+   },
+   {
+    "beat": "escape:13",
+    "shot": "shots/escape-timeout__tamagoyaki/44-escape_13.png",
+    "note": "A heavy door. Behind it, stairs to the street. [Wait for her | Leave her house]",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:0",
+    "shot": "shots/escape-timeout__tamagoyaki/45-escape-timeout_0.png",
+    "note": "The ladder creaks. She's coming down.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:1",
+    "shot": "shots/escape-timeout__tamagoyaki/46-escape-timeout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:2",
+    "shot": "shots/escape-timeout__tamagoyaki/47-escape-timeout_2.png",
+    "note": "You wake at the tea table. Four cups now.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:3",
+    "shot": "shots/escape-timeout__tamagoyaki/48-escape-timeout_3.png",
+    "note": "She holds out the tamagoyaki. You eat.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:4",
+    "shot": "shots/escape-timeout__tamagoyaki/49-escape-timeout_4.png",
+    "note": "甘い？…ね。",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:5",
+    "shot": "shots/escape-timeout__tamagoyaki/50-escape-timeout_5.png",
+    "note": "One sweet bite…",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:6",
+    "shot": "shots/escape-timeout__tamagoyaki/51-escape-timeout_6.png",
+    "note": "…then sleep. You're mine to keep.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:7",
+    "shot": "shots/escape-timeout__tamagoyaki/52-escape-timeout_7.png",
+    "note": "ESCAPE? [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/escape-timeout__tamagoyaki/53-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "escape-timeout__umeboshi",
+  "end": "escape-timeout",
+  "bento": "umeboshi",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/escape-timeout__umeboshi/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/escape-timeout__umeboshi/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/escape-timeout__umeboshi/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/escape-timeout__umeboshi/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/escape-timeout__umeboshi/04-rooftop_2.png",
+    "note": "Sour. Hm. You like things that bite?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/escape-timeout__umeboshi/05-rooftop_3.png",
+    "note": "Sour, ne?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/escape-timeout__umeboshi/06-rooftop_4.png",
+    "note": "You smile for her anyway.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/escape-timeout__umeboshi/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/escape-timeout__umeboshi/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/escape-timeout__umeboshi/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/escape-timeout__umeboshi/10-train_1.png",
+    "note": "Nobody reads the ads. This one says すっぱい! SOUR!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/escape-timeout__umeboshi/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/escape-timeout__umeboshi/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/escape-timeout__umeboshi/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/escape-timeout__umeboshi/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/escape-timeout__umeboshi/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/escape-timeout__umeboshi/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/escape-timeout__umeboshi/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/escape-timeout__umeboshi/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/escape-timeout__umeboshi/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/escape-timeout__umeboshi/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/escape-timeout__umeboshi/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/escape-timeout__umeboshi/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/escape-timeout__umeboshi/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/escape-timeout__umeboshi/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/escape-timeout__umeboshi/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "cup:0",
+    "shot": "shots/escape-timeout__umeboshi/26-cup_0.png",
+    "note": "I bought umeboshi. For no reason. Eat.",
+    "fail": null
+   },
+   {
+    "beat": "cup:1",
+    "shot": "shots/escape-timeout__umeboshi/27-cup_1.png",
+    "note": "Third teacup. Nobody poured it. One umeboshi on its saucer.",
+    "fail": null
+   },
+   {
+    "beat": "cup:2",
+    "shot": "shots/escape-timeout__umeboshi/28-cup_2.png",
+    "note": "Who's the third cup for?",
+    "fail": null
+   },
+   {
+    "beat": "cup:3",
+    "shot": "shots/escape-timeout__umeboshi/29-cup_3.png",
+    "note": "For Input B. Silly. It's always three of us. [Drink | Stand up]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:0",
+    "shot": "shots/escape-timeout__umeboshi/30-unknown_0.png",
+    "note": "You stand. The floor tilts a little.",
+    "fail": null
+   },
+   {
+    "beat": "unknown:1",
+    "shot": "shots/escape-timeout__umeboshi/31-unknown_1.png",
+    "note": "Under the table: a floor hatch. Too big for storage. [Open the hatch]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:2",
+    "shot": "shots/escape-timeout__umeboshi/32-unknown_2.png",
+    "note": "A steep wooden ladder. Down into the dark. [Climb down]",
+    "fail": null
+   },
+   {
+    "beat": "escape:0",
+    "shot": "shots/escape-timeout__umeboshi/33-escape_0.png",
+    "note": "Concrete. One bulb. Rain at a high window. [Look at the shelves]",
+    "fail": null
+   },
+   {
+    "beat": "escape:1",
+    "shot": "shots/escape-timeout__umeboshi/34-escape_1.png",
+    "note": "Jars on the shelves. Each one: a date, a name.",
+    "fail": null
+   },
+   {
+    "beat": "escape:2",
+    "shot": "shots/escape-timeout__umeboshi/35-escape_2.png",
+    "note": "The dates go back years. The names are all different.",
+    "fail": null
+   },
+   {
+    "beat": "escape:3",
+    "shot": "shots/escape-timeout__umeboshi/36-escape_3.png",
+    "note": "Bento boxes, one per day. Your name on each. Untouched.",
+    "fail": null
+   },
+   {
+    "beat": "escape:4",
+    "shot": "shots/escape-timeout__umeboshi/37-escape_4.png",
+    "note": "The oldest is dated before you met.",
+    "fail": null
+   },
+   {
+    "beat": "escape:5",
+    "shot": "shots/escape-timeout__umeboshi/38-escape_5.png",
+    "note": "A mortar and a mallet. One fresh mochi. Hers only. [Keep looking]",
+    "fail": null
+   },
+   {
+    "beat": "escape:6",
+    "shot": "shots/escape-timeout__umeboshi/39-escape_6.png",
+    "note": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+    "fail": null
+   },
+   {
+    "beat": "escape:7",
+    "shot": "shots/escape-timeout__umeboshi/40-escape_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:9",
+    "shot": "shots/escape-timeout__umeboshi/41-escape_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:11",
+    "shot": "shots/escape-timeout__umeboshi/42-escape_11.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:12",
+    "shot": "shots/escape-timeout__umeboshi/43-escape_12.png",
+    "note": "Minutes gone. A clock upstairs chimed. You lost count.",
+    "fail": null
+   },
+   {
+    "beat": "escape:13",
+    "shot": "shots/escape-timeout__umeboshi/44-escape_13.png",
+    "note": "A heavy door. Behind it, stairs to the street. [Wait for her | Leave her house]",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:0",
+    "shot": "shots/escape-timeout__umeboshi/45-escape-timeout_0.png",
+    "note": "The ladder creaks. She's coming down.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:1",
+    "shot": "shots/escape-timeout__umeboshi/46-escape-timeout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:2",
+    "shot": "shots/escape-timeout__umeboshi/47-escape-timeout_2.png",
+    "note": "You wake at the tea table. Four cups now.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:3",
+    "shot": "shots/escape-timeout__umeboshi/48-escape-timeout_3.png",
+    "note": "She holds out an umeboshi. You eat.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:4",
+    "shot": "shots/escape-timeout__umeboshi/49-escape-timeout_4.png",
+    "note": "すっぱい？…ね。",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:5",
+    "shot": "shots/escape-timeout__umeboshi/50-escape-timeout_5.png",
+    "note": "One sour hour…",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:6",
+    "shot": "shots/escape-timeout__umeboshi/51-escape-timeout_6.png",
+    "note": "…then every hour is ours.",
+    "fail": null
+   },
+   {
+    "beat": "escape-timeout:7",
+    "shot": "shots/escape-timeout__umeboshi/52-escape-timeout_7.png",
+    "note": "ESCAPE? [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/escape-timeout__umeboshi/53-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "leave-fu__tamagoyaki",
+  "end": "leave-fu",
+  "bento": "tamagoyaki",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/leave-fu__tamagoyaki/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/leave-fu__tamagoyaki/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/leave-fu__tamagoyaki/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/leave-fu__tamagoyaki/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/leave-fu__tamagoyaki/04-rooftop_2.png",
+    "note": "Sweet. Like me. Good input.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/leave-fu__tamagoyaki/05-rooftop_3.png",
+    "note": "Sweet, ne? I rolled it myself.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/leave-fu__tamagoyaki/06-rooftop_4.png",
+    "note": "You smile for her. It's easy.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/leave-fu__tamagoyaki/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/leave-fu__tamagoyaki/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/leave-fu__tamagoyaki/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/leave-fu__tamagoyaki/10-train_1.png",
+    "note": "Nobody reads the ads. This one says 甘い! SWEET!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/leave-fu__tamagoyaki/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/leave-fu__tamagoyaki/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/leave-fu__tamagoyaki/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/leave-fu__tamagoyaki/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/leave-fu__tamagoyaki/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/leave-fu__tamagoyaki/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/leave-fu__tamagoyaki/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/leave-fu__tamagoyaki/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/leave-fu__tamagoyaki/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/leave-fu__tamagoyaki/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/leave-fu__tamagoyaki/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/leave-fu__tamagoyaki/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/leave-fu__tamagoyaki/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/leave-fu__tamagoyaki/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/leave-fu__tamagoyaki/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "leave:0",
+    "shot": "shots/leave-fu__tamagoyaki/26-leave_0.png",
+    "note": "Leaving is not an option.",
+    "fail": null
+   },
+   {
+    "beat": "leave:1",
+    "shot": "shots/leave-fu__tamagoyaki/27-leave_1.png",
+    "note": "XOR Coffee. 7:00 AM.",
+    "fail": null
+   },
+   {
+    "beat": "leave:2",
+    "shot": "shots/leave-fu__tamagoyaki/28-leave_2.png",
+    "note": "He wakes at 7:00.",
+    "fail": null
+   },
+   {
+    "beat": "leave:3",
+    "shot": "shots/leave-fu__tamagoyaki/29-leave_3.png",
+    "note": "From now on… can we be fORever? [uhmmm yeah ig | FUCK YOU. I'm leaving]",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:0",
+    "shot": "shots/leave-fu__tamagoyaki/30-leave-fu_0.png",
+    "note": "Her hand rises. Time freezes. The café turns.",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:1",
+    "shot": "shots/leave-fu__tamagoyaki/31-leave-fu_1.png",
+    "note": "You said leave. I heard 'lea—'.",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:2",
+    "shot": "shots/leave-fu__tamagoyaki/32-leave-fu_2.png",
+    "note": "fORever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:3",
+    "shot": "shots/leave-fu__tamagoyaki/33-leave-fu_3.png",
+    "note": "fORever and ever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:4",
+    "shot": "shots/leave-fu__tamagoyaki/34-leave-fu_4.png",
+    "note": "LEAVE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/leave-fu__tamagoyaki/35-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "leave-fu__umeboshi",
+  "end": "leave-fu",
+  "bento": "umeboshi",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/leave-fu__umeboshi/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/leave-fu__umeboshi/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/leave-fu__umeboshi/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/leave-fu__umeboshi/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/leave-fu__umeboshi/04-rooftop_2.png",
+    "note": "Sour. Hm. You like things that bite?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/leave-fu__umeboshi/05-rooftop_3.png",
+    "note": "Sour, ne?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/leave-fu__umeboshi/06-rooftop_4.png",
+    "note": "You smile for her anyway.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/leave-fu__umeboshi/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/leave-fu__umeboshi/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/leave-fu__umeboshi/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/leave-fu__umeboshi/10-train_1.png",
+    "note": "Nobody reads the ads. This one says すっぱい! SOUR!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/leave-fu__umeboshi/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/leave-fu__umeboshi/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/leave-fu__umeboshi/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/leave-fu__umeboshi/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/leave-fu__umeboshi/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/leave-fu__umeboshi/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/leave-fu__umeboshi/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/leave-fu__umeboshi/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/leave-fu__umeboshi/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/leave-fu__umeboshi/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/leave-fu__umeboshi/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/leave-fu__umeboshi/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/leave-fu__umeboshi/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/leave-fu__umeboshi/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/leave-fu__umeboshi/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "leave:0",
+    "shot": "shots/leave-fu__umeboshi/26-leave_0.png",
+    "note": "Leaving is not an option.",
+    "fail": null
+   },
+   {
+    "beat": "leave:1",
+    "shot": "shots/leave-fu__umeboshi/27-leave_1.png",
+    "note": "XOR Coffee. 7:00 AM.",
+    "fail": null
+   },
+   {
+    "beat": "leave:2",
+    "shot": "shots/leave-fu__umeboshi/28-leave_2.png",
+    "note": "He wakes at 7:00.",
+    "fail": null
+   },
+   {
+    "beat": "leave:3",
+    "shot": "shots/leave-fu__umeboshi/29-leave_3.png",
+    "note": "From now on… can we be fORever? [uhmmm yeah ig | FUCK YOU. I'm leaving]",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:0",
+    "shot": "shots/leave-fu__umeboshi/30-leave-fu_0.png",
+    "note": "Her hand rises. Time freezes. The café turns.",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:1",
+    "shot": "shots/leave-fu__umeboshi/31-leave-fu_1.png",
+    "note": "You said leave. I heard 'lea—'.",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:2",
+    "shot": "shots/leave-fu__umeboshi/32-leave-fu_2.png",
+    "note": "fORever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:3",
+    "shot": "shots/leave-fu__umeboshi/33-leave-fu_3.png",
+    "note": "fORever and ever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:4",
+    "shot": "shots/leave-fu__umeboshi/34-leave-fu_4.png",
+    "note": "LEAVE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/leave-fu__umeboshi/35-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "leave-yeah__tamagoyaki",
+  "end": "leave-yeah",
+  "bento": "tamagoyaki",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/leave-yeah__tamagoyaki/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/leave-yeah__tamagoyaki/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/leave-yeah__tamagoyaki/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/leave-yeah__tamagoyaki/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/leave-yeah__tamagoyaki/04-rooftop_2.png",
+    "note": "Sweet. Like me. Good input.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/leave-yeah__tamagoyaki/05-rooftop_3.png",
+    "note": "Sweet, ne? I rolled it myself.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/leave-yeah__tamagoyaki/06-rooftop_4.png",
+    "note": "You smile for her. It's easy.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/leave-yeah__tamagoyaki/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/leave-yeah__tamagoyaki/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/leave-yeah__tamagoyaki/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/leave-yeah__tamagoyaki/10-train_1.png",
+    "note": "Nobody reads the ads. This one says 甘い! SWEET!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/leave-yeah__tamagoyaki/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/leave-yeah__tamagoyaki/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/leave-yeah__tamagoyaki/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/leave-yeah__tamagoyaki/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/leave-yeah__tamagoyaki/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/leave-yeah__tamagoyaki/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/leave-yeah__tamagoyaki/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/leave-yeah__tamagoyaki/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/leave-yeah__tamagoyaki/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/leave-yeah__tamagoyaki/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/leave-yeah__tamagoyaki/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/leave-yeah__tamagoyaki/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/leave-yeah__tamagoyaki/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/leave-yeah__tamagoyaki/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/leave-yeah__tamagoyaki/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "leave:0",
+    "shot": "shots/leave-yeah__tamagoyaki/26-leave_0.png",
+    "note": "Leaving is not an option.",
+    "fail": null
+   },
+   {
+    "beat": "leave:1",
+    "shot": "shots/leave-yeah__tamagoyaki/27-leave_1.png",
+    "note": "XOR Coffee. 7:00 AM.",
+    "fail": null
+   },
+   {
+    "beat": "leave:2",
+    "shot": "shots/leave-yeah__tamagoyaki/28-leave_2.png",
+    "note": "He wakes at 7:00.",
+    "fail": null
+   },
+   {
+    "beat": "leave:3",
+    "shot": "shots/leave-yeah__tamagoyaki/29-leave_3.png",
+    "note": "From now on… can we be fORever? [uhmmm yeah ig | FUCK YOU. I'm leaving]",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:0",
+    "shot": "shots/leave-yeah__tamagoyaki/30-leave-yeah_0.png",
+    "note": "Hooray! FORever and ever!",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:1",
+    "shot": "shots/leave-yeah__tamagoyaki/31-leave-yeah_1.png",
+    "note": "Good input.",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:2",
+    "shot": "shots/leave-yeah__tamagoyaki/32-leave-yeah_2.png",
+    "note": "fORever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:3",
+    "shot": "shots/leave-yeah__tamagoyaki/33-leave-yeah_3.png",
+    "note": "fORever and ever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:4",
+    "shot": "shots/leave-yeah__tamagoyaki/34-leave-yeah_4.png",
+    "note": "LEAVE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/leave-yeah__tamagoyaki/35-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "leave-yeah__umeboshi",
+  "end": "leave-yeah",
+  "bento": "umeboshi",
+  "w": 1920,
+  "h": 1080,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/leave-yeah__umeboshi/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/leave-yeah__umeboshi/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/leave-yeah__umeboshi/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/leave-yeah__umeboshi/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/leave-yeah__umeboshi/04-rooftop_2.png",
+    "note": "Sour. Hm. You like things that bite?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/leave-yeah__umeboshi/05-rooftop_3.png",
+    "note": "Sour, ne?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/leave-yeah__umeboshi/06-rooftop_4.png",
+    "note": "You smile for her anyway.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/leave-yeah__umeboshi/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/leave-yeah__umeboshi/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/leave-yeah__umeboshi/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/leave-yeah__umeboshi/10-train_1.png",
+    "note": "Nobody reads the ads. This one says すっぱい! SOUR!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/leave-yeah__umeboshi/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/leave-yeah__umeboshi/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/leave-yeah__umeboshi/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/leave-yeah__umeboshi/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/leave-yeah__umeboshi/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/leave-yeah__umeboshi/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/leave-yeah__umeboshi/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/leave-yeah__umeboshi/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/leave-yeah__umeboshi/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/leave-yeah__umeboshi/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/leave-yeah__umeboshi/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/leave-yeah__umeboshi/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/leave-yeah__umeboshi/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/leave-yeah__umeboshi/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/leave-yeah__umeboshi/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "leave:0",
+    "shot": "shots/leave-yeah__umeboshi/26-leave_0.png",
+    "note": "Leaving is not an option.",
+    "fail": null
+   },
+   {
+    "beat": "leave:1",
+    "shot": "shots/leave-yeah__umeboshi/27-leave_1.png",
+    "note": "XOR Coffee. 7:00 AM.",
+    "fail": null
+   },
+   {
+    "beat": "leave:2",
+    "shot": "shots/leave-yeah__umeboshi/28-leave_2.png",
+    "note": "He wakes at 7:00.",
+    "fail": null
+   },
+   {
+    "beat": "leave:3",
+    "shot": "shots/leave-yeah__umeboshi/29-leave_3.png",
+    "note": "From now on… can we be fORever? [uhmmm yeah ig | FUCK YOU. I'm leaving]",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:0",
+    "shot": "shots/leave-yeah__umeboshi/30-leave-yeah_0.png",
+    "note": "Hooray! FORever and ever!",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:1",
+    "shot": "shots/leave-yeah__umeboshi/31-leave-yeah_1.png",
+    "note": "Good input.",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:2",
+    "shot": "shots/leave-yeah__umeboshi/32-leave-yeah_2.png",
+    "note": "fORever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:3",
+    "shot": "shots/leave-yeah__umeboshi/33-leave-yeah_3.png",
+    "note": "fORever and ever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-yeah:4",
+    "shot": "shots/leave-yeah__umeboshi/34-leave-yeah_4.png",
+    "note": "LEAVE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/leave-yeah__umeboshi/35-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "escape-win__tamagoyaki__1024",
+  "end": "escape-win",
+  "bento": "tamagoyaki",
+  "w": 1024,
+  "h": 768,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/escape-win__tamagoyaki__1024/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/escape-win__tamagoyaki__1024/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/escape-win__tamagoyaki__1024/04-rooftop_2.png",
+    "note": "Sweet. Like me. Good input.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/escape-win__tamagoyaki__1024/05-rooftop_3.png",
+    "note": "Sweet, ne? I rolled it myself.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/escape-win__tamagoyaki__1024/06-rooftop_4.png",
+    "note": "You smile for her. It's easy.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/escape-win__tamagoyaki__1024/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/escape-win__tamagoyaki__1024/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/10-train_1.png",
+    "note": "Nobody reads the ads. This one says 甘い! SWEET!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/escape-win__tamagoyaki__1024/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:3",
+    "shot": "shots/escape-win__tamagoyaki__1024/16-blackout_3.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/escape-win__tamagoyaki__1024/17-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:5",
+    "shot": "shots/escape-win__tamagoyaki__1024/18-blackout_5.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/escape-win__tamagoyaki__1024/19-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:7",
+    "shot": "shots/escape-win__tamagoyaki__1024/20-blackout_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/escape-win__tamagoyaki__1024/21-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/escape-win__tamagoyaki__1024/22-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/23-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/24-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/escape-win__tamagoyaki__1024/25-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "cup:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/26-cup_0.png",
+    "note": "I made tamagoyaki. For no reason. Eat.",
+    "fail": null
+   },
+   {
+    "beat": "cup:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/27-cup_1.png",
+    "note": "Third teacup. Nobody poured it. Tamagoyaki on its saucer.",
+    "fail": null
+   },
+   {
+    "beat": "cup:2",
+    "shot": "shots/escape-win__tamagoyaki__1024/28-cup_2.png",
+    "note": "Who's the third cup for?",
+    "fail": null
+   },
+   {
+    "beat": "cup:3",
+    "shot": "shots/escape-win__tamagoyaki__1024/29-cup_3.png",
+    "note": "For Input B. Silly. It's always three of us. [Drink | Stand up]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/30-unknown_0.png",
+    "note": "You stand. The floor tilts a little.",
+    "fail": null
+   },
+   {
+    "beat": "unknown:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/31-unknown_1.png",
+    "note": "Under the table: a floor hatch. Too big for storage. [Open the hatch]",
+    "fail": null
+   },
+   {
+    "beat": "unknown:2",
+    "shot": "shots/escape-win__tamagoyaki__1024/32-unknown_2.png",
+    "note": "A steep wooden ladder. Down into the dark. [Climb down]",
+    "fail": null
+   },
+   {
+    "beat": "escape:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/33-escape_0.png",
+    "note": "Concrete. One bulb. Rain at a high window. [Look at the shelves]",
+    "fail": null
+   },
+   {
+    "beat": "escape:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/34-escape_1.png",
+    "note": "Jars on the shelves. Each one: a date, a name.",
+    "fail": null
+   },
+   {
+    "beat": "escape:2",
+    "shot": "shots/escape-win__tamagoyaki__1024/35-escape_2.png",
+    "note": "The dates go back years. The names are all different.",
+    "fail": null
+   },
+   {
+    "beat": "escape:3",
+    "shot": "shots/escape-win__tamagoyaki__1024/36-escape_3.png",
+    "note": "Bento boxes, one per day. Your name on each. Untouched.",
+    "fail": null
+   },
+   {
+    "beat": "escape:4",
+    "shot": "shots/escape-win__tamagoyaki__1024/37-escape_4.png",
+    "note": "The oldest is dated before you met.",
+    "fail": null
+   },
+   {
+    "beat": "escape:5",
+    "shot": "shots/escape-win__tamagoyaki__1024/38-escape_5.png",
+    "note": "A mortar and a mallet. One fresh mochi. Hers only. [Keep looking]",
+    "fail": null
+   },
+   {
+    "beat": "escape:6",
+    "shot": "shots/escape-win__tamagoyaki__1024/39-escape_6.png",
+    "note": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.",
+    "fail": null
+   },
+   {
+    "beat": "escape:7",
+    "shot": "shots/escape-win__tamagoyaki__1024/40-escape_7.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:9",
+    "shot": "shots/escape-win__tamagoyaki__1024/41-escape_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:11",
+    "shot": "shots/escape-win__tamagoyaki__1024/42-escape_11.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape:12",
+    "shot": "shots/escape-win__tamagoyaki__1024/43-escape_12.png",
+    "note": "Minutes gone. A clock upstairs chimed. You lost count.",
+    "fail": null
+   },
+   {
+    "beat": "escape:13",
+    "shot": "shots/escape-win__tamagoyaki__1024/44-escape_13.png",
+    "note": "A heavy door. Behind it, stairs to the street. [Wait for her | Leave her house]",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/45-escape-win_0.png",
+    "note": "She's waiting at the outside door.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:1",
+    "shot": "shots/escape-win__tamagoyaki__1024/46-escape-win_1.png",
+    "note": "You took the long way.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:2",
+    "shot": "shots/escape-win__tamagoyaki__1024/47-escape-win_2.png",
+    "note": "Home is warm, and sweet.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:3",
+    "shot": "shots/escape-win__tamagoyaki__1024/48-escape-win_3.png",
+    "note": "Sleep now. You're mine to keep.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:4",
+    "shot": "shots/escape-win__tamagoyaki__1024/49-escape-win_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:5",
+    "shot": "shots/escape-win__tamagoyaki__1024/50-escape-win_5.png",
+    "note": "Mine.",
+    "fail": null
+   },
+   {
+    "beat": "escape-win:6",
+    "shot": "shots/escape-win__tamagoyaki__1024/51-escape-win_6.png",
+    "note": "ESCAPE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/escape-win__tamagoyaki__1024/52-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ },
+ {
+  "name": "leave-fu__umeboshi__rm",
+  "end": "leave-fu",
+  "bento": "umeboshi",
+  "w": 1920,
+  "h": 1080,
+  "rm": true,
+  "beats": [
+   {
+    "beat": "logic",
+    "shot": "shots/leave-fu__umeboshi__rm/00-logic.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "collapse",
+    "shot": "shots/leave-fu__umeboshi__rm/01-collapse.png",
+    "note": ""
+   },
+   {
+    "beat": "rooftop:0",
+    "shot": "shots/leave-fu__umeboshi__rm/02-rooftop_0.png",
+    "note": " audio=carried",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:1",
+    "shot": "shots/leave-fu__umeboshi__rm/03-rooftop_1.png",
+    "note": "Don't look at me like that. It's not for you. [Take the tamagoyaki | Take the umeboshi]",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:2",
+    "shot": "shots/leave-fu__umeboshi__rm/04-rooftop_2.png",
+    "note": "Sour. Hm. You like things that bite?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:3",
+    "shot": "shots/leave-fu__umeboshi__rm/05-rooftop_3.png",
+    "note": "Sour, ne?",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:4",
+    "shot": "shots/leave-fu__umeboshi__rm/06-rooftop_4.png",
+    "note": "You smile for her anyway.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:5",
+    "shot": "shots/leave-fu__umeboshi__rm/07-rooftop_5.png",
+    "note": "Technically, rain wasn't f-OR-ecast.",
+    "fail": null
+   },
+   {
+    "beat": "rooftop:6",
+    "shot": "shots/leave-fu__umeboshi__rm/08-rooftop_6.png",
+    "note": "Stay fORever? The rain can wait. [Stay a minute | OR Leave before the rain]",
+    "fail": null
+   },
+   {
+    "beat": "train:0",
+    "shot": "shots/leave-fu__umeboshi__rm/09-train_0.png",
+    "note": "AND Line, local service. Home in twelve stops.",
+    "fail": null
+   },
+   {
+    "beat": "train:1",
+    "shot": "shots/leave-fu__umeboshi__rm/10-train_1.png",
+    "note": "Nobody reads the ads. This one says すっぱい! SOUR!",
+    "fail": null
+   },
+   {
+    "beat": "naan:0",
+    "shot": "shots/leave-fu__umeboshi__rm/11-naan_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "naan:1",
+    "shot": "shots/leave-fu__umeboshi__rm/12-naan_1.png",
+    "note": "Technically, that's a NAND gate. Not bread.",
+    "fail": null
+   },
+   {
+    "beat": "blackout:0",
+    "shot": "shots/leave-fu__umeboshi__rm/13-blackout_0.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:1",
+    "shot": "shots/leave-fu__umeboshi__rm/14-blackout_1.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:2",
+    "shot": "shots/leave-fu__umeboshi__rm/15-blackout_2.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:4",
+    "shot": "shots/leave-fu__umeboshi__rm/16-blackout_4.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:6",
+    "shot": "shots/leave-fu__umeboshi__rm/17-blackout_6.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:8",
+    "shot": "shots/leave-fu__umeboshi__rm/18-blackout_8.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "blackout:9",
+    "shot": "shots/leave-fu__umeboshi__rm/19-blackout_9.png",
+    "note": "",
+    "fail": null
+   },
+   {
+    "beat": "door:0",
+    "shot": "shots/leave-fu__umeboshi__rm/20-door_0.png",
+    "note": "This is me. Unit 12. Obviously you'll remember.",
+    "fail": null
+   },
+   {
+    "beat": "door:1",
+    "shot": "shots/leave-fu__umeboshi__rm/21-door_1.png",
+    "note": "Come in? Just for tea.",
+    "fail": null
+   },
+   {
+    "beat": "door:2",
+    "shot": "shots/leave-fu__umeboshi__rm/22-door_2.png",
+    "note": "I already boiled the water. This morning. Just in case. [Just one cup | Say goodnight]",
+    "fail": null
+   },
+   {
+    "beat": "leave:0",
+    "shot": "shots/leave-fu__umeboshi__rm/23-leave_0.png",
+    "note": "Leaving is not an option.",
+    "fail": null
+   },
+   {
+    "beat": "leave:1",
+    "shot": "shots/leave-fu__umeboshi__rm/24-leave_1.png",
+    "note": "XOR Coffee. 7:00 AM.",
+    "fail": null
+   },
+   {
+    "beat": "leave:2",
+    "shot": "shots/leave-fu__umeboshi__rm/25-leave_2.png",
+    "note": "He wakes at 7:00.",
+    "fail": null
+   },
+   {
+    "beat": "leave:3",
+    "shot": "shots/leave-fu__umeboshi__rm/26-leave_3.png",
+    "note": "From now on… can we be fORever? [uhmmm yeah ig | FUCK YOU. I'm leaving]",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:0",
+    "shot": "shots/leave-fu__umeboshi__rm/27-leave-fu_0.png",
+    "note": "Her hand rises. Time freezes. The café turns.",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:1",
+    "shot": "shots/leave-fu__umeboshi__rm/28-leave-fu_1.png",
+    "note": "You said leave. I heard 'lea—'.",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:2",
+    "shot": "shots/leave-fu__umeboshi__rm/29-leave-fu_2.png",
+    "note": "fORever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:3",
+    "shot": "shots/leave-fu__umeboshi__rm/30-leave-fu_3.png",
+    "note": "fORever and ever and ever",
+    "fail": null
+   },
+   {
+    "beat": "leave-fu:4",
+    "shot": "shots/leave-fu__umeboshi__rm/31-leave-fu_4.png",
+    "note": "LEAVE. [Back to start]",
+    "fail": null
+   },
+   {
+    "beat": "back-to-rooftop:0",
+    "shot": "shots/leave-fu__umeboshi__rm/32-back-to-rooftop_0.png",
+    "note": "returned to scene 1"
+   }
+  ],
+  "errs": [],
+  "escNote": null,
+  "audio": "carried"
+ }
+]
