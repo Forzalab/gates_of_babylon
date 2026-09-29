@@ -212,7 +212,7 @@ Audio context on arrival: carried
 | escape:5 | [png](shots/escape-win__umeboshi/38-escape_5.png) | pass | A mortar and a mallet. One fresh mochi. Hers only. [Keep looking] |
 | escape:6 | [png](shots/escape-win__umeboshi/39-escape_6.png) | pass | Newest jar: today, your name, umeboshi. Lid off. Empty. |
 | escape:7 | [png](shots/escape-win__umeboshi/40-escape_7.png) | pass |  |
-| escape:9 | [png](shots/escape-win__umeboshi/41-escape_9.png) | pass |  |
+| escape:10 | [png](shots/escape-win__umeboshi/41-escape_10.png) | pass |  |
 | escape:11 | [png](shots/escape-win__umeboshi/42-escape_11.png) | pass |  |
 | escape:12 | [png](shots/escape-win__umeboshi/43-escape_12.png) | pass | Minutes gone. A clock upstairs chimed. You lost count. |
 | escape:13 | [png](shots/escape-win__umeboshi/44-escape_13.png) | pass | A heavy door. Behind it, stairs to the street. [Wait for her / Leave her house] |
