@@ -10,6 +10,7 @@ import { ART_NAMES } from './date-beta-art-names.js';
 const scenes = loadScenes(data, { manifest, art: ART_NAMES });
 
 // picks: choice labels in the order they come up (the rooftop bento pick is taken from `bento`, not the queue).
+// null = the first (pink) choice: the HUD draft picks (rooftop 3, door 1, cup 0, leave 2) take it unless a test says.
 // Returns the scene ids visited, every line shown (after vary), and the final card position.
 function walk(picks, rm = false, bento = 'umeboshi') {
   const queue = [...picks], seen = [], lines = [];
@@ -32,11 +33,11 @@ function walk(picks, rm = false, bento = 'umeboshi') {
 
 const SHARED = ['rooftop', 'train', 'naan', 'blackout', 'platform', 'underpass', 'apartment', 'door'];
 const PATHS = {
-  STEEPED: { picks: [null, 'Just one cup', 'Drink'], via: ['genkan-in', 'cup', 'steeped'], card: 'STEEPED.' },
-  'ESCAPE-win': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Leave her house'], via: ['genkan-in', 'cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
-  'ESCAPE-timeout': { picks: [null, 'Just one cup', 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Wait for her'], via: ['genkan-in', 'cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
-  'LEAVE (refuse)': { picks: [null, "Say goodnight", "FUCK YOU. I'm leaving"], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
-  'LEAVE (agree)': { picks: [null, "Say goodnight", 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
+  STEEPED: { picks: [null, null, null, 'Just one cup', null, 'Drink'], via: ['genkan-in', 'cup', 'steeped'], card: 'STEEPED.' },
+  'ESCAPE-win': { picks: [null, null, null, 'Just one cup', null, 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Leave her house'], via: ['genkan-in', 'cup', 'unknown', 'escape', 'escape-win'], card: 'ESCAPE.' },
+  'ESCAPE-timeout': { picks: [null, null, null, 'Just one cup', null, 'Stand up', 'Open the hatch', 'Climb down', 'Look at the shelves', 'Keep looking', 'Wait for her'], via: ['genkan-in', 'cup', 'unknown', 'escape', 'escape-timeout'], card: 'ESCAPE?' },
+  'LEAVE (refuse)': { picks: [null, null, null, "Say goodnight", null, "FUCK YOU. I'm leaving"], via: ['leave', 'leave-fu'], card: 'LEAVE.' },
+  'LEAVE (agree)': { picks: [null, null, null, "Say goodnight", null, 'uhmmm yeah ig'], via: ['leave', 'leave-yeah'], card: 'LEAVE.' },
 };
 
 for (const [name, { picks, via, card }] of Object.entries(PATHS)) {
@@ -85,7 +86,7 @@ test('date-beta basement: the door beat converges (timer -> wait -> timeout, cli
 });
 
 test('date-beta spine: the DOOR timer defaults to going in (pink)', () => {
-  const b = scenes.find((x) => x.id === 'door').beats.find((x) => x.choices);
+  const b = scenes.find((x) => x.id === 'door').beats.find((x) => x.timer);
   assert.equal(b.timer, 5);
   assert.equal(b.choices.find((c) => c.default).go, 'genkan-in'); // alt's arrival insert, then cup
 });

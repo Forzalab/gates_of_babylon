@@ -23,6 +23,8 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 | `wait` | `click`, `start`, `auto`, `choice` | inferred | What moves the beat on. |
 | `motion` + `rmAlt` | bool; `same`, `hard-cut`, `static`, `skip` | `false`, `same` | A motion beat needs a reduced-motion alt. |
 | `vary` | `{ flag: { value: { text?, speaker?, props?, sprite?, bg?, sfx? } } }` | none | Per-value overlay for a declared flag (see Flags). Only these six look fields can vary; `choices`, `timer`, `set`, `wait` etc. cannot, so the scene graph is the same for every value. |
+| `card` | `"goal"` | none | Draws the goal card over the beat (rooftop beat 0, the first thing after the Figur collapse). A card beat waits for a click (GOT IT ▸). |
+| `end` | `steeped`, `escape`, `leave` (lowercase name) | none | The ending title beat. It must keep its `Back to start` choice: the result card (win / almost / low) replaces the chip and choices, and its button takes choice 0. |
 
 ## Choice
 
@@ -34,6 +36,10 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 | `if` | flags object | Enabled only when every key equals its flag. A missing flag reads as `null`. A disabled choice is shown but can't be picked. |
 | `set` | flags object | Merged in on pick, before `go` is resolved. |
 | `go` | scene id, or a list like `[{ "if": {...}, "to": "x" }, "fallback"]` | Jumps to the first entry that matches. If nothing matches (or there is no `go`), play moves to the next beat. |
+| `love` | whole number -5..+5 | The score change. Default 0 (no pop, no reaction frame). |
+| `emote` | `heart`, `hearts`, `sweat`, `pout`, `or`, `crack` | Her face + bubble on the reaction frame. Default from `love`: +3 and up hearts, +2 heart, +1 sweat, -1 pout, -2 or, -3 and down crack. Needs a non-zero `love`. |
+| `react` | string, max 12 words | Her line on the reaction frame (speaker NANDA, `{OR}` allowed, echo-linted). Missing = the chip keeps the question line. Needs a non-zero `love`. |
+| `tell` | bool | Show the "She liked that." / "She did not like that." line under the delta pill. Default true when `love` is not 0. |
 
 ## Scene
 
@@ -41,8 +47,24 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 |---|---|
 | `id`, `title`, `enter` (`cut`/`fade`), `bg`, `scare`, `beats` | As before. |
 | `defaults` | Flags object. Skipping the scene (Esc or S) merges these in, so the flags look as if the scene had played its default path. |
+| `nanda` | bool. Is she on screen in this scene? Default: true when any beat (or `vary` variant) has a NANDA line. Drives the HUD bar and her sprite. |
+| `short` | 1-8 uppercase characters. The scene's name on the route trail. Default: `END` for a scene with an `end` beat, else the id in capitals. |
 
-Flag values are strings, numbers, booleans or `null`. Root keys: `version`, `note`, `flags`, `scenes`.
+Flag values are strings, numbers, booleans or `null`. Root keys: `version`, `note`, `flags`, `love`, `scenes`.
+
+## Love (HUD)
+
+| rule | meaning |
+|---|---|
+| root `love` | `{ "start": 0, "goal": "auto" }`. The loader walks every path from scene 1 to an ending (`end` beat, a choice back to scene 1, or the end of the script) following sets, `if` and `go`, and takes the best total (clamped at 0 on the way, like play). `goal: "auto"` uses that. A written number must equal it, so a new branch can never make 100% unreachable or reachable by accident. A loop in the graph fails the load. Shipped goal: 16 (STEEPED, all pink picks, tamagoyaki). |
+| `pos.love` | The running score, clamped 0..goal. Shown as a percentage: 100% only when full. A choice back to scene 1 starts a new run at `start`. `?love=N` starts there (testing). |
+| present | `scene.nanda` and the beat's bg is not `blackout`. The ribbon (meter, route trail, beat pips) and her sprite show only then. She also shows on any NANDA line. |
+| reaction frame | A pick with `love` where she is present: same bg, choices gone, the chip shows `react` (else the question line), her `emote` with a big bubble, the delta pill + tell line under the ribbon. Holds at least 500 ms, then click / Space / Enter / → / NEXT goes on to where the pick went. Esc just closes it. |
+| deferred pop | A pick with `love` where she is absent (the basement) changes the score at once; the pop and emote show on the next beat where she is present. |
+| skip | Esc / S scores every pick it passes over as the timer would pick it (`default`, else pink). The pick it lands on (a branch) is not scored. |
+| timer | The auto-pick scores like a click. |
+| ending card | On the `end` beat: 100% = win, 60-99% = almost, below 60% = low. PLAY AGAIN / TRY AGAIN go back to the rooftop at love 0. |
+| trail | Scenes entered this run (filled), this one (a capsule with `short` and one pip per beat, or `n/N` over 8 beats), then the shortest route to an ending (hollow; the ending is a heart). |
 
 ## Flags and `vary` (echo rule)
 

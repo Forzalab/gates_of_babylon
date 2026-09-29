@@ -1,0 +1,206 @@
+/* date-beta HUD mockups (love score + minimap + NEXT + goal / win / low cards). Layered on the REAL engine CSS
+   (src/date-beta/tokens.css + beta.css, linked read-only) so the dialogue chip, choices and Nanda sit exactly where the
+   engine puts them. Everything new is `hud-` / `lv-` prefixed. Static by default = the reduced-motion frame.
+   ?play adds the stepped motion: every step holds >= 334 ms (<= 3 Hz), no flashes, no full-screen luminance flips. */
+
+@font-face { font-family: 'M PLUS Rounded 1c'; font-weight: 500; src: url('../../../node_modules/@fontsource/m-plus-rounded-1c/files/m-plus-rounded-1c-latin-500-normal.woff2') format('woff2'); }
+@font-face { font-family: 'M PLUS Rounded 1c'; font-weight: 700; src: url('../../../node_modules/@fontsource/m-plus-rounded-1c/files/m-plus-rounded-1c-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'M PLUS Rounded 1c'; font-weight: 800; src: url('../../../node_modules/@fontsource/m-plus-rounded-1c/files/m-plus-rounded-1c-latin-800-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Nunito Variable'; font-weight: 200 1000; src: url('../../../node_modules/@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Nunito'; font-weight: 900; src: url('../../../node_modules/@fontsource/nunito/files/nunito-latin-900-normal.woff2') format('woff2'); }
+
+:root {
+  /* HUD tokens (new). The panel = the dialogue chip's own material so the HUD reads as part of the same UI. */
+  --lv-panel: #fff0f6; --lv-rim: #d6337f; --lv-edge: #3a1d3f; --lv-ol: #3a0a26;
+  --lv-empty: #f6d6e6; --lv-empty-in: #e9b9d0;
+  --lv-fill: linear-gradient(180deg, #f27fc0 0%, #e0409a 45%, #c42a82 100%);
+  --lv-new: linear-gradient(180deg, #ffa6d6 0%, #ff4f9a 55%, #e0307f 100%);
+  --lv-ink: #7a0f45;           /* text on the light panel: 8.4:1 */
+  --lv-dark: #1a0710; --lv-dark-ink: #ffe9f1; --lv-dark-hot: #ff6b7d;
+  /* the NEXT pill: the HA glossy pill, one notch darker so white text holds 4.5:1 even on the flat fallback colour */
+  --next-body: linear-gradient(180deg, #e8559f 0%, #c42a82 42%, #a8206f 70%, #8e1860 100%);
+}
+
+.viewport { cursor: default; }
+.plate { position: absolute; inset: 0; width: 1920px; height: 1080px; display: block; }
+
+/* ============ NEXT ▸ : an HA pill straddling the dialogue chip's bottom edge (mirror of the name tag on the top edge) */
+.db-say .next { display: none; }
+.hud-next { position: absolute; right: 44px; bottom: -40px; z-index: 4; display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 30px 14px 38px; border: 0; border-radius: 999px; color: #fff; background-color: #a8206f; background-image: var(--next-body);
+  font: 900 38px/1 var(--btn); letter-spacing: .04em; text-shadow: var(--g-ring); pointer-events: auto; cursor: pointer;
+  box-shadow: inset 0 0 0 3px var(--g-pink-edge), inset 0 -5px 0 rgba(90, 8, 50, .3), 0 0 0 7px var(--g-rim), 0 0 0 9px var(--g-rim-edge),
+    0 10px 0 2px var(--g-rim-edge); }
+.hud-next svg { width: 26px; height: 30px; overflow: visible; }
+.hud-next svg path { fill: #fff; stroke: var(--g-ol); stroke-width: 2.4; stroke-linejoin: round; paint-order: stroke; }
+.has-or .hud-next { background-color: #3a0d1c; background-image: var(--g-dark); color: var(--scrim-ink);
+  box-shadow: inset 0 0 0 4px var(--her), 0 0 0 7px var(--g-rim), 0 0 0 9px var(--g-rim-edge), 0 10px 0 2px var(--g-rim-edge); }
+
+/* ============ shared bits */
+.lv-heart-svg path.body { fill: url(#lvHeartFill); stroke: var(--lv-ol); stroke-width: 2.2; stroke-linejoin: round; }
+.lv-heart-svg path.rim { fill: none; stroke: #fff; stroke-width: 7; stroke-linejoin: round; }
+.lv-heart-svg path.gloss { fill: #fff; opacity: .5; }
+.lv-num { color: #fff; font: 900 30px/1 var(--btn); letter-spacing: .01em; text-shadow: var(--g-ring); }
+/* white text on a heart: backed by the heart's own flat mid-band colour (#c42a82, 5.3:1) so a contrast checker sees what the eye sees */
+.lv-badge .lv-num, .lv-bulb .lv-num, .lv-bulb .lv-label, .hud-end.win .bigheart .lv-num { background-color: #c42a82; border-radius: 8px; padding: 0 4px; }
+
+/* segmented meter (both variants): one cell per love point. filled = glossy pink, new (+) = pale pink ring, lost (-) = dark hatch */
+.lv-cell { display: block; border-radius: 6px; background: var(--lv-empty); box-shadow: inset 0 2px 0 var(--lv-empty-in); }
+.lv-cell.on { background: var(--lv-fill); box-shadow: inset 0 -3px 0 rgba(90, 8, 50, .28), inset 0 3px 0 rgba(255, 255, 255, .45); }
+.lv-cell.new { background: var(--lv-new); box-shadow: inset 0 0 0 3px #fff, 0 0 0 2px var(--lv-ol); }
+.lv-cell.lost { background: repeating-linear-gradient(135deg, #3a0d1c 0 6px, #6a1430 6px 12px); box-shadow: inset 0 0 0 3px var(--her); }
+
+/* ============ VARIANT A: top-edge ribbon (meter + scene trail), x 32..1580, clear of the chips (x >= 1606) */
+.hud-a { position: absolute; left: 32px; top: 16px; width: 1548px; height: 78px; z-index: 6; display: flex; align-items: center; gap: 18px;
+  padding: 0 26px 0 118px; border: 4px solid var(--lv-rim); border-radius: 999px; background: var(--lv-panel);
+  box-shadow: inset 0 0 0 3px #fff, 0 7px 0 var(--lv-edge); pointer-events: none; }
+.hud-a .lv-badge { position: absolute; left: -14px; top: -12px; width: 124px; height: 112px; display: grid; place-items: center; }
+.hud-a .lv-badge svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hud-a .lv-badge .lv-num { position: relative; top: -4px; font-size: 32px; }
+.hud-a .lv-label { font: 800 22px/1 var(--cond); letter-spacing: .14em; color: var(--lv-ink); white-space: nowrap; }
+.hud-a .lv-meter { position: relative; flex: none; width: 620px; height: 40px; padding: 5px; display: grid; grid-template-columns: repeat(var(--goal), minmax(0, 1fr));
+  gap: 4px; border-radius: 12px; background: #fff; box-shadow: inset 0 0 0 2px var(--lv-ol); }
+.hud-a .lv-marker { position: absolute; top: -13px; left: calc(2.5px + var(--n) * (100% - 5px) / var(--goal)); width: 40px; height: 40px;
+  transform: translateX(-50%); }
+.hud-a .lv-marker svg, .hud-b .lv-marker svg { width: 100%; height: 100%; overflow: visible; }
+.lv-marker path { fill: #fff; stroke: var(--lv-ol); stroke-width: 2.4; stroke-linejoin: round; }
+.lv-marker path.in { fill: #ff5fa2; stroke: none; }
+.hud-a .lv-goal { display: flex; align-items: center; gap: 8px; font: 800 26px/1 var(--cond); color: var(--lv-ink); white-space: nowrap; }
+.lv-goal svg { width: 40px; height: 38px; overflow: visible; }
+.lv-goal path { fill: #fff; stroke: var(--lv-rim); stroke-width: 3.5; stroke-linejoin: round; }
+.lv-goal.full path { fill: #ff5fa2; stroke: var(--lv-ol); stroke-width: 2.4; }
+.hud-a .lv-sep { width: 3px; height: 44px; border-radius: 2px; background: #efbad3; flex: none; }
+.hud-a .lv-trail { margin-left: auto; }
+
+/* the trail = AND Line station dots (the train sign's own motif): done = filled, here = a capsule with name + beat pips */
+.lv-trail { display: flex; align-items: center; gap: 0; }
+.lv-trail .rail { width: 22px; height: 4px; background: var(--lv-rim); flex: none; }
+.lv-trail .stop { width: 20px; height: 20px; border-radius: 50%; flex: none; background: #fff; box-shadow: inset 0 0 0 4px var(--lv-rim); }
+.lv-trail .stop.done { background: var(--lv-rim); box-shadow: inset 0 0 0 4px var(--lv-rim); }
+.lv-trail .stop.end { width: 30px; height: 28px; border-radius: 0; background: none; box-shadow: none; }
+.lv-trail .stop.end svg { width: 100%; height: 100%; overflow: visible; }
+.lv-trail .stop.end path { fill: #fff; stroke: var(--lv-rim); stroke-width: 3.5; stroke-linejoin: round; }
+.lv-trail .stop.end.done path { fill: var(--lv-rim); }
+.lv-trail .here { display: inline-flex; align-items: center; gap: 10px; flex: none; padding: 8px 14px 9px 16px; border-radius: 999px;
+  background: #a3135a; color: #fff; box-shadow: 0 0 0 3px #fff, 0 0 0 5px var(--lv-ol); font: 800 22px/1 var(--cond); letter-spacing: .08em; white-space: nowrap; }
+.lv-trail .pips { display: inline-flex; gap: 4px; }
+.lv-trail .pip { width: 9px; height: 16px; border-radius: 3px; background: #7d0e46; box-shadow: inset 0 0 0 2px #e27bb0; }
+.lv-trail .pip.on { background: #fff; box-shadow: none; }
+
+/* ============ pop (Telltale): the delta pill + "She'll remember that." hung from the fill head */
+.lv-pop { position: absolute; z-index: 7; display: flex; align-items: center; gap: 16px; pointer-events: none; white-space: nowrap; }
+.lv-delta { position: relative; display: inline-flex; align-items: center; gap: 10px; padding: 10px 24px 12px 18px; border-radius: 999px;
+  color: #fff; font: 900 44px/1 var(--btn); text-shadow: var(--g-ring); background-color: #a8206f; background-image: var(--next-body);
+  box-shadow: inset 0 0 0 3px var(--g-pink-edge), 0 0 0 6px var(--g-rim), 0 0 0 8px var(--g-rim-edge), 0 9px 0 2px var(--g-rim-edge); }
+.lv-delta svg { width: 44px; height: 40px; overflow: visible; }
+.lv-delta svg path { fill: #fff; stroke: var(--g-ol); stroke-width: 2.4; stroke-linejoin: round; }
+.lv-pop.minus .lv-delta { background-color: var(--lv-dark); background-image: var(--g-dark); color: var(--lv-dark-hot); text-shadow: none;
+  box-shadow: inset 0 0 0 4px var(--her), 0 0 0 6px var(--g-rim), 0 0 0 8px var(--g-rim-edge), 0 9px 0 2px var(--g-rim-edge); }
+.lv-pop.minus .lv-delta svg path { fill: none; stroke: var(--lv-dark-hot); stroke-width: 3.2; }
+.lv-tell { display: inline-flex; align-items: center; gap: 12px; padding: 12px 22px 13px; border-radius: 12px; background: rgba(26, 7, 16, .92);
+  color: var(--lv-dark-ink); font: italic 700 30px/1 var(--cond); letter-spacing: .01em; box-shadow: 0 0 0 3px rgba(255, 233, 241, .5); }
+.lv-tell i { font-style: normal; width: 12px; height: 12px; border-radius: 50%; background: var(--pink); flex: none; }
+.lv-pop.minus .lv-tell i { background: var(--her); }
+/* A: tail up to the marker */
+.lv-pop.at-a { left: 200px; top: 124px; }
+.lv-pop.at-a .lv-delta::before { content: ''; position: absolute; left: 34px; top: -24px; border: 14px solid transparent; border-bottom: 16px solid var(--g-rim); }
+
+/* ============ VARIANT B: the love thermometer, standing at Nanda's left (her heart, beside her). It rides with her:
+   normal beats top 312 (bulb ends at 798, above the chip's pins at 804); choice beats top 20 (ends 506, above the raised chip). */
+.hud-b { position: absolute; left: 1262px; top: 312px; width: 156px; height: 486px; z-index: 6; pointer-events: none; }
+.stage:has(.db-choices) .hud-b { top: 20px; }
+.hud-b .lv-goal { position: absolute; left: 50%; top: 0; transform: translateX(-50%); display: flex; align-items: center; gap: 8px; padding: 7px 16px 8px 11px;
+  border: 4px solid var(--lv-rim); border-radius: 999px; background: var(--lv-panel); box-shadow: inset 0 0 0 3px #fff, 0 6px 0 var(--lv-edge);
+  font: 800 24px/1 var(--cond); color: var(--lv-ink); white-space: nowrap; }
+.hud-b .lv-goal svg { width: 32px; height: 30px; }
+.hud-b .lv-tube { position: absolute; left: 50%; top: 60px; width: 84px; height: 300px; transform: translateX(-50%); padding: 10px;
+  border: 4px solid var(--lv-rim); border-radius: 42px 42px 16px 16px; background: var(--lv-panel); box-shadow: inset 0 0 0 3px #fff, 0 7px 0 var(--lv-edge); }
+.hud-b .lv-cells { position: relative; height: 100%; display: grid; grid-template-rows: repeat(var(--goal), minmax(0, 1fr)); gap: 4px; padding: 5px;
+  border-radius: 28px 28px 8px 8px; background: #fff; box-shadow: inset 0 0 0 2px var(--lv-ol); }
+.hud-b .lv-cells .lv-cell { border-radius: 4px; }
+.hud-b .lv-cells .lv-cell:first-child { border-radius: 22px 22px 4px 4px; }
+.hud-b .lv-marker { position: absolute; left: -50px; bottom: calc(2.5px + var(--n) * (100% - 5px) / var(--goal)); width: 36px; height: 36px;
+  transform: translateY(50%) rotate(-90deg); }
+.hud-b .lv-bulb { position: absolute; left: 50%; top: 344px; width: 156px; height: 142px; transform: translateX(-50%); display: grid; place-items: center; align-content: center; }
+.hud-b .lv-bulb svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hud-b .lv-bulb .lv-label { position: relative; top: -10px; font: 900 18px/1 var(--btn); letter-spacing: .16em; color: #fff; text-shadow: var(--g-ring); }
+.hud-b .lv-bulb .lv-num { position: relative; top: -8px; font-size: 38px; }
+/* B pop: the delta pill points at the fill head from the left; the Telltale line hangs under it */
+.lv-pop.at-b { left: 1000px; top: 500px; }
+.lv-pop.at-b .lv-tell { position: absolute; right: 0; top: calc(100% + 22px); }
+/* B trail: the AND Line station sign, top-left (the gauge carries the score; the sign carries the route) */
+.hud-b-trail { position: absolute; left: 32px; top: 16px; z-index: 6; display: flex; align-items: center; gap: 16px; padding: 12px 24px 12px 20px;
+  border: 4px solid var(--lv-rim); border-radius: 999px; background: var(--lv-panel); box-shadow: inset 0 0 0 3px #fff, 0 7px 0 var(--lv-edge); pointer-events: none; }
+.hud-b-trail .lv-label { font: 800 22px/1 var(--cond); letter-spacing: .12em; color: var(--lv-ink); white-space: nowrap; }
+
+/* ============ the GOAL card (after the Figur collapse lands on the rooftop) */
+.hud-card { position: absolute; z-index: 8; padding: 64px 70px 74px; border: 5px solid var(--rim); border-radius: 22px; background: var(--box); color: var(--box-ink);
+  box-shadow: inset 0 0 0 3px #fff, 0 12px 0 var(--edge); }
+.hud-card .tag { position: absolute; top: -32px; left: 52px; padding: 10px 30px 9px; border: 4px solid #fff; border-radius: 999px; background: var(--magenta);
+  color: #fff; box-shadow: 0 5px 0 var(--edge); font: 800 38px/1 var(--cond); letter-spacing: .12em; }
+.hud-card h2 { margin: 0 0 18px; font: 900 76px/1.05 var(--btn); letter-spacing: -.005em; color: #5c0f3c; }
+.hud-card p { margin: 0; font: 500 44px/1.3 var(--cond); color: var(--box-ink); }
+.hud-card p b { font-weight: 800; color: var(--magenta); }
+.hud-card p svg { width: 38px; height: 35px; vertical-align: -4px; margin-left: 6px; }
+.hud-card p svg path { fill: var(--pink); stroke: var(--lv-ol); stroke-width: 3; stroke-linejoin: round; }
+.hud-card .legend { display: flex; flex-wrap: wrap; align-items: center; gap: 18px 22px; margin-top: 30px; font: 700 32px/1 var(--cond); color: var(--box-ink); }
+.hud-card .legend .lv-delta { font-size: 34px; padding: 8px 20px 10px 14px; }
+.hud-card .legend .lv-delta svg { width: 34px; height: 31px; }
+.lv-delta.minus { background-color: var(--lv-dark); background-image: var(--g-dark); color: var(--lv-dark-hot); text-shadow: none;
+  box-shadow: inset 0 0 0 4px var(--her), 0 0 0 6px var(--g-rim), 0 0 0 8px var(--g-rim-edge), 0 8px 0 2px var(--g-rim-edge); }
+.lv-delta.minus svg path { fill: none; stroke: var(--lv-dark-hot); stroke-width: 3.2; }
+.hud-card .legend .gap { width: 20px; }
+.hud-card .hud-next { right: 56px; bottom: -42px; }
+/* pointer: A = a notch on the top edge up at the ribbon; B = a notch on the right edge at the gauge */
+.hud-card .notch { position: absolute; width: 56px; height: 56px; background: var(--box); border: 5px solid var(--rim); transform: rotate(45deg); }
+.hud-card.to-a .notch { top: -31px; left: 330px; border-right: 0; border-bottom: 0; border-radius: 10px 0 0 0; }
+.hud-card.to-b .notch { right: -31px; top: 200px; border-left: 0; border-bottom: 0; border-radius: 0 10px 0 0; }
+.hud-card .tag { z-index: 1; }
+/* the ribbon / gauge is ringed while the goal card points at it (static ring, no pulse) */
+.is-goal .hud-a, .is-goal .hud-b .lv-tube { outline: 6px solid #fff; outline-offset: 6px; }
+
+/* ============ endings: WIN splash + LOW card. Nanda stays above the scrim. */
+.hud-scrim ~ .db-nanda { z-index: 7; }
+/* ============ Scene stays visible under a 55% scrim (stepped in 3 x 334 ms with ?play). */
+.hud-scrim { position: absolute; inset: 0; z-index: 5; background: rgba(26, 7, 16, .55); }
+.hud-end { position: absolute; z-index: 8; display: grid; justify-items: center; text-align: center; padding: 56px 80px 84px; border-radius: 30px; }
+.hud-end.win { border: 6px solid var(--rim); background: var(--box); color: var(--box-ink); box-shadow: inset 0 0 0 4px #fff, 0 14px 0 var(--edge); }
+.hud-end.low { border: 6px solid var(--her); background: var(--scrim); color: var(--scrim-ink); box-shadow: inset 0 0 0 4px #5a0a1c, 0 14px 0 #8b0f2c; }
+.hud-end .kicker { margin: 0 0 8px; font: 800 30px/1 var(--cond); letter-spacing: .2em; }
+.hud-end.win .kicker { color: var(--magenta); }
+.hud-end.low .kicker { color: var(--lv-dark-hot); }
+.hud-end .bigheart { position: relative; width: 330px; height: 300px; display: grid; place-items: center; margin: 6px 0 4px; }
+.hud-end .bigheart svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.hud-end .bigheart .lv-num { position: relative; top: -22px; font-size: 72px; }
+.hud-end.low .bigheart .lv-num { top: 4px; color: var(--lv-dark-hot); text-shadow: none; }
+.hud-end h2 { margin: 0; font: 900 88px/1.04 var(--btn); letter-spacing: -.005em; }
+.hud-end.win h2 { color: #5c0f3c; }
+.hud-end.low h2 { color: var(--scrim-ink); }
+.hud-end .sub { margin: 16px 0 0; font: 500 40px/1.25 var(--cond); }
+.hud-end.low .sub { color: #f3c6d6; }
+.hud-end .hud-next { position: absolute; left: 50%; right: auto; bottom: -44px; transform: translateX(-50%); white-space: nowrap; }
+.low-heart path.shell { fill: #2a0714; stroke: var(--her); stroke-width: 7; stroke-linejoin: round; }
+.low-heart path.crack { fill: none; stroke: var(--her); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; }
+.low-heart path.part { fill: url(#lvLowFill); }
+
+
+/* ============ stepped motion (?play only). Static = the RM frame, so .rm needs nothing extra. */
+.play .lv-cell.new, .play .lv-cell.lost { animation: lv-step 1ms steps(1, end) both; animation-delay: calc(334ms + var(--i) * 334ms); }
+@keyframes lv-step { from { visibility: hidden; } to { visibility: visible; } }
+.play .lv-pop { animation: lv-pop 1002ms steps(3, end) both; }
+@keyframes lv-pop { from { transform: translateY(18px); opacity: .34; } to { transform: none; opacity: 1; } }
+.play .hud-scrim { animation: lv-dim 1002ms steps(3, end) both; }
+@keyframes lv-dim { from { opacity: 0; } to { opacity: 1; } }
+.play .hud-end, .play .hud-card { animation: lv-card 668ms steps(2, end) both; animation-delay: 334ms; }
+@keyframes lv-card { from { opacity: 0; } to { opacity: 1; } }
+.rm .lv-cell, .rm .lv-pop, .rm .hud-scrim, .rm .hud-end, .rm .hud-card { animation: none !important; }
+
+/* ============ index / sheet pages */
+.hub { max-width: 1760px; margin: 0 auto; padding: 48px 40px 80px; color: #ffe9f1; font: 500 22px/1.45 var(--cond); }
+.hub h1 { margin: 0 0 10px; font: 900 48px/1.1 var(--btn); color: #fff; }
+.hub h2 { margin: 40px 0 14px; font: 900 32px/1.1 var(--btn); color: #fff; }
+.hub p { margin: 0 0 12px; max-width: 56ch; color: #f3d7e3; }
+.hub a { color: #ffb3d6; }
+.hub .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+.hub .tile { display: grid; gap: 8px; color: #ffe9f1; text-decoration: none; font: 700 20px/1.2 var(--cond); }
+.hub .tile img { width: 100%; height: auto; display: block; border-radius: 8px; box-shadow: 0 0 0 2px rgba(255, 233, 241, .35); }
