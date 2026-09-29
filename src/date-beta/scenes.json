@@ -10,7 +10,7 @@
       "enter": "fade",
       "defaults": { "stayed": false, "bento": "umeboshi" },
       "beats": [
-        { "props": { "clock": "live" }, "text": "Lunch on the roof. The tower keeps your time.", "sfx": "wind", "hold": 1200 },
+        { "props": { "clock": "live" }, "sfx": "wind", "hold": 1200 },
         { "props": { "clock": "noon" }, "text": "NANDA: Don't look at me like that. It's not for you.", "sfx": "tick",
           "choices": [
             { "text": "Take the tamagoyaki", "side": "pink", "set": { "bento": "tamagoyaki" } },
