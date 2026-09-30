@@ -76,12 +76,12 @@ export function hexagon(x, y, r, rot = 0) {
 
 // Anger vein (ref 03 icon 1, the 💢 mark): 4 crescents in the diagonal corners, each bowing in toward the centre with
 // its two tips pointing out along the axes; fat in the middle, pointed tips, and the pieces never touch. Unit box -1..1.
-const WEDGE = 'M-.2 -1Q-.22 -.22 -1 -.2Q-.52 -.52 -.2 -1Z';
+const WEDGE = 'M-.14 -1Q-.18 -.18 -1 -.14Q-.66 -.66 -.14 -1Z'; // fat, bold crescents (chibi manga)
 export const VEIN4 = [0, 90, 180, 270].map((a) => `<path d="${WEDGE}" transform="rotate(${a})"/>`).join('');
 // Two opposing wedges (ref 03 icon 8): the small "vein in the air".
 export const VEIN2 = [0, 180].map((a) => `<path d="${WEDGE}" transform="rotate(${a})"/>`).join('');
-export function vein(x, y, size, { rot = 12, two = false, fill = '#e01010', edge = '#9a0808' } = {}) {
-  const sw = f3(2.5 / (size / 2));
+export function vein(x, y, size, { rot = 12, two = false, fill = '#e01010', edge = '#9a0808', bold = false } = {}) {
+  const sw = f3((bold ? 6 : 2.5) / (size / 2));
   return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${rot}) scale(${f1(size / 2)})" fill="${fill}" stroke="${edge}" stroke-width="${sw}" stroke-linejoin="round">${two ? VEIN2 : VEIN4}</g>`;
 }
 

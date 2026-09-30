@@ -66,12 +66,23 @@ test('face layers: positioned from her anchors (move an anchor, the layer moves)
   assert.notEqual(faceLayers(['vein'], PAL[1], ANCHORS).over, faceLayers(['vein'], PAL[1], moved).over);
   assert.match(faceLayers(['vein'], PAL[1], moved).over, /translate\(40 30\)/);
   const furious = faceLayers(['shadow-eyes', 'vein'], PAL[5], ANCHORS).over;
-  assert.equal((furious.match(/<g /g) ?? []).length, 2, 'temple vein + one in the air');
+  assert.equal((furious.match(/<g transform/g) ?? []).length, 4, 'temple vein + one in the air, each small + big');
+});
+
+test('anger vein grows by ONE stepped swap (small -> 1.25x big), big only under reduced motion', () => {
+  const over = faceLayers(['vein'], PAL[1], ANCHORS).over;
+  assert.match(over, /class="emo-v-s"[^]*scale\(13\)[^]*class="emo-v-b"[^]*scale\(16\.25\)/);
+  assert.match(EMOTION_FX.anger(), /class="emo-v-s"[^]*class="emo-v-b"/);
+  const css = readFileSync(new URL('./date-beta/art/emotion/emotion.css', import.meta.url), 'utf8');
+  assert.match(css, /prefers-reduced-motion: reduce\)\s*\{\s*\.emo-v-s \{ display: none/);
+  const jsx = readFileSync(new URL('./date-beta/art/emotion/EmotionFx.jsx', import.meta.url), 'utf8');
+  const ms = Number(jsx.match(/setTimeout\([^]*?, (\d+)\)/)[1]);
+  assert.ok(ms >= 500, 'each step >= 500 ms (<= 2 Hz)');
 });
 
 test('face layers in nandaSVG: under sits after the face and before the fringe (bangs on top); over after the figure', () => {
   const svg = nandaSVG({ emote: 'hate', overlay: (P, A) => faceLayers(['shadow-eyes', 'vein'], P, A) });
-  const face = svg.indexOf('translate(57 52)'), band = svg.indexOf('emo-se'), fringe = svg.indexOf('V0Z" fill'), vein = svg.indexOf('#e01010');
+  const face = svg.indexOf('translate(57 52)'), band = svg.indexOf('emo-se'), fringe = svg.indexOf('V0Z" fill'), vein = svg.indexOf('#ff1414');
   assert.ok(face < band && band < fringe && fringe < vein, `${face} < ${band} < ${fringe} < ${vein}`);
   assert.equal(nandaSVG({ emote: 'hearts' }).includes('emo-'), false, 'no layers = the old figure');
 });
