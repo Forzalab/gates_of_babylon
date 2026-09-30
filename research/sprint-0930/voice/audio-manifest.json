@@ -404,5 +404,12 @@
   "beat": "2",
   "file": "public/date-beta/voice/05-v2-curry/027_2.mp3",
   "text": "[pouty] I am hungry. [bubbly] You pick my lunch. [perfectly even][smiling] Pick the right one."
+ },
+ {
+  "n": 29,
+  "scene": "v2-curry",
+  "beat": "2 R= (k)",
+  "file": "public/date-beta/voice/05-v2-curry/029_2-r-k.mp3",
+  "text": "[happy] Crunchy. [flat, pleased] Good choice."
  }
 ]
