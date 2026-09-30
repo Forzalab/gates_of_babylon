@@ -1,0 +1,27 @@
+{
+ "name": "leave-route",
+ "notes": [
+  "M2 (09-30): the leave endings were unreachable in live play. Rooftop 'Leave before the rain' went to v2-park like 'Stay', and v2-home went straight to the cup, so 'Say goodnight' (only on the old `door` scene, off the live path) could never be picked.",
+  "Now: rooftop 'Leave before the rain' -> leave (she is waiting at XOR Coffee next morning); v2-home 4 gets 'Say goodnight' next to 'Sit down' -> leave. leave 3 then splits into leave-yeah / leave-fu as before.",
+  "Flag `left` (home | roof) = where you walked out. leave 0 ('Leaving is not an option.') shows the rooftop when you left from there, and her door 12 (BG-D1, the base bg) when you left her home.",
+  "Both new branch beats are consequential, so their chips are hidden (loveHidden). 'Sit down' is +1 so every option scores (the love-audit rule); every route through her kitchen gains the same +1 as the goal.",
+  "Applied after r5 (so r5's beat indexes still hold) and before gacha."
+ ],
+ "flags": { "left": ["home", "roof"] },
+ "patch": [
+  { "scene": "rooftop", "beat": 11, "choice": 2, "set": { "go": "leave", "set": { "cold": "yes", "left": "roof" } } },
+  { "scene": "rooftop", "beat": 11, "set": { "loveHidden": true } },
+  {
+   "scene": "v2-home",
+   "beat": 4,
+   "set": {
+    "loveHidden": true,
+    "choices": [
+     { "text": "Sit down", "side": "pink", "go": "cup", "set": { "cold": "no" }, "love": 1, "emote": "heart", "fx": "love-burst", "react": "Good. The middle chair is yours." },
+     { "text": "Say goodnight", "side": "purple", "go": "leave", "set": { "cold": "yes", "left": "home" }, "love": -3, "emote": "hate", "fx": "hate-quake", "react": "…Goodnight? It is only 7:10." }
+    ]
+   }
+  },
+  { "scene": "leave", "beat": 0, "set": { "vary": { "left": { "home": {}, "roof": { "bg": "rooftop-noon" } } } } }
+ ]
+}

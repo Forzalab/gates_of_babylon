@@ -107,3 +107,9 @@ Every change is a hard cut or **one** stepped swap at ≥ 500 ms, the same under
 | `handout` | `{ tama: i, ume: j }`. Her bento replaces `<Choices>`, and the two foods are the buttons for choices i and j. Any other choice stays a small pill. Keys 1–3 still pick. |
 | `tag` | On a beat with exactly one choice: that choice is drawn where NEXT sits ("smile ♥ +1"). A click anywhere, Space or Enter takes it. |
 | `food` | `tama` or `ume` for the `pov` / `peek` foreground. |
+
+## Live routes to the endings (packs/leave-route.json, test: src/date-beta-leave.test.js)
+- STEEPED: rooftop Stay/Walk → v2-park … v2-home 4 **Sit down** → cup → Drink/Hold → steeped.
+- ESCAPE: … cup 4 **Stand up** → unknown → escape 15 → escape-win (Leave her house) | escape-timeout (Wait for her).
+- LEAVE: rooftop 11 **Leave before the rain** → leave, or the full day then v2-home 4 **Say goodnight** → leave; leave 3 → leave-yeah (uhmmm yeah ig / Forever sounds long) | leave-fu (FUCK YOU). Flag `left` (home | roof) picks leave 0's bg (her door 12 | the rooftop).
+- The old night-walk spine (park … door, genkan-in) stays in scenes.json but is off the live path.
