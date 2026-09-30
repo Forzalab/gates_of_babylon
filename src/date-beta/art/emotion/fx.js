@@ -60,8 +60,12 @@ export function loveBombSVG() {
 export function angerSVG() {
   const defs = `<radialGradient id="emo-an-bg" cx="${HEAD.x / W}" cy="${HEAD.y / H}" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset=".7" stop-color="#fff0f5"/><stop offset="1" stop-color="#ffd9e7"/></radialGradient>`;
   const dots = `<path d="${halftone()}" fill="#f4a8c8"/>`;
-  const marks = vein(HEAD.x + 330, HEAD.y - 280, 76, { rot: 18 }) + vein(HEAD.x - 330, HEAD.y - 210, 54, { rot: -24 });
-  return svg(defs, `<rect width="${W}" height="${H}" fill="url(#emo-an-bg)"/>${dots}${marks}`);
+  // Stepped grow (no tween): small set first, big set (1.25x) once the stage says data-emo-step="big" (emotion.css).
+  const set = (k) => vein(HEAD.x + 330, HEAD.y - 280, 118 * k, { rot: 18, fill: '#ff1414', edge: '#6a0000', bold: true })
+    + vein(HEAD.x - 330, HEAD.y - 210, 86 * k, { rot: -24, fill: '#ff1414', edge: '#6a0000', bold: true });
+  const flush = `<rect width="${W}" height="${H}" fill="url(#emo-an-flush)"/>`;
+  const fdefs = `<radialGradient id="emo-an-flush" cx="${HEAD.x / W}" cy="${HEAD.y / H}" r=".35"><stop offset="0" stop-color="#ff3a4a" stop-opacity=".22"/><stop offset="1" stop-color="#ff3a4a" stop-opacity="0"/></radialGradient>`;
+  return svg(defs + fdefs, `<rect width="${W}" height="${H}" fill="url(#emo-an-bg)"/>${dots}${flush}<g class="emo-v-s">${set(1)}</g><g class="emo-v-b">${set(1.25)}</g>`);
 }
 
 export function rageSVG() {

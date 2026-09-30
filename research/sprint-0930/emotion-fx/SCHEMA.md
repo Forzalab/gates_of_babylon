@@ -73,7 +73,10 @@ tier = { "id": "crit10", "bonus": 10, "rate": 0.07, "fx": "love-crit", "face": [
   sparkle = 4-point stars in both eye highlights + 5 round her head.
 
 ## Motion + a11y
-- No animation at all: no keyframes, transitions, SMIL or timers (tested). Reduced motion = the same stills. 0 Hz flashes.
+- No tweened animation: no keyframes, transitions or SMIL (tested). One exception, the anger vein "grows a bit": a stepped
+  2-frame swap, small -> big (1.25x), via ONE 600 ms setTimeout in `EmotionFx` that sets `data-emo-step="big"` on the stage
+  (`.emo-v-s` / `.emo-v-b` in `emotion.css`), then it holds. Reduced motion: big only from frame 1. < 2 Hz, no flashes.
+- Puff (Tony 0930): fat balloon cheeks + hot blush + a soft red face flush; the anger backdrop has a red flush round her head.
 - Seeded layouts (fixed seeds per FX): the same tier always draws the same picture. Node budget <= 300 per FX; blur on <= 2 groups.
 - Text: the dialogue box keeps its opaque plate; badges: #7a0f4e / #6b0f45 / #9a0808 on #fff (8-12:1), #f4f8c8 on #1a1020 (~16:1).
   Meaning never by colour only: the badge + HUD pop carry the signed number and a word.

@@ -9,24 +9,36 @@ import { STAR4, VEIN4, VEIN2 } from './shapes.js';
 export const FACE_IDS = ['vein', 'puff', 'shadow-eyes', 'sparkle'];
 const DROP = 'M0 -11C4 -5 8 0 8 4.5A8 8 0 0 1 -8 4.5C-8 0 -4 -5 0 -11Z';
 const star = (x, y, r, fill = '#fff', rot = 0) => `<path d="${STAR4}" transform="translate(${x} ${y}) rotate(${rot}) scale(${r})" fill="${fill}"/>`;
-const mark = (x, y, s, rot, two = false) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" fill="#e01010" stroke="#7a0606" stroke-width="${(1.2 / s).toFixed(3)}" stroke-linejoin="round">${two ? VEIN2 : VEIN4}</g>`;
+const mark = (x, y, s, rot, two = false) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" fill="#ff1414" stroke="#6a0000" stroke-width="${(2.4 / s).toFixed(3)}" stroke-linejoin="round" paint-order="stroke">${two ? VEIN2 : VEIN4}</g>`;
+// "Grows a bit": a stepped 2-frame swap (never tweened). Small first, then the big one (1.25x) from the stage's
+// data-emo-step="big" (EmotionFx sets it once, after 600 ms); under reduced motion only the big one ever shows (emotion.css).
+const grow = (x, y, s, rot, two) => `<g class="emo-v-s">${mark(x, y, s, rot, two)}</g><g class="emo-v-b">${mark(x, y, s * 1.25, rot, two)}</g>`;
 
 let uid = 0;
 const LAYERS = {
   // The 💢 mark on the fringe at her temple (+ a small one in the air next to her when she is furious).
-  vein: (P, A, o) => ({ over: mark(A.temple[0], A.temple[1], o.furious ? 10 : 9, 12) + (o.furious ? mark(A.air[0], A.air[1], 7, -18) : '') }),
+  vein: (P, A, o) => ({ over: grow(A.temple[0], A.temple[1], o.furious ? 14 : 13, 12) + (o.furious ? grow(A.air[0], A.air[1], 9, -18) : '') }),
   // Ref 11: puffed cheeks = a rounder cheek contour bulging out on each side, big blush with hatching, and a small
   // teardrop at the outer corner of her right eye. (The squashed mouth and pouting brows are her `puff` face in nanda.js.)
   puff: (P, A) => {
-    const [lx, ly] = A.cheekL, [rx, ry] = A.cheekR, ink = P.ink;
+    const [lx, ly] = A.cheekL, [rx, ry] = A.cheekR, ink = P.ink, [fx, fy] = A.face, n = ++uid, g = `emo-pf${n}`;
     const blush = P.blush === 'none' ? '#f5a0a0' : P.blush;
-    const cheek = (x, y, dir) => `<ellipse cx="${x}" cy="${y}" rx="9.5" ry="6" fill="${blush}" opacity=".5"/>`
-      + `<path d="M${x - 5},${y - 2} l-2,4 M${x - 1},${y - 2.5} l-2,4 M${x + 3},${y - 2} l-2,4" stroke="${ink}" stroke-width="1.1" stroke-linecap="round" opacity=".7"/>`
-      + `<path d="M${x + dir * 9},${y - 6} Q${x + dir * 15},${y + 1} ${x + dir * 8},${y + 8}" fill="none" stroke="${ink}" stroke-width="1.8" stroke-linecap="round"/>`
-      + `<ellipse cx="${x - dir * 2}" cy="${y - 3.4}" rx="3" ry="1.5" fill="#fff" opacity=".55"/>`;
+    // Chibi balloon cheeks: big round skin-tone bulges pushed out sideways, a bold outer contour, a hot blush core.
+    const cheek = (x, y, dir) => {
+      const cx = x + dir * 4; y += 4;
+      return `<ellipse cx="${cx}" cy="${y}" rx="16" ry="11" fill="#ffc4c8"/>`
+        + `<path d="M${cx - dir * 2},${y - 11} Q${cx + dir * 22},${y - 8} ${cx + dir * 10},${y + 10}" fill="none" stroke="${ink}" stroke-width="2.4" stroke-linecap="round"/>`
+        + `<ellipse cx="${cx}" cy="${y + 1}" rx="13" ry="9" fill="#ff5a6e" opacity=".55"/>`
+        + `<ellipse cx="${cx}" cy="${y + 1}" rx="7.5" ry="5" fill="#ff2e4c" opacity=".45"/>`
+        + `<path d="M${cx - 7},${y - 2} l-2.6,5 M${cx - 2},${y - 2.6} l-2.6,5 M${cx + 3},${y - 2.6} l-2.6,5 M${cx + 8},${y - 2} l-2.6,5" stroke="${ink}" stroke-width="1.4" stroke-linecap="round" opacity=".75"/>`
+        + `<ellipse cx="${cx - dir * 5}" cy="${y - 5.5}" rx="4" ry="1.8" fill="#fff" opacity=".8"/>`;
+    };
+    // Soft comic red flush over her face (not gore: a warm gradient, no hard edge).
+    const flush = `<defs><radialGradient id="${g}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#ff2a3c" stop-opacity=".34"/><stop offset=".7" stop-color="#ff2a3c" stop-opacity=".2"/><stop offset="1" stop-color="#ff2a3c" stop-opacity="0"/></radialGradient></defs>`
+      + `<ellipse cx="${fx}" cy="${fy - 4}" rx="58" ry="44" fill="url(#${g})"/>`;
     const [tx, ty] = A.tear;
-    return { under: cheek(lx, ly, -1) + cheek(rx, ry, 1)
-      + `<path d="${DROP}" transform="translate(${tx} ${ty}) scale(.36)" fill="#bfe6ff" stroke="#1f5f96" stroke-width="3" stroke-linejoin="round"/>` };
+    return { under: flush + cheek(lx, ly, -1) + cheek(rx, ry, 1)
+      + `<path d="${DROP}" transform="translate(${tx + 4} ${ty}) scale(.42)" fill="#bfe6ff" stroke="#1f5f96" stroke-width="3" stroke-linejoin="round"/>` };
   },
   // Hidden eyes: a dark band across both eyes, hard top edge under the bangs, soft lower edge (blurred), the upper face
   // darkened; two small white eyes glint through (ref 04's shrunken pupils). Nose/mouth stay visible.

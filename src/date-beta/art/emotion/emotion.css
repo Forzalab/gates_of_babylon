@@ -9,3 +9,9 @@
 .emo-love-bomb .emo-badge { color: #6b0f45; border-color: #d1177f; }
 .emo-anger .emo-badge { color: #9a0808; border-color: #9a0808; }
 .emo-rage .emo-badge { background: #1a1020; color: #f4f8c8; border-color: #f4f8c8; box-shadow: 0 8px 0 rgba(0, 0, 0, .5); }
+/* Anger vein stepped grow: small, then big (1.25x) once the stage has data-emo-step="big" (one swap, then it holds).
+   Reduced motion: the big one only, from the first frame. */
+.emo-v-b { display: none; }
+[data-emo-step="big"] .emo-v-s { display: none; }
+[data-emo-step="big"] .emo-v-b { display: inline; }
+@media (prefers-reduced-motion: reduce) { .emo-v-s { display: none !important; } .emo-v-b { display: inline !important; } }
