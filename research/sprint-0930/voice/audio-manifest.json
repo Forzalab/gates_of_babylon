@@ -348,5 +348,12 @@
   "beat": "1 R=",
   "file": "public/date-beta/voice/01-rooftop/003_1-r.mp3",
   "text": "[amused] Sour. [proud] Brave. [whispers][close] I'll remember… [whispers, slower] you like sour."
+ },
+ {
+  "n": 5,
+  "scene": "rooftop",
+  "beat": "2 (u)",
+  "file": "public/date-beta/voice/01-rooftop/005_2-u.mp3",
+  "text": "[curious] Sour. Hm. [teasing][sing-song] You like things that bite?"
  }
 ]
