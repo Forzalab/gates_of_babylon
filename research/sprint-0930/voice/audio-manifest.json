@@ -82,5 +82,12 @@
   "beat": "3 R+",
   "file": "public/date-beta/voice/02-v2-park/018_3-r.mp3",
   "text": "[relieved][happy] It stopped. [pause] See? [flat, pleased] It only needed you."
+ },
+ {
+  "n": 20,
+  "scene": "v2-park",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/02-v2-park/020_3-r.mp3",
+  "text": "[sudden flat][quiet] Okay. My hand can wait. It is good at… [sweet] waiting."
  }
 ]
