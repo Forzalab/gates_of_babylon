@@ -48,13 +48,13 @@ const NameBand = ({ x = 1100, y = 360, w = 500 }) => (
   </g>
 );
 
-// 2. The shop doors (far: ref 16, closer; the entrance lands right of her slot). Cels: the name band on the traced
+// 2. The shop doors (far: ref 16, closer; the entrance lands right of her slot; an OPEN card cel was dropped: it
+// floated on the glass, the trace reads better). Cels: the name band on the traced
 // sign, the EGGS A-board on the pavement (shadow down-left).
 export function ShopDoors() {
   return (
     <ShopScene id="doors" trace="cel-doors" tint={SKY} label="The front of the NAND MART shop on a sunny afternoon. The glass doors on the right stand open; an EGGS sign stands on the pavement by the door.">
       <NameBand x={1110} y={372} w={480} />
-      <Card x={120} y={250} w={380} h={60} r={6} fill={SP.white} stroke="#2c57a8" lines={[['営業中 · OPEN, NOT CLOSED', 28, '#2c57a8']]} />
       <Shadow x={1800} y={930} w={200} h={30} />
       <path d="M1720 930 L1740 690 L1860 690 L1880 930" fill="none" stroke={SP.line} strokeWidth="8" />
       <rect x="1730" y="690" width="140" height="170" rx="6" fill="#fff6d8" stroke={SP.red} strokeWidth="5" />
