@@ -152,5 +152,12 @@
   "beat": "station crowd (Tony, → the class, 4:30 PM)",
   "file": "public/date-beta/voice/06-v2-train/032_station-crowd-tony-the-class-4-30-pm.mp3",
   "text": "[playful][bubbly] I see you, the curly-haired guy. [giggles][too long] I see you, you gringo wearing a cap. [pouty][sing-song] Don't gang up on me, [smiling][close] you all NEVER stop my [perfectly even] eternal bond [flat, pleased] with my lover."
+ },
+ {
+  "n": 34,
+  "scene": "v2-train",
+  "beat": "3 run 2",
+  "file": "public/date-beta/voice/06-v2-train/034_3-run-2.mp3",
+  "text": "[warm] Twelve stops. Second time today. [quiet] You forgot. [perfectly even] I did not."
  }
 ]
