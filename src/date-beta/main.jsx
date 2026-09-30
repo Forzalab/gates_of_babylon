@@ -11,7 +11,8 @@
 import { createRoot } from 'react-dom/client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './theme.js';
-import data from './scenes.json';
+import baseData from './scenes.json';
+import { applyPacks } from './packs/index.js';
 import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, reactView, present, trail, ending, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
 import { ART } from './art/index.js';
 import { BG_FALLBACK } from './art/fallbacks.js';
@@ -26,6 +27,14 @@ import './beta.css';
 
 const params = new URLSearchParams(location.search);
 const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+// ?pack=a,b previews src/date-beta/packs/<name>.json on top of scenes.json (validation stays on).
+const PACK_FILES = import.meta.glob('./packs/*.json', { eager: true, import: 'default' });
+const packOf = (n) => {
+  const p = PACK_FILES[`./packs/${n}.json`];
+  if (!p) throw new Error(`date-beta: no pack "${n}"`);
+  return { name: n, ...p };
+};
+const data = applyPacks(baseData, (params.get('pack') ?? '').split(',').filter(Boolean).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
 const DEBUG = createSession(() => localStorage, SCENES, data.flags ?? {});
