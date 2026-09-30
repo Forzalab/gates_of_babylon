@@ -1,15 +1,34 @@
 // SHOP 6-12 (SHOTLIST.md + FIX-LOG.md; all hand-pass cel rebuilds on the shared light/VP/palette): the basket, the snack aisle on the way, the checkout lanes, the register, her nails, the
 // self-checkout. Refs: 8d83db1f (basket), 0a536433 (snacks), d110f421 (checkout wide), c6ec0ec2 (retro register),
 // 8873611d (basket handle), b56aeeaa (self-checkout).
+import { traceUrl, preloadTrace } from '../romance/Grade.jsx';
 import { ShopScene, ShelfBay, Card, Cup, Hand, BasketBed, BasketGoods, BASKET, Shadow, SP, VP, pts } from './parts.jsx';
 
 // vtrace r2: the basket is the trace of ref 03 (the green basket full of groceries, 3/4 from above); her list sits on
 // top (the shared BasketGoods: carrot bag, egg pack, cups 1 + 2 on one baseline) and her hand lowers cup 3.
+// THE cup: one tea bowl traced by vtracer from the shop ref (research/sprint-0930/fix3/cups/trace_cup.py), re-projected to
+// the basket's top-down camera (rim ~a circle, a sliver of wall). Three identical copies, so they match; sprite 300 x 286.
+preloadTrace('shop/r2-cup');
+const CUPS = [[1195, 300, 0.56, -8], [1340, 455, 0.56, 6], [1150, 560, 0.56, 3]]; // x, y = sprite centre, scale, tilt
+function BasketCupBowls() {
+  return (
+    <g>
+      {CUPS.map(([x, y, k, r], i) => (
+        <g key={i} transform={`translate(${x} ${y}) rotate(${r})`}>
+          <ellipse cx={22 * k} cy={112 * k} rx={150 * k} ry={70 * k} fill="#1c0c08" opacity=".5" />
+          <image href={traceUrl('shop/r2-cup')} x={-150 * k} y={-143 * k} width={300 * k} height={286 * k} />
+        </g>
+      ))}
+    </g>
+  );
+}
+
 export function BasketCups() {
   return (
     <ShopScene id="basket" trace="r2-basket" label="Close-up from above: a green shop basket full of groceries. On top: carrots.">
       <Shadow x={980} y={690} w={640} h={60} op={0.28} />
       <BasketGoods x={930} y={620} s={1.25} />
+      <BasketCupBowls />
     </ShopScene>
   );
 }
