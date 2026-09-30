@@ -488,5 +488,12 @@
   "beat": "5 (u)",
   "file": "public/date-beta/voice/13-escape-timeout/068_5-u.mp3",
   "text": "[softly] One sour hour…"
+ },
+ {
+  "n": 69,
+  "scene": "escape-timeout",
+  "beat": "5 (t)",
+  "file": "public/date-beta/voice/13-escape-timeout/069_5-t.mp3",
+  "text": "[softly] One sweet bite…"
  }
 ]
