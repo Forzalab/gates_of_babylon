@@ -47,7 +47,8 @@
           "bg": "curry-katsu-counter",
           "props": {
             "cut": {
-              "frame": "medium"
+              "frame": "medium",
+              "face": "content"
             }
           }
         },
@@ -149,7 +150,8 @@
           "bg": "curry-street",
           "props": {
             "cut": {
-              "frame": "medium"
+              "frame": "medium",
+              "face": "heart-laugh"
             }
           },
           "choices": [
@@ -213,7 +215,8 @@
           "bg": "curry-street",
           "props": {
             "cut": {
-              "frame": "medium"
+              "frame": "medium",
+              "face": "content"
             }
           },
           "choices": [
@@ -331,7 +334,8 @@
         "text": "We walk out to the street. It is 3:40 PM.",
         "props": {
           "cut": {
-            "frame": "medium"
+            "frame": "medium",
+            "face": "heart-laugh"
           }
         }
       }
@@ -429,7 +433,8 @@
           "bg": "curry-butter-table",
           "props": {
             "cut": {
-              "frame": "medium"
+              "frame": "medium",
+              "face": "anya-smile"
             }
           }
         },

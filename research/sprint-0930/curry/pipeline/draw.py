@@ -1,6 +1,8 @@
-# CURRY r2: every food / hand / face shot, HAND-DRAWN as flat-cel SVG (base + one shade + one highlight, a thin dark line),
-# after Tony's anime refs (REF-NOTES-R2.md). No ref pixels are used, and nothing is vtraced: the flat SVG is crisper
-# than a trace (vt.py stays for photo backgrounds only). Written straight to public/date-beta/trace/curry/<id>.svg.
+# CURRY r3: every food / hand / face shot. The FOOD is vtraced from Tony's refs (sprites.py -> ../sprites/, R3-AUDIT.md):
+# the naan, the katori, the katsu plate + fukujinzuke are one sprite each, nested into every shot. Hands, faces, the
+# tray, surfaces and props stay hand-drawn flat cel. Written straight to public/date-beta/trace/curry/<id>.svg.
+# SCALE: every shot has a px/cm (the food's real size); hands are 18 cm long = 250 hand units, so a hand's scale and a
+# held piece's scale follow from it (HS_*, PK_*): the piece in her fingers is the same size as where it was torn.
 #
 # PHYSICS (SHOP-PHYSICS-CRITIQUE.md, applied to curry):
 # - ONE light for the whole visit: the 3:00 PM sun comes through the shop window at the upper LEFT. Highlights sit on
@@ -10,7 +12,7 @@
 # - Hands have 5 fingers, joined to a wrist and a sleeve that runs off the frame edge. Food touches fingers or a surface.
 # - No text is drawn here (the shop signs are JSX, below the y=140 HUD band). Faces + hands stay above y=740 (the box).
 # usage: python3 draw.py <out dir>
-import sys, os, random, math
+import sys, os, re, json, random, math
 
 OUT = sys.argv[1]
 os.makedirs(OUT, exist_ok=True)
@@ -19,8 +21,14 @@ SH = '#3a1606'          # the cast-shadow ink (multiplied by opacity)
 SDX, SDY = 26, 34       # every cast shadow: down-right of its object (window light from the upper left)
 
 
+TINT = {'b': '#ffe4c8', 'k': '#fff0da'}   # the per-scene grade on every cel (NAND's warm lamp, OR OR's pale noon)
+SIL = f'<filter id="sil" x="-5%" y="-5%" width="110%" height="110%"><feFlood flood-color="{SH}"/><feComposite operator="in" in2="SourceAlpha"/></filter>'   # a sprite's own silhouette = its cast shadow
+
+
 def svg(body, defs=''):
-    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080"><defs>{defs}</defs>{body}</svg>'
+    defs += ''.join(f'<filter id="tint-{k}"><feFlood flood-color="{c}"/><feBlend mode="multiply" in2="SourceGraphic"/><feComposite operator="in" in2="SourceAlpha"/></filter>' for k, c in TINT.items())
+    defs += ''.join(f'<g id="S-{k}">{RAW[k]}</g>' for k in META if f'href="#S-{k}"' in body)
+    return f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" width="1920" height="1080"><defs>{SIL}{defs}</defs>{body}</svg>'
 
 
 def blobpath(r, x, y, k, sx=1.8, sy=0.8, n=10):
@@ -46,30 +54,14 @@ def bumpy(pts, step=24, bulge=9, seed=1):
 
 
 # ---------------------------------------------------------------- surfaces (one VP each)
-def cloth(vp=(960, -1500)):
-    """the NAND HOUSE orange tablecloth (the same cloth as the two-shot + the lassi): a weave radiating from one VP."""
-    s = '<rect width="1920" height="1080" fill="#d6603a"/>'
-    for i in range(-14, 30):
-        x = i * 90
-        s += f'<path d="M{vp[0]} {vp[1]}L{x} 1080" stroke="#c9552f" stroke-width="3" opacity=".55"/>'
-    for y in (140, 330, 560, 830):
-        s += f'<path d="M0 {y}H1920" stroke="#e57446" stroke-width="3" opacity=".45"/>'
-    s += '<path d="M0 0H900L0 520z" fill="#fff0d0" opacity=".14"/>'   # the window light pool, upper left
-    return s
+def cloth():
+    """NAND HOUSE's table: the pure vtrace of images(181)'s wood table (sprites.py bg-nand). No hand repaint."""
+    return spr('bg-nand', 0, 0, 1920, shadow=0)
 
 
-def counter(vp=(960, -1700)):
-    """OR OR CURRY's pale wood counter: planks radiating from one VP, warm grain, the window pool upper left."""
-    r = random.Random(4)
-    s = '<rect width="1920" height="1080" fill="#d9ad74"/>'
-    for i in range(-10, 22):
-        x = i * 150
-        s += f'<path d="M{vp[0]} {vp[1]}L{x} 1080" stroke="#b98a52" stroke-width="5"/>'
-    for _ in range(40):
-        x = r.randint(-100, 1900); y = r.randint(0, 1060); t = (x - vp[0]) / (1080 - vp[1])
-        s += f'<path d="M{x} {y}l{t * 160:.0f} 160" stroke="{r.choice(["#e6bf88", "#c69a60"])}" stroke-width="{r.randint(3, 7)}" stroke-linecap="round" opacity=".7"/>'
-    s += '<path d="M0 0H900L0 520z" fill="#fff6e0" opacity=".16"/>'
-    return s
+def counter():
+    """OR OR CURRY's counter: the pure vtrace of images(183)'s pale plank table (sprites.py bg-oror)."""
+    return spr('bg-oror', 0, 0, 1920, shadow=0)
 
 
 def shadow(d, o=.32, blur=False):
@@ -77,49 +69,102 @@ def shadow(d, o=.32, blur=False):
 
 
 # ---------------------------------------------------------------- the butter thali (hero) + its parts
-def katori(cx, cy, rx, ry, food, food2, top, extra=''):
-    h = ry * 1.25
-    return f'''<g>
-  <ellipse cx="{cx + SDX}" cy="{cy + h + 14}" rx="{rx * 0.98}" ry="{ry * 0.8}" fill="#5a606a" opacity=".38"/>
-  <path d="M{cx - rx} {cy}V{cy + h * 0.75}C{cx - rx} {cy + h + ry * 0.45} {cx + rx} {cy + h + ry * 0.45} {cx + rx} {cy + h * 0.75}V{cy}z" fill="#b9bfc8" stroke="#6f7680" stroke-width="3"/>
-  <path d="M{cx + rx * 0.35} {cy + ry * 0.9}V{cy + h + ry * 0.2}C{cx + rx * 0.7} {cy + h + ry * 0.05} {cx + rx} {cy + h} {cx + rx} {cy + h * 0.75}V{cy}z" fill="#8e96a1"/>
-  <path d="M{cx - rx * 0.7} {cy + ry * 0.6}V{cy + h + ry * 0.1}" stroke="#f4f7fb" stroke-width="{rx * 0.09:.0f}" stroke-linecap="round" opacity=".9"/>
-  <ellipse cx="{cx}" cy="{cy}" rx="{rx}" ry="{ry}" fill="#dfe3e8" stroke="#6f7680" stroke-width="3"/>
-  <ellipse cx="{cx}" cy="{cy + ry * 0.06}" rx="{rx * 0.86}" ry="{ry * 0.78}" fill="{food}"/>
-  <path d="M{cx - rx * 0.86} {cy + ry * 0.06}A{rx * 0.86} {ry * 0.78} 0 0 1 {cx + rx * 0.86} {cy + ry * 0.06}A{rx * 0.86} {ry * 0.5} 0 0 0 {cx - rx * 0.86} {cy + ry * 0.06}z" fill="{food2}"/>
-  <ellipse cx="{cx - rx * 0.3}" cy="{cy + ry * 0.25}" rx="{rx * 0.22}" ry="{ry * 0.16}" fill="{top}" opacity=".9"/>
-  {extra}
-</g>'''
+# ---------------------------------------------------------------- r3: the TRACED food sprites (sprites.py, from the refs)
+# The naan (images 179), the steel katori (181), the katsu plate + its fukujinzuke dish (183) are vtraced from Tony's
+# refs, so their shape / proportion / colour / texture follow the ref. Each is ONE sprite, nested (<svg x y w h viewBox>)
+# into every shot that shows it, so the dish is identical from the hero shot to the bite.
+SPR_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'sprites')
+META = json.load(open(os.path.join(SPR_DIR, 'sprites.json')))
+RAW = {k: re.search(r'<svg[^>]*>(.*)</svg>', open(os.path.join(SPR_DIR, k + '.svg')).read(), re.S).group(1) for k in META}
+BODY = {k: f'<use href="#S-{k}"/>' for k in META}   # every use points at ONE copy in <defs> (svg() adds the ones used)
 
 
-def naan(seed, d, cid, bubbles, spots, butter=None, base='#f1cf8a', lit='#fbe5b4', rim='#c98640'):
-    r = random.Random(seed)
-    s = f'<clipPath id="{cid}"><path d="{d}"/></clipPath>'
-    s += f'<path d="{d}" transform="translate(6 22)" fill="{rim}" stroke="{LINE}" stroke-width="4"/>'
-    s += f'<path d="{d}" fill="{base}" stroke="{LINE}" stroke-width="4" stroke-linejoin="round"/>'
-    g = f'<g clip-path="url(#{cid})">'
-    for (x, y, rx, ry) in bubbles:
-        g += f'<ellipse cx="{x}" cy="{y}" rx="{rx}" ry="{ry}" fill="{lit}" stroke="#c98a48" stroke-width="3"/>'
-        g += f'<path d="{blobpath(r, x + rx * 0.15, y - ry * 0.3, rx * 0.32, 1.4, 0.6)}" fill="#c07632"/>'
-        g += f'<path d="{blobpath(r, x + rx * 0.2, y - ry * 0.35, rx * 0.16, 1.4, 0.6)}" fill="#6a3210"/>'
-    for (x, y, k) in spots:
-        g += f'<path d="{blobpath(r, x, y, k)}" fill="#b86c30"/><path d="{blobpath(r, x + k * 0.2, y, k * 0.5)}" fill="#5e2c0e"/>'
-    g += f'<path d="{d}" fill="none" stroke="#fff6de" stroke-width="10" opacity=".55" transform="translate(-4 -6)"/>'
-    s += g + '</g>'
-    if butter:
-        bx, by, bw = butter
-        s += f'''<ellipse cx="{bx + 8}" cy="{by + bw * 0.38}" rx="{bw * 1.05}" ry="{bw * 0.5}" fill="#ffd24a" opacity=".75"/>
-<g transform="translate({bx} {by}) rotate(-8)">
-  <rect x="{-bw * 0.5}" y="{-bw * 0.2}" width="{bw}" height="{bw * 0.5}" rx="{bw * 0.12}" fill="#f2c64a" stroke="{LINE}" stroke-width="3"/>
-  <rect x="{-bw * 0.5}" y="{-bw * 0.5}" width="{bw}" height="{bw * 0.5}" rx="{bw * 0.12}" fill="#ffe98c" stroke="{LINE}" stroke-width="3"/>
-  <rect x="{-bw * 0.38}" y="{-bw * 0.42}" width="{bw * 0.34}" height="{bw * 0.1}" rx="{bw * 0.05}" fill="#fffbe6"/>
-</g>'''
+def spr(name, x, y, w, inner=None, shadow=0.34):
+    """the sprite at (x, y), w px wide, with its cast shadow (its own silhouette, down-right: the window light)."""
+    W, H = META[name]; h = w * H / W
+    body = inner if inner is not None else BODY[name]
+    s = ''
+    if shadow:
+        s += f'<svg x="{x + SDX}" y="{y + SDY}" width="{w}" height="{h:.1f}" viewBox="0 0 {W} {H}" overflow="visible" filter="url(#sil)" opacity="{shadow}">{body}</svg>'
+    return s + f'<svg x="{x}" y="{y}" width="{w}" height="{h:.1f}" viewBox="0 0 {W} {H}" overflow="visible">{body}</svg>'
+
+
+# ---- the butter thali, hero coordinates. Real sizes: the naan ~40 cm = 1400 px (35 px/cm), the katori ~13 cm,
+# the tray ~40 cm; your / her hand is ~18 cm long = 250 hand units, so the hero hand scale is HS_B = 35 * 18 / 250.
+NAAN = (470, 250, 1400)                 # x, y, w: the naan droops off the tray on the right (images 179)
+NK = NAAN[2] / META['naan'][0]          # hero px per naan-sprite unit
+HS_B = 35 * 18 / 250                    # 2.52: the hand scale in hero px
+PK_B = NK / HS_B                        # the torn piece, in hand units (same physical size as on the naan)
+KAT = {'butter': (240, 150, 470), 'saag': (730, 96, 390), 'rice': (1130, 130, 360)}   # x, y, w (the SAME katori sprite)
+KK = lambda w: w / META['katori-butter'][0]
+KFOOD = tuple(v * META['katori-butter'][0] / 260 for v in (135.5, 95.2, 110, 40))   # the curry surface in the katori sprite (cx, cy, rx, ry)
+RAG = [(118, 150), (108, 166), (121, 184), (104, 202), (117, 222), (103, 242), (112, 258)]   # the tear, naan-sprite units
+TIPC = 'M-20 100L118 140' + ''.join(f'L{x} {y}' for x, y in RAG) + 'L104 290L-20 290Z'
+BODYC = 'M118 -20L118 140' + ''.join(f'L{x} {y}' for x, y in RAG) + 'L104 290L500 290L500 -20Z'
+TIP_O = (62, 212)                       # the piece's centre (sprite units)
+
+
+def kfood(name):
+    """the hero-px centre + radii of a katori's curry surface."""
+    x, y, w = KAT[name]; k = KK(w)
+    return x + KFOOD[0] * k, y + KFOOD[1] * k, KFOOD[2] * k, KFOOD[3] * k
+
+
+def rice_dome(name):
+    """the rice in its katori: a lumpy white dome over the rim, grain outlines (katsu-lift rice), shade lower right."""
+    cx, cy, rx, ry = kfood(name); r = random.Random(12)
+    pts = [(cx + math.cos(t) * rx * 0.98, cy - 10 + math.sin(t) * (ry * 0.9 if math.sin(t) > 0 else ry * 2.4)) for t in [k / 22 * math.tau for k in range(22)]]
+    d = bumpy(pts, step=26, bulge=8, seed=4)
+    s = f'<path d="{d}" fill="#fbfaf4" stroke="#a8a090" stroke-width="3"/>'
+    s += f'<path d="M{cx + rx * .2} {cy - ry * 1.9}C{cx + rx * .8} {cy - ry * 1.4} {cx + rx} {cy - ry * .4} {cx + rx * .9} {cy + ry * .4}C{cx + rx * .6} {cy + ry * .9} {cx} {cy + ry * .8} {cx - rx * .2} {cy + ry * .6}C{cx + rx * .5} {cy} {cx + rx * .6} {cy - ry} {cx + rx * .2} {cy - ry * 1.9}z" fill="#e2dccb"/>'
+    for _ in range(46):
+        a = r.random() * math.tau; q = r.random() ** .6
+        x = cx + math.cos(a) * rx * .85 * q; y = cy - ry * .6 + math.sin(a) * ry * 1.3 * q
+        s += f'<ellipse cx="{x:.0f}" cy="{y:.0f}" rx="11" ry="6" transform="rotate({r.randint(-50, 50)} {x:.0f} {y:.0f})" fill="none" stroke="#cfc8b6" stroke-width="3"/>'
     return s
 
 
-NAAN_D = 'M520 730C640 610 900 560 1200 520C1460 486 1720 470 1790 600C1840 700 1720 800 1480 812C1180 828 820 800 600 770C600 770 540 760 520 730z'
-RAG = 'M676 600L692 648L724 662L712 700L752 716L740 752L786 772L778 830'
-TORN = RAG.replace('M', 'M2000 300L676 300L', 1) + 'L2000 1000z'   # the notch she tore off the tip
+def naan_body(torn=False):
+    """the naan sprite (sprite units). torn = the tip is gone: the rest is clipped along RAG, a pale crumb edge on it."""
+    if not torn: return BODY['naan']
+    return (f'<clipPath id="nbody"><path d="{BODYC}"/></clipPath><g clip-path="url(#nbody)">{BODY["naan"]}</g>'
+            + '<path d="M' + 'L'.join(f'{x + 2} {y}' for x, y in RAG[1:-1]) + '" fill="none" stroke="#fbf0d4" stroke-width="5" stroke-linejoin="round"/>'
+            + '<path d="M' + 'L'.join(f'{x} {y}' for x, y in RAG[1:-1]) + f'" fill="none" stroke="{LINE}" stroke-width="1.6" stroke-linejoin="round"/>')
+
+
+def piece(sauce=None, drip=0, uid='p'):
+    """the torn tip of THE naan as a flat CEL (Tony's cel-over-vtrace: a held piece is a cel), in naan-sprite units,
+    centred; its colours are the traced naan's (cream body, golden bubble, dark char). The torn edge (+x) is held; the
+    sauce coats the far tip (-x). Scale it with PK_B inside a hand: the same size as the notch it left on the naan."""
+    r = random.Random(21)
+    d = 'M-80 10C-76 -30 -30 -54 30 -52L44 -40L60 -50L70 -26L88 -32L86 -6L100 4L84 22L92 42C50 58 -40 60 -80 10z'
+    g = '<g transform="scale(.6)">'
+    g += f'<path d="{d}" transform="translate(4 12)" fill="#c89452" stroke="{LINE}" stroke-width="4"/>'
+    g += f'<path d="{d}" fill="#f4d6a0" stroke="{LINE}" stroke-width="4" stroke-linejoin="round"/>'
+    # the traced naan's texture as cel shapes: pale puffed domes, golden rims, irregular char splotches (images 180), no dots
+    g += f'<path d="{blobpath(r, -26, -12, 22, 1.6, .7)}" fill="#fcefd6"/><path d="{blobpath(r, 28, 18, 18, 1.5, .6)}" fill="#fcefd6"/><path d="{blobpath(r, -50, 26, 12, 1.4, .6)}" fill="#fcefd6"/>'
+    g += f'<path d="{blobpath(r, -10, 8, 16, 1.9, .45)}" fill="#d9a866"/><path d="{blobpath(r, 44, -8, 12, 1.8, .5)}" fill="#d9a866"/>'
+    g += f'<path d="{blobpath(r, -8, 6, 9, 2.2, .45)}" fill="#8a4a1c"/><path d="{blobpath(r, 46, -10, 6, 2.2, .45)}" fill="#8a4a1c"/><path d="{blobpath(r, -58, 4, 6, 2, .5)}" fill="#aa6a2c"/>'
+    g += '<path d="M30 -52L44 -40L60 -50L70 -26L88 -32L86 -6L100 4L84 22L92 42" fill="none" stroke="#fdf4e0" stroke-width="7" stroke-linejoin="round" transform="translate(-4 0)"/>'  # the fluffy torn crumb
+    if sauce:
+        base, dark, hi = sauce
+        g += f'<path d="M-40 -40C-60 -30 -80 -10 -80 10C-70 34 -50 50 -24 54C-30 20 -24 -12 -40 -40z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
+        g += f'<path d="M-62 -14c-6 10 -6 24 0 34" stroke="{hi}" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="-52" cy="-18" rx="7" ry="4" fill="#ffffff" opacity=".9"/>'
+        if drip:
+            g += f'<path d="M-46 50C-44 {50 + drip * .5} -50 {50 + drip * .8} -46 {50 + drip}C-38 {50 + drip * 1.1} -34 {50 + drip * .8} -36 50z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
+            g += f'<ellipse cx="-42" cy="{54 + drip * 1.05}" rx="11" ry="14" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="-46" cy="{48 + drip * 1.05}" rx="4" ry="5" fill="#ffffff"/>'
+    return g + '</g>'
+
+
+def tray():
+    """the round steel thali tray (hero): a rim ellipse, its underside shade, the inner well (upper-left wall in shade)."""
+    b = f'<ellipse cx="{820 + SDX}" cy="{560 + SDY + 16}" rx="708" ry="352" fill="{SH}" opacity=".36"/>'
+    b += '<ellipse cx="820" cy="560" rx="700" ry="350" fill="#c3c8cf" stroke="#636a74" stroke-width="4"/>'
+    b += '<path d="M120 560A700 350 0 0 0 1520 560A700 320 0 0 1 120 560z" fill="#9aa1ab"/>'
+    b += '<ellipse cx="820" cy="548" rx="632" ry="310" fill="#e4e8ec" stroke="#8a919b" stroke-width="3"/>'
+    b += '<path d="M188 548A632 310 0 0 1 1452 548A632 272 0 0 0 188 548z" fill="#c9ced5"/>'
+    b += '<path d="M300 780C480 860 860 880 1140 850" stroke="#ffffff" stroke-width="14" fill="none" stroke-linecap="round" opacity=".85"/>'
+    return b
 
 
 def butter_curry(cx, cy, rx, ry):
@@ -139,58 +184,15 @@ def butter_curry(cx, cy, rx, ry):
 
 def thali_group(torn=False):
     """the whole steel thali in hero coordinates (no background). Crops use it with a transform."""
-    b = f'<ellipse cx="{870 + SDX}" cy="{540 + SDY + 16}" rx="728" ry="366" fill="{SH}" opacity=".36"/>'
-    b += '<ellipse cx="870" cy="540" rx="720" ry="360" fill="#c3c8cf" stroke="#636a74" stroke-width="4"/>'
-    b += '<path d="M150 540A720 360 0 0 0 1590 540A720 330 0 0 1 150 540z" fill="#9aa1ab"/>'
-    b += '<ellipse cx="870" cy="528" rx="650" ry="318" fill="#e4e8ec" stroke="#8a919b" stroke-width="3"/>'
-    b += '<path d="M220 528A650 318 0 0 1 1520 528A650 280 0 0 0 220 528z" fill="#c9ced5"/>'   # inner wall shade (upper left: away from the light)
-    b += '<path d="M330 760C520 850 900 870 1180 840" stroke="#ffffff" stroke-width="14" fill="none" stroke-linecap="round" opacity=".85"/>'
-    b += katori(560, 320, 170, 66, '#e2641c', '#b8420e', '#ffb070', butter_curry(560, 326, 146, 52))
-    b += katori(900, 250, 160, 60, '#4f7d26', '#355a18', '#8fbf4a', '<circle cx="930" cy="262" r="12" fill="#fff3dc"/>')
-    b += katori(1230, 300, 150, 58, '#e8b43a', '#c38a1e', '#ffe08a', '<circle cx="1200" cy="296" r="6" fill="#b8420e"/><circle cx="1260" cy="310" r="6" fill="#b8420e"/>')
-    r = random.Random(9)
-    b += '<path d="M252 574C262 484 402 444 492 464C582 484 612 544 592 604Z" fill="#3a1606" opacity=".2"/>'
-    b += '<path d="M230 560C240 470 380 430 470 450C560 470 590 530 570 590C500 630 300 630 230 560z" fill="#fbf7ec" stroke="#8a7a5a" stroke-width="3"/>'
-    b += '<path d="M230 560C300 620 500 630 570 590C530 565 380 575 230 560z" fill="#e3dac4"/>'
-    b += ''.join(f'<path d="M{x} {y}l{r.choice([-9, 9])} 4" stroke="#d8ceb4" stroke-width="5" stroke-linecap="round"/>' for x, y in [(r.randint(270, 540), r.randint(470, 590)) for _ in range(40)])
-    b += '<path d="M1356 432L1626 342" stroke="#3a1606" stroke-width="22" stroke-linecap="round" opacity=".18"/>'
-    b += '<path d="M1330 420L1600 330" stroke="#8e96a1" stroke-width="22" stroke-linecap="round"/><path d="M1330 420L1600 330" stroke="#e8ecf0" stroke-width="10" stroke-linecap="round"/>'
-    b += '<ellipse cx="1300" cy="432" rx="58" ry="32" transform="rotate(-18 1300 432)" fill="#c9ced5" stroke="#636a74" stroke-width="3"/><ellipse cx="1290" cy="428" rx="22" ry="10" transform="rotate(-18 1290 428)" fill="#ffffff"/>'
-    b += '<path d="M1580 520C1700 500 1800 540 1810 640C1820 760 1760 860 1640 900L1560 820z" fill="#3a1606" opacity=".35"/>'
-    bub = [(720, 650, 80, 34), (900, 700, 70, 30), (980, 620, 90, 36), (1150, 660, 100, 40), (1180, 760, 70, 26),
-           (1340, 600, 90, 40), (1420, 720, 110, 42), (1600, 600, 90, 44), (1650, 730, 80, 34), (820, 760, 60, 20)]
-    sp = [(640, 700, 12), (600, 730, 9), (840, 740, 12), (1380, 540, 12), (1600, 680, 12), (1760, 640, 12), (1120, 790, 10), (1450, 790, 14), (1640, 560, 14), (780, 690, 16), (880, 640, 10), (1040, 690, 18), (1110, 600, 12), (1260, 700, 20), (1300, 780, 12),
-          (1480, 650, 16), (1540, 770, 14), (1700, 650, 18), (1730, 560, 10), (980, 770, 12), (700, 740, 10)]
-    b += f'<path d="M1560 800C1690 806 1790 740 1812 640C1840 770 1790 900 1660 950C1610 910 1590 860 1560 800z" fill="#c98640" stroke="{LINE}" stroke-width="4"/>'
-    b += '<path d="M1700 860l40-20M1660 900l30-6" stroke="#6a3410" stroke-width="10" stroke-linecap="round"/>'
-    if torn: b += '<clipPath id="torn"><path d="' + TORN + '"/></clipPath><g clip-path="url(#torn)">'
-    b += naan(5, NAAN_D, 'naan-c' + ('t' if torn else ''), bub, sp, butter=(1240, 640, 96))
-    if torn: b += '</g>'
-    b += '<path d="M1560 500C1600 600 1600 740 1560 820" stroke="#b57a3a" stroke-width="10" fill="none" opacity=".55"/>'
-    if torn:  # the tip is gone: a ragged edge of pale, fluffy crumb (clipped to the naan)
-        b += f'<clipPath id="naanonly"><path d="{NAAN_D}"/></clipPath><g clip-path="url(#naanonly)"><path d="{RAG}" fill="none" stroke="#fbf0d4" stroke-width="22" stroke-linejoin="round"/><path d="{RAG}" fill="none" stroke="{LINE}" stroke-width="4" stroke-linejoin="round"/></g>'
+    b = tray()
+    for k in ('saag', 'rice', 'butter'):
+        x, y, w = KAT[k]
+        b += spr('katori-' + k, x, y, w, shadow=.3)
+        if k == 'butter': cx, cy, rx, ry = kfood(k); b += butter_curry(cx, cy, rx * .9, ry * .8)
+        if k == 'rice': b += rice_dome(k)
+    x, y, w = NAAN
+    b += spr('naan', x, y, w, inner=naan_body(torn), shadow=.36)
     return b
-
-
-def piece(x, y, s=1.0, rot=0, sauce=None, drip=0, bite=False):
-    """the torn piece of naan (the SAME piece from the tear to the bite): a ragged edge on the torn side, one char blister.
-    sauce = colour of the curry coat on its dipped end; drip = drip length."""
-    r = random.Random(21)
-    d = 'M-80 10C-70 -40 -10 -58 40 -50L60 -30L78 -44L92 -18L110 -26L112 4L96 20L104 40C60 60 -40 62 -80 10z'
-    g = f'<g transform="translate({x} {y}) rotate({rot}) scale({s})">'
-    g += f'<path d="{d}" transform="translate(4 12)" fill="#c98640" stroke="{LINE}" stroke-width="4"/>'
-    g += f'<path d="{d}" fill="#f1cf8a" stroke="{LINE}" stroke-width="4" stroke-linejoin="round"/>'
-    g += '<ellipse cx="-20" cy="-8" rx="36" ry="18" fill="#fbe5b4" stroke="#c98a48" stroke-width="3"/>'
-    g += f'<path d="{blobpath(r, -14, -14, 9, 1.4, .7)}" fill="#6a3210"/><path d="{blobpath(r, 30, 20, 8)}" fill="#b86c30"/>'
-    g += '<path d="M60 -30L78 -44L92 -18L110 -26L112 4" fill="none" stroke="#fbf0d4" stroke-width="7" stroke-linejoin="round"/>'  # the fluffy torn crumb
-    if sauce:
-        base, dark, hi = sauce
-        g += f'<path d="M20 -48C60 -40 110 -30 112 4L104 40C80 54 40 58 10 56C30 20 10 -10 20 -48z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
-        g += f'<path d="M48 -30c20 4 40 12 48 26" stroke="{hi}" stroke-width="8" fill="none" stroke-linecap="round"/><ellipse cx="40" cy="-20" rx="8" ry="5" fill="#ffffff" opacity=".9"/>'
-        if drip:
-            g += f'<path d="M70 50C74 {50 + drip * .5} 66 {50 + drip * .8} 70 {50 + drip}C78 {50 + drip * 1.1} 84 {50 + drip * .8} 80 50z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
-            g += f'<ellipse cx="74" cy="{54 + drip * 1.05}" rx="12" ry="15" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="70" cy="{48 + drip * 1.05}" rx="4" ry="5" fill="#ffffff"/>'
-    return g + '</g>'
 
 
 BUTTER = ('#e2641c', '#9a3208', '#ffb070')
@@ -248,53 +250,94 @@ def hand(tx, ty, ang, s, pose, who, flip=False, held='', nails=True):
     return g + '</g>'
 
 
+def cel(markup, scene, lift=(0, 0), op=.3):
+    """a cel on the traced bg: graded with the scene tint; its cast shadow (its silhouette) falls down-right like the
+    food's, further when it is lifted off the table (lift = extra offset)."""
+    sh = f'<g transform="translate({SDX + lift[0]} {SDY + lift[1]})" filter="url(#sil)" opacity="{op}">{markup}</g>' if op else ''
+    return sh + f'<g filter="url(#tint-{scene})">{markup}</g>'
+
+
+def hand_at(P, ang, s, pose, who, flip=False, held='', nails=True, on_top=False):
+    """hand() placed by its PINCH point P (fingertip contact) instead of its wrist. on_top = the held piece is drawn over
+    the fingers (a small piece the long fingers would hide), still pinned to the same pinch point."""
+    fy = -1 if flip else 1
+    px, py = 168 * s, -78 * s * fy
+    a = math.radians(ang)
+    wx = P[0] - (px * math.cos(a) - py * math.sin(a)); wy = P[1] - (px * math.sin(a) + py * math.cos(a))
+    if on_top:
+        return hand(round(wx), round(wy), ang, s, pose, who, flip, '', nails) + f'<g transform="translate({round(wx)} {round(wy)}) rotate({ang}) scale({s} {s * fy})">{held}</g>'
+    return hand(round(wx), round(wy), ang, s, pose, who, flip, held, nails)
+
+
+def aim(ang, target, flip=False):
+    """the held_piece rot that points a piece's far tip (its -x end) at screen angle `target` in a hand at `ang`."""
+    return (180 + ang - target) if flip else (target - ang - 180)
+
+
+def held_piece(svg_piece, k, rot=0, grip=(50, -4)):
+    """a food piece in a hand's own units: its HELD edge (grip, piece units) sits in the pinch (168,-78)."""
+    return f'<g transform="translate(168 -78) rotate({rot}) scale({k}) translate({-grip[0]} {-grip[1]})">{svg_piece}</g>'
+
+
 # ---------------------------------------------------------------- her face, extreme close-up (Nanda's IC-chip face)
+# r3: the ECU keeps her SPRITE proportions (nanda.js): eye spacing : eye-to-mouth = 24 : 16, the cheeks between them,
+# hatch blush; the eyes are the sprite's own faces (feed = 'anya-smile' glossy eyes, bite = 'big-eyes-peek' stare with
+# raised brows). EX/EY = the eyes, MX/MY = the mouth (above the box line y=740).
+EX, EY, MX, MY = (680, 1240), 300, 960, 560
+
+
+def big_eye(ex, ey, rx, ry, ink='#6b0f42'):
+    return (f'<ellipse cx="{ex}" cy="{ey}" rx="{rx}" ry="{ry}" fill="{ink}"/><ellipse cx="{ex}" cy="{ey + ry * .35}" rx="{rx * .7}" ry="{ry * .45}" fill="#a0306a"/>'
+            f'<ellipse cx="{ex - rx * .32}" cy="{ey - ry * .38}" rx="{rx * .36}" ry="{rx * .36}" fill="#ffffff"/><ellipse cx="{ex + rx * .35}" cy="{ey + ry * .3}" rx="{rx * .14}" ry="{rx * .14}" fill="#ffffff" opacity=".85"/>'
+            f'<path d="M{ex + rx * .7} {ey - ry * .8}l{rx * .5} {-ry * .3}" stroke="{ink}" stroke-width="12" stroke-linecap="round"/>')
+
+
 def face(mode, food, food_piece=''):
-    """mode 'open' = mouth open, waiting (Feed me); 'bite' = lips closed on the food, the curry smear at the corner."""
+    """mode 'open' = mouth open, waiting (Feed me); 'bite' = her lips close ON the food: the part inside is hidden behind
+    the lips (clipped), and no lip line crosses the food."""
     base, dark, hi = food
     b = '<rect width="1920" height="1080" fill="#fff4f9"/>'
     b += '<radialGradient id="fg" cx=".42" cy=".3" r=".8"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#fbe3ee"/></radialGradient><rect width="1920" height="1080" fill="url(#fg)"/>'
-    # the chip body: magenta edge bars with lavender pins (left + right), the silver fringe with its zigzag rim (top)
     for x in (40, 1830):
         b += f'<rect x="{x}" y="0" width="50" height="1080" fill="#d4197e"/>'
         b += ''.join(f'<rect x="{x - 26 if x < 900 else x + 50}" y="{y}" width="26" height="22" rx="3" fill="#cfc4e6" stroke="#7a5aa0" stroke-width="3"/>' for y in (180, 330, 480, 630))
-    zz = 'M90 0V130' + ''.join(f'L{90 + i * 145 + 72} {215 if i % 2 else 180}L{90 + (i + 1) * 145} 130' for i in range(12)) + 'V0z'
+    zz = 'M90 0V110' + ''.join(f'L{90 + i * 145 + 72} {180 if i % 2 else 150}L{90 + (i + 1) * 145} 110' for i in range(12)) + 'V0z'
     b += f'<path d="{zz}" fill="#e4e6f2" stroke="#d4197e" stroke-width="16" stroke-linejoin="round"/>'
-    b += '<path d="M300 20C340 60 360 100 350 140M760 20C800 70 810 110 800 150M1240 30C1270 70 1280 110 1270 150" stroke="#b9bdd8" stroke-width="8" fill="none" stroke-linecap="round"/>'
-    # eyes: open, looking straight at you (the camera). The catchlight is upper LEFT, the window side.
-    for ex in (620, 1300):
-        if mode == 'bite':  # heavy, pleased lids: the eye stays on you
-            b += f'<ellipse cx="{ex}" cy="310" rx="78" ry="104" fill="#6b0f42"/><ellipse cx="{ex - 26}" cy="282" rx="26" ry="26" fill="#ffffff"/>'
-            b += f'<path d="M{ex - 110} 196H{ex + 110}V268C{ex + 60} 242 {ex - 60} 242 {ex - 110} 268z" fill="#fdf0f6"/><path d="M{ex - 96} 266C{ex - 40} 238 {ex + 40} 238 {ex + 96} 266" stroke="#6b0f42" stroke-width="20" fill="none" stroke-linecap="round"/>'
-        else:
-            b += f'<ellipse cx="{ex}" cy="300" rx="80" ry="116" fill="#6b0f42"/><ellipse cx="{ex - 26}" cy="254" rx="30" ry="30" fill="#ffffff"/><ellipse cx="{ex + 28}" cy="350" rx="10" ry="10" fill="#ffffff" opacity=".8"/>'
-    blush = '#ffa6cf'
-    b += f'<ellipse cx="400" cy="470" rx="190" ry="84" fill="{blush}"/><ellipse cx="1520" cy="470" rx="190" ry="84" fill="{blush}"/>'
-    b += '<path d="M330 430l30 -40M390 430l30 -40M450 430l30 -40M1450 430l30 -40M1510 430l30 -40M1570 430l30 -40" stroke="#ff7cb4" stroke-width="8" stroke-linecap="round"/>'
-    mx, my = 960, 520
+    # cheeks (between the eyes and the mouth, as on the sprite): a soft flush + the vertical hatch
+    for cx in (500, 1420):
+        b += f'<ellipse cx="{cx}" cy="470" rx="150" ry="62" fill="#ffa6cf" opacity=".75"/>'
+        b += ''.join(f'<path d="M{cx + dx} 438v56" stroke="#6b0f42" stroke-width="7" stroke-linecap="round" opacity=".5"/>' for dx in (-60, -20, 20, 60))
+    for ex in EX:
+        if mode == 'bite':   # 'big-eyes-peek': bigger eyes, raised brows, on you the whole time
+            b += big_eye(ex, EY, 92, 118) + f'<path d="M{ex - 80} {EY - 140}Q{ex} {EY - 172} {ex + 80} {EY - 140}" stroke="#6b0f42" stroke-width="14" fill="none" stroke-linecap="round"/>'
+        else:                # 'anya-smile' eyes: glossy, two highlights, a lash flick
+            b += big_eye(ex, EY, 78, 100)
+    b += f'<path d="M{MX - 4} {MY - 110}v26" stroke="#6b0f42" stroke-width="8" stroke-linecap="round"/>'   # the nose tick
     if mode == 'open':
-        b += f'<path d="M{mx - 86} {my - 30}C{mx - 60} {my - 60} {mx + 60} {my - 60} {mx + 86} {my - 30}C{mx + 90} {my + 60} {mx - 90} {my + 60} {mx - 86} {my - 30}z" fill="#6b0f42"/>'
-        b += f'<path d="M{mx - 56} {my + 34}C{mx - 20} {my + 4} {mx + 30} {my + 4} {mx + 60} {my + 34}C{mx + 30} {my + 50} {mx - 30} {my + 50} {mx - 56} {my + 34}z" fill="#f06a8a"/>'
-        b += f'<path d="M{mx - 86} {my - 30}C{mx - 60} {my - 60} {mx + 60} {my - 60} {mx + 86} {my - 30}" stroke="#4a0a2e" stroke-width="10" fill="none" stroke-linecap="round"/>'
+        b += f'<path d="M{MX - 86} {MY - 26}C{MX - 60} {MY - 50} {MX + 60} {MY - 50} {MX + 86} {MY - 26}C{MX + 90} {MY + 64} {MX - 90} {MY + 64} {MX - 86} {MY - 26}z" fill="#6b0f42" stroke="#4a0a2e" stroke-width="8" stroke-linejoin="round"/>'
+        b += f'<path d="M{MX - 52} {MY + 36}C{MX - 20} {MY + 8} {MX + 30} {MY + 8} {MX + 56} {MY + 36}C{MX + 30} {MY + 50} {MX - 30} {MY + 50} {MX - 52} {MY + 36}z" fill="#f06a8a"/>'
         b += food_piece
     else:
-        b += f'<path d="M{mx - 70} {my - 16}C{mx - 30} {my + 30} {mx + 30} {my + 30} {mx + 70} {my - 16}C{mx + 40} {my + 6} {mx - 40} {my + 6} {mx - 70} {my - 16}z" fill="#6b0f42"/>'
-        b += food_piece
-        # the lips close over the far end of the piece (drawn after it): upper lip line + the soft cheek bulge
-        b += f'<path d="M{mx - 120} {my - 26}C{mx - 80} {my - 2} {mx - 40} {my - 26} {mx} {my - 12}C{mx + 40} {my - 26} {mx + 80} {my - 2} {mx + 120} {my - 26}" stroke="#4a0a2e" stroke-width="12" fill="none" stroke-linecap="round"/>'
-        b += f'<path d="M{mx - 30} {my + 44}C{mx} {my + 56} {mx + 30} {my + 56} {mx + 50} {my + 40}" stroke="#d27a9c" stroke-width="8" fill="none" stroke-linecap="round"/>'
-        # the curry at the corner of her mouth (the window glint on it, upper left) + one small drop on her chin
-        b += f'<path d="M{mx + 104} {my - 30}C{mx + 150} {my - 44} {mx + 176} {my - 10} {mx + 160} {my + 20}C{mx + 150} {my + 40} {mx + 120} {my + 30} {mx + 112} {my + 8}C{mx + 100} {my - 6} {mx + 92} {my - 20} {mx + 104} {my - 30}z" fill="{base}" stroke="{dark}" stroke-width="4"/>'
-        b += f'<ellipse cx="{mx + 128}" cy="{my - 18}" rx="12" ry="7" fill="#ffffff" opacity=".9"/><path d="M{mx + 140} {my + 28}C{mx + 142} {my + 60} {mx + 150} {my + 70} {mx + 142} {my + 84}C{mx + 130} {my + 70} {mx + 136} {my + 50} {mx + 140} {my + 28}z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
+        # the lips close on the piece: a small dark mouth, the piece (clipped OUTSIDE the mouth oval) enters it
+        b += f'<ellipse cx="{MX}" cy="{MY}" rx="74" ry="30" fill="#6b0f42"/>'
+        b += f'<clipPath id="lips"><path d="M0 0H1920V1080H0z M{MX - 74} {MY}a74 30 0 1 0 148 0a74 30 0 1 0 -148 0z" clip-rule="evenodd"/></clipPath><g clip-path="url(#lips)">{food_piece}</g>'
+        b += f'<path d="M{MX - 96} {MY - 22}C{MX - 60} {MY - 40} {MX + 60} {MY - 40} {MX + 96} {MY - 22}" stroke="#4a0a2e" stroke-width="10" fill="none" stroke-linecap="round"/>'   # upper lip, ABOVE the food
+        b += f'<path d="M{MX - 60} {MY + 38}C{MX - 20} {MY + 52} {MX + 20} {MY + 52} {MX + 60} {MY + 38}" stroke="#d27a9c" stroke-width="8" fill="none" stroke-linecap="round"/>'   # lower lip, BELOW it
+        # the sauce at the corner of her mouth (the right corner, away from the food) + one drop on the chin
+        b += f'<path d="M{MX + 84} {MY - 18}C{MX + 120} {MY - 24} {MX + 136} {MY} {MX + 124} {MY + 24}C{MX + 110} {MY + 36} {MX + 90} {MY + 20} {MX + 86} {MY + 4}C{MX + 80} {MY - 6} {MX + 78} {MY - 14} {MX + 84} {MY - 18}z" fill="{base}" stroke="{dark}" stroke-width="4"/>'
+        b += f'<ellipse cx="{MX + 104}" cy="{MY - 10}" rx="9" ry="5" fill="#ffffff" opacity=".9"/>'
     return b
 
 
-def feed_pov(food, piece_svg_open, piece_svg_bite, mode):
-    """your hand from the bottom-left holds the food at her mouth. Everything that matters sits above y=740 (the box)."""
-    if mode == 'open':
-        held = piece_svg_open
-        return face('open', food) + hand(300, 750, -10, 2.2, 'pinch', 'you', held=held)
-    return face('bite', food, hand(360, 750, -8, 2.2, 'pinch', 'you', held=piece_svg_bite))
+HS_F = 34 * 18 / 250                    # her mouth ~5 cm = 170 px -> 34 px/cm: the hand scale at her face
+
+
+def feed_pov(food, piece_svg, mode, k, grip=(50, -4), top=False, sh=(0, 0)):
+    """sh = a shift of the pinch toward the mouth for a shorter piece (the katsu slice is ~4 cm, the naan tip ~9 cm)."""
+    """your hand from the bottom-left holds the piece at her mouth (k = the piece scale in hand units). All above y=740."""
+    if mode == 'open':   # the dipped tip points at her open mouth, just short of it: the mouth stays visible
+        return face('open', food) + hand_at((600 + sh[0], 670 + sh[1]), -30, HS_F, 'pinch', 'you', held=held_piece(piece_svg, k, aim(-30, -22), grip), on_top=top)
+    return face('bite', food, hand_at((690 + sh[0], 655 + sh[1]), -30, HS_F, 'pinch', 'you', held=held_piece(piece_svg, k, aim(-30, -18), grip), on_top=top))
 
 
 # ---------------------------------------------------------------- a gravy boat (steel), tilted, pouring a ribbon
@@ -314,35 +357,70 @@ def boat(x, y, rot, s, food, ribbon_to):
     return g + '</g>'
 
 
+def crop(c, src, dst):
+    """a crop of a hero drawing: scale c, with hero point src landing on frame point dst."""
+    return f'translate({dst[0] - c * src[0]:.1f} {dst[1] - c * src[1]:.1f}) scale({c})'
+
+
+def at(c, src, dst, p):
+    """where hero point p lands in that crop."""
+    return (dst[0] + c * (p[0] - src[0]), dst[1] + c * (p[1] - src[1]))
+
+
+def tip_hero():
+    x, y, w = NAAN
+    return x + TIP_O[0] * NK, y + TIP_O[1] * NK
+
+
 # ================================================================ BUTTER-CHICKEN shots
 def thali():
     return svg(cloth() + thali_group())
 
 
+LIFT = (1.2, (800, 850), (980, 600))   # crop, hero src, frame dst: the naan's torn end in the middle, above the box
+
+
 def naan_lift():
-    """crop x1.9 on the naan tip: her hand (from the right) lifts the torn piece; a pull of dough still joins them."""
-    g = f'<g transform="translate(-535 -848) scale(1.9)">{thali_group(torn=True)}</g>'
-    return svg(cloth() + g + '<path d="M770 420C820 380 860 340 900 310" stroke="#f8ebc8" stroke-width="14" fill="none" stroke-linecap="round"/>'
-               + hand(1177, 476, 180 + 8, 1.7, 'pinch', 'her', flip=True, held=f'<g transform="translate(176 -80) rotate(180) scale(1 -1)">{piece(0, 0, 1.1, 0)}</g>'))
+    """the naan is torn: her hand (from the right) lifts THE tip (the sprite's own tip) up off it; a pull of dough."""
+    c, s0, d0 = LIFT
+    g = f'<g transform="{crop(c, s0, d0)}">{thali_group(torn=True)}</g>'
+    P = (640, 260)                     # her pinch, up-left of the torn end: she lifts the tip off
+    torn = at(c, s0, d0, (NAAN[0] + 112 * NK, NAAN[1] + 205 * NK))
+    dough = f'<path d="M{P[0] + 10} {P[1] + 30}C{P[0] + 60} {P[1] + 110} {torn[0] - 40} {torn[1] - 60} {torn[0]} {torn[1] - 10}" stroke="#fbf0d4" stroke-width="16" fill="none" stroke-linecap="round"/>'
+    return svg(cloth() + g + cel(dough + hand_at(P, 160, HS_B * c, 'pinch', 'her', flip=True, held=held_piece(piece(uid='l'), PK_B, aim(160, 172, True))), 'b', (70, 110), .22))
+
+
+SAUCE = (1.6, None, (880, 540))        # the butter katori, big
+
+
+def sauce_crop():
+    c, _, d0 = SAUCE
+    cx, cy, rx, ry = kfood('butter')
+    return c, (cx, cy), d0
 
 
 def sauce():
-    g = f'<g transform="translate(-1040 -560) scale(3.2)">{thali_group()}</g>'
-    return svg(cloth() + g + boat(1380, 330, -28, 1.6, BUTTER, (820, 540)))
+    c, s0, d0 = sauce_crop()
+    g = f'<g transform="{crop(c, s0, d0)}">{thali_group()}</g>'
+    return svg(cloth() + g + cel(boat(1500, 240, -28, 1.9, BUTTER, (d0[0] + 40, d0[1] - 10)), 'b', (80, 140), .2))
 
 
 def naan_dip():
-    g = f'<g transform="translate(-1580 -900) scale(4.2)">{thali_group()}</g>'
-    return svg(cloth() + g + '<ellipse cx="830" cy="600" rx="130" ry="30" fill="#b8420e"/><path d="M710 600c40-20 200-20 240 0" stroke="#ffb070" stroke-width="8" fill="none"/>'
-               + hand(1062, 761, 180 + 18, 1.7, 'pinch', 'her', flip=True, held=f'<g transform="translate(176 -80) rotate(180) scale(1 -1)">{piece(0, 0, 1.1, 0, BUTTER, 60)}</g>'))
+    """her hand dips THE torn tip in the butter katori; the coated tip is under the surface edge, the sauce drips."""
+    c, s0, d0 = sauce_crop()
+    g = f'<g transform="{crop(c, s0, d0)}">{thali_group(torn=True)}</g>'
+    ring = f'<ellipse cx="{d0[0] - 40}" cy="{d0[1] + 20}" rx="150" ry="36" fill="none" stroke="#ffb070" stroke-width="8"/>'
+    tip = (d0[0] - 30, d0[1] + 20); L = 98 * PK_B * HS_B * c; t = math.radians(120)
+    pin = (tip[0] - L * math.cos(t), tip[1] - L * math.sin(t))
+    return svg(cloth() + g + ring + cel(hand_at(pin, 135, HS_B * c, 'pinch', 'her', flip=True, held=held_piece(piece(BUTTER, 26, 'd'), PK_B, aim(135, 120, True))), 'b', (80, 120), .2))
 
 
 def naan_feed():
-    return svg(feed_pov(BUTTER, f'<g transform="translate(176 -82) rotate(14)">{piece(0, 0, 1.0, 0, BUTTER, 40)}</g>', '', 'open'))
+    return svg(feed_pov(BUTTER, piece(BUTTER, 16, 'f'), 'open', PK_B))
 
 
 def butter_bite():
-    return svg(feed_pov(BUTTER, '', f'<g transform="translate(200 -84) rotate(2)">{piece(0, 0, 1.0, 0, BUTTER)}</g>', 'bite'))
+    return svg(feed_pov(BUTTER, piece(BUTTER, 0, 'b'), 'bite', PK_B))   # hand units are physical: the piece is the same size in every shot
 
 
 def lassi_glass(cx, base_y, kind='lassi'):
@@ -395,9 +473,8 @@ def room_back(window=True):
 
 
 def lassi():
-    b = room_back()
-    b += '<path d="M0 560H1920V1080H0z" fill="#d6603a"/><path d="M0 560H1920V586H0z" fill="#ee8a52"/>'
-    b += ''.join(f'<path d="M{960 + (i * 120 - 960) * 1460 / 1980:.0f} 560L{i * 120} 1080" stroke="#c9552f" stroke-width="3" opacity=".5"/>' for i in range(-6, 24))
+    b = cloth() + room_back()   # the traced NAND table (bg-nand) under the drawn back wall
+    b += '<path d="M0 560H1920V586H0z" fill="#b08254"/>'
     b += f'<g transform="translate(-900 380) scale(1.0)">{thali_group()}</g>'   # the same thali, cut by the left edge
     b += lassi_glass(1100, 780)
     return svg(b)
@@ -454,137 +531,116 @@ def butter_table():
     b += ''.join(f'<path d="M{960 + (x - 960) * 380 / 700:.0f} 760L{x} 1080" stroke="#8a5c32" stroke-width="4"/>' for x in range(-1200, 3200, 260))
     b += '<path d="M540 790H1420V1080H540z" fill="#5a1a26"/>'
     # our table at the front-left (orange cloth), the thali on it (the same sprite, small)
-    b += '<path d="M-20 620H560L520 1080H-20z" fill="#d6603a" stroke="#8a3218" stroke-width="5"/><path d="M-20 620H560" stroke="#ee8a52" stroke-width="12"/>'
+    b += '<path d="M-20 620H560L520 1080H-20z" fill="#9a7048" stroke="#5a3a1c" stroke-width="5"/><path d="M-20 620H560" stroke="#c89a64" stroke-width="12"/>'   # the same wood table as bg-nand
     b += f'<g transform="translate(-30 560) scale(.34)">{thali_group()}</g>'
     # her lassi on the right edge of the booth table (a small tray table at the right, same cloth)
-    b += '<path d="M1440 640H1940V1080H1400z" fill="#d6603a" stroke="#8a3218" stroke-width="5"/><path d="M1440 640H1940" stroke="#ee8a52" stroke-width="12"/>'
+    b += '<path d="M1440 640H1940V1080H1400z" fill="#9a7048" stroke="#5a3a1c" stroke-width="5"/><path d="M1440 640H1940" stroke="#c89a64" stroke-width="12"/>'
     b += f'<g transform="translate(1100 330) scale(.42)">{lassi_glass(1100, 780)}</g>'
     return svg(b)
 
 
 # ================================================================ KATSU shots
-def cutlet(cut=False, seed=2):
-    """the sliced cutlet (KATSU-ANALYSIS rules 1-3): one oval cut in 6 fanned strips. Scalloped crumb, gold dots, a lit top
-    band, a dark underside (thickness), and a pink cut face in a crumb ring on the right of every strip."""
-    r = random.Random(seed)
-    RX, RY, N, FAN, T = 330, 125, 6, 30, 26
-    yt = lambda x: -RY * math.sqrt(max(0.02, 1 - (x / RX) ** 2))
-    g = ''
-    for i in range(N):
-        if cut and i == N - 1: break
-        a, b = -RX + i * 2 * RX / N, -RX + (i + 1) * 2 * RX / N
-        ox, oy = i * FAN - FAN * N / 2, -i * 5
-        xs = [a + (b - a) * k / 8 for k in range(9)]
-        top = [(x + ox, yt(x) + oy) for x in xs]
-        bot = [(x + ox, -yt(x) + oy) for x in reversed(xs)]
-        pts = top + bot
-        g += f'<path d="{bumpy([(x, y + T) for x, y in pts], step=20, bulge=7, seed=i)}" fill="#8a4a16" stroke="#5a2c0a" stroke-width="4"/>'  # the side (thickness)
-        g += f'<path d="{bumpy(pts, step=20, bulge=8, seed=i + 10)}" fill="#dc9c44" stroke="#8a4a16" stroke-width="4"/>'
-        g += f'<path d="M{top[1][0]:.0f} {top[1][1] + 12:.0f}' + ''.join(f'L{x:.0f} {y + 12:.0f}' for x, y in top[2:-1]) + '" stroke="#f7d27a" stroke-width="12" fill="none" stroke-linecap="round"/>'
-        for _ in range(16):
-            px = a + ox + 10 + r.random() * (b - a - 20); lim = -yt(px - ox) * 0.8
-            py = oy + (r.random() * 2 - 1) * lim
-            g += f'<circle cx="{px:.0f}" cy="{py:.0f}" r="{r.choice([4, 5, 6, 7])}" fill="{r.choice(["#f3c66e", "#a8641e", "#f3c66e", "#c47a2a"])}"/>'
-        if i < N - 1 or cut:  # the cut face: pink meat + a pale fat line inside a crumb ring
-            x1, y1, y2 = b + ox, yt(b) + oy, -yt(b) + oy
-            face_ = f'M{x1:.0f} {y1:.0f}L{x1 + 24:.0f} {y1 + 8:.0f}L{x1 + 24:.0f} {y2 + T:.0f}L{x1:.0f} {y2 + T - 6:.0f}z'
-            g += f'<path d="{face_}" fill="#f4b8b0" stroke="#c47a2a" stroke-width="10" stroke-linejoin="round"/>'
-            g += f'<path d="M{x1 + 12:.0f} {y1 + 20:.0f}C{x1 + 16:.0f} {(y1 + y2) / 2:.0f} {x1 + 8:.0f} {(y1 + y2) / 2 + 20:.0f} {x1 + 12:.0f} {y2 + T - 16:.0f}" stroke="#fbe2d6" stroke-width="5" fill="none"/>'
-    return g
+# The plate is the traced images(183) sprite: roux left, the fanned sliced cutlet across the seam, rice right. Real
+# sizes: the plate ~26 cm = 1350 px (52 px/cm); the spoon ~18 cm; the hand ~18 cm (HS_K); the fukujinzuke dish ~12 cm.
+PLATE = (170, 110, 1350)
+PKK = PLATE[2] / META['katsu-plate'][0]    # hero px per plate-sprite unit
+HS_K = 52 * 18 / 250                       # 3.74
+PK_K = PKK / HS_K                          # the cut slice, in hand units
+SLICE = [(318, 120), (350, 72), (398, 118), (392, 168), (345, 172)]   # the end slice of the cutlet (plate-sprite units)
+SLICE_O = (358, 124)
+ROUX_FILL = '#7a4420'
+
+
+def P(p):
+    """plate-sprite units -> hero px."""
+    return PLATE[0] + p[0] * PKK, PLATE[1] + p[1] * PKK
 
 
 def katsu_plate(cut=False):
-    """the hero plate (3/4 top view): rice on the right, roux on the left, the cutlet across the seam, fukujinzuke."""
-    r = random.Random(7)
-    cx, cy = 960, 560
-    b = f'<ellipse cx="{cx + SDX}" cy="{cy + SDY + 14}" rx="740" ry="372" fill="{SH}" opacity=".34"/>'
-    b += f'<ellipse cx="{cx}" cy="{cy}" rx="730" ry="366" fill="#fbfbfd" stroke="#7a8494" stroke-width="5"/>'
-    b += f'<path d="M{cx - 730} {cy}A730 366 0 0 1 {cx + 730} {cy}A730 330 0 0 0 {cx - 730} {cy}z" fill="#d5dde8"/>'   # blue-grey rim shade, far side
-    b += f'<ellipse cx="{cx}" cy="{cy + 10}" rx="600" ry="290" fill="#f4f6fa" stroke="#b9c2d0" stroke-width="3"/>'
-    b += f'<path d="M{cx - 600} {cy + 10}A600 290 0 0 1 {cx + 200} {cy - 276}A600 250 0 0 0 {cx - 600} {cy + 10}z" fill="#dfe6ef"/>'  # inner wall shade (upper left)
-    # rice (right): a lumpy dome with grain outlines, its shade on the lower right
-    rpts = [(960 + math.cos(t) * 300 * (1 + .05 * math.sin(5 * t)), 560 + math.sin(t) * 230 * (1 + .05 * math.cos(4 * t))) for t in [k / 28 * math.tau for k in range(28)]]
-    rpts = [(x + 230, y - 10) for x, y in rpts]
-    rice = bumpy(rpts[::-1][::-1], step=34, bulge=14, seed=3)
-    b += f'<path d="{rice}" transform="translate(16 20)" fill="#d8d2c2"/><path d="{rice}" fill="#fbfaf4" stroke="#b8b0a0" stroke-width="3"/>'
-    b += '<path d="M1540 580C1520 700 1400 790 1200 800C1320 740 1460 680 1540 580z" fill="#e6e0d0"/>'
-    for _ in range(90):
-        x = r.randint(1000, 1440); y = r.randint(380, 740)
-        b += f'<ellipse cx="{x}" cy="{y}" rx="12" ry="7" transform="rotate({r.randint(-40, 40)} {x} {y})" fill="none" stroke="#cfc8b6" stroke-width="3"/>'
-    # roux (left): a glossy plane, dark rim where it meets the rice, ridges, orange glints, white blobs
-    roux = 'M420 430C520 350 760 330 930 360C890 460 900 640 1000 760C1100 800 1200 810 1300 800C1100 850 800 860 600 820C420 790 300 640 330 540C340 490 380 460 420 430z'
-    b += f'<path d="{roux}" fill="#6a3414" stroke="#3a1a08" stroke-width="6"/>'
-    b += '<path d="M930 360C890 460 900 640 1000 760C1100 800 1200 810 1300 800" stroke="#3a1a08" stroke-width="14" fill="none" stroke-linecap="round"/>'
-    for (x, y, w) in [(470, 520, 160), (560, 640, 200), (700, 450, 150), (480, 720, 140), (760, 740, 120)]:
-        b += f'<path d="M{x} {y}c{w * .3} -24 {w * .6} 20 {w} -6" stroke="#8a4a1c" stroke-width="16" fill="none" stroke-linecap="round"/>'
-        b += f'<path d="M{x + 6} {y - 8}c{w * .25} -20 {w * .45} -8 {w * .6} -12" stroke="#e8862a" stroke-width="6" fill="none" stroke-linecap="round"/>'
-    for (x, y) in [(560, 470), (640, 600), (470, 640)]:
-        b += f'<ellipse cx="{x}" cy="{y}" rx="16" ry="9" fill="#ffffff" opacity=".9"/>'
-    for (x, y, k, c, s_) in [(520, 580, 34, '#f2d27a', '#d9ae4a'), (700, 700, 30, '#f2d27a', '#d9ae4a'), (820, 560, 28, '#e8762a', '#b8520e'), (600, 760, 24, '#e8762a', '#b8520e'), (440, 560, 22, '#f2d27a', '#d9ae4a')]:
-        b += f'<rect x="{x - k}" y="{y - k * .8}" width="{k * 2}" height="{k * 1.6}" rx="{k * .35}" fill="{c}" stroke="#5a3010" stroke-width="3"/><path d="M{x + k * .2} {y - k * .8}H{x + k}V{y + k * .8}" stroke="{s_}" stroke-width="{k * .5:.0f}" fill="none"/>'
-    # the cutlet across the seam (rotated a little; one VP holds because it lies flat on the plate)
-    b += f'<g transform="translate(900 520) rotate(-10)">{cutlet(cut)}</g>'
-    if cut:   # the end strip is cut off: the small piece lies apart on the rice, its pink face up
-        b += f'<g transform="translate(1250 520) rotate(-10)">{katsu_piece()}</g>'
-    # fukujinzuke (red pickles) on the rice edge, front right
-    for (x, y) in [(1330, 700), (1360, 690), (1350, 720), (1384, 712), (1318, 726), (1372, 736)]:
-        b += f'<rect x="{x}" y="{y}" width="30" height="18" rx="5" transform="rotate({r.randint(-30, 30)} {x} {y})" fill="#c8202e" stroke="#7a1018" stroke-width="2"/>'
-    return b
+    """the hero plate + its fukujinzuke dish (behind, upper right). cut = the end slice is gone (roux shows there)."""
+    b = spr('fukujinzuke', 1250, 30, 620, shadow=.28)
+    if not cut:
+        return b + spr('katsu-plate', *PLATE, shadow=.34)
+    sl = 'M' + 'L'.join(f'{x} {y}' for x, y in SLICE) + 'Z'
+    inner = (f'<clipPath id="nosl"><path d="M-10 -10H600V400H-10Z{sl}" clip-rule="evenodd"/></clipPath>'
+             f'<path d="{sl}" fill="{ROUX_FILL}" stroke="#4a2410" stroke-width="2"/><g clip-path="url(#nosl)">{BODY["katsu-plate"]}</g>')
+    return b + spr('katsu-plate', *PLATE, inner=inner, shadow=.34)
+
+
+def katsu_piece(dip=0, uid='k'):
+    """THE end slice as a flat CEL, in plate-sprite units, centred: crumb on top (the traced crumb's browns), the white
+    pork face with its pink rim + pale fat line toward us (katsu-lift ref). dip = roux coat on the far (-x) end + drip."""
+    g = '<g transform="scale(.6)">'
+    g += f'<path d="{bumpy([(-60, -40), (60, -46), (66, 40), (-54, 46)], step=18, bulge=7, seed=5)}" fill="#c47c34" stroke="#6a3a14" stroke-width="4"/>'
+    g += '<path d="M-50 -30L50 -36" stroke="#e8b060" stroke-width="10" stroke-linecap="round"/>'
+    g += ''.join(f'<circle cx="{x}" cy="{y}" r="5" fill="{c}"/>' for x, y, c in [(-30, -10, '#8a4a1c'), (0, 6, '#f0c070'), (30, -14, '#8a4a1c'), (-10, 26, '#f0c070'), (36, 20, '#8a4a1c')])
+    g += '<path d="M-44 20H50L54 50H-40z" fill="#f8ece4" stroke="#b8702a" stroke-width="7" stroke-linejoin="round"/><path d="M-36 30H44" stroke="#f2c4b8" stroke-width="6"/><path d="M-30 40H40" stroke="#fffaf4" stroke-width="3"/>'
+    if dip:
+        base, dark, hi = ROUX
+        g += f'<path d="M-56 -44C-64 -10 -64 20 -50 50L-40 50C-30 20 -30 -20 -20 -46z" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="-44" cy="-20" rx="5" ry="8" fill="#ffffff" opacity=".9"/>'
+        if dip > 1:
+            g += f'<path d="M-50 50C-48 {50 + dip * .5} -54 {50 + dip * .8} -50 {50 + dip}C-42 {50 + dip * 1.1} -38 {50 + dip * .8} -40 50z" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="-46" cy="{54 + dip * 1.05}" rx="11" ry="14" fill="{base}" stroke="{dark}" stroke-width="3"/>'
+    return g + '</g>'
+
+
+KGRIP = (36, 0)   # she holds the slice by its near (+x) end
+
+
+def spoon(x0, y0, x1, y1, bowl_w):
+    """a steel spoon: the bowl at (x0,y0), the handle to (x1,y1); bowl_w = the bowl's width (~4 cm)."""
+    a = math.degrees(math.atan2(y1 - y0, x1 - x0))
+    return (f'<path d="M{x0} {y0}L{x1} {y1}" stroke="#5a616b" stroke-width="{bowl_w * .24:.0f}" stroke-linecap="round"/><path d="M{x0} {y0}L{x1} {y1}" stroke="#dfe3e8" stroke-width="{bowl_w * .13:.0f}" stroke-linecap="round"/>'
+            f'<ellipse cx="{x0}" cy="{y0}" rx="{bowl_w * .78:.0f}" ry="{bowl_w * .5:.0f}" transform="rotate({a:.0f} {x0} {y0})" fill="#c9ced5" stroke="#5a616b" stroke-width="5"/>'
+            f'<ellipse cx="{x0 - bowl_w * .15:.0f}" cy="{y0 - bowl_w * .15:.0f}" rx="{bowl_w * .3:.0f}" ry="{bowl_w * .14:.0f}" transform="rotate({a:.0f} {x0} {y0})" fill="#ffffff"/>')
 
 
 def katsu_side():
-    """the set around the plate: a spoon on a white napkin (right) and the lemon water glass (top left: no text)."""
-    b = f'<g transform="rotate(-14 1780 700)"><rect x="{1680 + SDX}" y="{520 + SDY}" width="200" height="420" rx="8" fill="{SH}" opacity=".25"/><rect x="1680" y="520" width="200" height="420" rx="8" fill="#ffffff" stroke="#b9c2d0" stroke-width="4"/><path d="M1780 520V940" stroke="#e6ebf2" stroke-width="10"/>'
-    b += '<path d="M1780 600V900" stroke="#8e96a1" stroke-width="22" stroke-linecap="round"/><path d="M1780 600V900" stroke="#e8ecf0" stroke-width="9" stroke-linecap="round"/><ellipse cx="1780" cy="590" rx="44" ry="64" fill="#c9ced5" stroke="#636a74" stroke-width="4"/><ellipse cx="1770" cy="572" rx="14" ry="22" fill="#ffffff"/></g>'
+    """the spoon (18 cm = 940 px) on a white napkin at the right of the plate: it runs off the bottom of the frame."""
+    b = f'<g transform="rotate(-8 1800 700)"><rect x="{1690 + SDX}" y="{300 + SDY}" width="260" height="900" rx="8" fill="{SH}" opacity=".25"/><rect x="1690" y="300" width="260" height="900" rx="8" fill="#ffffff" stroke="#b9c2d0" stroke-width="4"/><path d="M1820 300V1200" stroke="#e6ebf2" stroke-width="10"/>'
+    b += spoon(1820, 400, 1820, 1300, 208) + '</g>'
     return b
 
 
 def katsu_dish():
-    return svg(counter() + katsu_plate() + katsu_side())
+    return svg(counter() + katsu_plate() + cel(katsu_side(), 'k', op=0))
 
 
 def katsu_cut():
-    """crop x1.7 on the cutlet's end: her hand (from the right) holds the spoon; its edge has cut off one small piece."""
-    g = f'<g transform="translate(-900 -290) scale(1.7)">{katsu_plate(cut=True)}</g>'
-    C, H = (1250, 470), (1420, 340)
-    sp = f'<path d="M{C[0] + 40} {C[1] - 30}L{H[0] + 120} {H[1] - 92}" stroke="#5a616b" stroke-width="32" stroke-linecap="round"/><path d="M{C[0] + 40} {C[1] - 30}L{H[0] + 120} {H[1] - 92}" stroke="#dfe3e8" stroke-width="18" stroke-linecap="round"/>'
-    sp += f'<ellipse cx="{C[0]}" cy="{C[1]}" rx="40" ry="74" transform="rotate(36 {C[0]} {C[1]})" fill="#c9ced5" stroke="#5a616b" stroke-width="6"/><ellipse cx="{C[0] - 10}" cy="{C[1] - 18}" rx="12" ry="24" transform="rotate(36 {C[0] - 10} {C[1] - 18})" fill="#ffffff"/>'
-    crunch = f'<path d="M{C[0] - 70} {C[1] - 60}l-40-40M{C[0] - 20} {C[1] - 90}l-6-56M{C[0] - 110} {C[1] - 10}l-56-10" stroke="#fff6de" stroke-width="10" stroke-linecap="round"/>'
-    return svg(counter() + g + sp + crunch + hand(H[0] + 171, H[1] + 242, 210, 1.6, 'pinch', 'her', flip=True))
+    """her hand (from the right) holds the spoon by its handle; the spoon's edge presses down through the end slice."""
+    e = P(SLICE_O)
+    bowl = (e[0] + 30, e[1] - 10)
+    end = (bowl[0] + 940 * math.cos(math.radians(-14)), bowl[1] + 940 * math.sin(math.radians(-14)))
+    grip = (bowl[0] + 560 * math.cos(math.radians(-14)), bowl[1] + 560 * math.sin(math.radians(-14)))
+    crunch = f'<path d="M{e[0] - 80} {e[1] - 70}l-40-40M{e[0] - 20} {e[1] - 100}l-6-56M{e[0] - 120} {e[1] - 10}l-56-10" stroke="#fff6de" stroke-width="10" stroke-linecap="round"/>'
+    return svg(counter() + katsu_plate() + crunch + cel(spoon(bowl[0], bowl[1], end[0], end[1], 208) + hand_at((grip[0], grip[1] - 20), 166, HS_K, 'grip', 'her', flip=True), 'k', (30, 50), .22))
 
 
 def katsu_pour():
-    g = f'<g transform="translate(-2580 -1156) scale(2.6)">{katsu_plate()}</g>'
-    return svg(counter() + g + '<path d="M620 560C640 500 900 490 960 560C980 620 860 650 760 640C680 634 610 610 620 560z" fill="#6a3414" stroke="#3a1a08" stroke-width="10"/><path d="M680 540c50-24 140-24 200-6" stroke="#e8862a" stroke-width="8" fill="none" stroke-linecap="round"/><ellipse cx="720" cy="570" rx="14" ry="8" fill="#fff"/>'
-               + boat(1380, 300, -30, 1.6, ROUX, (800, 560)))
+    c = 2.0; rice = P((440, 170)); d0 = (760, 480)
+    g = f'<g transform="{crop(c, rice, d0)}">{katsu_plate()}</g>'
+    pool = f'<path d="M{d0[0] - 140} {d0[1] + 20}C{d0[0] - 120} {d0[1] - 50} {d0[0] + 140} {d0[1] - 60} {d0[0] + 200} {d0[1] + 10}C{d0[0] + 220} {d0[1] + 70} {d0[0] + 100} {d0[1] + 100} {d0[0]} {d0[1] + 90}C{d0[0] - 80} {d0[1] + 84} {d0[0] - 150} {d0[1] + 60} {d0[0] - 140} {d0[1] + 20}z" fill="{ROUX[0]}" stroke="{ROUX[1]}" stroke-width="10"/><path d="M{d0[0] - 60} {d0[1] - 10}c50-24 140-24 200-6" stroke="{ROUX[2]}" stroke-width="8" fill="none" stroke-linecap="round"/><ellipse cx="{d0[0] - 40}" cy="{d0[1] + 20}" rx="14" ry="8" fill="#fff"/>'
+    return svg(counter() + g + pool + cel(boat(1460, 250, -30, 2.6, ROUX, (d0[0] + 40, d0[1] + 10)), 'k', (80, 140), .2))
 
 
-def katsu_piece(dip=0):
-    """the small piece she cut: crumb on top, the pink face toward us; dip = roux coat + drip length (0 = clean)."""
-    g = f'<path d="{bumpy([(-60, -40), (60, -46), (66, 40), (-54, 46)], step=18, bulge=7, seed=5)}" fill="#dc9c44" stroke="#8a4a16" stroke-width="4"/>'
-    g += '<path d="M-50 -30L50 -36" stroke="#f7d27a" stroke-width="10" stroke-linecap="round"/>'
-    g += ''.join(f'<circle cx="{x}" cy="{y}" r="5" fill="{c}"/>' for x, y, c in [(-30, -10, '#a8641e'), (0, 6, '#f3c66e'), (30, -14, '#a8641e'), (-10, 26, '#f3c66e'), (36, 20, '#a8641e')])
-    g += '<path d="M-44 20H50L54 50H-40z" fill="#f4b8b0" stroke="#b8702a" stroke-width="7" stroke-linejoin="round"/><path d="M-30 34H40" stroke="#fbe2d6" stroke-width="4"/>'
-    if dip:
-        base, dark, hi = ROUX
-        g += f'<path d="M-4 -44C30 -40 64 -30 66 40L54 50C30 60 0 60 -20 50C-10 20 -20 -10 -4 -44z" fill="{base}" stroke="{dark}" stroke-width="3"/><path d="M20 -30c14 6 26 16 30 30" stroke="{hi}" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="18" cy="-18" rx="7" ry="4" fill="#ffffff"/>'
-        if dip > 1:
-            g += f'<path d="M30 54C34 {54 + dip * .5} 26 {54 + dip * .8} 30 {54 + dip}C38 {54 + dip * 1.1} 44 {54 + dip * .8} 40 54z" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="34" cy="{58 + dip * 1.05}" rx="11" ry="14" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="30" cy="{52 + dip * 1.05}" rx="3" ry="4" fill="#ffffff"/>'
-    return g
+CLOSE = (1.0, (170 + 150 * 1350 / 520, 110 + 200 * 1350 / 520), (760, 540))   # the roux, left half of the plate
 
 
 def katsu_close():
-    """ECU: she dips the cut piece in the roux on the plate; the roux strings off it."""
-    g = f'<g transform="translate(-600 -1100) scale(3.2)">{katsu_plate(cut=True)}</g>'
-    return svg(counter() + g + '<ellipse cx="800" cy="600" rx="120" ry="28" fill="#3a1a08" opacity=".5"/>' + hand(1049, 744, 180 + 18, 1.7, 'pinch', 'her', flip=True, held=f'<g transform="translate(180 -80) rotate(180) scale(1.1 -1.1)">{katsu_piece(60)}</g>'))
+    """ECU: she dips the cut slice (the same slice) in the roux; the roux strings off it."""
+    c, s0, d0 = CLOSE
+    g = f'<g transform="{crop(c, s0, d0)}">{katsu_plate(cut=True)}</g>'
+    ring = f'<ellipse cx="{d0[0] - 30}" cy="{d0[1] + 30}" rx="130" ry="30" fill="none" stroke="{ROUX[2]}" stroke-width="7" opacity=".8"/>'
+    tip = (d0[0] - 30, d0[1] + 30); L = 72 * PK_K * HS_K * c; t = math.radians(115)
+    pin = (tip[0] - L * math.cos(t), tip[1] - L * math.sin(t))
+    return svg(counter() + g + ring + cel(hand_at(pin, 135, HS_K * c, 'pinch', 'her', flip=True, held=held_piece(katsu_piece(40, 'c'), PK_K, aim(135, 115, True), KGRIP), on_top=True), 'k', (80, 120), .2))
 
 
 def katsu_feed():
-    return svg(feed_pov(ROUX, f'<g transform="translate(180 -84) rotate(14)">{katsu_piece(40)}</g>', '', 'open'))
+    return svg(feed_pov(ROUX, katsu_piece(30, 'f'), 'open', PK_K, KGRIP, True, (150, -50)))
 
 
 def katsu_bite():
-    return svg(feed_pov(ROUX, '', f'<g transform="translate(200 -84) rotate(2)">{katsu_piece(1)}</g>', 'bite'))
+    return svg(feed_pov(ROUX, katsu_piece(1, 'b'), 'bite', PK_K, KGRIP, True, (150, -50)))
 
 
 def katsu_water():
