@@ -34,18 +34,15 @@
 .sa-handout-box svg { display: block; width: 100%; height: auto; overflow: visible; }
 .sa-handout-box .sa-food:focus { outline: none; }
 .sa-handout-box .sa-food:focus-visible > * { outline: 6px solid #fff; }
-.sa-food-tag, .sa-other { position: absolute; display: inline-flex; align-items: center; gap: 14px; pointer-events: auto; cursor: pointer;
-  padding: 12px 24px 12px 14px; border: 5px solid var(--rim); border-radius: 999px; background: var(--box); color: var(--box-ink);
-  box-shadow: inset 0 0 0 3px #fff, 0 8px 0 var(--edge); font: 800 40px/1 var(--btn); letter-spacing: .01em; white-space: nowrap; }
-.sa-food-tag kbd, .sa-other kbd { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%;
-  background: #a8206f; color: #fff; font: 900 32px/1 var(--btn); }
-.sa-food-tag .db-chip, .sa-other .db-chip { position: static; transform: none; font-size: 28px; }
-.sa-food-tag.right { left: 1350px; top: 432px; }
-.sa-food-tag.left { right: 1350px; top: 530px; }
-.sa-food-tag.hot { border-color: #ff5fa2; box-shadow: inset 0 0 0 3px #fff, 0 0 0 6px #fff, 0 8px 0 var(--edge); }
-.sa-food-tag .db-deftag { position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%); }
-.sa-other { right: 1350px; top: 640px; padding: 8px 20px 8px 10px; font-size: 32px; border-color: #6152cf; background: #efeaff; color: #2a1a55; }
-.sa-other kbd { width: 42px; height: 42px; font-size: 26px; background: #6152cf; }
+/* R6: the food picks = the normal .db-choice buttons (same gradient, rim, chip, default tag), a smaller size */
+.db-choice.sa-mini { position: absolute; pointer-events: auto; width: 440px; min-height: 100px; padding: 14px 26px 18px; font-size: 40px; }
+.db-choice.sa-mini .db-chip { font-size: 28px; top: -28px; }
+.db-choice.sa-mini .db-deftag { bottom: -30px; font-size: 24px; }
+.db-choice.sa-mini.right { left: 1340px; top: 440px; }
+.db-choice.sa-mini.left { right: 1340px; top: 530px; }
+.db-choice.sa-mini.left.rest0 { top: 690px; }
+.db-choice.sa-mini.left.rest1 { top: 820px; }
+.db-choice.sa-mini.hot { outline: 6px solid #fff; outline-offset: 10px; }
 .sa-timebar.db-timebar { position: absolute; left: 90px; right: auto; top: 450px; width: 480px; }
 
 /* ---------- the smile tag: the love pick drawn where NEXT sits ---------- */
@@ -54,4 +51,3 @@
 /* the tag is wider than NEXT: the line wraps before it instead of running under it */
 .db-say:has(.sa-smile) { padding-right: 400px; }
 /* the food tags' love chip: the HUD pink (#ffa6d6) under white text is 1.8:1, so the tags use her deep pink */
-.sa-food-tag .db-chip.up, .sa-other .db-chip.up { background: #a8206f; }

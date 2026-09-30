@@ -12,8 +12,6 @@
 .shot-face { position: absolute; inset: 0; width: 1920px; height: 1080px; }
 .shot-bars::before, .shot-bars::after { content: ''; position: absolute; left: 0; right: 0; height: 96px; background: #0c0612; }
 .shot-bars::before { top: 0; } .shot-bars::after { bottom: 0; }
-.shot-card { fill: #fffaf2; stroke: #4a1f3a; stroke-width: 8px; }
-.shot-card-in { fill: none; stroke: #ffb6d9; stroke-width: 6px; stroke-dasharray: 18 12; }
 .shot-cap { font: 400 64px/1 'Yellowtail', cursive; fill: #fff; stroke: #b0123e; stroke-width: 10px; paint-order: stroke fill; }
 .shot-jp { font: 900 44px/1 var(--jp-serif, serif); fill: #4a1f3a; }
 .shot-pov-edge { position: absolute; inset: 0; box-shadow: inset 0 0 240px 80px rgba(20, 8, 30, .7); border-radius: 50% / 40%; }

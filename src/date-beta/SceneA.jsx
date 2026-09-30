@@ -34,12 +34,15 @@ export function Handout({ choices, map, on = [], onPick, left = null, total = nu
   const timed = left != null && total > 0;
   const over = (e) => setHot(e.target.closest?.('[data-food]')?.dataset.food ?? null);
   const label = (f) => `${idx[f] + 1}: ${fill(choices[idx[f]].plain)}`;
-  const pill = (f, cls) => {
-    const i = idx[f], c = choices[i];
+  // R6 (Tony): the food picks are the SAME choice buttons as every other beat (db-choice + side colour + chip + default tag), only smaller.
+  const btn = (i, cls, text, f = null) => {
+    const c = choices[i];
     return (
-      <button type="button" tabIndex={-1} aria-hidden="true" className={`sa-food-tag ${cls}${hot === f ? ' hot' : ''}${timed && i === def ? ' is-default' : ''}`}
-        onClick={(e) => { e.stopPropagation(); onPick(i); }} onPointerEnter={() => setHot(f)} onPointerLeave={() => setHot(null)}>
-        <kbd>{i + 1}</kbd><span className="name">{FOOD_OF[f]}</span><LoveChip love={c.love} hidden={hidden} />
+      <button type="button" key={i} className={`db-choice ${c.side} sa-mini ${cls}${f && hot === f ? ' hot' : ''}${timed && i === def ? ' is-default' : ''}`}
+        disabled={on[i] === false} aria-label={`${i + 1}: ${fill(c.plain)}`}
+        onClick={(e) => { e.stopPropagation(); onPick(i); }} onPointerEnter={f ? () => setHot(f) : undefined} onPointerLeave={f ? () => setHot(null) : undefined}>
+        <LoveChip love={c.love} hidden={hidden} />
+        <span className="line">{text}</span>
         {timed && i === def && <span className="db-deftag">default</span>}
       </button>
     );
@@ -64,14 +67,9 @@ export function Handout({ choices, map, on = [], onPick, left = null, total = nu
           <span className="db-timer">{Math.ceil(left)}</span>
         </div>
       )}
-      {pill('tama', 'right')}
-      {pill('ume', 'left')}
-      {rest.map((i) => (
-        <button type="button" key={i} className={`sa-other ${choices[i].side}`} disabled={on[i] === false} aria-label={`${i + 1}: ${fill(choices[i].plain)}`}
-          onClick={(e) => { e.stopPropagation(); onPick(i); }}>
-          <kbd>{i + 1}</kbd><span className="line"><Parts parts={choices[i].parts} /></span><LoveChip love={choices[i].love} hidden={hidden} />
-        </button>
-      ))}
+      {btn(idx.tama, 'right', FOOD_OF.tama, 'tama')}
+      {btn(idx.ume, 'left', FOOD_OF.ume, 'ume')}
+      {rest.map((i, k) => btn(i, `left rest${k}`, <Parts parts={choices[i].parts} />))}
     </div>
   );
 }

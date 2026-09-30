@@ -8,7 +8,7 @@ import { rng } from '../util.js';
 const f = (n) => Math.round(n * 10) / 10;
 
 // one commuter silhouette as path data (feet at x, y). kind: coat | skirt | pack | bag | phone | bun
-function body(x, y, h, kind, flip = 1) {
+export function body(x, y, h, kind, flip = 1) {
   const hw = h * 0.13, hem = kind === 'coat' ? 0.3 : kind === 'skirt' ? 0.36 : 0.44, sh = y - h * 0.83, hy = y - h * hem;
   const head = `M${f(x - h * 0.068)} ${f(y - h * 0.92)}a${f(h * 0.068)} ${f(h * 0.078)} 0 1 0 ${f(h * 0.136)} 0a${f(h * 0.068)} ${f(h * 0.078)} 0 1 0 ${f(-h * 0.136)} 0Z`;
   const neck = `M${f(x - h * 0.03)} ${f(y - h * 0.86)}h${f(h * 0.06)}v${f(h * 0.05)}h${f(-h * 0.06)}Z`;
@@ -142,4 +142,28 @@ export function scatter(seed, n, [xa, xb], [y0, y1], [hMin, hMax]) {
     const t = r();
     return [f(xa + r() * (xb - xa)), f(y0 + t * (y1 - y0)), f(hMin + t * (hMax - hMin))];
   }).sort((a, b) => a[1] - b[1]);
+}
+
+// R6 (Tony): the station silhouettes, re-used for a street crowd, each person in their own clothes colour
+// (coat / skirt / pack), a darker head + legs, a soft straight-down contact shadow (overcast), seeded = static.
+const CLOTHES = ['#c8414b', '#3a5fa8', '#e0a33a', '#4f8a5b', '#8a5aa8', '#e7e2d6', '#2f3a48', '#d9738f', '#5aa0b8', '#7a5a3a', '#b8b0a0', '#1f2530'];
+export function ColorCrowd({ seed, people, skin = '#2a2230', op = 1, wash = null }) {
+  const r = rng(seed);
+  const ps = people.map(([x, y, h], i) => ({ x, y, h, kind: KINDS[(i + Math.floor(r() * 8)) % 8], flip: r() > 0.5 ? 1 : -1, c: CLOTHES[Math.floor(r() * CLOTHES.length)] }));
+  const id = `r6c-${seed}`;
+  return (
+    <g className="r6-crowd" aria-hidden="true" opacity={op}>
+      <defs>
+        {ps.map((p, i) => <clipPath key={i} id={`${id}-${i}`}><rect x={f(p.x - p.h)} y={f(p.y - p.h * 0.84)} width={f(p.h * 2)} height={f(p.h * 0.52)} /></clipPath>)}
+      </defs>
+      {ps.map((p, i) => (
+        <g key={i}>
+          <ellipse cx={p.x} cy={p.y} rx={f(p.h * 0.16)} ry={f(p.h * 0.03)} fill="#1a1410" opacity=".3" />
+          <path d={body(p.x, p.y, p.h, p.kind, p.flip)} fill={skin} />
+          <path d={body(p.x, p.y, p.h, p.kind, p.flip)} fill={p.c} clipPath={`url(#${id}-${i})`} />
+        </g>
+      ))}
+      {wash && <rect width="1920" height="1080" fill={wash} opacity=".12" style={{ mixBlendMode: 'multiply' }} />}
+    </g>
+  );
 }

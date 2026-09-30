@@ -4,6 +4,7 @@
 // (skewY = the facade slope toward the street VP). One soft, straight-down contact shadow (overcast / open shade).
 // HUD band: no text above y 140. The dialogue box starts near y 780, so the front text sits in y 140-760.
 import { TownScene } from './Town.jsx';
+import { ColorCrowd, scatter } from '../r3-station/Crowd.jsx';
 import { traceUrl } from '../romance/Grade.jsx';
 import { FrontDefs, front, Tate, Board, Nobori, Walker, NEON as N, LINE } from '../sandwich.jsx';
 
@@ -67,6 +68,10 @@ export function TownCrossingSW() {
         <Board x={1380} y={590} w={440} h={80} bg={W} rim={N.pink} lines={[['メイド・イン・NAND', 34, N.pink]]} />
         <Board x={200} y={560} w={240} h={70} bg={N.yellow} lines={[['まんが 中古', 36, N.red]]} />
       </g>
+      {/* R6 (Tony): "so many people" = a real crowd: the station silhouettes in mixed clothes, back (small) + front (big),
+          Nanda's centre (x 700-1220) left clear so she stays readable */}
+      <ColorCrowd seed={61} op={0.92} people={[...scatter(611, 16, [0, 690], [760, 820], [150, 190]), ...scatter(612, 16, [1230, 1920], [760, 820], [150, 190])].sort((a, b) => a[1] - b[1])} />
+      <ColorCrowd seed={62} people={[...scatter(621, 6, [-40, 640], [930, 1060], [300, 380]), ...scatter(622, 6, [1280, 1960], [930, 1060], [300, 380])].sort((a, b) => a[1] - b[1])} />
     </TownScene>
   );
 }

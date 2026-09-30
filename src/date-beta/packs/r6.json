@@ -1,0 +1,124 @@
+{
+ "name": "r6",
+ "notes": [
+  "R6 umeboshi critic pass (Tony 09-30, research/sprint-0930/r6/CRITIC.md + LINES-CHANGED.md). Applied LAST (after r5).",
+  "v2-park 4 (the 'Two pairs of shoes walk out of the park' feet insert) is cut: the errand pick routes straight on (groceries -> v2-shop, the book -> v2-library).",
+  "v2-shop 0 + 2: say plainly that you are there to SHOP: her list = what you buy.",
+  "v2-curry 13 -> v2-train 0: the clock runs in order (3:40 out of the curry shop, a walk, 4:30 at her station); train 0 is on the station bg (no black match-cut void)."
+ ],
+ "patch": [
+  {
+   "scene": "v2-park",
+   "beat": 3,
+   "choice": 0,
+   "set": {
+    "go": [
+     {
+      "if": {
+       "errand": "groceries"
+      },
+      "to": "v2-shop"
+     },
+     {
+      "to": "v2-library"
+     }
+    ]
+   }
+  },
+  {
+   "scene": "v2-park",
+   "beat": 3,
+   "choice": 1,
+   "set": {
+    "go": [
+     {
+      "if": {
+       "errand": "groceries"
+      },
+      "to": "v2-shop"
+     },
+     {
+      "to": "v2-library"
+     }
+    ]
+   }
+  },
+  {
+   "scene": "v2-park",
+   "beat": 3,
+   "choice": 2,
+   "set": {
+    "go": [
+     {
+      "if": {
+       "errand": "groceries"
+      },
+      "to": "v2-shop"
+     },
+     {
+      "to": "v2-library"
+     }
+    ]
+   }
+  },
+  {
+   "scene": "v2-park",
+   "beat": 4,
+   "remove": true
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 0,
+   "set": {
+    "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you into a shop. You are here to buy her groceries."
+   }
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 2,
+   "set": {
+    "text": "We are here to shop. You buy what is on my list: carrots, eggs, three cups. And you. ♡"
+   },
+   "props": {
+    "cut": {
+     "frame": "medium",
+     "face": "anya-smile",
+     "at": "And you",
+     "step": 900,
+     "face2": "heart-laugh"
+    }
+   }
+  },
+  {
+   "scene": "v2-curry",
+   "beat": 13,
+   "set": {
+    "text": "We walk out of the curry shop. It is 3:40 PM. Lunch is done. Now we walk to her station."
+   }
+  },
+  {
+   "scene": "v2-train",
+   "beat": 0,
+   "set": {
+    "bg": "station-gate-r3",
+    "text": "4:30 PM. We walked a long way. Now we are at her station. She takes your hand. 'Now we go to MY home. On MY train.'",
+    "props": {
+     "shot": "stamp",
+     "place": "STATION",
+     "time": "4:30 PM",
+     "cut": {
+      "face": "heart-laugh",
+      "reach": true
+     }
+    }
+   }
+  },
+  {
+   "scene": "v2-train",
+   "beat": 1,
+   "set": {
+    "text": "The station is full. Everyone is going home."
+   }
+  }
+ ]
+}

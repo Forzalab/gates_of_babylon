@@ -425,10 +425,20 @@ def feed_pov(food, kind, mode, uid):
 
 # ---------------------------------------------------------------- a gravy boat (steel), tilted, pouring a ribbon
 def boat(x, y, rot, s, food, ribbon_to):
+    """R6 physics fix (Tony: curry 7): the ribbon leaves the SPOUT (not the boat's belly) and FALLS: it drops almost
+    straight down into the katori (a little forward drift from the tilt), thinning as it falls, a ripple where it lands.
+    The boat is placed from the target: its spout sits ~260 px above the landing point. Returns the boat markup; x, y are
+    ignored for the position (kept for the call sites) but rot / s still set the tilt + size."""
     base, dark, hi = food
     tx, ty = ribbon_to
-    g = f'<path d="M{x - 40} {y + 30}C{x - 70} {(y + ty) / 2} {tx - 40} {ty - 120} {tx - 30} {ty}L{tx + 30} {ty}C{tx + 20} {ty - 140} {x - 10} {(y + ty) / 2 + 20} {x + 10} {y + 40}z" fill="{base}" stroke="{dark}" stroke-width="4"/>'
-    g += f'<path d="M{x - 38} {y + 60}C{x - 56} {(y + ty) / 2} {tx - 30} {ty - 130} {tx - 20} {ty - 40}" stroke="{hi}" stroke-width="9" fill="none" stroke-linecap="round"/>'
+    import math as _m
+    c, sn = _m.cos(_m.radians(rot)), _m.sin(_m.radians(rot))
+    spx, spy = (-110 * c + 30 * sn) * s, (-110 * sn - 30 * c) * s      # the spout tip, relative to the boat origin
+    sx, sy = tx + 34, ty - 260                                        # the spout: above the landing point
+    x, y = round(sx - spx), round(sy - spy)
+    g = f'<path d="M{sx - 16:.0f} {sy - 4:.0f}C{sx - 22:.0f} {sy + 70:.0f} {tx - 8:.0f} {ty - 140:.0f} {tx - 9:.0f} {ty:.0f}L{tx + 9:.0f} {ty:.0f}C{tx + 10:.0f} {ty - 140:.0f} {sx + 10:.0f} {sy + 70:.0f} {sx + 12:.0f} {sy + 2:.0f}z" fill="{base}" stroke="{dark}" stroke-width="4"/>'
+    g += f'<path d="M{sx - 8:.0f} {sy + 20:.0f}C{sx - 12:.0f} {sy + 90:.0f} {tx - 3:.0f} {ty - 120:.0f} {tx - 3:.0f} {ty - 30:.0f}" stroke="{hi}" stroke-width="5" fill="none" stroke-linecap="round"/>'
+    g += f'<ellipse cx="{tx:.0f}" cy="{ty + 4:.0f}" rx="46" ry="12" fill="none" stroke="{hi}" stroke-width="5"/><ellipse cx="{tx:.0f}" cy="{ty + 2:.0f}" rx="20" ry="6" fill="{dark}" opacity=".5"/>'
     g += f'<g transform="translate({x} {y}) rotate({rot}) scale({s})">'
     g += '<path d="M-60 -40C-40 60 160 70 200 -40z" fill="#b9bfc8" stroke="#5a616b" stroke-width="5"/>'
     g += '<path d="M60 20C120 20 170 0 190 -30L200 -40C160 30 100 50 60 40z" fill="#8e96a1"/>'

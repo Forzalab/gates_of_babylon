@@ -58,7 +58,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'r6', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -311,6 +311,9 @@ function Player() {
   const fplane = focus && !end && frame === 'medium' && flo.y && flo.y < UNDER_BOX && (here || speaksNanda(beat.line)) ? flo.y : 0;
   // outdoor rain (fx/rain.js): props.rain level, else the bg's default; keyed per beat so the wet marks re-measure
   const rain = !pos.done && !end ? rainOf(beat) : null;
+  // R6 (Tony: rain 1 react): once you step under her umbrella (a liked pick on an umbrella beat), the reaction is seen from
+  // UNDER it, the same near-lens canopy as beats 2-4 (and her own umbrella cel goes, so there is one umbrella, not two).
+  const shared = !!(beat.react && beat.props?.umbrella && (beat.react.love ?? 0) > 0);
   const rainKey = `${beat.scene}:${beat.index}:${beat.react ? 'r' : ''}:${!!beat.choices}`;
   const hint = (waiting || solo) && !paused; // only where a click does something (never on choice or auto beats)
   const closeTree = useCallback(() => setTree(false), []);
@@ -350,7 +353,7 @@ function Player() {
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
-        {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !(off && !end) && frame === 'medium'} under={!!beat.props?.underUmbrella && !end} stageRef={stageRef} beatKey={rainKey} />}
+        {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !shared && !(off && !end) && frame === 'medium'} under={(!!beat.props?.underUmbrella || shared) && !end} stageRef={stageRef} beatKey={rainKey} />}
         {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
