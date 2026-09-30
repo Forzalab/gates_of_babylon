@@ -1,0 +1,153 @@
+{
+ "note": "Preview scene for art/shots: ?pack=shots-demo&scene=shots-demo&beat=<n>&still. Not part of the shipped order.",
+ "scenes": [
+  {
+   "id": "shots-demo",
+   "title": "Shots demo",
+   "bg": "closeup",
+   "beats": [
+    {
+     "bg": "closeup",
+     "props": {
+      "of": "shop-street",
+      "x": 1300,
+      "y": 420,
+      "zoom": 2.4,
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "closeup",
+     "props": {
+      "of": "rail-crossing",
+      "x": 700,
+      "y": 500,
+      "zoom": 1.8
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "curry",
+      "of": "crossing-day",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "butter-chicken",
+      "of": "crossing-day",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "katsu",
+      "of": "crossing-day",
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "book",
+      "of": "rail-crossing",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "grocery",
+      "of": "shop-street",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "teacup",
+      "of": "street-dusk",
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "bento",
+      "of": "rooftop",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "heart",
+      "of": "street-day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "hearts",
+      "of": "street-dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "sweat",
+      "of": "shop-street"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "or",
+      "of": "crossing-night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "hate",
+      "of": "crossing-night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "establish",
+     "props": {
+      "of": "crossing-night",
+      "from": [
+       500,
+       500
+      ],
+      "to": [
+       1400,
+       420
+      ],
+      "zoom": 1.5,
+      "tone": "night"
+     },
+     "text": ""
+    }
+   ]
+  }
+ ]
+}

@@ -21,8 +21,9 @@ import './art.css';
 // splash = the old fake-site START page: kept registered (Tony may reuse it), no scene points at it any more.
 // naan-platform = the same station under its own name (alt's notes call it that); the naan scene uses `naan`.
 import { ROMANCE } from './romance/index.js';
+import { SHOTS } from './shots/index.js'; // camera tricks over these ids (closeup / insert / reaction / establish)
 // park: no art yet, falls back to the rooftop (sakura-free sky) so it never renders a grey box.
-export const ART = { ...ROMANCE, park: Rooftop, splash: Splash, rooftop: Rooftop, train: Train, naan: NaanPlatform, 'naan-platform': NaanPlatform, blackout: Blackout, basement: Basement,
+export const ART = { ...ROMANCE, ...SHOTS, park: Rooftop, splash: Splash, rooftop: Rooftop, train: Train, naan: NaanPlatform, 'naan-platform': NaanPlatform, blackout: Blackout, basement: Basement,
   platform: Platform, underpass: Underpass, apartment: ApartmentExt, stairs: Stairs, 'genkan-in': GenkanArrival,
   // fallback art for missing BG files (fallbacks.js maps the ids here)
   door: Door, genkan: Genkan, teatable: TeaTable, cafe: Cafe };

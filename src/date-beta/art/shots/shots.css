@@ -1,0 +1,19 @@
+/* shots/: camera tricks. The camera is a plain transform (no transition: moves are stepped). */
+.shot { overflow: hidden; background: #1a1024; }
+.shot-cam { position: absolute; inset: 0; overflow: hidden; }
+.shot-cam-in { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+.shot-cam-in > .art, .shot-cam-in > svg { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.shot-void { position: absolute; inset: 0; background: linear-gradient(#ffd2e6, #ffe6c2); }
+.shot-blur { filter: blur(14px) brightness(.8) saturate(1.2); }
+:root[data-lowfx] .shot-blur { filter: brightness(.6); }
+.shot-vig { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(26, 12, 40, .55) 100%); }
+.shot-grade { pointer-events: none; }
+.shot-wash { position: absolute; inset: 0; mix-blend-mode: multiply; }
+.shot-face { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.shot-bars::before, .shot-bars::after { content: ''; position: absolute; left: 0; right: 0; height: 96px; background: #0c0612; }
+.shot-bars::before { top: 0; } .shot-bars::after { bottom: 0; }
+.shot-card { fill: #fffaf2; stroke: #4a1f3a; stroke-width: 8px; }
+.shot-card-in { fill: none; stroke: #ffb6d9; stroke-width: 6px; stroke-dasharray: 18 12; }
+.shot-cap { font: 400 64px/1 'Yellowtail', cursive; fill: #b0123e; }
+.shot-jp { font: 900 44px/1 var(--jp-serif, serif); fill: #4a1f3a; }
+.reaction.emo-hate .shot-face, .reaction.emo-crack .shot-face { filter: saturate(.7) contrast(1.1); }
