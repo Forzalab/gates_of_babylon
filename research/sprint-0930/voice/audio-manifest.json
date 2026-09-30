@@ -138,5 +138,12 @@
   "beat": "2 R−",
   "file": "public/date-beta/voice/05-v2-curry/030_2-r.mp3",
   "text": "[sudden flat][quiet] Then you watch me… [sweet] eat."
+ },
+ {
+  "n": 31,
+  "scene": "v2-curry",
+  "beat": "4",
+  "file": "public/date-beta/voice/05-v2-curry/031_4.mp3",
+  "text": "[sweet][close] Feed me. [whispers] With your hand. [perfectly even] Not the spoon. [whispers, slower] Your hand."
  }
 ]
