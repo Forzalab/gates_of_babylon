@@ -158,13 +158,18 @@ body { font-family: var(--cond); color: var(--ink); }
   filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)); animation: nanda-in 320ms ease-out both; }
 /* feet on the floor; lifted above the raised box only on choice beats */
 .db-nanda.raised { bottom: 470px; }
-/* train-r4: props.cut.plant = px she is lowered so her shoes sit ON the platform floor (not hovering); .db-plant = her contact
-   shadow, offset down-left (the light is upper right), under her feet. Shoes are ~25 px above the sprite box bottom. */
+/* props.cut.plant = px she is lowered from her default spot (explicit, per beat). .floored = the per-bg / per-insert floor
+   line (art/floors.js, --floor = stage y of the ground at her column): her feet sit ON it whatever the box does.
+   .db-plant = her contact shadow, GLOBAL (research/sprint-0930/town/SHADOWS.md, float-audit/REPORT.md): straight under her
+   feet (centred on her column, x 960), soft radial, no offset / rotation, and no z-index, so it paints in DOM order:
+   BEHIND her sprite and BEHIND the dialogue box, never over them. */
 .db-nanda.planted { bottom: calc(160px - var(--plant)); }
 .db-nanda.planted.raised { bottom: calc(470px - var(--plant)); }
-.db-plant { position: absolute; left: 745px; bottom: calc(160px - var(--plant) - 4px); width: 290px; height: 36px; border-radius: 50%;
-  background: rgba(24, 12, 22, .42); z-index: 1; pointer-events: none; transform: rotate(-3deg); }
+.db-nanda.floored, .db-nanda.floored.raised { bottom: calc(1080px - var(--floor) - 4px); }
+.db-plant { position: absolute; left: 820px; bottom: calc(160px - var(--plant) - 4px); width: 280px; height: 34px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(24, 12, 22, .42), rgba(24, 12, 22, .22) 55%, rgba(24, 12, 22, 0)); pointer-events: none; }
 .db-plant.raised { bottom: calc(470px - var(--plant) - 4px); }
+.db-plant.floored { bottom: calc(1080px - var(--floor) - 17px); }
 /* OBBP: centred in play; back on the right while a modal card (goal card, end card) is up */
 .db-nanda { right: auto; left: 730px; }
 .stage.is-goal .db-nanda, .hud-scrim ~ .db-nanda { left: auto; right: 60px; }
@@ -172,8 +177,7 @@ body { font-family: var(--cond); color: var(--ink); }
    the buildings' open shade; 05 / 07: overcast), so her contact shadow sits straight UNDER her feet (centred on her
    column, x 960), soft-edged, cool open-shade ink, and paints BEHIND her sprite and the box (no z-index), never over
    them. Her body drop-shadow is the same softness (no hard 12 px offset). */
-.stage[data-bg^="town-"] .db-plant { z-index: auto; left: 820px; width: 280px; height: 34px; transform: none;
-  background: radial-gradient(closest-side, rgba(34, 38, 62, .42), rgba(34, 38, 62, .22) 55%, rgba(34, 38, 62, 0)); }
+.stage[data-bg^="town-"] .db-plant { background: radial-gradient(closest-side, rgba(34, 38, 62, .42), rgba(34, 38, 62, .22) 55%, rgba(34, 38, 62, 0)); }
 .stage[data-bg^="town-"] .db-nanda { filter: drop-shadow(0 4px 6px rgba(34, 38, 62, .22)); }
 .db-book { pointer-events: none; }
 @keyframes nanda-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }

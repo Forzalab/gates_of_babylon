@@ -6,6 +6,7 @@ import { readFileSync, existsSync, statSync } from 'node:fs';
 import { loadScenes } from './date-beta/engine.js';
 import { applyPacks } from './date-beta/packs/index.js';
 import { ART_NAMES } from './date-beta-art-names.js';
+import { FLOORS } from './date-beta/art/floors.js';
 
 const read = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
 const src = (p) => readFileSync(new URL(p, import.meta.url), 'utf8');
@@ -41,7 +42,7 @@ test('town beats: 3-5, the AKIBA 2:45 PM stamp, 3 shots, a different face per Na
   const her = beats.filter((b) => b.speaker === 'NANDA');
   const faces = her.map((b) => b.props.cut.face);
   assert.equal(new Set(faces).size, her.length, 'one face per beat');
-  for (const b of her) { assert.equal(b.props.cut.frame, 'medium'); assert.ok(b.props.cut.plant > 0, 'planted, not floating'); }
+  for (const b of her) { assert.equal(b.props.cut.frame, 'medium'); assert.ok(b.props.cut.plant > 0 || FLOORS[b.bg]?.y > 0, 'planted (cut.plant or an art/floors.js floor), not floating'); }
   for (const b of her) assert.ok(b.text.split(/[.!?]\s/).length <= 4 && b.text.length <= 60, b.text);
   assert.match(her.at(-1).text, /cute/);
 });
@@ -68,6 +69,8 @@ test('town pure: live traces are the pure vtrace, the hybrids stay exported, cel
   const jsx = src('./date-beta/art/town/Town.jsx');
   assert.ok(jsx.includes('オア電') && jsx.includes('ゲートちゃん'));
   const css = src('./date-beta/beta.css');
-  assert.match(css, /\.stage\[data-bg\^="town-"\] \.db-plant \{ z-index: auto;[^}]*transform: none;/);
+  // the contact shadow rule is global now (no z-index, no rotation: behind her + the box, straight under her feet)
+  const plant = /\n\.db-plant \{[^}]*\}/.exec(css)[0];
+  assert.ok(!/z-index|transform/.test(plant), plant);
 });
 

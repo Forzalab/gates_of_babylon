@@ -18,7 +18,7 @@
         { "speaker": "NANDA", "text": "Wow! A giant oshi board. Oshi means \"my favorite.\"", "bg": "town-board",
           "props": { "cut": { "frame": "medium", "face": "big-eyes-peek", "plant": 90 } } },
         { "speaker": "NANDA", "text": "But not one of them is as cute as me. Right?", "bg": "town-board",
-          "props": { "cut": { "frame": "medium", "face": "heart-laugh", "plant": 90 } },
+          "props": { "cut": { "frame": "medium", "face": "heart-laugh" } },
           "choices": [{ "text": "Walk to lunch", "go": "v2-curry" }] }
       ]
     }
