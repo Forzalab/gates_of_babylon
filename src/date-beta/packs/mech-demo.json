@@ -1,0 +1,21 @@
+{
+  "note": "T5 preview scene for shots: ?pack=mech-demo&scene=mech-demo&beat=<0|1|2>. Not part of the shipped order.",
+  "scenes": [
+    { "id": "mech-demo", "title": "Mech demo", "bg": "rooftop", "nanda": true, "beats": [
+      { "text": "NANDA: What do you want to eat?", "timer": 15, "choices": [
+        { "text": "Butter chicken", "love": 3, "fx": "love-burst" },
+        { "text": "Katsu curry", "love": 0, "default": true },
+        { "text": "I am not hungry", "love": -3, "fx": "hate-quake" }
+      ] },
+      { "text": "NANDA: Ready to go?", "choices": [
+        { "text": "Open the hatch", "love": 1 },
+        { "text": "Stay right here", "fake": true }
+      ] },
+      { "text": "NANDA: Say it.", "choices": [
+        { "text": "Kiss her cheek", "love": 2, "fx": "chosen-flash" },
+        { "text": "Say sorry", "love": 0 }
+      ] },
+      { "text": "The end of the demo." }
+    ] }
+  ]
+}

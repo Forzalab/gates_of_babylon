@@ -13,7 +13,7 @@ const pair = (a = {}, b = {}, beat = {}) =>
 test('date-beta contract: the shipped scenes validate against the manifest and art names', () => {
   assert.doesNotThrow(() => loadScenes(data, { manifest, art: ART_NAMES }));
   const roof = loadScenes(data).find((s) => s.id === 'rooftop').beats.find((b) => b.timer);
-  assert.equal(roof.timer, 10);
+  assert.equal(roof.timer, 12);
   assert.equal(timeoutPick(roof), 0);
 });
 
@@ -123,7 +123,7 @@ test('date-beta vary: load failures (missing variant, undeclared flag, unknown v
   assert.throws(() => loadScenes(flagged([{ choices: [{ text: 'a' }], vary: both({ choices: [] }, {}) }])), /vary\.bento\.umeboshi: "choices" cannot vary/);
   assert.throws(() => loadScenes(flagged([{ vary: both({ timer: 3 }, {}) }])), /"timer" cannot vary/);
   assert.throws(() => loadScenes(flagged([{ vary: both({ set: { x: 1 } }, {}) }])), /"set" cannot vary/);
-  assert.throws(() => loadScenes(flagged([{ vary: both({ text: 'one two three four five six seven eight nine ten eleven twelve thirteen' }, {}) }])), /umeboshi: text has 13 words/);
+  assert.throws(() => loadScenes(flagged([{ vary: both({ text: Array.from({ length: 31 }, (_, i) => 'w' + i).join(' ') }, {}) }])), /umeboshi: text has 31 words/);
   assert.throws(() => loadScenes(flagged([{ vary: both({ text: 'f{or}' }, {}) }])), /stray brace/);
   assert.throws(() => loadScenes(flagged([{ vary: both({ speaker: '' }, {}) }])), /speaker/);
   assert.throws(() => loadScenes(flagged([{ vary: both({ props: [1] }, {}) }])), /props must be an object/);

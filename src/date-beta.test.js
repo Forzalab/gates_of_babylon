@@ -30,7 +30,7 @@ test('date-beta loader: bg and props carry forward from beat to beat', () => {
 });
 
 test('date-beta loader: rejects a 13-word line, a motion beat without an RM alt, a duplicate id', () => {
-  assert.throws(() => loadScenes(tiny([{ text: 'one two three four five six seven eight nine ten eleven twelve thirteen' }])), /13 words/);
+  assert.throws(() => loadScenes(tiny([{ text: Array.from({ length: 31 }, (_, i) => 'w' + i).join(' ') }])), /31 words/);
   assert.throws(() => loadScenes(tiny([{ motion: true }])), /reduced-motion/);
   assert.throws(() => loadScenes({ scenes: [{ id: 'a', bg: 'x', beats: [{}] }, { id: 'a', bg: 'x', beats: [{}] }] }), /duplicate/);
   assert.throws(() => loadScenes({ scenes: [] }), /non-empty/);
@@ -124,6 +124,6 @@ test('date-beta choices: a choice beat waits for a pick; go jumps; validation', 
   assert.deepEqual(choose(scenes, p, 5), p, 'no such choice = no move');
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a', go: 'nope' }] }])), /unknown scene/);
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a' }, { text: 'b', side: 'pink' }] }])), /two choices/);
-  assert.throws(() => loadScenes(tiny([{ choices: [] }])), /1\.\.2/);
+  assert.throws(() => loadScenes(tiny([{ choices: [] }])), /1\.\.3/);
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a' }], auto: 900 }])), /auto-advance/);
 });

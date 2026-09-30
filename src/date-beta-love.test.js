@@ -38,7 +38,7 @@ test('love loader: love is a whole number -5..+5; emote / react / tell need a no
   assert.throws(() => loadScenes(one({ love: 1, emote: 'wink' })), /emote "wink" is not one of heart\|hearts\|sweat\|pout\|or\|crack/);
   assert.throws(() => loadScenes(one({ love: 1, tell: 'no' })), /tell must be true or false/);
   assert.throws(() => loadScenes(one({ love: 1, react: '' })), /react must be a non-empty string/);
-  assert.throws(() => loadScenes(one({ love: 1, react: 'one two three four five six seven eight nine ten eleven twelve thirteen' })), /react has 13 words, max 12/);
+  assert.throws(() => loadScenes(one({ love: 1, react: Array.from({ length: 31 }, (_, i) => 'w' + i).join(' ') })), /react has 31 words, max 30/);
   assert.throws(() => loadScenes({ flags: { bento: ['umeboshi', 'tamagoyaki'] }, ...one({ love: 1, react: 'You ate the umeboshi.' }) }), /react: "umeboshi" is an echo word/);
   assert.throws(() => loadScenes(one({ love: 1, react: 'f{or}ever' })), /stray brace/);
 });

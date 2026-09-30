@@ -25,6 +25,9 @@ export const PAL = {
   4: { body: '#1a0610', body2: '#2a0714', rim: '#f0243f', ink: '#f0243f', blush: 'none', lit: '#f0243f',
     hair: '#35263b', hair2: '#5a4660', hairhl: '#6b5570', col: '#3a0a18', col2: '#f0243f', stripe: '#f0243f', bow: '#b0102c', sock: '#c890a8',
     shoe: '#12040b', mood: '#f0243f', shadow: '#000000', dark: true },
+  // cold: her sweet palette drained to grey-violet, red only in the mood light
+  5: { ...SWEET, body: '#dcd9e8', body2: '#a9a3c0', rim: '#3a2a55', ink: '#1a1024', blush: 'none', lit: '#b7b0cf', bow: '#5a3a7a',
+    col: '#4a3d66', col2: '#2a2040', hair: '#b9b8cc', hair2: '#7d7a98', hairhl: '#dcdbe8', mood: '#f0243f' },
 };
 
 const heart = (x, y, s, f) => `<path d="${HEARTP}" transform="translate(${x} ${y}) scale(${s})" fill="${f}"/>`;
@@ -35,6 +38,11 @@ const pinClip = (x, y, rot, s, P) => `<g transform="translate(${x} ${y}) rotate(
 // ---- faces (face coords: origin = aleph face centre). 1-4 = the engine's stages, verbatim. sweat + pout = NEW.
 const blushOf = (P, op, hatch, rx = 7, ry = 3.6) => (P.blush === 'none' ? '' : `<ellipse cx="-21" cy="8" rx="${rx}" ry="${ry}" fill="${P.blush}" opacity="${op}"/><ellipse cx="17" cy="8" rx="${rx}" ry="${ry}" fill="${P.blush}" opacity="${op}"/>${hatch ? `<path d="M-25,6 l-2,4 M-21,6 l-2,4 M-17,6 l-2,4 M13,6 l-2,4 M17,6 l-2,4 M21,6 l-2,4" stroke="${P.ink}" stroke-width="1.1" stroke-linecap="round" opacity=".7"/>` : ''}`);
 const FACES = {
+  // NEW hate (angry, cold): flat dead eyes (bars), slanted brows, a flat mouth, a vein mark. No blush.
+  hate: (P, sw) => `<path d="M-19,-6 H-7 M5,-6 H17" stroke="${P.ink}" stroke-width="${sw + 1.2}" stroke-linecap="round"/>
+      <path d="M-20,-13 L-6,-9 M18,-13 L4,-9" stroke="${P.ink}" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M-7,12 H7" stroke="${P.ink}" stroke-width="${sw}" stroke-linecap="round"/>
+      <path d="M20,-20 l4,3 M24,-20 l-4,3" stroke="#f0243f" stroke-width="2" stroke-linecap="round"/>`,
   1: (P, sw) => `${blushOf(P, 0.55)}<ellipse cx="-13" cy="-7" rx="4.2" ry="6" fill="${P.ink}"/><circle cx="-11.5" cy="-9.5" r="1.5" fill="#fff"/>
       <path d="M5,-6 Q11,-13 17,-6" fill="none" stroke="${P.ink}" stroke-width="${sw}" stroke-linecap="round"/>
       <path d="M-7,10 Q0,18 7,10" fill="none" stroke="${P.ink}" stroke-width="${sw}" stroke-linecap="round"/>`,
@@ -77,6 +85,7 @@ const BUBBLES = {
   sweat: () => `${box(false)}<path d="${DROP}" transform="translate(4 -2) scale(1.9)" fill="#8fd3ff" stroke="#1f5f96" stroke-width="1.3" stroke-linejoin="round"/>
       <ellipse cx="-1" cy="4" rx="3" ry="5" fill="#fff" opacity=".85"/><path d="M-26,-14 l-8,-6 M-28,0 h-10" stroke="#1f5f96" stroke-width="3" stroke-linecap="round"/>`,
   // the anime anger mark, in her red
+  hate: () => `${box(true)}<g stroke="#f0243f" stroke-width="6" stroke-linecap="round" fill="none"><path d="M-14,-14 L14,14 M14,-14 L-14,14"/></g>`,
   pout: () => `${box(false)}<g stroke="#d1173f" stroke-width="5.5" stroke-linecap="round" fill="none" transform="translate(0 -2)">
       <path d="M-5,-17 Q-5,-5 -17,-5"/><path d="M5,-17 Q5,-5 17,-5"/><path d="M-5,17 Q-5,5 -17,5"/><path d="M5,17 Q5,5 17,5"/></g>`,
 };
@@ -89,6 +98,7 @@ export const EMOTES = {
   pout: { pal: 1, face: 'pout', bubble: 'pout' },
   or: { pal: 3, face: 3, bubble: 'or' },
   crack: { pal: 4, face: 4, bubble: 'crack' },
+  hate: { pal: 5, face: 'hate', bubble: 'hate', aura: true },
 };
 const STAGE_EMOTE = { 1: 'heart', 2: 'hearts', 3: 'or', 4: 'crack' };
 
@@ -106,6 +116,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false } = {}) {
   const k = big ? 0.74 : 0.57;
   const gate = `<defs><clipPath id="${cb}"><path d="${BODYB}"/></clipPath>
       <radialGradient id="${gb}" cx=".42" cy=".4" r=".75"><stop offset="0" stop-color="${P.body}"/><stop offset="1" stop-color="${P.body2}"/></radialGradient></defs>
+    ${E.aura ? `<radialGradient id="au${n}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#12040b" stop-opacity="0"/><stop offset=".6" stop-color="#12040b" stop-opacity=".55"/><stop offset="1" stop-color="#f0243f" stop-opacity="0"/></radialGradient><ellipse cx="58" cy="60" rx="98" ry="112" fill="url(#au${n})" class="nd-aura"/>` : ''}
     <ellipse cx="52" cy="129" rx="58" ry="6.5" fill="${P.shadow}" opacity=".16"/>${legs}
     <path d="M-8 33H0M-8 75H0" stroke="${P.rim}" stroke-width="3" stroke-linecap="round"/><path d="M-3.5 31.5H6.5V34.5H-3.5ZM-3.5 73.5H6.5V76.5H-3.5Z" fill="${P.lit}"/>
     <path d="${BODYB}" fill="url(#${gb})" stroke="${P.rim}" stroke-width="3.2" stroke-linejoin="round"/>

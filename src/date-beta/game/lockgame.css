@@ -1,0 +1,28 @@
+/* LockGame: basement lock, projector-sized. Colours from tokens.css only. No transitions or keyframes: every state
+   is a static frame (reduced-motion safe by construction). */
+.lg-root { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.6vh; background: radial-gradient(ellipse at 50% 30%, #2a1236 0%, var(--scrim) 70%); color: var(--scrim-ink);
+  font-family: var(--cond); user-select: none; }
+.lg-head { display: flex; gap: 3vw; align-items: baseline; }
+.lg-title { font-size: 5vh; font-weight: 800; letter-spacing: .08em; color: var(--pink); }
+.lg-time { font-family: var(--mono); font-size: 5vh; font-weight: 700; color: var(--ink); min-width: 4ch; text-align: right; }
+.lg-time.low { color: var(--or-on-dark); }
+.lg-sub { font-size: 2.8vh; opacity: .9; }
+.lg-grid { display: grid; grid-template-columns: repeat(4, 15vh); grid-template-rows: repeat(4, 15vh); gap: 1.6vh; }
+.lg-tile { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border: .5vh solid var(--purple); border-radius: 2vh; background: var(--edge); cursor: pointer; padding: 0; }
+.lg-tile svg { width: 60%; height: 60%; }
+.lg-name { font-family: var(--cond); font-weight: 800; font-size: 1.9vh; color: var(--ink); letter-spacing: .06em; }
+.lg-body { fill: var(--purple); stroke: var(--g-ol); stroke-width: 2; }
+.lg-lid, .lg-tag { fill: var(--pink); stroke: var(--g-ol); stroke-width: 2; }
+.lg-strap { fill: none; stroke: var(--pink); stroke-width: 4; stroke-linecap: round; }
+.lg-bits { font: 700 10px var(--mono); fill: var(--ink); text-anchor: middle; }
+.k-jar .lg-body, .k-bento .lg-body { fill: var(--pink); }
+.k-jar .lg-lid, .k-jar .lg-tag, .k-bento .lg-tag { fill: var(--purple); }
+.k-bento .lg-strap { stroke: var(--purple-deep); }
+.lg-tile.is-sel { border-color: var(--pink); background: var(--purple-deep); outline: .6vh solid var(--pink); }
+.lg-tile.is-bad { border-color: var(--her); background: var(--her-deep); }
+.lg-tile.is-open { opacity: .22; cursor: default; border-style: dashed; }
+.lg-pins { display: flex; gap: 1.2vh; }
+.lg-pins i { width: 3vh; height: 3vh; border-radius: 50%; border: .4vh solid var(--purple); }
+.lg-pins i.on { background: var(--pink); border-color: var(--pink); }

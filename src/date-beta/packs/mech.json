@@ -1,0 +1,26 @@
+{
+  "note": "T5 mechanics: every MOVEMENT beat becomes a choice. Early = action + cuter synonym (same outcome). Later = action + 'and nothing else'. Last = action + opposite (fake: the first option happens, then YOU CHOSE TO <ACTION>).",
+  "patch": [
+    { "scene": "unknown", "beat": 1, "set": { "choices": [
+      { "text": "Open the hatch" },
+      { "text": "Gently open the hatch ♡" }
+    ] } },
+    { "scene": "unknown", "beat": 2, "set": { "choices": [
+      { "text": "Climb down" },
+      { "text": "Tippy-toe down ♡" }
+    ] } },
+    { "scene": "escape", "beat": 0, "set": { "choices": [
+      { "text": "Look at the shelves" },
+      { "text": "Peek at the pretty shelves ♡" }
+    ] } },
+    { "scene": "escape", "beat": 5, "set": { "choices": [
+      { "text": "Keep looking" },
+      { "text": "Keep looking… and nothing else" }
+    ] } },
+    { "scene": "escape", "beat": 13, "set": { "timer": 12, "choices": [
+      { "text": "Leave her house", "go": "escape-win", "love": -3 },
+      { "text": "Wait for her", "go": "escape-timeout", "love": 1, "default": true },
+      { "text": "Stay right here", "fake": true }
+    ] } }
+  ]
+}

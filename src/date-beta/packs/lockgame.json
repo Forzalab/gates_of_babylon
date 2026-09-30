@@ -1,0 +1,6 @@
+{
+  "note": "T6: the basement door beat becomes the 4x4 lock game. Win -> choice 1 (escape-win), timeout -> choice 0 (escape-timeout).",
+  "patch": [
+    { "scene": "escape", "beat": 13, "set": { "bg": "lock-game", "text": null, "timer": null, "props": { "win": 1, "lose": 0, "secs": 40 } } }
+  ]
+}

@@ -11,21 +11,39 @@
 import { createRoot } from 'react-dom/client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './theme.js';
-import data from './scenes.json';
+import baseData from './scenes.json';
+import { applyPacks } from './packs/index.js';
 import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, reactView, present, trail, ending, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
-import { ART } from './art/index.js';
+import { ART as ART0 } from './art/index.js';
+import { GAME } from './game/index.js';
+const ART = { ...ART0, ...GAME }; // game art ids (lock-game) own their beat: choices hidden, onPick(i) plays choice i
 import { BG_FALLBACK } from './art/fallbacks.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { Nanda, speaksNanda } from './Nanda.jsx';
+import { Fx } from './Fx.jsx';
+import { setCrowd, bumpRun, runBucket } from './meta.js';
+import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
 import { createLoader } from './assets.js';
 import './beta.css';
+import './fx.css';
 
 const params = new URLSearchParams(location.search);
 const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
+// ?pack=a,b previews src/date-beta/packs/<name>.json on top of scenes.json (validation stays on).
+const PACK_FILES = import.meta.glob(['./packs/*.json', '!./packs/crowd.json'], { eager: true, import: 'default' });
+const packOf = (n) => {
+  const p = PACK_FILES[`./packs/${n}.json`];
+  if (!p) throw new Error(`date-beta: no pack "${n}"`);
+  return { name: n, ...p };
+};
+setCrowd(crowd);
+// Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
 const DEBUG = createSession(() => localStorage, SCENES, data.flags ?? {});
@@ -104,17 +122,21 @@ function Player() {
   const frozen = paused || tree;
   const since = useRef(0);
   const k = useFit();
+  const stageRef = useRef(null);
   const [ready, setReady] = useState(false); // the beat's hold has passed (NEXT shows)
   // On a reaction frame the scene is the pick's scene, even when the pick already jumped on.
   const scene = SCENES[pos.react ? pos.react.s : pos.s];
   // The beat as this run sees it: the reaction frame, else the beat with `vary` overlays (bento echo) applied.
   // Memoized on pos so effects don't re-fire.
-  const beat = useMemo(() => reactView(SCENES, pos) ?? beatView(beatAt(SCENES, pos), pos.flags), [pos]);
+  const beat = useMemo(() => reactView(SCENES, pos) ?? beatView(beatAt(SCENES, pos), { ...pos.flags, run: runBucket() }), [pos]);
   const here = !pos.done && present(scene, beat);
   const pop = pos.react ?? (here && pos.pending ? pos.pending : null);
   const end = ending(SCENES, pos);
   const card = !pos.done && beat.card === 'goal';
 
+  // Meta loop (meta.js): each arrival at the first scene (boot or a loop back) is a new run; `run` feeds vary/if.
+  const atFirst = !pos.done && pos.s === 0;
+  useEffect(() => { if (atFirst) bumpRun(); }, [atFirst]);
   useEffect(() => {
     since.current = performance.now();
     cue(beat.sfx);
@@ -187,12 +209,12 @@ function Player() {
     const name = isAssetId(v) ? (ASSETS.has(v) ? null : BG_FALLBACK[v]) : v;
     if (!name) return <img className={cls} src={ASSETS.src(v)} alt="" />;
     const Art = ART[name];
-    return <Art props={beat.props} rm={RM} onStart={() => advance(true)} />;
+    return <Art props={beat.props} rm={RM} onStart={() => advance(true)} onPick={(i) => setPos((p) => (p.done ? p : choose(SCENES, p, i, RM)))} />;
   };
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
   const onNext = waiting && ready && !card && !paused ? () => advance(true) : null;
-  const focus = !pos.done && !!(beat.text || beat.choices || card || end);
+  const focus = !pos.done && !GAME[beat.bg] && !!(beat.text || beat.choices || card || end);
   const hint = waiting && !paused; // only where a click does something (never on choice or auto beats)
   const closeTree = useCallback(() => setTree(false), []);
   const jump = useCallback((edge, choices) => {
@@ -206,20 +228,21 @@ function Player() {
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
-      <div className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
+      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
           {!pos.done && layer(beat.bg, 'db-bg')}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
+        <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} onAgain={() => pick(0)} />}
         {!pos.done && (here || speaksNanda(beat.line)) && (
           <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={end ? (end.tier === 'win' ? 'hearts' : 'crack') : pop?.emote}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} />
         )}
         {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}
-        {beat.choices && !pos.done && !end && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} key={`c${beat.scene}${beat.index}`} />}
+        {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} key={`c${beat.scene}${beat.index}`} />}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {card && <GoalCard onNext={() => advance(true)} />}
         {onNext && !beat.text && <NextButton className="solo" onClick={onNext} />}
