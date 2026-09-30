@@ -327,5 +327,12 @@
   "beat": "4 (t)",
   "file": "public/date-beta/voice/13-escape-timeout/067_4-t.mp3",
   "text": "[warm][slow] 甘いでしょ。 [pause][sing-song] …Neee?"
+ },
+ {
+  "n": 70,
+  "scene": "escape-timeout",
+  "beat": "6 (u)",
+  "file": "public/date-beta/voice/13-escape-timeout/070_6-u.mp3",
+  "text": "[whispers, slower] …then every hour [perfectly even] is ours."
  }
 ]
