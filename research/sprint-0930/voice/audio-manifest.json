@@ -481,5 +481,12 @@
   "beat": "3 (t)",
   "file": "public/date-beta/voice/12-escape-win/064_3-t.mp3",
   "text": "[tender] Sleep now. [whispers, slower] You're mine to keep."
+ },
+ {
+  "n": 68,
+  "scene": "escape-timeout",
+  "beat": "5 (u)",
+  "file": "public/date-beta/voice/13-escape-timeout/068_5-u.mp3",
+  "text": "[softly] One sour hour…"
  }
 ]
