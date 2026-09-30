@@ -338,8 +338,8 @@
         "cold": "no",
         "food": "katsu"
        },
-       "love": 2,
-       "emote": "heart",
+       "love": 3,
+       "emote": "hearts",
        "fx": "none",
        "react": "Crunchy. Good choice."
       },
