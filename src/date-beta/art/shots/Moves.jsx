@@ -104,5 +104,6 @@ export function Stamp({ props = {}, rm }) {
   const Art = ART[of];
   return (<div className="art shot stamp" role="img" aria-label={`${place}, ${time}`}>
     {Art && <Art props={props.ofProps ?? {}} rm={rm} />}
+    {props.air !== false && <div className="shot-air" />}
     <div className="shot-stamp"><b>{place}</b><i>·</i><span>{time}</span></div></div>);
 }

@@ -113,7 +113,8 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .db-sprite { position: absolute; left: 50%; bottom: 0; max-height: 90%; transform: translateX(-50%); }
 .db-timer { position: absolute; top: -64px; left: 50%; transform: translateX(-50%); min-width: 2.4em; text-align: center; font: 700 40px/1 var(--cond, sans-serif); color: #fff; text-shadow: 0 2px 6px #000; }
-.db-paused { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); padding: 8px 20px; background: #000a; color: #fff; font: 700 32px/1 var(--cond, sans-serif); }
+.db-paused { position: absolute; top: 150px; left: 50%; transform: translateX(-50%); color: #fff; font: 700 36px/1 var(--cond, sans-serif);
+  text-shadow: -2px -2px 0 #2a0a1e, 2px -2px 0 #2a0a1e, -2px 2px 0 #2a0a1e, 2px 2px 0 #2a0a1e, 0 3px 10px rgba(10, 2, 8, .6); }
 .db-choice:disabled { opacity: 0.4; cursor: not-allowed; }
 
 /* ---------- debug branch map (~ or ?debug). Own 1920x1080 layer, scaled like the stage. ---------- */
@@ -355,11 +356,14 @@ body { font-family: var(--cond); color: var(--ink); }
 /* NEXT on an art-only click beat (no chip to hang from) */
 .hud-next.solo { right: 60px; bottom: 60px; }
 
-/* "Click anywhere to continue": big on the goal card, then a small corner hint under the chip. Never on choice beats. */
-.db-hint { position: absolute; left: 32px; bottom: 10px; z-index: 9; padding: 8px 16px 9px; border-radius: 999px; pointer-events: none;
-  background: rgba(26, 7, 16, .82); color: var(--scrim-ink); font: 700 22px/1 var(--cond); letter-spacing: .04em; }
-.db-hint.big { left: 50%; bottom: 96px; transform: translateX(-50%); padding: 16px 36px 18px; border: 4px solid var(--pink);
-  font: 900 48px/1 var(--btn); letter-spacing: .01em; white-space: nowrap; }
+/* "Click anywhere to continue": big on the goal card, then a small corner line under the chip. Never on choice beats.
+   r5 (AUDIT G2): a SUBTITLE, not a button: no pill, no ground, no border; plain text with a thin dark outline + a soft
+   shadow so it reads on any art. Every hint-like label follows it (.db-legend, .db-paused). */
+.db-hint { position: absolute; left: 34px; bottom: 12px; z-index: 9; pointer-events: none; margin: 0; padding: 0; background: none; border: 0;
+  color: #fff6fa; font: 700 24px/1 var(--cond); letter-spacing: .05em; opacity: .92;
+  text-shadow: -1.5px -1.5px 0 #2a0a1e, 1.5px -1.5px 0 #2a0a1e, -1.5px 1.5px 0 #2a0a1e, 1.5px 1.5px 0 #2a0a1e, 0 2px 8px rgba(10, 2, 8, .6); }
+.db-hint.big { left: 50%; bottom: 100px; transform: translateX(-50%); font: 800 40px/1 var(--btn); letter-spacing: .02em; white-space: nowrap;
+  text-shadow: -2px -2px 0 #2a0a1e, 2px -2px 0 #2a0a1e, -2px 2px 0 #2a0a1e, 2px 2px 0 #2a0a1e, 0 3px 10px rgba(10, 2, 8, .6); }
 
 /* focus: while a line, choice or card is up, the art behind blurs + dims under a vignette (red at scare 2); Nanda gets a
    pink rim-light. Art-only beats stay sharp. .rm = same look, hard cut. data-lowfx (slow machine) = dim + vignette only. */
@@ -374,7 +378,7 @@ body { font-family: var(--cond); color: var(--ink); }
   background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(26, 7, 16, .55) 100%); }
 .stage.focus .db-focus { opacity: 1; }
 .stage.focus[data-scare="2"] .db-focus { background: radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(120, 8, 30, .6) 100%); }
-.stage.focus .db-nanda { filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)) drop-shadow(0 0 10px rgba(255, 95, 162, .75)); }
+.stage.focus .db-nanda { filter: drop-shadow(0 6px 6px rgba(20, 8, 18, .26)); } /* r5 G9: no pink glow halo (it read pasted-on) */
 
 /* ============ ux-six (sprint 0930): layering, legibility, contrast */
 /* Place/time stamp: drawn once, by the player (main.jsx .db-stamp), above her sprite + emote bubble, below the HUD pop.
@@ -398,8 +402,42 @@ body { font-family: var(--cond); color: var(--ink); }
 /* Timer label + the one-time ?? legend */
 .db-timebar .db-timer { white-space: nowrap; min-width: 0; }
 /* under the right-hand button, clear of the centred DEFAULT tag under a pink or mid default */
-.db-legend { position: absolute; right: 0; bottom: -64px; white-space: nowrap; z-index: 4; padding: 10px 22px 12px; border-radius: 12px; background: rgba(26, 7, 16, .92);
-  color: #ffe9f1; font: 700 28px/1 var(--cond); letter-spacing: .02em; box-shadow: 0 0 0 3px rgba(255, 233, 241, .5); pointer-events: none; }
+.db-legend { position: absolute; right: 0; bottom: -56px; white-space: nowrap; z-index: 4; padding: 0; background: none; border-radius: 0;
+  color: #fff6fa; font: 700 28px/1 var(--cond); letter-spacing: .03em; pointer-events: none; /* r5: a subtitle, not a pill */
+  text-shadow: -1.5px -1.5px 0 #2a0a1e, 1.5px -1.5px 0 #2a0a1e, -1.5px 1.5px 0 #2a0a1e, 1.5px 1.5px 0 #2a0a1e, 0 2px 8px rgba(10, 2, 8, .6); }
 .db-legend b { color: #ffa6d6; }
 /* Offscreen speaker label (NANDA (ABOVE)): same tag, dashed = not in the frame */
 .db-say.offscreen .who { border-style: dashed; }
+
+/* ============ r5-ume (research/sprint-0930/r5-ume/AUDIT.md): shot grammar, the focus plane, grounding */
+/* FOCUS PLANE (Tony's hybrid of variants focus-V1 + V2): the unblurred copy of the bg (main.jsx .db-plane) shows only in a
+   horizontal band at her floor line + a soft ellipse under her feet, feathered into the blurred art: the camera focus is
+   pulled to where she stands. Same dim as the focused scene, no blur, no motion (a hard cut with the beat; rm-safe). */
+.db-plane { position: absolute; inset: 0; pointer-events: none; overflow: hidden; filter: brightness(.78);
+  -webkit-mask-image: linear-gradient(180deg, transparent calc(var(--floor) - 120px), #000 calc(var(--floor) - 46px), #000 calc(var(--floor) + 40px), transparent calc(var(--floor) + 132px)),
+    radial-gradient(ellipse 390px 150px at 960px var(--floor), #000 42%, transparent 100%);
+  mask-image: linear-gradient(180deg, transparent calc(var(--floor) - 120px), #000 calc(var(--floor) - 46px), #000 calc(var(--floor) + 40px), transparent calc(var(--floor) + 132px)),
+    radial-gradient(ellipse 390px 150px at 960px var(--floor), #000 42%, transparent 100%);
+  -webkit-mask-composite: source-over; mask-composite: add; }
+.db-plane > .art, .db-plane > .db-bg { position: absolute; inset: 0; }
+:root[data-lowfx] .db-plane, .db-plane:has(.sw-mid), .db-plane:has(.art.basement, .art.cellar) { display: none; }
+/* a stronger contact shadow: the soft pool + a tight dark core under her shoes (straight down: the one light is high) */
+.db-plant { left: 800px; width: 320px; height: 40px;
+  background: radial-gradient(closest-side, rgba(20, 10, 18, .6), rgba(20, 10, 18, .32) 52%, rgba(20, 10, 18, 0)); }
+.db-plant::after { content: ''; position: absolute; left: 92px; right: 92px; top: 13px; bottom: 11px; border-radius: 50%; background: rgba(16, 6, 14, .42); }
+.db-plant.floored { bottom: calc(1080px - var(--floor) - 20px); }
+.stage[data-bg^="town-"] .db-plant { background: radial-gradient(closest-side, rgba(34, 38, 62, .6), rgba(34, 38, 62, .32) 52%, rgba(34, 38, 62, 0)); }
+/* CLOSE-UP (every ask): she is cut by the frame edge at the shins, never by the box; her face stays clear of the HUD band */
+.viewport .stage .db-nanda.frame-close { bottom: -250px; }
+/* long lines step down one size so a 2-line box never climbs over her floor band */
+.db-say.long .line { font-size: 44px; }
+/* r5 G5: a secret chip: one "?" on a dashed ring (reads as a mystery, not as broken text) */
+.db-chip.secret { outline: 3px dashed rgba(255, 255, 255, .85); outline-offset: -7px; padding-left: 24px; padding-right: 24px; }
+/* r5 (AUDIT 021): the falling hearts stay in the scene plane (DOM order: under her sprite, the box and its name tag) */
+.db-fx.love-burst { z-index: auto; }
+/* r5 G4: establishing + stamp shots are the sandwich (crisp back, .shot-air mid): the focus only dims them, never blurs */
+.stage.focus .scene:has(.shot.establish, .shot.stamp) { filter: brightness(.86); }
+/* r5: the BOOK crop line (main.jsx .db-bookline): an invisible zero-height mark at the BOOK cel edge that crops her
+   (the float audit counts it like the dialogue box); the tea-table BOOK sits in the room night grade under a line */
+.db-bookline { position: absolute; left: 0; width: 1920px; height: 0; pointer-events: none; }
+.stage.focus .db-book .sr-book, .stage.focus .sr-book { filter: brightness(.8); }

@@ -40,6 +40,8 @@ import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
 import { rainOf } from './fx/rain.js';
 import { floorOf } from './art/floors.js';
+import { Cels } from './art/r5/cels.jsx';
+import { SHOT_ALIASES } from './art/shots/aliases.js';
 import './beta.css';
 import './fx.css';
 
@@ -54,7 +56,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5-ume', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -184,20 +186,30 @@ function Player() {
   const card = !pos.done && beat.card === 'goal';
   // Scene A camera + chrome (props.cut, SCENES.md): frame, face (face2 after the step), a two-step line (lead / at),
   // sharp (no focus blur), handout (bento = the choices), tag (the one choice drawn as the NEXT pill).
+  // r5: a reaction frame may carry its own shot (props.react: cut / cels / shot, merged over the ask's props by reactView).
   const cut = beat.props?.cut ?? {};
-  // A reaction frame on the handout keeps her medium shot (the box is gone); every other frame holds through its react.
-  const frame = !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
-  const lead = !beat.react && cut.lead ? cut.lead : null;
-  const splitAt = !beat.react && cut.at ? cut.at : null;
-  const stepped = useStep(lead || splitAt ? Math.max(500, cut.step ?? 600) : 0, pos);
-  const face = beat.react ? null : (stepped && cut.face2) || cut.face || null;
-  // her floor (art/floors.js): an explicit props.cut.plant wins, else the per-bg / per-insert-shot floor line.
-  const flo = cut.plant ? { key: null, y: null } : floorOf(beat.bg, beat.props?.shot);
   const tag = !!(cut.tag && beat.choices?.length === 1 && !beat.react);
   const handout = !!(cut.handout && beat.choices && !beat.react);
   // ux-six: a one-button "choice" with no score is a NEXT in disguise: drawn as the NEXT pill (named after the action),
   // a click / Space / Enter takes it. Ending beats keep their card button.
   const solo = !!(beat.choices?.length === 1 && !beat.choices[0].love && !tag && !handout && !beat.end && !GAME[beat.bg] && !beat.react);
+  // A reaction frame on the handout keeps her medium shot (the box is gone); every other frame holds through its react.
+  // r5 shot grammar (AUDIT G3): an ASK (a scored choice: the box rises, the buttons fill the bottom) is her CLOSE-UP, cut by
+  // the frame edge, box on the left; her answer (the react) cuts back to the MEDIUM, feet on her floor. No more head on a box.
+  const asks = !!(beat.choices && !beat.react && !tag && !handout && !solo && !beat.end && !GAME[beat.bg]);
+  const frame0 = !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
+  // an insert (an object close-up: her key, the cups) is its own shot: her sprite sits it out (AUDIT G8)
+  const shotId = beat.props?.shot;
+  const insertShot = !!shotId && (shotId === 'insert' || shotId.startsWith('insert-') || SHOT_ALIASES[shotId]?.bg === 'insert');
+  const frame = insertShot ? 'off' : frame0 === 'medium' && asks ? 'close' : frame0;
+  const lead = !beat.react && cut.lead ? cut.lead : null;
+  const splitAt = !beat.react && cut.at ? cut.at : null;
+  const stepped = useStep(lead || splitAt ? Math.max(500, cut.step ?? 600) : 0, pos);
+  const face = beat.react ? (cut.reactFace ?? null) : (stepped && cut.face2) || cut.face || null;
+  // her floor (art/floors.js): the per-bg / per-insert-shot floor line; props.cut.plant only where the bg has none.
+  const flo0 = floorOf(beat.bg, beat.props?.shot);
+  const flo = flo0.y ? flo0 : cut.plant ? { key: null, y: null } : flo0;
+  const plant = flo.y ? 0 : cut.plant ?? 0;
   const off = !!scene.offstage; // she is in the house, not in the frame: no sprite, her lines are labelled from above
   const shown = useMemo(() => showLine(beat, off), [beat, off]);
 
@@ -295,6 +307,8 @@ function Player() {
   const say = !pos.done && !end && shown.parts.length > 0 && (!!beat.text || beat.wait === 'auto') && !GAME[beat.bg];
   const stampP = !pos.done && !end && beat.props?.shot === 'stamp' && beat.props.place ? beat.props : null;
   const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
+  // the focus plane: only where the art blurs and she stands on a floor line in the medium shot (reduced-motion safe: still)
+  const plane = focus && !end && !off && frame === 'medium' && !!flo.y && !ART[beat.props?.shot] && !cut.noPlane && (here || speaksNanda(beat.line));
   // outdoor rain (fx/rain.js): props.rain level, else the bg's default; keyed per beat so the wet marks re-measure
   const rain = !pos.done && !end ? rainOf(beat) : null;
   const rainKey = `${beat.scene}:${beat.index}:${beat.react ? 'r' : ''}:${!!beat.choices}`;
@@ -319,22 +333,29 @@ function Player() {
             : layer(beat.bg, 'db-bg'))}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
+        {/* r5 FOCUS PLANE (Tony's hybrid): while the art blurs behind a line, the ground she stands on stays sharp: an
+            unblurred copy of the bg, masked to a horizontal band at her floor + a soft ellipse under her feet. No motion. */}
+        {plane && <div className="db-plane" style={{ '--floor': `${flo.y}px` }} aria-hidden="true">{layer(beat.bg, 'db-bg')}</div>}
         <div className="db-focus" aria-hidden="true" />
+        {!pos.done && !end && <Cels list={beat.props?.cels} front={false} rm={RM} />}
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : (!!beat.choices || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px` } : { '--plant': `${cut.plant}px` }} aria-hidden="true" />}
+        {!pos.done && !end && !(off) && frame === 'medium' && (plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : (!!beat.choices || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px` } : { '--plant': `${plant}px` }} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
-            planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
+            planted={!end && frame === 'medium' && plant ? plant : 0}
             floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
+            arms={end ? null : cut.arms ?? null} pose={end ? null : cut.pose ?? null} tilt={end ? 0 : (stepped && cut.tilt2) || cut.tilt || 0}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
+        {!pos.done && !end && frame === 'medium' && flo.book && ART[`${beat.bg}-book`] && <div className="db-bookline" style={{ top: `${flo.book}px` }} aria-hidden="true" /> /* where the BOOK crops her (the float audit reads it) */}
+        {!pos.done && !end && <Cels list={beat.props?.cels} front rm={RM} /> /* r5 cels in front of her (your hands, sleeves, a table edge) */}
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
-        {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !(off && !end) && frame === 'medium'} under={!!beat.props?.underUmbrella && !end} stageRef={stageRef} beatKey={rainKey} />}
+        {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !(off && !end) && (frame === 'medium' || frame === 'close')} under={!!beat.props?.underUmbrella && !end} stageRef={stageRef} beatKey={rainKey} />}
         {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
@@ -345,7 +366,7 @@ function Player() {
         {rain && <WetGui level={rain} stageRef={stageRef} beatKey={rainKey} seed={beat.index + 1} />}
         {card && <GoalCard onNext={() => advance(true)} />}
         {onNext && !say && <NextButton className="solo" label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} onClick={onNext} />}
-        {hint && <div className={`db-hint${card ? ' big' : ''}`}>Click anywhere to continue</div>}
+        {hint && <div className={`db-hint${card ? ' big' : ''}`}>Click anywhere to continue</div> /* a subtitle, not a button (r5 G2) */}
         {paused && <div className="db-paused" role="status">paused (P)</div>}
       </div>
       <div className="chrome">

@@ -2,7 +2,8 @@ import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 import fs from 'node:fs';
 const { chromium } = pkg;
 const MODE = process.argv[2]; // ume | leave-a | leave-b
-const OUT = new URL('./before/', import.meta.url).pathname;
+const OUT = process.env.OUT ?? new URL('./before/', import.meta.url).pathname; // r5: OUT=<dir> PORT=<port> for the after/ pass
+const PORT = process.env.PORT ?? '5220';
 fs.mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
 const page = await (await browser.newContext({ viewport: { width: 1920, height: 1080 } })).newPage();
@@ -10,7 +11,7 @@ const LOOK = () => {
   const d = document.documentElement.dataset, q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)];
   return { beat: d.beat ?? null, who: q('.db-say .who')?.textContent ?? '', line: q('.db-say .line')?.innerText ?? '', ch: qa('.db-choice').map((c) => ({ text: c.querySelector('.line')?.innerText ?? c.innerText, chip: c.querySelector('.db-chip')?.textContent ?? '', cls: c.querySelector('.db-chip')?.className ?? '' })), card: q('.hud-card')?.innerText?.replace(/\s+/g, ' ') ?? null, end: q('.hud-end')?.innerText?.replace(/\s+/g, ' ') ?? null, game: !!q('.lg-root'), pop: q('.lv-pop')?.innerText?.replace(/\s+/g, ' ') ?? null };
 };
-await page.goto('http://localhost:5220/date-beta.html?seed=1', { waitUntil: 'networkidle' });
+await page.goto(`http://localhost:${PORT}/date-beta.html?seed=1`, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => document.documentElement.dataset.beat || document.querySelector('.hud-card'), null, { timeout: 15000 });
 let n = 1; const log = [];
 const shot = async (s, tag, taken) => {
@@ -38,7 +39,7 @@ while (n < 400 && Date.now() - still < 60000) {
     await shot(s, s.end ? 'end' : s.card ? 'card' : s.ch.length ? 'choice' : s.pop ? 'react' : '', '');
     if (s.end) { await page.waitForTimeout(2500); await page.screenshot({ path: OUT + `${String(n++).padStart(3, '0')}-END-settled.png` }); break; }
   }
-  if (MODE !== 'ume' && !jumped && /^v2-park:0/.test(s.beat || '')) { jumped = true; await page.goto('http://localhost:5220/date-beta.html?seed=1&scene=door&beat=0', { waitUntil: 'networkidle' }); await page.waitForTimeout(1500); prev = ''; continue; }
+  if (MODE !== 'ume' && !jumped && /^v2-park:0/.test(s.beat || '')) { jumped = true; await page.goto(`http://localhost:${PORT}/date-beta.html?seed=1&scene=door&beat=0`, { waitUntil: 'networkidle' }); await page.waitForTimeout(1500); prev = ''; continue; }
   if (s.game) { await page.waitForTimeout(1000); continue; }
   if (s.card) { await page.waitForTimeout(800); await page.locator('.hud-card .hud-next').click().catch(() => {}); await page.waitForTimeout(400); continue; }
   if (s.ch.length) {

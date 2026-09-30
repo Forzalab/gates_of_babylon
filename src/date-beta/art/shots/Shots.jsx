@@ -41,22 +41,21 @@ export function Closeup({ props = {}, rm }) {
   );
 }
 
+// r5 (AUDIT G8): no beige card and no caption any more. The insert is the SCENE's own art pushed in (a shallow depth of
+// field: the trace softly out of focus) with the object cel big and sharp in front of it, on a contact shadow in the
+// scene's light: cel over vtrace, the same bg family as the beats around it. Nanda's sprite sits out an insert (main.jsx).
 export function Insert({ props = {}, rm }) {
-  const { item = 'curry', of = 'crossing-day', caption, tone = 'day', tilt = -3 } = props;
+  const { item = 'curry', of = 'crossing-day', tone = 'day', tilt = -3 } = props;
   const Item = ITEMS[item] ?? ITEMS.curry;
   return (
     <div className="art shot insert" role="img" aria-label={`Insert: ${ITEM_LABEL[item] ?? item}`}>
-      <Cam of={of} zoom={1.15} rm className="shot-blur" />
-      <GradeLayer id="sh-in" tone={tone} rm={rm} sun={[1560, 160]} sparkles={20} />
+      <Cam of={of} zoom={1.3} rm className="shot-dof" />
+      <GradeLayer id="sh-in" tone={tone} rm={rm} sun={[1560, 160]} sparkles={0} />
       <svg className="art" viewBox="0 0 1920 1080">
-        <g transform={`rotate(${tilt} 960 520)`}>
-          <rect x="580" y="170" width="760" height="720" rx="36" fill="#000" opacity=".22" transform="translate(18 22)" />
-          <rect x="580" y="170" width="760" height="720" rx="36" className="shot-card" />
-          <rect x="604" y="194" width="712" height="672" rx="24" className="shot-card-in" />
-          <g transform="translate(660 215) scale(1)"><Item pose={props.pose} /></g>
-          {(caption ?? ITEM_LABEL[item]) && <text x="960" y="850" textAnchor="middle" className="shot-cap">{caption ?? ITEM_LABEL[item]}</text>}
-        </g>
+        <ellipse cx="970" cy="846" rx="430" ry="70" fill="#1a0c14" opacity=".32" />
+        <g transform={`rotate(${tilt} 960 520) translate(600 150) scale(1.2)`}><Item pose={props.pose} /></g>
       </svg>
+      <div className="shot-vig" />
     </div>
   );
 }
@@ -92,6 +91,7 @@ export function Establish({ props = {}, rm }) {
   return (
     <div className="art shot establish" role="img" aria-label={`Establishing pan across ${of}`}>
       <Cam of={of} x={x} y={y} zoom={zoom} props={props.ofProps} rm={rm} />
+      <div className="shot-air" />
       <div className="shot-bars" />
       {tone && <GradeLayer id="sh-es" tone={tone} rm={rm} sparkles={10} />}
     </div>

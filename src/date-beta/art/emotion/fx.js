@@ -32,7 +32,7 @@ export function loveCritSVG({ big = false } = {}) {
     <radialGradient id="emo-lc-glow" cx="${HEAD.x / W}" cy="${(HEAD.y - 60) / H}" r=".55"><stop offset="0" stop-color="#fff4e0" stop-opacity=".8"/><stop offset=".55" stop-color="#fff4e0" stop-opacity="0"/></radialGradient>${bubbleDefs()}`;
   const bubbles = scatter(big ? 51 : 50, big ? 16 : 12, { rMin: 24, rMax: 140, minGap: 0.75 }).map((b) => bubble(b.x, b.y, b.r)).join('');
   const stars = scatter(big ? 61 : 60, big ? 9 : 7, { rMin: 20, rMax: 70, grow: -140 }).map((s, i) => sparkle(s.x, s.y, s.r, { eight: i === 0 && big })).join('');
-  const flowers = big ? peony(230, 600, 175, -12) + peony(1700, 560, 160, 20) : '';
+  const flowers = ''; // r5 (AUDIT 014): no stray peony cels over the scene; the wash + bubbles carry the tier
   return svg(defs, `<rect width="${W}" height="${H}" fill="url(#emo-lc-bg)"/><rect width="${W}" height="${H}" fill="url(#emo-lc-glow)"/>${bubbles}${flowers}${stars}`);
 }
 

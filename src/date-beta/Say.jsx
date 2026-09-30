@@ -32,7 +32,9 @@ export function OrSpans({ text }) {
 // their space (visibility), so the box never jumps. action = drawn where NEXT sits (the smile tag) when there is no NEXT.
 export function Say({ line, onNext = null, lead = null, at = null, stepped = true, action = null, label }) {
   const who = line.who;
-  const cls = ['db-say', who ? `who-${who.toLowerCase().split(/[\s(]+/)[0]}` : 'narration', who && /\(/.test(who) && 'offscreen', line.hasOr && 'has-or', lead && 'two-step'];
+  // r5: a long line (> 72 chars) steps down one size, so the box stays at 2 lines and never climbs over her floor band
+  const long = (lead ? 0 : line.plain?.length ?? 0) > 72;
+  const cls = ['db-say', who ? `who-${who.toLowerCase().split(/[\s(]+/)[0]}` : 'narration', who && /\(/.test(who) && 'offscreen', line.hasOr && 'has-or', lead && 'two-step', long && 'long'];
   const [head, tail] = at ? splitParts(line.parts, at) : [line.parts, []];
   return (
     <div className={cls.filter(Boolean).join(' ')} role="status" data-step={lead || at ? (stepped ? '2' : '1') : undefined}>
@@ -65,7 +67,7 @@ export function Choices({ choices, onPick, on = [], left = null, total = null, d
           <span className="db-timer">TIME ⏳ {Math.ceil(left)}</span>
         </div>
       )}
-      {legend && <div className="db-legend" role="note"><b>?? </b>= hidden, find out</div>}
+      {legend && <div className="db-legend" role="note"><b>♥ ? </b>= a secret score. Pick one to find out.</div>}
       {choices.map((c, i) => (
         <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}${timed && i === def ? ' is-default' : ''}`}
           disabled={on[i] === false} aria-label={`${i + 1}: ${fill(c.plain)}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
@@ -79,8 +81,9 @@ export function Choices({ choices, onPick, on = [], left = null, total = null, d
 }
 
 // The value chip on a choice (hooks into the HUD's heart look: same pink / crack colours). +n = heart, 0 = plain, -n = cracked.
-// hidden (beat `loveHidden`): the number reads "??" (same chip, same colours; the score still changes on the pick).
+// hidden (beat `loveHidden`): the number is a secret: one "?" on a dashed chip (r5 G5: "??" read as broken text); the
+// score still changes on the pick.
 export function LoveChip({ love, hidden = false }) {
   const cls = love > 0 ? 'up' : love < 0 ? 'down' : 'zero';
-  return <span className={`db-chip ${cls}`} aria-hidden="true">{love < 0 ? '\u2661' : '\u2665'} {hidden ? '??' : love > 0 ? `+${love}` : love < 0 ? `\u2212${-love}` : '0'}</span>;
+  return <span className={`db-chip ${cls}${hidden ? ' secret' : ''}`} aria-hidden="true">{love < 0 ? '\u2661' : '\u2665'} {hidden ? '?' : love > 0 ? `+${love}` : love < 0 ? `\u2212${-love}` : '0'}</span>;
 }

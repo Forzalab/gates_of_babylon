@@ -56,7 +56,7 @@ for (const sc of scenes) {
       const nd = document.querySelector('.db-nanda'); const r = nd.getBoundingClientRect();
       const cx = xs.length ? xs[Math.floor(xs.length / 2)] : r.left + r.width / 2;
       // UI directly under her lowest row = her feet are cropped by the box / panel
-      const ui = [...document.querySelectorAll('.db-say, .db-choices, .db-ask, .db-handout, .hud-scrim')].map((e) => e.getBoundingClientRect())
+      const ui = [...document.querySelectorAll('.db-say, .db-choices, .db-ask, .db-handout, .hud-scrim, .db-bookline')].map((e) => e.getBoundingClientRect())
         .filter((q) => q.width && q.left < r.right && q.right > r.left);
       const boxTop = Math.min(1080, ...ui.map((q) => q.top));
       return { low, cx, boxTop, sprBottom: r.bottom };
