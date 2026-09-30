@@ -188,9 +188,8 @@ const ARTS = [...ART_NAMES, ...ROMANCE, ...INTERIORS, 'lock-game'];
 
 test('pack: gacha is LAST in main.jsx PLAY; applyPacks carries it to the root; later packs replace it', () => {
   assert.equal(PLAY.at(-1), 'gacha');
-  assert.equal(PLAY.at(-4), 'love', 'love keeps its final beat numbers, gacha adds no patches');
-  assert.equal(PLAY.at(-3), 'ux-six', 'ux-six patches after love (its inserts never shift love\'s beat numbers)');
-  assert.equal(PLAY.at(-2), 'r5-ume', 'the r5 umeboshi pass patches last (its park removal never shifts an earlier pack\'s beat numbers)');
+  assert.equal(PLAY.at(-3), 'love', 'love keeps its final beat numbers, gacha adds no patches');
+  assert.equal(PLAY.at(-2), 'ux-six', 'ux-six patches after love (its inserts never shift love\'s beat numbers)');
   assert.deepEqual(Object.keys(gachaPack).sort(), ['gacha', 'name', 'note']);
   const d = applyPacks(base, [gachaPack]);
   assert.deepEqual(d.gacha, RULES);

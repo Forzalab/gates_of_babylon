@@ -34,7 +34,7 @@ for (const sc of scenes) {
       const nd = document.querySelector('.db-nanda.frame-medium');
       if (!st || st.dataset.scene == null) return null;
       const say = document.querySelector('.db-say')?.textContent?.slice(0, 60) ?? '';
-      return { scene: st.dataset.scene, bg: st.dataset.bg, shot: st.dataset.shot ?? null, floorAt: st.dataset.floorY ? Number(st.dataset.floorY) : null, say, nanda: !!nd && getComputedStyle(nd).display !== 'none',
+      return { scene: st.dataset.scene, bg: st.dataset.bg, shot: st.dataset.shot ?? null, say, nanda: !!nd && getComputedStyle(nd).display !== 'none',
         plant: !!document.querySelector('.db-plant'), raised: !!nd?.classList.contains('raised') };
     });
     if (!info || info.scene !== sc.id || !info.nanda) continue;
@@ -56,7 +56,7 @@ for (const sc of scenes) {
       const nd = document.querySelector('.db-nanda'); const r = nd.getBoundingClientRect();
       const cx = xs.length ? xs[Math.floor(xs.length / 2)] : r.left + r.width / 2;
       // UI directly under her lowest row = her feet are cropped by the box / panel
-      const ui = [...document.querySelectorAll('.db-say, .db-choices, .db-ask, .db-handout, .hud-scrim, .db-bookline')].map((e) => e.getBoundingClientRect())
+      const ui = [...document.querySelectorAll('.db-say, .db-choices, .db-ask, .db-handout, .hud-scrim')].map((e) => e.getBoundingClientRect())
         .filter((q) => q.width && q.left < r.right && q.right > r.left);
       const boxTop = Math.min(1080, ...ui.map((q) => q.top));
       return { low, cx, boxTop, sprBottom: r.bottom };
@@ -64,8 +64,7 @@ for (const sc of scenes) {
     const cropped = m.low < 0 || m.low >= m.boxTop - 10 || m.low >= 1076;
     const key = floorOf(info.bg, info.shot).key;
     const floor = FLOORS[key];
-    // the renderer's own floor line wins (data-floor-y: a props.cut.floor on a camera shot), else the FLOORS entry
-    const floorY = info.floorAt ?? (floor?.crop ? null : floor?.y ?? null);
+    const floorY = floor?.crop ? null : floor?.y ?? null;
     const gap = floorY == null ? null : floorY - m.low;
     let flag = null;
     if (!cropped) {

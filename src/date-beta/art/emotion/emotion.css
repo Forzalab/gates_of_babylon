@@ -2,10 +2,8 @@
    The backdrop sits over the scene and under Nanda / the dialogue box / the HUD (DOM order, no z-index games). */
 .emo-fx { position: absolute; inset: 0; pointer-events: none; }
 .emo-bg, .emo-bg .emo-art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
-/* r5 (AUDIT 011/014): a WASH over the real scene, never a void that replaces it (she keeps her rooftop / park / street) */
-.emo-bg { opacity: .58; }
 /* The badge: the tier in words + the signed number, on its own opaque plate (never text straight on the FX). */
-.emo-badge { position: absolute; right: 380px; top: 124px; margin: 0; padding: 14px 30px 16px; border-radius: 16px;
+.emo-badge { position: absolute; right: 64px; top: 128px; margin: 0; padding: 14px 30px 16px; border-radius: 16px;
   font: 900 44px/1.1 var(--btn, 'Nunito Variable', sans-serif); letter-spacing: .03em; white-space: nowrap;
   background: #fff; color: #7a0f4e; border: 5px solid #7a0f4e; box-shadow: 0 8px 0 rgba(58, 10, 38, .3); }
 .emo-love-bomb .emo-badge { color: #6b0f45; border-color: #d1177f; }

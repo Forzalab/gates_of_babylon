@@ -24,11 +24,3 @@
   background: rgba(12, 6, 18, .78); border-left: 8px solid #ff5fa2; color: #fffaf2; font: 700 52px/1 var(--cond, sans-serif); letter-spacing: .08em; }
 .shot-stamp i { color: #ff5fa2; font-style: normal; } .shot-stamp span { font-weight: 400; }
 .reaction.emo-hate .shot-face, .reaction.emo-crack .shot-face { filter: saturate(.7) contrast(1.1); }
-/* r5 G4 (AUDIT 015/066/072/079): the SANDWICH for the wide shots: the back trace stays crisp (the player never focus-blurs an
-   establishing / stamp shot, beta.css), and this MID layer carries the depth: a cool air wash thickest at the far band
-   (the horizon), clear at the near ground where she stands. */
-.shot-air { position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(180deg, rgba(232, 238, 248, .10) 0%, rgba(232, 238, 248, .30) 34%, rgba(232, 238, 248, .12) 56%, rgba(232, 238, 248, 0) 70%); }
-/* r5 G8: the insert background = the scene art pushed in, softly out of focus (a lens depth of field, not a void) */
-.shot-dof { filter: blur(5px) brightness(.9); }
-:root[data-lowfx] .shot-dof { filter: brightness(.85); }

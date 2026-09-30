@@ -34,13 +34,8 @@ test('r3-rain: every beat shows its own bg in normal play (no later pack overrid
   const data = applyPacks(base, packs); // the full play order: a later pack must not take these beats back
   // validate up to this pack (later packs bring interiors / shot ids this helper list does not parse)
   const S = loadScenes(applyPacks(base, packs.slice(0, PLAY.indexOf('r3-rain') + 1)), { manifest, art: [...ART_NAMES, ...ROMANCE, 'lock-game'] });
-  // r5-ume (research/sprint-0930/r5-ume/AUDIT.md 069 / 071 / 078): three of these beats are now the close-up the line names
-  // (her shoes in the puddle, the wet shoes walking, the key in door 12's lock), each pushed into the SAME r3 trace.
-  const R5_ON = { 'r5-shoes-puddle': 'rain-alley', 'r5-key-lock': 'her-building' };
   for (const [scene, i, bg] of BEATS) {
     const b = data.scenes.find((s) => s.id === scene).beats[i];
-    const on = b.bg === 'r5-shoes-walk' ? b.props?.of : R5_ON[b.bg];
-    if (on) { assert.equal(on, bg, `${scene}[${i}] is a close-up on its own bg`); continue; }
     assert.equal(b.bg, bg, `${scene}[${i}]`);
     assert.ok([undefined, 'stamp'].includes(b.props?.shot), `${scene}[${i}] frames its own bg (no borrowed shot)`);
     assert.equal(b.props?.of, undefined, `${scene}[${i}] no borrowed 'of'`);

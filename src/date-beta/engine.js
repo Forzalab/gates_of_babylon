@@ -19,18 +19,9 @@ export const MAX_CHOICE_WORDS = 12; // a button label
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 // Beat-local props that never carry to the next beat: an `emote` (this line's face) and a hidden sprite (cut.frame
 // 'off', e.g. a mini-game that draws its own Nanda or a hand insert), so "hide Nanda" never leaks past its beat.
-// r5: her pose + the beat's own cels are beat-local too (an arm reaching for your sleeve never carries to the next beat).
-const LOCAL = ['emote', 'cels', 'react'];
-const LOCAL_CUT = ['arms', 'pose', 'tilt', 'tilt2', 'reactFace', 'noPlane'];
 export function carried(p) {
-  const rest = { ...p };
-  for (const k of LOCAL) delete rest[k];
-  if (rest.cut) {
-    const cut = { ...rest.cut };
-    for (const k of LOCAL_CUT) delete cut[k];
-    if (cut.frame === 'off') delete cut.frame;
-    rest.cut = cut;
-  }
+  const { emote, ...rest } = p;
+  if (rest.cut?.frame === 'off') { const { frame, ...cut } = rest.cut; rest.cut = cut; }
   return rest;
 }
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
@@ -583,10 +574,7 @@ export function skip(scenes, pos, rm = false) {
 export function reactView(scenes, pos) {
   const r = pos.react;
   if (!r) return null;
-  const base0 = beatView(scenes[r.s].beats[r.b], pos.flags);
-  // r5: props.react = the answer's own shot (bg / cut / cels / shot), merged over the ask's props for the reaction frame
-  const rx = base0.props?.react;
-  const base = rx ? { ...base0, bg: rx.bg ?? base0.bg, props: Object.freeze({ ...base0.props, ...rx, react: null }) } : base0;
+  const base = beatView(scenes[r.s].beats[r.b], pos.flags);
   return Object.freeze({ ...base, choices: null, timer: null, auto: null, wait: 'click', hold: MIN_HOLD, sfx: null, card: null, end: null,
     text: r.line ? r.line.plain : base.text, line: r.line ?? base.line, react: r });
 }

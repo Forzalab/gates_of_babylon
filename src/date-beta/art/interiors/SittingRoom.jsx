@@ -76,69 +76,12 @@ function Plate({ X, Z, kind }) {
   );
 }
 
-
-// the low tea table + its cups / pot / plate: drawn in the room, and again as the BOOK cel (SittingRoomBook) over her
-// sprite, so she stands BEHIND the table (its top hides her legs; research/sprint-0930/r5-ume, AUDIT 084).
-function TableSet({ kind, id }) {
-  const top = pts([[-TX, TOP, TZ0], [TX, TOP, TZ0], [TX, TOP, TZ1], [-TX, TOP, TZ1]]);
-  const front = pts([[-TX, TOP - 0.04, TZ0], [TX, TOP - 0.04, TZ0], [TX, TOP, TZ0], [-TX, TOP, TZ0]]);
-  const leg = (x) => pts([[x - 0.03, 0, TZ0 + 0.06], [x + 0.03, 0, TZ0 + 0.06], [x + 0.03, TOP - 0.04, TZ0 + 0.06], [x - 0.03, TOP - 0.04, TZ0 + 0.06]]);
-  return (
-    <g>
-      <defs><linearGradient id={`${id}-table`} x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#4a2a1c" /><stop offset=".7" stopColor="#6a3c26" /><stop offset="1" stopColor="#7e4a2e" /></linearGradient></defs>
-        {/* the low tea table */}
-        <polygon points={leg(-TX + 0.08)} fill="#2a160e" /><polygon points={leg(TX - 0.08)} fill="#2a160e" />
-        <polygon points={top} fill={`url(#${id}-table)`} />
-        <ellipse cx="1180" cy="770" rx="260" ry="22" fill="#ffd9a8" opacity=".14" />
-        <polygon points={pts([[-TX, TOP + 0.001, TZ1 - 0.01], [TX, TOP + 0.001, TZ1 - 0.01], [TX, TOP + 0.001, TZ1], [-TX, TOP + 0.001, TZ1]])} fill="#9fb8e8" opacity=".35" />
-        <polygon points={front} fill="#2e180e" />
-        <polygon points={pts([[-TX, TOP - 0.004, TZ0], [TX, TOP - 0.004, TZ0], [TX, TOP, TZ0], [-TX, TOP, TZ0]])} fill="#c88a5a" opacity=".5" />
-        <Teapot X={-0.6} Z={1.56} />
-        <Cup X={-0.4} Z={1.44} full />
-        <Cup X={-0.7} Z={1.46} full />
-        <Plate X={0.4} Z={1.42} kind={kind} />
-        <Cup X={0.64} Z={1.5} />
-    </g>
-  );
-}
-// the BOOK cel (art id `sitting-room-book`): the same table, over her (main.jsx draws ART[`${bg}-book`] after her sprite)
-export function SittingRoomBook({ props = {} }) {
-  const kind = props.feed || props.plate || null;
-  return (
-    <div className="art sr-book">
-      <svg viewBox="0 0 1920 1080" width="1920" height="1080" aria-hidden="true"><TableSet kind={kind} id="srb" /></svg>
-    </div>
-  );
-}
-
-
-// r5 (AUDIT 082): the table's dining chairs, one at each end (yours is the middle one, where the camera sits). Wood, the
-// lamp (top right) lights their right edges; a soft contact shadow under each on the floor.
-function SideChair({ flip = false }) {
-  const t = flip ? 'translate(1920 0) scale(-1 1)' : undefined;
-  const wood = '#5a321e', line = '#2a160e', lit = flip ? '#3e2214' : '#9a6a44';
-  return (
-    <g transform={t}>
-      <ellipse cx="170" cy="1066" rx="170" ry="22" fill="#0d0806" opacity=".45" />
-      {/* the back posts + top rail + a slat (the backrest faces the camera side) */}
-      <rect x="62" y="560" width="30" height="520" rx="8" fill={wood} stroke={line} strokeWidth="5" />
-      <rect x="132" y="578" width="28" height="500" rx="8" fill={wood} stroke={line} strokeWidth="5" />
-      <path d="M52 560 L170 578 L170 628 L52 612Z" fill="#6a3c26" stroke={line} strokeWidth="5" strokeLinejoin="round" />
-      <path d="M62 700 L160 712 L160 736 L62 724Z" fill="#6a3c26" stroke={line} strokeWidth="4" strokeLinejoin="round" />
-      <path d="M56 566 L166 582" stroke={lit} strokeWidth="6" strokeLinecap="round" />
-      {/* the seat, reaching toward the table, and the front legs */}
-      <path d="M58 880 L166 896 L318 890 L226 872Z" fill="#6a3c26" stroke={line} strokeWidth="5" strokeLinejoin="round" />
-      <path d="M58 880 L166 896 L166 914 L58 898Z" fill="#4a2a1c" stroke={line} strokeWidth="4" strokeLinejoin="round" />
-      <path d="M166 896 L318 890 L318 906 L166 914Z" fill="#3e2214" stroke={line} strokeWidth="4" strokeLinejoin="round" />
-      <rect x="226" y="900" width="24" height="180" fill={wood} stroke={line} strokeWidth="4" />
-      <rect x="292" y="900" width="24" height="180" fill={wood} stroke={line} strokeWidth="4" />
-    </g>
-  );
-}
-
 export default function SittingRoom({ props = {}, rm }) {
   const kind = props.feed || props.plate || null;
   const lamp = [1302, 262];
+  const top = pts([[-TX, TOP, TZ0], [TX, TOP, TZ0], [TX, TOP, TZ1], [-TX, TOP, TZ1]]);
+  const front = pts([[-TX, TOP - 0.04, TZ0], [TX, TOP - 0.04, TZ0], [TX, TOP, TZ0], [-TX, TOP, TZ0]]);
+  const leg = (x) => pts([[x - 0.03, 0, TZ0 + 0.06], [x + 0.03, 0, TZ0 + 0.06], [x + 0.03, TOP - 0.04, TZ0 + 0.06], [x - 0.03, TOP - 0.04, TZ0 + 0.06]]);
   return (
     <div className="art sitting-room">
       <svg viewBox="0 0 1920 1080" width="1920" height="1080" role="img"
@@ -162,8 +105,18 @@ export default function SittingRoom({ props = {}, rm }) {
         <Curtain x0={0} x1={340} hem={FLOOR + 10} side="left" seed={5} tint="#9a86c0" shade="#3e3258" />
         <Curtain x0={1580} x1={1920} hem={FLOOR + 10} side="right" seed={6} tint="#c8a8c8" shade="#4a3a60" />
         <circle cx={lamp[0]} cy={lamp[1]} r="520" fill="url(#sr-lamp)" style={{ mixBlendMode: 'screen' }} />
-        <SideChair /><SideChair flip />
-        <TableSet kind={kind} id="sr" />
+        {/* the low tea table */}
+        <polygon points={leg(-TX + 0.08)} fill="#2a160e" /><polygon points={leg(TX - 0.08)} fill="#2a160e" />
+        <polygon points={top} fill="url(#sr-table)" />
+        <ellipse cx="1180" cy="770" rx="260" ry="22" fill="#ffd9a8" opacity=".14" />
+        <polygon points={pts([[-TX, TOP + 0.001, TZ1 - 0.01], [TX, TOP + 0.001, TZ1 - 0.01], [TX, TOP + 0.001, TZ1], [-TX, TOP + 0.001, TZ1]])} fill="#9fb8e8" opacity=".35" />
+        <polygon points={front} fill="#2e180e" />
+        <polygon points={pts([[-TX, TOP - 0.004, TZ0], [TX, TOP - 0.004, TZ0], [TX, TOP, TZ0], [-TX, TOP, TZ0]])} fill="#c88a5a" opacity=".5" />
+        <Teapot X={-0.6} Z={1.56} />
+        <Cup X={-0.4} Z={1.44} full />
+        <Cup X={-0.7} Z={1.46} full />
+        <Plate X={0.4} Z={1.42} kind={kind} />
+        <Cup X={0.64} Z={1.5} />
         <Grade id="sr-grade" tone="night" sun={lamp} flareR={160} rm={rm} />
       </svg>
     </div>

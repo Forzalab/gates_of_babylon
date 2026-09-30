@@ -10,20 +10,18 @@ import { nandaSVG, stageFor } from './art/nanda.js';
 import { faceLayers } from './art/emotion/face.js';
 
 const VIEW = { medium: '-130 -330 320 345', eyes: '-65 -188 150 84.375' };
-export const FRAMES = ['off', 'medium', 'handout', 'pov', 'eyes', 'peek', 'close', 'reach']; // reach (r5): her medium close-up on the right, one pin arm thrust toward the lens
+export const FRAMES = ['off', 'medium', 'handout', 'pov', 'eyes', 'peek', 'close'];
 const BUBBLE = new Set(['medium', 'pov']);
 
 // layers: gacha face layer ids (vein | puff | shadow-eyes | sparkle), still overlays on her face (art/emotion/face.js).
-// arms / pose / tilt (r5): her pin arms, the kneel pose and a lean (art/nanda.js); data from props.cut.
-export function Nanda({ scare = 0, raised = false, emote = null, big = false, talk = true, layers = null, face = null, frame = 'medium', planted = 0, floor = 0, arms = null, pose = null, tilt = 0, dx = 0 }) {
+export function Nanda({ scare = 0, raised = false, emote = null, big = false, talk = true, layers = null, face = null, frame = 'medium', planted = 0, floor = 0 }) {
   const stage = stageFor(scare);
   const key = layers?.join(',') ?? '';
   const bubble = talk && BUBBLE.has(frame);
-  const armKey = arms ? JSON.stringify(arms) : '';
-  const svg = useMemo(() => nandaSVG({ stage, emote: emote ?? undefined, big, talk: bubble, face, arms: armKey ? JSON.parse(armKey) : null, pose, tilt,
-    overlay: key ? (P, A) => faceLayers(key.split(','), P, A) : null }), [stage, emote, big, bubble, key, face, armKey, pose, tilt]);
+  const svg = useMemo(() => nandaSVG({ stage, emote: emote ?? undefined, big, talk: bubble, face,
+    overlay: key ? (P, A) => faceLayers(key.split(','), P, A) : null }), [stage, emote, big, bubble, key, face]);
   return (
-    <svg className={`db-nanda stage-${stage} frame-${frame}${raised ? ' raised' : ''}${pose ? ` pose-${pose}` : ''}${planted ? ' planted' : ''}${floor ? ' floored' : ''}`} style={{ ...(floor ? { '--floor': `${floor}px` } : planted ? { '--plant': `${planted}px` } : {}), ...(dx ? { translate: `${dx}px 0` } : {}) }} data-layers={key || undefined} data-face={face ?? undefined}
+    <svg className={`db-nanda stage-${stage} frame-${frame}${raised ? ' raised' : ''}${planted ? ' planted' : ''}${floor ? ' floored' : ''}`} style={floor ? { '--floor': `${floor}px` } : planted ? { '--plant': `${planted}px` } : undefined} data-layers={key || undefined} data-face={face ?? undefined}
       viewBox={VIEW[frame] ?? VIEW.medium} preserveAspectRatio={frame === 'eyes' ? 'xMidYMid slice' : undefined} role="img"
       aria-label={frame === 'eyes' ? 'Nanda, extreme close-up on her eyes' : 'Nanda'} dangerouslySetInnerHTML={{ __html: svg }} />
   );

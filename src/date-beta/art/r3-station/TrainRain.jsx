@@ -5,7 +5,6 @@
 // grey window reflections down the aisle. Sun (4:40) -> rain (5:20) is the time passing.
 import { R3Scene, RainPair, Pole, TOD, preloadTrace, pts } from './parts.jsx';
 import { nandaSVG } from '../nanda.js';
-import { rng } from '../util.js';
 
 preloadTrace('train-rain');
 
@@ -122,50 +121,16 @@ export function Sleeper({ face = 'dazed-sleepy' }) {
     </g>
   );
 }
-// r5 (AUDIT 064): "It's raining. She lays her head on yours." The rain is ON the windows (streaks + beads, only inside the
-// glass), and she sleeps on YOUR shoulder (the navy blazer mound, bottom left), not on the dialogue bar.
-const PANES = [[420, 196, 336, 410], [1414, 24, 384, 610]];
-function WindowRain() {
-  const r = rng(517), streaks = [], beads = [];
-  PANES.forEach(([x, y, w, h], k) => {
-    for (let i = 0; i < 26; i++) { const sx = x + r() * w, sy = y + r() * h, len = 40 + r() * 90; streaks.push([sx, sy, len, k]); }
-    for (let i = 0; i < 14; i++) beads.push([x + r() * w, y + r() * h, 3 + r() * 5]);
-  });
-  return (
-    <g aria-hidden="true">
-      <defs><clipPath id="r5-panes">{PANES.map(([x, y, w, h], i) => <rect key={i} x={x} y={y} width={w} height={h} />)}</clipPath></defs>
-      <g clipPath="url(#r5-panes)">
-        {PANES.map(([x, y, w, h], i) => <rect key={i} x={x} y={y} width={w} height={h} fill="#3a4a66" opacity=".35" />)}
-        <g stroke="#dfe8ff" strokeWidth="3" strokeLinecap="round" opacity=".55">
-          {streaks.map(([x, y, len], i) => <line key={i} x1={x} y1={y} x2={x - len * 0.16} y2={y + len} />)}
-        </g>
-        {beads.map(([x, y, rr], i) => <g key={i}><ellipse cx={x} cy={y} rx={rr} ry={rr * 1.3} fill="#eaf1ff" opacity=".75" /><ellipse cx={x - rr * 0.3} cy={y - rr * 0.4} rx={rr * 0.35} ry={rr * 0.4} fill="#fff" /></g>)}
-      </g>
-    </g>
-  );
-}
-function YourShoulder() {
-  return (
-    <g aria-hidden="true">
-      <path d="M180 1080 C220 860 420 720 700 690 C900 670 1130 690 1240 760 C1320 820 1330 960 1320 1080Z" fill="#2d3a5a" stroke="#1b2238" strokeWidth="7" />
-      <path d="M520 720 C700 690 960 684 1150 720" stroke="#3d4870" strokeWidth="16" fill="none" strokeLinecap="round" opacity=".7" />
-      {/* your white shirt collar at the neck, top right of the mound */}
-      <path d="M1150 716 L1230 700 L1260 760 L1190 790Z" fill="#f4f1ea" stroke="#9a948a" strokeWidth="4" />
-    </g>
-  );
-}
 export function TrainRainSleepy({ props, rm }) {
   return (
     <TrainRain rm={rm} id="train-rain-sleepy" over={(
         <>
-          <WindowRain />
           {/* cosy dim carriage: the bg is darkened and warmed yellow, and she gets the same warm grade so they match */}
           <rect width="1920" height="1080" fill="#1c0e04" opacity=".62" />
           <rect width="1920" height="1080" fill="#ffb238" opacity=".2" />
-          <g style={{ filter: 'sepia(.35) saturate(1.1) brightness(.9)' }}><YourShoulder /></g>
-          <g transform="translate(0 -118)" style={{ filter: 'sepia(.55) saturate(1.15) brightness(.85)' }}><Sleeper face={props?.cut?.face ?? 'dazed-sleepy'} /></g>
+          <g style={{ filter: 'sepia(.55) saturate(1.15) brightness(.85)' }}><Sleeper face={props?.cut?.face ?? 'dazed-sleepy'} /></g>
         </>
       )}
-      label="5:20 PM on the rainy train. Rain runs down the windows. Nanda has fallen half asleep with her head on your shoulder, drooling a little." />
+      label="5:20 PM on the rainy train. Nanda has fallen half asleep lying across the dialogue bar, drooling a little." />
   );
 }

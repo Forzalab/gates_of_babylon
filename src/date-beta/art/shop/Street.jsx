@@ -28,10 +28,9 @@ export function Cart({ items = false, hands = true, her = true, handle = true, a
       {/* the handle: red grip on two posts */}
       {handle && <rect x="380" y={HANDLE_Y - 20} width="1160" height="40" rx="20" fill={SP.red} stroke={SP.redLo} strokeWidth="4" />}
       {handle && <rect x="400" y={HANDLE_Y - 14} width="1120" height="8" rx="4" fill="#fff" opacity=".45" />}
-      {hands && <Hand x={610} y={HANDLE_Y + 122} rot={10} pose="grip" thumb="right" sleeve={SP.player} />}
-      {hands && <Hand x={1320} y={HANDLE_Y + 122} rot={-10} pose="grip" thumb="left" sleeve={SP.player} />}
-      {/* r5 (AUDIT 026): her hand lies ON the back of your right hand, her fingers over your knuckles, her arm from the right */}
-      {hands && her && <Hand x={1398} y={HANDLE_Y + 150} rot={-22} s={0.9} her pose="flat" thumb="right" />}
+      {hands && <Hand x={610} y={HANDLE_Y + 122} rot={10} pose="grip" thumb="right" />}
+      {hands && <Hand x={1320} y={HANDLE_Y + 122} rot={-10} pose="grip" thumb="left" />}
+      {hands && her && <Hand x={1355} y={HANDLE_Y + 87} rot={-72} s={0.92} her pose="flat" thumb="right" />}
     </g>
   );
 }

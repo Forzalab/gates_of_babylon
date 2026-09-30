@@ -1,7 +1,6 @@
 // CURRY street (the choice) + the BUTTER-CHICKEN chain: NAND HOUSE, a Nepali-run Indian shop in Japan.
 // Refs + order: research/sprint-0930/curry/SHOTLIST.md. Every sign is ours; people and watermarks are gone (prep.py).
 import { CurryScene, Plate, Steam, Clock, Bell, usePose, preloadTrace } from './parts.jsx';
-import { Hand } from '../shop/parts.jsx';
 
 ['choice', 'butter-door', 'butter-int', 'butter-table', 'thali', 'naan-lift', 'sauce', 'naan-dip', 'naan-feed', 'butter-bite', 'lassi', 'napkin']
   .forEach((k) => preloadTrace(`curry/${k}`));
@@ -118,10 +117,8 @@ export function CurryNaanLift() {
 // a small steel boat pours more butter sauce into the butter chicken cup
 export function CurrySauce({ rm }) {
   return (
-    <CurryScene id="sauce" label="Close: her hand tips a small steel boat by its handle; more butter sauce pours into the cup of butter chicken. It is thick, orange, and shiny.">
+    <CurryScene id="sauce" label="Close: more butter sauce pours from a small steel boat into the cup of butter chicken. It is thick, orange, and shiny.">
       <Steam x={620} y={330} h={170} rm={rm} o={0.35} />
-      {/* r5 (AUDIT 050): her hand holds the boat by its handle (top right), her pink cuff off the frame edge */}
-      <Hand x={1860} y={280} rot={250} s={1} her pose="grip" thumb="left" />
     </CurryScene>
   );
 }

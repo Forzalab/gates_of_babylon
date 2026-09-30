@@ -13,11 +13,8 @@ const scenes = loadScenes(applyPacks(read('./date-beta/scenes.json'), packs), { 
 const nearOf = (id) => scenes.find((s) => s.id === id).beats.map((b) => b.props?.near ?? null);
 const IDS = /export const NEAR_IDS = \[([^\]]+)\]/.exec(src('./date-beta/fx/NearLens.jsx'))[1].match(/'([\w-]+)'/g).map((s) => s.slice(1, -1));
 
-// r5-ume: the 5:20 nap lost its near-lens hair strand (it was her old side-pony, which read as a blade; she now sleeps on
-// your shoulder), and the town crossing ("So many people") gets the station crowd cel.
-test('station crowd: beats 2-3 crowd, 4-5 crowd-bump (hat boy), and nothing else in v2-train', () => {
-  assert.deepEqual(nearOf('v2-train'), [null, null, 'crowd', 'crowd', 'crowd-bump', 'crowd-bump', null, null, null]);
-  assert.equal(nearOf('v2-town')[2], 'crowd');
+test('station crowd: beats 2-3 crowd, 4-5 crowd-bump (hat boy), and nothing else in v2-train but the 5:20 nap', () => {
+  assert.deepEqual(nearOf('v2-train'), [null, null, 'crowd', 'crowd', 'crowd-bump', 'crowd-bump', null, 'hair', null]);
 });
 
 test('basement: every cellar beat of escape has the shelves; the blackout beats never do', () => {
@@ -29,12 +26,10 @@ test('basement: every cellar beat of escape has the shelves; the blackout beats 
 
 test('rooftop fence only on the establishing beats (the handout + choice beats stay clean); genkan on v2-home 0', () => {
   const roof = nearOf('rooftop');
-  // r5-ume: beat 2 is now the low insert at the fence (her shoes): the fence is IN that shot, not a lens cel over it
-  assert.deepEqual(roof.slice(0, 3), ['fence', 'fence', null]);
+  assert.deepEqual(roof.slice(0, 3), ['fence', 'fence', 'fence']);
   assert.ok(roof.slice(3).every((n) => n === null));
   scenes.find((s) => s.id === 'rooftop').beats.forEach((b, i) => { if (b.choices) assert.equal(roof[i], null, `rooftop ${i}`); });
-  // r5-ume: v2-home 0 frames her shoes in their perfect line (a stamp pushed in on the shoe row): no lens cel over them
-  assert.deepEqual(nearOf('v2-home'), [null, null, null, null, null]);
+  assert.deepEqual(nearOf('v2-home'), ['genkan', null, null, null, null]);
 });
 
 test('every props.near in the game names a cel NearLens draws; the layer is static (no animation / keyframes)', () => {

@@ -6,67 +6,63 @@
 // feet tuck behind it (the box crops them, SHADOWS.md). crop: true = she is only ever shown cropped on this bg (the box /
 // frame hides her feet); no floor is applied, the audit flags it if her feet ever show.
 export const UNDER_BOX = 840;
-// r5-ume (AUDIT G3, the box ate her feet on ~45 beats): every medium shot now stands her ON a visible floor line above the
-// 2-line dialogue box (its pins reach y ~755): FEET = the default line where the bg's ground at her column is not measured
-// higher. The focus plane (main.jsx .db-plane) keeps that band of ground sharp, so she reads grounded, not pasted.
-export const FEET = 742;
 export const FLOORS = {
   // measured ground lines (feet visible)
-  'rain-ending': { y: FEET },      // the wet road at her x, just above the box (v2-rain 4)
-  'her-building': { y: FEET },     // the dark street in front of door 12 (v2-street 5)
-  'shop-way-out': { y: FEET },     // the pavement outside the shop doors
+  'rain-ending': { y: 760 },      // the wet road at her x, just above the box (v2-rain 4)
+  'her-building': { y: 790 },     // the dark street in front of door 12 (v2-street 5)
+  'shop-way-out': { y: 760 },     // the pavement outside the shop doors
   'train-sun': { y: 690 },        // the carriage floor (v2-train 6, matched to the Tony-approved plant 90)
   'platform-rain': { y: 698 },    // the platform edge (v2-train 8, plant 100)
   'station-ads': { y: 690 },      // the platform under the ads (v2-train 4, plant 90)
   // ground hidden behind the box at her column: feet tuck behind it
-  'curry-street': { y: FEET },
-  'town-board': { y: FEET },
+  'curry-street': { y: UNDER_BOX },
+  'town-board': { y: UNDER_BOX },
   // insert-card shots (a card over the bg): no ground in the card, feet tuck behind the box
-  'feet-park': { y: FEET },
-  'hands-lock': { y: FEET },
-  'tea-pour': { y: FEET },
+  'feet-park': { y: UNDER_BOX },
+  'hands-lock': { y: UNDER_BOX },
+  'tea-pour': { y: UNDER_BOX },
   // her feet are always behind the box / frame on these (audit: cropped on every beat)
-  'rooftop-noon': { y: FEET },
-  'shop-vending': { y: FEET },
-  'shop-doors': { y: FEET },
-  'shop-list': { y: FEET },
-  'shop-snacks': { y: FEET },
-  'shop-checkout': { y: FEET },
-  'shop-register': { y: FEET },
-  'shop-self-checkout': { y: FEET },
-  'shop-self-close': { y: FEET },
-  'curry-choice': { y: FEET },
-  'curry-butter-table': { y: FEET },
-  'curry-katsu-counter': { y: FEET },
-  'curry-katsu-int': { y: FEET },
-  'station-gate-r3': { y: FEET },
-  'vending-insert': { y: FEET },
-  'station-ads-insert': { y: FEET },
-  'rain-sidewalk': { y: FEET },
-  'rain-alley': { y: FEET },
-  'rain-eave': { y: FEET },
-  'street-bluehour': { y: FEET },
-  'street-dusk': { y: FEET },
-  'street-day': { y: FEET },
-  'BG-D1': { y: FEET },
-  'BG-D2': { y: FEET },
-  'BG-D3': { y: FEET },
-  'sitting-room': { y: 854, book: 745 }, // r5: behind the tea table (the BOOK cel sitting-room-book crops her at its far edge)
-  'bedroom': { y: FEET },
-  'blackout': { y: FEET },
-  'escape-night': { y: FEET },
-  'train': { y: FEET },
-  'crossing-night': { y: FEET },
-  'crossing-day': { y: FEET },
-  'shop-street': { y: FEET },
-  'genkan-in': { y: FEET },
-  'town-street': { y: FEET },
-  'town-crossing': { y: FEET },
-  'park': { y: FEET },
-  'rail-crossing': { y: FEET },
+  'rooftop-noon': { crop: true },
+  'shop-vending': { crop: true },
+  'shop-doors': { crop: true },
+  'shop-list': { crop: true },
+  'shop-snacks': { crop: true },
+  'shop-checkout': { crop: true },
+  'shop-register': { crop: true },
+  'shop-self-checkout': { crop: true },
+  'shop-self-close': { crop: true },
+  'curry-choice': { crop: true },
+  'curry-butter-table': { crop: true },
+  'curry-katsu-counter': { crop: true },
+  'curry-katsu-int': { crop: true },
+  'station-gate-r3': { crop: true },
+  'vending-insert': { crop: true },
+  'station-ads-insert': { crop: true },
+  'rain-sidewalk': { crop: true },
+  'rain-alley': { crop: true },
+  'rain-eave': { crop: true },
+  'street-bluehour': { crop: true },
+  'street-dusk': { crop: true },
+  'street-day': { crop: true },
+  'BG-D1': { crop: true },
+  'BG-D2': { crop: true },
+  'BG-D3': { crop: true },
+  'sitting-room': { crop: true },
+  'bedroom': { crop: true },
+  'blackout': { crop: true },
+  'escape-night': { crop: true },
+  'train': { crop: true },
+  'crossing-night': { crop: true },
+  'crossing-day': { crop: true },
+  'shop-street': { crop: true },
+  'genkan-in': { crop: true },
+  'town-street': { crop: true },
+  'town-crossing': { crop: true },
+  'park': { crop: true },
+  'rail-crossing': { crop: true },
 };
 export function floorOf(bg, shot) {
   const key = shot && FLOORS[shot] ? shot : bg;
   const f = FLOORS[key];
-  return { key, y: f && !f.crop ? f.y ?? null : null, book: f?.book ?? null };
+  return { key, y: f && !f.crop ? f.y ?? null : null };
 }
