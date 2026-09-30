@@ -1,0 +1,346 @@
+[
+ {
+  "nm": "001-rooftop-0-card.png",
+  "scene": "rooftop",
+  "beat": "0",
+  "tag": "card",
+  "text": "CARD: GOAL Make Nanda like you. Her LOVE score must reach 10",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "002-rooftop-1.png",
+  "scene": "rooftop",
+  "beat": "1",
+  "tag": "",
+  "text": "",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "003-rooftop-2.png",
+  "scene": "rooftop",
+  "beat": "2",
+  "tag": "",
+  "text": "Her shoes by the fence. Toes pointed at you.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "004-rooftop-3.png",
+  "scene": "rooftop",
+  "beat": "3",
+  "tag": "",
+  "text": "NANDA: I made two. One's for you. Don't look at me like that",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "005-rooftop-3-react.png",
+  "scene": "rooftop",
+  "beat": "3",
+  "tag": "react",
+  "text": "NANDA: Sour. Brave. I'll remember you like sour.",
+  "choices": [],
+  "taken": "",
+  "pop": "+1 She liked that."
+ },
+ {
+  "nm": "006-rooftop-4.png",
+  "scene": "rooftop",
+  "beat": "4",
+  "tag": "",
+  "text": "Close-up. The lid lifts. One red umeboshi on white rice.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "007-rooftop-5.png",
+  "scene": "rooftop",
+  "beat": "5",
+  "tag": "",
+  "text": "",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "008-rooftop-6.png",
+  "scene": "rooftop",
+  "beat": "6",
+  "tag": "",
+  "text": "MC: Itadakimasu.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "009-rooftop-7.png",
+  "scene": "rooftop",
+  "beat": "7",
+  "tag": "",
+  "text": "She doesn't eat hers. She watches you chew.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "010-rooftop-8-choice.png",
+  "scene": "rooftop",
+  "beat": "8",
+  "tag": "choice",
+  "text": "NANDA: Sour. Hm. You like things that bite?",
+  "choices": [
+   "♥ ??Best I've ever had",
+   "♥ ??It's good",
+   "♡ ??Bit salty, honestly"
+  ],
+  "taken": "♥ ??Best I've ever had",
+  "pop": null
+ },
+ {
+  "nm": "011-rooftop-8-react.png",
+  "scene": "rooftop",
+  "beat": "8",
+  "tag": "react",
+  "text": "NANDA: …Obviously. Don't stare.",
+  "choices": [],
+  "taken": "",
+  "pop": "+7 She liked that."
+ },
+ {
+  "nm": "012-rooftop-10-react.png",
+  "scene": "rooftop",
+  "beat": "10",
+  "tag": "react",
+  "text": "MC: Technically, rain wasn't f-OR-ecast.",
+  "choices": [],
+  "taken": "",
+  "pop": "+1 She liked that."
+ },
+ {
+  "nm": "013-rooftop-11-choice.png",
+  "scene": "rooftop",
+  "beat": "11",
+  "tag": "choice",
+  "text": "NANDA: Stay fORever? The rain can wait.",
+  "choices": [
+   "♥ +3Stay a minute",
+   "♥ +1Walk with her",
+   "♡ −3OR Leave before the rain"
+  ],
+  "taken": "♡ −3OR Leave before the rain",
+  "pop": null
+ },
+ {
+  "nm": "014-rooftop-11-react.png",
+  "scene": "rooftop",
+  "beat": "11",
+  "tag": "react",
+  "text": "NANDA: …Fine. The rain can have you. Later.",
+  "choices": [],
+  "taken": "",
+  "pop": "−8 She did not like that."
+ },
+ {
+  "nm": "015-v2-park-0.png",
+  "scene": "v2-park",
+  "beat": "0",
+  "tag": "",
+  "text": "PARK · 1:00 PM. A path under cherry trees. Petals on the gro",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "016-door-0.png",
+  "scene": "door",
+  "beat": "0",
+  "tag": "",
+  "text": "",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "017-door-1-choice.png",
+  "scene": "door",
+  "beat": "1",
+  "tag": "choice",
+  "text": "NANDA: This is me. Unit 12. Obviously you'll remember.",
+  "choices": [
+   "♥ +2I'll never forget it",
+   "♥ +1Nice building",
+   "♡ −3Which unit again?"
+  ],
+  "taken": "♥ +2I'll never forget it",
+  "pop": null
+ },
+ {
+  "nm": "018-door-1-react.png",
+  "scene": "door",
+  "beat": "1",
+  "tag": "react",
+  "text": "NANDA: Good. I wrote it on your hand anyway.",
+  "choices": [],
+  "taken": "",
+  "pop": "+2 She liked that."
+ },
+ {
+  "nm": "019-door-2.png",
+  "scene": "door",
+  "beat": "2",
+  "tag": "",
+  "text": "NANDA: Come in? Just for tea.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "020-door-3-choice.png",
+  "scene": "door",
+  "beat": "3",
+  "tag": "choice",
+  "text": "NANDA: I already boiled the water. This morning. Just in cas",
+  "choices": [
+   "♥ ??Just one cup",
+   "♥ ??One cup, then home",
+   "♡ ??Say goodnight"
+  ],
+  "taken": "♡ ??Say goodnight",
+  "pop": null
+ },
+ {
+  "nm": "021-door-3-react.png",
+  "scene": "door",
+  "beat": "3",
+  "tag": "react",
+  "text": "NANDA: …Goodnight? It's only 11:19 AM.",
+  "choices": [],
+  "taken": "",
+  "pop": "−5 She did not like that."
+ },
+ {
+  "nm": "022-leave-0.png",
+  "scene": "leave",
+  "beat": "0",
+  "tag": "",
+  "text": "NANDA: Leaving is not an option.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "023-leave-1.png",
+  "scene": "leave",
+  "beat": "1",
+  "tag": "",
+  "text": "XOR Coffee. 7:00 AM.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "024-leave-2-choice.png",
+  "scene": "leave",
+  "beat": "2",
+  "tag": "choice",
+  "text": "NANDA: He wakes at 7:00.",
+  "choices": [
+   "♥ +2Good morning, Nanda",
+   "♥ +1Who's 'he'?",
+   "♡ −3Stop following me"
+  ],
+  "taken": "♥ +2Good morning, Nanda",
+  "pop": null
+ },
+ {
+  "nm": "025-leave-2-react.png",
+  "scene": "leave",
+  "beat": "2",
+  "tag": "react",
+  "text": "NANDA: Good morning! Same as yesterday. Same as always.",
+  "choices": [],
+  "taken": "",
+  "pop": "+2 She liked that."
+ },
+ {
+  "nm": "026-leave-3-choice.png",
+  "scene": "leave",
+  "beat": "3",
+  "tag": "choice",
+  "text": "NANDA: From now on… can we be fORever?",
+  "choices": [
+   "♥ ??uhmmm yeah ig",
+   "♥ ??Forever sounds long",
+   "♡ ??FUCK YOU. I'm leaving"
+  ],
+  "taken": "♡ ??FUCK YOU. I'm leaving",
+  "pop": null
+ },
+ {
+  "nm": "027-leave-3-react.png",
+  "scene": "leave",
+  "beat": "3",
+  "tag": "react",
+  "text": "NANDA: Leave, then. I'll be here. I'm always here.",
+  "choices": [],
+  "taken": "",
+  "pop": "−8 She did not like that."
+ },
+ {
+  "nm": "028-leave-fu-0.png",
+  "scene": "leave-fu",
+  "beat": "0",
+  "tag": "",
+  "text": "Her hand rises. Time freezes. The café turns.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "029-leave-fu-1.png",
+  "scene": "leave-fu",
+  "beat": "1",
+  "tag": "",
+  "text": "NANDA: You said leave. I heard 'lea—'.",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "030-leave-fu-2.png",
+  "scene": "leave-fu",
+  "beat": "2",
+  "tag": "",
+  "text": "CROWD: fORever and ever",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "031-leave-fu-3.png",
+  "scene": "leave-fu",
+  "beat": "3",
+  "tag": "",
+  "text": "CROWD: fORever and ever and ever",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ },
+ {
+  "nm": "032-leave-fu-4-end.png",
+  "scene": "leave-fu",
+  "beat": "4",
+  "tag": "end",
+  "text": "END: GAME OVER 0% You left a crumb. I noticed. Again? LOVE 0",
+  "choices": [],
+  "taken": "",
+  "pop": null
+ }
+]
