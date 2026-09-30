@@ -7,3 +7,5 @@ export const ART_NAMES = [...ART_INDEX.slice(ART_INDEX.indexOf('export const ART
 // ...SCENE_A (art/scene-a/index.js, which spreads ...ROOFTOP from art/rooftop/index.js) adds its own ids.
 const idsOf = (p, from) => { const s = readFileSync(new URL(p, import.meta.url), 'utf8'); return [...s.slice(s.indexOf(from)).matchAll(/'([\w-]+)': [A-Z]\w*/g)].map((m) => m[1]); };
 if (ART_INDEX.includes('...SCENE_A')) ART_NAMES.push(...idsOf('./date-beta/art/rooftop/index.js', 'ROOFTOP'), ...idsOf('./date-beta/art/scene-a/index.js', 'export const SCENE_A'));
+// ...R3_STATION (art/r3-station/index.js, scenes-r3 G1 station + train) adds its own ids.
+if (ART_INDEX.includes('...R3_STATION')) ART_NAMES.push(...idsOf('./date-beta/art/r3-station/index.js', 'export const R3_STATION'));
