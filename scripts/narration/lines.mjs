@@ -27,7 +27,7 @@ export function narrationLines() {
       const key = `${s.id}|${text}`;
       if (seen.has(key)) continue;
       seen.add(key);
-      out.push({ scene: s.id, beat: b.index, k, who: line.who, text, ...(cut.at ? { at: cut.at } : {}) });
+      out.push({ scene: s.id, beat: b.index, k, who: line.who, text, ...(cut.at ? { at: cut.at } : {}), ...(b.props?.sfxAt ? { sfxAt: b.props.sfxAt } : {}) });
     }
   }
   return out;

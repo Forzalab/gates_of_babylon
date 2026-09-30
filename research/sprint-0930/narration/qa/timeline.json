@@ -1,0 +1,8240 @@
+{
+ "pad": 350,
+ "scenes": [
+  {
+   "id": "rooftop",
+   "ms": 100240,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 1200,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 0
+     },
+     "readyAt": 1200,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 1200,
+     "end": 2100,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 1200
+     },
+     "readyAt": 2100,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 2100,
+     "end": 5480,
+     "text": "Her shoes by the fence. Toes pointed at you.",
+     "chars": 44,
+     "files": [
+      "date-beta/voice/narration/rooftop/245_2.mp3"
+     ],
+     "voice": [
+      2100,
+      5130
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 5480,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 5480,
+     "end": 11969,
+     "text": "I made two. One's for you. Don't look at me like that.",
+     "chars": 54,
+     "files": [
+      "date-beta/voice/01-rooftop/001_1.mp3"
+     ],
+     "voice": [
+      5480,
+      11619
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 5480
+     },
+     "readyAt": 11969,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] react 0",
+     "start": 11969,
+     "end": 17988,
+     "text": "Sweet egg for my sweet boy. ♡",
+     "chars": 29,
+     "files": [
+      "date-beta/voice/01-rooftop/002_1-r.mp3"
+     ],
+     "voice": [
+      11969,
+      17638
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 17988,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] react 1",
+     "start": 17988,
+     "end": 24163,
+     "text": "Sour. Brave. I'll remember you like sour.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/01-rooftop/003_1-r.mp3"
+     ],
+     "voice": [
+      17988,
+      23813
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 24163,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] react 2",
+     "start": 24163,
+     "end": 27465,
+     "text": "…I woke up at four for this.",
+     "chars": 28,
+     "files": [
+      "date-beta/voice/01-rooftop/004_1-r.mp3"
+     ],
+     "voice": [
+      24163,
+      27115
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 27465,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 27465,
+     "end": 27965,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 27465
+     },
+     "readyAt": 27965,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] bento=umeboshi",
+     "start": 27965,
+     "end": 32521,
+     "text": "Close-up. The lid lifts. One red umeboshi on white rice.",
+     "chars": 56,
+     "files": [
+      "date-beta/voice/narration/rooftop/246_4-bento-umeboshi.mp3"
+     ],
+     "voice": [
+      27965,
+      32171
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 27965
+     },
+     "readyAt": 32521,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4] bento=tamagoyaki",
+     "start": 32521,
+     "end": 37730,
+     "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers.",
+     "chars": 59,
+     "files": [
+      "date-beta/voice/narration/rooftop/247_4-bento-tamagoyaki.mp3"
+     ],
+     "voice": [
+      32521,
+      37380
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 32521
+     },
+     "readyAt": 37730,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 37730,
+     "end": 38630,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 38630,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 38630,
+     "end": 40208,
+     "text": "Itadakimasu.",
+     "chars": 12,
+     "files": [
+      "date-beta/voice/narration/rooftop/248_6.mp3"
+     ],
+     "voice": [
+      38630,
+      39858
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 40208,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 40208,
+     "end": 43458,
+     "text": "She doesn't eat hers. She watches you chew.",
+     "chars": 43,
+     "files": [
+      "date-beta/voice/narration/rooftop/249_7.mp3"
+     ],
+     "voice": [
+      40208,
+      43108
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 40208
+     },
+     "readyAt": 43458,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8]",
+     "start": 43458,
+     "end": 47308,
+     "text": "",
+     "chars": 0,
+     "files": [
+      "date-beta/voice/01-rooftop/006_2-t.mp3"
+     ],
+     "voice": [
+      43458,
+      46958
+     ],
+     "step": 44458,
+     "sfx": null,
+     "readyAt": 47308,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8] bento=umeboshi",
+     "start": 47308,
+     "end": 54031,
+     "text": "Sour, neee?",
+     "chars": 11,
+     "files": [
+      "date-beta/voice/01-rooftop/006_2-t.mp3",
+      "date-beta/voice/01-rooftop/007_3-u.mp3"
+     ],
+     "voice": [
+      47308,
+      53681
+     ],
+     "step": 50808,
+     "sfx": null,
+     "readyAt": 54031,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8] bento=tamagoyaki",
+     "start": 54031,
+     "end": 62505,
+     "text": "Sweet, ne? I rolled it myself.",
+     "chars": 30,
+     "files": [
+      "date-beta/voice/01-rooftop/006_2-t.mp3",
+      "date-beta/voice/01-rooftop/008_3-t.mp3"
+     ],
+     "voice": [
+      54031,
+      62155
+     ],
+     "step": 57531,
+     "sfx": null,
+     "readyAt": 62505,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8] react 2",
+     "start": 62505,
+     "end": 67557,
+     "text": "Say that again. Slowly. So I can write it down.",
+     "chars": 47,
+     "files": [
+      "date-beta/voice/01-rooftop/011_3-r.mp3"
+     ],
+     "voice": [
+      62505,
+      67207
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 67557,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[9]",
+     "start": 67557,
+     "end": 70780,
+     "text": "…Obviously. Don't stare.",
+     "chars": 24,
+     "files": [
+      "date-beta/voice/01-rooftop/009_3-r.mp3"
+     ],
+     "voice": [
+      67557,
+      70430
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 70780,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[9] yum=good",
+     "start": 70780,
+     "end": 74787,
+     "text": "Good is a start. Tomorrow I'll do better.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/01-rooftop/010_3-r.mp3"
+     ],
+     "voice": [
+      70780,
+      74437
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 74787,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[9] yum=salty",
+     "start": 74787,
+     "end": 78716,
+     "text": "Salty. Noted. Forever.",
+     "chars": 22,
+     "files": [
+      "date-beta/voice/01-rooftop/012_4-cold.mp3"
+     ],
+     "voice": [
+      74787,
+      78366
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 78716,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[10]",
+     "start": 78716,
+     "end": 82044,
+     "text": "Technically, rain wasn't f-OR-ecast.",
+     "chars": 36,
+     "files": [
+      "date-beta/voice/narration/rooftop/250_10.mp3"
+     ],
+     "voice": [
+      78716,
+      81694
+     ],
+     "step": 80341,
+     "sfx": {
+      "id": "bell",
+      "at": 78716
+     },
+     "readyAt": 82044,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[11]",
+     "start": 82044,
+     "end": 86547,
+     "text": "Stay fORever? The rain can wait.",
+     "chars": 32,
+     "files": [
+      "date-beta/voice/01-rooftop/013_6.mp3"
+     ],
+     "voice": [
+      82044,
+      86197
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 82044
+     },
+     "readyAt": 86547,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[11] react 0",
+     "start": 86547,
+     "end": 92069,
+     "text": "A minute. Then another. Then the whole day.",
+     "chars": 43,
+     "files": [
+      "date-beta/voice/01-rooftop/014_6-r.mp3"
+     ],
+     "voice": [
+      86547,
+      91719
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 92069,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[11] react 1",
+     "start": 92069,
+     "end": 96233,
+     "text": "Yay! Park first. I already planned it.",
+     "chars": 38,
+     "files": [
+      "date-beta/voice/01-rooftop/015_6-r.mp3"
+     ],
+     "voice": [
+      92069,
+      95883
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 96233,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[11] react 2",
+     "start": 96233,
+     "end": 100240,
+     "text": "…Fine. The rain can have you. Later.",
+     "chars": 36,
+     "files": [
+      "date-beta/voice/01-rooftop/016_6-r.mp3"
+     ],
+     "voice": [
+      96233,
+      99890
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 100240,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-park",
+   "ms": 56827,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5653,
+     "text": "PARK · 1:00 PM. A path under cherry trees. Petals on the ground.",
+     "chars": 64,
+     "files": [
+      "date-beta/voice/narration/v2-park/251_0.mp3"
+     ],
+     "voice": [
+      0,
+      5303
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 0
+     },
+     "readyAt": 5653,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5653,
+     "end": 12377,
+     "text": "Hold my hand. My hand is shaking. Only yours can stop it.",
+     "chars": 57,
+     "files": [
+      "date-beta/voice/02-v2-park/017_3.mp3"
+     ],
+     "voice": [
+      5653,
+      12027
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 5653
+     },
+     "readyAt": 12377,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 0",
+     "start": 12377,
+     "end": 16959,
+     "text": "It stopped. See? It only needed you.",
+     "chars": 36,
+     "files": [
+      "date-beta/voice/02-v2-park/018_3-r.mp3"
+     ],
+     "voice": [
+      12377,
+      16609
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 16959,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 1",
+     "start": 16959,
+     "end": 21306,
+     "text": "One finger. I will hold it very hard.",
+     "chars": 37,
+     "files": [
+      "date-beta/voice/02-v2-park/019_3-r.mp3"
+     ],
+     "voice": [
+      16959,
+      20956
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 21306,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 2",
+     "start": 21306,
+     "end": 26280,
+     "text": "Okay. My hand can wait. It is good at waiting.",
+     "chars": 46,
+     "files": [
+      "date-beta/voice/02-v2-park/020_3-r.mp3"
+     ],
+     "voice": [
+      21306,
+      25930
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 26280,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 26280,
+     "end": 33788,
+     "text": "Her thumb is on your wrist. She is counting your pulse. She wants every beat to be for her.",
+     "chars": 91,
+     "files": [
+      "date-beta/voice/narration/v2-park/252_2.mp3"
+     ],
+     "voice": [
+      26280,
+      33438
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 26280
+     },
+     "readyAt": 33788,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 33788,
+     "end": 39493,
+     "text": "One job before lunch. My groceries, or my library book?",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/02-v2-park/021_5.mp3"
+     ],
+     "voice": [
+      33788,
+      39143
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 39493,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] react 0",
+     "start": 39493,
+     "end": 42716,
+     "text": "Groceries. For our dinner.",
+     "chars": 26,
+     "files": [
+      "date-beta/voice/02-v2-park/022_5-r-shop.mp3"
+     ],
+     "voice": [
+      39493,
+      42366
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 42716,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] react 1",
+     "start": 42716,
+     "end": 47611,
+     "text": "The book. It is very late.",
+     "chars": 26,
+     "files": [
+      "date-beta/voice/02-v2-park/023_5-r-lib.mp3"
+     ],
+     "voice": [
+      42716,
+      47261
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 47611,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] react 2",
+     "start": 47611,
+     "end": 52193,
+     "text": "Alone? No. Groceries. Now.",
+     "chars": 26,
+     "files": [
+      "date-beta/voice/02-v2-park/024_5-r.mp3"
+     ],
+     "voice": [
+      47611,
+      51843
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 52193,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 52193,
+     "end": 56827,
+     "text": "Two pairs of shoes walk out of the park. Hers stay close to yours.",
+     "chars": 66,
+     "files": [
+      "date-beta/voice/narration/v2-park/253_4.mp3"
+     ],
+     "voice": [
+      52193,
+      56477
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 52193
+     },
+     "readyAt": 56827,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-shop",
+   "ms": 56269,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 7664,
+     "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you to a shop.",
+     "chars": 78,
+     "files": [
+      "date-beta/voice/narration/v2-shop/254_0.mp3"
+     ],
+     "voice": [
+      0,
+      7314
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 0
+     },
+     "readyAt": 7664,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 7664,
+     "end": 11932,
+     "text": "The shop doors slide open. A little tune plays.",
+     "chars": 47,
+     "files": [
+      "date-beta/voice/narration/v2-shop/255_1.mp3"
+     ],
+     "voice": [
+      7664,
+      11582
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 7664
+     },
+     "readyAt": 11932,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 11932,
+     "end": 12432,
+     "text": "Carrots, eggs, three cups, and you. My whole list. ♡",
+     "chars": 52,
+     "files": [],
+     "voice": null,
+     "step": 12832,
+     "sfx": null,
+     "readyAt": 12432,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 12432,
+     "end": 16805,
+     "text": "Your hands push the cart. Her hand slides on top of yours.",
+     "chars": 58,
+     "files": [
+      "date-beta/voice/narration/v2-shop/256_3.mp3"
+     ],
+     "voice": [
+      12432,
+      16455
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 12432
+     },
+     "readyAt": 16805,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 16805,
+     "end": 17305,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 17305,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 0",
+     "start": 17305,
+     "end": 17805,
+     "text": "You forgot my list. Next time I write it on your hand.",
+     "chars": 54,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 17805,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 1",
+     "start": 17805,
+     "end": 18305,
+     "text": "Almost perfect. I still keep you. ♡",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18305,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 2",
+     "start": 18305,
+     "end": 18805,
+     "text": "Every item, first try. You know me. ♡",
+     "chars": 37,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18805,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 18805,
+     "end": 25111,
+     "text": "Close-up. Her hand puts one cup in the basket. Then two. Then three.",
+     "chars": 68,
+     "files": [
+      "date-beta/voice/narration/v2-shop/257_5.mp3"
+     ],
+     "voice": [
+      18805,
+      24761
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 18805
+     },
+     "readyAt": 25111,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 25111,
+     "end": 30163,
+     "text": "You walk past the sweets. She does not look at them. She looks at you.",
+     "chars": 70,
+     "files": [
+      "date-beta/voice/narration/v2-shop/258_6.mp3"
+     ],
+     "voice": [
+      25111,
+      29813
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 25111
+     },
+     "readyAt": 30163,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 30163,
+     "end": 34980,
+     "text": "Checkout. Lane 2 is open. You put the basket on the counter.",
+     "chars": 60,
+     "files": [
+      "date-beta/voice/narration/v2-shop/259_7.mp3"
+     ],
+     "voice": [
+      30163,
+      34630
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 30163
+     },
+     "readyAt": 34980,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8]",
+     "start": 34980,
+     "end": 38282,
+     "text": "The shop lady smiles at you. Nanda sees it.",
+     "chars": 43,
+     "files": [
+      "date-beta/voice/narration/v2-shop/260_8.mp3"
+     ],
+     "voice": [
+      34980,
+      37932
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 34980
+     },
+     "readyAt": 38282,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[9]",
+     "start": 38282,
+     "end": 42785,
+     "text": "Close-up. Her nails press into the basket handle. Hard.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/v2-shop/261_9.mp3"
+     ],
+     "voice": [
+      38282,
+      42435
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 38282
+     },
+     "readyAt": 42785,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[10]",
+     "start": 42785,
+     "end": 46635,
+     "text": "She pulls you to the self-checkout. No shop lady there.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/v2-shop/262_10.mp3"
+     ],
+     "voice": [
+      42785,
+      46285
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 42785
+     },
+     "readyAt": 46635,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[11]",
+     "start": 46635,
+     "end": 51530,
+     "text": "Do not look at her. Look at me. I bought you a cup.",
+     "chars": 51,
+     "files": [
+      "date-beta/voice/03-v2-shop/025_5.mp3"
+     ],
+     "voice": [
+      46635,
+      51180
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 51530,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[12]",
+     "start": 51530,
+     "end": 56269,
+     "text": "The shop bell rings. You carry the bags. She holds your sleeve.",
+     "chars": 63,
+     "files": [
+      "date-beta/voice/narration/v2-shop/263_12.mp3"
+     ],
+     "voice": [
+      51530,
+      55919
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 51530
+     },
+     "readyAt": 56269,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-library",
+   "ms": 29841,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5940,
+     "text": "RAIL CROSSING · 1:50 PM. The bell rings. The gate is down.",
+     "chars": 58,
+     "files": [
+      "date-beta/voice/narration/v2-library/264_0.mp3"
+     ],
+     "voice": [
+      0,
+      5590
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 0
+     },
+     "readyAt": 5940,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5940,
+     "end": 10574,
+     "text": "A train passes. Her hand grabs your sleeve until it is gone.",
+     "chars": 60,
+     "files": [
+      "date-beta/voice/narration/v2-library/265_1.mp3"
+     ],
+     "voice": [
+      5940,
+      10224
+     ],
+     "step": null,
+     "sfx": {
+      "id": "train-hum",
+      "at": 5940
+     },
+     "readyAt": 10574,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 10574,
+     "end": 15260,
+     "text": "LIBRARY · 2:00 PM. Cool air. Very quiet.",
+     "chars": 40,
+     "files": [
+      "date-beta/voice/narration/v2-library/266_2.mp3"
+     ],
+     "voice": [
+      10574,
+      14910
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 10574
+     },
+     "readyAt": 15260,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 15260,
+     "end": 21122,
+     "text": "You touched this book once. Right here. I kept it forty days.",
+     "chars": 61,
+     "files": [
+      "date-beta/voice/04-v2-library/026_4.mp3"
+     ],
+     "voice": [
+      15260,
+      20772
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 21122,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 21122,
+     "end": 25573,
+     "text": "Close-up. The book drops into the slot. Thunk.",
+     "chars": 46,
+     "files": [
+      "date-beta/voice/narration/v2-library/267_4.mp3"
+     ],
+     "voice": [
+      21122,
+      25223
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 21122
+     },
+     "readyAt": 25573,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 25573,
+     "end": 29841,
+     "text": "Her empty hand finds your hand. You walk out.",
+     "chars": 45,
+     "files": [
+      "date-beta/voice/narration/v2-library/268_5.mp3"
+     ],
+     "voice": [
+      25573,
+      29491
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 25573
+     },
+     "readyAt": 29841,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-town",
+   "ms": 8881,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 6881,
+     "text": "AKIBA · 2:45 PM. Big signs. Big screens. She holds your hand.",
+     "chars": 61,
+     "files": [
+      "date-beta/voice/narration/v2-town/269_0.mp3"
+     ],
+     "voice": [
+      0,
+      6531
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 0
+     },
+     "readyAt": 6881,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 6881,
+     "end": 7381,
+     "text": "We are going out for curry. Just you and me.",
+     "chars": 44,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7381,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 7381,
+     "end": 7881,
+     "text": "So many people. I will hold your arm. Tight.",
+     "chars": 44,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7881,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 7881,
+     "end": 8381,
+     "text": "Wow! A giant oshi board. Oshi means \"my favorite.\"",
+     "chars": 50,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 8381,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 8381,
+     "end": 8881,
+     "text": "But not one of them is as cute as me. Right?",
+     "chars": 44,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 8881,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "v2-curry",
+   "ms": 80424,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5157,
+     "text": "It is 2:55 PM. Two curry shops stand side by side.",
+     "chars": 50,
+     "files": [
+      "date-beta/voice/narration/v2-curry/270_0.mp3"
+     ],
+     "voice": [
+      0,
+      4807
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 5157,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5157,
+     "end": 10444,
+     "text": "I am hungry. You pick my lunch. Pick the right one.",
+     "chars": 51,
+     "files": [
+      "date-beta/voice/05-v2-curry/027_2.mp3"
+     ],
+     "voice": [
+      5157,
+      10094
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 10444,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 0",
+     "start": 10444,
+     "end": 14451,
+     "text": "With naan! You know me.",
+     "chars": 23,
+     "files": [
+      "date-beta/voice/05-v2-curry/028_2-r-b.mp3"
+     ],
+     "voice": [
+      10444,
+      14101
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 14451,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 1",
+     "start": 14451,
+     "end": 17413,
+     "text": "Crunchy. Good choice.",
+     "chars": 21,
+     "files": [
+      "date-beta/voice/05-v2-curry/029_2-r-k.mp3"
+     ],
+     "voice": [
+      14451,
+      17063
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 17413,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 2",
+     "start": 17413,
+     "end": 20375,
+     "text": "Then you watch me eat.",
+     "chars": 22,
+     "files": [
+      "date-beta/voice/05-v2-curry/030_2-r.mp3"
+     ],
+     "voice": [
+      17413,
+      20025
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 20375,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 20375,
+     "end": 23755,
+     "text": "She opens the glass door. A bell rings.",
+     "chars": 39,
+     "files": [
+      "date-beta/voice/narration/v2-curry/271_2.mp3"
+     ],
+     "voice": [
+      20375,
+      23405
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 20375
+     },
+     "readyAt": 23755,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 23755,
+     "end": 28154,
+     "text": "We go inside NAND HOUSE. A TV plays a dance video.",
+     "chars": 50,
+     "files": [
+      "date-beta/voice/narration/v2-curry/272_3.mp3"
+     ],
+     "voice": [
+      23755,
+      27804
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 28154,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 28154,
+     "end": 34329,
+     "text": "We sit at a table by the window. She sits on your right. Her knee touches your knee.",
+     "chars": 84,
+     "files": [
+      "date-beta/voice/narration/v2-curry/273_4.mp3"
+     ],
+     "voice": [
+      28154,
+      33979
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 28154
+     },
+     "readyAt": 34329,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 34329,
+     "end": 41236,
+     "text": "Lunch comes on a steel tray. Butter chicken, green saag, rice, and one very big naan.",
+     "chars": 85,
+     "files": [
+      "date-beta/voice/narration/v2-curry/274_5.mp3"
+     ],
+     "voice": [
+      34329,
+      40886
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 34329
+     },
+     "readyAt": 41236,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 41236,
+     "end": 44616,
+     "text": "She tears off a piece of naan with two fingers.",
+     "chars": 47,
+     "files": [
+      "date-beta/voice/narration/v2-curry/275_6.mp3"
+     ],
+     "voice": [
+      41236,
+      44266
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 41236
+     },
+     "readyAt": 44616,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 44616,
+     "end": 49773,
+     "text": "She pours more butter sauce. It is thick, orange, and shiny.",
+     "chars": 60,
+     "files": [
+      "date-beta/voice/narration/v2-curry/276_7.mp3"
+     ],
+     "voice": [
+      44616,
+      49423
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 49773,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8]",
+     "start": 49773,
+     "end": 53388,
+     "text": "She dips the naan in the sauce. The sauce drips.",
+     "chars": 48,
+     "files": [
+      "date-beta/voice/narration/v2-curry/277_8.mp3"
+     ],
+     "voice": [
+      49773,
+      53038
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 53388,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[9]",
+     "start": 53388,
+     "end": 59407,
+     "text": "Feed me. With your hand. Not the spoon. Your hand.",
+     "chars": 50,
+     "files": [
+      "date-beta/voice/05-v2-curry/031_4.mp3"
+     ],
+     "voice": [
+      53388,
+      59057
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 53388
+     },
+     "readyAt": 59407,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[10]",
+     "start": 59407,
+     "end": 66888,
+     "text": "She eats the naan from your fingers. She looks at your face the whole time. There is sauce on her lip.",
+     "chars": 102,
+     "files": [
+      "date-beta/voice/narration/v2-curry/278_10.mp3"
+     ],
+     "voice": [
+      59407,
+      66538
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 59407
+     },
+     "readyAt": 66888,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[11]",
+     "start": 66888,
+     "end": 71104,
+     "text": "She pushes her mango lassi to you. It has only one straw.",
+     "chars": 57,
+     "files": [
+      "date-beta/voice/narration/v2-curry/279_11.mp3"
+     ],
+     "voice": [
+      66888,
+      70754
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 71104,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[12]",
+     "start": 71104,
+     "end": 76809,
+     "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+     "chars": 85,
+     "files": [
+      "date-beta/voice/narration/v2-curry/280_12.mp3"
+     ],
+     "voice": [
+      71104,
+      76459
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 76809,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[13]",
+     "start": 76809,
+     "end": 80424,
+     "text": "We walk out to the street. It is 3:40 PM.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/narration/v2-curry/281_13.mp3"
+     ],
+     "voice": [
+      76809,
+      80074
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 76809
+     },
+     "readyAt": 80424,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-curry-katsu",
+   "ms": 53015,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 3250,
+     "text": "She opens the yellow door. A bell rings.",
+     "chars": 40,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/282_0.mp3"
+     ],
+     "voice": [
+      0,
+      2900
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 0
+     },
+     "readyAt": 3250,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 3250,
+     "end": 7753,
+     "text": "We go inside OR OR CURRY. A TV plays a cooking show.",
+     "chars": 52,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/283_1.mp3"
+     ],
+     "voice": [
+      3250,
+      7403
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 7753,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 7753,
+     "end": 13223,
+     "text": "We sit at the counter. She sits on your right. Her knee touches your knee.",
+     "chars": 74,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/284_2.mp3"
+     ],
+     "voice": [
+      7753,
+      12873
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 7753
+     },
+     "readyAt": 13223,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 13223,
+     "end": 19163,
+     "text": "Lunch comes on a white plate. Rice, brown curry, and a fried pork cutlet.",
+     "chars": 73,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/285_3.mp3"
+     ],
+     "voice": [
+      13223,
+      18813
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 13223
+     },
+     "readyAt": 19163,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 19163,
+     "end": 23196,
+     "text": "She cuts off one small piece with her spoon. Crunch.",
+     "chars": 52,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/286_4.mp3"
+     ],
+     "voice": [
+      19163,
+      22846
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 23196,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 23196,
+     "end": 28300,
+     "text": "She pours more curry on the rice. It is thick, brown, and hot.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/287_5.mp3"
+     ],
+     "voice": [
+      23196,
+      27950
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 28300,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 28300,
+     "end": 32333,
+     "text": "She dips the small piece in the curry. The curry drips.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/288_6.mp3"
+     ],
+     "voice": [
+      28300,
+      31983
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 32333,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 32333,
+     "end": 32833,
+     "text": "Feed me. With your hand. Not the spoon. Your hand.",
+     "chars": 50,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 32333
+     },
+     "readyAt": 32833,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[8]",
+     "start": 32833,
+     "end": 39792,
+     "text": "She eats the piece from your fingers. She looks at your face the whole time. There is curry on her lip.",
+     "chars": 103,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/289_8.mp3"
+     ],
+     "voice": [
+      32833,
+      39442
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 32833
+     },
+     "readyAt": 39792,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[9]",
+     "start": 39792,
+     "end": 43956,
+     "text": "She pushes her lemon water to you. It has only one straw.",
+     "chars": 57,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/290_9.mp3"
+     ],
+     "voice": [
+      39792,
+      43606
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 43956,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[10]",
+     "start": 43956,
+     "end": 49478,
+     "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+     "chars": 85,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/291_10.mp3"
+     ],
+     "voice": [
+      43956,
+      49128
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 49478,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[11]",
+     "start": 49478,
+     "end": 53015,
+     "text": "We walk out to the street. It is 3:40 PM.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/narration/v2-curry-katsu/292_11.mp3"
+     ],
+     "voice": [
+      49478,
+      52665
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 49478
+     },
+     "readyAt": 53015,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-curry-alone",
+   "ms": 15872,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 3432,
+     "text": "She opens the yellow door. A bell rings.",
+     "chars": 40,
+     "files": [
+      "date-beta/voice/narration/v2-curry-alone/293_0.mp3"
+     ],
+     "voice": [
+      0,
+      3082
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 0
+     },
+     "readyAt": 3432,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 3432,
+     "end": 8406,
+     "text": "She eats alone. You get no food. She looks at you the whole time.",
+     "chars": 65,
+     "files": [
+      "date-beta/voice/narration/v2-curry-alone/294_1.mp3"
+     ],
+     "voice": [
+      3432,
+      8056
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 3432
+     },
+     "readyAt": 8406,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 8406,
+     "end": 12152,
+     "text": "She folds her napkin and keeps it. She collects them.",
+     "chars": 53,
+     "files": [
+      "date-beta/voice/narration/v2-curry-alone/295_2.mp3"
+     ],
+     "voice": [
+      8406,
+      11802
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 12152,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 12152,
+     "end": 15872,
+     "text": "We walk out to the street. It is 3:40 PM.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/narration/v2-curry-alone/296_3.mp3"
+     ],
+     "voice": [
+      12152,
+      15522
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 12152
+     },
+     "readyAt": 15872,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-train",
+   "ms": 67483,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 4739,
+     "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'",
+     "chars": 81,
+     "files": [
+      "date-beta/voice/06-v2-train/239_1-quote.mp3"
+     ],
+     "voice": [
+      0,
+      4389
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 0
+     },
+     "readyAt": 4739,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 4739,
+     "end": 10784,
+     "text": "STATION · 4:30 PM. The station is full. Everyone is going home.",
+     "chars": 63,
+     "files": [
+      "date-beta/voice/narration/v2-train/297_1.mp3"
+     ],
+     "voice": [
+      4739,
+      10434
+     ],
+     "step": null,
+     "sfx": {
+      "id": "train-hum",
+      "at": 4739
+     },
+     "readyAt": 10784,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 10784,
+     "end": 14530,
+     "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'",
+     "chars": 67,
+     "files": [
+      "date-beta/voice/06-v2-train/240_3-ume-quote.mp3"
+     ],
+     "voice": [
+      10784,
+      14180
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 10784
+     },
+     "readyAt": 14530,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] bento=umeboshi",
+     "start": 14530,
+     "end": 18276,
+     "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'",
+     "chars": 67,
+     "files": [
+      "date-beta/voice/06-v2-train/240_3-ume-quote.mp3"
+     ],
+     "voice": [
+      14530,
+      17926
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 14530
+     },
+     "readyAt": 18276,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] bento=tamagoyaki",
+     "start": 18276,
+     "end": 22570,
+     "text": "Egg pudding drink. Sweet. 'Like the one you picked. I remember.'",
+     "chars": 64,
+     "files": [
+      "date-beta/voice/06-v2-train/241_3-tama-quote.mp3"
+     ],
+     "voice": [
+      18276,
+      22220
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 18276
+     },
+     "readyAt": 22570,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 22570,
+     "end": 25689,
+     "text": "Two men bump her bag. They laugh.",
+     "chars": 33,
+     "files": [
+      "date-beta/voice/narration/v2-train/298_3.mp3"
+     ],
+     "voice": [
+      22570,
+      25339
+     ],
+     "step": 24335,
+     "sfx": null,
+     "readyAt": 25689,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 25689,
+     "end": 36175,
+     "text": "Hey, you. Wavy hair. And you. Hat boy, the gringo. Stop pushing. He is MINE.",
+     "chars": 76,
+     "files": [
+      "date-beta/voice/06-v2-train/238_5-crowd.mp3"
+     ],
+     "voice": [
+      25689,
+      35825
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 36175,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 36175,
+     "end": 39398,
+     "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'",
+     "chars": 84,
+     "files": [
+      "date-beta/voice/06-v2-train/242_6-quote.mp3"
+     ],
+     "voice": [
+      36175,
+      39048
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 36175
+     },
+     "readyAt": 39398,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 39398,
+     "end": 39898,
+     "text": "loop",
+     "chars": 4,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 39898,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6] run=1",
+     "start": 39898,
+     "end": 45603,
+     "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'",
+     "chars": 104,
+     "files": [
+      "date-beta/voice/06-v2-train/243_7-run-1-quote.mp3"
+     ],
+     "voice": [
+      39898,
+      45253
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 45603,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6] run=2",
+     "start": 45603,
+     "end": 51308,
+     "text": "Twelve stops. Second time today. You forgot. I did not.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/06-v2-train/034_3-run-2.mp3"
+     ],
+     "voice": [
+      45603,
+      50958
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 51308,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6] run=3",
+     "start": 51308,
+     "end": 57640,
+     "text": "Three fingers. Three times today. Same train. Same you.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/06-v2-train/035_3-run-3.mp3"
+     ],
+     "voice": [
+      51308,
+      57290
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 57640,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 57640,
+     "end": 64599,
+     "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
+     "chars": 67,
+     "files": [
+      "date-beta/voice/narration/v2-train/299_7.mp3"
+     ],
+     "voice": [
+      57640,
+      64249
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 57640
+     },
+     "readyAt": 64599,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8]",
+     "start": 64599,
+     "end": 67483,
+     "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'",
+     "chars": 74,
+     "files": [
+      "date-beta/voice/06-v2-train/244_9-quote.mp3"
+     ],
+     "voice": [
+      64599,
+      67133
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 64599
+     },
+     "readyAt": 67483,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-rain",
+   "ms": 39737,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 7717,
+     "text": "BIG CROSSING · 5:30 PM. Heavy rain. The signs glow. Nobody else.",
+     "chars": 64,
+     "files": [
+      "date-beta/voice/narration/v2-rain/300_0.mp3"
+     ],
+     "voice": [
+      0,
+      7367
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 0
+     },
+     "readyAt": 7717,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 7717,
+     "end": 13579,
+     "text": "Share my umbrella. It is small. Our arms have to touch.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/07-v2-rain/036_2.mp3"
+     ],
+     "voice": [
+      7717,
+      13229
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 13579,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 0",
+     "start": 13579,
+     "end": 18082,
+     "text": "Our arms touch. Now I am warm.",
+     "chars": 30,
+     "files": [
+      "date-beta/voice/07-v2-rain/037_2-r.mp3"
+     ],
+     "voice": [
+      13579,
+      17732
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 18082,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 1",
+     "start": 18082,
+     "end": 22324,
+     "text": "Your hand on the handle. My hand on yours.",
+     "chars": 42,
+     "files": [
+      "date-beta/voice/07-v2-rain/038_2-r.mp3"
+     ],
+     "voice": [
+      18082,
+      21974
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 22324,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 2",
+     "start": 22324,
+     "end": 26749,
+     "text": "Then get wet. Sick boys stay inside.",
+     "chars": 36,
+     "files": [
+      "date-beta/voice/07-v2-rain/039_2-r.mp3"
+     ],
+     "voice": [
+      22324,
+      26399
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 26749,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 26749,
+     "end": 31488,
+     "text": "Close-up. Her shoes are wet. She walks in the puddles for you.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/v2-rain/301_2.mp3"
+     ],
+     "voice": [
+      26749,
+      31138
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 26749
+     },
+     "readyAt": 31488,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 31488,
+     "end": 35286,
+     "text": "She looks up at you. Then down. Then up again.",
+     "chars": 46,
+     "files": [
+      "date-beta/voice/narration/v2-rain/302_3.mp3"
+     ],
+     "voice": [
+      31488,
+      34936
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 31488
+     },
+     "readyAt": 35286,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 35286,
+     "end": 39737,
+     "text": "The rain stops. Two pairs of wet shoes walk toward her street.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/v2-rain/303_4.mp3"
+     ],
+     "voice": [
+      35286,
+      39387
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 35286
+     },
+     "readyAt": 39737,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-street",
+   "ms": 49596,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5836,
+     "text": "HER STREET · 6:00 PM. Wet road. Low sun. Long shadows.",
+     "chars": 54,
+     "files": [
+      "date-beta/voice/narration/v2-street/304_0.mp3"
+     ],
+     "voice": [
+      0,
+      5486
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 0
+     },
+     "readyAt": 5836,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5836,
+     "end": 12168,
+     "text": "Take small steps. Small steps make the day longer.",
+     "chars": 50,
+     "files": [
+      "date-beta/voice/08-v2-street/040_2.mp3"
+     ],
+     "voice": [
+      5836,
+      11818
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 12168,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 0",
+     "start": 12168,
+     "end": 20250,
+     "text": "Smaller. Smaller. There. We are almost still.",
+     "chars": 45,
+     "files": [
+      "date-beta/voice/08-v2-street/041_2-r.mp3"
+     ],
+     "voice": [
+      12168,
+      19900
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 20250,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 1",
+     "start": 20250,
+     "end": 24414,
+     "text": "Same pace. Same day. Same you.",
+     "chars": 30,
+     "files": [
+      "date-beta/voice/08-v2-street/042_2-r.mp3"
+     ],
+     "voice": [
+      20250,
+      24064
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 24414,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 2",
+     "start": 24414,
+     "end": 28421,
+     "text": "Home? You are walking me home.",
+     "chars": 30,
+     "files": [
+      "date-beta/voice/08-v2-street/043_2-r.mp3"
+     ],
+     "voice": [
+      24414,
+      28071
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 28421,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 28421,
+     "end": 34257,
+     "text": "7:00 PM. The sky goes orange, then dark blue. You walked one hour.",
+     "chars": 66,
+     "files": [
+      "date-beta/voice/narration/v2-street/305_2.mp3"
+     ],
+     "voice": [
+      28421,
+      33907
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 28421
+     },
+     "readyAt": 34257,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 34257,
+     "end": 39492,
+     "text": "Close-up. Her house key. Her fist opens. Red marks on her palm.",
+     "chars": 63,
+     "files": [
+      "date-beta/voice/narration/v2-street/306_3.mp3"
+     ],
+     "voice": [
+      34257,
+      39142
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 34257
+     },
+     "readyAt": 39492,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 39492,
+     "end": 45014,
+     "text": "I held it since noon. So I would be ready. For you.",
+     "chars": 51,
+     "files": [
+      "date-beta/voice/08-v2-street/044_5.mp3"
+     ],
+     "voice": [
+      39492,
+      44664
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 45014,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 45014,
+     "end": 49596,
+     "text": "Close-up. The key turns. Click. Door 12 opens.",
+     "chars": 46,
+     "files": [
+      "date-beta/voice/narration/v2-street/307_5.mp3"
+     ],
+     "voice": [
+      45014,
+      49246
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 45014
+     },
+     "readyAt": 49596,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "v2-home",
+   "ms": 25651,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5992,
+     "text": "HER HOME · 7:05 PM. Very clean. Her shoes in a perfect line.",
+     "chars": 60,
+     "files": [
+      "date-beta/voice/narration/v2-home/308_0.mp3"
+     ],
+     "voice": [
+      0,
+      5642
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 0
+     },
+     "readyAt": 5992,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5992,
+     "end": 10495,
+     "text": "She kneels. She puts slippers on your feet. Your size.",
+     "chars": 54,
+     "files": [
+      "date-beta/voice/narration/v2-home/309_1.mp3"
+     ],
+     "voice": [
+      5992,
+      10145
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 5992
+     },
+     "readyAt": 10495,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 10495,
+     "end": 15547,
+     "text": "Every choice you made today led here. I planned them all.",
+     "chars": 57,
+     "files": [
+      "date-beta/voice/09-v2-home/045_3.mp3"
+     ],
+     "voice": [
+      10495,
+      15197
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 15547,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 15547,
+     "end": 21383,
+     "text": "HER KITCHEN · 7:10 PM. Three chairs. Three cups. Steam.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/v2-home/310_3.mp3"
+     ],
+     "voice": [
+      15547,
+      21033
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 15547
+     },
+     "readyAt": 21383,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 21383,
+     "end": 25651,
+     "text": "Her hand on your back. She sits you in the middle chair.",
+     "chars": 56,
+     "files": [
+      "date-beta/voice/narration/v2-home/311_4.mp3"
+     ],
+     "voice": [
+      21383,
+      25301
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 21383
+     },
+     "readyAt": 25651,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "park",
+   "ms": 19392,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5235,
+     "text": "A sakura park. Blue sky. Petals fall like slow snow.",
+     "chars": 52,
+     "files": [
+      "date-beta/voice/narration/park/312_0.mp3"
+     ],
+     "voice": [
+      0,
+      4885
+     ],
+     "step": null,
+     "sfx": {
+      "id": "wind",
+      "at": 0
+     },
+     "readyAt": 5235,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5235,
+     "end": 5735,
+     "text": "I love your {CLOTHES}. You wore it for me. I can tell. Don't say no, I already decided. ♡",
+     "chars": 89,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5735,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] cold=yes",
+     "start": 5735,
+     "end": 6235,
+     "text": "Park. Now. Hold my hand on the way.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6235,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 0",
+     "start": 6235,
+     "end": 6735,
+     "text": "I knew it. I know everything about you. Even the time. It's {TIME}. ♡",
+     "chars": 69,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6735,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 6735,
+     "end": 7235,
+     "text": "Clean for me. That's the same thing, silly.",
+     "chars": 43,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7235,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 2",
+     "start": 7235,
+     "end": 7735,
+     "text": "…Everything is about me. You'll learn. You always learn, around run {RUN}.",
+     "chars": 74,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7735,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 7735,
+     "end": 8235,
+     "text": "Sakura only last a week. Then they fall. I don't let things fall.",
+     "chars": 65,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 8235,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] cold=yes",
+     "start": 8235,
+     "end": 8735,
+     "text": "Don't say that again. The petals are listening.",
+     "chars": 47,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 8735,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 8735,
+     "end": 9235,
+     "text": "Hold my hand. The whole way. Hands get lost if you let go.",
+     "chars": 58,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 9235,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 0",
+     "start": 9235,
+     "end": 9735,
+     "text": "Tighter. Mm. Now you're mine till tonight. ♡",
+     "chars": 44,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 9735,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 1",
+     "start": 9735,
+     "end": 10235,
+     "text": "One finger is a start. I'll collect the rest.",
+     "chars": 45,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 10235,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 2",
+     "start": 10235,
+     "end": 10735,
+     "text": "Oh. …Your hand is cold anyway.",
+     "chars": 30,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 10735,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 10735,
+     "end": 15892,
+     "text": "Close-up. Her fingers lock between yours. Tight. Tighter.",
+     "chars": 57,
+     "files": [
+      "date-beta/voice/narration/park/313_4.mp3"
+     ],
+     "voice": [
+      10735,
+      15542
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 10735
+     },
+     "readyAt": 15892,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 15892,
+     "end": 16392,
+     "text": "See? A perfect fit. Like a lock. Click. ♡",
+     "chars": 41,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 16392,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 16392,
+     "end": 16892,
+     "text": "Who needs friends? I'm the only friend you need. I'm like ten friends. In one!",
+     "chars": 78,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 16892,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6] cold=yes",
+     "start": 16892,
+     "end": 17392,
+     "text": "I'll warm it later. I have ways.",
+     "chars": 32,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 17392,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[7]",
+     "start": 17392,
+     "end": 17892,
+     "text": "It's {TIME}. One job today. My groceries, or my library book? You pick. I already know.",
+     "chars": 87,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 17892,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[7] react 0",
+     "start": 17892,
+     "end": 18392,
+     "text": "Groceries! For our dinner. I mean mine. Ours.",
+     "chars": 45,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18392,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[7] react 1",
+     "start": 18392,
+     "end": 18892,
+     "text": "The book! It's late. Like you. But you came.",
+     "chars": 44,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18892,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[7] react 2",
+     "start": 18892,
+     "end": 19392,
+     "text": "Alone? There's no alone today. Groceries. Now.",
+     "chars": 46,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 19392,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "errand-shop",
+   "ms": 22638,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 3955,
+     "text": "A street of little shops. Pink petals on every roof.",
+     "chars": 52,
+     "files": [
+      "date-beta/voice/narration/errand-shop/314_0.mp3"
+     ],
+     "voice": [
+      0,
+      3605
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 3955,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[0] cold=yes",
+     "start": 3955,
+     "end": 4455,
+     "text": "Carrots first. Then you can talk.",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4455,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 4455,
+     "end": 4955,
+     "text": "Carrots. Rice. Two cups. No, three cups. We'll need three.",
+     "chars": 58,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4955,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 0",
+     "start": 4955,
+     "end": 5455,
+     "text": "You get it. You always get me.",
+     "chars": 30,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5455,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 5455,
+     "end": 5955,
+     "text": "Because it's always three of us. Silly.",
+     "chars": 39,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5955,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 2",
+     "start": 5955,
+     "end": 6455,
+     "text": "Normal people are lonely. Do you want lonely?",
+     "chars": 45,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6455,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 6455,
+     "end": 11873,
+     "text": "Close-up. Three cups in the basket. She strokes the third one.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/errand-shop/315_2.mp3"
+     ],
+     "voice": [
+      6455,
+      11523
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 6455
+     },
+     "readyAt": 11873,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 11873,
+     "end": 12373,
+     "text": "The shop lady smiled at you. It's okay! She has a bad face. Look at me.",
+     "chars": 71,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12373,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] cold=yes",
+     "start": 12373,
+     "end": 12873,
+     "text": "Three. Say it. Three.",
+     "chars": 21,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12873,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 12873,
+     "end": 13373,
+     "text": "You carry the bags. I carry you. In my heart. Heavy, right?",
+     "chars": 59,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13373,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 0",
+     "start": 13373,
+     "end": 13873,
+     "text": "Ehehe. Heavy means you can't run.",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13873,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 1",
+     "start": 13873,
+     "end": 14373,
+     "text": "Fine is my least favorite word.",
+     "chars": 31,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14373,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 2",
+     "start": 14373,
+     "end": 14873,
+     "text": "…Okay. I'll carry everything. I always do.",
+     "chars": 42,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14873,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 14873,
+     "end": 15373,
+     "text": "I'm hungry. You look hungry too. Let's eat. Now.",
+     "chars": 48,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15373,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] cold=yes",
+     "start": 15373,
+     "end": 15873,
+     "text": "I carry a lot. You don't even know.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15873,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 15873,
+     "end": 19959,
+     "text": "The shop door jingles shut. The bags cut into your fingers.",
+     "chars": 59,
+     "files": [
+      "date-beta/voice/narration/errand-shop/316_6.mp3"
+     ],
+     "voice": [
+      15873,
+      19609
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 15873
+     },
+     "readyAt": 19959,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 19959,
+     "end": 20459,
+     "text": "Heavy? Good. Heavy means you can't run. Ehehe. Kidding. ♡",
+     "chars": 57,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 20459,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[8]",
+     "start": 20459,
+     "end": 22638,
+     "text": "WALK TO THE FOOD STALLS",
+     "chars": 23,
+     "files": [
+      "date-beta/voice/narration/errand-shop/317_8.mp3"
+     ],
+     "voice": [
+      20459,
+      22288
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 22638,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "errand-library",
+   "ms": 27394,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 4451,
+     "text": "A rail crossing. Bells ring. Sakura on the tracks.",
+     "chars": 50,
+     "files": [
+      "date-beta/voice/narration/errand-library/318_0.mp3"
+     ],
+     "voice": [
+      0,
+      4101
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 4451,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 4451,
+     "end": 4951,
+     "text": "This book is forty days late. I kept it because you touched it once.",
+     "chars": 68,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4951,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 0",
+     "start": 4951,
+     "end": 5451,
+     "text": "I knew you'd say that. I wrote it down.",
+     "chars": 39,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5451,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 5451,
+     "end": 5951,
+     "text": "I do. I remember for both of us.",
+     "chars": 32,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5951,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 2",
+     "start": 5951,
+     "end": 6451,
+     "text": "Creepy is a word for people who get left.",
+     "chars": 41,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6451,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 6451,
+     "end": 6951,
+     "text": "The gate is down. The train is a big metal door. I hate doors. Stand closer.",
+     "chars": 76,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6951,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] cold=yes",
+     "start": 6951,
+     "end": 7451,
+     "text": "Don't use words you can't take back.",
+     "chars": 36,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7451,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 7451,
+     "end": 12372,
+     "text": "The library. Cool air. So quiet you can hear pages turn.",
+     "chars": 56,
+     "files": [
+      "date-beta/voice/narration/errand-library/319_3.mp3"
+     ],
+     "voice": [
+      7451,
+      12022
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 7451
+     },
+     "readyAt": 12372,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 12372,
+     "end": 17163,
+     "text": "Close-up. The book drops in the return slot. Thunk.",
+     "chars": 51,
+     "files": [
+      "date-beta/voice/narration/errand-library/320_4.mp3"
+     ],
+     "voice": [
+      12372,
+      16813
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 12372
+     },
+     "readyAt": 17163,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 17163,
+     "end": 17663,
+     "text": "Bye, book. You were a good hostage. ♡",
+     "chars": 37,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 17663,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 17663,
+     "end": 18163,
+     "text": "Book's back. Now the library can't keep you either. Only I can.",
+     "chars": 63,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18163,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6] react 0",
+     "start": 18163,
+     "end": 18663,
+     "text": "Only me. Say it at the station too.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18663,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6] react 1",
+     "start": 18663,
+     "end": 19163,
+     "text": "Mm! Yes! Food, then more me.",
+     "chars": 28,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 19163,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6] react 2",
+     "start": 19163,
+     "end": 19663,
+     "text": "Everybody gets kept. It's just who does it.",
+     "chars": 43,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 19663,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[7]",
+     "start": 19663,
+     "end": 24715,
+     "text": "Outside, the crossing bell starts again. She waits for it to stop.",
+     "chars": 66,
+     "files": [
+      "date-beta/voice/narration/errand-library/321_7.mp3"
+     ],
+     "voice": [
+      19663,
+      24365
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 19663
+     },
+     "readyAt": 24715,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8]",
+     "start": 24715,
+     "end": 26894,
+     "text": "WALK TO THE FOOD STALLS",
+     "chars": 23,
+     "files": [
+      "date-beta/voice/narration/errand-library/322_8.mp3"
+     ],
+     "voice": [
+      24715,
+      26544
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 26894,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[8] cold=yes",
+     "start": 26894,
+     "end": 27394,
+     "text": "You'll see. Tonight.",
+     "chars": 20,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 27394,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "hungry",
+   "ms": 5500,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 500,
+     "text": "I'm so hungry. Feed me. Butter chicken, or katsu curry? Pick the right one.",
+     "chars": 75,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 0",
+     "start": 500,
+     "end": 1000,
+     "text": "With naan! You know me so well. ♡",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 1000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 1",
+     "start": 1000,
+     "end": 1500,
+     "text": "Crunchy! You chose. I'll pretend I did.",
+     "chars": 39,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 1500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 2",
+     "start": 1500,
+     "end": 2000,
+     "text": "You don't eat? Then you watch me eat.",
+     "chars": 37,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 2000,
+     "end": 2500,
+     "text": "Say ahh. No, I feed you first. Then you feed me. That's the rule.",
+     "chars": 65,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] food=butter",
+     "start": 2500,
+     "end": 3000,
+     "text": "Tear the naan. Give me the soft part. Always the soft part.",
+     "chars": 59,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] food=katsu",
+     "start": 3000,
+     "end": 3500,
+     "text": "Cut the katsu. Blow on it. I like it when you work for me.",
+     "chars": 58,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 3500,
+     "end": 4000,
+     "text": "Mm! See? You're so good at making me happy. Keep going. Forever.",
+     "chars": 64,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 0",
+     "start": 4000,
+     "end": 4500,
+     "text": "Anything. I'll hold you to that. ♡",
+     "chars": 34,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 1",
+     "start": 4500,
+     "end": 5000,
+     "text": "Nothing is just anything with me.",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 2",
+     "start": 5000,
+     "end": 5500,
+     "text": "…I can. I just won't.",
+     "chars": 21,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5500,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "town",
+   "ms": 17842,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 4399,
+     "text": "The big crossing. A thousand people. She only looks at you.",
+     "chars": 59,
+     "files": [
+      "date-beta/voice/narration/town/323_0.mp3"
+     ],
+     "voice": [
+      0,
+      4049
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 4399,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[0] cold=yes",
+     "start": 4399,
+     "end": 4899,
+     "text": "Wipe my mouth. …Thank you. See? Easy.",
+     "chars": 37,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 4899,
+     "end": 5399,
+     "text": "So many people. Don't look at them. They can't love you like me.",
+     "chars": 64,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 0",
+     "start": 5399,
+     "end": 5899,
+     "text": "Good. Your eyes are mine till bedtime.",
+     "chars": 38,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 5899,
+     "end": 6399,
+     "text": "Walk close. Crowds eat people.",
+     "chars": 30,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 2",
+     "start": 6399,
+     "end": 6899,
+     "text": "Then get lost in one. See who finds you.",
+     "chars": 40,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 6899,
+     "end": 7399,
+     "text": "Your phone buzzed. It's just people. We're busy being us.",
+     "chars": 57,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] cold=yes",
+     "start": 7399,
+     "end": 7899,
+     "text": "Me. Only me finds you.",
+     "chars": 22,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 7899,
+     "end": 8399,
+     "text": "Want to see a magic trick? It's {TIME}. Hi, {CROWD.1}. I see you.",
+     "chars": 65,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 8399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 8399,
+     "end": 8899,
+     "text": "Trick two. I know what {CROWD.2} is thinking. Snacks.",
+     "chars": 53,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 8899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 8899,
+     "end": 9399,
+     "text": "And {CROWD.3}? Thinking about me. Everyone is.",
+     "chars": 46,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 9399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] react 0",
+     "start": 9399,
+     "end": 9899,
+     "text": "See? Even the class agrees. ♡",
+     "chars": 29,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 9899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] react 1",
+     "start": 9899,
+     "end": 10399,
+     "text": "A little is a start. I'll take it.",
+     "chars": 34,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 10399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] react 2",
+     "start": 10399,
+     "end": 10899,
+     "text": "They're not yours to protect. They're mine to watch.",
+     "chars": 52,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 10899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 10899,
+     "end": 11399,
+     "text": "Trick three. I heard a laugh. It was {CROWD.4}.",
+     "chars": 47,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 11399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[7]",
+     "start": 11399,
+     "end": 11899,
+     "text": "I'm not mad. I'm just remembering your face. For later. ♡",
+     "chars": 57,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 11899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[8]",
+     "start": 11899,
+     "end": 12399,
+     "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap.",
+     "chars": 69,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[9]",
+     "start": 12399,
+     "end": 12899,
+     "text": "Don't gang up on me, you all NEVER stop my eternal bond with my lover.",
+     "chars": 70,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[10]",
+     "start": 12899,
+     "end": 13399,
+     "text": "You're so smart. Smarter than everyone here. They don't get you. Only I get you.",
+     "chars": 80,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[10] react 0",
+     "start": 13399,
+     "end": 13899,
+     "text": "I'm the only one who ever will.",
+     "chars": 31,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[10] react 1",
+     "start": 13899,
+     "end": 14399,
+     "text": "Don't argue with me. It's cute, but don't.",
+     "chars": 42,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[10] react 2",
+     "start": 14399,
+     "end": 14899,
+     "text": "Fine. You're nothing. …That's how they'd say it.",
+     "chars": 48,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[11]",
+     "start": 14899,
+     "end": 15399,
+     "text": "Train time. Twelve stops. I counted them this morning. For fun.",
+     "chars": 63,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[11] cold=yes",
+     "start": 15399,
+     "end": 15899,
+     "text": "See? You need me to be nice to you.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[12]",
+     "start": 15899,
+     "end": 17842,
+     "text": "WALK TO THE STATION",
+     "chars": 19,
+     "files": [
+      "date-beta/voice/narration/town/324_12.mp3"
+     ],
+     "voice": [
+      15899,
+      17492
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 17842,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "train",
+   "ms": 15137,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 4164,
+     "text": "AND Line, local service. Home in twelve stops.",
+     "chars": 46,
+     "files": [
+      "date-beta/voice/narration/train/325_0.mp3"
+     ],
+     "voice": [
+      0,
+      3814
+     ],
+     "step": null,
+     "sfx": {
+      "id": "train-hum",
+      "at": 0
+     },
+     "readyAt": 4164,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 4164,
+     "end": 5764,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 4164
+     },
+     "readyAt": 5764,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] bento=umeboshi",
+     "start": 5764,
+     "end": 10921,
+     "text": "Nobody reads the ads. This one says すっぱい！ SOUR!",
+     "chars": 47,
+     "files": [
+      "date-beta/voice/narration/train/326_1-bento-umeboshi.mp3"
+     ],
+     "voice": [
+      5764,
+      10571
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 5764
+     },
+     "readyAt": 10921,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] bento=tamagoyaki",
+     "start": 10921,
+     "end": 15137,
+     "text": "Nobody reads the ads. This one says 甘い！ SWEET!",
+     "chars": 46,
+     "files": [
+      "date-beta/voice/narration/train/327_1-bento-tamagoyaki.mp3"
+     ],
+     "voice": [
+      10921,
+      14787
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 10921
+     },
+     "readyAt": 15137,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "naan",
+   "ms": 8182,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 1500,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 0
+     },
+     "readyAt": 1500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 1500,
+     "end": 4697,
+     "text": "Technically, that's a NAND gate. Not bread.",
+     "chars": 43,
+     "files": [
+      "date-beta/voice/narration/naan/328_1.mp3"
+     ],
+     "voice": [
+      1500,
+      4347
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 1500
+     },
+     "readyAt": 4697,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] food=butter",
+     "start": 4697,
+     "end": 8182,
+     "text": "Technically, that's a NAND gate. Not our lunch.",
+     "chars": 47,
+     "files": [
+      "date-beta/voice/narration/naan/329_1-food-butter.mp3"
+     ],
+     "voice": [
+      4697,
+      7832
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 4697
+     },
+     "readyAt": 8182,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "blackout",
+   "ms": 7500,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 500,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 0
+     },
+     "readyAt": 500,
+     "autoAt": 500,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 500,
+     "end": 1700,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 1000,
+     "autoAt": 1700,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 1700,
+     "end": 2800,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 1700
+     },
+     "readyAt": 2200,
+     "autoAt": 2800,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 2800,
+     "end": 3300,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3300,
+     "autoAt": 3300,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 3300,
+     "end": 3800,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3800,
+     "autoAt": 3800,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 3800,
+     "end": 4300,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4300,
+     "autoAt": 4300,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 4300,
+     "end": 5800,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4800,
+     "autoAt": 5800,
+     "gap": null
+    },
+    {
+     "label": "[7]",
+     "start": 5800,
+     "end": 6500,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6300,
+     "autoAt": 6500,
+     "gap": null
+    },
+    {
+     "label": "[8]",
+     "start": 6500,
+     "end": 7000,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 6500
+     },
+     "readyAt": 7000,
+     "autoAt": 7000,
+     "gap": null
+    },
+    {
+     "label": "[9]",
+     "start": 7000,
+     "end": 7500,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "static",
+      "at": 7000
+     },
+     "readyAt": 7500,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "platform",
+   "ms": 11864,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 3850,
+     "text": "Her stop. The rain followed us off the train.",
+     "chars": 45,
+     "files": [
+      "date-beta/voice/narration/platform/330_0.mp3"
+     ],
+     "voice": [
+      0,
+      3500
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 0
+     },
+     "readyAt": 3850,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 3850,
+     "end": 7413,
+     "text": "The AND Line leaves. Just two of us now.",
+     "chars": 40,
+     "files": [
+      "date-beta/voice/narration/platform/331_1.mp3"
+     ],
+     "voice": [
+      3850,
+      7063
+     ],
+     "step": null,
+     "sfx": {
+      "id": "train-hum",
+      "at": 3850
+     },
+     "readyAt": 7413,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 7413,
+     "end": 11864,
+     "text": "NEXT: this OR that. The sign never picks.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/narration/platform/332_2.mp3"
+     ],
+     "voice": [
+      7413,
+      11514
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 7413
+     },
+     "readyAt": 11864,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "station-talk",
+   "ms": 20869,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 500,
+     "text": "Twelve stops, and you held the pole. Not me. Next time, hold me.",
+     "chars": 64,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 0",
+     "start": 500,
+     "end": 1000,
+     "text": "There is no next time. Only this time. Again. ♡",
+     "chars": 47,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 1000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 1",
+     "start": 1000,
+     "end": 1500,
+     "text": "It's always crowded. That's why you need me.",
+     "chars": 44,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 1500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 2",
+     "start": 1500,
+     "end": 2000,
+     "text": "The pole won't miss you. I will.",
+     "chars": 32,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 2000,
+     "end": 2500,
+     "text": "Hey… have we stood here before? No. Silly. It's just a nice day. It's {TIME}. Remember that.",
+     "chars": 92,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] run=2",
+     "start": 2500,
+     "end": 3000,
+     "text": "Wait. Why is everything the same? Same rain. Same {TIME}. You said that exact thing last time. I remember. Do you?",
+     "chars": 114,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] run=3",
+     "start": 3000,
+     "end": 3500,
+     "text": "Run {RUN}. Same day. You know, I know. Skip the small talk. It's {TIME} again. Hold my hand.",
+     "chars": 92,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 3500,
+     "end": 7037,
+     "text": "(Weird. Feels like I've heard that before.)",
+     "chars": 43,
+     "files": [
+      "date-beta/voice/narration/station-talk/333_2.mp3"
+     ],
+     "voice": [
+      3500,
+      6687
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 7037,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] run=2",
+     "start": 7037,
+     "end": 14754,
+     "text": "Didn't we already do this? The bento, the train, the tea… Nanda, are we in a loop?",
+     "chars": 82,
+     "files": [
+      "date-beta/voice/narration/station-talk/334_2-run-2.mp3"
+     ],
+     "voice": [
+      7037,
+      14404
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 14754,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] run=3",
+     "start": 14754,
+     "end": 18369,
+     "text": "Run {RUN}. I know every line. So do you.",
+     "chars": 40,
+     "files": [
+      "date-beta/voice/narration/station-talk/335_2-run-3.mp3"
+     ],
+     "voice": [
+      14754,
+      18019
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 18369,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 18369,
+     "end": 18869,
+     "text": "Déjà vu is just your heart remembering me early. ♡",
+     "chars": 50,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18869,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] run=2",
+     "start": 18869,
+     "end": 19369,
+     "text": "A loop? Ehehe. Then you can't leave. You picked me last time too. You'll pick me again.",
+     "chars": 87,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 19369,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] run=3",
+     "start": 19369,
+     "end": 19869,
+     "text": "Of course it's a loop. I made it. Every ending comes back here, every {DAYPART}. And you keep coming back. That's love.",
+     "chars": 119,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 19869,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 19869,
+     "end": 20369,
+     "text": "It's raining. Good. Rain keeps people inside. Inside is where people stay.",
+     "chars": 74,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 20369,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] cold=yes",
+     "start": 20369,
+     "end": 20869,
+     "text": "Every night. At this stop. Waiting.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 20869,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "rain-crossing",
+   "ms": 19511,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5810,
+     "text": "Rain. The signs glow. The crossing is empty now. It's {TIME}.",
+     "chars": 61,
+     "files": [
+      "date-beta/voice/narration/rain-crossing/336_0.mp3"
+     ],
+     "voice": [
+      0,
+      5460
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 5810,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5810,
+     "end": 6310,
+     "text": "Share my umbrella. It's small. We have to be very close. That's the point.",
+     "chars": 74,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6310,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 0",
+     "start": 6310,
+     "end": 6810,
+     "text": "Your shoulder's wet. It's okay. I'll dry everything.",
+     "chars": 52,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6810,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 6810,
+     "end": 7310,
+     "text": "Tall and useful. I'm keeping you.",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7310,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 2",
+     "start": 7310,
+     "end": 7810,
+     "text": "Then get wet. Sick boys stay home. My home.",
+     "chars": 43,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7810,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 7810,
+     "end": 13933,
+     "text": "Close-up. Rain on the umbrella. Her shoulder gets wet. Yours doesn't.",
+     "chars": 69,
+     "files": [
+      "date-beta/voice/narration/rain-crossing/337_2.mp3"
+     ],
+     "voice": [
+      7810,
+      13583
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 7810
+     },
+     "readyAt": 13933,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 13933,
+     "end": 14433,
+     "text": "I'm cold. I don't mind. Dry people don't leave.",
+     "chars": 47,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14433,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 14433,
+     "end": 14933,
+     "text": "If you ever left, I'd be fine. I'd just stand here. In the rain. Until you came back.",
+     "chars": 85,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14933,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] cold=yes",
+     "start": 14933,
+     "end": 15433,
+     "text": "Don't run. It's slippery. People fall.",
+     "chars": 38,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15433,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 15433,
+     "end": 15933,
+     "text": "Say you had fun. Say it's the best day ever. Say it twice.",
+     "chars": 58,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15933,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] react 0",
+     "start": 15933,
+     "end": 16433,
+     "text": "Then we'll have it again. And again. ♡",
+     "chars": 38,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 16433,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] react 1",
+     "start": 16433,
+     "end": 16933,
+     "text": "Nice. Next time, same day, but better.",
+     "chars": 38,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 16933,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] react 2",
+     "start": 16933,
+     "end": 17433,
+     "text": "Too long? …It hasn't even started.",
+     "chars": 34,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 17433,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 17433,
+     "end": 19011,
+     "text": "WALK HER HOME",
+     "chars": 13,
+     "files": [
+      "date-beta/voice/narration/rain-crossing/338_6.mp3"
+     ],
+     "voice": [
+      17433,
+      18661
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 19011,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6] cold=yes",
+     "start": 19011,
+     "end": 19511,
+     "text": "Walk me home. That's not a question.",
+     "chars": 36,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 19511,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "underpass",
+   "ms": 4246,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 3746,
+     "text": "Your steps, her steps. Always an even count.",
+     "chars": 44,
+     "files": [
+      "date-beta/voice/narration/underpass/339_0.mp3"
+     ],
+     "voice": [
+      0,
+      3396
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 0
+     },
+     "readyAt": 3746,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 3746,
+     "end": 4246,
+     "text": "Don't read the ads. Read me.",
+     "chars": 28,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 3746
+     },
+     "readyAt": 4246,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "walk-home",
+   "ms": 22263,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 4399,
+     "text": "The rain stops. Sun on her street. She walks slower.",
+     "chars": 52,
+     "files": [
+      "date-beta/voice/narration/walk-home/340_0.mp3"
+     ],
+     "voice": [
+      0,
+      4049
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 4399,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 4399,
+     "end": 4899,
+     "text": "This is my street. I walk it every day and pretend you're next to me. Now you are.",
+     "chars": 82,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 0",
+     "start": 4899,
+     "end": 5399,
+     "text": "Right here. Don't move from right here.",
+     "chars": 39,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 5399,
+     "end": 5899,
+     "text": "It's nicer with you on it. Stay on it.",
+     "chars": 38,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5899,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 2",
+     "start": 5899,
+     "end": 6399,
+     "text": "A lot is how much I love you. Get used to it.",
+     "chars": 45,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6399,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 6399,
+     "end": 10380,
+     "text": "The sky goes orange. She stopped walking a while ago.",
+     "chars": 53,
+     "files": [
+      "date-beta/voice/narration/walk-home/341_2.mp3"
+     ],
+     "voice": [
+      6399,
+      10030
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 10380,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] cold=yes",
+     "start": 10380,
+     "end": 10880,
+     "text": "You'll get used to it. Everyone does.",
+     "chars": 37,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 10880,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 10880,
+     "end": 11380,
+     "text": "Walk slower. If we walk slow, the day can't end.",
+     "chars": 48,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 11380,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 0",
+     "start": 11380,
+     "end": 11880,
+     "text": "Slower… slower… there. Now we're almost still.",
+     "chars": 46,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 11880,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 1",
+     "start": 11880,
+     "end": 12380,
+     "text": "Same pace. Same day. Same you. Good.",
+     "chars": 36,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12380,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 2",
+     "start": 12380,
+     "end": 12880,
+     "text": "Home? You're walking me home. That's where you're going.",
+     "chars": 56,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12880,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 12880,
+     "end": 13380,
+     "text": "Everyone goes home at night. Not you. You come home with me.",
+     "chars": 60,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13380,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] cold=yes",
+     "start": 13380,
+     "end": 13880,
+     "text": "Don't look back at the station. It's gone for you.",
+     "chars": 50,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13880,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 13880,
+     "end": 19872,
+     "text": "Close-up. Her house key is already in her hand. Warm. Held since noon.",
+     "chars": 70,
+     "files": [
+      "date-beta/voice/narration/walk-home/342_5.mp3"
+     ],
+     "voice": [
+      13880,
+      19522
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 13880
+     },
+     "readyAt": 19872,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 19872,
+     "end": 20372,
+     "text": "I held it all day. So I'd be ready. For us.",
+     "chars": 43,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 20372,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[7]",
+     "start": 20372,
+     "end": 22263,
+     "text": "FOLLOW HER INSIDE",
+     "chars": 17,
+     "files": [
+      "date-beta/voice/narration/walk-home/343_7.mp3"
+     ],
+     "voice": [
+      20372,
+      21913
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 22263,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "apartment",
+   "ms": 3332,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 2832,
+     "text": "Four floors. One window lit.",
+     "chars": 28,
+     "files": [
+      "date-beta/voice/narration/apartment/344_0.mp3"
+     ],
+     "voice": [
+      0,
+      2482
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 0
+     },
+     "readyAt": 2832,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 2832,
+     "end": 3332,
+     "text": "That's mine. I left the light on for you.",
+     "chars": 41,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 2832
+     },
+     "readyAt": 3332,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "door",
+   "ms": 6000,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 1000,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 0
+     },
+     "readyAt": 1000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 1000,
+     "end": 1500,
+     "text": "This is me. Unit 12. Obviously you'll remember.",
+     "chars": 47,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 1000
+     },
+     "readyAt": 1500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 0",
+     "start": 1500,
+     "end": 2000,
+     "text": "Good. I wrote it on your hand anyway.",
+     "chars": 37,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 2000,
+     "end": 2500,
+     "text": "It's old. It has a basement. Lots of room.",
+     "chars": 42,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 2",
+     "start": 2500,
+     "end": 3000,
+     "text": "Twelve. Twelve. Twelve. Say it back.",
+     "chars": 36,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 3000,
+     "end": 3500,
+     "text": "Come in? Just for tea.",
+     "chars": 22,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 3000
+     },
+     "readyAt": 3500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] cold=yes",
+     "start": 3500,
+     "end": 4000,
+     "text": "Say it. …Good.",
+     "chars": 14,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 3500
+     },
+     "readyAt": 4000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 4000,
+     "end": 4500,
+     "text": "I already boiled the water. This morning. Just in case.",
+     "chars": 55,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 4000
+     },
+     "readyAt": 4500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 0",
+     "start": 4500,
+     "end": 5000,
+     "text": "One cup. I'll pour it slow.",
+     "chars": 27,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 1",
+     "start": 5000,
+     "end": 5500,
+     "text": "Then home. Sure. Come in.",
+     "chars": 25,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 2",
+     "start": 5500,
+     "end": 6000,
+     "text": "…Goodnight? It's only {TIME}.",
+     "chars": 29,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6000,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "genkan-in",
+   "ms": 10245,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 3145,
+     "text": "Her shoes. Lined up to the millimetre.",
+     "chars": 38,
+     "files": [
+      "date-beta/voice/narration/genkan-in/345_0.mp3"
+     ],
+     "voice": [
+      0,
+      2795
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 0
+     },
+     "readyAt": 3145,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 3145,
+     "end": 5872,
+     "text": "Men's slippers. Already set out.",
+     "chars": 32,
+     "files": [
+      "date-beta/voice/narration/genkan-in/346_1.mp3"
+     ],
+     "voice": [
+      3145,
+      5522
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 3145
+     },
+     "readyAt": 5872,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 5872,
+     "end": 10245,
+     "text": "A tiny shrine. Inside: a circuit you built.",
+     "chars": 43,
+     "files": [
+      "date-beta/voice/narration/genkan-in/347_2.mp3"
+     ],
+     "voice": [
+      5872,
+      9895
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 5872
+     },
+     "readyAt": 10245,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "genkan-talk",
+   "ms": 16943,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 500,
+     "text": "おかえり。Welcome home. I mean my home. I mean our home. Same thing.",
+     "chars": 63,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 0",
+     "start": 500,
+     "end": 1000,
+     "text": "You said it! ただいま! I'm keeping that.",
+     "chars": 36,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 1000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 1",
+     "start": 1000,
+     "end": 1500,
+     "text": "Having you. Yes. That's the word.",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 1500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 2",
+     "start": 1500,
+     "end": 2000,
+     "text": "Not yet.",
+     "chars": 8,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 2000,
+     "end": 2500,
+     "text": "Slippers on. I bought them in your size. Last year. Before we met. Don't think about it.",
+     "chars": 88,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 2500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] cold=yes",
+     "start": 2500,
+     "end": 3000,
+     "text": "Shoes off. Now.",
+     "chars": 15,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 3000,
+     "end": 3500,
+     "text": "I made a list of things you like. Forty things. I'm number one. I checked.",
+     "chars": 74,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 3500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 0",
+     "start": 3500,
+     "end": 4000,
+     "text": "I knew it. The list is never wrong.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 1",
+     "start": 4000,
+     "end": 4500,
+     "text": "Tea. Number two is tea. Come drink it.",
+     "chars": 38,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 2",
+     "start": 4500,
+     "end": 5000,
+     "text": "I have copies. In the basement.",
+     "chars": 31,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 5000,
+     "end": 5500,
+     "text": "Kitchen's this way. Don't open the other doors. They're shy.",
+     "chars": 60,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] cold=yes",
+     "start": 5500,
+     "end": 6000,
+     "text": "Don't go near the basement.",
+     "chars": 27,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 6000,
+     "end": 11574,
+     "text": "The kitchen. Too clean. Three chairs. The kettle is already warm.",
+     "chars": 65,
+     "files": [
+      "date-beta/voice/narration/genkan-talk/348_4.mp3"
+     ],
+     "voice": [
+      6000,
+      11224
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 6000
+     },
+     "readyAt": 11574,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 11574,
+     "end": 16443,
+     "text": "Close-up. She pours. The steam curls up like a finger.",
+     "chars": 54,
+     "files": [
+      "date-beta/voice/narration/genkan-talk/349_5.mp3"
+     ],
+     "voice": [
+      11574,
+      16093
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 11574
+     },
+     "readyAt": 16443,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 16443,
+     "end": 16943,
+     "text": "Blow on it. No, let me. …There. Now it has my breath in it.",
+     "chars": 59,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 16443
+     },
+     "readyAt": 16943,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "cup",
+   "ms": 62013,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5522,
+     "text": "HER KITCHEN · 7:20 PM. The tea is poured. Three cups.",
+     "chars": 53,
+     "files": [
+      "date-beta/voice/narration/cup/350_0.mp3"
+     ],
+     "voice": [
+      0,
+      5172
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 0
+     },
+     "readyAt": 5522,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5522,
+     "end": 6022,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 5522
+     },
+     "readyAt": 6022,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] bento=umeboshi",
+     "start": 6022,
+     "end": 10996,
+     "text": "I bought umeboshi. For no reason. Eat.",
+     "chars": 38,
+     "files": [
+      "date-beta/voice/10-cup/046_0-u.mp3"
+     ],
+     "voice": [
+      6022,
+      10646
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 6022
+     },
+     "readyAt": 10996,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] bento=tamagoyaki",
+     "start": 10996,
+     "end": 15656,
+     "text": "I made tamagoyaki. For no reason. Eat.",
+     "chars": 38,
+     "files": [
+      "date-beta/voice/10-cup/047_0-t.mp3"
+     ],
+     "voice": [
+      10996,
+      15306
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 10996
+     },
+     "readyAt": 15656,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 0",
+     "start": 15656,
+     "end": 18462,
+     "text": "See? You needed me.",
+     "chars": 19,
+     "files": [
+      "date-beta/voice/10-cup/048_0-r.mp3"
+     ],
+     "voice": [
+      15656,
+      18112
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 18462,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 1",
+     "start": 18462,
+     "end": 22077,
+     "text": "A little now. A lot later.",
+     "chars": 26,
+     "files": [
+      "date-beta/voice/10-cup/049_0-r.mp3"
+     ],
+     "voice": [
+      18462,
+      21727
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 22077,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 2",
+     "start": 22077,
+     "end": 24883,
+     "text": "You will be. Later.",
+     "chars": 19,
+     "files": [
+      "date-beta/voice/10-cup/050_0-r.mp3"
+     ],
+     "voice": [
+      22077,
+      24533
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 24883,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 24883,
+     "end": 25383,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 24883
+     },
+     "readyAt": 25383,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] bento=umeboshi",
+     "start": 25383,
+     "end": 30540,
+     "text": "Third teacup. Nobody poured it. One umeboshi on its saucer.",
+     "chars": 59,
+     "files": [
+      "date-beta/voice/narration/cup/351_2-bento-umeboshi.mp3"
+     ],
+     "voice": [
+      25383,
+      30190
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 25383
+     },
+     "readyAt": 30540,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] bento=tamagoyaki",
+     "start": 30540,
+     "end": 35357,
+     "text": "Third teacup. Nobody poured it. Tamagoyaki on its saucer.",
+     "chars": 57,
+     "files": [
+      "date-beta/voice/narration/cup/352_2-bento-tamagoyaki.mp3"
+     ],
+     "voice": [
+      30540,
+      35007
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 30540
+     },
+     "readyAt": 35357,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] cold=yes",
+     "start": 35357,
+     "end": 39051,
+     "text": "I'll wait. I'm good at waiting.",
+     "chars": 31,
+     "files": [
+      "date-beta/voice/10-cup/051_1-cold.mp3"
+     ],
+     "voice": [
+      35357,
+      38701
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 35357
+     },
+     "readyAt": 39051,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 39051,
+     "end": 40994,
+     "text": "Who's the third cup for?",
+     "chars": 24,
+     "files": [
+      "date-beta/voice/narration/cup/353_3.mp3"
+     ],
+     "voice": [
+      39051,
+      40644
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 39051
+     },
+     "readyAt": 40994,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 40994,
+     "end": 47091,
+     "text": "For Input B. Silly. It's always three of us.",
+     "chars": 44,
+     "files": [
+      "date-beta/voice/10-cup/052_3.mp3"
+     ],
+     "voice": [
+      40994,
+      46741
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 40994
+     },
+     "readyAt": 47091,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4] react 0",
+     "start": 47091,
+     "end": 52457,
+     "text": "Drink. It's warm. It makes the thinking stop.",
+     "chars": 45,
+     "files": [
+      "date-beta/voice/10-cup/053_3-r.mp3"
+     ],
+     "voice": [
+      47091,
+      52107
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 52457,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4] react 1",
+     "start": 52457,
+     "end": 58476,
+     "text": "Hold it. Smell it. Then drink. I'll wait.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/10-cup/054_3-r.mp3"
+     ],
+     "voice": [
+      52457,
+      58126
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 58476,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4] react 2",
+     "start": 58476,
+     "end": 62013,
+     "text": "Sit. The tea isn't finished.",
+     "chars": 28,
+     "files": [
+      "date-beta/voice/10-cup/055_3-r.mp3"
+     ],
+     "voice": [
+      58476,
+      61663
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 62013,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "steeped",
+   "ms": 22394,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 3380,
+     "text": "Rest. I'll do the remembering.",
+     "chars": 30,
+     "files": [
+      "date-beta/voice/11-steeped/056_1.mp3"
+     ],
+     "voice": [
+      0,
+      3030
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 0
+     },
+     "readyAt": 3380,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 3380,
+     "end": 3880,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 3380
+     },
+     "readyAt": 3880,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] bento=umeboshi",
+     "start": 3880,
+     "end": 9663,
+     "text": "Bitter cup, sour hour. Every hour is ours.",
+     "chars": 42,
+     "files": [
+      "date-beta/voice/11-steeped/057_2-u.mp3"
+     ],
+     "voice": [
+      3880,
+      9313
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 3880
+     },
+     "readyAt": 9663,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] bento=tamagoyaki",
+     "start": 9663,
+     "end": 14637,
+     "text": "Warm cup, sweet sleep. You're mine to keep.",
+     "chars": 43,
+     "files": [
+      "date-beta/voice/11-steeped/058_2-t.mp3"
+     ],
+     "voice": [
+      9663,
+      14287
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 9663
+     },
+     "readyAt": 14637,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 14637,
+     "end": 15137,
+     "text": "いつまでも一緒。…FORever. ね？",
+     "chars": 20,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 14637
+     },
+     "readyAt": 15137,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 15137,
+     "end": 20894,
+     "text": "Close-up. Your cup, empty. Hers, full. She never drank.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/steeped/354_3.mp3"
+     ],
+     "voice": [
+      15137,
+      20544
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 15137
+     },
+     "readyAt": 20894,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 20894,
+     "end": 22394,
+     "text": "STEEPED.",
+     "chars": 8,
+     "files": [
+      "date-beta/voice/narration/steeped/355_4.mp3"
+     ],
+     "voice": [
+      20894,
+      21756
+     ],
+     "step": null,
+     "sfx": {
+      "id": "static",
+      "at": 20894
+     },
+     "readyAt": 22394,
+     "autoAt": null,
+     "gap": 638
+    }
+   ]
+  },
+  {
+   "id": "unknown",
+   "ms": 18032,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 2962,
+     "text": "You stand. The floor tilts a little.",
+     "chars": 36,
+     "files": [
+      "date-beta/voice/narration/unknown/356_0.mp3"
+     ],
+     "voice": [
+      0,
+      2612
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 0
+     },
+     "readyAt": 2962,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 2962,
+     "end": 7361,
+     "text": "Under the table: a floor hatch. Too big for storage.",
+     "chars": 52,
+     "files": [
+      "date-beta/voice/narration/unknown/357_1.mp3"
+     ],
+     "voice": [
+      2962,
+      7011
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 2962
+     },
+     "readyAt": 7361,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1] react 0",
+     "start": 7361,
+     "end": 7861,
+     "text": "Did something creak down there?",
+     "chars": 31,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7861,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1] react 1",
+     "start": 7861,
+     "end": 8361,
+     "text": "So gentle. You were always gentle with my things.",
+     "chars": 49,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 8361,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 8361,
+     "end": 12864,
+     "text": "Upstairs, the kettle clicks off. Her slippers stop moving.",
+     "chars": 58,
+     "files": [
+      "date-beta/voice/narration/unknown/358_2.mp3"
+     ],
+     "voice": [
+      8361,
+      12514
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 8361
+     },
+     "readyAt": 12864,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 12864,
+     "end": 13364,
+     "text": "Darling? Where did you go?",
+     "chars": 26,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 12864
+     },
+     "readyAt": 13364,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 13364,
+     "end": 17032,
+     "text": "A steep wooden ladder. Down into the dark.",
+     "chars": 42,
+     "files": [
+      "date-beta/voice/narration/unknown/359_4.mp3"
+     ],
+     "voice": [
+      13364,
+      16682
+     ],
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 13364
+     },
+     "readyAt": 17032,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4] react 0",
+     "start": 17032,
+     "end": 17532,
+     "text": "Heavy feet. I can hear every step.",
+     "chars": 34,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 17532,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 1",
+     "start": 17532,
+     "end": 18032,
+     "text": "Quiet as a mouse. Still heard you.",
+     "chars": 34,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 18032,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "escape",
+   "ms": 56334,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 6541,
+     "text": "BASEMENT · 7:40 PM. Concrete. One bulb. Rain at a high window.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/escape/360_0.mp3"
+     ],
+     "voice": [
+      0,
+      6191
+     ],
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 0
+     },
+     "readyAt": 6541,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[0] react 0",
+     "start": 6541,
+     "end": 7041,
+     "text": "Don't touch the labels.",
+     "chars": 23,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7041,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[0] react 1",
+     "start": 7041,
+     "end": 7541,
+     "text": "Pretty, right? I dust them every day.",
+     "chars": 37,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7541,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 7541,
+     "end": 12332,
+     "text": "Jars on the shelves. Each one: a date, a name.",
+     "chars": 46,
+     "files": [
+      "date-beta/voice/narration/escape/361_1.mp3"
+     ],
+     "voice": [
+      7541,
+      11982
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 7541
+     },
+     "readyAt": 12332,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 12332,
+     "end": 16235,
+     "text": "The dates go back years. The names are all different.",
+     "chars": 53,
+     "files": [
+      "date-beta/voice/narration/escape/362_2.mp3"
+     ],
+     "voice": [
+      12332,
+      15885
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 16235,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 16235,
+     "end": 20869,
+     "text": "Bento boxes, one per day. Your name on each. Untouched.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/escape/363_3.mp3"
+     ],
+     "voice": [
+      16235,
+      20519
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 16235
+     },
+     "readyAt": 20869,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 20869,
+     "end": 23701,
+     "text": "The oldest is dated before you met.",
+     "chars": 35,
+     "files": [
+      "date-beta/voice/narration/escape/364_4.mp3"
+     ],
+     "voice": [
+      20869,
+      23351
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 23701,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 23701,
+     "end": 28152,
+     "text": "A mortar and a mallet. One fresh mochi. Hers only.",
+     "chars": 50,
+     "files": [
+      "date-beta/voice/narration/escape/365_5.mp3"
+     ],
+     "voice": [
+      23701,
+      27802
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 23701
+     },
+     "readyAt": 28152,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5] react 0",
+     "start": 28152,
+     "end": 28652,
+     "text": "You're looking too long.",
+     "chars": 24,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 28652,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] react 1",
+     "start": 28652,
+     "end": 29152,
+     "text": "Only looking. I trust you.",
+     "chars": 26,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 29152,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6]",
+     "start": 29152,
+     "end": 29652,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 29152
+     },
+     "readyAt": 29652,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6] bento=umeboshi",
+     "start": 29652,
+     "end": 35226,
+     "text": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/escape/366_6-bento-umeboshi.mp3"
+     ],
+     "voice": [
+      29652,
+      34876
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 29652
+     },
+     "readyAt": 35226,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6] bento=tamagoyaki",
+     "start": 35226,
+     "end": 40226,
+     "text": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.",
+     "chars": 57,
+     "files": [
+      "date-beta/voice/narration/escape/367_6-bento-tamagoyaki.mp3"
+     ],
+     "voice": [
+      35226,
+      39876
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 35226
+     },
+     "readyAt": 40226,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 40226,
+     "end": 40726,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 40226
+     },
+     "readyAt": 40726,
+     "autoAt": 40726,
+     "gap": null
+    },
+    {
+     "label": "[8]",
+     "start": 40726,
+     "end": 41426,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 41226,
+     "autoAt": 41426,
+     "gap": null
+    },
+    {
+     "label": "[9]",
+     "start": 41426,
+     "end": 42426,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 41926,
+     "autoAt": 42426,
+     "gap": null
+    },
+    {
+     "label": "[10]",
+     "start": 42426,
+     "end": 43126,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 42926,
+     "autoAt": 43126,
+     "gap": null
+    },
+    {
+     "label": "[11]",
+     "start": 43126,
+     "end": 45126,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 43626,
+     "autoAt": 45126,
+     "gap": null
+    },
+    {
+     "label": "[12]",
+     "start": 45126,
+     "end": 49629,
+     "text": "Minutes gone. A clock upstairs chimed. You lost count.",
+     "chars": 54,
+     "files": [
+      "date-beta/voice/narration/escape/368_12.mp3"
+     ],
+     "voice": [
+      45126,
+      49279
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 45126
+     },
+     "readyAt": 49629,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[13]",
+     "start": 49629,
+     "end": 55334,
+     "text": "Above you, footsteps. Slow. Counting. One, two, three.",
+     "chars": 54,
+     "files": [
+      "date-beta/voice/narration/escape/369_13.mp3"
+     ],
+     "voice": [
+      49629,
+      54984
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 49629
+     },
+     "readyAt": 55334,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[14]",
+     "start": 55334,
+     "end": 55834,
+     "text": "Four, five… Don't hide, darling. I always find you.",
+     "chars": 51,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 55334
+     },
+     "readyAt": 55834,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[15]",
+     "start": 55834,
+     "end": 56334,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 55834
+     },
+     "readyAt": 56334,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "escape-win",
+   "ms": 27869,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 2701,
+     "text": "She's waiting at the outside door.",
+     "chars": 34,
+     "files": [
+      "date-beta/voice/narration/escape-win/370_0.mp3"
+     ],
+     "voice": [
+      0,
+      2351
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 0
+     },
+     "readyAt": 2701,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 2701,
+     "end": 5193,
+     "text": "You took the long way.",
+     "chars": 22,
+     "files": [
+      "date-beta/voice/12-escape-win/060_1.mp3"
+     ],
+     "voice": [
+      2701,
+      4843
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 2701
+     },
+     "readyAt": 5193,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 5193,
+     "end": 5693,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5693,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] bento=umeboshi",
+     "start": 5693,
+     "end": 8107,
+     "text": "You picked sour.",
+     "chars": 16,
+     "files": [
+      "date-beta/voice/12-escape-win/061_2-u.mp3"
+     ],
+     "voice": [
+      5693,
+      7757
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 8107,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2] bento=tamagoyaki",
+     "start": 8107,
+     "end": 11069,
+     "text": "Home is warm, and sweet.",
+     "chars": 24,
+     "files": [
+      "date-beta/voice/12-escape-win/062_2-t.mp3"
+     ],
+     "voice": [
+      8107,
+      10719
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 11069,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 11069,
+     "end": 11569,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 11069
+     },
+     "readyAt": 11569,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] bento=umeboshi",
+     "start": 11569,
+     "end": 15263,
+     "text": "Now every hour is ours.",
+     "chars": 23,
+     "files": [
+      "date-beta/voice/12-escape-win/063_3-u.mp3"
+     ],
+     "voice": [
+      11569,
+      14913
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 11569
+     },
+     "readyAt": 15263,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] bento=tamagoyaki",
+     "start": 15263,
+     "end": 18957,
+     "text": "Sleep now. You're mine to keep.",
+     "chars": 31,
+     "files": [
+      "date-beta/voice/12-escape-win/064_3-t.mp3"
+     ],
+     "voice": [
+      15263,
+      18607
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 15263
+     },
+     "readyAt": 18957,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 18957,
+     "end": 20157,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 18957
+     },
+     "readyAt": 19457,
+     "autoAt": 20157,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 20157,
+     "end": 21683,
+     "text": "Mine.",
+     "chars": 5,
+     "files": [
+      "date-beta/voice/12-escape-win/065_5.mp3"
+     ],
+     "voice": [
+      20157,
+      21333
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 20157
+     },
+     "readyAt": 21683,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 21683,
+     "end": 26369,
+     "text": "Wide. Her street at night. One window lit. It's yours now.",
+     "chars": 58,
+     "files": [
+      "date-beta/voice/narration/escape-win/371_6.mp3"
+     ],
+     "voice": [
+      21683,
+      26019
+     ],
+     "step": null,
+     "sfx": {
+      "id": "rain",
+      "at": 21683
+     },
+     "readyAt": 26369,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 26369,
+     "end": 27869,
+     "text": "ESCAPE.",
+     "chars": 7,
+     "files": [
+      "date-beta/voice/narration/escape-win/372_7.mp3"
+     ],
+     "voice": [
+      26369,
+      27309
+     ],
+     "step": null,
+     "sfx": {
+      "id": "static",
+      "at": 26369
+     },
+     "readyAt": 27869,
+     "autoAt": null,
+     "gap": 560
+    }
+   ]
+  },
+  {
+   "id": "escape-timeout",
+   "ms": 29791,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 2832,
+     "text": "The ladder creaks. She's coming down.",
+     "chars": 37,
+     "files": [
+      "date-beta/voice/narration/escape-timeout/373_0.mp3"
+     ],
+     "voice": [
+      0,
+      2482
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 0
+     },
+     "readyAt": 2832,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 2832,
+     "end": 4032,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 2832
+     },
+     "readyAt": 3332,
+     "autoAt": 4032,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 4032,
+     "end": 7099,
+     "text": "You wake at the tea table. Four cups now.",
+     "chars": 41,
+     "files": [
+      "date-beta/voice/narration/escape-timeout/374_2.mp3"
+     ],
+     "voice": [
+      4032,
+      6749
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 4032
+     },
+     "readyAt": 7099,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 7099,
+     "end": 7599,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 7099
+     },
+     "readyAt": 7599,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] bento=umeboshi",
+     "start": 7599,
+     "end": 10744,
+     "text": "She holds out an umeboshi. You eat.",
+     "chars": 35,
+     "files": [
+      "date-beta/voice/narration/escape-timeout/375_3-bento-umeboshi.mp3"
+     ],
+     "voice": [
+      7599,
+      10394
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 7599
+     },
+     "readyAt": 10744,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3] bento=tamagoyaki",
+     "start": 10744,
+     "end": 13811,
+     "text": "She holds out the tamagoyaki. You eat.",
+     "chars": 38,
+     "files": [
+      "date-beta/voice/narration/escape-timeout/376_3-bento-tamagoyaki.mp3"
+     ],
+     "voice": [
+      10744,
+      13461
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 10744
+     },
+     "readyAt": 13811,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 13811,
+     "end": 14311,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14311,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] bento=umeboshi",
+     "start": 14311,
+     "end": 14811,
+     "text": "すっぱいでしょ。…ね？",
+     "chars": 11,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14811,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] bento=tamagoyaki",
+     "start": 14811,
+     "end": 15311,
+     "text": "甘いでしょ。…ね？",
+     "chars": 9,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15311,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 15311,
+     "end": 15811,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15811,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5] bento=umeboshi",
+     "start": 15811,
+     "end": 18381,
+     "text": "One sour hour…",
+     "chars": 14,
+     "files": [
+      "date-beta/voice/13-escape-timeout/068_5-u.mp3"
+     ],
+     "voice": [
+      15811,
+      18031
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 18381,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5] bento=tamagoyaki",
+     "start": 18381,
+     "end": 20795,
+     "text": "One sweet bite…",
+     "chars": 15,
+     "files": [
+      "date-beta/voice/13-escape-timeout/069_5-t.mp3"
+     ],
+     "voice": [
+      18381,
+      20445
+     ],
+     "step": null,
+     "sfx": null,
+     "readyAt": 20795,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 20795,
+     "end": 21295,
+     "text": "",
+     "chars": 0,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 20795
+     },
+     "readyAt": 21295,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[6] bento=umeboshi",
+     "start": 21295,
+     "end": 24754,
+     "text": "…then every hour is ours.",
+     "chars": 25,
+     "files": [
+      "date-beta/voice/13-escape-timeout/070_6-u.mp3"
+     ],
+     "voice": [
+      21295,
+      24404
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 21295
+     },
+     "readyAt": 24754,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6] bento=tamagoyaki",
+     "start": 24754,
+     "end": 28291,
+     "text": "…then sleep. You're mine to keep.",
+     "chars": 33,
+     "files": [
+      "date-beta/voice/13-escape-timeout/071_6-t.mp3"
+     ],
+     "voice": [
+      24754,
+      27941
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 24754
+     },
+     "readyAt": 28291,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[7]",
+     "start": 28291,
+     "end": 29791,
+     "text": "ESCAPE?",
+     "chars": 7,
+     "files": [
+      "date-beta/voice/narration/escape-timeout/377_7.mp3"
+     ],
+     "voice": [
+      28291,
+      29231
+     ],
+     "step": null,
+     "sfx": {
+      "id": "static",
+      "at": 28291
+     },
+     "readyAt": 29791,
+     "autoAt": null,
+     "gap": 560
+    }
+   ]
+  },
+  {
+   "id": "leave",
+   "ms": 7675,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 500,
+     "text": "Leaving is not an option.",
+     "chars": 25,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 0
+     },
+     "readyAt": 500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 500,
+     "end": 3175,
+     "text": "XOR Coffee. 7:00 AM.",
+     "chars": 20,
+     "files": [
+      "date-beta/voice/narration/leave/378_1.mp3"
+     ],
+     "voice": [
+      500,
+      2825
+     ],
+     "step": null,
+     "sfx": {
+      "id": "static",
+      "at": 500
+     },
+     "readyAt": 3175,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 3175,
+     "end": 3675,
+     "text": "He wakes at 7:00.",
+     "chars": 17,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 3175
+     },
+     "readyAt": 3675,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 0",
+     "start": 3675,
+     "end": 4175,
+     "text": "Good morning! Same as yesterday. Same as always.",
+     "chars": 48,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4175,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 1",
+     "start": 4175,
+     "end": 4675,
+     "text": "Nobody. Not anymore.",
+     "chars": 20,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 4675,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2] react 2",
+     "start": 4675,
+     "end": 5175,
+     "text": "I was here first.",
+     "chars": 17,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 5175,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 5175,
+     "end": 5675,
+     "text": "From now on… can we be fORever?",
+     "chars": 31,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 5175
+     },
+     "readyAt": 5675,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] cold=yes",
+     "start": 5675,
+     "end": 6175,
+     "text": "だめ。You already said forever. I heard it.",
+     "chars": 40,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 5675
+     },
+     "readyAt": 6175,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 0",
+     "start": 6175,
+     "end": 6675,
+     "text": "Yeah? Say it again. I'm keeping it.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6675,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 1",
+     "start": 6675,
+     "end": 7175,
+     "text": "Yeah? Say it again. I'm keeping it.",
+     "chars": 35,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7175,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3] react 2",
+     "start": 7175,
+     "end": 7675,
+     "text": "Leave, then. I'll be here. I'm always here.",
+     "chars": 43,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7675,
+     "autoAt": null,
+     "gap": null
+    }
+   ]
+  },
+  {
+   "id": "leave-fu",
+   "ms": 10965,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 4739,
+     "text": "Her hand rises. Time freezes. The café turns.",
+     "chars": 45,
+     "files": [
+      "date-beta/voice/narration/leave-fu/379_0.mp3"
+     ],
+     "voice": [
+      0,
+      4389
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 0
+     },
+     "readyAt": 4739,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 4739,
+     "end": 5239,
+     "text": "You said leave. I heard 'lea—'.",
+     "chars": 31,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 4739
+     },
+     "readyAt": 5239,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 5239,
+     "end": 7104,
+     "text": "fORever and ever",
+     "chars": 16,
+     "files": [
+      "date-beta/voice/narration/leave-fu/380_2.mp3"
+     ],
+     "voice": [
+      5239,
+      6754
+     ],
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 5239
+     },
+     "readyAt": 7104,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 7104,
+     "end": 9465,
+     "text": "fORever and ever and ever",
+     "chars": 25,
+     "files": [
+      "date-beta/voice/narration/leave-fu/381_3.mp3"
+     ],
+     "voice": [
+      7104,
+      9115
+     ],
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 7104
+     },
+     "readyAt": 9465,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 9465,
+     "end": 10965,
+     "text": "LEAVE.",
+     "chars": 6,
+     "files": [
+      "date-beta/voice/narration/leave-fu/382_4.mp3"
+     ],
+     "voice": [
+      9465,
+      10327
+     ],
+     "step": null,
+     "sfx": {
+      "id": "static",
+      "at": 9465
+     },
+     "readyAt": 10965,
+     "autoAt": null,
+     "gap": 638
+    }
+   ]
+  },
+  {
+   "id": "leave-yeah",
+   "ms": 13451,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 500,
+     "text": "Hooray! FORever and ever!",
+     "chars": 25,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 0
+     },
+     "readyAt": 500,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[1]",
+     "start": 500,
+     "end": 1000,
+     "text": "Good input.",
+     "chars": 11,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 500
+     },
+     "readyAt": 1000,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 1000,
+     "end": 3179,
+     "text": "fORever and ever",
+     "chars": 16,
+     "files": [
+      "date-beta/voice/narration/leave-yeah/383_2.mp3"
+     ],
+     "voice": [
+      1000,
+      2829
+     ],
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 1000
+     },
+     "readyAt": 3179,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 3179,
+     "end": 5410,
+     "text": "fORever and ever and ever",
+     "chars": 25,
+     "files": [
+      "date-beta/voice/narration/leave-yeah/384_3.mp3"
+     ],
+     "voice": [
+      3179,
+      5060
+     ],
+     "step": null,
+     "sfx": {
+      "id": "drone",
+      "at": 3179
+     },
+     "readyAt": 5410,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[4]",
+     "start": 5410,
+     "end": 11951,
+     "text": "Wide. The café. Every table has two cups. Every cup has your name.",
+     "chars": 66,
+     "files": [
+      "date-beta/voice/narration/leave-yeah/385_4.mp3"
+     ],
+     "voice": [
+      5410,
+      11601
+     ],
+     "step": null,
+     "sfx": {
+      "id": "silence",
+      "at": 5410
+     },
+     "readyAt": 11951,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[5]",
+     "start": 11951,
+     "end": 13451,
+     "text": "LEAVE.",
+     "chars": 6,
+     "files": [
+      "date-beta/voice/narration/leave-yeah/386_5.mp3"
+     ],
+     "voice": [
+      11951,
+      12813
+     ],
+     "step": null,
+     "sfx": {
+      "id": "static",
+      "at": 11951
+     },
+     "readyAt": 13451,
+     "autoAt": null,
+     "gap": 638
+    }
+   ]
+  },
+  {
+   "id": "seq-butter",
+   "ms": 25559,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 7299,
+     "text": "A tiny curry house. Warm yellow light. Spice in the air. Two seats, side by side.",
+     "chars": 81,
+     "files": [
+      "date-beta/voice/narration/seq-butter/387_0.mp3"
+     ],
+     "voice": [
+      0,
+      6949
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 0
+     },
+     "readyAt": 7299,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 7299,
+     "end": 7799,
+     "text": "Side by side. Not across. Across is how strangers sit.",
+     "chars": 54,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 7799,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 7799,
+     "end": 14288,
+     "text": "Close-up. Butter chicken lands. Orange and glossy. One naan, torn in two.",
+     "chars": 73,
+     "files": [
+      "date-beta/voice/narration/seq-butter/388_2.mp3"
+     ],
+     "voice": [
+      7799,
+      13938
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 7799
+     },
+     "readyAt": 14288,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 14288,
+     "end": 14788,
+     "text": "Say ahh. No, I feed you first. Then you feed me. That's the rule.",
+     "chars": 65,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14788,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 14788,
+     "end": 15288,
+     "text": "Mm! See? You're so good at making me happy. Keep going. Forever.",
+     "chars": 64,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15288,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 0",
+     "start": 15288,
+     "end": 15788,
+     "text": "Anything. I'll hold you to that. ♡",
+     "chars": 34,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 15788,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 1",
+     "start": 15788,
+     "end": 16288,
+     "text": "Nothing is just anything with me.",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 16288,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 2",
+     "start": 16288,
+     "end": 16788,
+     "text": "…I can. I just won't.",
+     "chars": 21,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 16788,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 16788,
+     "end": 21056,
+     "text": "She wipes your mouth with her thumb. Then she licks the thumb.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/seq-butter/389_5.mp3"
+     ],
+     "voice": [
+      16788,
+      20706
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 16788
+     },
+     "readyAt": 21056,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 21056,
+     "end": 25559,
+     "text": "The bell over the door. Outside, the big crossing roars again.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/seq-butter/390_6.mp3"
+     ],
+     "voice": [
+      21056,
+      25209
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 21056
+     },
+     "readyAt": 25559,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "seq-katsu",
+   "ms": 24071,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 6071,
+     "text": "A tiny curry house. Oil hisses in the back. Two seats, side by side.",
+     "chars": 68,
+     "files": [
+      "date-beta/voice/narration/seq-katsu/391_0.mp3"
+     ],
+     "voice": [
+      0,
+      5721
+     ],
+     "step": null,
+     "sfx": {
+      "id": "kettle",
+      "at": 0
+     },
+     "readyAt": 6071,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 6071,
+     "end": 6571,
+     "text": "You sit on the inside. By the wall. So nobody bumps you. So nobody gets you.",
+     "chars": 76,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 6571,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[2]",
+     "start": 6571,
+     "end": 11806,
+     "text": "Close-up. Katsu curry lands. The knife goes in. Crunch.",
+     "chars": 55,
+     "files": [
+      "date-beta/voice/narration/seq-katsu/392_2.mp3"
+     ],
+     "voice": [
+      6571,
+      11456
+     ],
+     "step": null,
+     "sfx": {
+      "id": "thump",
+      "at": 6571
+     },
+     "readyAt": 11806,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[3]",
+     "start": 11806,
+     "end": 12306,
+     "text": "Hear that crunch? Like a little bone. Ehehe. Kidding. Say ahh.",
+     "chars": 62,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12306,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4]",
+     "start": 12306,
+     "end": 12806,
+     "text": "Mm! See? You're so good at making me happy. Keep going. Forever.",
+     "chars": 64,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 12806,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 0",
+     "start": 12806,
+     "end": 13306,
+     "text": "Anything. I'll hold you to that. ♡",
+     "chars": 34,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13306,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 1",
+     "start": 13306,
+     "end": 13806,
+     "text": "Nothing is just anything with me.",
+     "chars": 33,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13806,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[4] react 2",
+     "start": 13806,
+     "end": 14306,
+     "text": "…I can. I just won't.",
+     "chars": 21,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 14306,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[5]",
+     "start": 14306,
+     "end": 19097,
+     "text": "She eats slowly. She never looks at the plate. Only at you.",
+     "chars": 59,
+     "files": [
+      "date-beta/voice/narration/seq-katsu/393_5.mp3"
+     ],
+     "voice": [
+      14306,
+      18747
+     ],
+     "step": null,
+     "sfx": {
+      "id": "breath",
+      "at": 14306
+     },
+     "readyAt": 19097,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[6]",
+     "start": 19097,
+     "end": 24071,
+     "text": "The bell over the door. Outside, the big crossing roars again.",
+     "chars": 62,
+     "files": [
+      "date-beta/voice/narration/seq-katsu/394_6.mp3"
+     ],
+     "voice": [
+      19097,
+      23721
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 19097
+     },
+     "readyAt": 24071,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  },
+  {
+   "id": "seq-station",
+   "ms": 17302,
+   "rows": [
+    {
+     "label": "[0]",
+     "start": 0,
+     "end": 5888,
+     "text": "The station. Noon light through the glass roof. A train sighs somewhere.",
+     "chars": 72,
+     "files": [
+      "date-beta/voice/narration/seq-station/395_0.mp3"
+     ],
+     "voice": [
+      0,
+      5538
+     ],
+     "step": null,
+     "sfx": {
+      "id": "train-hum",
+      "at": 0
+     },
+     "readyAt": 5888,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[1]",
+     "start": 5888,
+     "end": 12534,
+     "text": "Close-up. The ticket gate. She taps her card. Then taps it again. For you.",
+     "chars": 74,
+     "files": [
+      "date-beta/voice/narration/seq-station/396_1.mp3"
+     ],
+     "voice": [
+      5888,
+      12184
+     ],
+     "step": null,
+     "sfx": {
+      "id": "tick",
+      "at": 5888
+     },
+     "readyAt": 12534,
+     "autoAt": null,
+     "gap": 350
+    },
+    {
+     "label": "[2]",
+     "start": 12534,
+     "end": 13034,
+     "text": "I loaded your card last week. You're welcome. Don't ask how.",
+     "chars": 60,
+     "files": [],
+     "voice": null,
+     "step": null,
+     "sfx": null,
+     "readyAt": 13034,
+     "autoAt": null,
+     "gap": null
+    },
+    {
+     "label": "[3]",
+     "start": 13034,
+     "end": 17302,
+     "text": "The door chime plays. She holds your sleeve the whole song.",
+     "chars": 59,
+     "files": [
+      "date-beta/voice/narration/seq-station/397_3.mp3"
+     ],
+     "voice": [
+      13034,
+      16952
+     ],
+     "step": null,
+     "sfx": {
+      "id": "bell",
+      "at": 13034
+     },
+     "readyAt": 17302,
+     "autoAt": null,
+     "gap": 350
+    }
+   ]
+  }
+ ],
+ "errors": [],
+ "warnings": [],
+ "stats": {
+  "beats": 450,
+  "voiced": 226,
+  "spokenMs": 935366,
+  "totalMs": 1138150
+ }
+}
