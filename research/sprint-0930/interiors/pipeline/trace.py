@@ -8,12 +8,12 @@ from PIL import Image, ImageFilter
 
 PREP, OUT = sys.argv[1], sys.argv[2]
 ONLY = sys.argv[3:]
-SCALE = {'apartment': 0.5}  # of the prep PNG's own size (default 0.3 of 1920x1080 = 576x324)
-COLORS = {'basement': 20, 'apartment': 48}
-MEDIAN = {'apartment': 0}  # the small detailed ref loses its rails + bikes to the median pass  # dark room: fewer colours keep the concrete from speckling
+SCALE = {'apartment': 0.5, 'sitting-room': 0.6, 'bedroom': 0.6}  # of the prep PNG's own size (default 0.3 of 1920x1080 = 576x324)
+COLORS = {'basement': 20, 'apartment': 48, 'sitting-room': 48, 'bedroom': 40}  # dark basement: fewer colours keep the concrete clean
+MEDIAN = {'apartment': 0, 'sitting-room': 0, 'bedroom': 0}  # small detailed refs lose their thin structure to the median pass
 BASE = dict(colormode='color', hierarchical='stacked', mode='spline', filter_speckle=6, color_precision=8,
             layer_difference=8, corner_threshold=60, length_threshold=4.0, max_iterations=10, splice_threshold=45, path_precision=1)
-LIMIT = {'apartment': 700_000}  # default 560 KB
+LIMIT = {'apartment': 700_000, 'sitting-room': 650_000, 'bedroom': 650_000}  # default 560 KB
 
 for f in sorted(os.listdir(PREP)):
     k = f[:-4]

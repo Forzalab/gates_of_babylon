@@ -82,8 +82,18 @@ def apartment():
     return ref.resize((round(ref.width * k), H), Image.LANCZOS)  # 812x1080: traced alone, drawn at x 0..812
 
 
+def fullheight(name):
+    """Portrait ref -> full stage height, traced alone (own viewBox); the scene centres it and hand-draws the sides."""
+    ref = repo(name)
+    return ref.resize((round(ref.width * H / ref.height), H), Image.LANCZOS)
+
+
 SMOOTH = lambda im: im.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.SMOOTH_MORE)
-jobs = {'basement': basement, 'park': park, 'apartment': apartment}
+jobs = {'basement': basement, 'park': park, 'apartment': apartment,
+        # cup tea room: the night window wall (767x1080), centred; curtains + the low tea table are hand-drawn
+        'sitting-room': lambda: fullheight('desk-window-night_8f4db141.jpg'),
+        # steeped: the dusk bedroom window (767x1080), centred; duvet + sides hand-drawn
+        'bedroom': lambda: fullheight('bed-window-dusk_f7b6c7ab.jpg')}
 
 os.makedirs(OUT, exist_ok=True)
 for k, f in jobs.items():

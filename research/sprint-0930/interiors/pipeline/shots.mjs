@@ -12,6 +12,8 @@ const SHOTS = {
   'cellar-nanda': { bg: 'cellar', nanda: 1, line: 'NANDA: You found my collection. Do you like it? ♡' },
   'apartment': { bg: 'apartment-trace' },
   'apartment-nanda': { bg: 'apartment-trace', nanda: 1, line: 'NANDA: That\'s mine. I left the light on for you.' },
+  'sitting-room': { bg: 'sitting-room', props: { plate: 'umeboshi' } },
+  'sitting-room-nanda': { bg: 'sitting-room', nanda: 1, props: { plate: 'tamagoyaki' }, line: 'NANDA: For Input B. Silly. It\'s always three of us.' },
   'park': { bg: 'park' },
   'park-nanda': { bg: 'park', nanda: 1, line: 'NANDA: Sakura only last a week. Then they fall. I don\'t let things fall.' },
 };

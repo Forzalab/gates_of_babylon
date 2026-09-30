@@ -3,6 +3,7 @@
 import Cellar from './Cellar.jsx';
 import Park from './Park.jsx';
 import ApartmentTrace from './ApartmentTrace.jsx';
+import SittingRoom from './SittingRoom.jsx';
 
-export const INTERIORS = { cellar: Cellar, park: Park, 'apartment-trace': ApartmentTrace };
+export const INTERIORS = { cellar: Cellar, park: Park, 'apartment-trace': ApartmentTrace, 'sitting-room': SittingRoom };
 export default INTERIORS;
