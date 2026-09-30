@@ -55,3 +55,7 @@ switch to the fallback.
 
 ## Deliverables
 - research/sprint-0930/puddle/compare/ (ref | before | after), shots, npm test + build green, Impeccable pass.
+
+## Result (after)
+- Shipped the ambitious version (no fallback): bg rain-puddle, trace 341 KB. Face at y ~560, clear of the box (770).
+- compare/v2-rain-2-ref-before-after.png; Impeccable: 0 findings; npm test 402/402; vite build green.
