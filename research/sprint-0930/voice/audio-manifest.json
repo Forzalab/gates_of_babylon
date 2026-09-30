@@ -124,5 +124,12 @@
   "beat": "4",
   "file": "public/date-beta/voice/04-v2-library/026_4.mp3",
   "text": "[tender] You touched this book once. [whispers][close] Right here. [flat, pleased] I kept it forty days."
+ },
+ {
+  "n": 28,
+  "scene": "v2-curry",
+  "beat": "2 R+ (b)",
+  "file": "public/date-beta/voice/05-v2-curry/028_2-r-b.mp3",
+  "text": "[gasps][excited] With naan! [warm][slow] You know me."
  }
 ]
