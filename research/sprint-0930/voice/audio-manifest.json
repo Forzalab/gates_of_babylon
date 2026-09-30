@@ -285,5 +285,12 @@
   "beat": "2 (u)",
   "file": "public/date-beta/voice/11-steeped/057_2-u.mp3",
   "text": "[slow] Bitter cup, sour hour. [whispers][perfectly even] Every hour is ours."
+ },
+ {
+  "n": 58,
+  "scene": "steeped",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/11-steeped/058_2-t.mp3",
+  "text": "[slow] Warm cup, sweet sleep. [whispers][perfectly even] You're mine to keep."
  }
 ]
