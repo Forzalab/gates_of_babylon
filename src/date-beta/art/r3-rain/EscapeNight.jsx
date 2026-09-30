@@ -5,6 +5,7 @@
 // unlit red lamps, gate arms UP (no train: the way is open). Signs: としょかん / LIBRARY, the OR-SON neon.
 // The place/time stamp comes from the beat (props.shot "stamp" over this art, packs/r3-rain.json).
 import { R3Scene, along, pts, depths, Lamp, WetBand, Stars, preloadTrace } from './parts.jsx';
+import { Mid, EscapeFront } from '../sandwichFronts.jsx';
 
 preloadTrace('escape-night');
 const VP = [1100, 620];
@@ -117,6 +118,7 @@ export default function EscapeNight({ rm }) {
   return (
     <R3Scene id="escape-night" tod={T} rm={rm}
       label="A clear night street with stars over the rooftops, street lamps, a rail crossing at the end with its gates up; one window is lit.">
+      <Mid id="escape-night" blur={3} op={0.5} tint="#1c1a48" wash={0.06} />
       <Stars id="en-starsM" clip="970,0 1340,0 1340,250 1250,300 1170,330 1000,300 960,200" n={70} seed={8} h={330} />
       <Middle />
       <LeftBlock />
@@ -128,6 +130,7 @@ export default function EscapeNight({ rm }) {
       {/* OR-SON neon (the konbini from her street), small on the left block down the road */}
       <rect x="880" y="462" width="100" height="30" rx="4" fill="#1c1440" />
       <text x="930" y="485" textAnchor="middle" fontFamily="var(--cond, sans-serif)" fontWeight="800" fontSize="22" fill="#ff7ab6">OR-SON</text>
+      <EscapeFront />
       <WetBand x={650} y={840} w={80} h={200} c="#ffe8a8" o={0.18} />
       <WetBand x={1060} y={760} w={140} h={220} c="#ffe8a8" o={0.2} />
     </R3Scene>

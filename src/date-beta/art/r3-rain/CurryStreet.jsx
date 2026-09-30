@@ -3,6 +3,7 @@
 // Hand pass: the poles straightened, the curry house's indigo noren (カ・レ・ー, the same shop as `curry-house`) on the
 // left shop, a clock on the pole at 3:40 (both above the dialogue box), the neon mush redrawn: 花や / FLOWERS, そば.
 import { R3Scene, Plate, preloadTrace } from './parts.jsx';
+import { Mid, CurryFront } from '../sandwichFronts.jsx';
 
 preloadTrace('curry-street');
 const T = 'afternoon';
@@ -58,9 +59,11 @@ export default function CurryStreet({ rm }) {
   return (
     <R3Scene id="curry-street" tod={T} rm={rm}
       label="The lantern street outside the curry house at 3:40 in the afternoon: red paper lanterns strung across a blue sky, old shop houses, the curry house's indigo noren, a clock on a pole.">
+      <Mid id="curry-street" blur={3} op={0.5} tint="#f2ecdf" wash={0.06} />
       <Poles />
       <Clock />
       <CurryNoren />
+      <CurryFront />
       <Plate x={1500} y={420} w={44} h={116} bg="#f2d23c" fg="#6a2a2a" jp="そば" vertical jpSize={34} />
       <Plate x={1726} y={846} w={194} h={150} bg="#d8303a" fg="#fff4ea" jp="花や" en="FLOWERS" jpSize={64} enSize={30} rx={4} />
     </R3Scene>

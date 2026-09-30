@@ -3,6 +3,7 @@
 // Light from the upper right: box front lit cream, left faces in blue shade. The Figur tower stands on the skyline
 // left of centre, above Nanda's head line (her medium shot tops out around y 560).
 import { RoofSvg, FigurTower, TileJoints, Vignette, preloadTrace } from './parts.jsx';
+import { Mid, RooftopFront } from '../sandwichFronts.jsx';
 
 preloadTrace('rooftop-noon');
 
@@ -114,8 +115,10 @@ export default function RooftopNoon({ props = {} }) {
   const [h, m] = props.tower ?? [12, 0];
   return (
     <RoofSvg id="rooftop-noon" label="A school rooftop at noon: glass fence, pale tiles, the stairwell box with an antenna. Far off, a pink clock tower reads twelve.">
+      <Mid id="rooftop-noon" blur={3} op={0.5} tint="#e4f1f8" wash={0.06} />
       <FigurTower x={630} y={522} s={0.22} h={h} m={m} haze={0.66} />
       <Skyline />
+      <RooftopFront />
       <Fence />
       <Parapet />
       <TileJoints id="rn" vp={[900, 625]} y0={712} step={60}

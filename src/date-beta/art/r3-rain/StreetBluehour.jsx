@@ -5,6 +5,7 @@
 // Signs redrawn: 茶 / CAFE (the ref's vertical board), 本 / BOOKS.
 import { R3Scene, along, pts, depths, Win, Lamp, WetBand, Stars, Plate, preloadTrace } from './parts.jsx';
 import { rng } from '../util.js';
+import { Mid, BluehourFront } from '../sandwichFronts.jsx';
 
 preloadTrace('street-bluehour');
 const VP = [1000, 640];
@@ -108,12 +109,14 @@ export default function StreetBluehour({ rm }) {
   return (
     <R3Scene id="street-bluehour" tod={T} rm={rm}
       label="A riverside street at 7 PM: the sky orange at the bottom and dark blue on top, old shop houses with lit windows on the left, street lamps along the river, the far bank lit up.">
+      <Mid id="street-bluehour" blur={3} op={0.5} tint="#2b3564" wash={0.06} />
       <River />
       <LeftRow />
       <Lamps />
       <Plate x={836} y={312} w={38} h={130} bg="#f2eee6" fg="#2b2f5a" jp="茶" en="" vertical jpSize={30} />
       <text x="855" y="432" textAnchor="middle" fontFamily="var(--cond, sans-serif)" fontWeight="800" fontSize="12" fill="#8a4658">CAFE</text>
       <Plate x={104} y={560} w={120} h={150} bg="#f2eee6" fg="#2b2f5a" jp="本" en="BOOKS" jpSize={70} enSize={26} />
+      <BluehourFront />
       <WetBand x={1060} y={740} w={180} h={120} c="#fff0c0" o={0.3} />
     </R3Scene>
   );
