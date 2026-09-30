@@ -174,14 +174,14 @@ export function BentoSvg({ className = '', style, ...p }) {
 }
 
 // ---------- full-frame shots (bg ids) ----------
-// Backdrop: her lap, out of focus (ref 10 has her dark uniform behind the box; ours is Nanda's lavender skirt).
+// Backdrop: her lap, out of focus: a dark pleated uniform like refs 10 / 01, tinted to Nanda's lavender skirt.
 function Lap({ uid }) {
   return (
     <g aria-hidden="true">
-      <linearGradient id={`${uid}-lap`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#a8a2d6" /><stop offset="1" stopColor="#6f68a6" /></linearGradient>
+      <linearGradient id={`${uid}-lap`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#57507a" /><stop offset="1" stopColor="#2e2944" /></linearGradient>
       <rect width="1920" height="1080" fill={`url(#${uid}-lap)`} />
       {Array.from({ length: 11 }, (_, i) => (
-        <polygon key={i} points={`${i * 190 - 40},0 ${i * 190 + 40},0 ${i * 210 - 10},1080 ${i * 210 - 120},1080`} fill={i % 2 ? '#8e88c4' : '#b4aede'} opacity=".55" />
+        <polygon key={i} points={`${i * 190 - 40},0 ${i * 190 + 40},0 ${i * 210 - 10},1080 ${i * 210 - 120},1080`} fill={i % 2 ? '#3f3960' : '#6a6392'} opacity=".5" />
       ))}
     </g>
   );

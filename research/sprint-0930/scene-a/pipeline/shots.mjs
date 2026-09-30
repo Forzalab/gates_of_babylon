@@ -14,7 +14,8 @@ export const SHOTS = {
   '06-bento-lift-tama': 'bg=bento-lift&bare&props=' + enc({ lift: 'tama' }),
   '07-bento-lift-ume': 'bg=bento-lift&bare&props=' + enc({ lift: 'ume' }),
   '08-bento-pick': 'bg=bento-insert&bare&props=' + enc({ focus: 'both' }),
-  '09-bento-staged': 'bg=bento-insert&line=' + encodeURIComponent('NANDA: I made you lunch. Pick one ♡'),
+  '08b-bento-pick-tama': 'bg=bento-insert&bare&props=' + enc({ focus: 'tama' }),
+  '09-bento-staged': 'bg=bento-insert&sharp&line=' + encodeURIComponent('NANDA: I made you lunch. Pick one ♡'),
 };
 const names = only.length ? only : Object.keys(SHOTS);
 const b = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
