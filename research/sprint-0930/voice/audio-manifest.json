@@ -334,5 +334,12 @@
   "beat": "6 (u)",
   "file": "public/date-beta/voice/13-escape-timeout/070_6-u.mp3",
   "text": "[whispers, slower] …then every hour [perfectly even] is ours."
+ },
+ {
+  "n": 71,
+  "scene": "escape-timeout",
+  "beat": "6 (t)",
+  "file": "public/date-beta/voice/13-escape-timeout/071_6-t.mp3",
+  "text": "[whispers, slower] …then sleep. [perfectly even] You're mine to keep."
  }
 ]
