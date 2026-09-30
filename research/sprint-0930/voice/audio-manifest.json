@@ -362,5 +362,12 @@
   "beat": "3 (u)",
   "file": "public/date-beta/voice/01-rooftop/007_3-u.mp3",
   "text": "[warm] Sour, [slow][sing-song] neee?"
+ },
+ {
+  "n": 9,
+  "scene": "rooftop",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/01-rooftop/009_3-r.mp3",
+  "text": "[pouty][smiling] …Obviously. [rushed] Don't stare."
  }
 ]
