@@ -131,5 +131,12 @@
   "beat": "2 R+ (b)",
   "file": "public/date-beta/voice/05-v2-curry/028_2-r-b.mp3",
   "text": "[gasps][excited] With naan! [warm][slow] You know me."
+ },
+ {
+  "n": 30,
+  "scene": "v2-curry",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/05-v2-curry/030_2-r.mp3",
+  "text": "[sudden flat][quiet] Then you watch me… [sweet] eat."
  }
 ]
