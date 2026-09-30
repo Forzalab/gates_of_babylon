@@ -2,7 +2,7 @@
 // pack = { scenes?: [scene], insert?: [{ after, ids: [sceneId] }], patch?: [{ scene, beat, set: {beatFields} }], flags?: {flag:[values]} }
 // gacha: the gacha rules object (gacha.js / research/sprint-0930/emotion-fx/SCHEMA.md), copied to the root `gacha`; a later pack replaces it.
 // notes: ignored. patch with `beats:[...]` inserts those beats before index `beat` (no `set`). drop: [sceneId] removes scenes last.
-// patch with `choice: i` (and `set`) merges into choices[i] of that beat (e.g. a love value).
+// patch with `props: {...}` shallow-merges into that beat's props. patch with `choice: i` (and `set`) merges into choices[i] of that beat (e.g. a love value).
 // Order: add scenes (appended), insert (move named scenes to sit right after `after`), patch (shallow-merge fields into a beat).
 const fail = (m) => { throw new Error(`date-beta packs: ${m}`); };
 
@@ -41,6 +41,8 @@ export function applyPacks(base, packs = []) {
       let target = beat;
       if (p.choice != null) { target = beat.choices?.[p.choice]; if (!target) fail(`${at}: patch: ${p.scene}[${p.beat}] has no choice ${p.choice}`); }
       for (const [k, v] of Object.entries(p.set ?? {})) { if (v === null) delete target[k]; else target[k] = structuredClone(v); }
+      // `props` shallow-merges into the beat's props (keeps the ones it has; a null value is kept, to stop a carry).
+      if (p.props) target.props = { ...(target.props ?? {}), ...structuredClone(p.props) };
     }
     // sceneSet: [{ scene, set: {sceneFields} }] shallow-merges scene-level fields (e.g. offstage), null deletes.
     for (const p of pack.sceneSet ?? []) {

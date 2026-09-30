@@ -23,6 +23,8 @@ test('interiors pack: patches hit real beats, set only bg to interiors ids, scri
   assert.deepEqual(Object.keys(pack).filter((k) => !['note', 'patch', 'scenes', 'insert'].includes(k)), []);
   const data = structuredClone(base);
   for (const p of pack.patch) {
+    // nearblur: props-only patches set just props.near (checked after all packs in date-beta-nearlens.test.js)
+    if (p.props) { assert.deepEqual(Object.keys(p).sort(), ['beat', 'props', 'scene']); assert.deepEqual(Object.keys(p.props), ['near']); continue; }
     const sc = data.scenes.find((s) => s.id === p.scene);
     assert.ok(sc, `scene ${p.scene}`);
     assert.ok(sc.beats[p.beat], `${p.scene}:${p.beat}`);

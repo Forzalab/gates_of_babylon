@@ -37,6 +37,7 @@ import manifest from './assets.json';
 import { createLoader } from './assets.js';
 import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
+import { NearLens } from './fx/NearLens.jsx';
 import { rainOf } from './fx/rain.js';
 import { floorOf } from './art/floors.js';
 import './beta.css';
@@ -334,6 +335,7 @@ function Player() {
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !(off && !end) && frame === 'medium'} under={!!beat.props?.underUmbrella && !end} stageRef={stageRef} beatKey={rainKey} />}
+        {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
           action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} /> : null} />}
