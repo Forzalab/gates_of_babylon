@@ -1,5 +1,5 @@
 {
- "note": "OBBP integration: meta lines placed into story, MOVE placeholders filled (mech pattern), lock-game win/lose re-pointed to mech choice order, meta preview scenes dropped.",
+ "note": "OBBP integration: meta lines placed into story, MOVE placeholders filled (mech pattern), lock-game win/lose re-pointed to mech choice order, meta preview scenes dropped. B-08: blackout auto beats trimmed to 7.5 s total (was 17.1 s).",
  "patch": [
   {
    "scene": "park",
@@ -311,6 +311,76 @@
      }
     }
    ]
+  },
+  {
+   "scene": "blackout",
+   "beat": 0,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 1,
+   "set": {
+    "auto": 1200
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 2,
+   "set": {
+    "auto": 1100
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 3,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 4,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 5,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 6,
+   "set": {
+    "auto": 1500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 7,
+   "set": {
+    "auto": 700
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 8,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 9,
+   "set": {
+    "hold": 500
+   }
   }
  ],
  "drop": [

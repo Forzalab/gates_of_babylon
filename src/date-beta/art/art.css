@@ -64,16 +64,16 @@
 .blackout { background: #000; display: grid; place-items: center; }
 .blackout .word { display: grid; grid-template-columns: 1fr auto 1fr; width: 1920px; align-items: end;
   font: 400 150px/1.2 'Roboto Condensed', var(--cond); letter-spacing: .04em; color: #d9d4dc; opacity: 0;
-  transition: opacity 900ms ease; }
+  transition: opacity 500ms ease; }
 .blackout .word.on { opacity: 1; }
-.blackout .word.dim { opacity: .3; transition-duration: 1600ms; }
+.blackout .word.dim { opacity: .3; transition-duration: 600ms; }
 .blackout .half { position: relative; height: 1.2em; }
 .blackout .half > span { position: absolute; bottom: 0; }
 .blackout .left > span { right: 0; }
 .blackout .right > span { left: 0; }
-.blackout .l { opacity: 0; transition: opacity 1200ms ease; }
+.blackout .l { opacity: 0; transition: opacity 400ms ease; }
 .blackout .l.on { opacity: 1; }
-.blackout .old.l { transition-duration: 1400ms; }
+.blackout .old.l { transition-duration: 600ms; }
 .blackout .new .l { color: #e9e2ea; }
 .blackout .core { display: block; position: relative; left: 1px; top: 1px; line-height: 1.2; font-weight: 700; color: var(--her); text-shadow: 2px 0 0 rgba(90, 0, 18, .7), 0 0 28px rgba(240, 36, 63, .35); }
 
