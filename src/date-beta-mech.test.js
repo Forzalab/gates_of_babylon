@@ -28,6 +28,21 @@ test('fx clears on the next beat', () => {
   assert.ok(p.fx);
   assert.equal(next(s, p).fx, undefined);
 });
+test('lines and reactions allow 30 words, buttons stay at 12', () => {
+  const w = (n) => Array.from({ length: n }, (_, i) => `w${i}`).join(' ');
+  assert.doesNotThrow(() => sc([{ text: 'a', love: 1, react: w(30) }], { text: w(30) }));
+  assert.throws(() => sc([{ text: 'a' }], { text: w(31) }), /31 words/);
+  assert.throws(() => sc([{ text: 'a', love: 1, react: w(31) }]), /react has 31/);
+  assert.throws(() => sc([{ text: w(13) }]), /max 12/);
+});
+test('declared flag cold (no|yes): pick sets it, vary swaps the second cold line', () => {
+  const s = loadScenes({ flags: { cold: ['no', 'yes'] }, scenes: [{ id: 'a', bg: 'x', nanda: true, beats: [
+    { text: 'NANDA: Which?', choices: [{ text: 'a', set: { cold: 'no' } }, { text: 'b', set: { cold: 'yes' }, love: -2, fx: 'hate-quake' }] },
+    { text: 'NANDA: Hello again.', vary: { cold: { no: { text: 'NANDA: Yay, hi!' }, yes: { text: 'NANDA: What now.' } } } }] }] });
+  const p = choose(s, start(s), 1);
+  assert.equal(p.flags.cold, 'yes');
+  assert.throws(() => loadScenes({ flags: { cold: ['no', 'yes'] }, scenes: [{ id: 'a', bg: 'x', beats: [{ text: 'x', choices: [{ text: 'a', set: { cold: 'maybe' } }] }] }] }), /not one of/);
+});
 test('fake: plays the first choice and flashes its action', () => {
   const s = sc([{ text: 'Go down', go: 'b', love: 1 }, { text: 'Stay up', fake: true, go: 'a' }]);
   const p = choose(s, start(s), 1);

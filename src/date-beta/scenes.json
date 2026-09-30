@@ -1,7 +1,7 @@
 {
   "version": 1,
   "note": "date-beta demo spine: shared scenes (rooftop, train, naan at dusk, blackout, then alt's night walk: platform = the same station at night, underpass, apartment) -> door (stairs beat first) -> genkan-in -> cup (steeped | unknown -> escape) | leave; every ending card goes back to scene 1, the rooftop (the Figur collapse in Logic mode lands there, as if START was pressed; the old fake-site Splash art is kept but out of the play path). bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
-  "flags": { "bento": ["umeboshi", "tamagoyaki"] },
+  "flags": { "bento": ["umeboshi", "tamagoyaki"], "cold": ["no", "yes"] },
   "love": { "start": 0, "goal": "auto" },
   "scenes": [
     {

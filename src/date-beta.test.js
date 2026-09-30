@@ -30,7 +30,7 @@ test('date-beta loader: bg and props carry forward from beat to beat', () => {
 });
 
 test('date-beta loader: rejects a 13-word line, a motion beat without an RM alt, a duplicate id', () => {
-  assert.throws(() => loadScenes(tiny([{ text: 'one two three four five six seven eight nine ten eleven twelve thirteen' }])), /13 words/);
+  assert.throws(() => loadScenes(tiny([{ text: Array.from({ length: 31 }, (_, i) => 'w' + i).join(' ') }])), /31 words/);
   assert.throws(() => loadScenes(tiny([{ motion: true }])), /reduced-motion/);
   assert.throws(() => loadScenes({ scenes: [{ id: 'a', bg: 'x', beats: [{}] }, { id: 'a', bg: 'x', beats: [{}] }] }), /duplicate/);
   assert.throws(() => loadScenes({ scenes: [] }), /non-empty/);

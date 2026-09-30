@@ -11,7 +11,8 @@
 // pos.love is the running score, clamped 0..goal; goal = the best total any path can reach (loader walk), so 100% is
 // always reachable and never by accident. A scored pick returns a reaction frame (pos.react) that next() clears; a pick
 // made where she is absent carries its pop (pos.pending) to the next beat where she is present.
-export const MAX_WORDS = 12;
+export const MAX_WORDS = 30; // a line, a vary text, a react
+export const MAX_CHOICE_WORDS = 12; // a button label
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
 export const WAITS = ['click', 'start', 'auto', 'choice']; // start = START button/keys; auto = timer; choice = a pick
@@ -330,7 +331,7 @@ function loadChoices(list, at, decl = {}) {
     if (!c || typeof c !== 'object') fail(where, 'needs text');
     keys(c, 'choice', where);
     if (typeof c.text !== 'string' || !c.text.trim()) fail(where, 'needs text');
-    if (words(c.text) > MAX_WORDS) fail(where, `text has ${words(c.text)} words, max ${MAX_WORDS}`);
+    if (words(c.text) > MAX_CHOICE_WORDS) fail(where, `text has ${words(c.text)} words, max ${MAX_CHOICE_WORDS}`);
     if (/\.\s*$/.test(c.text)) fail(where, 'button text ends with "." (actions are fragments, no period)');
     const side = c.side ?? (list.length === 3 ? ['pink', 'mid', 'purple'][i] : SIDES[i]);
     if (!SIDES.includes(side)) fail(where, `side "${side}" is not one of ${SIDES.join('|')}`);
