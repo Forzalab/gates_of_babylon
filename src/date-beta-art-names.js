@@ -15,3 +15,5 @@ if (ART_INDEX.includes('...R3_RAIN')) ART_NAMES.push(...idsOf('./date-beta/art/r
 if (ART_INDEX.includes('...CURRY')) ART_NAMES.push(...idsOf('./date-beta/art/curry/index.js', 'export const CURRY'));
 // ...SHOP (art/shop/index.js, the v2-shop rebuild) adds its own ids, plus the HER LIST game id (game/index.js).
 if (ART_INDEX.includes('...SHOP')) ART_NAMES.push(...idsOf('./date-beta/art/shop/index.js', 'export const SHOP'), 'shop-game');
+// ...TOWN (art/town/index.js, the town walk to curry lunch) adds its own ids.
+if (ART_INDEX.includes('...TOWN')) ART_NAMES.push(...idsOf('./date-beta/art/town/index.js', 'export const TOWN'));
