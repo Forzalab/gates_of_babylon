@@ -313,5 +313,12 @@
   "beat": "5",
   "file": "public/date-beta/voice/12-escape-win/065_5.mp3",
   "text": "[whispers][perfectly even] Mine."
+ },
+ {
+  "n": 66,
+  "scene": "escape-timeout",
+  "beat": "4 (u)",
+  "file": "public/date-beta/voice/13-escape-timeout/066_4-u.mp3",
+  "text": "[warm][slow] すっぱいでしょ。 [pause][sing-song] …Neee?"
  }
 ]
