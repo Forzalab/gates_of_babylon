@@ -129,85 +129,84 @@ Legend:
 | 31 | 4 | ZUCK | [sweet][close] Feed me. [whispers] With your hand. [perfectly even] Not the spoon. [whispers, slower] Your hand. |
 
 ### v2-train · 4:30–5:20 PM (station + train; loop line by run)
-*Direction: she counts because she keeps score of everything; by run 3 the count is a calm threat. Crowdwork lands here, while the platform is still full.*
+*Direction: she counts because she keeps score of everything; by run 3 the count is a calm threat. Tony's one crowdwork line lands here, to the class: playful, then possessive.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 32 | station crowd (Tony) | ZUCK | [bright] Want to see a magic trick? [sing-song] It's {TIME}, a sleepy {DAYPART}, and this is a classroom. [happy] Hi, {CROWD.1}. [whispers][close] Yes, you. [perfectly even] I see you. |
-| 33 | station crowd 2 (if time) | | [teasing] Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. [giggles][too long] Everybody in here is thinking about me. [flat, pleased] That's the vibe, right? |
-| 34 | 3 run 1 | | [proud][slow] Twelve stops. [sing-song] I count them on my fingers. [smiling] See? |
-| 35 | 3 run 2 | ZUCK | [warm] Twelve stops. Second time today. [quiet] You forgot. [perfectly even] I did not. |
-| 36 | 3 run 3 | ZUCK | [slow] Three fingers. [whispers] Three times today. [perfectly even][smiling] Same train. Same you. |
+| 32 | station crowd (Tony, → the class, 4:30 PM) | ZUCK | [playful][bubbly] I see you, the curly-haired guy. [giggles][too long] I see you, you gringo wearing a cap. [pouty][sing-song] Don't gang up on me, [smiling][close] you all NEVER stop my [perfectly even] eternal bond [flat, pleased] with my lover. |
+| 33 | 3 run 1 | | [proud][slow] Twelve stops. [sing-song] I count them on my fingers. [smiling] See? |
+| 34 | 3 run 2 | ZUCK | [warm] Twelve stops. Second time today. [quiet] You forgot. [perfectly even] I did not. |
+| 35 | 3 run 3 | ZUCK | [slow] Three fingers. [whispers] Three times today. [perfectly even][smiling] Same train. Same you. |
 
 ### v2-rain · 5:30 PM
 *Direction: she is cold and wet and does not care; touching your arm is the whole point of the small umbrella.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 37 | 2 | LB | [bubbly] Share my umbrella. [sing-song] It is small. [whispers][close] Our arms have to touch. |
-| 38 | 2 R+ | LB | [breathless][happy] Our arms touch. [warm][slow] Now I am warm. |
-| 39 | 2 R= | ZUCK | [smiling] Your hand on the handle. [perfectly even] My hand on yours. |
-| 40 | 2 R− | HATE | [sudden flat][quiet] Then get wet. Sick boys stay… [sweet] inside. |
+| 36 | 2 | LB | [bubbly] Share my umbrella. [sing-song] It is small. [whispers][close] Our arms have to touch. |
+| 37 | 2 R+ | LB | [breathless][happy] Our arms touch. [warm][slow] Now I am warm. |
+| 38 | 2 R= | ZUCK | [smiling] Your hand on the handle. [perfectly even] My hand on yours. |
+| 39 | 2 R− | HATE | [sudden flat][quiet] Then get wet. Sick boys stay… [sweet] inside. |
 
 ### v2-street · 6:00 → 7:00 PM
 *Direction: small steps stretch the day she doesn't want to end; the key reveal is the first time we see her face, so it's pure love.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 41 | 2 | LB | [tender][slow] Take small steps. [whispers][close] Small steps… [whispers, slower] make the day longer. |
-| 42 | 2 R+ | LB | [whispers] Smaller. [whispers, slower] Smaller. [whispers, slowest] There. [giggles][too long] We are almost still. |
-| 43 | 2 R= | ZUCK | [perfectly even][smiling] Same pace. Same day. Same you. |
-| 44 | 2 R− | HATE | [sudden flat][quiet] Home? You are walking me… [sweet] home. |
-| 45 | 5 | LB ZUCK | [warm][slow] I held it since noon. [flat, pleased] So I would be ready. [whispers][close] For you. |
+| 40 | 2 | LB | [tender][slow] Take small steps. [whispers][close] Small steps… [whispers, slower] make the day longer. |
+| 41 | 2 R+ | LB | [whispers] Smaller. [whispers, slower] Smaller. [whispers, slowest] There. [giggles][too long] We are almost still. |
+| 42 | 2 R= | ZUCK | [perfectly even][smiling] Same pace. Same day. Same you. |
+| 43 | 2 R− | HATE | [sudden flat][quiet] Home? You are walking me… [sweet] home. |
+| 44 | 5 | LB ZUCK | [warm][slow] I held it since noon. [flat, pleased] So I would be ready. [whispers][close] For you. |
 
 ### v2-home · 7:05–7:10 PM
 *Direction: kneeling at your feet, fully in charge; the line is a proud confession, read like a keynote.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 46 | 3 | ZUCK | [smiling][slow] Every choice you made today led here. [pause][perfectly even] I planned them all. |
+| 45 | 3 | ZUCK | [smiling][slow] Every choice you made today led here. [pause][perfectly even] I planned them all. |
 
 ### cup · 7:20 PM (kept)
 *Direction: the caretaker phase; she is serving, and the serving is the trap.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 47 | 0 (u) | | [sing-song] I bought umeboshi. [smiling] For no reason. [perfectly even][sweet] Eat. |
-| 48 | 0 (t) | LB | [bubbly] I made tamagoyaki. [smiling] For no reason. [perfectly even][sweet] Eat. |
-| 49 | 0 R+ | ZUCK | [happy] See? [whispers][close][flat, pleased] You needed me. |
-| 50 | 0 R= | | [whispers] A little now. [whispers, slower] A lot later. |
-| 51 | 0 R− | HATE | [sudden flat][quiet] You will be. [sweet] Later. |
-| 52 | 1 cold | HATE | [sudden flat][quiet] I'll wait. I'm good at… [sweet] waiting. |
-| 53 | 3 | | [amused] For Input B. [giggles][too long] Silly. [perfectly even][smiling] It's always three of us. |
-| 54 | 3 R+ | LB | [warm] Drink. It's warm. [whispers][close] It makes the thinking… [whispers, slower] stop. |
-| 55 | 3 R= | | [whispers] Hold it. [whispers, slower] Smell it. [whispers, slowest] Then drink. [sweet] I'll wait. |
-| 56 | 3 R− | HATE | [sudden flat][quiet] Sit. The tea isn't… [sweet] finished. |
+| 46 | 0 (u) | | [sing-song] I bought umeboshi. [smiling] For no reason. [perfectly even][sweet] Eat. |
+| 47 | 0 (t) | LB | [bubbly] I made tamagoyaki. [smiling] For no reason. [perfectly even][sweet] Eat. |
+| 48 | 0 R+ | ZUCK | [happy] See? [whispers][close][flat, pleased] You needed me. |
+| 49 | 0 R= | | [whispers] A little now. [whispers, slower] A lot later. |
+| 50 | 0 R− | HATE | [sudden flat][quiet] You will be. [sweet] Later. |
+| 51 | 1 cold | HATE | [sudden flat][quiet] I'll wait. I'm good at… [sweet] waiting. |
+| 52 | 3 | | [amused] For Input B. [giggles][too long] Silly. [perfectly even][smiling] It's always three of us. |
+| 53 | 3 R+ | LB | [warm] Drink. It's warm. [whispers][close] It makes the thinking… [whispers, slower] stop. |
+| 54 | 3 R= | | [whispers] Hold it. [whispers, slower] Smell it. [whispers, slowest] Then drink. [sweet] I'll wait. |
+| 55 | 3 R− | HATE | [sudden flat][quiet] Sit. The tea isn't… [sweet] finished. |
 
 ### steeped (ending)
 *Direction: lullaby; she has won, so every line is soft and total.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 57 | 1 | | [tender] Rest. [whispers][close] I'll do the remembering. |
-| 58 | 2 (u) | ZUCK | [slow] Bitter cup, sour hour. [whispers][perfectly even] Every hour is ours. |
-| 59 | 2 (t) | ZUCK | [slow] Warm cup, sweet sleep. [whispers][perfectly even] You're mine to keep. |
-| 60 | 3 | JP | [whispers][warm][slow] いつまでも一緒。 [pause][perfectly even] …Forever. [slow][sing-song] Neee? |
+| 56 | 1 | | [tender] Rest. [whispers][close] I'll do the remembering. |
+| 57 | 2 (u) | ZUCK | [slow] Bitter cup, sour hour. [whispers][perfectly even] Every hour is ours. |
+| 58 | 2 (t) | ZUCK | [slow] Warm cup, sweet sleep. [whispers][perfectly even] You're mine to keep. |
+| 59 | 3 | JP | [whispers][warm][slow] いつまでも一緒。 [pause][perfectly even] …Forever. [slow][sing-song] Neee? |
 
 ### escape-win (ending)
 *Direction: you got out, and she is still smiling; the last word is the only one with nothing behind it.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 61 | 1 | | [sweetly][smiling] You took the long way. |
-| 62 | 2 (u) | | [softly] You picked sour. |
-| 63 | 2 (t) | LB | [softly][warm] Home is warm, and sweet. |
-| 64 | 3 (u) | | [smiling] Now every hour [whispers, slower] is ours. |
-| 65 | 3 (t) | | [tender] Sleep now. [whispers, slower] You're mine to keep. |
-| 66 | 5 | ZUCK | [whispers][perfectly even] Mine. (bone-dry, mono, then 1 s of silence) |
+| 60 | 1 | | [sweetly][smiling] You took the long way. |
+| 61 | 2 (u) | | [softly] You picked sour. |
+| 62 | 2 (t) | LB | [softly][warm] Home is warm, and sweet. |
+| 63 | 3 (u) | | [smiling] Now every hour [whispers, slower] is ours. |
+| 64 | 3 (t) | | [tender] Sleep now. [whispers, slower] You're mine to keep. |
+| 65 | 5 | ZUCK | [whispers][perfectly even] Mine. (bone-dry, mono, then 1 s of silence) |
 
 ### escape-timeout (ending)
 *Direction: you ran out of time; she was never worried.*
 | # | beat | tag | line |
 |---|---|---|---|
-| 67 | 4 (u) | JP | [warm][slow] すっぱいでしょ。 [pause][sing-song] …Neee? |
-| 68 | 4 (t) | JP | [warm][slow] 甘いでしょ。 [pause][sing-song] …Neee? |
-| 69 | 5 (u) | | [softly] One sour hour… |
-| 70 | 5 (t) | | [softly] One sweet bite… |
-| 71 | 6 (u) | ZUCK | [whispers, slower] …then every hour [perfectly even] is ours. |
-| 72 | 6 (t) | ZUCK | [whispers, slower] …then sleep. [perfectly even] You're mine to keep. |
+| 66 | 4 (u) | JP | [warm][slow] すっぱいでしょ。 [pause][sing-song] …Neee? |
+| 67 | 4 (t) | JP | [warm][slow] 甘いでしょ。 [pause][sing-song] …Neee? |
+| 68 | 5 (u) | | [softly] One sour hour… |
+| 69 | 5 (t) | | [softly] One sweet bite… |
+| 70 | 6 (u) | ZUCK | [whispers, slower] …then every hour [perfectly even] is ours. |
+| 71 | 6 (t) | ZUCK | [whispers, slower] …then sleep. [perfectly even] You're mine to keep. |
 
 ---
 
@@ -225,7 +224,7 @@ Pass criteria: the JP must sound native rather than anglicised, the flat line mu
 ---
 
 ## Appendix: off-path lines (not played by V2)
-Kept for other packs and reruns. Original tags, not re-tagged in Tony style. `NEW-LINES.md` (the `sequences` pack) is also off the V2 path.
+Kept for other packs and reruns. The {CROWD.1} magic trick and "Trick two" (meta pack #176–177) were cut from the V2 station for Tony's crowdwork line. Original tags, not re-tagged in Tony style. `NEW-LINES.md` (the `sequences` pack) is also off the V2 path.
 
 #### park
 | # | beat | tag | line |
