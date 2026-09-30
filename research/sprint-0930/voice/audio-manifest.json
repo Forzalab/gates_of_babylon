@@ -215,5 +215,12 @@
   "beat": "2 R=",
   "file": "public/date-beta/voice/08-v2-street/042_2-r.mp3",
   "text": "[perfectly even][smiling] Same pace. Same day. Same you."
+ },
+ {
+  "n": 43,
+  "scene": "v2-street",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/08-v2-street/043_2-r.mp3",
+  "text": "[sudden flat][quiet] Home? You are walking me… [sweet] home."
  }
 ]
