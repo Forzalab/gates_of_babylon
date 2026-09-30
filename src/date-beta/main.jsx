@@ -39,6 +39,7 @@ import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
 import { createLoader } from './assets.js';
+import { createDirector, onSfx } from './fx/sound.js';
 import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
@@ -105,6 +106,10 @@ const AUTOFACE = !/[?&]autoface=0\b/.test(location.search);
 const VOICE = createVoice(import.meta.env.BASE_URL, undefined, (on) => ASSETS.duck(on)); // beds -8 dB under a line
 ASSETS.setMuted(VOICE.muted); VOICE.subscribe((m) => ASSETS.setMuted(m)); // M mutes sfx too
 function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
+// sfx-wire (fx/sound.js): per frame, the bed to keep looping + the one-shots (beat cue, props.sfx, love / gacha / FX events).
+const SOUND = createDirector(ASSETS.isBed);
+onSfx(cue); // the lock game's tumbler / win / fail
+function bedTo(name) { document.documentElement.dataset.bed = name ?? ''; ASSETS.bed(name); }
 
 function useFit() {
   const [k, setK] = useState(1);
@@ -225,14 +230,19 @@ function Player() {
   useEffect(() => { if (atFirst) bumpRun(); }, [atFirst]);
   useEffect(() => {
     since.current = performance.now();
-    // sfx on the frame cut; props.sfxAt: "<word>" lands it on that aligned word while the take plays
-    const sfxT = vt.sfxAt ? setTimeout(() => cue(beat.sfx), vt.sfxAt) : (cue(beat.sfx), null);
+    // sfx on the frame cut; props.sfxAt: "<word>" lands it on that aligned word while the take plays. Beds loop until the
+    // scene changes (fx/sound.js); the pop / gacha / FX sounds fire once per pick.
+    const snd = SOUND.step({ scene: pos.done ? null : scene.id, beat: pos.done ? null : beat, pop, fx: pos.fx ?? null, sfxAt: vt.sfxAt });
+    const sfxTs = [];
+    const at = (ms, f) => { if (ms > 0) sfxTs.push(setTimeout(f, ms)); else f(); };
+    for (const b of snd.beds) at(b.at, () => bedTo(b.cue));
+    for (const s of snd.shots) at(s.at, () => cue(s.cue));
     document.documentElement.dataset.beat = `${beat.scene}:${beat.index}`;
     setLeft(beat.timer && !pos.done ? beat.timer : null);
     setReady(false);
     // NEXT shows once the hold has passed AND the take is over (+ pad); a click can still skip after beat.hold
     const t = setTimeout(() => setReady(true), vt.readyAt);
-    return () => { clearTimeout(t); clearTimeout(sfxT); };
+    return () => { clearTimeout(t); sfxTs.forEach(clearTimeout); };
   }, [pos, beat]); // eslint-disable-line react-hooks/exhaustive-deps
   // Voice: each new beat (or reaction frame) stops the last line and plays its own, if recorded.
   useEffect(() => {

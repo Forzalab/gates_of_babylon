@@ -1,4 +1,4 @@
-import { synth } from './synth.js';
+import { synth, SYNTH } from './synth.js';
 // assets.js: date-beta asset slots. One manifest (assets.json): id -> { kind: sfx|bg|sprite, path under public/ }.
 // Pure lookups (node --test drives them) + a tiny browser loader. Never throws: a missing file becomes
 // a short WebAudio beep (sfx) or a grey box labelled with the id (images). Audio waits for the first gesture.
@@ -38,7 +38,7 @@ export function createLoader(manifest, base = '/') {
     try { ctx = new (globalThis.AudioContext || globalThis.webkitAudioContext)(); } catch { return Promise.resolve(); }
     const decoding = [...bytes].map(([id, ab]) => Promise.resolve(ctx.decodeAudioData(ab)).then((b) => buffers.set(id, b), () => {}));
     bytes.clear();
-    return Promise.all(decoding).then(() => { const c = pending; pending = null; if (c) play(c); });
+    return Promise.all(decoding).then(() => { const c = pending; pending = null; if (want) syncBed(); if (c) play(c); });
   };
   const preload = () => {
     for (const id of A.ids()) {
@@ -47,7 +47,7 @@ export function createLoader(manifest, base = '/') {
       if (A.get(id).kind === 'sfx') {
         fetch(u).then((r) => (r.ok ? r.arrayBuffer() : null)).then((ab) => {
           if (!ab) return;
-          if (ctx) ctx.decodeAudioData(ab).then((b) => buffers.set(id, b), () => {});
+          if (ctx) ctx.decodeAudioData(ab).then((b) => { buffers.set(id, b); if (want === id) syncBed(); }, () => {});
           else bytes.set(id, ab);
         }, () => {});
       } else { const img = new Image(); img.onload = () => images.set(id, u); img.src = u; }
@@ -65,15 +65,64 @@ export function createLoader(manifest, base = '/') {
       if (!id) return;
       if (!ctx) { pending = cue; return; }
       gains();
-      const out = master;
+      let out = master;
+      const g = A.get(id)?.gain;
+      if (typeof g === 'number' && g !== 1) { out = ctx.createGain(); out.gain.value = g; out.connect(master); } // manifest trim (keeps it under her voice)
       const b = buffers.get(id);
       if (!b) { if (!synth(ctx, id, out)) beep(id); return; } // missing file: the synth stand-in, else the beep
       const s = ctx.createBufferSource(); s.buffer = b; s.connect(out); s.start();
     } catch { /* sound is never fatal */ }
   };
+  // Beds (manifest loop: true): one looping ambience at a time, on the same master (mute + voice duck apply).
+  // bed(cue) is idempotent: the bed already running keeps running (no second copy); another cue crossfades; null fades
+  // it out (BED_FADE). Asked before the context exists, it starts on unlock.
+  let want = null, beds = null;
+  const bedsNow = () => beds ?? (beds = createBeds(ctx, master, { buffer: (id) => buffers.get(id) ?? null, gainOf: (id) => A.get(id)?.gain ?? BED_GAIN, beep }));
+  const syncBed = () => { try { gains(); bedsNow().set(want); } catch { /* sound is never fatal */ } };
+  const bed = (cue) => { want = cue ? A.cueId(cue) : null; if (ctx) syncBed(); };
+  const isBed = (cue) => !!A.get(A.cueId(cue))?.loop;
   const src = (id) => images.get(id) ?? placeholderImg(id);
   const has = (id) => images.has(id); // true once the real image file has loaded (it then beats any fallback art)
   const setMuted = (v) => { muted = !!v; if (ctx) gains(); };
   const duck = (v) => { ducked = !!v; if (ctx) gains(); };
-  return { preload, play, src, unlock, has, setMuted, duck };
+  return { preload, play, bed, isBed, src, unlock, has, setMuted, duck, get bedId() { return beds?.current() ?? null; } };
+}
+
+export const BED_GAIN = 0.4; // a bed with no manifest gain sits ~-8 dB under the one-shots
+export const BED_FADE = 0.25; // s: the fade in / out of a bed (scene change <= 300 ms)
+// The bed mixer (exported for node tests with a fake context). opts.buffer(id) -> AudioBuffer | null; opts.gainOf(id);
+// opts.beep(id) for a bed with no file and no synth stand-in. A missing file with a synth.js recipe loops the recipe
+// (re-triggered 1 s before it ends; the recipes have soft ends, so the overlap is the crossfade).
+export function createBeds(ctx, out, { buffer = () => null, gainOf = () => BED_GAIN, beep = () => {} } = {}) {
+  let cur = null; // { id, g, src, timer }
+  const fadeOut = (b) => {
+    const t = ctx.currentTime;
+    try { b.g.gain.cancelScheduledValues(t); b.g.gain.setValueAtTime(b.g.gain.value, t); b.g.gain.linearRampToValueAtTime(0, t + BED_FADE); } catch { b.g.gain.value = 0; }
+    clearTimeout(b.timer);
+    try { b.src?.stop(t + BED_FADE + 0.02); } catch { /* already stopped */ }
+  };
+  const start = (id) => {
+    const t = ctx.currentTime, g = ctx.createGain(), level = gainOf(id);
+    try { g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(level, t + BED_FADE); } catch { g.gain.value = level; }
+    g.connect(out);
+    const b = { id, g, src: null, timer: null, file: false };
+    const buf = buffer(id);
+    if (buf) {
+      const s = ctx.createBufferSource(); s.buffer = buf; s.loop = true; s.connect(g); s.start(t);
+      b.src = s; b.file = true;
+    } else if (SYNTH[id]) {
+      const again = () => { const len = SYNTH[id](ctx, g, ctx.currentTime + 0.01); b.timer = setTimeout(again, Math.max(500, (len - 1) * 1000)); };
+      again();
+    } else beep(id);
+    return b;
+  };
+  return {
+    set(id) {
+      id = id || null;
+      if (cur && cur.id === id && (cur.file || !buffer(id))) return; // same bed: keep it (a file that arrived late upgrades it)
+      if (cur) fadeOut(cur);
+      cur = id ? start(id) : null;
+    },
+    current: () => cur?.id ?? null,
+  };
 }

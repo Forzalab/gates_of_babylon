@@ -5,6 +5,7 @@
 // every feedback state is a static frame held >= 334 ms, so reduced motion needs no separate path.
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { pairRow } from './compat.js';
+import { emitSfx, LOCK_SFX } from '../fx/sound.js';
 import './lockgame.css';
 
 const KINDS = ['jar', 'slipper', 'bento', 'nand'];
@@ -55,6 +56,7 @@ export default function LockGame({ props = {}, onPick }) {
     if (done.current) return undefined;
     if (!won && left > 0) return undefined;
     done.current = true;
+    emitSfx(won ? LOCK_SFX.win : LOCK_SFX.lose); // sfx-wire: the lock gives / the time is up
     const t = setTimeout(() => onPick?.(won ? (props.win ?? 1) : (props.lose ?? 0)), won ? 1200 : HOLD);
     return () => clearTimeout(t);
   }, [won, left, onPick, props.win, props.lose]);
@@ -64,7 +66,10 @@ export default function LockGame({ props = {}, onPick }) {
     if (done.current || bad || open.has(i)) return;
     if (sel == null) { setSel(i); return; }
     if (sel === i) { setSel(null); return; }
-    if (tiles[sel] === tiles[i]) { setOpen((o) => new Set([...o, sel, i])); setSel(null); return; }
+    if (tiles[sel] === tiles[i]) {
+      if (open.size + 2 < tiles.length) emitSfx(LOCK_SFX.match); // a tumbler turns (the last pair plays the win)
+      setOpen((o) => new Set([...o, sel, i])); setSel(null); return;
+    }
     setBad([sel, i]); setSel(null);
     setTimeout(() => setBad(null), HOLD);
   };

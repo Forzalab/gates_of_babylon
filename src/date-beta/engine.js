@@ -20,8 +20,9 @@ export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can mo
 // Beat-local props that never carry to the next beat: an `emote` (this line's face) and a hidden sprite (cut.frame
 // 'off', e.g. a mini-game that draws its own Nanda or a hand insert), so "hide Nanda" never leaks past its beat.
 // R5: a cel (props.cel, fx/Cels.jsx) and her reaching arm (props.cut.reach) are one beat's action, never carried.
+// sfx-wire: props.sfx (fx/sound.js: a beat's own one-shots, e.g. the vending clunk) never carries either.
 export function carried(p) {
-  const { emote, cel, ...rest } = p;
+  const { emote, cel, sfx, ...rest } = p;
   if (rest.cut?.frame === 'off') { const { frame, ...cut } = rest.cut; rest.cut = cut; }
   if (rest.cut?.reach) { const { reach, ...cut } = rest.cut; rest.cut = cut; }
   return rest;
