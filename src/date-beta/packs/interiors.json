@@ -1,5 +1,5 @@
 {
-  "note": "T1b INTERIORS+BASEMENT: bg patches only (no copy). apartment = traced walk-up; cup + unknown = the traced sitting room; steeped = the traced bedroom; escape = the new cellar (0 + the returns from each blackout: 8, 10, 12); escape 13 stays the lock game (lockgame/obbp packs).",
+  "note": "T1b INTERIORS+BASEMENT: bg patches only (no copy). apartment = traced walk-up; cup + unknown + escape-timeout 2 = the traced sitting room; steeped = the traced bedroom; escape = the new cellar (0 + the returns from each blackout: 8, 10, 12); escape 13 stays the lock game (lockgame/obbp packs).",
   "patch": [
     {
       "scene": "apartment",
@@ -55,6 +55,13 @@
       "beat": 12,
       "set": {
         "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape-timeout",
+      "beat": 2,
+      "set": {
+        "bg": "sitting-room"
       }
     }
   ]

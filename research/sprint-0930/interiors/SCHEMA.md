@@ -22,7 +22,7 @@
   `insert`: camera crop onto slippers + shrine. Exports VP/F/CAM/ROOM/PAL as on alt's branch.
 
 ## Pack `packs/interiors.json` (bg patches only; no scenes, no copy; order: anywhere after `mech`)
-- `apartment` 0 -> `apartment-trace`; `cup` 0 + `unknown` 0 -> `sitting-room`; `steeped` 0 -> `bedroom`;
+- `apartment` 0 -> `apartment-trace`; `cup` 0 + `unknown` 0 + `escape-timeout` 2 -> `sitting-room`; `steeped` 0 -> `bedroom`;
   `escape` 0, 8, 10, 12 -> `cellar` (arrival + each return from `blackout`); `escape` 13 stays `lock-game`.
 - No patch needed: `park` (story's park scene already uses it), `genkan-in` + story's `genkan-talk` (id override).
 - Old art (`basement`, `apartment`, BG-D2 teatable) stays registered for A/B; nothing points at it after the pack.
