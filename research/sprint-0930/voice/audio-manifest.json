@@ -376,5 +376,12 @@
   "beat": "3 R=",
   "file": "public/date-beta/voice/01-rooftop/010_3-r.mp3",
   "text": "[warm] Good is a start. [sweetly][perfectly even] Tomorrow I'll do better."
+ },
+ {
+  "n": 13,
+  "scene": "rooftop",
+  "beat": "6",
+  "file": "public/date-beta/voice/01-rooftop/013_6.mp3",
+  "text": "[breathless][happy] Stay forever? [whispers][close] The rain… [whispers, slower] can wait."
  }
 ]
