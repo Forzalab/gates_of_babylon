@@ -65,11 +65,11 @@ def basement():
 
 
 def park():
-    """Sakura park (ref 9) is portrait: full height centre + wings; the pink cathedral (ref 10) is not pasted
-    (the hand overlay puts a small far tower in the sky gap instead: cleaner than a keyed paste at this size)."""
-    im = repo('sakura-park_5f5f46b7.jpg')  # 374x534, Craiyon mark bottom-right
-    im = inpaint(im, [(300, 505, 374, 534)], 5)
-    return wings(im, 60, 534)
+    """Sakura park (ref 9, 374x534 portrait): a 16:9 band (rows ~200..410: canopy hem, trunks, lamp, gazebo, bench,
+    path, pond) cover-cropped to the stage; Craiyon mark (bottom-right) is outside the band. The hand overlay adds the
+    near canopy, the bench for two, the path edge, the far pink clock tower (ref 10 idea, redrawn) and the grade."""
+    im = cover(repo('sakura-park_5f5f46b7.jpg'), 0.62)
+    return ImageEnhance.Color(im).enhance(1.3)
 
 
 SMOOTH = lambda im: im.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.SMOOTH_MORE)
