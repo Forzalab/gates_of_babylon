@@ -24,7 +24,8 @@ import { BG_FALLBACK } from './art/fallbacks.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { createVoice } from './voice/index.js';
-import { Nanda, speaksNanda } from './Nanda.jsx';
+import { Nanda, speaksNanda, FRAMES } from './Nanda.jsx';
+import { Handout, SmileTag, PovFood, PeekBento, useStep } from './SceneA.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
 import { setCrowd, bumpRun, runBucket, getRun, fill } from './meta.js';
@@ -48,7 +49,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'interiors', 'love', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'scene-a', 'interiors', 'love', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -151,6 +152,17 @@ function Player() {
   const pop = pos.react ?? (here && pos.pending ? pos.pending : null);
   const end = ending(SCENES, pos);
   const card = !pos.done && beat.card === 'goal';
+  // Scene A camera + chrome (props.cut, SCENES.md): frame, face (face2 after the step), a two-step line (lead / at),
+  // sharp (no focus blur), handout (bento = the choices), tag (the one choice drawn as the NEXT pill).
+  const cut = beat.props?.cut ?? {};
+  // A reaction frame on the handout keeps her medium shot (the box is gone); every other frame holds through its react.
+  const frame = !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
+  const lead = !beat.react && cut.lead ? cut.lead : null;
+  const splitAt = !beat.react && cut.at ? cut.at : null;
+  const stepped = useStep(lead || splitAt ? Math.max(500, cut.step ?? 600) : 0, pos);
+  const face = beat.react ? null : (stepped && cut.face2) || cut.face || null;
+  const tag = !!(cut.tag && beat.choices?.length === 1 && !beat.react);
+  const handout = !!(cut.handout && beat.choices && !beat.react);
 
   // Meta loop (meta.js): each arrival at the first scene (boot or a loop back) is a new run; `run` feeds vary/if.
   const atFirst = !pos.done && pos.s === 0;
@@ -169,8 +181,9 @@ function Player() {
   useEffect(() => VOICE.subscribe(setVmuted), []);
   useEffect(() => {
     if (pos.done || end) VOICE.stop();
+    else if (lead) VOICE.show(beat.scene, lead, beat.line?.plain);
     else VOICE.show(beat.scene, beat.line?.plain);
-  }, [pos, beat, end]);
+  }, [pos, beat, end, lead]);
   // Auto beats wait while the map is open (the full wait restarts when it closes).
   useEffect(() => {
     if (beat.auto == null || pos.done || tree) return undefined;
@@ -205,9 +218,10 @@ function Player() {
     if (pos.done) { setPos(start(SCENES, { rm: RM, luck: nextRunLuck(pos.luck) })); return; }
     if (paused) return;
     if (end) { if (button) pick(0); return; } // the end card: its button / Space / Enter = play again (choice 0)
+    if (tag) { pick(0); return; } // the smile tag stands where NEXT does: a click / Space / Enter takes it
     if (!canAdvance(beat, performance.now() - since.current, { button })) return;
     setPos((p) => next(SCENES, p, RM));
-  }, [pos, beat, paused, end, pick]);
+  }, [pos, beat, paused, end, pick, tag]);
   const skipScene = useCallback(() => setPos((p) => skip(SCENES, p, RM)), []); // skip() on a done run = a new run (keeps the luck going)
 
   useEffect(() => {
@@ -241,7 +255,7 @@ function Player() {
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
   const onNext = waiting && ready && !card && !paused ? () => advance(true) : null;
-  const focus = !pos.done && !GAME[beat.bg] && !!(beat.text || beat.choices || card || end);
+  const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
   const hint = waiting && !paused; // only where a click does something (never on choice or auto beats)
   const closeTree = useCallback(() => setTree(false), []);
   const jump = useCallback((edge, choices) => {
@@ -255,7 +269,7 @@ function Player() {
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
-      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
+      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''} frame-${frame}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
           {!pos.done && (ART[beat.props?.shot] /* props.shot = art/shots id over the beat's bg */
@@ -267,12 +281,17 @@ function Player() {
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && (here || speaksNanda(beat.line)) && (
-          <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
-            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face} />
+        {!pos.done && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
+          <Nanda scare={beat.scare} raised={!!beat.choices && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
+            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face}
+            face={end ? null : face} frame={end ? 'medium' : frame} />
         )}
-        {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}
-        {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`c${beat.scene}${beat.index}`} />}
+        {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
+        {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
+        {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}
+        {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
+          action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} /> : null} />}
+        {beat.choices && !tag && !handout && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`c${beat.scene}${beat.index}`} />}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {card && <GoalCard onNext={() => advance(true)} />}
         {onNext && !beat.text && <NextButton className="solo" onClick={onNext} />}

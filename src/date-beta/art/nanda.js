@@ -81,6 +81,55 @@ const FACES = {
       <path d="M-5,13 Q-2.5,9.5 0,12 Q2.5,9.5 5,13" fill="none" stroke="${P.ink}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>`,
 };
 
+// ---- Scene A faces (research/sprint-0930/scene-a/FACES.md; refs 12-15). Same face coords as above, her palette's ink,
+// her blush pink. Picked by id (nandaSVG({ face })), never by emote, so the engine's emote list does not change.
+// Each may bring still decor outside her body clip (FACE_DECOR, gate units): drops, flicks, hearts.
+const bigEye = (x, y, rx, ry, P, lash = true) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${P.ink}"/>
+      <ellipse cx="${x}" cy="${y + ry * 0.38}" rx="${rx * 0.72}" ry="${ry * 0.45}" fill="#b8508a" opacity=".55"/>
+      <circle cx="${x + rx * 0.34}" cy="${y - ry * 0.4}" r="${rx * 0.42}" fill="#fff"/><circle cx="${x - rx * 0.38}" cy="${y + ry * 0.36}" r="${rx * 0.2}" fill="#fff"/>
+      <path d="M${x - rx * 1.15},${y - ry * 0.55} Q${x},${y - ry * 1.45} ${x + rx * 1.15},${y - ry * 0.55}" fill="none" stroke="${P.ink}" stroke-width="2.4" stroke-linecap="round"/>
+      ${lash ? `<path d="M${x + rx * 1.05 * Math.sign(x || 1)},${y - ry * 0.62} l${2.6 * Math.sign(x || 1)},-2.2" stroke="${P.ink}" stroke-width="1.6" stroke-linecap="round"/>` : ''}`;
+// vertical hatch blush (ref 14): 3-4 short strokes per cheek over a faint flush
+const hatchV = (P, op = 0.35) => (P.blush === 'none' ? '' : `<ellipse cx="-21" cy="8" rx="7.5" ry="3.6" fill="${P.blush}" opacity="${op}"/><ellipse cx="17" cy="8" rx="7.5" ry="3.6" fill="${P.blush}" opacity="${op}"/>`)
+  + `<path d="M-25,5.5 v4.5 M-22,5 v5 M-19,5 v5 M-16,5.5 v4.5 M13,5.5 v4.5 M16,5 v5 M19,5 v5 M22,5.5 v4.5" stroke="${P.ink}" stroke-width="1" stroke-linecap="round" opacity=".62"/>`;
+// the ref 13 blush band: one hot band across both cheeks and the nose, /// hatch on each side
+const band = (P, op = 0.62) => (P.blush === 'none' ? '' : `<ellipse cx="-2" cy="6" rx="30" ry="6.2" fill="${P.blush}" opacity="${op}"/>`)
+  + `<path d="M-26,9.5 l3,-6 M-22,9.5 l3,-6 M-18,9.5 l3,-6 M12,9.5 l3,-6 M16,9.5 l3,-6 M20,9.5 l3,-6" stroke="${P.ink}" stroke-width="1.2" stroke-linecap="round" opacity=".75"/>`;
+const squint = (P, w = 3) => `<path d="M-19,-11 L-9,-6 L-19,-1" fill="none" stroke="${P.ink}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M15,-11 L5,-6 L15,-1" fill="none" stroke="${P.ink}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
+export const SCENE_FACES = ['anya-smile', 'blush-embarrassed', 'heart-laugh', 'content', 'big-eyes-peek'];
+Object.assign(FACES, {
+  // ref 14: huge glossy eyes (2 highlights, lash flick), a tiny nose tick, a wide flat closed smile, hatch blush
+  'anya-smile': (P) => `${hatchV(P)}${bigEye(-13, -5, 6, 7.6, P)}${bigEye(11, -5, 6, 7.6, P)}
+      <path d="M-1,3 v2.4" stroke="${P.ink}" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M-13,11.5 Q-1,15.5 11,11.5" fill="none" stroke="${P.ink}" stroke-width="1.9" stroke-linecap="round"/>`,
+  // ref 13 >///<: squeezed chevron eyes, a hot band with /// hatch, a wobbly flustered mouth (drops + flicks = decor)
+  'blush-embarrassed': (P, sw) => `${band(P)}${squint(P, sw)}
+      <path d="M-7,13 q1.75,-3 3.5,0 q1.75,3 3.5,0 q1.75,-3 3.5,0 q1.75,3 3.5,0" fill="none" stroke="${P.ink}" stroke-width="${sw * 0.8}" stroke-linecap="round" stroke-linejoin="round"/>`,
+  // ref 15 + ref 13 laugh: >< eyes, raised brows, a tall open mouth with a tongue, red blush bands (hearts = decor)
+  'heart-laugh': (P, sw) => `${band(P, 0.75)}${squint(P, sw + 0.4)}
+      <path d="M-20,-17 Q-14,-20 -8,-17 M4,-17 Q10,-20 16,-17" fill="none" stroke="${P.ink}" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M-11,7 Q-1,9 9,7 Q8,21 -1,22 Q-10,21 -11,7Z" fill="${P.ink}" stroke="${P.ink}" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M-7,17.5 Q-1,13.5 5,17.5 Q3,20.6 -1,20.8 Q-5,20.6 -7,17.5Z" fill="#ff7fa8"/>`,
+  // ref 12 "Content": closed happy arcs, a small soft smile, a plain soft blush
+  content: (P, sw) => `${blushOf(P, 0.5)}
+      <path d="M-19,-4 Q-13,-12 -7,-4 M5,-4 Q11,-12 17,-4" fill="none" stroke="${P.ink}" stroke-width="${sw + 0.4}" stroke-linecap="round"/>
+      <path d="M-5,10 Q-1,13.6 3,10" fill="none" stroke="${P.ink}" stroke-width="${sw * 0.8}" stroke-linecap="round"/>`,
+  // the watching-you-eat stare: even bigger eyes than anya-smile, raised brows, a tiny closed mouth
+  'big-eyes-peek': (P) => `${blushOf(P, 0.4)}${bigEye(-14, -3, 7.6, 9.8, P)}${bigEye(12, -3, 7.6, 9.8, P)}
+      <path d="M-4,12 Q-1,13.6 2,12" fill="none" stroke="${P.ink}" stroke-width="1.8" stroke-linecap="round"/>`,
+});
+const DROPS = (pts) => pts.map(([x, y, s]) => `<path d="${DROP}" transform="translate(${x} ${y}) scale(${s})" fill="#8fd3ff" stroke="#1f5f96" stroke-width="${(1.6 / s).toFixed(2)}" stroke-linejoin="round"/><ellipse cx="${x - s * 2}" cy="${y + s * 2}" rx="${s * 1.4}" ry="${s * 2.2}" fill="#fff" opacity=".8"/>`).join('');
+const FLICKS = (pts, ink) => pts.map(([x, y, r]) => `<path d="M${x - 3.4},${y - 3} L${x + 3.4},${y - 3} L${x},${y + 3.4}Z" transform="rotate(${r} ${x} ${y})" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linejoin="round"/>`).join('');
+export const FACE_DECOR = {
+  // the ref 13 sweat row: three drops stepping down past her right temple, two flick triangles over her head
+  'blush-embarrassed': (P) => DROPS([[96, 8, 0.7], [104, 20, 0.58], [109, 32, 0.48]]) + FLICKS([[26, -2, -18], [36, -8, 10]], P.ink),
+  // ref 15 hearts floating round her head (still), ref 13's flicks
+  'heart-laugh': () => [[-8, 4, 0.62, -14], [8, -12, 0.5, 10], [104, 6, 0.66, 16], [120, 30, 0.44, -10], [-12, 40, 0.42, 12]]
+    .map(([x, y, s, r]) => `<path d="${HEARTP}" transform="translate(${x} ${y}) rotate(${r}) scale(${s})" fill="#ff7fb8" stroke="#c21a6a" stroke-width="${(1.4 / s).toFixed(2)}"/>`).join('')
+    + FLICKS([[30, -2, -16], [42, -8, 12]], '#6b0f45'),
+};
+
 // ---- thought bubbles. heart / hearts / OR / crack = the engine's stage bubbles, verbatim. sweat + pout = NEW.
 const box = (dark) => `<path d="${BUBBLE}" fill="${dark ? '#1a0710' : '#fff'}" stroke="${dark ? '#f0243f' : '#e64aa6'}" stroke-width="3" stroke-linejoin="round"/>`;
 const BUBBLES = {
@@ -123,8 +172,10 @@ let uid = 0;
 // One figure as an SVG fragment (no <svg> wrapper). ids are unique per call so several can share a page.
 // overlay(P, ANCHORS) -> { under, over }: extra still layers (the gacha face layers). under = inside the body clip after
 // the face, before the fringe; over = after the figure, before the bubble.
-export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null } = {}) {
-  const E = EMOTES[emote ?? STAGE_EMOTE[stage]] ?? EMOTES.heart;
+// face: a Scene A face id (SCENE_FACES) or any FACES key; it replaces the emote's face (the palette + bubble stay the emote's).
+export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null } = {}) {
+  const E0 = EMOTES[emote ?? STAGE_EMOTE[stage]] ?? EMOTES.heart;
+  const E = face != null && FACES[face] ? { ...E0, face } : E0;
   const s = E.pal, P = PAL[s], n = ++uid, cb = `nd-cb${n}`, gb = `nd-gb${n}`, sh = `nd-sh${n}`;
   const legs = [40, 64].map((x) => `<rect x="${x - 3}" y="94" width="6" height="24" rx="3" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/>
     ${P.dark ? '' : `<rect x="${x - 3}" y="99" width="6" height="3" fill="${P.bow}"/>`}
@@ -156,7 +207,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay =
     <path d="${PONYB}" fill="${P.hair}" stroke="${P.rim}" stroke-width="2.2" stroke-linejoin="round"/><path d="M112 70C120 82 126 92 124 104" fill="none" stroke="${P.hair2}" stroke-width="1.5" stroke-linecap="round"/>
     <circle cx="112" cy="54" r="12" fill="${P.dark ? '#1a0610' : '#fff'}" stroke="${P.rim}" stroke-width="3.2"/>
     <circle cx="112" cy="54" r="5.2" fill="${P.mood}" opacity="${s === 2 ? 0.5 : 0.9}"/><circle cx="108" cy="50" r="2" fill="#fff" opacity="${s === 4 ? 0.25 : 0.9}"/>
-    ${bow(111, 41.5, 0.5, P)}${pinClip(78, 22, -18, 0.5, P)}${sweatDrop}${ov.over ?? ''}
+    ${bow(111, 41.5, 0.5, P)}${pinClip(78, 22, -18, 0.5, P)}${sweatDrop}${FACE_DECOR[E.face]?.(P) ?? ''}${ov.over ?? ''}
     ${talk ? `<g transform="translate(${big ? 100 : 104} ${big ? -22 : -14}) scale(${k})">${BUBBLES[E.bubble]()}</g>` : ''}`;
   return `<g transform="translate(-104 -252) scale(2)">${gate}</g>`;
 }

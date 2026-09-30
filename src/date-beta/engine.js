@@ -39,7 +39,7 @@ const KEYS = {
   root: ['version', 'note', 'flags', 'love', 'gacha', 'scenes'],
   scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short'],
   beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end', 'loveHidden'],
-  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake'],
+  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake', 'pass'],
 };
 // Default emote for a score change: +3 and up hearts, +2 heart, +1 sweat, -1 pout, -2 or, -3 and down crack.
 export const emoteFor = (love) => (love >= 3 ? 'hearts' : love === 2 ? 'heart' : love === 1 ? 'sweat'
@@ -126,6 +126,16 @@ export function orParts(text, where = 'text') {
   return out;
 }
 const plain = (parts) => parts.map((p) => p.t).join('');
+// Scene A two-step line (props.cut.at): parts split at the first occurrence of `at` in a text part: [before, after]. No match = [all, []].
+export function splitParts(parts, at) {
+  for (const [i, p] of parts.entries()) {
+    const k = p.or ? -1 : p.t.indexOf(at);
+    if (k < 0 || (k === 0 && i === 0)) continue;
+    const head = p.t.slice(0, k);
+    return [[...parts.slice(0, i), ...(head ? [{ t: head }] : [])], [{ t: p.t.slice(k) }, ...parts.slice(i + 1)]];
+  }
+  return [parts, []];
+}
 
 // "NANDA: line" -> speaker + line. No prefix = narration (who = null). An explicit `speaker` wins and the text is
 // then taken as-is (no prefix parse); speaker: false = narration even when the text starts "WORD:" (a sign read out).
@@ -354,6 +364,9 @@ function loadChoices(list, at, decl = {}) {
     if (c.fx != null && !FX.includes(c.fx)) fail(where, `fx "${c.fx}" is not one of ${FX.join('|')}`);
     if (c.fake != null && typeof c.fake !== 'boolean') fail(where, 'fake must be true or false');
     if (c.fake && i === 0) fail(where, 'the first choice cannot be fake (a fake pick is overridden to the first choice)');
+    // pass: a scored pick with no reaction frame: play moves on at once and the pop rides to the next beat she is on.
+    if (c.pass != null && typeof c.pass !== 'boolean') fail(where, 'pass must be true or false');
+    if (c.pass && c.react != null) fail(where, 'a pass pick has no reaction frame, so no react line');
     const fx = c.fake ? 'chosen-flash' : c.fx ?? (love > 0 ? 'none' : 'none');
     let react = null;
     if (c.react != null) {
@@ -364,7 +377,7 @@ function loadChoices(list, at, decl = {}) {
     }
     return Object.freeze({ text: c.text, side, go: loadGo(c.go, where, decl), if: declared(decl, flagsField(c.if, where, 'if'), where),
       set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or),
-      love, fx, fake: !!c.fake, emote: love ? c.emote ?? (fx === 'hate-quake' ? 'hate' : emoteFor(love)) : null, react, tell: love ? c.tell ?? true : false });
+      love, fx, fake: !!c.fake, pass: !!c.pass, emote: love ? c.emote ?? (fx === 'hate-quake' ? 'hate' : emoteFor(love)) : null, react, tell: love ? c.tell ?? true : false });
   });
   // A fake choice plays the first choice's outcome (go / set / love / emote / react), so the goal walk and the route graph see it.
   return Object.freeze(loaded.map((c) => {
@@ -486,7 +499,7 @@ function take(scenes, pos, c, rm) {
   const gacha = t ? Object.freeze({ id: t.id, fx: t.fx, face: t.face, label: t.label, bonus: t.bonus, base: c.love }) : null;
   const react = Object.freeze({ love: c.love + roll.bonus, from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b,
     ...(gacha ? { gacha } : {}) });
-  return here ? { ...dest, react } : { ...dest, pending: react };
+  return here && !c.pass ? { ...dest, react } : { ...dest, pending: react }; // pass: no frame, the pop shows on the next beat
 }
 // Debug tree: stand on the edge's beat ({ s, b, i }) with these flags (and score) and take choice i, exactly as choose()
 // would, except the choice's own `if` is not checked (a warning is returned instead of a silent no-op).

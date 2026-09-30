@@ -4,3 +4,6 @@ import { readFileSync } from 'node:fs';
 
 export const ART_INDEX = readFileSync(new URL('./date-beta/art/index.js', import.meta.url), 'utf8');
 export const ART_NAMES = [...ART_INDEX.slice(ART_INDEX.indexOf('export const ART')).matchAll(/'?([\w-]+)'?: [A-Z]\w*/g)].map((m) => m[1]);
+// ...SCENE_A (art/scene-a/index.js, which spreads ...ROOFTOP from art/rooftop/index.js) adds its own ids.
+const idsOf = (p, from) => { const s = readFileSync(new URL(p, import.meta.url), 'utf8'); return [...s.slice(s.indexOf(from)).matchAll(/'([\w-]+)': [A-Z]\w*/g)].map((m) => m[1]); };
+if (ART_INDEX.includes('...SCENE_A')) ART_NAMES.push(...idsOf('./date-beta/art/rooftop/index.js', 'ROOFTOP'), ...idsOf('./date-beta/art/scene-a/index.js', 'export const SCENE_A'));

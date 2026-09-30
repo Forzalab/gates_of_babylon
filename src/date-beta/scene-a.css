@@ -1,0 +1,53 @@
+/* Scene A (rooftop) frames + chrome: SceneA.jsx, Nanda.jsx `frame`, beat props.cut (SCENES.md). Every frame is a hard
+   cut (no transition, no entrance animation); the only change inside a beat is one stepped swap (.db-later -> shown). */
+
+/* ---------- camera frames for her sprite (viewBox -130 -330 320 345; the face centre sits at 140/320, 182/345) ---------- */
+.stage .db-nanda:not(.frame-medium) { animation: none; }
+.stage .db-nanda.frame-handout { left: 715px; right: auto; bottom: 535px; width: 560px; height: 604px; }
+.stage .db-nanda.frame-pov { left: 1214px; right: auto; bottom: 556px; width: 380px; height: 410px; }
+/* watching you eat: eyes ~ (1150, 305), her smile just over the raised box's top edge, the rest of her behind the bar
+   (cut off at y 745, so her legs never show under the box while the choices wait for the step) */
+.stage .db-nanda.frame-peek { left: 497px; right: auto; bottom: -14px; width: 1493px; height: 1610px; clip-path: inset(0 0 349px 0); }
+/* stay forever: ~half the frame, in front of the dialogue box's right end, under the HUD (which she shoves) */
+.stage .db-nanda.frame-close { left: 787px; right: auto; bottom: 20px; width: 1250px; height: 1348px; z-index: 5; }
+.stage .db-nanda.frame-eyes { left: 0; right: auto; top: 0; bottom: auto; width: 1920px; height: 1080px; filter: none; }
+
+/* stay forever: the box moves left out of her way (its right end runs under her), the pills stay on top of her, and
+   the HUD is pushed: the ribbon knocked up-left and tilted, the trail shoved in. Static offsets = one hard cut. */
+.stage.frame-close .db-say { left: 60px; transform: none; width: 1000px; padding-right: 260px; }
+.stage.frame-close .db-choices { z-index: 7; }
+.stage.frame-close .hud-a { transform: translate(-26px, -10px) rotate(-1.4deg); transform-origin: 0 50%; }
+.stage.frame-close .hud-a .lv-trail { transform: translate(-12px, -5px) rotate(-3deg); }
+
+/* ---------- two-step lines: the later half keeps its space, then shows (one swap, >= 500 ms) ---------- */
+.db-later { visibility: hidden; }
+.db-say .line.lead + .line { margin-top: 6px; }
+
+/* ---------- camera layers (POV food, the peek box): over her sprite, under the dialogue ---------- */
+.sa-layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; overflow: visible; }
+.sa-peek-box.sa-layer { left: -130px; top: 330px; width: 900px; height: 676px; transform: rotate(-8deg); }
+
+/* ---------- the handout: her bento is the choice ---------- */
+.sa-handout { position: absolute; inset: 0; pointer-events: none; }
+.sa-arms { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; }
+.sa-handout-box { position: absolute; pointer-events: auto; }
+.sa-handout-box svg { display: block; width: 100%; height: auto; overflow: visible; }
+.sa-handout-box .sa-food:focus { outline: none; }
+.sa-handout-box .sa-food:focus-visible > * { outline: 6px solid #fff; }
+.sa-food-tag, .sa-other { position: absolute; display: inline-flex; align-items: center; gap: 14px; pointer-events: auto; cursor: pointer;
+  padding: 12px 24px 12px 14px; border: 5px solid var(--rim); border-radius: 999px; background: var(--box); color: var(--box-ink);
+  box-shadow: inset 0 0 0 3px #fff, 0 8px 0 var(--edge); font: 800 40px/1 var(--btn); letter-spacing: .01em; white-space: nowrap; }
+.sa-food-tag kbd, .sa-other kbd { display: grid; place-items: center; width: 50px; height: 50px; border-radius: 50%;
+  background: #a8206f; color: #fff; font: 900 32px/1 var(--btn); }
+.sa-food-tag .db-chip, .sa-other .db-chip { position: static; transform: none; font-size: 28px; }
+.sa-food-tag.right { left: 1350px; top: 432px; }
+.sa-food-tag.left { right: 1350px; top: 530px; }
+.sa-food-tag.hot { border-color: #ff5fa2; box-shadow: inset 0 0 0 3px #fff, 0 0 0 6px #fff, 0 8px 0 var(--edge); }
+.sa-food-tag .db-deftag { position: absolute; left: 50%; bottom: -22px; transform: translateX(-50%); }
+.sa-other { right: 1350px; top: 640px; padding: 8px 20px 8px 10px; font-size: 32px; border-color: #6152cf; background: #efeaff; color: #2a1a55; }
+.sa-other kbd { width: 42px; height: 42px; font-size: 26px; background: #6152cf; }
+.sa-timebar.db-timebar { position: absolute; left: 90px; right: auto; top: 450px; width: 480px; }
+
+/* ---------- the smile tag: the love pick drawn where NEXT sits ---------- */
+.hud-next.sa-smile { gap: 16px; padding-left: 34px; }
+.hud-next.sa-smile b { padding: 6px 14px 7px; border-radius: 999px; background: #fff; color: #a8206f; font: 900 32px/1 var(--btn); text-shadow: none; }

@@ -13,10 +13,11 @@ import lockgame from './date-beta/packs/lockgame.json' with { type: 'json' };
 import obbp from './date-beta/packs/obbp.json' with { type: 'json' };
 import sequences from './date-beta/packs/sequences.json' with { type: 'json' };
 import v2 from './date-beta/packs/variant-v2.json' with { type: 'json' };
+import sceneA from './date-beta/packs/scene-a.json' with { type: 'json' };
 import love from './date-beta/packs/love.json' with { type: 'json' };
 
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
-const S = loadScenes(applyPacks(base, [story, meta, mech, lockgame, obbp, sequences, v2, love]), { manifest, art: [...ART_NAMES, ...ROMANCE, 'lock-game'] });
+const S = loadScenes(applyPacks(base, [story, meta, mech, lockgame, obbp, sequences, v2, sceneA, love]), { manifest, art: [...ART_NAMES, ...ROMANCE, 'lock-game'] });
 const goal = S.love.goal;
 
 // Best total love per errand x food route (same walk as the loader's goal, but keyed by the flags at the ending).

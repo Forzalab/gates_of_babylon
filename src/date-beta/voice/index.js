@@ -16,12 +16,15 @@ export function createVoice(base = '/', storage = () => localStorage) {
   const stop = () => {
     if (cur) { try { cur.pause(); } catch { /* ignore */ } cur = null; }
   };
-  const start = (file) => {
+  let queued = null; // a second take to play when this one ends (a two-step beat: lead line, then its own line)
+  const start = (file, then = null) => {
     stop();
+    if (!file && then) { file = then; then = null; }
     if (!file || muted || !unlocked || typeof Audio === 'undefined') return;
     try {
       const a = new Audio(`${base}${file}`);
       a.addEventListener('error', () => { if (cur === a) cur = null; });
+      if (then) a.addEventListener('ended', () => { if (cur === a && queued === then) start(then); });
       cur = a;
       a.play()?.catch(() => { if (cur === a) cur = null; });
     } catch { cur = null; }
@@ -29,19 +32,20 @@ export function createVoice(base = '/', storage = () => localStorage) {
   const unlock = () => {
     if (unlocked) return;
     unlocked = true;
-    if (want && !muted) start(want);
+    if ((want || queued) && !muted) start(want, queued);
   };
   if (typeof addEventListener === 'function') for (const ev of ['pointerdown', 'keydown']) addEventListener(ev, unlock, { once: true });
 
   return {
     // The beat now showing: stops the previous line, plays this one if recorded (scene id + the line's words).
-    show(scene, plain) { want = fileForLine(INDEX, scene, plain); start(want); },
-    stop() { want = null; stop(); },
+    // then = the words of a second line that follows on the same beat (played after the first take ends).
+    show(scene, plain, then = null) { want = fileForLine(INDEX, scene, plain); queued = then ? fileForLine(INDEX, scene, then) : null; start(want, queued); },
+    stop() { want = null; queued = null; stop(); },
     get muted() { return muted; },
     setMuted(v) {
       muted = !!v;
       try { storage().setItem(KEY, muted ? '1' : '0'); } catch { /* ignore */ }
-      if (muted) stop(); else start(want);
+      if (muted) stop(); else start(want, queued);
       emit();
     },
     subscribe(f) { subs.add(f); return () => subs.delete(f); },
