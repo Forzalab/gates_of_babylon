@@ -320,5 +320,12 @@
   "beat": "4 (u)",
   "file": "public/date-beta/voice/13-escape-timeout/066_4-u.mp3",
   "text": "[warm][slow] すっぱいでしょ。 [pause][sing-song] …Neee?"
+ },
+ {
+  "n": 67,
+  "scene": "escape-timeout",
+  "beat": "4 (t)",
+  "file": "public/date-beta/voice/13-escape-timeout/067_4-t.mp3",
+  "text": "[warm][slow] 甘いでしょ。 [pause][sing-song] …Neee?"
  }
 ]
