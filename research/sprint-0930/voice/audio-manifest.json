@@ -159,5 +159,12 @@
   "beat": "3 run 2",
   "file": "public/date-beta/voice/06-v2-train/034_3-run-2.mp3",
   "text": "[warm] Twelve stops. Second time today. [quiet] You forgot. [perfectly even] I did not."
+ },
+ {
+  "n": 35,
+  "scene": "v2-train",
+  "beat": "3 run 3",
+  "file": "public/date-beta/voice/06-v2-train/035_3-run-3.mp3",
+  "text": "[slow] Three fingers. [whispers] Three times today. [perfectly even][smiling] Same train. Same you."
  }
 ]
