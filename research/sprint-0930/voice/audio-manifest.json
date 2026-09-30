@@ -250,5 +250,12 @@
   "beat": "0 R+",
   "file": "public/date-beta/voice/10-cup/048_0-r.mp3",
   "text": "[happy] See? [whispers][close][flat, pleased] You needed me."
+ },
+ {
+  "n": 50,
+  "scene": "cup",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/10-cup/050_0-r.mp3",
+  "text": "[sudden flat][quiet] You will be. [sweet] Later."
  }
 ]
