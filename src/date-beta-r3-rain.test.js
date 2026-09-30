@@ -14,9 +14,9 @@ const base = read('./date-beta/scenes.json');
 const manifest = read('./date-beta/assets.json');
 const INDEX = src('./date-beta/art/r3-rain/index.js');
 const IDS = [...INDEX.slice(INDEX.indexOf('export const R3_RAIN')).matchAll(/'([\w-]+)': [A-Z]\w*/g)].map((m) => m[1]);
-// v2-curry 12 = its exit (was 5 until packs/curry.json put the street -> door -> table -> dish shots before it)
+// v2-curry 13 = its exit (was 5 until packs/curry.json put the street -> door -> table -> dish shots before it)
 const BEATS = [['v2-rain', 1, 'rain-sidewalk'], ['v2-rain', 2, 'rain-alley'], ['v2-rain', 3, 'rain-eave'], ['v2-rain', 4, 'rain-ending'],
-  ['v2-street', 2, 'street-bluehour'], ['v2-street', 5, 'her-building'], ['v2-curry', 12, 'curry-street'], ['escape-win', 6, 'escape-night']];
+  ['v2-street', 2, 'street-bluehour'], ['v2-street', 5, 'her-building'], ['v2-curry', 13, 'curry-street'], ['escape-win', 6, 'escape-night']];
 const PLAY = /const PLAY = \[([^\]]+)\]/.exec(src('./date-beta/main.jsx'))[1].match(/'([\w-]+)'/g).map((s) => s.slice(1, -1));
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
 

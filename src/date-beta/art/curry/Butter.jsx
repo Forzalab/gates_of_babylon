@@ -1,8 +1,8 @@
 // CURRY street (the choice) + the BUTTER-CHICKEN chain: NAND HOUSE, a Nepali-run Indian shop in Japan.
 // Refs + order: research/sprint-0930/curry/SHOTLIST.md. Every sign is ours; people and watermarks are gone (prep.py).
-import { CurryScene, Plate, Steam, Clock, Bell, YourHand, usePose, preloadTrace } from './parts.jsx';
+import { CurryScene, Plate, Steam, Clock, Bell, usePose, preloadTrace } from './parts.jsx';
 
-['choice', 'butter-door', 'butter-int', 'butter-table', 'thali', 'naan-lift', 'sauce', 'naan-dip', 'naan-feed', 'lassi']
+['choice', 'butter-door', 'butter-int', 'butter-table', 'thali', 'naan-lift', 'sauce', 'naan-dip', 'naan-feed', 'butter-bite', 'lassi', 'napkin']
   .forEach((k) => preloadTrace(`curry/${k}`));
 
 // 2:55 PM street: NAND HOUSE (left, 37f7e6cf) | OR OR CURRY (right, da264766). The pole hides the seam, its clock says 2:55.
@@ -44,8 +44,11 @@ export function CurryChoice() {
 export function CurryButterDoor() {
   return (
     <CurryScene id="butter-door" label="Insert: the glass door of NAND HOUSE under its pink awning, a brass bell hanging on the frame.">
-      <rect x="930" y="0" width="560" height="74" rx="8" fill="#fbf7ef" />
-      <text className="cu-sign" x="1210" y="58" textAnchor="middle" fontSize="60" fill="#c8202e">NAND HOUSE</text>
+      {/* our sign, on the slanted sign band over the old shop name (kept below the y=140 HUD band) */}
+      <g transform="rotate(-13 1180 232)">
+        <rect x="950" y="178" width="460" height="108" rx="10" fill="#fbf7ef" stroke="#c8202e" strokeWidth="6" />
+        <text className="cu-sign" x="1180" y="256" textAnchor="middle" fontSize="66" fill="#c8202e">NAND HOUSE</text>
+      </g>
       <Bell x={520} y={420} s={1.6} />
       <Plate x={1340} y={560} w={230} h={120} bg="#c8202e" fg="#fff4ea" jp="営業中" en="OPEN" jpSize={50} enSize={30} />
     </CurryScene>
@@ -89,83 +92,66 @@ export function CurryButterInt({ rm }) {
   );
 }
 
-// two seats by the window: the same orange cloth as the room, a cruet stand
+// Every shot below is HAND-DRAWN flat cel (research/sprint-0930/curry/pipeline/draw.py): one window light from the upper
+// left, cast shadows down-right, the SAME thali sprite in every close-up (crops of the hero), 5-finger hands on sleeves.
+
+// the two-shot: the window on the left, her booth in the middle (she sits on its seat, her shadow falls right), our table
 export function CurryButterTable() {
-  return (
-    <CurryScene id="butter-table" label="A small table for two by the window in NAND HOUSE, an orange tablecloth, a cruet stand.">
-      <path d="M740 640L1920 470V1080H960z" fill="#d6603a" />
-      <path d="M740 640L1920 470V496L770 668z" fill="#e8844e" />
-      <path d="M740 640L960 1080H920L720 660z" fill="#a8452a" />
-      <g transform="translate(1560 450)">
-        <rect x="-60" y="60" width="120" height="16" rx="6" fill="#8a6a4a" />
-        <rect x="-44" y="-10" width="26" height="72" rx="8" fill="#c23a1a" />
-        <rect x="-10" y="0" width="26" height="62" rx="8" fill="#e8d8b8" />
-        <rect x="24" y="10" width="22" height="52" rx="8" fill="#5a3a1a" />
-      </g>
-    </CurryScene>
-  );
+  return <CurryScene id="butter-table" label="A small table for two by the window in NAND HOUSE: the lunch tray on an orange tablecloth, a red booth seat, a mango lassi." />;
 }
 
-// HERO DISH (b6b74858): the steel thali. Butter sheen on the curry, static steam.
+// HERO DISH: the steel thali (teardrop naan draped over the edge, butter pat), static steam over the butter chicken
 export function CurryThali({ rm }) {
   return (
-    <CurryScene id="thali" label="The lunch set on a steel tray: butter chicken, green saag, rice, an orange-dressing salad, and one giant naan hanging off the edge. Steam rises.">
-      <ellipse cx="1110" cy="250" rx="70" ry="22" fill="#fff4d8" opacity=".55" />
-      <path d="M1060 240c20-18 60-18 80 0" stroke="#fffaf0" strokeWidth="8" fill="none" opacity=".7" strokeLinecap="round" />
-      <Steam x={1110} y={170} rm={rm} />
-      <Steam x={720} y={160} h={180} rm={rm} o={0.4} />
+    <CurryScene id="thali" label="The lunch set on a steel tray: butter chicken, green saag, yellow dal, rice, and one giant teardrop naan with a butter pat, hanging over the edge. Steam rises.">
+      <Steam x={560} y={270} h={150} w={50} rm={rm} o={0.45} />
     </CurryScene>
   );
 }
 
-// her hand (from the right) tears the naan into the curry (acc8479f)
-export function CurryNaanLift({ rm }) {
-  return (
-    <CurryScene id="naan-lift" label="Close-up: her fingers tear a piece of naan and dip it in the butter chicken.">
-      <Steam x={760} y={300} h={200} rm={rm} o={0.4} />
-    </CurryScene>
-  );
+// her hand (from the right) lifts the piece she tore off the naan tip
+export function CurryNaanLift() {
+  return <CurryScene id="naan-lift" label="Close: her fingers hold up a piece of naan. She tore it off the tip of the big naan." />;
 }
 
-// the gravy boat pours: the glossy sauce (59cee883)
+// a small steel boat pours more butter sauce into the butter chicken cup
 export function CurrySauce({ rm }) {
   return (
-    <CurryScene id="sauce" label="Close-up: more butter sauce pours from a small silver boat. It is thick, orange and shiny.">
-      <path d="M340 470c60-40 200-50 300-10" stroke="#fff3d8" strokeWidth="10" fill="none" opacity=".6" strokeLinecap="round" />
-      <Steam x={520} y={330} h={200} rm={rm} o={0.4} />
+    <CurryScene id="sauce" label="Close: more butter sauce pours from a small steel boat into the cup of butter chicken. It is thick, orange, and shiny.">
+      <Steam x={620} y={330} h={170} rm={rm} o={0.35} />
     </CurryScene>
   );
 }
 
-// extreme close-up: the naan dips, the sauce strings off it (c8b36373)
-export function CurryNaanDip({ rm }) {
-  return (
-    <CurryScene id="naan-dip" label="Extreme close-up: a piece of naan dips into the copper bowl of curry. The sauce drips, glossy.">
-      <Steam x={1320} y={500} h={220} rm={rm} o={0.35} />
-    </CurryScene>
-  );
+// her fingers dip the same piece into the butter chicken; the sauce drips
+export function CurryNaanDip() {
+  return <CurryScene id="naan-dip" label="Very close: her fingers dip the piece of naan in the butter chicken. The sauce drips off it." />;
 }
 
-// POV: YOUR hand (bottom-left) holds out a piece of naan over the tray (d791b70f)
+// POV, extreme close-up: YOUR hand (bottom-left) holds the sauced naan at her open mouth. All of it sits above the box.
 export function CurryNaanFeed() {
-  return (
-    <CurryScene id="naan-feed" label="Your view: your hand holds out a piece of naan over the steel tray." over={<YourHand x={420} y={560} s={1.5} />} />
-  );
+  return <CurryScene id="naan-feed" label="Your view, very close: your fingers hold the piece of naan with sauce at her open mouth. Her eyes look at you." />;
 }
 
-// the mango lassi insert: one glass, one straw, on the same orange cloth
+// she eats from your fingers: the butter sauce at the corner of her mouth, her eyes on you
+export function CurryButterBite() {
+  return <CurryScene id="butter-bite" label="Very close: she eats the naan from your fingers. There is orange sauce at the corner of her mouth. Her eyes look at you." />;
+}
+
+// the mango lassi on the same orange cloth, the same tray at the left edge; ONE straw
 export function CurryLassi() {
   return (
-    <CurryScene id="lassi" label="Insert: a mango lassi in a tall cup with a straw on the orange tablecloth. A menu card says LASSI.">
-      <path d="M790 60l-60 180" stroke="#f2f2f2" strokeWidth="18" strokeLinecap="round" />
-      <path d="M790 60l-60 180" stroke="#e0306a" strokeWidth="6" strokeDasharray="20 22" strokeLinecap="round" />
-      <path d="M560 250c20-70 440-70 470 0z" fill="#f8f4ec" opacity=".55" stroke="#ffffff" strokeWidth="6" />
-      <g fill="#fffaf0" opacity=".7">{[[640, 360], [700, 470], [900, 420], [960, 560], [660, 600]].map(([x, y]) => <ellipse key={x} cx={x} cy={y} rx="8" ry="12" />)}</g>
-      <g transform="translate(1380 380)">
-        <path d="M0 220L60 0H300L360 220z" fill="#fbf6ea" stroke="#c8202e" strokeWidth="6" />
-        <text className="cu-sign" x="180" y="100" textAnchor="middle" fontSize="54" fill="#c8202e">LASSI</text>
-        <text className="cu-jp" x="180" y="170" textAnchor="middle" fontSize="40" fill="#5a3a2a">マンゴー ¥300</text>
+    <CurryScene id="lassi" label="A mango lassi in a tall glass with one pink straw, on the orange tablecloth next to the lunch tray. A menu card says LASSI.">
+      <g transform="translate(1440 420)">
+        <path d="M0 150L40 0H260L300 150z" fill="#fbf6ea" stroke="#c8202e" strokeWidth="6" />
+        <text className="cu-sign" x="150" y="70" textAnchor="middle" fontSize="46" fill="#c8202e">LASSI</text>
+        <text className="cu-jp" x="150" y="128" textAnchor="middle" fontSize="32" fill="#5a3a2a">マンゴー ¥300</text>
       </g>
     </CurryScene>
   );
+}
+
+// the napkin: her hand (from the right) wipes the sauce off your fingers with a white napkin, over the tray
+export function CurryNapkin() {
+  return <CurryScene id="napkin" label="Close: her hand wipes the orange sauce off your fingers with a white paper napkin, over the lunch tray." />;
 }

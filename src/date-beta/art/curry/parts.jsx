@@ -57,18 +57,3 @@ export function Bell({ x, y, s = 1 }) {
     </g>
   );
 }
-
-// YOUR hand, from the bottom-left (school-blazer sleeve), pinching a piece of food at (x, y)
-export function YourHand({ x, y, s = 1, food = '#f1dcae', edge = '#c98a45' }) {
-  return (
-    <g transform={`translate(0 1080) scale(${s}) translate(0 -1080)`}>
-      <path d={`M-40 1120L${x - 330} ${y + 250}L${x - 170} ${y + 390}L180 1120z`} fill="#26305a" />
-      <path d={`M${x - 330} ${y + 250}l160 140l-20 22l-160-140z`} fill="#e9e4d8" />
-      <path d={`M${x - 320} ${y + 235}C${x - 250} ${y + 120} ${x - 150} ${y + 60} ${x - 60} ${y + 40}C${x - 10} ${y + 30} ${x + 20} ${y + 60} ${x - 20} ${y + 90}C${x - 60} ${y + 120} ${x - 110} ${y + 150} ${x - 150} ${y + 200}L${x - 175} ${y + 385}z`} fill="#f2c9a8" />
-      <path d={`M${x - 150} ${y + 190}C${x - 110} ${y + 150} ${x - 80} ${y + 140} ${x - 40} ${y + 150}`} stroke="#d59f80" strokeWidth="6" fill="none" strokeLinecap="round" />
-      <path d={`M${x - 70} ${y + 10}l${130} -60l60 70l-120 70z`} fill={food} stroke={edge} strokeWidth="8" strokeLinejoin="round" />
-      <path d={`M${x - 10} ${y - 5}l40 -15M${x + 30} ${y + 30}l30 -12`} stroke={edge} strokeWidth="7" strokeLinecap="round" />
-      <path d={`M${x - 90} ${y + 45}C${x - 60} ${y - 10} ${x - 20} ${y - 20} ${x + 10} ${y + 5}C${x - 10} ${y + 40} ${x - 50} ${y + 60} ${x - 90} ${y + 60}z`} fill="#f2c9a8" stroke="#d59f80" strokeWidth="4" />
-    </g>
-  );
-}

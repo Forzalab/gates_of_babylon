@@ -1,10 +1,10 @@
 {
   "name": "curry",
   "notes": [
-    "CURRY scene rebuild (plan fizzy-dreaming-clover, Tony's 16 refs; research/sprint-0930/curry/SHOTLIST.md). Runs after r3-rain and before love (love + gacha stay last), so the v2-curry beat numbers below are the ORIGINAL ones: r3-rain's beat-5 curry-street lands on the exit, and love's beat-1 loveHidden still hits the pick (every insert here is at 2 or later).",
-    "The choice moves OUT to the street (2:55 PM, two shop fronts): butter chicken stays in v2-curry (NAND HOUSE, the Indian shop), katsu goes to v2-curry-katsu (OR OR CURRY), not hungry goes to v2-curry-alone (the katsu shop, she eats alone).",
-    "v2-curry after this pack: 0 street stamp 2:55 | 1 the pick | 2 door + bell | 3 interior stamp 3:00 | 4 two-shot, knee | 5 HERO thali | 6 naan tear | 7 sauce | 8 naan dip | 9 'Feed me' (your hand) | 10 her eyes | 11 lassi | 12 exit 3:40 (curry-street).",
-    "Voice takes are scene + words: every recorded v2-curry line keeps its words and stays in v2-curry. The katsu path's 'Feed me' line is in its own scene, so it has no take."
+    "CURRY scene (plan fizzy-dreaming-clover; r2 = research/sprint-0930/curry/BATCHES.md). Runs after r3-rain and before love (love + gacha stay last), so the v2-curry patch beat numbers are the ORIGINAL ones: r3-rain's beat-5 curry-street lands on the exit, love's beat-1 loveHidden still hits the pick.",
+    "The choice is on the street (2:55 PM): butter chicken stays in v2-curry (NAND HOUSE), katsu goes to v2-curry-katsu (OR OR CURRY), not hungry goes to v2-curry-alone.",
+    "Butter and katsu are the SAME chain, beat for beat: door | inside 3:00 | two-shot | hero dish | tear/cut | more sauce | dip | 'Feed me' (POV, your hand at her mouth) | the bite (sauce at her mouth) | her drink, one straw | the napkin | exit 3:40.",
+    "Lines are grade-2 talk mode, literal (research/sprint-0930/curry/LINES-CHANGED.md). NANDA lines with a voice take keep their words (takes are scene + words); the katsu 'Feed me' has no take."
   ],
   "scenes": [
     {
@@ -14,15 +14,152 @@
       "bg": "curry-katsu-int",
       "nanda": true,
       "beats": [
-        { "speaker": false, "text": "Insert. She pushes the yellow door. A bell rings.", "sfx": "bell", "bg": "curry-katsu-door", "props": { "cut": { "frame": "off", "sharp": true } } },
-        { "speaker": false, "text": "Two seats at the counter. She sits at your right. Her knee touches yours.", "sfx": "kettle", "bg": "curry-katsu-int", "props": { "shot": "stamp", "place": "OR OR CURRY", "time": "3:00 PM", "cut": { "frame": "medium" } } },
-        { "speaker": false, "text": "Close-up. Katsu curry. She cuts one small piece. Crunch.", "sfx": "thump", "bg": "curry-katsu-dish", "props": { "cut": { "frame": "off", "sharp": true } } },
-        { "speaker": false, "text": "Extreme close-up. Brown curry. Soft potato. Hot rice.", "bg": "curry-katsu-close", "props": { "cut": { "frame": "off", "sharp": true } } },
-        { "speaker": "NANDA", "text": "Feed me. With your hand. Not the spoon. Your hand.", "sfx": "breath", "bg": "curry-katsu-spoon", "props": { "cut": { "frame": "medium" } } },
-        { "speaker": false, "text": "She eats from your fingers. Her eyes never leave your face.", "sfx": "silence", "bg": "curry-katsu-int", "props": { "cut": { "frame": "eyes" } } },
         {
-          "speaker": false, "text": "She wipes your fingers with her napkin. Then she keeps the napkin for her collection.", "sfx": "bell", "bg": "curry-street", "props": { "cut": { "frame": "medium" } },
-          "choices": [{ "text": "Walk to the station", "go": "v2-train" }]
+          "speaker": false,
+          "text": "She opens the yellow door. A bell rings.",
+          "sfx": "bell",
+          "bg": "curry-katsu-door",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "We go inside OR OR CURRY. A TV plays a cooking show.",
+          "bg": "curry-katsu-int",
+          "props": {
+            "shot": "stamp",
+            "place": "OR OR CURRY",
+            "time": "3:00 PM",
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "We sit at the counter. She sits on your right. Her knee touches your knee.",
+          "sfx": "kettle",
+          "bg": "curry-katsu-counter",
+          "props": {
+            "cut": {
+              "frame": "medium",
+              "face": "content"
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "Lunch comes on a white plate. Rice, brown curry, and a fried pork cutlet.",
+          "sfx": "thump",
+          "bg": "curry-katsu-dish",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She cuts off one small piece with her spoon. Crunch.",
+          "bg": "curry-katsu-cut",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She pours more curry on the rice. It is thick, brown, and hot.",
+          "bg": "curry-katsu-pour",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She dips the small piece in the curry. The curry drips.",
+          "bg": "curry-katsu-close",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": "NANDA",
+          "text": "Feed me. With your hand. Not the spoon. Your hand.",
+          "sfx": "breath",
+          "bg": "curry-katsu-feed",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She eats the piece from your fingers. She looks at your face the whole time. There is curry on her lip.",
+          "sfx": "silence",
+          "bg": "curry-katsu-bite",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She pushes her lemon water to you. It has only one straw.",
+          "bg": "curry-katsu-water",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+          "bg": "curry-katsu-napkin",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "We walk out to the street. It is 3:40 PM.",
+          "sfx": "bell",
+          "bg": "curry-street",
+          "props": {
+            "cut": {
+              "frame": "medium",
+              "face": "heart-laugh"
+            }
+          },
+          "choices": [
+            {
+              "text": "Walk to the station",
+              "go": "v2-train"
+            }
+          ]
         }
       ]
     },
@@ -33,37 +170,287 @@
       "bg": "curry-katsu-int",
       "nanda": true,
       "beats": [
-        { "speaker": false, "text": "Insert. She pushes the yellow door. A bell rings.", "sfx": "bell", "bg": "curry-katsu-door", "props": { "cut": { "frame": "off", "sharp": true } } },
-        { "speaker": false, "text": "She eats alone. You get nothing. She stares at you the whole time.", "sfx": "silence", "bg": "curry-katsu-int", "props": { "shot": "stamp", "place": "OR OR CURRY", "time": "3:00 PM", "cut": { "frame": "close", "face": "hate" } } },
         {
-          "speaker": false, "text": "She folds her napkin and keeps it. For her collection.", "sfx": "bell", "bg": "curry-street", "props": { "cut": { "frame": "medium" } },
-          "choices": [{ "text": "Walk to the station", "go": "v2-train" }]
+          "speaker": false,
+          "text": "She opens the yellow door. A bell rings.",
+          "sfx": "bell",
+          "bg": "curry-katsu-door",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She eats alone. You get no food. She looks at you the whole time.",
+          "sfx": "silence",
+          "bg": "curry-katsu-int",
+          "props": {
+            "shot": "stamp",
+            "place": "OR OR CURRY",
+            "time": "3:00 PM",
+            "cut": {
+              "frame": "medium",
+              "face": "hate"
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She folds her napkin and keeps it. She collects them.",
+          "bg": "curry-napkin-fold",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "We walk out to the street. It is 3:40 PM.",
+          "sfx": "bell",
+          "bg": "curry-street",
+          "props": {
+            "cut": {
+              "frame": "medium",
+              "face": "content"
+            }
+          },
+          "choices": [
+            {
+              "text": "Walk to the station",
+              "go": "v2-train"
+            }
+          ]
         }
       ]
     }
   ],
-  "insert": [{ "after": "v2-curry", "ids": ["v2-curry-katsu", "v2-curry-alone"] }],
+  "insert": [
+    {
+      "after": "v2-curry",
+      "ids": [
+        "v2-curry-katsu",
+        "v2-curry-alone"
+      ]
+    }
+  ],
   "patch": [
-    { "scene": "v2-curry", "beat": 0, "set": { "bg": "curry-choice", "text": "CURRY STREET · 2:55 PM. Two curry shops, side by side.", "sfx": null, "props": { "shot": "stamp", "place": "CURRY STREET", "time": "2:55 PM", "cut": { "frame": "off", "sharp": true } } } },
-    { "scene": "v2-curry", "beat": 1, "set": { "bg": "curry-choice", "props": { "cut": { "frame": "medium" } } } },
-    { "scene": "v2-curry", "beat": 5, "set": { "props": { "cut": { "frame": "medium" } } } },
-    { "scene": "v2-curry", "beat": 1, "choice": 1, "set": { "go": "v2-curry-katsu" } },
-    { "scene": "v2-curry", "beat": 1, "choice": 2, "set": { "go": "v2-curry-alone" } },
-    { "scene": "v2-curry", "beat": 2, "set": { "bg": "curry-naan-lift", "text": "Close-up. She tears the naan with two fingers.", "vary": null, "props": { "cut": { "frame": "off", "sharp": true } } } },
-    { "scene": "v2-curry", "beat": 3, "set": { "bg": "curry-naan-feed", "props": { "cut": { "frame": "close" } } } },
-    { "scene": "v2-curry", "beat": 4, "set": { "bg": "curry-butter-table", "props": { "cut": { "frame": "eyes" } } } },
-    { "scene": "v2-curry", "beat": 5, "beats": [
-      { "speaker": false, "text": "Her mango lassi. She pushes it to you. One straw.", "bg": "curry-lassi", "props": { "cut": { "frame": "off", "sharp": true } } }
-    ] },
-    { "scene": "v2-curry", "beat": 3, "beats": [
-      { "speaker": false, "text": "More butter sauce. Thick, orange, and shiny.", "bg": "curry-sauce", "props": { "cut": { "frame": "off", "sharp": true } } },
-      { "speaker": false, "text": "Extreme close-up. She dips the naan. The sauce drips.", "bg": "curry-naan-dip", "props": { "cut": { "frame": "off", "sharp": true } } }
-    ] },
-    { "scene": "v2-curry", "beat": 2, "beats": [
-      { "speaker": false, "text": "Insert. She pushes the glass door. A bell rings.", "sfx": "bell", "bg": "curry-butter-door", "props": { "cut": { "frame": "off", "sharp": true } } },
-      { "speaker": false, "text": "Inside NAND HOUSE. A dance video plays on the TV.", "bg": "curry-butter-int", "props": { "shot": "stamp", "place": "NAND HOUSE", "time": "3:00 PM", "cut": { "frame": "off", "sharp": true } } },
-      { "speaker": false, "text": "Two seats by the window. She sits at your right. Her knee touches yours.", "sfx": "kettle", "bg": "curry-butter-table", "props": { "cut": { "frame": "medium" } } },
-      { "speaker": false, "text": "The lunch set. Butter chicken, saag, rice, and one giant naan.", "sfx": "thump", "bg": "curry-thali", "props": { "cut": { "frame": "off", "sharp": true } } }
-    ] }
+    {
+      "scene": "v2-curry",
+      "beat": 0,
+      "set": {
+        "bg": "curry-choice",
+        "text": "It is 2:55 PM. Two curry shops stand side by side.",
+        "sfx": null,
+        "props": {
+          "shot": "stamp",
+          "place": "CURRY STREET",
+          "time": "2:55 PM",
+          "cut": {
+            "frame": "off",
+            "sharp": true
+          }
+        }
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 1,
+      "set": {
+        "bg": "curry-choice",
+        "props": {
+          "cut": {
+            "frame": "medium"
+          }
+        }
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 1,
+      "choice": 1,
+      "set": {
+        "go": "v2-curry-katsu"
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 1,
+      "choice": 2,
+      "set": {
+        "go": "v2-curry-alone"
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 2,
+      "set": {
+        "bg": "curry-naan-lift",
+        "text": "She tears off a piece of naan with two fingers.",
+        "vary": null,
+        "props": {
+          "cut": {
+            "frame": "off",
+            "sharp": true
+          }
+        }
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 3,
+      "set": {
+        "bg": "curry-naan-feed",
+        "props": {
+          "cut": {
+            "frame": "off",
+            "sharp": true
+          }
+        }
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 4,
+      "set": {
+        "bg": "curry-butter-bite",
+        "text": "She eats the naan from your fingers. She looks at your face the whole time. There is sauce on her lip.",
+        "props": {
+          "cut": {
+            "frame": "off",
+            "sharp": true
+          }
+        }
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 5,
+      "set": {
+        "text": "We walk out to the street. It is 3:40 PM.",
+        "props": {
+          "cut": {
+            "frame": "medium",
+            "face": "heart-laugh"
+          }
+        }
+      }
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 5,
+      "beats": [
+        {
+          "speaker": false,
+          "text": "She pushes her mango lassi to you. It has only one straw.",
+          "bg": "curry-lassi",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+          "bg": "curry-napkin",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 3,
+      "beats": [
+        {
+          "speaker": false,
+          "text": "She pours more butter sauce. It is thick, orange, and shiny.",
+          "bg": "curry-sauce",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "She dips the naan in the sauce. The sauce drips.",
+          "bg": "curry-naan-dip",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scene": "v2-curry",
+      "beat": 2,
+      "beats": [
+        {
+          "speaker": false,
+          "text": "She opens the glass door. A bell rings.",
+          "sfx": "bell",
+          "bg": "curry-butter-door",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "We go inside NAND HOUSE. A TV plays a dance video.",
+          "bg": "curry-butter-int",
+          "props": {
+            "shot": "stamp",
+            "place": "NAND HOUSE",
+            "time": "3:00 PM",
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "We sit at a table by the window. She sits on your right. Her knee touches your knee.",
+          "sfx": "kettle",
+          "bg": "curry-butter-table",
+          "props": {
+            "cut": {
+              "frame": "medium",
+              "face": "anya-smile"
+            }
+          }
+        },
+        {
+          "speaker": false,
+          "text": "Lunch comes on a steel tray. Butter chicken, green saag, rice, and one very big naan.",
+          "sfx": "thump",
+          "bg": "curry-thali",
+          "props": {
+            "cut": {
+              "frame": "off",
+              "sharp": true
+            }
+          }
+        }
+      ]
+    }
   ]
 }

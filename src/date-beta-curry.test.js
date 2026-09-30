@@ -14,8 +14,8 @@ const IDS = [...INDEX.slice(INDEX.indexOf('export const CURRY')).matchAll(/'([\w
 const PLAY = /const PLAY = \[([^\]]+)\]/.exec(src('./date-beta/main.jsx'))[1].match(/'([\w-]+)'/g).map((s) => s.slice(1, -1));
 const EXTRA = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night', 'cellar', 'park', 'apartment-trace', 'sitting-room', 'bedroom', 'genkan-in', 'genkan-v2', 'lock-game'];
 
-test('curry: 15 art ids registered, each with a trace under 600 KB', () => {
-  assert.equal(IDS.length, 15);
+test('curry: 24 art ids registered, each with a trace under 600 KB', () => {
+  assert.equal(IDS.length, 24);
   assert.match(src('./date-beta/art/index.js'), /\.\.\.CURRY,/);
   for (const id of IDS) {
     assert.ok(ART_NAMES.includes(id), id);
@@ -37,9 +37,15 @@ test('curry: in the play list before love; the pick is on the street; the three 
   assert.equal(sc('v2-curry').beats[0].props.time, '2:55 PM');
   assert.deepEqual(pick.choices.map((c) => c.go), [undefined, 'v2-curry-katsu', 'v2-curry-alone']);
   assert.deepEqual(bgs('v2-curry'), ['curry-choice', 'curry-choice', 'curry-butter-door', 'curry-butter-int', 'curry-butter-table', 'curry-thali',
-    'curry-naan-lift', 'curry-sauce', 'curry-naan-dip', 'curry-naan-feed', 'curry-butter-table', 'curry-lassi', 'curry-street']);
-  assert.deepEqual(bgs('v2-curry-katsu'), ['curry-katsu-door', 'curry-katsu-int', 'curry-katsu-dish', 'curry-katsu-close', 'curry-katsu-spoon', 'curry-katsu-int', 'curry-street']);
-  assert.deepEqual(bgs('v2-curry-alone'), ['curry-katsu-door', 'curry-katsu-int', 'curry-street']);
+    'curry-naan-lift', 'curry-sauce', 'curry-naan-dip', 'curry-naan-feed', 'curry-butter-bite', 'curry-lassi', 'curry-napkin', 'curry-street']);
+  assert.deepEqual(bgs('v2-curry-katsu'), ['curry-katsu-door', 'curry-katsu-int', 'curry-katsu-counter', 'curry-katsu-dish', 'curry-katsu-cut', 'curry-katsu-pour',
+    'curry-katsu-close', 'curry-katsu-feed', 'curry-katsu-bite', 'curry-katsu-water', 'curry-katsu-napkin', 'curry-street']);
+  assert.deepEqual(bgs('v2-curry-alone'), ['curry-katsu-door', 'curry-katsu-int', 'curry-napkin-fold', 'curry-street']);
+  // katsu = butter, beat for beat (from the door on); the napkin is SHOWN on both paths, never told over the street
+  assert.equal(sc('v2-curry').beats.length - 2, sc('v2-curry-katsu').beats.length);
+  for (const id of ['v2-curry', 'v2-curry-katsu']) assert.match(sc(id).beats.at(-2).bg, /napkin/, id);
+  // the feed + bite beats are full-frame art (no sprite frame for the box to clip)
+  for (const [id, i] of [['v2-curry', 9], ['v2-curry', 10], ['v2-curry-katsu', 7], ['v2-curry-katsu', 8]]) assert.equal(sc(id).beats[i].props.cut.frame, 'off', `${id} ${i}`);
   for (const id of ['v2-curry', 'v2-curry-katsu', 'v2-curry-alone']) assert.equal(sc(id).beats.at(-1).choices[0].go, 'v2-train', id);
   // no beat borrows another scene's art (the old 'closeup of cafe' bug)
   for (const id of ['v2-curry', 'v2-curry-katsu', 'v2-curry-alone']) for (const b of sc(id).beats) assert.equal(b.props?.of, undefined);
