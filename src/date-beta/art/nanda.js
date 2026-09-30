@@ -6,6 +6,8 @@
 // Emotes (HUD SPEC): nandaSVG({ emote, big }) = palette + face + bubble per reaction; sweat + pout are new faces/bubbles.
 // `stage` alone (1-4) keeps the old look (heart / hearts / or / crack). `big` = reaction-size bubble.
 
+import { VEIN4 } from './emotion/shapes.js';
+
 const HEARTP = 'M0 -3C-4 -10 -14 -6 -9 2L0 10L9 2C14 -6 4 -10 0 -3Z';
 const BUBBLE = 'M-40 -30H40Q52 -30 52 -18V14Q52 26 40 26H-6L-26 44L-20 26H-40Q-52 26 -52 14V-18Q-52 -30 -40 -30Z';
 const BODYB = 'M12 12H58A42 42 0 0 1 58 96H12V85.5A10.5 10.5 0 0 1 12 64.5V43.5A10.5 10.5 0 0 1 12 22.5Z';
@@ -101,6 +103,8 @@ const band = (P, op = 0.62) => (P.blush === 'none' ? '' : `<ellipse cx="-2" cy="
 const squint = (P, w = 3) => `<path d="M-19,-11 L-9,-6 L-19,-1" fill="none" stroke="${P.ink}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>
       <path d="M15,-11 L5,-6 L15,-1" fill="none" stroke="${P.ink}" stroke-width="${w}" stroke-linecap="round" stroke-linejoin="round"/>`;
 export const SCENE_FACES = ['anya-smile', 'blush-embarrassed', 'heart-laugh', 'content', 'big-eyes-peek'];
+// train-r4 (research/sprint-0930/train-r4/NOTES.md): six faces traced from the ref 13 chibi sheet (+ ref 12, ref 10 drool).
+export const TRAIN_FACES = ['nervous', 'ticked-off', 'very-angry', 'happy', 'dazed-sleepy', 'smug-gloating'];
 Object.assign(FACES, {
   // ref 14: huge glossy eyes (2 highlights, lash flick), a tiny nose tick, a wide flat closed smile, hatch blush
   'anya-smile': (P) => `${hatchV(P)}${bigEye(-13, -5, 6, 7.6, P)}${bigEye(11, -5, 6, 7.6, P)}
@@ -122,9 +126,66 @@ Object.assign(FACES, {
   'big-eyes-peek': (P) => `${blushOf(P, 0.4)}${bigEye(-14, -3, 7.6, 9.8, P)}${bigEye(12, -3, 7.6, 9.8, P)}
       <path d="M-4,12 Q-1,13.6 2,12" fill="none" stroke="${P.ink}" stroke-width="1.8" stroke-linecap="round"/>`,
 });
+// ---- train-r4 faces (ref 13 chibi 16 sheet, ref 12 yummies, ref 10 drool). Same face coords, her ink + blush.
+const openEye = (x, y, rx, ry, P, px = 0, pr = 2.6) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="#fff" stroke="${P.ink}" stroke-width="2"/>`
+  + `<circle cx="${x + px}" cy="${y + 0.6}" r="${pr}" fill="${P.ink}"/><circle cx="${x + px + pr * 0.4}" cy="${y - pr * 0.3}" r="${pr * 0.34}" fill="#fff"/>`;
+Object.assign(FACES, {
+  // ref 13 "Nervous": wide round eyes, small pupils, brows tilted up in the middle, a stiff wobbly grin with a tooth row
+  nervous: (P) => `${blushOf(P, 0.35)}${openEye(-13, -6, 5.6, 6.6, P, 0.4, 2.4)}${openEye(11, -6, 5.6, 6.6, P, -0.4, 2.4)}
+      <path d="M-19,-15 L-8,-17 M5,-17 L16,-15" stroke="${P.ink}" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M-8,10 Q-5,8.4 -2.5,10 Q0,11.6 2.5,10 Q5,8.4 8,10 L7,14 Q0,15.6 -7,14 Z" fill="#fff" stroke="${P.ink}" stroke-width="1.7" stroke-linejoin="round"/>
+      <path d="M-2.5,10.4 v4.4 M2.5,10.4 v4.4" stroke="${P.ink}" stroke-width="1" stroke-linecap="round"/>`,
+  // ref 13 "Ticked Off": flat heavy upper lids over dot pupils (half-shut), a flat line under each eye, a small tight frown
+  'ticked-off': (P) => {
+    const eye = (x) => `<path d="M${x - 6.5},-7 H${x + 6.5} V-3.2 Q${x},-0.2 ${x - 6.5},-3.2 Z" fill="#fff" stroke="${P.ink}" stroke-width="1.8" stroke-linejoin="round"/>
+      <circle cx="${x}" cy="-4.4" r="2.1" fill="${P.ink}"/><path d="M${x - 7.4},-7.2 H${x + 7.4}" stroke="${P.ink}" stroke-width="3.4" stroke-linecap="round"/>`;
+    return `${blushOf(P, 0.25)}${eye(-13)}${eye(11)}<path d="M-20,-12 L-7,-11 M5,-11 L18,-12" stroke="${P.ink}" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M-6,13 Q0,9.6 6,13" fill="none" stroke="${P.ink}" stroke-width="2.2" stroke-linecap="round"/>`;
+  },
+  // ref 13 "Very Angry": white eyes cut by steep V brows, tiny pupils, a wide shouting mouth with a top tooth row
+  // (the 💢 vein sits on her fringe: FACE_DECOR)
+  'very-angry': (P) => {
+    const eye = (x, d) => `<path d="M${x - 6.5 * d},-10 L${x + 6.5 * d},-4.6 Q${x + 5 * d},2 ${x},2 Q${x - 6.5 * d},1.4 ${x - 6.5 * d},-10 Z" fill="#fff" stroke="${P.ink}" stroke-width="2" stroke-linejoin="round"/>
+      <circle cx="${x + 1.2 * d}" cy="-2.2" r="1.9" fill="${P.ink}"/>`;
+    return `${blushOf(P, 0.5)}${eye(-13, 1)}${eye(11, -1)}<path d="M-22,-16 L-6,-9.5 M20,-16 L4,-9.5" stroke="${P.ink}" stroke-width="3.2" stroke-linecap="round"/>
+      <path d="M-11,7.5 Q-1,5.5 9,7.5 L6.5,17 Q-1,20 -8.5,17 Z" fill="${P.ink}" stroke="${P.ink}" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M-9.6,8.6 Q-1,6.8 7.6,8.6 L7,11 Q-1,9.6 -9,11 Z" fill="#fff"/><path d="M-5,15.6 Q-1,13.4 3,15.6" fill="none" stroke="#ff7fa8" stroke-width="2.4" stroke-linecap="round"/>`;
+  },
+  // ref 13 "Happy": closed upturned arcs, a big open D smile with a tongue, soft blush
+  happy: (P, sw) => `${blushOf(P, 0.6)}
+      <path d="M-19,-4 Q-13,-13 -7,-4 M5,-4 Q11,-13 17,-4" fill="none" stroke="${P.ink}" stroke-width="${sw + 0.4}" stroke-linecap="round"/>
+      <path d="M-9,7 H7 Q6,19 -1,19 Q-8,19 -9,7 Z" fill="${P.ink}" stroke="${P.ink}" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M-5.6,15 Q-1,11.8 3.6,15 Q2,17.6 -1,17.6 Q-4,17.6 -5.6,15 Z" fill="#ff7fa8"/>`,
+  // ref 13 "Dazed/Hungry" + ref 10: heavy-lidded closed eyes (droopy arcs + lash line), a slack open mouth, drool (decor)
+  'dazed-sleepy': (P) => `${blushOf(P, 0.45)}
+      <path d="M-19,-6 Q-13,-1.5 -7,-6 M5,-6 Q11,-1.5 17,-6" fill="none" stroke="${P.ink}" stroke-width="2.6" stroke-linecap="round"/>
+      <path d="M-19.5,-6.4 l-2,1.4 M16.8,-6.4 l2,1.4" stroke="${P.ink}" stroke-width="1.4" stroke-linecap="round"/>
+      <path d="M-19,-12 Q-13,-14 -7,-12.6 M5,-12.6 Q11,-14 17,-12" fill="none" stroke="${P.ink}" stroke-width="1.5" stroke-linecap="round" opacity=".8"/>
+      <path d="M-5,9 Q0,7.4 5,9.4 Q4.6,16 0,16.4 Q-4.8,16 -5,9 Z" fill="${P.ink}"/><path d="M-3,13.4 Q0,11.6 3,13.6 Q1.6,15.4 0,15.4 Q-2,15.2 -3,13.4 Z" fill="#ff7fa8"/>
+      <path d="M3.6,12 Q6.4,16 6.2,23" fill="none" stroke="#1f5f96" stroke-width="3.6" stroke-linecap="round"/><path d="M3.6,12 Q6.4,16 6.2,23" fill="none" stroke="#bfe8ff" stroke-width="2" stroke-linecap="round"/><path d="${DROP}" transform="translate(6.2 25.4) scale(.36)" fill="#8fd3ff" stroke="#1f5f96" stroke-width="2.6"/>`,
+  // ref 13 "Smug" + "Gloating": half lids sliding sideways (pupils to the corner), one brow up, a lopsided cat grin
+  'smug-gloating': (P) => {
+    const eye = (x) => `<path d="M${x - 6},-5.6 Q${x},-8 ${x + 6},-5.6 Q${x + 5.6},-0.4 ${x},-0.2 Q${x - 5.6},-0.4 ${x - 6},-5.6 Z" fill="#fff" stroke="${P.ink}" stroke-width="1.8" stroke-linejoin="round"/>
+      <circle cx="${x + 3}" cy="-3.2" r="2.4" fill="${P.ink}"/><path d="M${x - 7},-6.4 Q${x},-9.6 ${x + 7},-6.4" fill="none" stroke="${P.ink}" stroke-width="3.2" stroke-linecap="round"/>`;
+    return `${blushOf(P, 0.55, true)}${eye(-13)}${eye(11)}<path d="M-20,-14 Q-13,-15 -7,-13 M5,-17 Q11,-20 17,-16" fill="none" stroke="${P.ink}" stroke-width="2" stroke-linecap="round"/>
+      <path d="M-8,10 Q-4,14 0,10.6 Q4,14 9,8.4" fill="none" stroke="${P.ink}" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>`;
+  },
+});
 const DROPS = (pts) => pts.map(([x, y, s]) => `<path d="${DROP}" transform="translate(${x} ${y}) scale(${s})" fill="#8fd3ff" stroke="#1f5f96" stroke-width="${(1.6 / s).toFixed(2)}" stroke-linejoin="round"/><ellipse cx="${x - s * 2}" cy="${y + s * 2}" rx="${s * 1.4}" ry="${s * 2.2}" fill="#fff" opacity=".8"/>`).join('');
 const FLICKS = (pts, ink) => pts.map(([x, y, r]) => `<path d="M${x - 3.4},${y - 3} L${x + 3.4},${y - 3} L${x},${y + 3.4}Z" transform="rotate(${r} ${x} ${y})" fill="none" stroke="${ink}" stroke-width="1.6" stroke-linejoin="round"/>`).join('');
+const VEIN = (x, y, s, r) => `<g transform="translate(${x} ${y}) rotate(${r}) scale(${s})" fill="#ff1414" stroke="#6a0000" stroke-width="${(2.4 / s).toFixed(3)}" stroke-linejoin="round" paint-order="stroke">${VEIN4}</g>`;
+const ZZ = (x, y, s, ink) => `<path d="M${x},${y} h${s} l-${s},${s} h${s}" fill="none" stroke="${ink}" stroke-width="${Math.max(1.4, s / 5)}" stroke-linecap="round" stroke-linejoin="round"/>`;
 export const FACE_DECOR = {
+  // ref 13 Nervous: one big sweat drop on the top of her head (right side), static
+  nervous: () => DROPS([[92, 6, 1.05]]),
+  // ref 13 Ticked Off: three short tension lines over the brow
+  'ticked-off': (P) => `<path d="M98,12 l7,-5 M100,20 l9,-1 M98,28 l7,4" stroke="${P.ink}" stroke-width="1.8" stroke-linecap="round"/>`,
+  // ref 13 Very Angry: the 💢 vein layer on her fringe + a small one in the air (the emotion/shapes.js VEIN4 mark)
+  'very-angry': () => VEIN(34, 24, 9, 12) + VEIN(-8, 8, 6, -18),
+  // dazed/sleepy: two small z's drifting off her pony side (still)
+  'dazed-sleepy': (P) => ZZ(118, -6, 9, P.ink) + ZZ(132, -20, 6, P.ink),
+  // gloating: a tiny sparkle by the grin side
+  'smug-gloating': () => '<path d="M122,52 l2,-6 l2,6 l6,2 l-6,2 l-2,6 l-2,-6 l-6,-2 Z" fill="#ffd23f" stroke="#a36a00" stroke-width="1"/>',
   // the ref 13 sweat row: three drops stepping down past her right temple, two flick triangles over her head
   'blush-embarrassed': (P) => DROPS([[96, 8, 0.7], [104, 20, 0.58], [109, 32, 0.48]]) + FLICKS([[26, -2, -18], [36, -8, 10]], P.ink),
   // ref 15 hearts floating round her head (still), ref 13's flicks

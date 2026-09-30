@@ -118,11 +118,24 @@ function assetField(v, kind, where, manifest, names) {
 export const isAssetId = (v) => typeof v === 'string' && ASSET_ID.test(v);
 
 // "f{OR}ever" -> [{ t: 'f' }, { t: 'OR', or: true }, { t: 'ever' }]. Any other brace is a typo and fails loudly.
+// train-r4 styled spans: "{wavy:Wavy hair.}" / "{hat:Hat boy.}" -> { t: 'Wavy hair.', span: 'wavy' }. The plain text
+// (voice lookup, aria, OCR) is just the words; Say.jsx draws the look (wavy = italic teal wavy underline, hat = bold orange + cap chip).
+export const SPANS = ['wavy', 'hat'];
+const SPAN_RE = /\{(wavy|hat):([^{}]+)\}/g;
 export function orParts(text, where = 'text') {
   const bits = text.split(OR_MARK);
-  if (bits.some((b) => /[{}]/.test(b.replace(TOKEN_RE, '')))) fail(where, `stray brace in "${text}" (the only mark is ${OR_MARK})`);
+  if (bits.some((b) => /[{}]/.test(b.replace(TOKEN_RE, '').replace(SPAN_RE, '')))) fail(where, `stray brace in "${text}" (the only marks are ${OR_MARK}, {wavy:…}, {hat:…})`);
   const out = [];
-  bits.forEach((t, i) => { if (i) out.push({ t: 'OR', or: true }); if (t) out.push({ t }); });
+  const push = (t) => {
+    let k = 0;
+    for (const m of t.matchAll(SPAN_RE)) {
+      if (m.index > k) out.push({ t: t.slice(k, m.index) });
+      out.push({ t: m[2], span: m[1] });
+      k = m.index + m[0].length;
+    }
+    if (k < t.length) out.push({ t: t.slice(k) });
+  };
+  bits.forEach((t, i) => { if (i) out.push({ t: 'OR', or: true }); if (t) push(t); });
   return out;
 }
 const plain = (parts) => parts.map((p) => p.t).join('');
@@ -132,7 +145,7 @@ export function splitParts(parts, at) {
     const k = p.or ? -1 : p.t.indexOf(at);
     if (k < 0 || (k === 0 && i === 0)) continue;
     const head = p.t.slice(0, k);
-    return [[...parts.slice(0, i), ...(head ? [{ t: head }] : [])], [{ t: p.t.slice(k) }, ...parts.slice(i + 1)]];
+    return [[...parts.slice(0, i), ...(head ? [{ ...p, t: head }] : [])], [{ ...p, t: p.t.slice(k) }, ...parts.slice(i + 1)]];
   }
   return [parts, []];
 }

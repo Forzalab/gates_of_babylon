@@ -1,0 +1,24 @@
+| shot | beat | face | text (DOM, visible) | OCR recall | covered pts | contrast | notes | gate |
+|---|---|---|---|---|---|---|---|---|
+| ume-beat1 | v2-train:0 | heart-laugh | 4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.' | 0.89 | 0 | 11.3 | missed: 30 is; face y 686 vs box 773; MANUAL: OCR reads the italic narration "4:30" as "4:50" and "is" as "ts" (font shapes, not layout); legible by eye | PASS (manual) |
+| ume-beat2 | v2-train:1 | nervous | STATION · 4:30 PM. The station is full. Everyone is going home. | 1.00 | 0 | 11.0 | face y 686 vs box 773 | PASS |
+| ume-beat3 | v2-train:2 | anya-smile | She buys a plum drink. Sour. 'Like the one you picked. I remember.' | 1.00 | 0 | 11.1 | face y 686 vs box 773 | PASS |
+| ume-beat4a-step1 | v2-train:3 | ticked-off | Two men bump her bag.  | 1.00 | 0 | 8.1 | later words hidden 2/2; face y 686 vs box 826 | PASS |
+| ume-beat4b-step2 | v2-train:3 | puff | Two men bump her bag. They laugh. | 1.00 | 0 | 10.4 | face y 686 vs box 826 | PASS |
+| ume-beat5 | v2-train:4 | very-angry | Hey, you. Wavy hair. And you.  Hat boy, the gringo. Stop pushing. He is MINE. | 0.93 | 0 | 11.9 | missed: is; wavy "Wavy hair." OCR read, 6.1:1; hat "Hat boy, the gringo." OCR read, 5.8:1; face y 376 vs box 692 | PASS |
+| ume-beat6 | v2-train:5 | content | She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.' | 1.00 | 0 | 11.3 | face y 686 vs box 773 | PASS |
+| ume-beat7 | v2-train:6 | happy | 12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.' | 1.00 | 0 | 11.3 | face y 376 vs box 704 | PASS |
+| ume-beat8 | v2-train:7 | dazed-sleepy | 5:20 PM. It's raining. She lays her head on yours. She drifts away. | 1.00 | 0 | 11.1 | face y 686 vs box 773 | PASS |
+| ume-beat9 | v2-train:8 | smug-gloating | Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.' | 1.00 | 0 | 11.3 | face y 376 vs box 773 | PASS |
+| tama-beat1 | v2-train:0 | heart-laugh | 4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.' | 0.89 | 0 | 11.3 | missed: 30 is; face y 686 vs box 773; MANUAL: OCR reads the italic narration "4:30" as "4:50" and "is" as "ts" (font shapes, not layout); legible by eye | PASS (manual) |
+| tama-beat2 | v2-train:1 | nervous | STATION · 4:30 PM. The station is full. Everyone is going home. | 1.00 | 0 | 11.0 | face y 686 vs box 773 | PASS |
+| tama-beat3 | v2-train:2 | anya-smile | Egg pudding drink. Sweet. 'Like the one you picked. I remember.' | 1.00 | 0 | 11.1 | face y 686 vs box 773 | PASS |
+| tama-beat4a-step1 | v2-train:3 | ticked-off | Two men bump her bag.  | 1.00 | 0 | 8.1 | later words hidden 2/2; face y 686 vs box 826 | PASS |
+| tama-beat4b-step2 | v2-train:3 | puff | Two men bump her bag. They laugh. | 1.00 | 0 | 10.4 | face y 686 vs box 826 | PASS |
+| tama-beat5 | v2-train:4 | very-angry | Hey, you. Wavy hair. And you.  Hat boy, the gringo. Stop pushing. He is MINE. | 0.93 | 0 | 11.9 | missed: is; wavy "Wavy hair." OCR read, 6.1:1; hat "Hat boy, the gringo." OCR read, 5.8:1; face y 376 vs box 692 | PASS |
+| tama-beat6 | v2-train:5 | content | She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.' | 1.00 | 0 | 11.3 | face y 686 vs box 773 | PASS |
+| tama-beat7 | v2-train:6 | happy | 12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.' | 1.00 | 0 | 11.3 | face y 376 vs box 704 | PASS |
+| tama-beat8 | v2-train:7 | dazed-sleepy | 5:20 PM. It's raining. She lays her head on yours. She drifts away. | 1.00 | 0 | 11.1 | face y 686 vs box 773 | PASS |
+| tama-beat9 | v2-train:8 | smug-gloating | Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.' | 1.00 | 0 | 11.3 | face y 376 vs box 773 | PASS |
+
+20 shots, 0 fail

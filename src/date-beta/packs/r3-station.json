@@ -3,14 +3,18 @@
  "notes": [
   "Scenes R3 G1 STATION + TRAIN (research/sprint-0930/scenes-r3/PLAN.md, G1-NOTES.md). Runs right after variant-v2, so the beat numbers are variant-v2's own.",
   "One background per line: 1 station-gate-r3 (ref 12, 4:30 overcast, board 4:30 -> OR) | 2 station-ads (ref 11, NAND駅, WATCHING YOU) | 3 station-ads-insert (ref 11 crop + IC gate, sharp) | 4 train-sun (ref 13, 4:40) | 5 train-rain (ref 14, 5:20 rain) | 6 platform-rain (ref 09/08/10, OR駅, her empty spot).",
-  "Each beat replaces its props so the old camera shots (station-gate alias, ots, closeup of train, train-door) are gone: no pans, no animation. Props carry forward in a scene, so beat 4 resets the cut that beat 3 set."
+  "Each beat replaces its props so the old camera shots (station-gate alias, ots, closeup of train, train-door) are gone: no pans, no animation. Props carry forward in a scene, so beat 4 resets the cut that beat 3 set.",
+  "train-r4 (research/sprint-0930/train-r4/PLAN.md, NOTES.md): v2-train is now the 9-beat script. One face per beat via props.cut.face (cut.raise = her raised pose over a 3-line box, so the face stays in view) (art/nanda.js TRAIN_FACES + the Scene A faces): 0 heart-laugh | 1 nervous | 2 anya-smile | 3 ticked-off -> puff (two-step at 'They laugh.') | 4 very-angry | 5 content | 6 happy | 7 dazed-sleepy | 8 smug-gloating."
  ],
  "patch": [
-  { "scene": "v2-train", "beat": 1, "set": { "bg": "station-gate-r3", "props": { "place": "STATION", "time": "4:30 PM" } } },
-  { "scene": "v2-train", "beat": 2, "set": { "bg": "station-ads", "props": { "emote": "pout" } } },
-  { "scene": "v2-train", "beat": 3, "set": { "bg": "station-ads-insert", "props": { "cut": { "sharp": true } } } },
-  { "scene": "v2-train", "beat": 4, "set": { "bg": "train-sun", "props": { "cut": {} } } },
-  { "scene": "v2-train", "beat": 5, "set": { "bg": "train-rain", "props": { "place": "TRAIN", "time": "5:20 PM", "cut": {} } } },
-  { "scene": "v2-train", "beat": 6, "set": { "bg": "platform-rain", "props": { "cut": {} } } }
+  {"scene": "v2-train", "beat": 0, "set": {"props": {"shot": "match", "of": "cafe", "to": "platform", "cut": {"face": "heart-laugh"}}}},
+  {"scene": "v2-train", "beat": 1, "set": {"bg": "station-gate-r3", "props": {"place": "STATION", "time": "4:30 PM", "cut": {"face": "nervous"}}}},
+  {"scene": "v2-train", "beat": 2, "set": {"bg": "station-ads-insert", "props": {"cut": {"face": "anya-smile", "sharp": true}}}},
+  {"scene": "v2-train", "beat": 3, "set": {"bg": "station-ads", "props": {"cut": {"face": "ticked-off", "face2": "puff", "at": "They laugh.", "step": 700}}}},
+  {"scene": "v2-train", "beat": 4, "set": {"bg": "station-ads", "props": {"cut": {"face": "very-angry", "raise": true}}}},
+  {"scene": "v2-train", "beat": 5, "set": {"bg": "station-ads-insert", "props": {"cut": {"face": "content", "sharp": true}}}},
+  {"scene": "v2-train", "beat": 6, "set": {"bg": "train-sun", "props": {"cut": {"face": "happy", "raise": true}}}},
+  {"scene": "v2-train", "beat": 7, "set": {"bg": "train-rain", "props": {"place": "TRAIN", "time": "5:20 PM", "cut": {"face": "dazed-sleepy"}}}},
+  {"scene": "v2-train", "beat": 8, "set": {"bg": "platform-rain", "props": {"cut": {"face": "smug-gloating"}}}}
  ]
 }

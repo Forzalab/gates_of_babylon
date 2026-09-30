@@ -15,19 +15,20 @@ const manifest = read('./date-beta/assets.json');
 const pack = read('./date-beta/packs/r3-station.json');
 const INDEX = src('./date-beta/art/r3-station/index.js');
 const IDS = [...INDEX.slice(INDEX.indexOf('export const R3_STATION')).matchAll(/'([\w-]+)': [A-Z]\w*/g)].map((m) => m[1]);
-const BEATS = { 1: 'station-gate-r3', 2: 'station-ads', 3: 'station-ads-insert', 4: 'train-sun', 5: 'train-rain', 6: 'platform-rain' };
+// train-r4: v2-train is 9 beats now (research/sprint-0930/train-r4/PLAN.md); 3 + 4 share the crowded ad wall (the bump, then her line).
+const BEATS = { 1: 'station-gate-r3', 2: 'station-ads-insert', 3: 'station-ads', 4: 'station-ads', 5: 'station-ads-insert', 6: 'train-sun', 7: 'train-rain', 8: 'platform-rain' };
 const BEFORE = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2'];
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
 
 test('r3-station: ids registered, spread into ART, pack runs right after variant-v2', () => {
-  assert.deepEqual([...IDS].sort(), Object.values(BEATS).sort());
+  assert.deepEqual([...IDS].sort(), [...new Set(Object.values(BEATS))].sort());
   for (const id of IDS) assert.ok(ART_NAMES.includes(id), `${id} reaches the art-name list`);
   assert.match(src('./date-beta/art/index.js'), /\.\.\.R3_STATION,/);
   assert.match(src('./date-beta/main.jsx'), /'variant-v2', 'r3-station',/);
   for (const m of INDEX.matchAll(/from '\.\/([\w.]+)'/g)) assert.ok(existsSync(new URL(`./date-beta/art/r3-station/${m[1]}`, import.meta.url)), m[1]);
 });
 
-test('r3-station: v2-train beats 1-6 each get their own bg, no camera shot left, script loads', () => {
+test('r3-station: v2-train beats 1-8 each get their bg, no camera shot left, script loads', () => {
   const packs = BEFORE.map((n) => ({ name: n, ...read(`./date-beta/packs/${n}.json`) }));
   const data = applyPacks(base, [...packs, pack]);
   const S = loadScenes(data, { manifest, art: [...ART_NAMES, ...ROMANCE, 'lock-game'] });
@@ -36,7 +37,6 @@ test('r3-station: v2-train beats 1-6 each get their own bg, no camera shot left,
     assert.equal(train.beats[i].bg, bg, `v2-train[${i}]`);
     assert.equal(train.beats[i].props?.shot, undefined, `v2-train[${i}] has no props.shot (no pan / camera move)`);
   }
-  assert.equal(new Set(Object.values(BEATS)).size, 6, 'one background per line');
   assert.ok(S['v2-train'] ?? S.scenes ?? S, 'loads');
 });
 

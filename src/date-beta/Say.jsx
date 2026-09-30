@@ -6,8 +6,17 @@ import { fill } from './meta.js';
 import { NextButton } from './Hud.jsx';
 // Class names are prefixed `db-` so they can never collide with art classes (R2b finding 2: the art used `.or`).
 
+// train-r4 styled spans (engine SPANS): wavy = italic + a teal wavy underline; hat = bold orange + a small cap-icon chip.
+// The words stay real text (screen readers + OCR read them); the cap chip is decoration (aria-hidden).
+const CapIcon = () => (
+  <svg className="db-cap" viewBox="0 0 24 16" aria-hidden="true" focusable="false">
+    <path d="M3 11C3 5 7 2 12 2s9 3 9 9Z" fill="currentColor" /><path d="M1 11h22v2.5H1Z" fill="currentColor" /><circle cx="12" cy="2.4" r="1.6" fill="#fff" />
+  </svg>
+);
 export function Parts({ parts }) {
-  return parts.map((p, i) => (p.or ? <span key={i} className="db-or">OR</span> : fill(p.t)));
+  return parts.map((p, i) => (p.or ? <span key={i} className="db-or">OR</span>
+    : p.span === 'hat' ? <span key={i} className="db-span db-hat"><span className="db-hat-chip" aria-hidden="true"><CapIcon /></span>{fill(p.t)}</span>
+      : p.span ? <em key={i} className={`db-span db-${p.span}`}>{fill(p.t)}</em> : fill(p.t)));
 }
 
 // SVG twin of <Parts> for signage inside art: tspans in a <text>, OR offset 1 px. Same explicit "{OR}" mark.

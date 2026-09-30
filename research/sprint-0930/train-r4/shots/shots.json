@@ -1,0 +1,580 @@
+{
+ "ume-beat1": {
+  "beat": "v2-train:0",
+  "bg": "art shot match",
+  "face": "heart-laugh",
+  "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "ume-beat2": {
+  "beat": "v2-train:1",
+  "bg": "art r3 r3-station-gate-r3",
+  "face": "nervous",
+  "text": "STATION · 4:30 PM. The station is full. Everyone is going home.",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "ume-beat3": {
+  "beat": "v2-train:2",
+  "bg": "art r3 r3-station-ads-insert",
+  "face": "anya-smile",
+  "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "ume-beat4a-step1": {
+  "beat": "v2-train:3",
+  "bg": "art r3 r3-station-ads",
+  "face": "ticked-off",
+  "text": "Two men bump her bag. ",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   877,
+   1505,
+   946
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "ume-beat4b-step2": {
+  "beat": "v2-train:3",
+  "bg": "art r3 r3-station-ads",
+  "face": "puff",
+  "text": "Two men bump her bag. They laugh.",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   877,
+   1505,
+   946
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "ume-beat5": {
+  "beat": "v2-train:4",
+  "bg": "art r3 r3-station-ads",
+  "face": "very-angry",
+  "text": "Hey, you. Wavy hair. And you. \nHat boy, the gringo. Stop pushing. He is MINE.",
+  "hidden": "",
+  "spans": [
+   [
+    "db-span db-wavy",
+    "Wavy hair."
+   ],
+   [
+    "db-span db-hat",
+    "Hat boy, the gringo."
+   ]
+  ],
+  "covered": [],
+  "say": [
+   260,
+   692,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   755,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   114,
+   1190,
+   610
+  ],
+  "sleepy": null
+ },
+ "ume-beat6": {
+  "beat": "v2-train:5",
+  "bg": "art r3 r3-station-ads-insert",
+  "face": "content",
+  "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "ume-beat7": {
+  "beat": "v2-train:6",
+  "bg": "art r3 r3-train-sun",
+  "face": "happy",
+  "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   704,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   755,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   114,
+   1190,
+   610
+  ],
+  "sleepy": null
+ },
+ "ume-beat8": {
+  "beat": "v2-train:7",
+  "bg": "art r3 r3-train-rain",
+  "face": "dazed-sleepy",
+  "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "ume-beat9": {
+  "beat": "v2-train:8",
+  "bg": "art r3 r3-platform-rain",
+  "face": "smug-gloating",
+  "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   114,
+   1190,
+   610
+  ],
+  "sleepy": null
+ },
+ "tama-beat1": {
+  "beat": "v2-train:0",
+  "bg": "art shot match",
+  "face": "heart-laugh",
+  "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "tama-beat2": {
+  "beat": "v2-train:1",
+  "bg": "art r3 r3-station-gate-r3",
+  "face": "nervous",
+  "text": "STATION · 4:30 PM. The station is full. Everyone is going home.",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "tama-beat3": {
+  "beat": "v2-train:2",
+  "bg": "art r3 r3-station-ads-insert",
+  "face": "anya-smile",
+  "text": "Egg pudding drink. Sweet. 'Like the one you picked. I remember.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "tama-beat4a-step1": {
+  "beat": "v2-train:3",
+  "bg": "art r3 r3-station-ads",
+  "face": "ticked-off",
+  "text": "Two men bump her bag. ",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   877,
+   1505,
+   946
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "tama-beat4b-step2": {
+  "beat": "v2-train:3",
+  "bg": "art r3 r3-station-ads",
+  "face": "puff",
+  "text": "Two men bump her bag. They laugh.",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   877,
+   1505,
+   946
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "tama-beat5": {
+  "beat": "v2-train:4",
+  "bg": "art r3 r3-station-ads",
+  "face": "very-angry",
+  "text": "Hey, you. Wavy hair. And you. \nHat boy, the gringo. Stop pushing. He is MINE.",
+  "hidden": "",
+  "spans": [
+   [
+    "db-span db-wavy",
+    "Wavy hair."
+   ],
+   [
+    "db-span db-hat",
+    "Hat boy, the gringo."
+   ]
+  ],
+  "covered": [],
+  "say": [
+   260,
+   692,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   755,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   114,
+   1190,
+   610
+  ],
+  "sleepy": null
+ },
+ "tama-beat6": {
+  "beat": "v2-train:5",
+  "bg": "art r3 r3-station-ads-insert",
+  "face": "content",
+  "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "tama-beat7": {
+  "beat": "v2-train:6",
+  "bg": "art r3 r3-train-sun",
+  "face": "happy",
+  "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   704,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   755,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   114,
+   1190,
+   610
+  ],
+  "sleepy": null
+ },
+ "tama-beat8": {
+  "beat": "v2-train:7",
+  "bg": "art r3 r3-train-rain",
+  "face": "dazed-sleepy",
+  "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "sleepy": null
+ },
+ "tama-beat9": {
+  "beat": "v2-train:8",
+  "bg": "art r3 r3-platform-rain",
+  "face": "smug-gloating",
+  "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'",
+  "hidden": "",
+  "spans": [],
+  "covered": [],
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "line": [
+   343,
+   824,
+   1505,
+   961
+  ],
+  "nanda": [
+   730,
+   114,
+   1190,
+   610
+  ],
+  "sleepy": null
+ }
+}

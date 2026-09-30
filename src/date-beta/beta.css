@@ -20,6 +20,17 @@ body { font-family: var(--cond); color: var(--ink); }
   border-radius: .16em; background: var(--scrim); color: var(--or-on-dark); font-weight: 700; text-shadow: none; }
 .has-or .db-or { background: none; padding: 0; margin: 0; }
 
+/* ---------- train-r4 styled spans (engine SPANS, Say.jsx Parts): Nanda naming the two bumpers ----------
+   wavy = italic + a teal wavy underline; hat = bold orange + a small cap-icon chip. Both >= 4.5:1 on the pink box.
+   The words stay plain text for OCR / screen readers; the underline sits under the descenders (offset) so OCR keeps them. */
+.db-span { font-style: normal; }
+.db-wavy { font-style: italic; color: #0a6670; text-decoration: underline wavy #12a3ac; text-decoration-thickness: 3px; text-underline-offset: 12px; text-decoration-skip-ink: none; }
+.db-hat { font-weight: 800; color: #a3400a; white-space: nowrap; }
+.db-hat-chip { display: inline-flex; align-items: center; justify-content: center; width: 1.05em; height: .78em; margin: 0 .16em 0 .04em;
+  vertical-align: .02em; border-radius: .22em; background: #ffe2c6; border: 2px solid #a3400a; color: #a3400a; }
+.db-hat-chip .db-cap { width: .72em; height: .5em; display: block; }
+.db-say.has-or .db-wavy { color: #7fe6ee; } .db-say.has-or .db-hat { color: #ffb070; }
+
 /* ---------- dialogue: the candy chip (R2b §5). Opaque pink box, magenta rim + white inner stroke, pins = shape only ---------- */
 .db-say { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); width: 1400px; min-height: 190px;
   padding: 58px 150px 50px 78px; border: 5px solid var(--rim); border-radius: 18px; color: var(--box-ink); pointer-events: none;

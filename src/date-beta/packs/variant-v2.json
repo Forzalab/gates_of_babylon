@@ -426,7 +426,7 @@
    "beats": [
     {
      "speaker": false,
-     "text": "The plate is empty. Now: a round clock. 4:30 PM.",
+     "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'",
      "sfx": "tick",
      "props": {
       "shot": "match",
@@ -436,43 +436,60 @@
     },
     {
      "speaker": false,
-     "text": "STATION · 4:30 PM. Many feet walk past. Hers stop next to yours.",
+     "text": "STATION · 4:30 PM. The station is full. Everyone is going home.",
      "sfx": "train-hum",
      "props": {
-      "shot": "station-gate",
       "place": "STATION",
       "time": "4:30 PM"
      }
     },
     {
-     "speaker": "NANDA",
-     "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover.",
-     "props": {
-      "shot": "ots",
-      "of": "platform",
-      "emote": "pout"
+     "speaker": false,
+     "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'",
+     "sfx": "tick",
+     "props": {},
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'",
+        "props": {
+         "drink": "umeboshi"
+        }
+       },
+       "tamagoyaki": {
+        "text": "Egg pudding drink. Sweet. 'Like the one you picked. I remember.'",
+        "props": {
+         "drink": "tamagoyaki"
+        }
+       }
+      }
      }
     },
     {
      "speaker": false,
-     "text": "Close-up. She taps her card. Then she taps it again, for you.",
+     "text": "Two men bump her bag. They laugh.",
+     "props": {}
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Hey, you. {wavy:Wavy hair.} And you. {hat:Hat boy, the gringo.} Stop pushing. He is MINE.",
+     "props": {}
+    },
+    {
+     "speaker": false,
+     "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'",
      "sfx": "tick",
-     "props": {
-      "shot": "ic-card-tap"
-     }
+     "props": {}
     },
     {
      "speaker": "NANDA",
      "text": "loop",
-     "props": {
-      "shot": "closeup",
-      "of": "train",
-      "zoom": 2.5
-     },
+     "props": {},
      "vary": {
       "run": {
        "1": {
-        "text": "Twelve stops. I count them on my fingers. See?"
+        "speaker": false,
+        "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'"
        },
        "2": {
         "text": "Twelve stops. Second time today. You forgot. I did not."
@@ -485,21 +502,18 @@
     },
     {
      "speaker": false,
-     "text": "5:20 PM. Her head is on your shoulder. Rain hits the window.",
+     "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
      "sfx": "rain",
      "props": {
-      "shot": "train",
       "place": "TRAIN",
       "time": "5:20 PM"
      }
     },
     {
      "speaker": false,
-     "text": "Her stop. The doors open. She pulls you out by the sleeve.",
+     "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'",
      "sfx": "bell",
-     "props": {
-      "shot": "train-door"
-     },
+     "props": {},
      "choices": [
       {
        "text": "Step off the train",

@@ -125,9 +125,12 @@ const FORCE = tierById(SCENES.gacha, params.get('gacha')) ? params.get('gacha') 
 // ?pick=N (testing / shots): take choice N (1-based) on the start beat, so a URL can open straight on a reaction frame.
 const PICK = Number(params.get('pick')) - 1;
 const LAYERS = params.has('layers') ? params.get('layers').split(',').filter(Boolean) : null; // ?layers=vein,puff: override her face layers on a gacha pop (shots)
+// ?bento=umeboshi|tamagoyaki (testing / shots): open a deep link on that bento path (train-r4 vending echo); unknown = ignored.
+const BENTO = (data.flags?.bento ?? []).includes(params.get('bento')) ? params.get('bento') : null;
 const startPos = () => {
   const p = startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0, seed: SEED, force: FORCE });
-  return PICK >= 0 && !p.done && beatAt(SCENES, p).choices?.[PICK] ? choose(SCENES, p, PICK, RM) : p;
+  const q = BENTO ? { ...p, flags: { ...p.flags, bento: BENTO } } : p;
+  return PICK >= 0 && !q.done && beatAt(SCENES, q).choices?.[PICK] ? choose(SCENES, q, PICK, RM) : q;
 };
 
 // ux-six: the line as drawn (display only; voice keys still use beat.line.plain).
@@ -311,7 +314,7 @@ function Player() {
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
-          <Nanda scare={beat.scare} raised={!!beat.choices && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
+          <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}
