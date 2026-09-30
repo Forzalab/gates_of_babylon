@@ -117,5 +117,12 @@
   "beat": "5",
   "file": "public/date-beta/voice/03-v2-shop/025_5.mp3",
   "text": "[perfectly even] Do not look at her. [smiling][close] Look at me. [bubbly][rushed] I bought you a cup."
+ },
+ {
+  "n": 26,
+  "scene": "v2-library",
+  "beat": "4",
+  "file": "public/date-beta/voice/04-v2-library/026_4.mp3",
+  "text": "[tender] You touched this book once. [whispers][close] Right here. [flat, pleased] I kept it forty days."
  }
 ]
