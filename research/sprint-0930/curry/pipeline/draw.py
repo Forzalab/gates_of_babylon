@@ -321,6 +321,13 @@ def cel(markup, scene, lift=(0, 0), op=.3):
     return sh + f'<g filter="url(#tint-{scene})">{markup}</g>'
 
 
+def boat_cel(rb, scene):
+    """the boat casts its shadow; the ribbon is drawn (tinted) with none."""
+    rib, b = rb
+    sh = f'<g transform="translate({SDX + 80} {SDY + 140})" filter="url(#sil)" opacity="0.2">{b}</g>'
+    return sh + f'<g filter="url(#tint-{scene})">{rib}{b}</g>'
+
+
 def hand_at(P, ang, s, pose, who, flip=False, held='', nails=True, on_top=False):
     """hand() placed by its PINCH point P (fingertip contact) instead of its wrist. on_top = the held piece is drawn over
     the fingers (a small piece the long fingers would hide), still pinned to the same pinch point."""
@@ -436,10 +443,10 @@ def boat(x, y, rot, s, food, ribbon_to):
     spx, spy = (-110 * c + 30 * sn) * s, (-110 * sn - 30 * c) * s      # the spout tip, relative to the boat origin
     sx, sy = tx + 34, ty - 260                                        # the spout: above the landing point
     x, y = round(sx - spx), round(sy - spy)
-    g = f'<path d="M{sx - 16:.0f} {sy - 4:.0f}C{sx - 22:.0f} {sy + 70:.0f} {tx - 8:.0f} {ty - 140:.0f} {tx - 9:.0f} {ty:.0f}L{tx + 9:.0f} {ty:.0f}C{tx + 10:.0f} {ty - 140:.0f} {sx + 10:.0f} {sy + 70:.0f} {sx + 12:.0f} {sy + 2:.0f}z" fill="{base}" stroke="{dark}" stroke-width="4"/>'
-    g += f'<path d="M{sx - 8:.0f} {sy + 20:.0f}C{sx - 12:.0f} {sy + 90:.0f} {tx - 3:.0f} {ty - 120:.0f} {tx - 3:.0f} {ty - 30:.0f}" stroke="{hi}" stroke-width="5" fill="none" stroke-linecap="round"/>'
-    g += f'<ellipse cx="{tx:.0f}" cy="{ty + 4:.0f}" rx="46" ry="12" fill="none" stroke="{hi}" stroke-width="5"/><ellipse cx="{tx:.0f}" cy="{ty + 2:.0f}" rx="20" ry="6" fill="{dark}" opacity=".5"/>'
-    g += f'<g transform="translate({x} {y}) rotate({rot}) scale({s})">'
+    rib = f'<path d="M{sx - 16:.0f} {sy - 4:.0f}C{sx - 22:.0f} {sy + 70:.0f} {tx - 8:.0f} {ty - 140:.0f} {tx - 9:.0f} {ty:.0f}L{tx + 9:.0f} {ty:.0f}C{tx + 10:.0f} {ty - 140:.0f} {sx + 10:.0f} {sy + 70:.0f} {sx + 12:.0f} {sy + 2:.0f}z" fill="{base}" stroke="{dark}" stroke-width="4"/>'
+    rib += f'<path d="M{sx - 8:.0f} {sy + 20:.0f}C{sx - 12:.0f} {sy + 90:.0f} {tx - 3:.0f} {ty - 120:.0f} {tx - 3:.0f} {ty - 30:.0f}" stroke="{hi}" stroke-width="5" fill="none" stroke-linecap="round"/>'
+    rib += f'<ellipse cx="{tx:.0f}" cy="{ty + 4:.0f}" rx="46" ry="12" fill="none" stroke="{hi}" stroke-width="5"/><ellipse cx="{tx:.0f}" cy="{ty + 2:.0f}" rx="20" ry="6" fill="{dark}" opacity=".5"/>'
+    g = f'<g transform="translate({x} {y}) rotate({rot}) scale({s})">'
     g += '<path d="M-60 -40C-40 60 160 70 200 -40z" fill="#b9bfc8" stroke="#5a616b" stroke-width="5"/>'
     g += '<path d="M60 20C120 20 170 0 190 -30L200 -40C160 30 100 50 60 40z" fill="#8e96a1"/>'
     g += '<ellipse cx="70" cy="-40" rx="130" ry="26" fill="#dfe3e8" stroke="#5a616b" stroke-width="5"/>'
@@ -447,7 +454,7 @@ def boat(x, y, rot, s, food, ribbon_to):
     g += '<path d="M-60 -40L-110 -30L-58 -20z" fill="#c3c8cf" stroke="#5a616b" stroke-width="5" stroke-linejoin="round"/>'
     g += '<path d="M200 -20C260 -30 270 40 210 40" stroke="#8e96a1" stroke-width="14" fill="none" stroke-linecap="round"/>'
     g += '<path d="M-20 0C20 30 80 38 120 30" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round" opacity=".85"/>'
-    return g + '</g>'
+    return rib, g + '</g>'   # R6: (ribbon, boat); only the boat casts a shadow (a stream throws no second stream)
 
 
 def crop(c, src, dst):
@@ -519,7 +526,7 @@ def sauce_crop():
 def sauce():
     c, s0, d0 = sauce_crop()
     g = f'<g transform="{crop(c, s0, d0)}">{thali_group()}</g>'
-    return svg(cloth() + g + cel(boat(1500, 240, -28, 1.9, BUTTER, (d0[0] + 40, d0[1] - 10)), 'b', (80, 140), .2))
+    return svg(cloth() + g + boat_cel(boat(1500, 240, -28, 1.9, BUTTER, (d0[0] + 40, d0[1] - 10)), 'b'))
 
 
 def naan_dip():
@@ -752,7 +759,7 @@ def katsu_pour():
     c = 2.0; rice = P((440, 170)); d0 = (760, 480)
     g = f'<g transform="{crop(c, rice, d0)}">{katsu_plate()}</g>'
     pool = f'<path d="M{d0[0] - 140} {d0[1] + 20}C{d0[0] - 120} {d0[1] - 50} {d0[0] + 140} {d0[1] - 60} {d0[0] + 200} {d0[1] + 10}C{d0[0] + 220} {d0[1] + 70} {d0[0] + 100} {d0[1] + 100} {d0[0]} {d0[1] + 90}C{d0[0] - 80} {d0[1] + 84} {d0[0] - 150} {d0[1] + 60} {d0[0] - 140} {d0[1] + 20}z" fill="{ROUX[0]}" stroke="{ROUX[1]}" stroke-width="10"/><path d="M{d0[0] - 60} {d0[1] - 10}c50-24 140-24 200-6" stroke="{ROUX[2]}" stroke-width="8" fill="none" stroke-linecap="round"/><ellipse cx="{d0[0] - 40}" cy="{d0[1] + 20}" rx="14" ry="8" fill="#fff"/>'
-    return svg(counter() + g + pool + cel(boat(1460, 250, -30, 2.6, ROUX, (d0[0] + 40, d0[1] + 10)), 'k', (80, 140), .2))
+    return svg(counter() + g + pool + boat_cel(boat(1460, 250, -30, 2.6, ROUX, (d0[0] + 40, d0[1] + 10)), 'k'))
 
 
 CLOSE = (1.0, (170 + 150 * 1350 / 520, 110 + 200 * 1350 / 520), (760, 540))   # the roux, left half of the plate
