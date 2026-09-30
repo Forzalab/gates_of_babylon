@@ -25,6 +25,9 @@ import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { createVoice } from './voice/index.js';
 import { Nanda, speaksNanda, FRAMES } from './Nanda.jsx';
+import { stageFor } from './art/nanda.js';
+import { autoFaces } from './art/autoface.js';
+import { SHOT_ALIASES } from './art/shots/aliases.js';
 import { Handout, SmileTag, PovFood, PeekBento, useStep } from './SceneA.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
@@ -39,7 +42,8 @@ import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
 import { rainOf } from './fx/rain.js';
-import { floorOf } from './art/floors.js';
+import { floorOf, UNDER_BOX } from './art/floors.js';
+import { Cel, celOf } from './fx/Cels.jsx';
 import './beta.css';
 import './fx.css';
 
@@ -54,7 +58,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -93,7 +97,9 @@ function probeFrames() {
   };
   setTimeout(() => requestAnimationFrame(step), 1500);
 }
-if (!RM) probeFrames();
+// ?fx=full skips the probe (headless shots and a known-good demo machine keep the real blur + focus plane).
+if (!RM && !/[?&]fx=full\b/.test(location.search)) probeFrames();
+const AUTOFACE = !/[?&]autoface=0\b/.test(location.search);
 // Voice: Nanda's recorded lines (voice/), one at a time; silent where a line has no file. M = mute.
 const VOICE = createVoice(import.meta.env.BASE_URL);
 function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
@@ -186,11 +192,16 @@ function Player() {
   // sharp (no focus blur), handout (bento = the choices), tag (the one choice drawn as the NEXT pill).
   const cut = beat.props?.cut ?? {};
   // A reaction frame on the handout keeps her medium shot (the box is gone); every other frame holds through its react.
-  const frame = !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
+  // R5: an insert shot (art/shots Insert: a close-up of one item) IS the close-up: she steps out of that frame (no
+  // floating over the item), unless the beat picks its own frame.
+  const insert = SHOT_ALIASES[beat.props?.shot]?.bg === 'insert' && !beat.react;
+  const frame = insert && !cut.frame ? 'off' : !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
   const lead = !beat.react && cut.lead ? cut.lead : null;
   const splitAt = !beat.react && cut.at ? cut.at : null;
   const stepped = useStep(lead || splitAt ? Math.max(500, cut.step ?? 600) : 0, pos);
-  const face = beat.react ? null : (stepped && cut.face2) || cut.face || null;
+  // R5: a beat with no face of its own gets one from its line's mood, never the beat-before's (art/autoface.js; ?autoface=0 = off)
+  const autoFace = useMemo(() => (AUTOFACE ? autoFaces(scene.beats, (b) => stageFor(b.scare)) : []), [scene]);
+  const face = beat.react ? null : (stepped && cut.face2) || cut.face || autoFace[beat.index] || null;
   // her floor (art/floors.js): an explicit props.cut.plant wins, else the per-bg / per-insert-shot floor line.
   const flo = cut.plant ? { key: null, y: null } : floorOf(beat.bg, beat.props?.shot);
   const tag = !!(cut.tag && beat.choices?.length === 1 && !beat.react);
@@ -295,6 +306,9 @@ function Player() {
   const say = !pos.done && !end && shown.parts.length > 0 && (!!beat.text || beat.wait === 'auto') && !GAME[beat.bg];
   const stampP = !pos.done && !end && beat.props?.shot === 'stamp' && beat.props.place ? beat.props : null;
   const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
+  // R5 focus plane (Tony 09-30, the HYBRID pick): when her feet stand on a visible floor, the ground around them stays
+  // sharp (a floor band + an ellipse round her feet, soft edges), the rest of the bg blurs. Camera focus pulled to her.
+  const fplane = focus && !end && frame === 'medium' && flo.y && flo.y < UNDER_BOX && (here || speaksNanda(beat.line)) ? flo.y : 0;
   // outdoor rain (fx/rain.js): props.rain level, else the bg's default; keyed per beat so the wet marks re-measure
   const rain = !pos.done && !end ? rainOf(beat) : null;
   const rainKey = `${beat.scene}:${beat.index}:${beat.react ? 'r' : ''}:${!!beat.choices}`;
@@ -311,7 +325,7 @@ function Player() {
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
-      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''} frame-${frame}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
+      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${fplane ? ' fplane' : ''}${card ? ' is-goal' : ''} frame-${frame}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-bg={beat.bg} data-floor={flo.key ?? undefined} data-shot={beat.props?.shot ?? undefined} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
           {!pos.done && (ART[beat.props?.shot] /* props.shot = art/shots id over the beat's bg */
@@ -320,16 +334,18 @@ function Player() {
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
+        {fplane ? <div className="db-fplane" style={{ '--fy': `${fplane}px` }} aria-hidden="true" /> : null}
+        {!pos.done && !end && celOf(beat.props) && <Cel id={celOf(beat.props)} /> /* R5 cels over the blur (fx/Cels.jsx) */}
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : (!!beat.choices || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px` } : { '--plant': `${cut.plant}px` }} aria-hidden="true" />}
+        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px` } : { '--plant': `${cut.plant}px` }} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
-          <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
+          <Nanda scare={beat.scare} raised={((!!beat.choices && !solo) || !!cut.raise) && !end && frame === 'medium' && !tag /* R5: a solo NEXT keeps the low box, so she stays down */} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
-            face={end ? null : face} frame={end ? 'medium' : frame} />
+            face={end ? null : face} frame={end ? 'medium' : frame} reach={!end && !beat.react && !!cut.reach} />
         )}
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}

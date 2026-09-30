@@ -242,16 +242,20 @@ def butter_curry(cx, cy, rx, ry):
     return s
 
 
-def thali_group(torn=False):
-    """the whole steel thali in hero coordinates (no background). Crops use it with a transform."""
-    b = tray()
-    for k in ('saag', 'rice', 'butter'):
-        x, y, w = KAT[k]
-        b += spr('katori-' + k, x, y, w, shadow=.3)
-        if k == 'butter': cx, cy, rx, ry = kfood(k); b += butter_curry(cx, cy, rx * .9, ry * .8)
-        if k == 'rice': b += rice_dome(k)
-    x, y, w = NAAN
-    b += spr('naan', x, y, w, inner=naan_body(torn), shadow=.36)
+def thali_group(torn=False, part='all'):
+    """the whole steel thali in hero coordinates (no background). Crops use it with a transform.
+    part: 'all' | 'base' (tray + katori, no naan) | 'naan' (the naan alone): R5 draws the tear hands BETWEEN them."""
+    b = ''
+    if part != 'naan':
+        b = tray()
+        for k in ('saag', 'rice', 'butter'):
+            x, y, w = KAT[k]
+            b += spr('katori-' + k, x, y, w, shadow=.3)
+            if k == 'butter': cx, cy, rx, ry = kfood(k); b += butter_curry(cx, cy, rx * .9, ry * .8)
+            if k == 'rice': b += rice_dome(k)
+    if part != 'base':
+        x, y, w = NAAN
+        b += spr('naan', x, y, w, inner=naan_body(torn), shadow=.36)
     return b
 
 
@@ -463,10 +467,14 @@ def naan_lift():
     """THE TEAR (ref 03 + 05): a two-hand pinch-pull. Her left hand ('press', ref 03: palm down, the thumb under the
     naan, the index + middle tips pinning the naan body right of the tear) holds the naan down; her right hand ('pinch')
     holds the torn tip by its torn edge and pulls it up-left, 5 cm off the notch, dough strands still joining them.
-    The piece is the sprite's own tip, so it matches the notch exactly. 42 px/cm (the 1.2 crop), hands 16.5 cm."""
+    The piece is the sprite's own tip, so it matches the notch exactly. 42 px/cm (the 1.2 crop), hands 16.5 cm.
+    R5 (Tony's pick V2, 09-30): BOTH hands sit BEHIND the naan. Paint order = tray -> the anchor hand -> the naan ->
+    the pulling hand -> the piece: the naan overlaps the anchor fingers and the piece overlaps the pinch, so no finger
+    floats in front of the bread (V1 had the pinch hand pasted over the piece)."""
     c, s0, d0 = LIFT
     s = 35 * c; k = NK * c
-    g = f'<g transform="{crop(c, s0, d0)}">{thali_group(torn=True)}</g>'
+    g = f'<g transform="{crop(c, s0, d0)}">{thali_group(torn=True, part="base")}</g>'
+    gn = f'<g transform="{crop(c, s0, d0)}">{thali_group(torn=True, part="naan")}</g>'
     on = lambda p: at(c, s0, d0, (NAAN[0] + p[0] * NK, NAAN[1] + p[1] * NK))
     g0 = on((112, 210))                                       # the held edge, where it was
     G = (g0[0] - 150, g0[1] - 170); rot = -14                  # pulled up-left + tilted (lifted off the naan)
@@ -481,14 +489,12 @@ def naan_lift():
     # the anchor hand: her LEFT (mirrored), from the top right, the fingertips on the naan 2 cm right of the tear
     A = on((150, 196))
     ha, HA = grip.hand(A, 118, s, 'press', 'her', flip=True, wrist=-10, uid='la')
-    tipsA = ''.join(f'<ellipse cx="{p[0] + 8:.0f}" cy="{p[1] + 12:.0f}" rx="{.9 * s:.0f}" ry="{.45 * s:.0f}" fill="{SH}" opacity=".3" filter="url(#silb)"/>' for p in (HA.pt('index'), HA.pt('middle'), HA.pt('ring')))
     # the pulling hand: her RIGHT, from the top left, thumb under the piece + the index on top of it, at the torn edge
     P = piece_pt('naan', G, rot, k, (98, 196))
     hb, HB = grip.hand(P, 64, s, 'pinch', 'her', wrist=8, uid='lb')
-    return svg(cloth() + g + strands + tipsA
-               + hand_cel(ha, 'b', s, 1.2)
-               + grip.shadow(piece_sil('naan', G, rot, k), *grip.lift_off(s, 5), .28) + f'<g filter="url(#tint-b)">{pc}</g>'
-               + hand_cel(hb, 'b', s, 6.5))
+    return svg(cloth() + g + hand_cel(ha, 'b', s, 1.2) + gn + strands
+               + hand_cel(hb, 'b', s, 6.5)
+               + grip.shadow(piece_sil('naan', G, rot, k), *grip.lift_off(s, 5), .28) + f'<g filter="url(#tint-b)">{pc}</g>')
 
 
 SAUCE = (1.6, None, (880, 540))        # the butter katori, big

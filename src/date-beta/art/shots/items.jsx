@@ -161,7 +161,7 @@ Object.assign(ITEMS, {
   feet: ({ pose = 'park' } = {}) => {
     const wet = pose === 'wet';
     return (<g>
-      <rect x="-40" y="360" width="680" height="300" rx="20" fill={wet ? '#3b3f66' : '#e9d8b4'} />
+      <ellipse cx="330" cy="500" rx="380" ry="120" fill={wet ? '#3b3f66' : '#cdb58c'} opacity=".8" /> {/* R5: a soft ground patch, no card */}
       {wet
         ? <g><ellipse cx="200" cy="470" rx="170" ry="36" fill="#6f7fd0" opacity=".7" stroke="#9fb4ff" strokeWidth="4" />
             <ellipse cx="200" cy="470" rx="90" ry="18" fill="none" stroke="#c9d4ff" strokeWidth="4" />

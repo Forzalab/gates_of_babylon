@@ -18,7 +18,7 @@ test('nanda: SVG only (no <image>, no url() to files, no raster), ids unique per
 
 test('nanda: V1b keeps the real NAND orientation (bubble tie at the output, right of the D)', () => {
   const s = nandaSVG({ stage: 1 });
-  assert.match(s, /<circle cx="112" cy="54" r="12"/); // NOT bubble at the true output = side-pony tie
+  assert.match(s, /<circle cx="112" cy="54" r="12"/); // NOT bubble at the true output (her joint; the side-pony is gone, R5)
   assert.match(s, /M12 12H58A42 42 0 0 1 58 96H12/); // flat back left, curved front right
 });
 
