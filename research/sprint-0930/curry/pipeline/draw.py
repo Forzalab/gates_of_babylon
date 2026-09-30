@@ -23,6 +23,10 @@ SDX, SDY = 26, 34       # every cast shadow: down-right of its object (window li
 
 TINT = {'b': '#ffe4c8', 'k': '#fff0da'}   # the per-scene grade on every cel (NAND's warm lamp, OR OR's pale noon)
 SIL = f'<filter id="sil" x="-5%" y="-5%" width="110%" height="110%"><feFlood flood-color="{SH}"/><feComposite operator="in" in2="SourceAlpha"/></filter>'   # a sprite's own silhouette = its cast shadow
+# a lifted cel's shadow: the same silhouette, softened (a hand 5-8 cm above the naan throws a soft-edged shadow)
+SIL += f'<filter id="silb" x="-10%" y="-10%" width="120%" height="120%"><feFlood flood-color="{SH}"/><feComposite operator="in" in2="SourceAlpha"/><feGaussianBlur stdDeviation="9"/></filter>'
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import grip   # NAAN-HANDS: the anatomical cel hand in cm (grips from Tony's hand refs)
 
 
 def svg(body, defs=''):
@@ -132,28 +136,84 @@ def naan_body(torn=False):
             + '<path d="M' + 'L'.join(f'{x} {y}' for x, y in RAG[1:-1]) + f'" fill="none" stroke="{LINE}" stroke-width="1.6" stroke-linejoin="round"/>')
 
 
-def piece(sauce=None, drip=0, uid='p'):
-    """the torn tip of THE naan as a flat CEL (Tony's cel-over-vtrace: a held piece is a cel), in naan-sprite units,
-    centred; its colours are the traced naan's (cream body, golden bubble, dark char). The torn edge (+x) is held; the
-    sauce coats the far tip (-x). Scale it with PK_B inside a hand: the same size as the notch it left on the naan."""
-    r = random.Random(21)
-    d = 'M-80 10C-76 -30 -30 -54 30 -52L44 -40L60 -50L70 -26L88 -32L86 -6L100 4L84 22L92 42C50 58 -40 60 -80 10z'
-    g = '<g transform="scale(.6)">'
-    g += f'<path d="{d}" transform="translate(4 12)" fill="#c89452" stroke="{LINE}" stroke-width="4"/>'
-    g += f'<path d="{d}" fill="#f4d6a0" stroke="{LINE}" stroke-width="4" stroke-linejoin="round"/>'
-    # the traced naan's texture as cel shapes: pale puffed domes, golden rims, irregular char splotches (images 180), no dots
-    g += f'<path d="{blobpath(r, -26, -12, 22, 1.6, .7)}" fill="#fcefd6"/><path d="{blobpath(r, 28, 18, 18, 1.5, .6)}" fill="#fcefd6"/><path d="{blobpath(r, -50, 26, 12, 1.4, .6)}" fill="#fcefd6"/>'
-    g += f'<path d="{blobpath(r, -10, 8, 16, 1.9, .45)}" fill="#d9a866"/><path d="{blobpath(r, 44, -8, 12, 1.8, .5)}" fill="#d9a866"/>'
-    g += f'<path d="{blobpath(r, -8, 6, 9, 2.2, .45)}" fill="#8a4a1c"/><path d="{blobpath(r, 46, -10, 6, 2.2, .45)}" fill="#8a4a1c"/><path d="{blobpath(r, -58, 4, 6, 2, .5)}" fill="#aa6a2c"/>'
-    g += '<path d="M30 -52L44 -40L60 -50L70 -26L88 -32L86 -6L100 4L84 22L92 42" fill="none" stroke="#fdf4e0" stroke-width="7" stroke-linejoin="round" transform="translate(-4 0)"/>'  # the fluffy torn crumb
+# NAAN-HANDS: the held food is THE piece that left the notch: the traced sprite itself, clipped by the tear outline
+# (naan) / the cut slice (katsu), so its size + shape + char match the hole it left, exactly (R3 drew a separate
+# smaller cel: 65 % of the notch's area). All in SCREEN px: G = where the held (torn / near) edge sits, rot = the turn
+# of the piece (its far end points along 180 + rot deg), k = screen px per sprite unit.
+TIPPOLY = [(0, 209), (12, 188), (35, 172), (70, 160), (118, 152)] + RAG[1:] + [(104, 266), (60, 266), (25, 252), (6, 232)]
+PIECES = {   # sprite, outline (sprite units), held point, far end, the sauce coat on the far end
+    'naan': ('naan', TIPPOLY, (112, 210), (0, 209), 'M-6 186C18 160 52 164 50 198C54 232 42 262 12 262C-8 250 -12 214 -6 186z'),
+    'katsu': ('katsu-plate', None, (388, 140), (318, 118), 'M306 60C330 56 344 80 342 110C344 140 338 170 318 178C300 170 300 90 306 60z'),
+}
+
+
+def piece_xf(kind, G, rot, k, fold=1.0):
+    spr_, poly, grip_, far, _c = PIECES[kind]
+    return f'translate({G[0]:.1f} {G[1]:.1f}) rotate({rot:.1f}) scale({k:.3f} {k * fold:.3f}) translate({-grip_[0]} {-grip_[1]})'
+
+
+def piece_pt(kind, G, rot, k, p, fold=1.0):
+    """a sprite-unit point of the placed piece -> screen."""
+    grip_ = PIECES[kind][2]
+    x, y = (p[0] - grip_[0]) * k, (p[1] - grip_[1]) * k * fold
+    a = math.radians(rot)
+    return (G[0] + x * math.cos(a) - y * math.sin(a), G[1] + x * math.sin(a) + y * math.cos(a))
+
+
+def food_piece(kind, G, rot, k, sauce=None, fold=1.0, drip=0, uid='p', hide=None):
+    """the piece, placed. sauce = the coat on the far end; fold < 1 = folded into a scoop (squashed across, its folded-
+    under half shows as a toasted band); drip = a drop falling STRAIGHT DOWN (screen) off the far end, px; hide = a
+    screen polygon the piece is hidden inside (the curry it is dipped into: the submerged part)."""
+    spr_, poly, grip_, far, coat = PIECES[kind]
+    if poly is None: poly = SLICE
+    pd = 'M' + 'L'.join(f'{x} {y}' for x, y in poly) + 'Z'
+    xf = piece_xf(kind, G, rot, k, fold)
+    g = f'<clipPath id="pc{uid}"><path d="{pd}"/></clipPath>'
+    body = ''
+    if fold < 1:   # the folded-under half: a toasted band below the top layer (the fold's lip)
+        body += f'<path d="{pd}" transform="translate(0 {26 if kind == "naan" else 12})" fill="#c98a4a" stroke="{LINE}" stroke-width="{3 / k * 1.2:.2f}"/>'
+    body += f'<path d="{pd}" fill="{"#f4d6a0" if kind == "naan" else "#c47c34"}"/><g clip-path="url(#pc{uid})"><use href="#S-{spr_}"/></g>'
+    if kind == 'naan':   # the fluffy torn crumb along the tear (pale) + the cel line
+        body += '<path d="M' + 'L'.join(f'{x - 2} {y}' for x, y in RAG) + f'" fill="none" stroke="#fdf4e0" stroke-width="{7 / k * 1.4:.2f}" stroke-linejoin="round"/>'
+    body += f'<path d="{pd}" fill="none" stroke="{LINE}" stroke-width="{3.2 / k * 1.4:.2f}" stroke-linejoin="round"/>'
     if sauce:
         base, dark, hi = sauce
-        g += f'<path d="M-40 -40C-60 -30 -80 -10 -80 10C-70 34 -50 50 -24 54C-30 20 -24 -12 -40 -40z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
-        g += f'<path d="M-62 -14c-6 10 -6 24 0 34" stroke="{hi}" stroke-width="7" fill="none" stroke-linecap="round"/><ellipse cx="-52" cy="-18" rx="7" ry="4" fill="#ffffff" opacity=".9"/>'
-        if drip:
-            g += f'<path d="M-46 50C-44 {50 + drip * .5} -50 {50 + drip * .8} -46 {50 + drip}C-38 {50 + drip * 1.1} -34 {50 + drip * .8} -36 50z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
-            g += f'<ellipse cx="-42" cy="{54 + drip * 1.05}" rx="11" ry="14" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="-46" cy="{48 + drip * 1.05}" rx="4" ry="5" fill="#ffffff"/>'
-    return g + '</g>'
+        body += f'<g clip-path="url(#pc{uid})"><path d="{coat}" fill="{base}" stroke="{dark}" stroke-width="{3 / k * 1.4:.2f}"/></g>'
+        c0 = (far[0] + 14, far[1] - 18) if kind == 'naan' else (far[0] + 6, far[1] - 30)
+        body += f'<ellipse cx="{c0[0]}" cy="{c0[1]}" rx="{5}" ry="{3}" fill="#ffffff" opacity=".9"/>'
+    g += f'<g transform="{xf}">{body}</g>'
+    if hide:
+        hd = 'M-100 -100H2100V1200H-100Z M' + 'L'.join(f'{x:.1f} {y:.1f}' for x, y in hide) + 'Z'
+        g = f'<clipPath id="hd{uid}"><path d="{hd}" clip-rule="evenodd"/></clipPath><g clip-path="url(#hd{uid})">{g}</g>'
+    if sauce and drip:
+        base, dark, hi = sauce
+        t = piece_pt(kind, G, rot, k, (far[0] + 8, far[1] + (20 if kind == 'naan' else 10)), fold)
+        g += (f'<path d="M{t[0] - 9:.0f} {t[1]:.0f}C{t[0] - 8:.0f} {t[1] + drip * .6:.0f} {t[0] - 12:.0f} {t[1] + drip * .8:.0f} {t[0] - 2:.0f} {t[1] + drip:.0f}'
+              f'C{t[0] + 8:.0f} {t[1] + drip * .8:.0f} {t[0] + 6:.0f} {t[1] + drip * .6:.0f} {t[0] + 7:.0f} {t[1]:.0f}z" fill="{base}" stroke="{dark}" stroke-width="3"/>'
+              f'<ellipse cx="{t[0] - 2:.0f}" cy="{t[1] + drip + 8:.0f}" rx="11" ry="14" fill="{base}" stroke="{dark}" stroke-width="3"/><ellipse cx="{t[0] - 6:.0f}" cy="{t[1] + drip + 2:.0f}" rx="3" ry="4" fill="#ffffff"/>')
+    return g
+
+
+def piece_sil(kind, G, rot, k, fold=1.0):
+    """the placed piece's outline (for its cast shadow)."""
+    poly = PIECES[kind][1] or SLICE
+    return f'<path d="M' + 'L'.join(f'{x} {y}' for x, y in poly) + f'Z" transform="{piece_xf(kind, G, rot, k, fold)}" fill="#000"/>'
+
+
+def surface_hide(cx, cy, rx, ry, ye, down=260):
+    """the region under a curry surface (ellipse) below the line y = ye, down through the bowl's front wall: a dipped
+    piece is hidden there (it is under the curry / behind the wall)."""
+    yy = min(max(ye, cy), cy + ry * .98)
+    hw = rx * math.sqrt(max(0, 1 - ((yy - cy) / ry) ** 2))
+    return [(cx + hw, ye), (cx + hw, cy + ry + down), (cx - hw, cy + ry + down), (cx - hw, ye)]
+
+
+def meniscus(x, y, w, food):
+    """the curry rising round the piece where it goes in (a lit lip) + a ring on the surface."""
+    base, dark, hi = food
+    return (f'<ellipse cx="{x:.0f}" cy="{y + 4:.0f}" rx="{w * .95:.0f}" ry="{w * .26:.0f}" fill="none" stroke="{hi}" stroke-width="7" opacity=".8"/>'
+            f'<path d="M{x - w * .55:.0f} {y:.0f}Q{x:.0f} {y - w * .22:.0f} {x + w * .55:.0f} {y:.0f}" stroke="{base}" stroke-width="{w * .18:.0f}" fill="none" stroke-linecap="round"/>'
+            f'<path d="M{x - w * .45:.0f} {y - 2:.0f}Q{x:.0f} {y - w * .2:.0f} {x + w * .4:.0f} {y - 2:.0f}" stroke="{hi}" stroke-width="5" fill="none" stroke-linecap="round"/>')
 
 
 def tray():
@@ -329,15 +389,34 @@ def face(mode, food, food_piece=''):
     return b
 
 
-HS_F = 34 * 18 / 250                    # her mouth ~5 cm = 170 px -> 34 px/cm: the hand scale at her face
+PXCM_F = 34                             # her mouth ~5 cm = 170 px -> 34 px/cm at her face
 
 
-def feed_pov(food, piece_svg, mode, k, grip=(50, -4), top=False, sh=(0, 0)):
-    """sh = a shift of the pinch toward the mouth for a shorter piece (the katsu slice is ~4 cm, the naan tip ~9 cm)."""
-    """your hand from the bottom-left holds the piece at her mouth (k = the piece scale in hand units). All above y=740."""
-    if mode == 'open':   # the dipped tip points at her open mouth, just short of it: the mouth stays visible
-        return face('open', food) + hand_at((600 + sh[0], 670 + sh[1]), -30, HS_F, 'pinch', 'you', held=held_piece(piece_svg, k, aim(-30, -22), grip), on_top=top)
-    return face('bite', food, hand_at((690 + sh[0], 655 + sh[1]), -30, HS_F, 'pinch', 'you', held=held_piece(piece_svg, k, aim(-30, -18), grip), on_top=top))
+def hand_cel(markup, scene, s, h_cm, extra_sil='', op=.26):
+    """a hand (+ what it holds) on the traced bg: the scene grade + its soft cast shadow, offset by its height above the
+    surface along the window light (lower right)."""
+    dx, dy = grip.lift_off(s, h_cm)
+    return grip.shadow(markup + extra_sil, dx, dy, op) + f'<g filter="url(#tint-{scene})">{markup}</g>'
+
+
+def feed_pov(food, kind, mode, uid):
+    """YOUR right hand from the bottom-left (the navy sleeve off the frame), grip 'hold' (ref 02: the piece between the
+    thumb pad on top and the index / middle under it), held out at her mouth. The piece is THE torn tip (or THE cut
+    slice), sauce on its far end: 'open' = the tip stops at the corner of her open mouth; 'bite' = the tip is inside her
+    lips (clipped), the lips close on it. Scale: 34 px/cm, the hand 16.5 cm = 560 px, the naan piece 10 cm."""
+    s = PXCM_F
+    k = (NK if kind == 'naan' else PKK) * s / (35 if kind == 'naan' else 52)   # sprite unit -> px at her face
+    far, gp = PIECES[kind][3], PIECES[kind][2]
+    L = math.dist(far, gp) * k
+    th = math.radians(-14 if mode == 'open' else -10)            # the piece points at her mouth, slightly up
+    tip = (MX - 150, MY + 18) if mode == 'open' else (MX - 20, MY + 4)
+    G = (tip[0] - L * math.cos(th), tip[1] - L * math.sin(th))
+    rot = math.degrees(th) - 180 + math.degrees(math.atan2(far[1] - gp[1], gp[0] - far[0]))
+    held = food_piece(kind, G, rot, k, food, 1.0, 22 if mode == 'open' else 0, uid)
+    h, H = grip.hand(G, math.degrees(th) - 28, s, 'hold', 'you', held=held, uid=uid)
+    if mode == 'open':
+        return face('open', food) + h
+    return face('bite', food, h)
 
 
 # ---------------------------------------------------------------- a gravy boat (steel), tilted, pouring a ribbon
@@ -381,13 +460,35 @@ LIFT = (1.2, (800, 850), (980, 600))   # crop, hero src, frame dst: the naan's t
 
 
 def naan_lift():
-    """the naan is torn: her hand (from the right) lifts THE tip (the sprite's own tip) up off it; a pull of dough."""
+    """THE TEAR (ref 03 + 05): a two-hand pinch-pull. Her left hand ('press', ref 03: palm down, the thumb under the
+    naan, the index + middle tips pinning the naan body right of the tear) holds the naan down; her right hand ('pinch')
+    holds the torn tip by its torn edge and pulls it up-left, 5 cm off the notch, dough strands still joining them.
+    The piece is the sprite's own tip, so it matches the notch exactly. 42 px/cm (the 1.2 crop), hands 16.5 cm."""
     c, s0, d0 = LIFT
+    s = 35 * c; k = NK * c
     g = f'<g transform="{crop(c, s0, d0)}">{thali_group(torn=True)}</g>'
-    P = (640, 260)                     # her pinch, up-left of the torn end: she lifts the tip off
-    torn = at(c, s0, d0, (NAAN[0] + 112 * NK, NAAN[1] + 205 * NK))
-    dough = f'<path d="M{P[0] + 10} {P[1] + 30}C{P[0] + 60} {P[1] + 110} {torn[0] - 40} {torn[1] - 60} {torn[0]} {torn[1] - 10}" stroke="#fbf0d4" stroke-width="16" fill="none" stroke-linecap="round"/>'
-    return svg(cloth() + g + cel(dough + hand_at(P, 160, HS_B * c, 'pinch', 'her', flip=True, held=held_piece(piece(uid='l'), PK_B, aim(160, 172, True))), 'b', (70, 110), .22))
+    on = lambda p: at(c, s0, d0, (NAAN[0] + p[0] * NK, NAAN[1] + p[1] * NK))
+    g0 = on((112, 210))                                       # the held edge, where it was
+    G = (g0[0] - 150, g0[1] - 170); rot = -14                  # pulled up-left + tilted (lifted off the naan)
+    pc = food_piece('naan', G, rot, k, uid='l')
+    # dough strands: from the notch's crumb edge on the naan to the same points on the piece's torn edge
+    strands = ''
+    for i, (x, y) in enumerate(RAG[1:-1:2]):
+        a, b = on((x + 2, y)), piece_pt('naan', G, rot, k, (x - 2, y))
+        m = ((a[0] + b[0]) / 2 + 12, (a[1] + b[1]) / 2 + 22)
+        strands += f'<path d="M{a[0]:.0f} {a[1]:.0f}Q{m[0]:.0f} {m[1]:.0f} {b[0]:.0f} {b[1]:.0f}" stroke="#fbf0d4" stroke-width="{11 - i * 2}" fill="none" stroke-linecap="round"/>'
+        strands += f'<path d="M{a[0]:.0f} {a[1]:.0f}Q{m[0]:.0f} {m[1]:.0f} {b[0]:.0f} {b[1]:.0f}" stroke="#d9b27a" stroke-width="2" fill="none" opacity=".7" transform="translate(2 4)"/>'
+    # the anchor hand: her LEFT (mirrored), from the top right, the fingertips on the naan 2 cm right of the tear
+    A = on((150, 196))
+    ha, HA = grip.hand(A, 118, s, 'press', 'her', flip=True, wrist=-10, uid='la')
+    tipsA = ''.join(f'<ellipse cx="{p[0] + 8:.0f}" cy="{p[1] + 12:.0f}" rx="{.9 * s:.0f}" ry="{.45 * s:.0f}" fill="{SH}" opacity=".3" filter="url(#silb)"/>' for p in (HA.pt('index'), HA.pt('middle'), HA.pt('ring')))
+    # the pulling hand: her RIGHT, from the top left, thumb under the piece + the index on top of it, at the torn edge
+    P = piece_pt('naan', G, rot, k, (98, 196))
+    hb, HB = grip.hand(P, 64, s, 'pinch', 'her', wrist=8, uid='lb')
+    return svg(cloth() + g + strands + tipsA
+               + hand_cel(ha, 'b', s, 1.2)
+               + grip.shadow(piece_sil('naan', G, rot, k), *grip.lift_off(s, 5), .28) + f'<g filter="url(#tint-b)">{pc}</g>'
+               + hand_cel(hb, 'b', s, 6.5))
 
 
 SAUCE = (1.6, None, (880, 540))        # the butter katori, big
@@ -406,21 +507,33 @@ def sauce():
 
 
 def naan_dip():
-    """her hand dips THE torn tip in the butter katori; the coated tip is under the surface edge, the sauce drips."""
+    """THE DIP (ref 01 + 04): her right hand ('scoop', ref 04: the torn piece folded over the index into a scoop, the
+    thumb on top) pushes the piece's far end 2.5 cm INTO the butter curry: the submerged end is hidden under the
+    surface + behind the katori's front wall, the curry rises round it, a coat of sauce on the part that came out, one
+    drop falling straight down. 56 px/cm (the 1.6 crop): the katori 13 cm = 730 px, her hand 16.5 cm = 925 px."""
     c, s0, d0 = sauce_crop()
+    s = 35 * c; k = NK * c
     g = f'<g transform="{crop(c, s0, d0)}">{thali_group(torn=True)}</g>'
-    ring = f'<ellipse cx="{d0[0] - 40}" cy="{d0[1] + 20}" rx="150" ry="36" fill="none" stroke="#ffb070" stroke-width="8"/>'
-    tip = (d0[0] - 30, d0[1] + 20); L = 98 * PK_B * HS_B * c; t = math.radians(120)
-    pin = (tip[0] - L * math.cos(t), tip[1] - L * math.sin(t))
-    return svg(cloth() + g + ring + cel(hand_at(pin, 135, HS_B * c, 'pinch', 'her', flip=True, held=held_piece(piece(BUTTER, 26, 'd'), PK_B, aim(135, 120, True))), 'b', (80, 120), .2))
+    cx, cy, rx, ry = kfood('butter'); cx, cy, rx, ry = d0[0], d0[1], rx * c * .9, ry * c * .8
+    far, gp = PIECES['naan'][3], PIECES['naan'][2]
+    L = math.dist(far, gp) * k
+    entry = (cx - 40, cy - 30); depth = 2.5 * s                # the far end goes 2.5 cm under
+    th = math.radians(146)                                     # the scoop leans in from the right, far end down-left
+    tip = (entry[0] + depth * math.cos(th), entry[1] + depth * math.sin(th))
+    G = (tip[0] - L * math.cos(th), tip[1] - L * math.sin(th))
+    rot = math.degrees(th) - 180
+    hide = surface_hide(cx, cy, rx, ry, entry[1])
+    pc = food_piece('naan', G, rot, k, BUTTER, .62, 0, 'd', hide)
+    h, H = grip.hand(G, 176, s, 'scoop', 'her', flip=True, held=pc, wrist=-8, uid='d')   # her left hand, from the right (ref 04)
+    return svg(cloth() + g + hand_cel(h, 'b', s, 8) + meniscus(entry[0] + 1.2 * s, entry[1], 3.6 * s, BUTTER))
 
 
 def naan_feed():
-    return svg(feed_pov(BUTTER, piece(BUTTER, 16, 'f'), 'open', PK_B))
+    return svg(feed_pov(BUTTER, 'naan', 'open', 'f'))
 
 
 def butter_bite():
-    return svg(feed_pov(BUTTER, piece(BUTTER, 0, 'b'), 'bite', PK_B))   # hand units are physical: the piece is the same size in every shot
+    return svg(feed_pov(BUTTER, 'naan', 'bite', 'b'))   # the same piece, the same hand, 5 cm further: into her lips
 
 
 def lassi_glass(cx, base_y, kind='lassi'):
@@ -606,13 +719,17 @@ def katsu_dish():
 
 
 def katsu_cut():
-    """her hand (from the right) holds the spoon by its handle; the spoon's edge presses down through the end slice."""
+    """her left hand (mirrored, from the right) holds the spoon ('spoon' grip: the handle between the thumb pad and the
+    side of the index, the handle end under the heel of the hand); the spoon's edge presses down through the end
+    slice. 52 px/cm: the spoon 18 cm = 940 px, the hand 16.5 cm = 860 px, the grip 6 cm up the handle from its end."""
     e = P(SLICE_O)
-    bowl = (e[0] + 30, e[1] - 10)
-    end = (bowl[0] + 940 * math.cos(math.radians(-14)), bowl[1] + 940 * math.sin(math.radians(-14)))
-    grip = (bowl[0] + 560 * math.cos(math.radians(-14)), bowl[1] + 560 * math.sin(math.radians(-14)))
+    bowl = (e[0] + 30, e[1] - 10); a = math.radians(-14)
+    end = (bowl[0] + 940 * math.cos(a), bowl[1] + 940 * math.sin(a))
+    G = (bowl[0] + 600 * math.cos(a), bowl[1] + 600 * math.sin(a))
     crunch = f'<path d="M{e[0] - 80} {e[1] - 70}l-40-40M{e[0] - 20} {e[1] - 100}l-6-56M{e[0] - 120} {e[1] - 10}l-56-10" stroke="#fff6de" stroke-width="10" stroke-linecap="round"/>'
-    return svg(counter() + katsu_plate() + crunch + cel(spoon(bowl[0], bowl[1], end[0], end[1], 208) + hand_at((grip[0], grip[1] - 20), 166, HS_K, 'grip', 'her', flip=True), 'k', (30, 50), .22))
+    h, H = grip.hand(G, 180 - 14 - 22, 52, 'spoon', 'her', flip=True, uid='kc')
+    sp = spoon(bowl[0], bowl[1], end[0], end[1], 208)
+    return svg(counter() + katsu_plate() + crunch + cel(sp, 'k', (30, 50), .22) + hand_cel(h, 'k', 52, 4))
 
 
 def katsu_pour():
@@ -626,21 +743,30 @@ CLOSE = (1.0, (170 + 150 * 1350 / 520, 110 + 200 * 1350 / 520), (760, 540))   # 
 
 
 def katsu_close():
-    """ECU: she dips the cut slice (the same slice) in the roux; the roux strings off it."""
+    """ECU: her right hand pinches THE cut slice (the plate sprite's own end slice, so it fits the gap it left) and
+    presses its far end into the roux: the roux is ~1 cm deep on the plate, so only the end 1 cm goes under; the roux
+    rings round it and coats the end. 52 px/cm: the slice 3.7 x 4.6 cm, her hand 16.5 cm."""
     c, s0, d0 = CLOSE
+    s = 52 * c; k = PKK * c
     g = f'<g transform="{crop(c, s0, d0)}">{katsu_plate(cut=True)}</g>'
-    ring = f'<ellipse cx="{d0[0] - 30}" cy="{d0[1] + 30}" rx="130" ry="30" fill="none" stroke="{ROUX[2]}" stroke-width="7" opacity=".8"/>'
-    tip = (d0[0] - 30, d0[1] + 30); L = 72 * PK_K * HS_K * c; t = math.radians(115)
-    pin = (tip[0] - L * math.cos(t), tip[1] - L * math.sin(t))
-    return svg(counter() + g + ring + cel(hand_at(pin, 135, HS_K * c, 'pinch', 'her', flip=True, held=held_piece(katsu_piece(40, 'c'), PK_K, aim(135, 115, True), KGRIP), on_top=True), 'k', (80, 120), .2))
+    far, gp = PIECES['katsu'][3], PIECES['katsu'][2]
+    L = math.dist(far, gp) * k
+    entry = (d0[0] - 30, d0[1] + 30); th = math.radians(112)
+    tip = (entry[0] + 1.0 * s * math.cos(th), entry[1] + 1.0 * s * math.sin(th))
+    G = (tip[0] - L * math.cos(th), tip[1] - L * math.sin(th))
+    rot = math.degrees(th) - 180 + math.degrees(math.atan2(far[1] - gp[1], gp[0] - far[0]))
+    hide = [(entry[0] + 120, entry[1]), (entry[0] + 120, entry[1] + 200), (entry[0] - 120, entry[1] + 200), (entry[0] - 120, entry[1])]
+    pc = food_piece('katsu', G, rot, k, ROUX, 1.0, 0, 'c', hide)
+    h, H = grip.hand(G, 64, s, 'pinch', 'her', held=pc, wrist=6, uid='kc2')
+    return svg(counter() + g + hand_cel(h, 'k', s, 5) + meniscus(entry[0], entry[1], 1.9 * s, ROUX))
 
 
 def katsu_feed():
-    return svg(feed_pov(ROUX, katsu_piece(30, 'f'), 'open', PK_K, KGRIP, True, (150, -50)))
+    return svg(feed_pov(ROUX, 'katsu', 'open', 'kf'))
 
 
 def katsu_bite():
-    return svg(feed_pov(ROUX, katsu_piece(1, 'b'), 'bite', PK_K, KGRIP, True, (150, -50)))
+    return svg(feed_pov(ROUX, 'katsu', 'bite', 'kb'))
 
 
 def katsu_water():
