@@ -231,7 +231,7 @@ function Player() {
       <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
-          {!pos.done && layer(beat.bg, 'db-bg')}
+          {!pos.done && layer(ART[beat.props?.shot] ? beat.props.shot : beat.bg, 'db-bg') /* props.shot = art/shots id, bg = fallback */}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
