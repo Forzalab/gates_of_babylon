@@ -271,5 +271,12 @@
   "beat": "3 R+",
   "file": "public/date-beta/voice/10-cup/053_3-r.mp3",
   "text": "[warm] Drink. It's warm. [whispers][close] It makes the thinking… [whispers, slower] stop."
+ },
+ {
+  "n": 55,
+  "scene": "cup",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/10-cup/055_3-r.mp3",
+  "text": "[sudden flat][quiet] Sit. The tea isn't… [sweet] finished."
  }
 ]
