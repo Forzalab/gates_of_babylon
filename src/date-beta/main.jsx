@@ -35,6 +35,7 @@ import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
 import { createLoader } from './assets.js';
+import { withInjury } from './injury.js';
 import './beta.css';
 import './fx.css';
 
@@ -316,7 +317,7 @@ function Player() {
         {!pos.done && !end && !(off) && frame === 'medium' && cut.plant && (here || speaksNanda(beat.line)) && <div className={`db-plant${(!!beat.choices || !!cut.raise) && !tag ? ' raised' : ''}`} style={{ '--plant': `${cut.plant}px` }} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
-            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null}
+            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}

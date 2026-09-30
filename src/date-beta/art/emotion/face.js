@@ -16,10 +16,15 @@ const mark = (x, y, s, rot, two = false) => `<g transform="translate(${x} ${y}) 
 const grow = (x, y, s, rot, two) => `<g class="emo-v-s">${mark(x, y, s, rot, two)}</g><g class="emo-v-b">${mark(x, y, s * 1.25, rot, two)}</g>`;
 
 // Beat-only layers (props.cut.layers on a station beat; never a gacha tier, so they stay out of FACE_IDS / FACE_LAYERS).
-export const BEAT_LAYER_IDS = ['black-eye'];
+export const BEAT_LAYER_IDS = ['black-eye', 'plaster'];
 
 let uid = 0;
 const LAYERS = {
+  // Healed: the bruise has faded, only the small plaster stays on the cheekbone.
+  plaster: (P, A) => {
+    const [x, y] = A.eyeR;
+    return { under: `<g transform="translate(${x + 10} ${y + 9}) rotate(-32)"><rect x="-7" y="-3" width="14" height="6" rx="2.6" fill="#f3d3a4" stroke="${P.ink}" stroke-width="1"/><path d="M-2,-3 v6 M2,-3 v6" stroke="#c9975c" stroke-width="1"/></g>` };
+  },
   // Comic shiner round her right eye (ring only, so the smug eye still shows), a tiny plaster on the cheekbone and a star.
   'black-eye': (P, A) => {
     const [x, y] = A.eyeR;
