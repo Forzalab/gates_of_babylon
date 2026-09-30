@@ -1,0 +1,118 @@
+[
+{
+"run": "steeped__butter",
+"file": "010-park-park_0.png"
+},
+{
+"run": "steeped__butter",
+"file": "011-park-park_0.png"
+},
+{
+"run": "steeped__butter",
+"file": "001-rooftop-rooftop_1.png"
+},
+{
+"run": "steeped__butter",
+"file": "036-town-town_4.png"
+},
+{
+"run": "steeped__butter",
+"file": "038-town-town_6.png"
+},
+{
+"run": "steeped__butter",
+"file": "zz-settled-goalcard.png"
+},
+{
+"run": "steeped__butter",
+"file": "zz-settled-endcard-L1.png"
+},
+{
+"run": "all-love",
+"file": "zz-settled-endcard-L1.png"
+},
+{
+"run": "all-hate",
+"file": "zz-settled-endcard-L1.png"
+},
+{
+"run": "all-hate",
+"file": "082-walk-home-walk_home_5.png"
+},
+{
+"run": "all-hate",
+"file": "083-apartment-apartment_0.png"
+},
+{
+"run": "all-hate",
+"file": "010-park-park_0.png"
+},
+{
+"run": "all-hate",
+"file": "011-park-park_0.png"
+},
+{
+"run": "errand-library__steeped",
+"file": "019-errand-library-errand_library_1.png"
+},
+{
+"run": "escape-win__butter",
+"file": "120-escape-escape_13.png"
+},
+{
+"run": "escape-win__butter",
+"file": "122-escape-escape_13.png"
+},
+{
+"run": "escape-win__butter",
+"file": "123-escape-win-escape_win_0.png"
+},
+{
+"run": "escape-timeout__butter",
+"file": "121-escape-escape_13.png"
+},
+{
+"run": "escape-timeout__butter",
+"file": "122-escape-timeout-escape_timeout_0.png"
+},
+{
+"run": "loop3__leave-yeah",
+"file": "062-station-talk-station_talk_1.png"
+},
+{
+"run": "loop3__leave-yeah",
+"file": "164-L2-station-talk-station_talk_1.png"
+},
+{
+"run": "loop3__leave-yeah",
+"file": "267-L3-station-talk-station_talk_1.png"
+},
+{
+"run": "vp1024__escape-win",
+"file": "036-town-town_4.png"
+},
+{
+"run": "reduced-motion__steeped",
+"file": "010-park-park_0.png"
+},
+{
+"run": "extra",
+"file": "endcard-win-100.png"
+},
+{
+"run": "all-hate",
+"file": "095-leave-leave_3.png"
+},
+{
+"run": "all-hate",
+"file": "096-leave-leave_3.png"
+},
+{
+"run": "all-hate",
+"file": "079-walk-home-walk_home_3.png"
+},
+{
+"run": "steeped__butter",
+"file": "035-town-town_3.png"
+}
+]
