@@ -313,9 +313,11 @@ function Player() {
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
+        {!pos.done && !end && !(off) && frame === 'medium' && cut.plant && (here || speaksNanda(beat.line)) && <div className={`db-plant${(!!beat.choices || !!cut.raise) && !tag ? ' raised' : ''}`} style={{ '--plant': `${cut.plant}px` }} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
-            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face}
+            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null}
+            planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}

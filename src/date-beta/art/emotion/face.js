@@ -15,8 +15,21 @@ const mark = (x, y, s, rot, two = false) => `<g transform="translate(${x} ${y}) 
 // data-emo-step="big" (EmotionFx sets it once, after 600 ms); under reduced motion only the big one ever shows (emotion.css).
 const grow = (x, y, s, rot, two) => `<g class="emo-v-s">${mark(x, y, s, rot, two)}</g><g class="emo-v-b">${mark(x, y, s * 1.25, rot, two)}</g>`;
 
+// Beat-only layers (props.cut.layers on a station beat; never a gacha tier, so they stay out of FACE_IDS / FACE_LAYERS).
+export const BEAT_LAYER_IDS = ['black-eye'];
+
 let uid = 0;
 const LAYERS = {
+  // Comic shiner round her right eye (ring only, so the smug eye still shows), a tiny plaster on the cheekbone and a star.
+  'black-eye': (P, A) => {
+    const [x, y] = A.eyeR;
+    const ring = `M${x - 12},${y + 1}a12,10 0 1 0 24,0a12,10 0 1 0 -24,0ZM${x - 6.6},${y + 1}a6.6,5.4 0 1 1 13.2,0a6.6,5.4 0 1 1 -13.2,0Z`;
+    return { under: `<path d="${ring}" fill="#5a3fa8" fill-rule="evenodd" opacity=".82"/>`
+      + `<path d="${ring}" fill="none" stroke="#2a1a63" stroke-width="1.3" opacity=".9"/>`
+      + `<path d="M${x - 9},${y + 8} q9,5 18,-1" stroke="#7d63c9" stroke-width="2.4" fill="none" stroke-linecap="round" opacity=".7"/>`
+      + `<g transform="translate(${x + 10} ${y + 9}) rotate(-32)"><rect x="-7" y="-3" width="14" height="6" rx="2.6" fill="#f3d3a4" stroke="${P.ink}" stroke-width="1"/><path d="M-2,-3 v6 M2,-3 v6" stroke="#c9975c" stroke-width="1"/></g>`,
+      over: star(x + 19, y - 12, 4.4, '#ffd23f') };
+  },
   // The 💢 mark on the fringe at her temple (+ a small one in the air next to her when she is furious).
   vein: (P, A, o) => ({ over: grow(A.temple[0], A.temple[1], o.furious ? 14 : 13, 12) + (o.furious ? grow(A.air[0], A.air[1], 9, -18) : '') }),
   // Ref 11: puffed cheeks = a rounder cheek contour bulging out on each side, big blush with hatching, and a small
@@ -77,7 +90,7 @@ const LAYERS = {
 export function faceLayers(ids = [], P, A) {
   const o = { furious: ids.includes('shadow-eyes') }; // rage = shadow-eyes + vein: the bigger vein pair
   const out = { under: '', over: '' };
-  for (const id of FACE_IDS) {
+  for (const id of [...FACE_IDS, ...BEAT_LAYER_IDS]) {
     if (!ids.includes(id)) continue;
     const l = LAYERS[id](P, A, o);
     out.under += l.under ?? '';

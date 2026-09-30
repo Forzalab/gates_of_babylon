@@ -14,14 +14,14 @@ export const FRAMES = ['off', 'medium', 'handout', 'pov', 'eyes', 'peek', 'close
 const BUBBLE = new Set(['medium', 'pov']);
 
 // layers: gacha face layer ids (vein | puff | shadow-eyes | sparkle), still overlays on her face (art/emotion/face.js).
-export function Nanda({ scare = 0, raised = false, emote = null, big = false, talk = true, layers = null, face = null, frame = 'medium' }) {
+export function Nanda({ scare = 0, raised = false, emote = null, big = false, talk = true, layers = null, face = null, frame = 'medium', planted = 0 }) {
   const stage = stageFor(scare);
   const key = layers?.join(',') ?? '';
   const bubble = talk && BUBBLE.has(frame);
   const svg = useMemo(() => nandaSVG({ stage, emote: emote ?? undefined, big, talk: bubble, face,
     overlay: key ? (P, A) => faceLayers(key.split(','), P, A) : null }), [stage, emote, big, bubble, key, face]);
   return (
-    <svg className={`db-nanda stage-${stage} frame-${frame}${raised ? ' raised' : ''}`} data-layers={key || undefined} data-face={face ?? undefined}
+    <svg className={`db-nanda stage-${stage} frame-${frame}${raised ? ' raised' : ''}${planted ? ' planted' : ''}`} style={planted ? { '--plant': `${planted}px` } : undefined} data-layers={key || undefined} data-face={face ?? undefined}
       viewBox={VIEW[frame] ?? VIEW.medium} preserveAspectRatio={frame === 'eyes' ? 'xMidYMid slice' : undefined} role="img"
       aria-label={frame === 'eyes' ? 'Nanda, extreme close-up on her eyes' : 'Nanda'} dangerouslySetInnerHTML={{ __html: svg }} />
   );

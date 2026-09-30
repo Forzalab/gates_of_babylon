@@ -12,10 +12,10 @@
   {"scene": "v2-train", "beat": 1, "set": {"bg": "station-gate-r3", "props": {"place": "STATION", "time": "4:30 PM", "cut": {"face": "nervous"}}, "vary": {"bento": {"umeboshi": {"props": {"drink": "umeboshi"}}, "tamagoyaki": {"props": {"drink": "tamagoyaki"}}}}}},
   {"scene": "v2-train", "beat": 2, "set": {"bg": "vending-insert", "props": {"cut": {"face": "anya-smile", "sharp": true}}}},
   {"scene": "v2-train", "beat": 3, "set": {"bg": "station-ads", "props": {"cut": {"face": "ticked-off", "face2": "puff", "at": "They laugh.", "step": 700}, "bump": "laugh"}, "vary": {"bento": {"umeboshi": {"props": {"drink": "umeboshi"}}, "tamagoyaki": {"props": {"drink": "tamagoyaki"}}}}}},
-  {"scene": "v2-train", "beat": 4, "set": {"bg": "station-ads", "props": {"cut": {"face": "very-angry", "raise": true}, "bump": "named"}, "vary": {"bento": {"umeboshi": {"props": {"drink": "umeboshi"}}, "tamagoyaki": {"props": {"drink": "tamagoyaki"}}}}}},
+  {"scene": "v2-train", "beat": 4, "set": {"bg": "station-ads", "props": {"cut": {"face": "very-angry", "raise": true, "plant": 90}, "bump": "named"}, "vary": {"bento": {"umeboshi": {"props": {"drink": "umeboshi"}}, "tamagoyaki": {"props": {"drink": "tamagoyaki"}}}}}},
   {"scene": "v2-train", "beat": 5, "set": {"bg": "station-ads-insert", "props": {"cut": {"face": "content", "sharp": true}}, "vary": {"bento": {"umeboshi": {"props": {"drink": "umeboshi"}}, "tamagoyaki": {"props": {"drink": "tamagoyaki"}}}}}},
-  {"scene": "v2-train", "beat": 6, "set": {"bg": "train-sun", "props": {"cut": {"face": "happy", "raise": true}}}},
+  {"scene": "v2-train", "beat": 6, "set": {"bg": "train-sun", "props": {"cut": {"face": "happy", "raise": true, "plant": 90}}}},
   {"scene": "v2-train", "beat": 7, "set": {"bg": "train-rain-sleepy", "props": {"place": "TRAIN", "time": "5:20 PM", "cut": {"face": "dazed-sleepy", "frame": "off", "sharp": true}}}},
-  {"scene": "v2-train", "beat": 8, "set": {"bg": "platform-rain", "props": {"cut": {"face": "smug-gloating"}}}}
+  {"scene": "v2-train", "beat": 8, "set": {"bg": "platform-rain", "props": {"cut": {"face": "smug-gloating", "plant": 100, "layers": ["black-eye"]}}}}
  ]
 }

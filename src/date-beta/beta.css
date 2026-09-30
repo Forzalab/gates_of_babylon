@@ -158,6 +158,13 @@ body { font-family: var(--cond); color: var(--ink); }
   filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)); animation: nanda-in 320ms ease-out both; }
 /* feet on the floor; lifted above the raised box only on choice beats */
 .db-nanda.raised { bottom: 470px; }
+/* train-r4: props.cut.plant = px she is lowered so her shoes sit ON the platform floor (not hovering); .db-plant = her contact
+   shadow, offset down-left (the light is upper right), under her feet. Shoes are ~25 px above the sprite box bottom. */
+.db-nanda.planted { bottom: calc(160px - var(--plant)); }
+.db-nanda.planted.raised { bottom: calc(470px - var(--plant)); }
+.db-plant { position: absolute; left: 745px; bottom: calc(160px - var(--plant) - 4px); width: 290px; height: 36px; border-radius: 50%;
+  background: rgba(24, 12, 22, .42); z-index: 1; pointer-events: none; transform: rotate(-3deg); }
+.db-plant.raised { bottom: calc(470px - var(--plant) - 4px); }
 /* OBBP: centred in play; back on the right while a modal card (goal card, end card) is up */
 .db-nanda { right: auto; left: 730px; }
 .stage.is-goal .db-nanda, .hud-scrim ~ .db-nanda { left: auto; right: 60px; }

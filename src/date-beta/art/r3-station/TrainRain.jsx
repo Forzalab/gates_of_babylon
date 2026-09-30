@@ -123,7 +123,14 @@ export function Sleeper({ face = 'dazed-sleepy' }) {
 }
 export function TrainRainSleepy({ props, rm }) {
   return (
-    <TrainRain rm={rm} id="train-rain-sleepy" over={<Sleeper face={props?.cut?.face ?? 'dazed-sleepy'} />}
+    <TrainRain rm={rm} id="train-rain-sleepy" over={(
+        <>
+          {/* cosy dim carriage: the bg is darkened and warmed yellow, and she gets the same warm grade so they match */}
+          <rect width="1920" height="1080" fill="#1c0e04" opacity=".62" />
+          <rect width="1920" height="1080" fill="#ffb238" opacity=".2" />
+          <g style={{ filter: 'sepia(.55) saturate(1.15) brightness(.85)' }}><Sleeper face={props?.cut?.face ?? 'dazed-sleepy'} /></g>
+        </>
+      )}
       label="5:20 PM on the rainy train. Nanda has fallen half asleep lying across the dialogue bar, drooling a little." />
   );
 }
