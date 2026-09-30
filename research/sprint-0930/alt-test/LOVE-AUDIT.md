@@ -64,3 +64,38 @@ Rule used for the moves: the plain wording is -1 (she did not like that), the cu
 | seq-butter:4 | off-path | Anything for you / It's just lunch / Feed yourself | +3 / +1 / -4 |
 | seq-katsu:4 | off-path | Anything for you / It's just lunch / Feed yourself | +3 / +1 / -4 |
 
+## Hidden chips ("??", variable reward)
+
+Tony: "set 50% of decisions + the consequential one '??'." Flag: beat field `loveHidden: true` (SCENES.md); the chip reads "♥ ??", the score still changes. Rule: every other choice beat in play order (the 2nd, 4th, ... choice beat) plus every consequential choice (options land in different scenes, or a pick sets a flag that a `go` / `if` reads). **26 of 46 choice beats hidden (57%)**, 9 of 15 on the live path. Enforced by `src/date-beta-lovehidden.test.js`.
+
+| # | scene:beat | live | why hidden | options |
+|---|---|---|---|---|
+| 2 | rooftop:6 | yes | every other | Best I've ever had (+2) / It's good (+1) / Bit salty, honestly (-3) |
+| 4 | v2-park:2 | yes | every other | Hold it tight (+3) / Hold one finger (+1) / Pull your hand back (-4) |
+| 5 | v2-park:4 | yes | consequential | Carry her groceries (+2) / Return her book (+2) / Do it alone, later (-4) |
+| 6 | v2-curry:1 | yes | every other | Butter chicken for her (+3) / Katsu curry (+3) / I am not hungry (-4) |
+| 8 | v2-street:1 | yes | every other | Walk slower with her (+3) / Keep the same pace (+1) / I need to go home (-5) |
+| 10 | cup:4 | yes | consequential + every other | Drink (+3) / Hold the cup (+1) / Stand up (-3) |
+| 12 | unknown:3 | yes | every other | Climb down (-1) / Tippy-toe down ♡ (+1) |
+| 14 | escape:5 | yes | every other | Keep looking (-1) / Keep looking… and nothing else (+1) |
+| 15 | escape:14 | yes | consequential | Leave her house (-3) / Wait for her (+1) / Stay right here (-3) |
+| 16 | park:1 | off-path | every other | I wore it for you (+3) / It was clean (+1) / Not everything is about you (-4) |
+| 18 | park:7 | off-path | consequential + every other | Carry her groceries (+2) / Return her book (+2) / Do it alone, later (-4) |
+| 20 | errand-shop:4 | off-path | every other | So heavy, in a good way (+3) / The bags are fine (+1) / Carry your own bags (-4) |
+| 22 | errand-library:1 | off-path | every other | That's so cute (+3) / I don't remember that (+1) / That's creepy (-4) |
+| 24 | errand-library:8 | off-path | every other | Walk to the food stalls (-1) / Stroll to the yummy stalls ♡ (+1) |
+| 25 | hungry:0 | off-path | consequential | Butter chicken, for her (+3) / Katsu curry (+2) / I'm not hungry (-4) |
+| 26 | hungry:2 | off-path | every other | Anything for you (+3) / It's just lunch (+1) / Feed yourself (-4) |
+| 28 | town:5 | off-path | every other | Only about you (+3) / Maybe a little (+1) / Leave them alone (-4) |
+| 30 | town:10 | off-path | every other | You get me (+3) / I'm not that smart (+1) / Stop flattering me (-4) |
+| 32 | station-talk:0 | off-path | every other | Next time, I'll hold you (+3) / It was crowded (+1) / I needed the pole (-4) |
+| 34 | rain-crossing:5 | off-path | every other | Best day ever. Twice (+4) / It was a nice day (+1) / It's been too long (-5) |
+| 36 | walk-home:1 | off-path | every other | I'm right here (+3) / It's a nice street (+1) / That's a lot (-4) |
+| 38 | walk-home:7 | off-path | every other | Follow her inside (-1) / Follow her inside… and nothing else (+1) / Run home alone (-1) |
+| 40 | door:3 | off-path | consequential + every other | Just one cup (+3) / One cup, then home (+1) / Say goodnight (-3) |
+| 42 | genkan-talk:2 | off-path | every other | You're number one (+3) / What's number two? (+1) / Burn the list (-5) |
+| 44 | leave:3 | off-path | consequential + every other | uhmmm yeah ig (+1) / Forever sounds long (+1) / FUCK YOU. I'm leaving (-5) |
+| 46 | seq-katsu:4 | off-path | every other | Anything for you (+3) / It's just lunch (+1) / Feed yourself (-4) |
+
+Shown (number visible): rooftop:2, rooftop:9, v2-rain:1, cup:1, unknown:1, escape:0, park:3, errand-shop:1, errand-shop:8, errand-library:6, town:1, town:9, town:12, rain-crossing:1, rain-crossing:6, walk-home:3, door:1, genkan-talk:0, leave:2, seq-butter:4.
+

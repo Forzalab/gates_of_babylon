@@ -243,7 +243,7 @@ function Player() {
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} />
         )}
         {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}
-        {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} key={`c${beat.scene}${beat.index}`} />}
+        {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`c${beat.scene}${beat.index}`} />}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {card && <GoalCard onNext={() => advance(true)} />}
         {onNext && !beat.text && <NextButton className="solo" onClick={onNext} />}

@@ -25,6 +25,7 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 | `vary` | `{ flag: { value: { text?, speaker?, props?, sprite?, bg?, sfx? } } }` | none | Per-value overlay for a declared flag (see Flags). Only these six look fields can vary; `choices`, `timer`, `set`, `wait` etc. cannot, so the scene graph is the same for every value. |
 | `card` | `"goal"` | none | Draws the goal card over the beat (rooftop beat 0, the first thing after the Figur collapse). A card beat waits for a click (GOT IT ▸). |
 | `end` | `steeped`, `escape`, `leave` (lowercase name) | none | The ending title beat. It must keep its `Back to start` choice: the result card (win / almost / low) replaces the chip and choices, and its button takes choice 0. |
+| `loveHidden` | bool, choice beats only | `false` | The ♥ chips on this beat's buttons read `♥ ??` instead of the number (same chip, size and colour). Only the display changes: the pick scores as usual and the pop / meter show the real change afterwards. Used for variable reward: about half of the choice beats plus every consequential one (see `research/sprint-0930/alt-test/LOVE-AUDIT.md`). |
 
 ## Choice
 
