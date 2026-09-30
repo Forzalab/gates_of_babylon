@@ -1,0 +1,5 @@
+/* SHOP (art/shop): hand-drawn sign text. Stage px. */
+.r3 .shop-sign { font-family: var(--cond); font-weight: 800; letter-spacing: .01em; }
+.r3 .shop-jp { font-family: var(--jp); font-weight: 800; }
+.r3 .shop-price { font-family: var(--cond); font-weight: 900; }
+.r3 .shop-hand { font-family: var(--hand, var(--cond)); font-weight: 700; }
