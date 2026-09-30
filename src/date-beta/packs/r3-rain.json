@@ -9,7 +9,7 @@
  "patch": [
   { "scene": "v2-rain", "beat": 0, "set": { "props": { "shot": "establish", "place": "BIG CROSSING", "time": "5:30 PM", "rain": "heavy" } } },
   { "scene": "v2-rain", "beat": 1, "set": { "bg": "rain-sidewalk", "props": { "rain": "heavy", "umbrella": true, "underUmbrella": false } } },
-  { "scene": "v2-rain", "beat": 2, "set": { "bg": "rain-alley", "props": { "rain": "medium", "umbrella": false, "underUmbrella": true } } },
+  { "scene": "v2-rain", "beat": 2, "set": { "bg": "rain-puddle", "props": { "rain": "medium", "umbrella": false, "underUmbrella": true } } },
   { "scene": "v2-rain", "beat": 3, "set": { "bg": "rain-eave", "props": { "rain": "medium", "umbrella": false, "underUmbrella": true } } },
   { "scene": "v2-rain", "beat": 4, "set": { "bg": "rain-ending", "props": { "rain": "stopping", "umbrella": false, "underUmbrella": true } } },
   { "scene": "v2-street", "beat": 2, "set": { "bg": "street-bluehour", "props": { "shot": "stamp", "place": "HER STREET", "time": "7:00 PM" } } },
