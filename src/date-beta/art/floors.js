@@ -8,11 +8,11 @@
 export const UNDER_BOX = 840;
 export const FLOORS = {
   // measured ground lines (feet visible)
-  'rain-ending': { y: 760 },      // the wet road at her x, just above the box (v2-rain 4)
-  'her-building': { y: 790 },     // the dark street in front of door 12 (v2-street 5)
+  'rain-ending': { y: 700, wet: true },      // the wet road at her x, a step up the road so her soles + reflection clear the box rivets (R7 legs)
+  'her-building': { y: 790, wet: true },     // the dark street in front of door 12 (v2-street 5)
   'shop-way-out': { y: 760 },     // the pavement outside the shop doors
   'train-sun': { y: 690 },        // the carriage floor (v2-train 6, matched to the Tony-approved plant 90)
-  'platform-rain': { y: 698 },    // the platform edge (v2-train 8, plant 100)
+  'platform-rain': { y: 698, wet: true },    // the platform edge (v2-train 8, plant 100)
   'station-ads': { y: 690 },      // the platform under the ads (v2-train 4, plant 90)
   // ground hidden behind the box at her column: feet tuck behind it
   'curry-street': { y: UNDER_BOX },
@@ -65,5 +65,5 @@ export const FLOORS = {
 export function floorOf(bg, shot) {
   const key = shot && FLOORS[shot] ? shot : bg;
   const f = FLOORS[key];
-  return { key, y: f && !f.crop ? f.y ?? null : null };
+  return { key, y: f && !f.crop ? f.y ?? null : null, wet: !!(f && !f.crop && f.wet) };
 }

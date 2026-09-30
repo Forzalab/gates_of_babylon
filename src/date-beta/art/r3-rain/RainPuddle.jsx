@@ -59,9 +59,9 @@ function You() {
       <defs>
         <linearGradient id="pd-you" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#222a40" /><stop offset="1" stopColor="#222a40" stopOpacity="0" /></linearGradient>
       </defs>
-      <path d="M1136 332 L1150 470 L1178 470 L1190 332Z M1238 336 L1232 470 L1262 470 L1290 336Z" fill="#2b3550" />
-      <path d="M1120 470 Q1210 440 1300 470 L1330 760 Q1210 800 1096 760Z" fill="url(#pd-you)" />
-      <ellipse cx="1164" cy="340" rx="30" ry="12" fill="#5a4fb8" /><ellipse cx="1262" cy="344" rx="30" ry="12" fill="#5a4fb8" />
+      <path d="M1124 380 L1136 480 L1164 480 L1176 380Z M1264 384 L1258 480 L1288 480 L1316 384Z" fill="#2b3550" />
+      <path d="M1110 480 Q1220 450 1330 480 L1350 760 Q1220 800 1090 760Z" fill="url(#pd-you)" />
+      
     </g>
   );
 }
@@ -81,37 +81,78 @@ function Plane({ her }) {
   );
 }
 
-// ---- FRONT: the real shoes, seen from straight above (toes toward the water / the camera's bottom edge)
-function HerShoe({ x, y, r }) {
-  // her plum shoe (her sprite's shoe + its pink strap) with the white sock rising out of frame; wet: dark toe, glints
+// ---- FRONT: the real shoes, seen from above and a little in front (toes toward the camera's bottom edge).
+// research/sprint-0930/legs (R7): built on a grid, local (0, 0) = the toe's water contact; the leg rises from the
+// ankle opening (y ~ -80) toward the lens and leaves the frame under the umbrella rim (y < 190), so it is foreshortened:
+// wider the nearer it gets. Her canon (nanda.js): pin leg 6 u : shoe 18 u -> 26 px : 78 px here; the pink band near the
+// top of the pin; the plum shoe + the pink strap. Your sneaker is 1.3x her shoe (a man's foot = a head; hers = her canon).
+// Light: the dusk sky above (a cool lilac sheen on the top planes), the warm lamp reflected at the lower right (a warm
+// glint on the right-hand toe edges), no cast shadow on water: a dark contact line, a meniscus ring, the toe's own
+// flipped reflection just below it (darker, rippled by the plane's rings).
+function WaterLine({ w }) {
   return (
-    <g transform={`translate(${x} ${y}) rotate(${r})`}>
-      <path d="M-50 -400 Q-40 -260 -34 -128 L34 -128 Q40 -260 50 -400Z" fill="#fff" stroke="#d1177f" strokeWidth="5" />
-      <path d="M-24 -400 Q-20 -260 -18 -140" stroke="#ffe3f1" strokeWidth="12" fill="none" />
-      <path d="M-37 -196 L37 -196 L36 -184 L-36 -184Z" fill="#ff5fa2" />
-      <path d="M-56 -118 Q-64 -60 -52 -24 Q-30 10 0 10 Q30 10 52 -24 Q64 -60 56 -118 Q30 -140 0 -140 Q-30 -140 -56 -118Z" fill="#5a2350" stroke="#d1177f" strokeWidth="5" strokeLinejoin="round" />
-      <path d="M-34 -128 Q0 -104 34 -128 L32 -136 Q0 -122 -32 -136Z" fill="#fff" />
-      <path d="M-58 -100 Q0 -114 58 -100" stroke="#ff5fa2" strokeWidth="13" fill="none" strokeLinecap="round" />
-      <circle cx="40" cy="-104" r="8" fill="#ffc4e6" stroke="#6b0f45" strokeWidth="2.5" />
-      <path d="M-44 -34 Q0 -12 44 -34 Q40 -10 0 6 Q-40 -10 -44 -34Z" fill="#2f0f2a" opacity=".55" />
-      <path d="M-30 -62 Q-34 -38 -24 -22" stroke="#fff" strokeWidth="6" fill="none" strokeLinecap="round" opacity=".75" />
-      <circle cx="18" cy="-40" r="4" fill="#fff" opacity=".9" /><circle cx="-8" cy="-14" r="3" fill="#fff" opacity=".8" />
+    <g>
+      <ellipse cx="0" cy="2" rx={w * 0.62} ry={w * 0.13} fill="#141828" opacity=".55" />
+      <ellipse cx="0" cy="-2" rx={w * 0.5} ry={w * 0.08} fill="#0b0d18" opacity=".75" />
+      <ellipse cx="0" cy="2" rx={w * 0.62} ry={w * 0.13} fill="none" stroke="#e4ebf8" strokeWidth="2.4" opacity=".65" />
+    </g>
+  );
+}
+function HerShoe({ x, y, r, k = 0.9 }) {
+  const shoe = 'M-35 -84 Q-44 -46 -36 -16 Q-22 6 0 6 Q22 6 36 -16 Q44 -46 35 -84 Q0 -100 -35 -84Z';
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${r}) scale(${k})`}>
+      {/* the toe's reflection (flipped, darker, short: the water drinks it) */}
+      <path d={shoe} transform="translate(0 8) scale(1 -.42)" fill="#2a0f2c" opacity=".6" />
+      <WaterLine w={84} />
+      {/* the pin leg (her canon: white lead, pink rim, the pink band near the top), widening toward the lens */}
+      {/* (the leg stays plumb on screen: only the foot turns in, the shin does not follow the toe) */}
+      <g transform={`rotate(${-r} 0 -82)`}>
+        <path d="M-13 -80 L-16 -260 L16 -260 L13 -80Z" fill="#fff" stroke="#d1177f" strokeWidth="5" strokeLinejoin="round" />
+        <path d="M-15 -186 L15 -186 L15 -172 L-15 -172Z" fill="#ff5fa2" />
+        <path d="M-6 -84 L-8 -256" stroke="#e9d9f4" strokeWidth="5" opacity=".9" />
+      </g>
+      {/* the shoe: plum dome, the sole lip at the toe, the ankle opening the pin stands in */}
+      <path d={shoe} fill="#5a2350" stroke="#d1177f" strokeWidth="4.5" strokeLinejoin="round" />
+      <path d="M-34 -18 Q-20 4 0 4 Q20 4 34 -18" stroke="#1a0612" strokeWidth="6" fill="none" strokeLinecap="round" />
+      <ellipse cx="0" cy="-82" rx="21" ry="9" fill="#24081e" />
+      <path d="M-13 -82 L-13.5 -100 L13.5 -100 L13 -82Z" fill="#fff" />
+      <path d="M-13 -83 Q0 -77 13 -83" stroke="#d1177f" strokeWidth="3" fill="none" />
+      {/* the strap across the instep + its button (outer side) */}
+      <path d="M-38 -60 Q0 -70 38 -60" stroke="#ff5fa2" strokeWidth="9" fill="none" strokeLinecap="round" />
+      <circle cx="30" cy="-62" r="5.5" fill="#ffc4e6" stroke="#6b0f45" strokeWidth="2" />
+      {/* wet: the toe drinks the water (darker), the sky sheen on the dome, the warm lamp glint, drops */}
+      <path d="M-32 -26 Q0 -12 32 -26 Q24 2 0 3 Q-24 2 -32 -26Z" fill="#2a0a26" opacity=".5" />
+      <path d="M-24 -50 Q-26 -30 -16 -18" stroke="#d8c8f0" strokeWidth="5" fill="none" strokeLinecap="round" opacity=".7" />
+      <path d="M26 -30 Q30 -18 22 -10" stroke="#ffd9a0" strokeWidth="3" fill="none" strokeLinecap="round" opacity=".85" />
+      <circle cx="10" cy="-40" r="3" fill="#fff" opacity=".9" /><circle cx="-6" cy="-10" r="2.2" fill="#fff" opacity=".8" />
     </g>
   );
 }
 function YourShoe({ x, y, r }) {
-  // your purple sneaker (the feet insert's colours): white toe cap + sole rim, laces, the jeans cuff rising out of frame
+  const sole = 'M-46 -118 Q-54 -50 -44 -12 Q-24 10 0 10 Q24 10 44 -12 Q54 -50 46 -118 Q0 -134 -46 -118Z';
   return (
     <g transform={`translate(${x} ${y}) rotate(${r})`}>
-      <path d="M-40 -380 L-38 -150 L40 -150 L42 -380Z" fill="#2b3550" />
-      <path d="M-44 -170 L44 -170 L42 -146 L-42 -146Z" fill="#3a4768" />
-      <path d="M-58 -150 Q-64 -40 -46 -6 Q0 20 46 -6 Q64 -40 58 -150 Q0 -170 -58 -150Z" fill="#fdfbf5" />
-      <path d="M-50 -148 Q-56 -50 -40 -24 Q0 -6 40 -24 Q56 -50 50 -148 Q0 -164 -50 -148Z" fill="#8a7ff0" />
-      <path d="M-40 -34 Q0 -48 40 -34 Q34 -8 0 2 Q-34 -8 -40 -34Z" fill="#fdfbf5" />
-      <path d="M-16 -150 L-18 -70 L18 -70 L16 -150Z" fill="#5a4fb8" />
-      {[-136, -116, -96, -78].map((v) => <path key={v} d={`M-20 ${v} l40 6`} stroke="#fdfbf5" strokeWidth="6" strokeLinecap="round" />)}
-      <path d="M-40 -32 Q0 -12 40 -32 Q34 -6 0 4 Q-34 -6 -40 -32Z" fill="#1c2238" opacity=".4" />
-      <circle cx="-26" cy="-60" r="4" fill="#fff" opacity=".9" /><circle cx="22" cy="-22" r="3" fill="#fff" opacity=".8" />
+      <path d={sole} transform="translate(0 12) scale(1 -.38)" fill="#1a1e36" opacity=".6" />
+      <WaterLine w={106} />
+      {/* the jeans: from the hem break over the tongue up out of frame, widening toward the lens; a light crease */}
+      <path d="M-44 -104 L-58 -330 L58 -330 L44 -104 Q0 -92 -44 -104Z" fill="#2b3550" />
+      <path d="M-44 -104 L-58 -330 L-40 -330 L-30 -106Z" fill="#1f273e" />
+      <path d="M8 -112 L12 -330" stroke="#4a5878" strokeWidth="6" opacity=".7" />
+      {/* the sneaker: white sole rim (its thickness shows at the toe), purple upper, white toe cap, tongue + laces */}
+      <path d={sole} fill="#d9d4de" stroke="#232033" strokeWidth="4" strokeLinejoin="round" />
+      <path d="M-44 -20 Q0 6 44 -20" stroke="#b9b3c8" strokeWidth="5" fill="none" />
+      <path d="M-40 -112 Q-46 -54 -36 -26 Q0 -14 36 -26 Q46 -54 40 -112 Q0 -124 -40 -112Z" fill="#6c62c4" stroke="#232033" strokeWidth="3" />
+      <path d="M-35 -30 Q0 -44 35 -30 Q32 -12 0 -6 Q-32 -12 -35 -30Z" fill="#e2dde6" stroke="#232033" strokeWidth="2.5" />
+      <path d="M-14 -112 L-15 -58 Q0 -52 15 -58 L14 -112Z" fill="#4b4298" />
+      {[-100, -86, -72].map((v) => <path key={v} d={`M-18 ${v} L18 ${v + 8} M18 ${v} L-18 ${v + 8}`} stroke="#f4f0e8" strokeWidth="4.5" strokeLinecap="round" />)}
+      {/* the jeans hem breaks over the tongue (drawn after the laces) */}
+      <path d="M-46 -108 Q0 -90 46 -108 L44 -124 Q0 -110 -44 -124Z" fill="#35415f" />
+      {/* wet: darker toe, the sky sheen on the vamp, the warm glint on the right-hand toe edge, drops */}
+      <path d="M-34 -30 Q0 -16 34 -30 Q30 -8 0 -4 Q-30 -8 -34 -30Z" fill="#1c2238" opacity=".35" />
+      <path d="M-28 -90 Q-32 -64 -26 -44" stroke="#c9c2f6" strokeWidth="5" fill="none" strokeLinecap="round" opacity=".65" />
+      <path d="M38 -34 Q42 -20 34 -10" stroke="#ffd9a0" strokeWidth="3" fill="none" strokeLinecap="round" opacity=".85" />
+      <circle cx="-20" cy="-52" r="3" fill="#fff" opacity=".9" /><circle cx="18" cy="-18" r="2.4" fill="#fff" opacity=".8" />
     </g>
   );
 }
@@ -174,8 +215,8 @@ export default function RainPuddle({ rm }) {
       {/* FRONT: rings on the water, then the floaters, then the real shoes standing in it */}
       {RINGS[pose].map(([x, y, r, n, o], i) => <Rings key={i} x={x} y={y} r={r} n={n} o={o} />)}
       <Floaters />
-      <HerShoe x={726} y={354} r={9} /><HerShoe x={884} y={348} r={-7} />
-      <YourShoe x={1160} y={362} r={-4} /><YourShoe x={1272} y={366} r={5} />
+      <HerShoe x={772} y={374} r={-12} /><HerShoe x={852} y={370} r={-2} />
+      <YourShoe x={1150} y={380} r={6} /><YourShoe x={1290} y={384} r={-8} />
     </R3Scene>
   );
 }

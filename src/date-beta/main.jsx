@@ -353,6 +353,7 @@ function Player() {
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
+            wet={!end && frame === 'medium' && !!flo.wet}
             face={end ? null : face} frame={end ? 'medium' : frame} reach={!end && !beat.react && !!cut.reach} />
         )}
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
