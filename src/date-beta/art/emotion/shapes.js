@@ -132,3 +132,11 @@ export function bolts(seed, { main = 9, keep = { x: HEAD.x, y: HEAD.y - 40, rx: 
   const d = (list) => list.map((pts) => `M${pts.map(([a, b]) => `${f1(a)} ${f1(b)}`).join('L')}`).join('');
   return { trunk: d(trunk), spur: d(spur) };
 }
+
+// A unit heart (width 2, height ~1.8, centred on 0 0): heart eyes (face.js) and the love-bomb's floating hearts (fx.js).
+export const HEART_U = 'M0 .9C-.28 .66-.96 .3-.96-.24C-.96-.6-.68-.86-.36-.86C-.16-.86-.04-.74 0-.6C.04-.74 .16-.86 .36-.86C.68-.86 .96-.6 .96-.24C.96 .3 .28 .66 0 .9Z';
+// A glossy heart at (x, y), half-width r: fill, a darker rim, one white highlight on the upper-left lobe.
+export function heart(x, y, r, { fill = '#ff3d8b', rim = '#b0105a', rot = 0, hi = true, sw = 0.08 } = {}) {
+  return `<g transform="translate(${f1(x)} ${f1(y)}) rotate(${f1(rot)}) scale(${f1(r)})"><path d="${HEART_U}" fill="${fill}" stroke="${rim}" stroke-width="${sw}" stroke-linejoin="round"/>`
+    + (hi ? `<ellipse cx="-.44" cy="-.46" rx=".2" ry=".13" transform="rotate(-35 -.44 -.46)" fill="#fff" opacity=".9"/>` : '') + '</g>';
+}

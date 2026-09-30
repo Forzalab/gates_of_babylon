@@ -21,7 +21,7 @@ Tests: `src/date-beta-gacha.test.js`, `src/date-beta-emotion.test.js`.
 | `crit5` | ♥ pick, next 15% | +5 | `love-crit` | sparkle | hearts | CRITICAL +5 |
 | `rage` | 💔 pick (love < 0), 12% | -5 | `rage` | shadow-eyes, vein (pair) | hate | FURIOUS −5 |
 | `anger` | 💔 pick, next 25% | -2 | `anger` | vein, puff | puff | ANGRY −2 |
-| `pity` | ♥ pick after 2 💔 picks in a row | +10 | `love-bomb` | sparkle | hearts | PITY +10 · redeemed |
+| `pity` | ♥ pick after 2 💔 picks in a row | +15 | `love-bomb` | heart-eyes | hearts | LOVE BOMB +15 |
 
 The bonus adds to the choice's own love (a +3 pick that crits +10 = +13 on the HUD pop). Love clamps 0..goal as before.
 
@@ -35,7 +35,7 @@ The bonus adds to the choice's own love (a +3 pick that crits +10 = +13 on the H
 }
 tier = { "id": "crit10", "bonus": 10, "rate": 0.07, "fx": "love-crit", "face": ["sparkle"], "emote": "hearts", "label": "CRITICAL +10" }
 ```
-- `id`: short lowercase name, unique. `bonus`: whole number, > 0 in crit/pity, < 0 in penalty, within -10..+10.
+- `id`: short lowercase name, unique. `bonus`: whole number, > 0 in crit/pity, < 0 in penalty, within -10..+10 (pity: up to +15).
 - `rate`: 0 < rate < 1. `fx`: `love-crit | love-bomb | anger | rage`. `face`: any of `vein | puff | shadow-eyes | sparkle`.
 - `emote` (optional): a Nanda emote (engine `EMOTES`, now incl. `puff`); replaces the choice's emote. `label`: badge text, max 24 chars, keep the signed number in it.
 - Unknown keys, bad signs, rates over 1, duplicate ids, unknown fx / face / emote: load error (the game will not boot).

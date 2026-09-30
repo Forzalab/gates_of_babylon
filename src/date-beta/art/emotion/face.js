@@ -3,10 +3,11 @@
 //   under = drawn inside her body clip, after the face and before the fringe (so the bangs sit on top, as in ref 01);
 //   over  = drawn after the whole figure (things that float over hair or outside her outline).
 // Layers: vein (💢 at the temple, ref 03), puff (ref 11: puffed cheeks, blush hatching, a teardrop), shadow-eyes
-// (refs 01/02/04: dark eye band under the bangs, two small white eyes), sparkle (ref 10: 4-point stars in the eyes + round her).
-import { STAR4, VEIN4, VEIN2 } from './shapes.js';
+// (refs 01/02/04: dark eye band under the bangs, two small white eyes), sparkle (ref 10: 4-point stars in the eyes + round her),
+// heart-eyes (ref scene-a/12 "Love": each eye becomes a big glossy heart, hot blush, hearts floating round her head).
+import { STAR4, VEIN4, VEIN2, heart } from './shapes.js';
 
-export const FACE_IDS = ['vein', 'puff', 'shadow-eyes', 'sparkle'];
+export const FACE_IDS = ['vein', 'puff', 'shadow-eyes', 'sparkle', 'heart-eyes'];
 const DROP = 'M0 -11C4 -5 8 0 8 4.5A8 8 0 0 1 -8 4.5C-8 0 -4 -5 0 -11Z';
 const star = (x, y, r, fill = '#fff', rot = 0) => `<path d="${STAR4}" transform="translate(${x} ${y}) rotate(${rot}) scale(${r})" fill="${fill}"/>`;
 const mark = (x, y, s, rot, two = false) => `<g transform="translate(${x} ${y}) rotate(${rot}) scale(${s})" fill="#ff1414" stroke="#6a0000" stroke-width="${(2.4 / s).toFixed(3)}" stroke-linejoin="round" paint-order="stroke">${two ? VEIN2 : VEIN4}</g>`;
@@ -56,6 +57,18 @@ const LAYERS = {
     const [lx, ly] = A.eyeL, [rx, ry] = A.eyeR;
     const under = star(lx + 2.6, ly - 3.6, 3.6) + star(rx + 2.6, ry - 3.6, 3.6);
     const over = A.halo.map(([x, y, r], i) => (i === 0 ? star(x, y, r * 0.6, '#fff', 45) : '') + `<circle cx="${x}" cy="${y}" r="${(r * 0.28).toFixed(1)}" fill="#ffc8e8" opacity=".6"/>` + star(x, y, r)).join('');
+    return { under, over };
+  },
+  // Ref scene-a/12 "Love" (the pity love-bomb): her eyes are painted out with face colour, then a big pink heart sits on
+  // each (wider than the eye, so no pupil peeks through the notch); a hot blush with hatching; hearts round her head.
+  'heart-eyes': (P, A) => {
+    const [lx, ly] = A.eyeL, [rx, ry] = A.eyeR, [clx, cly] = A.cheekL, [crx, cry] = A.cheekR;
+    const hide = (x, y) => `<ellipse cx="${x}" cy="${y}" rx="7.4" ry="8.8" fill="${P.body}"/>`;
+    const eye = (x, y) => heart(x, y + 0.6, 9.4, { fill: '#ff2e7e', rim: P.ink, sw: 0.15 });
+    const blush = (x, y) => `<ellipse cx="${x}" cy="${y}" rx="9" ry="4.6" fill="#ff5a8c" opacity=".7"/>`
+      + `<path d="M${x - 5},${y - 2} l-2,4 M${x},${y - 2} l-2,4 M${x + 5},${y - 2} l-2,4" stroke="${P.ink}" stroke-width="1.1" stroke-linecap="round" opacity=".6"/>`;
+    const under = hide(lx, ly) + hide(rx, ry) + eye(lx, ly) + eye(rx, ry) + blush(clx, cly) + blush(crx, cry);
+    const over = A.halo.map(([x, y, r], i) => heart(x, y, r * 0.9, { fill: i % 2 ? '#ff6fae' : '#ff2e7e', rim: '#9a0a4a', rot: (i % 2 ? 1 : -1) * 14 })).join('');
     return { under, over };
   },
 };

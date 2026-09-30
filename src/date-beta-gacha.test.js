@@ -90,7 +90,7 @@ test('gacha pity: after 2 💔 picks in a row the next ♥ pick is the love-bomb
   const bomb = rollGacha(G, l, 1);
   assert.equal(bomb.tier.id, 'pity');
   assert.equal(bomb.tier.fx, 'love-bomb');
-  assert.equal(bomb.bonus, 10);
+  assert.equal(bomb.bonus, 15);
   assert.equal(bomb.luck.streak, 0);
   assert.notEqual(rollGacha(G, bomb.luck, 1).tier?.id, 'pity', 'spent once');
 });
@@ -154,7 +154,7 @@ test('engine: a penalty takes love down and clamps at 0; streak of 2 then a ♥ 
   assert.equal(p.react.gacha.id, 'pity');
   assert.equal(p.react.gacha.fx, 'love-bomb');
   assert.equal(S.love.goal, 18);
-  assert.equal(p.love, 13, '0 + 3 + 10');
+  assert.equal(p.love, 18, '0 + 3 + 15 = the goal (18)');
 });
 
 test('engine: the same seed replays the same luck; a go back to scene 1 starts the next seed', () => {

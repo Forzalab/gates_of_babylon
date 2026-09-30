@@ -3,11 +3,11 @@
 // research/sprint-0930/emotion-fx/SCHEMA.md.
 //   ♥ pick (love > 0): the pity tier if armed, else one roll against the `crit` tiers (+5 / +10 surprise crits).
 //   💔 pick (love < 0): one roll against the `penalty` tiers (-2 anger / -5 rage). Each 💔 pick grows the streak.
-//   pity ("redeem your fault"): after `after` 💔 picks in a row, the next ♥ pick is a guaranteed love-bomb. A ♥ pick resets the streak.
+//   pity ("redeem your fault"): after `after` 💔 picks in a row, the next ♥ pick is a guaranteed love-bomb (+15, heart eyes). A ♥ pick resets the streak.
 // Deterministic: the roll for pick n of a run is hash(seed, n), so a seed replays the same luck. `force` (debug, ?gacha=<id>)
 // makes every roll of that tier's sign land on it.
 export const GACHA_FX = ['love-crit', 'love-bomb', 'anger', 'rage'];
-export const FACE_LAYERS = ['vein', 'puff', 'shadow-eyes', 'sparkle'];
+export const FACE_LAYERS = ['vein', 'puff', 'shadow-eyes', 'sparkle', 'heart-eyes'];
 const TIER_KEYS = ['id', 'bonus', 'rate', 'fx', 'face', 'emote', 'label'];
 const ROOT_KEYS = ['seed', 'crit', 'penalty', 'pity'];
 const ID = /^[a-z][a-z0-9-]{0,15}$/;
@@ -27,7 +27,9 @@ function tier(t, at, sign, emotes, withRate) {
   for (const k of Object.keys(t)) if (!TIER_KEYS.includes(k) && !(k === 'after' && !withRate)) fail(`${at}: unknown key "${k}"`);
   if (typeof t.id !== 'string' || !ID.test(t.id)) fail(`${at}: id must be a short lowercase name`);
   if (!Number.isInteger(t.bonus) || Math.sign(t.bonus) !== sign) fail(`${at}: bonus must be a whole number ${sign > 0 ? '> 0' : '< 0'}`);
-  if (Math.abs(t.bonus) > 10) fail(`${at}: bonus ${t.bonus} is outside -10..+10`);
+  // Rolled tiers stay within ±10; the pity love-bomb (guaranteed, once per streak) may go to +15 (UX fix pack, Tony).
+  const max = withRate ? 10 : 15;
+  if (Math.abs(t.bonus) > max) fail(`${at}: bonus ${t.bonus} is outside -${max}..+${max}`);
   if (withRate && !(typeof t.rate === 'number' && t.rate > 0 && t.rate < 1)) fail(`${at}: rate must be a number between 0 and 1`);
   if (!GACHA_FX.includes(t.fx)) fail(`${at}: fx "${t.fx}" is not one of ${GACHA_FX.join('|')}`);
   const face = t.face ?? [];
