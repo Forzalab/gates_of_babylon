@@ -964,7 +964,7 @@
     },
     {
      "speaker": "NANDA",
-     "text": "Walk slower. If we walk slow, the day can't end. It's {DAYPART}.",
+     "text": "Walk slower. If we walk slow, the day can't end.",
      "timer": 12,
      "choices": [
       {
