@@ -47,5 +47,12 @@
   "beat": "4 cold",
   "file": "public/date-beta/voice/01-rooftop/012_4-cold.mp3",
   "text": "[sudden flat][quiet] Salty. Noted. [perfectly even] …Forever."
+ },
+ {
+  "n": 14,
+  "scene": "rooftop",
+  "beat": "6 R+",
+  "file": "public/date-beta/voice/01-rooftop/014_6-r.mp3",
+  "text": "[whispers][close] A minute. [whispers, slower] Then another. [whispers, slowest] Then the whole day."
  }
 ]
