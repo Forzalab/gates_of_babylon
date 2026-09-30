@@ -49,8 +49,7 @@ until all 29 sfx files are decoded, so no cue falls back to its stand-in.
 - Lock game (escape 15): 8 pairs matched -> **7 lock-click + 1 lock-win**, and the rain bed runs on under it. Left alone
   for 40 s -> **lock-fail**.
 
-These checks were run with umbrella-rain at gain 0.43. It was trimmed to 0.4 afterwards to meet the bed rule, which is a
-level change only.
+The run was repeated on the final head, rebased onto the M2 leave fixes and with the final trims: 25/25 ok again.
 
 ## Spot-listen for Tony (a headless run can't judge these by ear)
 1. rooftop: wind under her first lines at -30 LUFS. Can you still hear it on the ceiling speakers?
