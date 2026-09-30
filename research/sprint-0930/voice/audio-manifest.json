@@ -222,5 +222,12 @@
   "beat": "2 R−",
   "file": "public/date-beta/voice/08-v2-street/043_2-r.mp3",
   "text": "[sudden flat][quiet] Home? You are walking me… [sweet] home."
+ },
+ {
+  "n": 44,
+  "scene": "v2-street",
+  "beat": "5",
+  "file": "public/date-beta/voice/08-v2-street/044_5.mp3",
+  "text": "[warm][slow] I held it since noon. [flat, pleased] So I would be ready. [whispers][close] For you."
  }
 ]
