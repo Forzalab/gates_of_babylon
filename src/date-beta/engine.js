@@ -354,7 +354,7 @@ function loadChoices(list, at, decl = {}) {
       if (typeof c.react !== 'string' || !c.react.trim()) fail(where, 'react must be a non-empty string (her line)');
       if (words(c.react) > MAX_WORDS) fail(where, `react has ${words(c.react)} words, max ${MAX_WORDS}`);
       react = parseLine(c.react, `${where}.react`, 'NANDA');
-      echoLint(c.react, null, `${where}.react`);
+      if (!Object.keys(c.set ?? {}).some((k) => ECHO[k])) echoLint(c.react, null, `${where}.react`); // a react to the pick that sets the flag is not an echo
     }
     return Object.freeze({ text: c.text, side, go: loadGo(c.go, where, decl), if: declared(decl, flagsField(c.if, where, 'if'), where),
       set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or),

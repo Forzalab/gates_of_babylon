@@ -22,7 +22,7 @@
      },
      {
       "text": "It was clean",
-      "side": "pink",
+      "side": "mid",
       "default": true,
       "set": {
        "cold": "no"
@@ -46,6 +46,7 @@
     ],
     "vary": {
      "cold": {
+      "no": {},
       "yes": {
        "text": "Park. Now. Hold my hand on the way.",
        "speaker": "NANDA"
