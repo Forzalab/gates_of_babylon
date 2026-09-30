@@ -61,5 +61,12 @@
   "beat": "6 R=",
   "file": "public/date-beta/voice/01-rooftop/015_6-r.mp3",
   "text": "[excited] Yay! Park first. [flat, pleased] I already planned it."
+ },
+ {
+  "n": 16,
+  "scene": "rooftop",
+  "beat": "6 R−",
+  "file": "public/date-beta/voice/01-rooftop/016_6-r.mp3",
+  "text": "[sudden flat][quiet] …Fine. The rain can have you. [sweet] Later."
  }
 ]
