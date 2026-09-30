@@ -103,5 +103,12 @@
   "beat": "5 R shop",
   "file": "public/date-beta/voice/02-v2-park/022_5-r-shop.mp3",
   "text": "[excited][bubbly] Groceries. [warm][slow] For our dinner."
+ },
+ {
+  "n": 24,
+  "scene": "v2-park",
+  "beat": "5 R−",
+  "file": "public/date-beta/voice/02-v2-park/024_5-r.mp3",
+  "text": "[sudden flat][quiet] Alone? No. [perfectly even] Groceries. [sweet] Now."
  }
 ]
