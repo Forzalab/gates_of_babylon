@@ -68,5 +68,12 @@
   "beat": "6 R−",
   "file": "public/date-beta/voice/01-rooftop/016_6-r.mp3",
   "text": "[sudden flat][quiet] …Fine. The rain can have you. [sweet] Later."
+ },
+ {
+  "n": 17,
+  "scene": "v2-park",
+  "beat": "3",
+  "file": "public/date-beta/voice/02-v2-park/017_3.mp3",
+  "text": "[breathless][tender] Hold my hand. [trembling] My hand is shaking. [whispers][close] Only yours… [whispers, slower] can stop it."
  }
 ]
