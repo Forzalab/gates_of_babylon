@@ -1,10 +1,12 @@
 // v2-train 2: the crowd line (ref 11: benches + the ad wall). Same 4:30 overcast grade as the gate.
 // Hand pass: station sign 「NAND駅」 (the group's name gag), the next-train board (4:30 → OR again), the ad wall
 // redrawn as our own posters, KEEPING the ref's red "WATCHING YOU" poster (a yandere wink: the eyes follow you),
-// the vending machine re-branded (おちゃ TEA), the fire box, straight pillars and a clean yellow tactile strip.
+// (train-r4: the green tea machine became the platform PlatformVending, Vending.jsx), the fire box, straight pillars and a clean yellow tactile strip.
 // StationAdsInsert (v2-train 3, "she taps her card, twice"): the same art, insert framing on the vending + gate side,
 // plus a ticket gate with an IC reader in the left third (Nanda keeps the centre).
 import { R3Scene, Pole, preloadTrace, pts } from './parts.jsx';
+import { Crowd, Shafts, WavyGuy, CapGuy, scatter } from './Crowd.jsx';
+import { PlatformVending } from './Vending.jsx';
 
 preloadTrace('station-ads');
 
@@ -33,32 +35,7 @@ function Watching() {
   );
 }
 
-function Vending() {
-  // green machine, frontal: drinks in 4 rows, big button column, the brand panel (was "Chilsung Cider")
-  const drinks = ['#e9f4ff', '#ff9d6b', '#8fd6a0', '#ffe07a', '#c9b3ff', '#7fc4ff'];
-  return (
-    <g>
-      <rect x="66" y="316" width="286" height="516" rx="6" fill="#2f9a4b" />
-      <rect x="66" y="316" width="286" height="18" fill="#56c16f" />
-      <rect x="82" y="340" width="232" height="226" fill="#9dbcae" />
-      {[0, 1, 2, 3].map((r) => (
-        <g key={r}>
-          {Array.from({ length: 7 }, (_, i) => (
-            <rect key={i} x={92 + i * 31} y={352 + r * 54} width="20" height="38" rx="6" fill={drinks[(i + r * 2) % drinks.length]} stroke="#4a6a58" strokeWidth="2" />
-          ))}
-          <rect x="88" y={394 + r * 54} width="220" height="6" fill="#9cc7ae" />
-        </g>
-      ))}
-      <rect x="82" y="580" width="178" height="150" rx="10" fill="#e2f0e6" />
-      <text x="171" y="648" textAnchor="middle" className="r3-jp" fill="#2f9a4b" fontSize="52">おちゃ</text>
-      <text x="171" y="704" textAnchor="middle" className="r3-sign" fill="#1d6b35" fontSize="36">TEA</text>
-      <rect x="276" y="584" width="30" height="46" rx="4" fill="#1d3a2a" />
-      <rect x="92" y="752" width="200" height="54" rx="6" fill="#153323" />
-    </g>
-  );
-}
-
-export function StationAdsArt() {
+export function StationAdsArt({ drink }) {
   return (
     <g>
       {/* the next-train board (ref: G1 次 00:00 開往 幻想郷) */}
@@ -94,7 +71,7 @@ export function StationAdsArt() {
       {/* platform number */}
       <rect x="1436" y="340" width="62" height="46" rx="4" fill="#f4efe2" />
       <text x="1467" y="378" textAnchor="middle" className="r3-sign" fill="#1f2a38" fontSize="38">1</text>
-      <Vending />
+      <PlatformVending x={66} y={316} w={286} h={516} drink={drink} />
       {/* fire box (ref: 灭火器) */}
       <rect x="806" y="516" width="118" height="134" rx="4" fill="#c8322b" />
       <rect x="818" y="530" width="94" height="40" rx="3" fill="#f4efe2" />
@@ -112,19 +89,31 @@ export function StationAdsArt() {
 // the yellow tactile strip, bottom left -> far right (ref 11); drawn under the pillars' feet
 const STRIP = [[150, 1080], [500, 1080], [1880, 552], [1830, 540]];
 
-export default function StationAds({ rm }) {
+// train-r4: the crowd (refs 07-08) + the two bumpers either side of her. props.bump: 'laugh' (beat 4: they laugh)
+// | 'named' (beat 5: she calls them out; each gets the chip of her styled span: a teal wave, an orange cap).
+const BACK = scatter(52, 14, [1440, 1900], [520, 600], [100, 170]);
+const FRONT = [[1800, 1140, 720]];
+const SHAFTS = ['1560,0 1680,0 1180,1080 1000,1080', '1780,0 1840,0 1480,1080 1390,1080', '1100,0 1150,0 560,1080 500,1080'];
+
+export default function StationAds({ props, rm }) {
+  const mood = props?.bump ?? 'plain';
   return (
     <R3Scene id="station-ads" tone="overcast" rm={rm}
-      label="NAND station platform at 4:30 PM: benches under an ad wall, a red poster that says WATCHING YOU, a green tea vending machine.">
+      label={`NAND station platform at 4:30 PM, crowded: an ad wall with a red WATCHING YOU poster, a drink vending machine, a wavy-haired guy with a teal scarf left of her and a guy in an orange cap right of her${mood === 'laugh' ? ', both laughing' : ''}.`}>
       <polygon points={pts(STRIP)} fill="#d2ad3e" />
       <polygon points={pts([[500, 1080], [520, 1080], [1890, 556], [1880, 552]])} fill="#b8922a" />
-      <StationAdsArt />
+      <StationAdsArt drink={props?.drink} />
+      <Crowd seed={52} back={BACK} front={[]} />
+      <WavyGuy x={560} y={930} h={590} mood={mood} />
+      <CapGuy x={1330} y={940} h={610} mood={mood} />
+      <Crowd seed={54} back={[]} front={FRONT} />
+      <Shafts id="r4sa" bands={SHAFTS} op={0.2} />
     </R3Scene>
   );
 }
 
 // v2-train 3: insert on the vending + gate side (the same art at 1.9x, left half), ticket gate + IC reader over it
-export function StationAdsInsert({ rm }) {
+export function StationAdsInsert({ props, rm }) {
   const gate = (
     <g>
       <defs>
@@ -149,9 +138,9 @@ export function StationAdsInsert({ rm }) {
   );
   return (
     <R3Scene id="station-ads-insert" trace="station-ads" tone="overcast" rm={rm} cam="scale(1.9) translate(0 -260)" over={gate}
-      label="Close-up: the ticket gate at NAND station, next to the green tea machine. The IC reader glows blue: beep, beep.">
+      label="Close-up: the ticket gate at NAND station, next to the drink vending machine. The IC reader glows blue: beep, beep.">
       <polygon points={pts(STRIP)} fill="#d2ad3e" />
-      <StationAdsArt />
+      <StationAdsArt drink={props?.drink} />
     </R3Scene>
   );
 }

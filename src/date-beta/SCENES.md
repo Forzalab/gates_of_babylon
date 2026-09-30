@@ -8,7 +8,7 @@ a `go` to a missing scene, an asset id missing from `assets.json` or of the wron
 
 | field | type | default | meaning |
 |---|---|---|---|
-| `text` | string, max 30 words | `""` | The line. `{OR}` is the only OR mark. |
+| `text` | string, max 30 words | `""` | The line. `{OR}` is the only OR mark. Styled spans (train-r4): `{wavy:words}` (italic teal, wavy underline) and `{hat:words}` (bold orange, cap chip). The words stay plain text for voice, aria and OCR. |
 | `speaker` | string \| `false` | from a `NAME:` prefix in `text`, else narration | Who says it. If set, `text` is used as written (no prefix parse). `false` = narration, text as written (a sign read out: `NEXT: this {OR} that.`). |
 | `choices` | 1-2 choices (below) | none | The beat waits for a pick. |
 | `timer` | seconds > 0, choice beats only | none | Counts down, frozen while paused (P) or the tab is hidden. At 0 it picks the `default` choice, else the pink one. If that choice is disabled it picks the other enabled one. If none is enabled, nothing is picked. |
@@ -99,6 +99,7 @@ Every change is a hard cut or **one** stepped swap at ≥ 500 ms, the same under
 |---|---|
 | `frame` | Her camera. `medium` (default) is the usual sprite. `off` hides her sprite (bg-only / food shots). `handout` puts her behind the box she holds out. `pov` shows her small, across from you, behind the food. `eyes` is an extreme close-up that fills the stage. `peek` is her huge face behind a raised dialogue bar, with the box in the foreground. `close` fills about half the frame, in front of the dialogue box's right end, and shoves the HUD. Big frames drop the thought bubble. |
 | `face` / `face2` | Her face id: `art/nanda.js` `SCENE_FACES`, or any `FACES` key such as `hate`. `face2` replaces it once the beat has stepped. A reaction frame keeps the emote's face. |
+| `raise` | `true` = her raised pose (as on choice beats), so a 3-line box never covers her face (train-r4). |
 | `lead` | A line shown first, on top, in the same box. The beat's own line reveals under it after `step` ms. Voice plays the lead's take, then the beat's own. |
 | `at` | Split the beat's line at this text. The rest reveals in place after `step` ms. |
 | `step` | ms before the reveal (≥ 500, default 600). Hidden text keeps its space, so the box never jumps. Put the beat's `hold` ≥ `step`, so no pick or NEXT comes before it. |

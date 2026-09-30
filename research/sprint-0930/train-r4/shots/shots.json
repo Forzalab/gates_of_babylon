@@ -57,7 +57,7 @@
  },
  "ume-beat3": {
   "beat": "v2-train:2",
-  "bg": "art r3 r3-station-ads-insert",
+  "bg": "art r3 r3-vending-insert",
   "face": "anya-smile",
   "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'",
   "hidden": "",
@@ -234,7 +234,7 @@
  },
  "ume-beat8": {
   "beat": "v2-train:7",
-  "bg": "art r3 r3-train-rain",
+  "bg": "art r3 r3-train-rain-sleepy",
   "face": "dazed-sleepy",
   "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
   "hidden": "",
@@ -252,13 +252,13 @@
    1505,
    961
   ],
-  "nanda": [
-   730,
-   424,
-   1190,
-   920
-  ],
-  "sleepy": null
+  "nanda": null,
+  "sleepy": [
+   629,
+   344,
+   1269,
+   985
+  ]
  },
  "ume-beat9": {
   "beat": "v2-train:8",
@@ -346,7 +346,7 @@
  },
  "tama-beat3": {
   "beat": "v2-train:2",
-  "bg": "art r3 r3-station-ads-insert",
+  "bg": "art r3 r3-vending-insert",
   "face": "anya-smile",
   "text": "Egg pudding drink. Sweet. 'Like the one you picked. I remember.'",
   "hidden": "",
@@ -523,7 +523,7 @@
  },
  "tama-beat8": {
   "beat": "v2-train:7",
-  "bg": "art r3 r3-train-rain",
+  "bg": "art r3 r3-train-rain-sleepy",
   "face": "dazed-sleepy",
   "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
   "hidden": "",
@@ -541,13 +541,13 @@
    1505,
    961
   ],
-  "nanda": [
-   730,
-   424,
-   1190,
-   920
-  ],
-  "sleepy": null
+  "nanda": null,
+  "sleepy": [
+   629,
+   344,
+   1269,
+   985
+  ]
  },
  "tama-beat9": {
   "beat": "v2-train:8",

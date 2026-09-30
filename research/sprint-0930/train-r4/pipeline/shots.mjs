@@ -19,7 +19,7 @@ const grab = async (name) => {
   info[name] = await cur.evaluate(() => {
     const r = (el) => { if (!el) return null; const q = el.getBoundingClientRect(); return [q.left, q.top, q.right, q.bottom].map(Math.round); };
     const line = document.querySelector('.db-say .line');
-    return { beat: document.documentElement.dataset.beat, bg: document.querySelector('.scene .art')?.className, face: document.querySelector('.db-nanda')?.dataset.face ?? null,
+    return { beat: document.documentElement.dataset.beat, bg: document.querySelector('.scene .art')?.className, face: document.querySelector('.db-nanda')?.dataset.face ?? document.querySelector('.r4-sleeper')?.dataset.face ?? null,
       text: [...document.querySelectorAll('.db-say .line')].filter((e) => getComputedStyle(e).visibility !== 'hidden').map((e) => e.innerText).join(' / '),
       hidden: [...document.querySelectorAll('.db-say .db-later')].map((e) => e.innerText).join(' '),
       spans: [...document.querySelectorAll('.db-say .db-span')].map((e) => [e.className, e.innerText]),

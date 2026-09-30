@@ -230,6 +230,8 @@ export const ANCHORS = Object.freeze({
   eyeBand: { x: [14, 100], y: [30, 56] },
   halo: [[-6, 14, 11], [118, 12, 7], [-14, 62, 6], [106, 100, 8], [30, -2, 5]],
 });
+// train-r4: a face that talks brings its own thought bubble (a very angry face never thinks a pink heart).
+export const FACE_BUBBLE = { 'very-angry': 'hate', nervous: 'sweat', 'ticked-off': 'pout' };
 const STAGE_EMOTE = { 1: 'heart', 2: 'hearts', 3: 'or', 4: 'crack' };
 
 let uid = 0;
@@ -239,7 +241,7 @@ let uid = 0;
 // face: a Scene A face id (SCENE_FACES) or any FACES key; it replaces the emote's face (the palette + bubble stay the emote's).
 export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null } = {}) {
   const E0 = EMOTES[emote ?? STAGE_EMOTE[stage]] ?? EMOTES.heart;
-  const E = face != null && FACES[face] ? { ...E0, face } : E0;
+  const E = face != null && FACES[face] ? { ...E0, face, bubble: FACE_BUBBLE[face] ?? E0.bubble } : E0;
   const s = E.pal, P = PAL[s], n = ++uid, cb = `nd-cb${n}`, gb = `nd-gb${n}`, sh = `nd-sh${n}`;
   const legs = [40, 64].map((x) => `<rect x="${x - 3}" y="94" width="6" height="24" rx="3" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/>
     ${P.dark ? '' : `<rect x="${x - 3}" y="99" width="6" height="3" fill="${P.bow}"/>`}

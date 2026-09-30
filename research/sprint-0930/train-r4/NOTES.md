@@ -54,3 +54,32 @@ Brief: `PLAN.md`, where Tony approved the 9-line table. Refs: `refs/01-16`. Shot
   - `wavy` = italic, teal `#0a6670`, wavy underline `#12a3ac` (6.1:1 on the box).
   - `hat` = bold, orange `#a3400a`, plus a cap-icon chip (5.8:1). The chip is aria-hidden.
 - **Deep link for shots.** `?bento=umeboshi|tamagoyaki` (main.jsx). An unknown value is ignored.
+
+## Stage B: art
+- **Crowd** (`art/r3-station/Crowd.jsx`, refs 07-08). Flat silhouette commuters in 2 depth layers.
+  - The back layer is small, light and hazy, near the vanishing point. The front layer is big and dark at the frame edges, with a warm rim from the low sun.
+  - Long shadows fall down-left, and still sun shafts (screen blend) come through the roof.
+  - Placements are seeded, so every render is identical.
+  - It is drawn on `station-gate-r3` (beat 2) and `station-ads` (beats 4-5). Nanda's centre and the boards stay clear.
+- **The two bumpers.** They are coded to her styled spans, so the words and the picture match:
+  - **WAVY:** a big wavy mop with a wave line and a teal scarf (the `{wavy:}` teal).
+  - **CAP:** an orange cap with a long brim, a backpack and a tourist camera (the `{hat:}` orange).
+  - `props.bump`: `laugh` (beat 4) adds "HA HA" lettering. `named` (beat 5) outlines them in their span colour and pins the same chip the text uses: a teal wave, an orange cap.
+- **Vending machine** (`art/r3-station/Vending.jsx`, refs 01/02/06, header from 03, lower panel after 04).
+  - `PlatformVending` is a white and sky-blue frontal box with a side IC panel, a じどうはんばいき strip, 4 rows and a take-out slot.
+  - Its top row is the bento drink: plum うめ bottles, or egg-pudding プリン bottles.
+  - Every station beat carries `props.drink` from `vary.bento` (the r3-station patch), so the machine echoes the pick in beats 2-6.
+  - It replaces G1's green tea machine on `station-ads` and stands in front of the wall ad on `station-gate-r3`.
+- **Vending insert** (`vending-insert`, beat 3, ref 09 composition).
+  - The glass fills the frame over the dotted lilac back wall. Three shelves are packed with kawaii drinks and juice boxes that have faces and sparkles.
+  - Her drink glows mid-left with a "SAME ♡" tag, and her pink sleeve and mitten reach up-left to it from behind the sprite.
+  - The shelves are the bento drink, with a few of the other kind.
+- **Sleepy beat** (`train-rain-sleepy`, beat 8, ref 10).
+  - It is TrainRain plus `Sleeper`: the same gate-girl, rotated -48° and slumped across the dialogue bar, with the `dazed-sleepy` face.
+  - A drool strand runs down to a drop on the bar edge, with still z's above her.
+  - `cut.frame: 'off'` hides her standing sprite, and `sharp` keeps her crisp.
+- **Bubbles.** A talking face can bring its own thought bubble (`FACE_BUBBLE`). Her very-angry line shows the anger mark, not a pink heart.
+- **Pipeline.** The station, train and rain backgrounds are G1's vtracer traces (`scenes-r3/g1-pipeline`, `romance/pipeline/trace.py`). Everything new in train-r4 is the hand pass in flat SVG cels on top of those traces:
+  - the crowd, the bumpers, the machine, the insert and the sleeper.
+  - No new raster was traced. Refs 07 and 09 are other artists' illustrations, so we took their composition and grammar, not their pixels.
+- **Motion.** None. Every piece is still; the only stepped swap is beat 4's face (700 ms).

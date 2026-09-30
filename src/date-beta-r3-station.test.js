@@ -16,12 +16,12 @@ const pack = read('./date-beta/packs/r3-station.json');
 const INDEX = src('./date-beta/art/r3-station/index.js');
 const IDS = [...INDEX.slice(INDEX.indexOf('export const R3_STATION')).matchAll(/'([\w-]+)': [A-Z]\w*/g)].map((m) => m[1]);
 // train-r4: v2-train is 9 beats now (research/sprint-0930/train-r4/PLAN.md); 3 + 4 share the crowded ad wall (the bump, then her line).
-const BEATS = { 1: 'station-gate-r3', 2: 'station-ads-insert', 3: 'station-ads', 4: 'station-ads', 5: 'station-ads-insert', 6: 'train-sun', 7: 'train-rain', 8: 'platform-rain' };
+const BEATS = { 1: 'station-gate-r3', 2: 'vending-insert', 3: 'station-ads', 4: 'station-ads', 5: 'station-ads-insert', 6: 'train-sun', 7: 'train-rain-sleepy', 8: 'platform-rain' };
 const BEFORE = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2'];
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
 
 test('r3-station: ids registered, spread into ART, pack runs right after variant-v2', () => {
-  assert.deepEqual([...IDS].sort(), [...new Set(Object.values(BEATS))].sort());
+  assert.deepEqual([...IDS].sort(), [...new Set([...Object.values(BEATS), 'train-rain'])].sort(), 'train-rain stays registered (the sleepy beat draws over it)');
   for (const id of IDS) assert.ok(ART_NAMES.includes(id), `${id} reaches the art-name list`);
   assert.match(src('./date-beta/art/index.js'), /\.\.\.R3_STATION,/);
   assert.match(src('./date-beta/main.jsx'), /'variant-v2', 'r3-station',/);
@@ -41,7 +41,7 @@ test('r3-station: v2-train beats 1-8 each get their bg, no camera shot left, scr
 });
 
 test('r3-station: traces exist, each <= 600 KB; rain = 2 static layers swapped >= 600 ms', () => {
-  for (const id of IDS.filter((i) => i !== 'station-ads-insert')) {
+  for (const id of IDS.filter((i) => !['station-ads-insert', 'vending-insert', 'train-rain-sleepy'].includes(i))) { // inserts reuse a trace
     const f = new URL(`../public/date-beta/trace/${id}.svg`, import.meta.url);
     assert.ok(existsSync(f), `${id}.svg`);
     assert.ok(statSync(f).size <= 600_000, `${id}.svg ${statSync(f).size} B`);
@@ -51,7 +51,7 @@ test('r3-station: traces exist, each <= 600 KB; rain = 2 static layers swapped >
   assert.ok(m, 'RainPair steps 2 poses, off under reduced motion');
   const TICK = +/export const TICK = (\d+)/.exec(src('./date-beta/art/util.js'))[1];
   assert.ok(TICK * Math.max(4, +m[1]) >= 600, `swap every ${TICK * m[1]} ms`);
-  for (const f of ['StationGate', 'StationAds', 'TrainSun', 'TrainRain', 'PlatformRain']) {
+  for (const f of ['StationGate', 'StationAds', 'TrainSun', 'TrainRain', 'PlatformRain', 'Crowd', 'Vending']) {
     const s = src(`./date-beta/art/r3-station/${f}.jsx`);
     assert.doesNotMatch(s, /<animate|@keyframes|animation:|transition:/, `${f}: no animation`);
   }

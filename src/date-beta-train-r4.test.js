@@ -63,4 +63,26 @@ test('train-r4: the six traced faces render in her palette (distinct from each o
   for (const s of svgs) assert.match(s, /#6b0f45/, 'her ink');
   assert.match(nandaSVG({ face: 'very-angry' }), /#ff1414/, 'the vein layer');
   assert.match(nandaSVG({ face: 'dazed-sleepy' }), /#8fd3ff/, 'drool');
+  assert.doesNotMatch(nandaSVG({ face: 'very-angry' }), /#ff7fcf/, 'her angry line gets the anger-mark bubble, not a pink heart');
+});
+
+test('train-r4 art: crowd + bumpers on the station beats, the machine echoes the bento pick on every station beat, the sleeper', () => {
+  const src = (p) => readFileSync(new URL(`./date-beta/art/r3-station/${p}`, import.meta.url), 'utf8');
+  assert.deepEqual(T.beats.map((b) => b.bg), ['train', 'station-gate-r3', 'vending-insert', 'station-ads', 'station-ads', 'station-ads-insert', 'train-sun', 'train-rain-sleepy', 'platform-rain']);
+  for (const i of [1, 2, 3, 4, 5]) {
+    assert.equal(beatView(T.beats[i], { bento: 'umeboshi' }).props.drink, 'umeboshi', `beat ${i}`);
+    assert.equal(beatView(T.beats[i], { bento: 'tamagoyaki' }).props.drink, 'tamagoyaki', `beat ${i}`);
+  }
+  assert.deepEqual([T.beats[3].props.bump, T.beats[4].props.bump], ['laugh', 'named']);
+  assert.equal(T.beats[7].props.cut.frame, 'off', 'the sleeper replaces her standing sprite');
+  for (const f of ['StationGate.jsx', 'StationAds.jsx']) {
+    assert.match(src(f), /<WavyGuy /, `${f}: the wavy-haired bumper`);
+    assert.match(src(f), /<CapGuy /, `${f}: the cap bumper`);
+    assert.match(src(f), /<Crowd /, `${f}: the crowd`);
+    assert.match(src(f), /<Shafts /, `${f}: sun shafts`);
+    assert.match(src(f), /<PlatformVending [^>]*drink=\{/, `${f}: the machine takes the drink`);
+  }
+  assert.match(src('Vending.jsx'), /r === 0\s*\n?\s*\? <Drink key=\{c\} kind=\{drink\}/, 'the top row is the bento drink');
+  assert.match(src('Vending.jsx'), /props\?\.drink === 'tamagoyaki'/);
+  assert.match(src('TrainRain.jsx'), /export function TrainRainSleepy/);
 });

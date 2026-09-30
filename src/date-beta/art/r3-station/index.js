@@ -3,7 +3,8 @@
 import StationGate from './StationGate.jsx';
 import StationAds, { StationAdsInsert } from './StationAds.jsx';
 import TrainSun from './TrainSun.jsx';
-import TrainRain from './TrainRain.jsx';
+import TrainRain, { TrainRainSleepy } from './TrainRain.jsx';
+import { VendingInsert } from './Vending.jsx';
 import PlatformRain from './PlatformRain.jsx';
 
 export const R3_STATION = {
@@ -12,6 +13,8 @@ export const R3_STATION = {
   'station-ads-insert': StationAdsInsert,
   'train-sun': TrainSun,
   'train-rain': TrainRain,
+  'train-rain-sleepy': TrainRainSleepy,
+  'vending-insert': VendingInsert,
   'platform-rain': PlatformRain,
 };
 export default R3_STATION;

@@ -4,6 +4,7 @@
 // the glass only (swapped every 750 ms; reduced motion = 1 still layer), straight poles + the luggage rack in front,
 // grey window reflections down the aisle. Sun (4:40) -> rain (5:20) is the time passing.
 import { R3Scene, RainPair, Pole, TOD, preloadTrace, pts } from './parts.jsx';
+import { nandaSVG } from '../nanda.js';
 
 preloadTrace('train-rain');
 
@@ -18,11 +19,11 @@ const GLASS = [
 // the far town through the glass: low grey blocks along each pane's bottom
 const TOWN = [[0, 520, 90, 70], [90, 540, 70, 60], [170, 500, 80, 110], [260, 530, 110, 80], [380, 510, 90, 90], [1640, 250, 90, 120], [1740, 230, 70, 110], [1820, 260, 100, 60]];
 
-export default function TrainRain({ rm }) {
+export default function TrainRain({ rm, over = null, id = 'train-rain', label = null }) {
   const clip = GLASS.map((g) => `M${pts(g).replace(/ /g, 'L')}Z`).join('');
   return (
-    <R3Scene id="train-rain" tone="rain-dusk" rm={rm}
-      label="The same kind of train at 5:20 PM, grey now: rain streaks down every window, green seats, the aisle shines with the grey light.">
+    <R3Scene id={id} trace="train-rain" tone="rain-dusk" rm={rm} over={over}
+      label={label ?? 'The same kind of train at 5:20 PM, grey now: rain streaks down every window, green seats, the aisle shines with the grey light.'}>
       <defs>
         <linearGradient id="r3tr-glass" x1="0" y1="0" x2="0" y2="1">
           <stop offset="0" stopColor="#7d8898" /><stop offset=".7" stopColor="#a9b3c0" /><stop offset="1" stopColor="#c3cad3" />
@@ -95,5 +96,34 @@ export default function TrainRain({ rm }) {
         <polygon points="1230,640 1260,640 1250,1080 1170,1080" />
       </g>
     </R3Scene>
+  );
+}
+
+// train-r4 beat 8 (ref 10): she lies across the dialogue bar, half asleep, drooling. Her standing sprite is off
+// (cut.frame 'off'); this is the same gate-girl rotated onto her flat back, resting on the box top (y 773), her
+// dazed-sleepy face (props.cut.face), a drool strand + drop hanging over the bar edge, still z's. No motion.
+export const SLEEP_AT = { x: 1075, y: 832, s: 1.5, rot: -48 };
+export function Sleeper({ face = 'dazed-sleepy' }) {
+  const svg = nandaSVG({ face, talk: false });
+  const { x, y, s, rot } = SLEEP_AT;
+  return (
+    <g className="r4-sleeper" data-face={face} aria-hidden="true">
+      <ellipse cx="900" cy="772" rx="260" ry="18" fill="#0c1220" opacity=".4" />
+      <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`} dangerouslySetInnerHTML={{ __html: svg }} />
+      {/* drool: from the corner of her mouth down to the bar edge (ref 10) */}
+      <path d="M947 698 Q962 730 956 752" fill="none" stroke="#1f5f96" strokeWidth="7" strokeLinecap="round" />
+      <path d="M947 698 Q962 730 956 752" fill="none" stroke="#bfe8ff" strokeWidth="4" strokeLinecap="round" />
+      <path d="M956 744 C964 754 970 760 970 766 A14 14 0 0 1 942 766 C942 760 948 754 956 744 Z" fill="#8fd3ff" stroke="#1f5f96" strokeWidth="3" />
+      <ellipse cx="950" cy="764" rx="3" ry="5" fill="#fff" opacity=".85" />
+      <g fill="none" stroke="#fff" strokeWidth="8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M1080 470h40l-40 40h40" /><path d="M1150 400h30l-30 30h30" /><path d="M1206 344h20l-20 20h20" />
+      </g>
+    </g>
+  );
+}
+export function TrainRainSleepy({ props, rm }) {
+  return (
+    <TrainRain rm={rm} id="train-rain-sleepy" over={<Sleeper face={props?.cut?.face ?? 'dazed-sleepy'} />}
+      label="5:20 PM on the rainy train. Nanda has fallen half asleep lying across the dialogue bar, drooling a little." />
   );
 }

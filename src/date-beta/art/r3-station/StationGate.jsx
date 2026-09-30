@@ -3,6 +3,8 @@
 // the big wall ad (the ref's Chinese slogan -> our own poster), straight catenary poles, the yellow tactile strip and
 // the floor joints toward the vanishing point. The board hangs at y 150-290: under the HUD bar, above the dialogue box.
 import { R3Scene, Pole, preloadTrace, pts } from './parts.jsx';
+import { Crowd, Shafts, WavyGuy, CapGuy, scatter } from './Crowd.jsx';
+import { PlatformVending } from './Vending.jsx';
 
 preloadTrace('station-gate-r3');
 
@@ -53,12 +55,18 @@ function WallAd() {
   );
 }
 
-export default function StationGate({ rm }) {
+// train-r4 crowd (refs 07-08): back layer near the vanishing point, front layer at the right edge, the two bumpers
+// mid-right (they bump her in beat 4), still sun shafts, and the platform vending machine in front of the wall ad.
+const BACK = scatter(41, 16, [1010, 1420], [470, 560], [80, 150]);
+const FRONT = [[1760, 1120, 700], [1900, 1100, 640], [70, 1130, 660]];
+const SHAFTS = ['1480,0 1600,0 1120,1080 930,1080', '1700,0 1760,0 1420,1080 1330,1080', '1260,0 1310,0 700,1080 640,1080'];
+
+export default function StationGate({ props, rm }) {
   // yellow tactile strip + floor joints, both toward VP
   const joints = [-900, -560, -300, -80, 120, 330];
   return (
     <R3Scene id="station-gate-r3" tone="overcast" rm={rm}
-      label="Station platform 2 at 4:30 PM, dry and overcast: steel seats and plants on the left, the departure board reads 4:30 to OR.">
+      label="Station platform 2 at 4:30 PM, full of people going home: flat silhouette commuters, sun shafts, a wavy-haired guy and a guy in an orange cap, a drink vending machine, the departure board reads 4:30 to OR.">
       {/* canopy underside: one clean slate cel, slats toward VP */}
       <polygon points="780,0 1305,0 1300,140 1160,252 1004,338 986,332 800,128" fill="#43535c" />
       <g stroke="#5d6f78" strokeWidth="4">
@@ -85,6 +93,12 @@ export default function StationGate({ rm }) {
       </g>
       <Pole x={1383} y0={150} y1={500} w={10} fill="#6d7a84" hi="#c9d3d9" />
       <Pole x={1628} y0={0} y1={548} w={18} fill="#6d7a84" hi="#c9d3d9" />
+      <Crowd seed={41} back={BACK} front={[]} />
+      <WavyGuy x={1310} y={760} h={330} />
+      <CapGuy x={1520} y={800} h={370} />
+      <Crowd seed={43} back={[]} front={FRONT} />
+      <Shafts id="r4sg" bands={SHAFTS} op={0.22} />
+      <PlatformVending x={322} y={404} w={190} h={362} drink={props?.drink} />
       <Board />
       {/* the far board above the platform end */}
       <rect x="1030" y="324" width="100" height="32" rx="3" fill="#15202b" />
