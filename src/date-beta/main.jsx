@@ -282,7 +282,7 @@ function Player() {
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
         {!pos.done && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
-          <Nanda scare={beat.scare} raised={!!beat.choices && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
+          <Nanda scare={beat.scare} raised={!!beat.choices && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}

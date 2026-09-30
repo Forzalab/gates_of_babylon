@@ -1,6 +1,6 @@
 // SHOP 1-4 + exit (SHOTLIST.md): the covered shop street, the shop doors, her list, the cart POV, and the way out.
 // Refs: c91399ad (vending machines under the arcade roof), 16981cdc (konbini doors), 48d536e4 (cart POV).
-import { ShopScene, Card, PlayerHand, HerHand, pts } from './parts.jsx';
+import { ShopScene, Card, Hand, BasketBed, AisleVP, SP, VP, pts } from './parts.jsx';
 
 // 1. SHOP STREET · 2:00 PM: the vending machines outside the shop, under the arcade roof (establishing + stamp).
 export function ShopVending() {
@@ -133,72 +133,89 @@ export function ShopExit() {
   );
 }
 
-// 4. Cart POV (48d536e4): the empty cart, your hands on the handle, her hand slides on top of yours.
-function EmptyCart() {
-  // the pre-pass flattened the cart contents; redraw the empty wire basket toward the far red corners
-  const far = [[792, 132], [1188, 142]], near = [[430, 930], [1440, 940]];
-  const lerp = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t];
+// 4. Cart POV (refs 13 + 15; FIX-LOG): one vanishing point (VP) for the aisle AND the cart, the green shop basket in
+// the cart, the red handle at y 560 (hands clear of the dialogue box top, y ~770), your two knit-sleeved hands wrapped round it (5 fingers,
+// thumbs under the bar), and her hand coming in from the right, lying on top of your right hand.
+export const HANDLE_Y = 560;
+export function Cart({ items = false, hands = true, her = true, handle = true }) {
+  const [vx, vy] = VP;
+  const toVP = ([x, y], u) => [x + (vx - x) * u, y + (vy - y) * u];
+  const nearL = [430, HANDLE_Y - 20], nearR = [1490, HANDLE_Y - 20], fl = [480, HANDLE_Y + 300], fr = [1440, HANDLE_Y + 300];
+  const farL = toVP(nearL, 0.42), farR = toVP(nearR, 0.42), ffL = toVP(fl, 0.5), ffR = toVP(fr, 0.5);
+  const wires = [];
+  for (let i = 1; i < 12; i++) { const t = i / 12; const a = [farL[0] + (farR[0] - farL[0]) * t, farL[1]], b = [ffL[0] + (ffR[0] - ffL[0]) * t, ffL[1]]; wires.push([a, b]); }
+  for (let i = 1; i < 6; i++) { const u = i / 6 * 0.42; wires.push([toVP(nearL, u), toVP(fl, u * 0.5 / 0.42)]); wires.push([toVP(nearR, u), toVP(fr, u * 0.5 / 0.42)]); }
   return (
     <g>
-      <polygon points={pts([[700, 280], [1160, 290], [1260, 930], [600, 930]])} fill="#d9d6cf" />
-      {[0.15, 0.3, 0.45, 0.6, 0.75].map((t) => (
-        <line key={t} x1={640 + t * 40} y1={200 + t * 700} x2={1210 + t * 40} y2={210 + t * 700} stroke="#e3e5e8" strokeWidth="3" opacity=".5" />
-      ))}
-      <g stroke="#8d9097" strokeWidth="5" opacity=".9">
-        {[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1].map((t) => {
-          const a = lerp(far[0], far[1], t), b = lerp(near[0], near[1], t);
-          return <line key={t} x1={a[0]} y1={a[1] + 150} x2={b[0]} y2={b[1]} />;
-        })}
-        {[0.25, 0.5, 0.75].map((t) => <line key={`h${t}`} x1={660 - t * 60} y1={300 + t * 620} x2={1180 + t * 70} y2={306 + t * 620} />)}
+      <AisleVP />
+      {/* the cart: inner floor, far wall, sides, wire mesh, rims on the VP */}
+      <polygon points={pts([ffL, ffR, fr, fl])} fill={SP.metalLo} opacity=".35" />
+      <g stroke={SP.metalLo} strokeWidth="4" opacity=".8">
+        {wires.map(([a, b], i) => <line key={i} x1={a[0]} y1={a[1]} x2={b[0]} y2={b[1]} />)}
       </g>
-      {/* the right-hand cold case (covers the removed shopper's arm) */}
-      <polygon points={pts([[1250, 0], [1920, 0], [1920, 480], [1550, 560], [1330, 330]])} fill="#e6ecef" />
-      {[80, 180, 280, 380].map((y) => <line key={y} x1={1300 + (y / 330) * 20} y1={y} x2="1920" y2={y + 40} stroke="#b9c3ca" strokeWidth="8" />)}
-      {[0, 1, 2, 3, 4, 5].map((i) => <rect key={i} x={1420 + i * 80} y={110 + (i % 2) * 100} width="54" height="60" rx="6" fill={['#ffffff', '#f2d7a0', '#d8e8f5'][i % 3]} stroke="#9aa4ab" strokeWidth="3" />)}
+      <polyline points={pts([ffL, ffR])} stroke={SP.metalLo} strokeWidth="5" fill="none" />
+      <polygon points={pts([nearL, farL, farR, nearR])} fill="none" stroke={SP.metal} strokeWidth="12" strokeLinejoin="round" />
+      <polygon points={pts([nearL, farL, farR, nearR])} fill="none" stroke={SP.metalHi} strokeWidth="4" strokeLinejoin="round" transform="translate(3 -4)" />
+      <BasketBed x={960} y={items ? HANDLE_Y - 70 : HANDLE_Y - 10} s={items ? 0.62 : 0.56} items={items} />
+      {/* the handle: red grip on two posts */}
+      {handle && <rect x="380" y={HANDLE_Y - 20} width="1160" height="40" rx="20" fill={SP.red} stroke={SP.redLo} strokeWidth="4" />}
+      {handle && <rect x="400" y={HANDLE_Y - 14} width="1120" height="8" rx="4" fill="#fff" opacity=".45" />}
+      {hands && <Hand x={610} y={HANDLE_Y + 122} rot={10} pose="grip" thumb="right" />}
+      {hands && <Hand x={1320} y={HANDLE_Y + 122} rot={-10} pose="grip" thumb="left" />}
+      {hands && her && <Hand x={1355} y={HANDLE_Y + 87} rot={-72} s={0.92} her pose="flat" thumb="right" />}
     </g>
   );
 }
 
 export function ShopCart() {
-  const over = (
-    <g>
-      <rect x="250" y="1004" width="1400" height="30" rx="14" fill="#c9372f" stroke="#6a1a16" strokeWidth="4" />
-      <PlayerHand x={640} y={1000} flip />
-      <PlayerHand x={1260} y={1000} />
-      <HerHand x={1300} y={930} rot={-40} />
-    </g>
-  );
   return (
-    <ShopScene id="cart" trace="shop-cart" over={over}
-      label="Your view down at an empty shopping cart in a bright aisle. Your two hands hold the red handle. Nanda's hand, with pink nails, rests on top of your right hand.">
-      <EmptyCart />
+    <ShopScene id="cart" trace={null}
+      label="Your view down the aisle over a shopping cart with a green basket in it. Your two hands hold the red handle. Nanda's hand, with pink nails, lies on top of your right hand.">
+      <Cart />
     </ShopScene>
   );
 }
 
-// 3. Her list (insert): a handwritten note clipped to the cart handle.
+// the end card + react frame of the game: the same cart, her list in the basket (carrot, eggs, three cups)
+export function ShopCartFull() {
+  return (
+    <ShopScene id="cart-full" trace={null}
+      label="The cart again. In the green basket: a bag of carrots, a pack of eggs and three matching cups.">
+      <Cart items her={false} />
+    </ShopScene>
+  );
+}
+
+// 3. Her list (insert, refs 13/03): the note on a little clipboard, hooked on the cart handle; the aisle soft behind.
+// The paper sits LEFT of Nanda's slot (x 730-1190), so every line reads; a shadow falls down-left.
 export function ShopList() {
   const over = (
     <g>
-      <rect width="1920" height="1080" fill="#1a1420" opacity=".35" />
-      <g transform="rotate(-4 960 540)">
-        <rect x="620" y="130" width="680" height="820" rx="10" fill="#fffdf4" stroke="#b9a98a" strokeWidth="5" />
-        {[0, 1, 2, 3, 4, 5, 6].map((i) => <line key={i} x1="650" x2="1270" y1={300 + i * 92} y2={300 + i * 92} stroke="#bcd3ee" strokeWidth="4" />)}
-        <line x1="720" x2="720" y1="140" y2="940" stroke="#f3a0b0" strokeWidth="4" />
-        <text x="960" y="240" textAnchor="middle" fontSize="64" fill="#e0467f" className="shop-hand">My list ♡</text>
+      <g transform="rotate(-3 440 460)">
+        <rect x="150" y="190" width="560" height="620" rx="14" fill={SP.shade} opacity=".3" transform="translate(-22 16)" />
+        <rect x="150" y="190" width="560" height="620" rx="14" fill={SP.plank} stroke={SP.plankLo} strokeWidth="5" />
+        <rect x="178" y="226" width="504" height="556" rx="6" fill="#fffdf4" stroke="#b9a98a" strokeWidth="3" />
+        {[0, 1, 2, 3, 4].map((i) => <line key={i} x1="196" x2="664" y1={414 + i * 92} y2={414 + i * 92} stroke="#bcd3ee" strokeWidth="4" />)}
+        <line x1="240" x2="240" y1="232" y2="776" stroke="#f3a0b0" strokeWidth="4" />
+        <text x="440" y="300" textAnchor="middle" fontSize="60" fill={SP.pink} className="shop-hand">My list ♡</text>
         {['1. carrots', '2. eggs', '3. three cups', '4. you ♡'].map((t, i) => (
-          <text key={t} x="750" y={378 + i * 138} fontSize={i === 3 ? 84 : 70} fill={i === 3 ? '#e0467f' : '#2b2a55'} className="shop-hand">{t}</text>
+          <text key={t} x="262" y={402 + i * 92} fontSize={i === 3 ? 66 : 58} fill={i === 3 ? SP.pink : SP.navy} className="shop-hand">{t}</text>
         ))}
-        {/* the clip */}
-        <rect x="900" y="100" width="120" height="70" rx="10" fill="#c9372f" stroke="#6a1a16" strokeWidth="4" />
-        <path d="M1150 820 C1130 800 1100 812 1116 840 L1150 872 L1184 840 C1200 812 1170 800 1150 820Z" fill="#ff7aa8" />
+        {/* the clip, hooked over the handle */}
+        <rect x="370" y="160" width="140" height="70" rx="12" fill={SP.metal} stroke={SP.metalLo} strokeWidth="4" />
+        <rect x="380" y="166" width="120" height="12" rx="6" fill={SP.metalHi} />
       </g>
     </g>
   );
   return (
-    <ShopScene id="list" trace="shop-cart" cam="translate(-960 -1080) scale(2)" over={over}
-      label="Close-up of Nanda's handwritten shopping list, clipped to the cart handle: 1 carrots, 2 eggs, 3 three cups, 4 you, with a heart.">
-      <EmptyCart />
+    <ShopScene id="list" trace={null} over={over}
+      label="Close-up of Nanda's handwritten shopping list on a little clipboard hooked to the cart handle: 1 carrots, 2 eggs, 3 three cups, 4 you, with a heart.">
+      <defs><filter id="shop-list-soft" x="0" y="0" width="1" height="1"><feGaussianBlur stdDeviation="9" /></filter></defs>
+      <g filter="url(#shop-list-soft)" transform="translate(-480 -540) scale(1.5)">
+        <Cart hands={false} handle={false} />
+      </g>
+      <rect width="1920" height="1080" fill={SP.shade} opacity=".12" />
+      <rect x="0" y="150" width="1920" height="44" fill={SP.red} stroke={SP.redLo} strokeWidth="4" />
     </ShopScene>
   );
 }

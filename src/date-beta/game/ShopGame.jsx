@@ -30,6 +30,12 @@ function Icon({ id }) {
   }
 }
 
+// her one anchor in every game frame: the same sprite size + feet on the floor band (y ~950), a contact shadow that
+// falls down-left (the 2:00 PM sun is upper right). Only her face/layers change between frames.
+function Her(props) {
+  return (<><i className="sg-foot" aria-hidden="true" /><Nanda big talk={false} {...props} /></>);
+}
+
 function Bg({ id }) {
   const Art = SHOP[id];
   return Art ? <div className="sg-bg"><Art rm props={{}} /></div> : null;
@@ -106,7 +112,7 @@ export default function ShopGame({ props = {}, onPick }) {
   if (frame.kind === 'end') {
     return (
       <div className="sg-root sg-end" onClick={stop}>
-        <Bg id="shop-cart" />
+        <Bg id="shop-cart-full" />
         <div className="sg-card" role="status">
           <div className="sg-list-title">HER LIST · DONE</div>
           <ul className="sg-got">
@@ -115,7 +121,7 @@ export default function ShopGame({ props = {}, onPick }) {
           </ul>
           <div className="sg-line">{st.wrongs === 0 ? 'Every item. First try. You are perfect. ♡' : st.wrongs === 1 ? 'All done. Almost perfect. ♡' : 'All done. Next time, read my list.'}</div>
         </div>
-        <Nanda emote={st.wrongs >= 2 ? 'pout' : 'hearts'} big talk={false} />
+        <Her emote={st.wrongs >= 2 ? 'pout' : 'hearts'} />
       </div>
     );
   }
@@ -126,7 +132,7 @@ export default function ShopGame({ props = {}, onPick }) {
       <div className="sg-root sg-right" onClick={stop}>
         <Bg id={frame.round.close} />
         <div className="sg-say" role="status"><b>NANDA</b> {line}</div>
-        <Nanda emote="heart" big talk={false} layers={['sparkle']} />
+        <Her emote="heart" layers={['sparkle']} />
       </div>
     );
   }
@@ -142,7 +148,7 @@ export default function ShopGame({ props = {}, onPick }) {
           {frame.aside && <span className="sg-aside">{frame.aside}</span>}
           <span><b>NANDA</b> {frame.sweet ? mood.sweet : mood.line}</span>
         </div>
-        <Nanda emote={frame.sweet ? 'heart' : mood.face === 'pout' ? 'pout' : null} big talk={false} scare={split ? 2 : 0}
+        <Her emote={frame.sweet ? 'heart' : mood.face === 'pout' || mood.face === 'vein' ? 'pout' : null} scare={split ? 2 : 0}
           layers={frame.sweet ? ['sparkle'] : mood.layers} />
       </div>
     );
@@ -168,8 +174,8 @@ export default function ShopGame({ props = {}, onPick }) {
           </button>
         ))}
       </div>
-      <div className="sg-handle" aria-hidden="true"><i /><i /></div>
-      {st.wrongs > 0 && <Nanda emote={st.wrongs === 1 ? 'pout' : null} talk={false} layers={moodOf(st.wrongs).layers} scare={Math.min(2, st.wrongs - 1)} />}
+      <div className="sg-handle" aria-hidden="true"><i /><i /><b /><b /></div>
+      {st.wrongs > 0 && <Her emote={st.wrongs === 1 ? 'pout' : null} layers={moodOf(st.wrongs).layers} scare={Math.min(2, st.wrongs - 1)} />}
     </div>
   );
 }

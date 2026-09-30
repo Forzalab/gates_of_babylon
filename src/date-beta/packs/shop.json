@@ -21,7 +21,7 @@
     "bg": "shop-basket-cups",
     "props": {
      "cut": {
-      "frame": "medium"
+      "frame": "off"
      }
     }
    }
@@ -41,7 +41,11 @@
    "beat": 3,
    "set": {
     "bg": "shop-basket-handle",
-    "props": null
+    "props": {
+     "cut": {
+      "frame": "off"
+     }
+    }
    }
   },
   {
@@ -109,7 +113,12 @@
      "speaker": false,
      "bg": "shop-cart",
      "text": "Your hands push the cart. Her hand slides on top of yours.",
-     "sfx": "breath"
+     "sfx": "breath",
+     "props": {
+      "cut": {
+       "frame": "off"
+      }
+     }
     },
     {
      "bg": "shop-game",

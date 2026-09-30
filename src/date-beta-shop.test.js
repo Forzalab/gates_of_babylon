@@ -84,3 +84,11 @@ test('HER LIST keys: 1-4 map to the shelf slots, others ignored; the game captur
   assert.doesNotMatch(src('./date-beta/game/shopgame.css'), /transition\s*:|@keyframes|animation\s*:/, 'stepped frames only');
   assert.ok(existsSync(new URL('./date-beta/game/shopgame.css', import.meta.url)));
 });
+
+test('shop fix: hide-Nanda (cut.frame off) and a line emote stay on their own beat; the register line pouts', async () => {
+  const { carried } = await import('./date-beta/engine.js');
+  assert.deepEqual(carried({ emote: 'pout', cut: { frame: 'off', face: 'x' }, secs: 12 }), { cut: { face: 'x' }, secs: 12 });
+  const shop = data.scenes.find((s) => s.id === 'v2-shop');
+  assert.equal(shop.beats.find((b) => b.bg === 'shop-register').props.emote, 'pout');
+  assert.match(MAIN, /beat\.props\?\.emote/, 'the player reads the emote field');
+});
