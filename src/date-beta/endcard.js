@@ -11,6 +11,15 @@ export const REAL_ENDINGS = Object.freeze({
   'escape-timeout': Object.freeze({ title: 'ESCAPE?', line: 'You waited. Now there are four cups.' }),
 });
 
+// The win card's small line under "She loves you." (M2: a leave ending can reach 100% with gacha luck; "You drank all
+// her tea" was wrong there, no tea is poured on that route). Any other ending keeps the default.
+export const WIN_DEFAULT = 'You drank all her tea. You are not leaving.';
+export const WIN_LINES = Object.freeze({
+  'leave-yeah': 'You said yes. She wrote it on every cup.',
+  'leave-fu': 'You said leave. She only heard forever.',
+});
+export const winLine = (end) => WIN_LINES[end?.scene] ?? WIN_DEFAULT;
+
 // The fail card's lines. Her voice: yandere, BPD / OCPD (clingy, counting, forgiving, keeping score). Each hints to go
 // back and look around, never says how. `at` = the ending scene it fits ('*' = any), `band` = the love band ('*' = any).
 // Every (ending, band) pair has 5 candidates, so two seeds or two runs rarely land on the same line.

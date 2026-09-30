@@ -3,7 +3,7 @@
 // Pop = the delta pill + one literal line under the fill head. Goal card = the rules, once per run. End card = the result.
 // All static by default (the reduced-motion frame); .play steps in at >= 334 ms per step, nothing loops.
 import { lovePct } from './engine.js';
-import { cardFor, REAL_ENDINGS } from './endcard.js';
+import { cardFor, REAL_ENDINGS, winLine } from './endcard.js';
 
 const HEART = 'M50 88C22 66 4 50 4 28C4 13 16 4 29 4C39 4 46 10 50 17C54 10 61 4 71 4C84 4 96 13 96 28C96 50 78 66 50 88Z';
 const CRACK = `${HEART} M50 17L42 36L56 48L45 62L50 88`;
@@ -154,7 +154,7 @@ export function EndCard({ end, line = '', onAgain }) {
           <b className="lv-num">{end.pct}%</b>
         </div>
         <h2>{win ? 'She loves you.' : line}</h2>
-        <p className="sub">{win ? 'You drank all her tea. You are not leaving.' : `LOVE ${end.pct}%. You needed 100%.`}</p>
+        <p className="sub">{win ? winLine(end) : `LOVE ${end.pct}%. You needed 100%.`}</p>
         <NextButton label={win ? 'PLAY AGAIN' : 'TRY AGAIN'} onClick={onAgain} />
       </section>
     </>

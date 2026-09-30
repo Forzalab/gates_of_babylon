@@ -110,6 +110,20 @@ test('leave: "Leaving is not an option" plays on the rooftop when you left it, a
   assert.equal(sc('v2-home').beats[4].choices.find((c) => label(c) === 'Say goodnight').set.left, 'home');
 });
 
+test('leave audit: every leave beat she is on has its own face, never the one before; "Her hand rises" = her pin reaches', () => {
+  for (const id of ['leave', 'leave-fu', 'leave-yeah']) {
+    const faces = sc(id).beats.filter((b) => !b.end).map((b) => b.props?.cut?.face);
+    faces.forEach((f, i) => { assert.ok(f, `${id}[${i}] has no face`); assert.notEqual(f, faces[i - 1], `${id}[${i}] repeats ${f}`); });
+  }
+  assert.equal(sc('leave-fu').beats[0].props.cut.reach, true);
+});
+
+test('leave audit: a 100% leave ending gets its own win line (no "You drank all her tea": no tea is poured there)', async () => {
+  const { winLine, WIN_DEFAULT } = await import('./date-beta/endcard.js');
+  for (const scene of ['leave-fu', 'leave-yeah']) assert.doesNotMatch(winLine({ scene, tier: 'win' }), /tea/, scene);
+  assert.equal(winLine({ scene: 'steeped', tier: 'win' }), WIN_DEFAULT, 'the other endings keep the old line');
+});
+
 test('leave: both new branch beats score every option (+ and -) and hide the chips (consequential)', () => {
   for (const b of [sc('rooftop').beats[11], sc('v2-home').beats[4]]) {
     assert.equal(b.loveHidden, true);

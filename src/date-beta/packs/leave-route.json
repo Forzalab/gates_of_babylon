@@ -5,7 +5,8 @@
   "Now: rooftop 'Leave before the rain' -> leave (she is waiting at XOR Coffee next morning); v2-home 4 gets 'Say goodnight' next to 'Sit down' -> leave. leave 3 then splits into leave-yeah / leave-fu as before.",
   "Flag `left` (home | roof) = where you walked out. leave 0 ('Leaving is not an option.') shows the rooftop when you left from there, and her door 12 (BG-D1, the base bg) when you left her home.",
   "Both new branch beats are consequential, so their chips are hidden (loveHidden). 'Sit down' is +1 so every option scores (the love-audit rule); every route through her kitchen gains the same +1 as the goal.",
-  "Applied after r5 (so r5's beat indexes still hold) and before gacha."
+  "Applied after r5 (so r5's beat indexes still hold) and before gacha.",
+  "Audit fixes (research/sprint-0930/leave/AUDIT.md): every leave / leave-fu / leave-yeah beat gets its own face that fits its line (the auto faces flipped between two smug faces for 8 beats); leave-fu 0 'Her hand rises' = her upper pin reaches out (cut.reach)."
  ],
  "flags": { "left": ["home", "roof"] },
  "patch": [
@@ -22,6 +23,19 @@
     ]
    }
   },
-  { "scene": "leave", "beat": 0, "set": { "vary": { "left": { "home": {}, "roof": { "bg": "rooftop-noon" } } } } }
+  { "scene": "leave", "beat": 0, "set": { "vary": { "left": { "home": {}, "roof": { "bg": "rooftop-noon" } } } } },
+  { "scene": "leave", "beat": 0, "props": { "cut": { "face": "ticked-off" } } },
+  { "scene": "leave", "beat": 1, "props": { "cut": { "face": "happy" } } },
+  { "scene": "leave", "beat": 2, "props": { "cut": { "face": "smug-gloating" } } },
+  { "scene": "leave", "beat": 3, "props": { "cut": { "face": "blush-embarrassed" } } },
+  { "scene": "leave-fu", "beat": 0, "props": { "cut": { "face": "very-angry", "reach": true } } },
+  { "scene": "leave-fu", "beat": 1, "props": { "cut": { "face": "big-eyes-peek" } } },
+  { "scene": "leave-fu", "beat": 2, "props": { "cut": { "face": "heart-laugh" } } },
+  { "scene": "leave-fu", "beat": 3, "props": { "cut": { "face": "content" } } },
+  { "scene": "leave-yeah", "beat": 0, "props": { "cut": { "face": "heart-laugh" } } },
+  { "scene": "leave-yeah", "beat": 1, "props": { "cut": { "face": "content" } } },
+  { "scene": "leave-yeah", "beat": 2, "props": { "cut": { "face": "anya-smile" } } },
+  { "scene": "leave-yeah", "beat": 3, "props": { "cut": { "face": "smug-gloating" } } },
+  { "scene": "leave-yeah", "beat": 4, "props": { "cut": { "face": "big-eyes-peek" } } }
  ]
 }

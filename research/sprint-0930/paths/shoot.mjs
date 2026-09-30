@@ -1,7 +1,10 @@
 import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 import fs from 'node:fs';
 const { chromium } = pkg;
-const MODE = process.argv[2]; // ume | leave-a | leave-b
+const MODE = process.argv[2]; // ume | leave-a | leave-b | leave-live/{roof,home}-{fu,yeah} (live: real choices from the start, no ?scene jump)
+const PORT = process.env.PORT || 5219;
+const LIVE = MODE.startsWith('leave-live/') ? MODE.split('/')[1] : null; // roof-fu | roof-yeah | home-fu | home-yeah
+let SAVE = !LIVE || LIVE.startsWith('roof'); // home-*: play the whole day, save PNGs from v2-home on (the day = paths/ume)
 const OUT = new URL('./' + MODE + '/', import.meta.url).pathname;
 fs.mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
@@ -10,18 +13,25 @@ const LOOK = () => {
   const d = document.documentElement.dataset, q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)];
   return { beat: d.beat ?? null, who: q('.db-say .who')?.textContent ?? '', line: q('.db-say .line')?.innerText ?? '', ch: qa('.db-choice').map((c) => ({ text: c.querySelector('.line')?.innerText ?? c.innerText, chip: c.querySelector('.db-chip')?.textContent ?? '', cls: c.querySelector('.db-chip')?.className ?? '' })), card: q('.hud-card')?.innerText?.replace(/\s+/g, ' ') ?? null, end: q('.hud-end')?.innerText?.replace(/\s+/g, ' ') ?? null, game: !!q('.lg-root'), pop: q('.lv-pop')?.innerText?.replace(/\s+/g, ' ') ?? null };
 };
-await page.goto('http://localhost:5219/date-beta.html?seed=1', { waitUntil: 'networkidle' });
+await page.goto(`http://localhost:${PORT}/date-beta.html?seed=1`, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => document.documentElement.dataset.beat || document.querySelector('.hud-card'), null, { timeout: 15000 });
 let n = 1; const log = [];
 const shot = async (s, tag, taken) => {
-  const nm = `${String(n++).padStart(3, '0')}-${(s.beat || 'x').replace(':', '-')}${tag ? '-' + tag : ''}.png`;
-  await page.screenshot({ path: OUT + nm });
+  if (LIVE && !SAVE && /^v2-home:/.test(s.beat || '')) SAVE = true;
+  const nm = SAVE ? `${String(n++).padStart(3, '0')}-${(s.beat || 'x').replace(':', '-')}${tag ? '-' + tag : ''}.png` : '';
+  if (SAVE) await page.screenshot({ path: OUT + nm });
   const text = (s.end ? 'END: ' + s.end : s.card ? 'CARD: ' + s.card : (s.who ? s.who + ': ' : '') + s.line).replace(/\s+/g, ' ').slice(0, 60);
   log.push({ nm, scene: (s.beat || '').split(':')[0], beat: (s.beat || '').split(':')[1] ?? '', tag, text, choices: s.ch.map((c) => c.chip + c.text), taken: taken || '', pop: s.pop });
 };
 const want = (b, ch) => {
   const f = (re) => ch.findIndex((c) => re.test(c.text));
   let i = -1;
+  if (LIVE) {
+    if (/^rooftop:11/.test(b) && LIVE.startsWith('roof')) i = f(/Leave before/i);
+    if (/^v2-home:/.test(b) && LIVE.startsWith('home')) i = f(/Say goodnight/i);
+    if (/^leave:3/.test(b)) i = f(LIVE.endsWith('fu') ? /FUCK YOU/i : /yeah ig/i);
+    return i;
+  }
   if (MODE === 'ume') i = f(/umeboshi/i);
   else { i = f(/tamagoyaki/i); if (i < 0) i = f(/Leave before/i); }
   if (i < 0 && MODE !== 'ume') i = f(/Say goodnight/i);
@@ -30,15 +40,16 @@ const want = (b, ch) => {
   return i;
 };
 let jumped = false; let prev = '', still = Date.now();
-while (n < 400 && Date.now() - still < 60000) {
+let steps = 0;
+while (n < 400 && steps++ < 3000 && Date.now() - still < 60000) {
   let s = await page.evaluate(LOOK);
   const key = [s.beat, s.line, s.ch.length, s.card, s.end, s.pop].join('|');
   if (key !== prev) {
     await page.waitForTimeout(900); s = await page.evaluate(LOOK); prev = key; still = Date.now();
     await shot(s, s.end ? 'end' : s.card ? 'card' : s.ch.length ? 'choice' : s.pop ? 'react' : '', '');
-    if (s.end) { await page.waitForTimeout(2500); await page.screenshot({ path: OUT + `${String(n++).padStart(3, '0')}-END-settled.png` }); break; }
+    if (s.end) { await page.waitForTimeout(2500); if (SAVE) await page.screenshot({ path: OUT + `${String(n++).padStart(3, '0')}-END-settled.png` }); break; }
   }
-  if (MODE !== 'ume' && !jumped && /^v2-park:0/.test(s.beat || '')) { jumped = true; await page.goto('http://localhost:5219/date-beta.html?seed=1&scene=door&beat=0', { waitUntil: 'networkidle' }); await page.waitForTimeout(1500); prev = ''; continue; }
+  if (MODE !== 'ume' && !LIVE && !jumped && /^v2-park:0/.test(s.beat || '')) { jumped = true; await page.goto(`http://localhost:${PORT}/date-beta.html?seed=1&scene=door&beat=0`, { waitUntil: 'networkidle' }); await page.waitForTimeout(1500); prev = ''; continue; }
   if (s.game) { await page.waitForTimeout(1000); continue; }
   if (s.card) { await page.waitForTimeout(800); await page.locator('.hud-card .hud-next').click().catch(() => {}); await page.waitForTimeout(400); continue; }
   if (s.ch.length) {
