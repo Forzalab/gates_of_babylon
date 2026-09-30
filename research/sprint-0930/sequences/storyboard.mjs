@@ -10,8 +10,8 @@ import { dirname, join, resolve } from 'node:path';
 const { chromium } = pkg;
 const HERE = dirname(new URL(import.meta.url).pathname);
 const ROOT = resolve(HERE, '../../..');
-const OUT = join(HERE, 'board');
-const PORT = 4179;
+const OUT = process.env.BOARD_OUT ? resolve(process.env.BOARD_OUT) : join(HERE, 'board');
+const PORT = Number(process.env.BOARD_PORT ?? 4179);
 
 // side = default pick index on 3-way beats; picks = overrides "scene:beat" -> index; start = ?scene=...
 const ROUTES = {
@@ -20,6 +20,9 @@ const ROUTES = {
   hate: { side: 2, picks: { 'park:4': 2, 'leave:3': 2 } }, // neither, alone -> errand-shop, not hungry -> leave -> leave-fu
   timeout: { start: 'unknown', side: 0, picks: { 'escape:13': 'lose' } }, // branch tail: lock game timeout
   yeah: { start: 'leave', side: 0, picks: {} }, // branch tail: leave -> leave-yeah
+  // V2 Yamada default path (cup has a 7:20 PM stamp beat first, so its pick is cup:4)
+  'shop-butter': { side: 0, picks: {} }, // groceries, butter chicken -> steeped
+  'library-katsu': { side: 1, picks: { 'cup:4': 2, 'escape:13': 'win' } }, // library, katsu -> unknown -> escape-win
 };
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));

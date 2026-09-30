@@ -160,7 +160,7 @@ const YourShoe = ({ x, y, r = 0 }) => (<g transform={`translate(${x} ${y}) rotat
 Object.assign(ITEMS, {
   feet: ({ pose = 'park' } = {}) => {
     const wet = pose === 'wet';
-    return (<g>
+    return (<g transform="translate(0 -250)">
       <rect x="-40" y="360" width="680" height="300" rx="20" fill={wet ? '#3b3f66' : '#e9d8b4'} />
       {wet
         ? <g><ellipse cx="200" cy="470" rx="170" ry="36" fill="#6f7fd0" opacity=".7" stroke="#9fb4ff" strokeWidth="4" />
@@ -169,7 +169,7 @@ Object.assign(ITEMS, {
         : [...Array(26)].map((_, i) => <circle key={i} cx={(i * 97) % 620} cy={390 + ((i * 53) % 230)} r={5 + (i % 3) * 3} fill="#b89d74" />)}
       <HerShoe x={150} y={470} r={-6} wet={wet} /><HerShoe x={250} y={478} r={4} wet={wet} />
       <g transform="scale(-1 1) translate(-980 0)"><YourShoe x={420} y={500} r={-4} /><YourShoe x={540} y={506} r={3} /></g>
-      <path d="M300 200 C282 180 256 196 274 216 L300 240 L326 216 C344 196 318 180 300 200Z" fill={PINK_D} stroke={INK} strokeWidth="4" />
+      <path d="M300 280 C282 260 256 276 274 296 L300 320 L326 296 C344 276 318 260 300 280Z" fill={PINK_D} stroke={INK} strokeWidth="4" />
     </g>);
   },
 });
