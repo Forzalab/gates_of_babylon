@@ -23,6 +23,7 @@ import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { Nanda, speaksNanda } from './Nanda.jsx';
 import { Fx } from './Fx.jsx';
+import { EmotionFx } from './art/emotion/EmotionFx.jsx';
 import { setCrowd, bumpRun, runBucket } from './meta.js';
 import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
@@ -240,6 +241,7 @@ function Player() {
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
+        {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} onAgain={() => pick(0)} />}
         {!pos.done && (here || speaksNanda(beat.line)) && (
