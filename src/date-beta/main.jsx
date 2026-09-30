@@ -49,7 +49,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'love', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'love', 'ux-six', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -130,6 +130,28 @@ const startPos = () => {
   return PICK >= 0 && !p.done && beatAt(SCENES, p).choices?.[PICK] ? choose(SCENES, p, PICK, RM) : p;
 };
 
+// ux-six: the line as drawn (display only; voice keys still use beat.line.plain).
+// - a stamp beat's "PLACE · TIME." lead-in is dropped: the stamp banner already says it (once, not twice);
+// - offstage (scene.offstage) her lines carry an offscreen label ("NANDA (ABOVE)"), never the sprite;
+// - an auto beat with no words says the clock is running instead of an empty box.
+export const AUTO_LINE = '⏳ Her clock is running…';
+function showLine(beat, off) {
+  let line = beat.line;
+  const p = beat.props ?? {};
+  if (p.shot === 'stamp' && p.place && p.time) {
+    const lead = `${p.place} · ${p.time}.`;
+    const first = line.parts[0];
+    if (first && !first.or && first.t.startsWith(lead)) {
+      const rest = first.t.slice(lead.length).trimStart();
+      const parts = [...(rest ? [{ t: rest }] : []), ...line.parts.slice(1)];
+      line = { ...line, parts, plain: parts.map((x) => x.t).join('') };
+    }
+  }
+  if (off && line.who === 'NANDA') line = { ...line, who: 'NANDA (ABOVE)' };
+  if (!beat.text && beat.wait === 'auto') line = { who: null, parts: [{ t: AUTO_LINE }], plain: AUTO_LINE, hasOr: false };
+  return line;
+}
+
 function Player() {
   const [pos, setPos] = useState(startPos);
   const [full, setFull] = useState(false);
@@ -163,6 +185,11 @@ function Player() {
   const face = beat.react ? null : (stepped && cut.face2) || cut.face || null;
   const tag = !!(cut.tag && beat.choices?.length === 1 && !beat.react);
   const handout = !!(cut.handout && beat.choices && !beat.react);
+  // ux-six: a one-button "choice" with no score is a NEXT in disguise: drawn as the NEXT pill (named after the action),
+  // a click / Space / Enter takes it. Ending beats keep their card button.
+  const solo = !!(beat.choices?.length === 1 && !beat.choices[0].love && !tag && !handout && !beat.end && !GAME[beat.bg] && !beat.react);
+  const off = !!scene.offstage; // she is in the house, not in the frame: no sprite, her lines are labelled from above
+  const shown = useMemo(() => showLine(beat, off), [beat, off]);
 
   // Meta loop (meta.js): each arrival at the first scene (boot or a loop back) is a new run; `run` feeds vary/if.
   const atFirst = !pos.done && pos.s === 0;
@@ -218,10 +245,10 @@ function Player() {
     if (pos.done) { setPos(start(SCENES, { rm: RM, luck: nextRunLuck(pos.luck) })); return; }
     if (paused) return;
     if (end) { if (button) pick(0); return; } // the end card: its button / Space / Enter = play again (choice 0)
-    if (tag) { pick(0); return; } // the smile tag stands where NEXT does: a click / Space / Enter takes it
+    if (tag || solo) { pick(0); return; } // solo = a one-button choice drawn as NEXT (ux-six). The smile tag stands where NEXT does: a click / Space / Enter takes it
     if (!canAdvance(beat, performance.now() - since.current, { button })) return;
     setPos((p) => next(SCENES, p, RM));
-  }, [pos, beat, paused, end, pick, tag]);
+  }, [pos, beat, paused, end, pick, tag, solo]);
   const skipScene = useCallback(() => setPos((p) => skip(SCENES, p, RM)), []); // skip() on a done run = a new run (keeps the luck going)
 
   useEffect(() => {
@@ -254,9 +281,11 @@ function Player() {
   };
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
-  const onNext = waiting && ready && !card && !paused ? () => advance(true) : null;
+  const onNext = (waiting || solo) && ready && !card && !paused ? () => advance(true) : null;
+  const say = !pos.done && !end && shown.parts.length > 0 && (!!beat.text || beat.wait === 'auto') && !GAME[beat.bg];
+  const stampP = !pos.done && !end && beat.props?.shot === 'stamp' && beat.props.place ? beat.props : null;
   const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
-  const hint = waiting && !paused; // only where a click does something (never on choice or auto beats)
+  const hint = (waiting || solo) && !paused; // only where a click does something (never on choice or auto beats)
   const closeTree = useCallback(() => setTree(false), []);
   const jump = useCallback((edge, choices) => {
     ASSETS.unlock();
@@ -281,7 +310,7 @@ function Player() {
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
+        {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={!!beat.choices && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face}
             face={end ? null : face} frame={end ? 'medium' : frame} />
@@ -289,12 +318,13 @@ function Player() {
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}
-        {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
+        {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
           action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} /> : null} />}
-        {beat.choices && !tag && !handout && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`c${beat.scene}${beat.index}`} />}
+        {beat.choices && !tag && !handout && !solo && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} beatKey={`${beat.scene}:${beat.index}`} key={`c${beat.scene}${beat.index}`} />}
+        {stampP && <div className="db-stamp" aria-hidden="true"><b>{stampP.place}</b><i>·</i><span>{stampP.time}</span></div>}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {card && <GoalCard onNext={() => advance(true)} />}
-        {onNext && !beat.text && <NextButton className="solo" onClick={onNext} />}
+        {onNext && !say && <NextButton className="solo" label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} onClick={onNext} />}
         {hint && <div className={`db-hint${card ? ' big' : ''}`}>Click anywhere to continue</div>}
         {paused && <div className="db-paused" role="status">paused (P)</div>}
       </div>

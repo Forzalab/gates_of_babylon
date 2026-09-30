@@ -337,3 +337,31 @@ body { font-family: var(--cond); color: var(--ink); }
 .stage.focus .db-focus { opacity: 1; }
 .stage.focus[data-scare="2"] .db-focus { background: radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(120, 8, 30, .6) 100%); }
 .stage.focus .db-nanda { filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)) drop-shadow(0 0 10px rgba(255, 95, 162, .75)); }
+
+/* ============ ux-six (sprint 0930): layering, legibility, contrast */
+/* Place/time stamp: drawn once, by the player (main.jsx .db-stamp), above her sprite + emote bubble, below the HUD pop.
+   The art's own stamp (art/shots Stamp) is hidden so it never shows twice. Sits under the pop's lane (pop ends ~y 180). */
+.stage .shot-stamp { display: none; }
+.db-stamp { position: absolute; left: 96px; top: 206px; z-index: 6; display: flex; gap: 18px; align-items: baseline; padding: 18px 34px;
+  background: rgba(12, 6, 18, .86); border-left: 8px solid #ff5fa2; color: #fffaf2; font: 700 52px/1 var(--cond, sans-serif); letter-spacing: .08em;
+  pointer-events: none; }
+.db-stamp i { color: #ff5fa2; font-style: normal; } .db-stamp span { font-weight: 400; }
+/* +N pop: the HUD lifts over the FX layer (.db-fx z 30, falling hearts / quake) while a pop is up, so the pill stays readable */
+.hud-a:has(.lv-pop) { z-index: 31; }
+.lv-pop .lv-tell { background: rgba(26, 7, 16, .96); }
+/* Contrast >= 4.5:1 for white text on the pink pills (was 1.8:1 on #ffa6d6 chips, ~3:1 at the top of the pink buttons) */
+.viewport { --g-pink: linear-gradient(180deg, #c63a88 0%, #b52c7e 40%, #a82272 65%, #8f1a62 100%);
+  --next-body: linear-gradient(180deg, #c63a88 0%, #b02a7a 42%, #9c206c 70%, #82185a 100%); }
+.db-chip.up { color: var(--lv-ol); text-shadow: none; }
+/* Top controls: >= 24 px text, solid black ground (white on #000 = 21:1), big hit area */
+/* stacked down the right edge so the bigger controls never sit on the HUD ribbon (it ends at x 1580) */
+.chrome { gap: 8px; flex-direction: column; align-items: flex-end; }
+.chrome button, .chrome a { font-size: 24px; padding: 10px 16px; min-height: 48px; border: 2px solid #fff; background: #000; }
+/* Timer label + the one-time ?? legend */
+.db-timebar .db-timer { white-space: nowrap; min-width: 0; }
+/* under the right-hand button, clear of the centred DEFAULT tag under a pink or mid default */
+.db-legend { position: absolute; right: 0; bottom: -64px; white-space: nowrap; z-index: 4; padding: 10px 22px 12px; border-radius: 12px; background: rgba(26, 7, 16, .92);
+  color: #ffe9f1; font: 700 28px/1 var(--cond); letter-spacing: .02em; box-shadow: 0 0 0 3px rgba(255, 233, 241, .5); pointer-events: none; }
+.db-legend b { color: #ffa6d6; }
+/* Offscreen speaker label (NANDA (ABOVE)): same tag, dashed = not in the frame */
+.db-say.offscreen .who { border-style: dashed; }

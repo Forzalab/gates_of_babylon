@@ -3,7 +3,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { loadGacha, rollGacha, freshLuck, nextRunLuck, unit, tierById, GACHA_FX, FACE_LAYERS } from './date-beta/gacha.js';
-import { loadScenes, start, next, choose, beatAt, ending, EMOTES } from './date-beta/engine.js';
+import { loadScenes, start, next, choose, beatAt, ending, EMOTES, swingCap, capSwing } from './date-beta/engine.js';
 import { applyPacks } from './date-beta/packs/index.js';
 import base from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
@@ -133,8 +133,9 @@ test('engine: a forced crit adds its bonus, tags the reaction, replaces the pick
   assert.equal(S.love.goal, 12, 'goal = base love only');
   const p = start(S, { force: 'crit10' });
   const q = choose(S, p, 0);
-  assert.equal(q.love, 12, '3 + 10 clamps at the goal');
-  assert.equal(q.react.love, 13);
+  assert.equal(swingCap(12), 5, 'ux-six: one pick moves at most max(5, 25% of goal)');
+  assert.equal(q.love, 5, '3 + 10 = 13, capped at +5 in one pick');
+  assert.equal(q.react.love, 5, 'the pop shows the capped change');
   assert.deepEqual({ ...q.react.gacha, face: [...q.react.gacha.face] }, { id: 'crit10', fx: 'love-crit', face: ['sparkle'], label: 'CRITICAL +10', bonus: 10, base: 3 });
   assert.equal(q.react.emote, 'hearts');
   assert.equal(q.fx, undefined, 'the gacha FX replaces the pick fx (love-burst)');
@@ -146,15 +147,18 @@ test('engine: a penalty takes love down and clamps at 0; streak of 2 then a ♥ 
   let p = start(S, { force: 'rage' });
   p = choose(S, p, 1);
   assert.equal(p.react.gacha.id, 'rage');
-  assert.equal(p.love, 0, '6 - 2 - 5 clamps at 0');
-  assert.equal(p.react.love, -7);
+  assert.equal(p.love, 1, '6 - 2 - 5 = -7, capped at -5 in one pick');
+  assert.equal(p.react.love, -5);
   p = choose(S, next(S, p), 1);
   assert.equal(p.luck.streak, 2);
+  const before = next(S, p).love;
   p = choose(S, next(S, p), 0);
   assert.equal(p.react.gacha.id, 'pity');
   assert.equal(p.react.gacha.fx, 'love-bomb');
   assert.equal(S.love.goal, 18);
-  assert.equal(p.love, 18, '0 + 3 + 15 = the goal (18)');
+  assert.equal(p.love, before + swingCap(18), 'the love-bomb 3 + 15 is capped at +swingCap');
+  assert.equal(capSwing(40, 100), 25, 'cap = 25% of the goal');
+  assert.equal(capSwing(-40, 100), -25);
 });
 
 test('engine: the same seed replays the same luck; a go back to scene 1 starts the next seed', () => {
@@ -183,7 +187,8 @@ const ARTS = [...ART_NAMES, ...ROMANCE, ...INTERIORS, 'lock-game'];
 
 test('pack: gacha is LAST in main.jsx PLAY; applyPacks carries it to the root; later packs replace it', () => {
   assert.equal(PLAY.at(-1), 'gacha');
-  assert.equal(PLAY.at(-2), 'love', 'love keeps its final beat numbers, gacha adds no patches');
+  assert.equal(PLAY.at(-3), 'love', 'love keeps its final beat numbers, gacha adds no patches');
+  assert.equal(PLAY.at(-2), 'ux-six', 'ux-six patches after love (its inserts never shift love\'s beat numbers)');
   assert.deepEqual(Object.keys(gachaPack).sort(), ['gacha', 'name', 'note']);
   const d = applyPacks(base, [gachaPack]);
   assert.deepEqual(d.gacha, RULES);
