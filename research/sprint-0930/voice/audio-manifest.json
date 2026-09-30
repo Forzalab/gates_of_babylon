@@ -299,5 +299,12 @@
   "beat": "3",
   "file": "public/date-beta/voice/11-steeped/059_3.mp3",
   "text": "[whispers][warm][slow] いつまでも一緒。 [pause][perfectly even] …Forever. [slow][sing-song] Neee?"
+ },
+ {
+  "n": 62,
+  "scene": "escape-win",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/12-escape-win/062_2-t.mp3",
+  "text": "[softly][warm] Home is warm, and sweet."
  }
 ]
