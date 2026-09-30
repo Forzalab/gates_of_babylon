@@ -1,5 +1,6 @@
 // packs/index.js: merge content packs into the base scenes.json data (raw JSON in, raw JSON out; loadScenes validates after).
 // pack = { scenes?: [scene], insert?: [{ after, ids: [sceneId] }], patch?: [{ scene, beat, set: {beatFields} }], flags?: {flag:[values]} }
+// notes: ignored. patch with `beats:[...]` inserts those beats before index `beat` (no `set`). drop: [sceneId] removes scenes last.
 // Order: add scenes (appended), insert (move named scenes to sit right after `after`), patch (shallow-merge fields into a beat).
 const fail = (m) => { throw new Error(`date-beta packs: ${m}`); };
 
@@ -8,7 +9,7 @@ export function applyPacks(base, packs = []) {
   for (const [n, pack] of packs.entries()) {
     const at = `pack[${pack?.name ?? n}]`;
     if (!pack || typeof pack !== 'object') fail(`${at}: must be an object`);
-    for (const k of Object.keys(pack)) if (!['name', 'note', 'scenes', 'insert', 'patch', 'flags'].includes(k)) fail(`${at}: unknown key "${k}"`);
+    for (const k of Object.keys(pack)) if (!['name', 'note', 'notes', 'scenes', 'insert', 'patch', 'flags', 'drop'].includes(k)) fail(`${at}: unknown key "${k}"`);
     for (const s of pack.scenes ?? []) {
       if (data.scenes.some((x) => x.id === s.id)) fail(`${at}: scene "${s.id}" already exists`);
       data.scenes.push(structuredClone(s));
@@ -29,9 +30,15 @@ export function applyPacks(base, packs = []) {
     for (const p of pack.patch ?? []) {
       const sc = data.scenes.find((s) => s.id === p.scene);
       if (!sc) fail(`${at}: patch: unknown scene "${p.scene}"`);
+      if (p.beats) { if (p.beat < 0 || p.beat > sc.beats.length) fail(`${at}: patch: ${p.scene} has no slot ${p.beat}`); sc.beats.splice(p.beat, 0, ...structuredClone(p.beats)); continue; }
       const beat = sc.beats[p.beat];
       if (!beat) fail(`${at}: patch: ${p.scene} has no beat ${p.beat}`);
       for (const [k, v] of Object.entries(p.set ?? {})) { if (v === null) delete beat[k]; else beat[k] = structuredClone(v); }
+    }
+    for (const id of pack.drop ?? []) {
+      const i = data.scenes.findIndex((s) => s.id === id);
+      if (i < 0) fail(`${at}: drop: unknown scene "${id}"`);
+      data.scenes.splice(i, 1);
     }
   }
   return data;

@@ -41,7 +41,9 @@ const packOf = (n) => {
   return { name: n, ...p };
 };
 setCrowd(crowd);
-const data = applyPacks(baseData, (params.get('pack') ?? '').split(',').filter(Boolean).map(packOf));
+// Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
 const DEBUG = createSession(() => localStorage, SCENES, data.flags ?? {});
