@@ -24,6 +24,7 @@ import { BG_FALLBACK } from './art/fallbacks.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { createVoice } from './voice/index.js';
+import { beatTiming } from './voice/voice.js';
 import { Nanda, speaksNanda, FRAMES } from './Nanda.jsx';
 import { stageFor } from './art/nanda.js';
 import { autoFaces } from './art/autoface.js';
@@ -101,7 +102,8 @@ function probeFrames() {
 if (!RM && !/[?&]fx=full\b/.test(location.search)) probeFrames();
 const AUTOFACE = !/[?&]autoface=0\b/.test(location.search);
 // Voice: Nanda's recorded lines (voice/), one at a time; silent where a line has no file. M = mute.
-const VOICE = createVoice(import.meta.env.BASE_URL);
+const VOICE = createVoice(import.meta.env.BASE_URL, undefined, (on) => ASSETS.duck(on)); // beds -8 dB under a line
+ASSETS.setMuted(VOICE.muted); VOICE.subscribe((m) => ASSETS.setMuted(m)); // M mutes sfx too
 function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
 
 function useFit() {
@@ -178,7 +180,9 @@ function Player() {
   const since = useRef(0);
   const k = useFit();
   const stageRef = useRef(null);
-  const [ready, setReady] = useState(false); // the beat's hold has passed (NEXT shows)
+  const [ready, setReady] = useState(false); // the beat's hold (and its voice take) has passed (NEXT shows)
+  const [vmuted, setVmuted] = useState(VOICE.muted);
+  useEffect(() => VOICE.subscribe(setVmuted), []);
   // On a reaction frame the scene is the pick's scene, even when the pick already jumped on.
   const scene = SCENES[pos.react ? pos.react.s : pos.s];
   // The beat as this run sees it: the reaction frame, else the beat with `vary` overlays (bento echo) applied.
@@ -198,7 +202,11 @@ function Player() {
   const frame = insert && !cut.frame ? 'off' : !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
   const lead = !beat.react && cut.lead ? cut.lead : null;
   const splitAt = !beat.react && cut.at ? cut.at : null;
-  const stepped = useStep(lead || splitAt ? Math.max(500, cut.step ?? 600) : 0, pos);
+  // Voice timing (research/sprint-0930/narration/TIMING.md): what this beat will say, in ms (0 when silent / muted).
+  const vplan = useMemo(() => VOICE.plan(beat.scene, lead ?? beat.line?.plain, lead ? beat.line?.plain : null), [beat, lead, vmuted]); // eslint-disable-line react-hooks/exhaustive-deps
+  // a two-step line reveals when the lead's take ends (lead) or at the aligned split word (cut.at); else the authored step
+  const vt = beatTiming(beat, vplan, { lead: !!lead, splitAt, step: Math.max(500, cut.step ?? 600) });
+  const stepped = useStep(lead || splitAt ? vt.stepAt : 0, pos);
   // R5: a beat with no face of its own gets one from its line's mood, never the beat-before's (art/autoface.js; ?autoface=0 = off)
   const autoFace = useMemo(() => (AUTOFACE ? autoFaces(scene.beats, (b) => stageFor(b.scare)) : []), [scene]);
   const face = beat.react ? null : (stepped && cut.face2) || cut.face || autoFace[beat.index] || null;
@@ -217,16 +225,16 @@ function Player() {
   useEffect(() => { if (atFirst) bumpRun(); }, [atFirst]);
   useEffect(() => {
     since.current = performance.now();
-    cue(beat.sfx);
+    // sfx on the frame cut; props.sfxAt: "<word>" lands it on that aligned word while the take plays
+    const sfxT = vt.sfxAt ? setTimeout(() => cue(beat.sfx), vt.sfxAt) : (cue(beat.sfx), null);
     document.documentElement.dataset.beat = `${beat.scene}:${beat.index}`;
     setLeft(beat.timer && !pos.done ? beat.timer : null);
     setReady(false);
-    const t = setTimeout(() => setReady(true), beat.hold ?? 0);
-    return () => clearTimeout(t);
-  }, [pos, beat]);
+    // NEXT shows once the hold has passed AND the take is over (+ pad); a click can still skip after beat.hold
+    const t = setTimeout(() => setReady(true), vt.readyAt);
+    return () => { clearTimeout(t); clearTimeout(sfxT); };
+  }, [pos, beat]); // eslint-disable-line react-hooks/exhaustive-deps
   // Voice: each new beat (or reaction frame) stops the last line and plays its own, if recorded.
-  const [vmuted, setVmuted] = useState(VOICE.muted);
-  useEffect(() => VOICE.subscribe(setVmuted), []);
   useEffect(() => {
     if (pos.done || end) VOICE.stop();
     else if (lead) VOICE.show(beat.scene, lead, beat.line?.plain);
@@ -235,7 +243,7 @@ function Player() {
   // Auto beats wait while the map is open (the full wait restarts when it closes).
   useEffect(() => {
     if (beat.auto == null || pos.done || tree) return undefined;
-    const t = setTimeout(() => setPos((p) => next(SCENES, p, RM)), beat.auto);
+    const t = setTimeout(() => setPos((p) => next(SCENES, p, RM)), vt.autoAt); // never cuts a take off
     return () => clearTimeout(t);
   }, [pos, beat, tree]);
 

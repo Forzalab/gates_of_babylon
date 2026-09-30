@@ -15,13 +15,15 @@ const manifest = read('./date-beta/assets.json');
 const INDEX = src('./date-beta/art/r3-rain/index.js');
 const IDS = [...INDEX.slice(INDEX.indexOf('export const R3_RAIN')).matchAll(/'([\w-]+)': [A-Z]\w*/g)].map((m) => m[1]);
 // v2-curry 13 = its exit (was 5 until packs/curry.json put the street -> door -> table -> dish shots before it)
-const BEATS = [['v2-rain', 1, 'rain-sidewalk'], ['v2-rain', 2, 'rain-alley'], ['v2-rain', 3, 'rain-eave'], ['v2-rain', 4, 'rain-ending'],
+const BEATS = [['v2-rain', 1, 'rain-sidewalk'], ['v2-rain', 2, 'rain-puddle'], ['v2-rain', 3, 'rain-eave'], ['v2-rain', 4, 'rain-ending'],
   ['v2-street', 2, 'street-bluehour'], ['v2-street', 5, 'her-building'], ['v2-curry', 13, 'curry-street'], ['escape-win', 6, 'escape-night']];
+// rain-alley: the old v2-rain 2 lane, kept registered as the puddle beat's fallback (research/sprint-0930/puddle/PLAN.md)
+const SPARE = ['rain-alley'];
 const PLAY = /const PLAY = \[([^\]]+)\]/.exec(src('./date-beta/main.jsx'))[1].match(/'([\w-]+)'/g).map((s) => s.slice(1, -1));
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
 
-test('r3-rain: 8 ids registered, spread into ART, pack runs right after variant-v2 / r3-station', () => {
-  assert.deepEqual([...IDS].sort(), BEATS.map((b) => b[2]).sort());
+test('r3-rain: 9 ids registered (8 beats + the spare), spread into ART, pack runs right after variant-v2 / r3-station', () => {
+  assert.deepEqual([...IDS].sort(), [...BEATS.map((b) => b[2]), ...SPARE].sort());
   for (const id of IDS) assert.ok(ART_NAMES.includes(id), `${id} reaches the art-name list`);
   assert.match(src('./date-beta/art/index.js'), /\.\.\.R3_RAIN,/);
   const i = PLAY.indexOf('r3-rain');

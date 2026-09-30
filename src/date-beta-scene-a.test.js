@@ -156,7 +156,7 @@ test('scene A faces: 5 new faces, drawn in her palette on her body; decor where 
 
 test('scene A voice: every recorded NANDA line on the rooftop still finds its take (bento x yum), the lead lines too', () => {
   const idx = buildIndex(voice);
-  const want = new Set(voice.filter((e) => e.scene === 'rooftop').map((e) => e.file));
+  const want = new Set(voice.filter((e) => e.scene === 'rooftop' && !e.file.includes('/narration/')).map((e) => e.file));
   const got = new Set();
   for (const b of B) for (const v of views(b)) {
     if (v.line.who === 'NANDA') { const f = fileForLine(idx, 'rooftop', v.line.plain); assert.ok(f, `no take for "${v.line.plain}"`); got.add(f); }

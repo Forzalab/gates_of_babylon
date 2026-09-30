@@ -4,7 +4,7 @@
   "R5 umeboshi deep pass (Tony 09-30, brain _drift/2026-09-30T0805-alt-R5-plan.md). Applied LAST, so the older packs keep their beat indexes.",
   "v2-park: beat 1 (the feet close-up) is cut; 'Hold my hand' plays on the real park bg with her upper pin reaching out at the viewer (props.cut.reach, a nervous face: her hand shakes); the rack shot's huge blurred duplicate of her is gone (plain park bg, her own sprite).",
   "Line/visual fixes (the R5 audit's contradictions): the train 'She takes your hand' = her pin reaches; 'The rain stops' said so while it still rained: the line now says it slows to a few drops (the 'stopping' rain FX, the umbrella still up); the key close-up = her pin hand opened with the key + red marks (cel key-palm, no beige card, she is off-frame: it IS her hand); 'Door 12 opens' = a close-up on the door + カチッ (cel door-click); 'She kneels' = lower + reaching down; 'Her hand on your back' = the kitchen bg, her pin reaching (no floating over a teacup card).",
-  "Insert shots (art/shots Insert, the old beige card): no card any more, the item is the close-up, big on the blurred place; she steps out of that frame (main.jsx). 'Close-up. Her shoes are wet' now IS that close-up (feet-wet).",
+  "Insert shots (art/shots Insert, the old beige card): no card any more, the item is the close-up, big on the blurred place; she steps out of that frame (main.jsx). 'Close-up. Her shoes are wet' now IS that close-up: since the puddle re-render (research/sprint-0930/puddle) its own bg rain-puddle, a top-down shot of both pairs of wet shoes + her reflection, so she steps out of the frame (cut.frame off) and the insert card is not used.",
   "v2-street 1 'Take small steps' is her line on a choice beat (the raised box hides any close-up): her on her street, no feet insert."
  ],
  "patch": [
@@ -70,7 +70,8 @@
     "zoom": 2.2,
     "cel": "door-click",
     "cut": {
-     "frame": "off"
+     "frame": "off",
+     "sharp": true
     }
    }
   },
@@ -109,8 +110,10 @@
    "scene": "v2-rain",
    "beat": 2,
    "props": {
-    "shot": "feet-wet",
-    "of": "rain-alley"
+    "cut": {
+     "frame": "off",
+     "sharp": true
+    }
    }
   },
   {

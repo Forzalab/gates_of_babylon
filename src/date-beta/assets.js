@@ -22,7 +22,14 @@ export const beepHz = (id) => 440 + ([...String(id)].reduce((h, c) => (h * 31 + 
 export function createLoader(manifest, base = '/') {
   const A = makeAssets(manifest);
   const bytes = new Map(), buffers = new Map(), images = new Map();
-  let ctx = null;
+  let ctx = null, master = null, muted = false, ducked = false;
+  // ONE sfx bus (master): M mutes it; it sits -8 dB (0.398) under a voice take (voice/index.js onSpeak).
+  const DUCK = 0.398;
+  const gains = () => {
+    if (!master) { master = ctx.createGain(); master.gain.value = muted ? 0 : ducked ? DUCK : 1; master.connect(ctx.destination); }
+    const v = muted ? 0 : ducked ? DUCK : 1;
+    try { const t = ctx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(v, t, ducked ? 0.03 : 0.12); } catch { master.gain.value = v; }
+  };
   let pending = null; // the last cue asked for before the context existed (the first beat's sound, red-team R5)
   // Start (or resume) the context inside a user gesture, then play the cue that was asked for before it: the first
   // beat's sfx fires on mount, before any gesture, and would otherwise never be heard.
@@ -50,19 +57,23 @@ export function createLoader(manifest, base = '/') {
   const beep = (id) => { // placeholder: a short beep, pitched per id so each missing cue is still told apart
     const o = ctx.createOscillator(), g = ctx.createGain();
     o.frequency.value = beepHz(id); g.gain.value = 0.05;
-    o.connect(g).connect(ctx.destination); o.start(); o.stop(ctx.currentTime + 0.08);
+    o.connect(g).connect(master); o.start(); o.stop(ctx.currentTime + 0.08);
   };
   const play = (cue) => {
     try {
       const id = A.cueId(cue);
       if (!id) return;
       if (!ctx) { pending = cue; return; }
+      gains();
+      const out = master;
       const b = buffers.get(id);
-      if (!b) { if (!synth(ctx, id)) beep(id); return; } // missing file: the synth stand-in, else the beep
-      const s = ctx.createBufferSource(); s.buffer = b; s.connect(ctx.destination); s.start();
+      if (!b) { if (!synth(ctx, id, out)) beep(id); return; } // missing file: the synth stand-in, else the beep
+      const s = ctx.createBufferSource(); s.buffer = b; s.connect(out); s.start();
     } catch { /* sound is never fatal */ }
   };
   const src = (id) => images.get(id) ?? placeholderImg(id);
   const has = (id) => images.has(id); // true once the real image file has loaded (it then beats any fallback art)
-  return { preload, play, src, unlock, has };
+  const setMuted = (v) => { muted = !!v; if (ctx) gains(); };
+  const duck = (v) => { ducked = !!v; if (ctx) gains(); };
+  return { preload, play, src, unlock, has, setMuted, duck };
 }
