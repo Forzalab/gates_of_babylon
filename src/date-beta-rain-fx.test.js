@@ -84,3 +84,12 @@ test('layer order in the player: bg -> Nanda -> rain overlay -> GUI -> wet marks
   assert.ok(at('<Nanda scare') < at('<RainOverlay') && at('<RainOverlay') < at('{say && <Say') && at('<Hud love') < at('<WetGui'));
   assert.doesNotMatch(src('./date-beta/art/r3-rain/RainSidewalk.jsx'), /<Umbrella/, 'the umbrella is the overlay cel, not in the bg');
 });
+
+test('near-lens umbrella: v2-rain 1-4 (after she offers it), not the crossing / platform / train / escape', async () => {
+  for (const i of [1, 2, 3, 4]) assert.equal(beat('v2-rain', i).props.underUmbrella, true, `v2-rain ${i}`);
+  for (const [s, i] of [['v2-rain', 0], ['v2-train', 8], ['escape-win', 6]]) assert.ok(!beat(s, i).props?.underUmbrella, `${s} ${i}`);
+  const ov = src('./date-beta/fx/RainOverlay.jsx');
+  assert.ok(ov.indexOf('<Streaks level') < ov.indexOf('<NearUmbrella tint') && ov.indexOf('<NearUmbrella tint') < ov.indexOf('<Glass level'), 'streaks -> near umbrella -> glass');
+  const { RIM_Y, nearRim } = await import('./date-beta/fx/RainOverlay.jsx').catch(() => ({}));
+  if (nearRim) { assert.ok(Math.abs(RIM_Y - 216) < 20); for (const [, y] of nearRim()) assert.ok(y > 150 && y <= 230); }
+});

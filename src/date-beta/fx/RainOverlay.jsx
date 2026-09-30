@@ -1,5 +1,5 @@
 // fx/RainOverlay.jsx: the rain overlay for outdoor rain beats (level from fx/rain.js rainOf(beat)).
-// Layer order in the stage: bg -> Nanda -> <RainOverlay> (umbrella cel = BOOK layer, streak layer, screen-glass drops)
+// Layer order in the stage: bg -> Nanda -> <RainOverlay> (umbrella cel = BOOK layer, streak layer, near-lens umbrella, screen-glass drops)
 // -> GUI -> <WetGui> (wet spots, beads, pool, drips on the dialogue box / HUD ribbon / choices; never over text).
 // Cel-over-vtrace: every piece here is a flat cel with a clean line, tinted by the bg's time-of-day grade (tintOf).
 // Motion: streak + glass layers swap 2-3 static frames every FRAME_MS (625 ms, < 2 Hz); reduced motion = frame 0.
@@ -94,6 +94,49 @@ function shelterPath(g) {
   return `M${cx - hw - 12} ${ry + 10} Q${cx - hw * 0.7} ${ay} ${cx} ${ay - 30} Q${cx + hw * 0.7} ${ay} ${cx + hw + 12} ${ry + 10} L${cx + hw * 0.92 + lean} ${H} L${cx - hw * 0.92 + lean} ${H}Z`;
 }
 
+// ---- the NEAR-LENS umbrella (props.underUmbrella): the same canopy seen from under it, close to the lens, so big and
+// heavily blurred (depth of field). Its rim spans the top of the frame down to ~1/5 of the height (RIM_Y), the ribs
+// read as soft darker bands fanning from a pivot far above the frame, and drips run off the rim, stepped per frame.
+export const RIM_Y = 216;
+const NEAR_N = 7, PIV = [960, -1500];
+export function nearRim() {
+  // rim points: scallop ends at the ribs, low in the middle (RIM_Y), lifting a little toward the edges
+  return Array.from({ length: NEAR_N + 1 }, (_, k) => { const x = -120 + (2160 * k) / NEAR_N, u = (x - 960) / 1080; return [x, RIM_Y - 40 * u * u]; });
+}
+export function nearCanopyPath() {
+  const r = nearRim();
+  let d = `M-200 -40 L${r[0][0]} ${r[0][1]}`;
+  for (let k = 0; k < NEAR_N; k++) { const [x0, y0] = r[k], [x1, y1] = r[k + 1]; d += ` Q${(x0 + x1) / 2} ${(y0 + y1) / 2 - 34} ${x1} ${y1}`; }
+  return `${d} L2120 -40Z`;
+}
+function NearUmbrella({ tint, frame }) {
+  const r = nearRim(), canopy = nearCanopyPath();
+  const falls = [[1, 0], [3, 1], [5, 2], [2, 1], [6, 0], [4, 2], [0, 2]].filter(([, f]) => f === frame % 3);
+  return (
+    <g className="rn-near" data-rim={RIM_Y}>
+      <g filter="url(#rn-lens)">
+        <path d={canopy} fill="#8a2d5e" />
+        <path d={canopy} fill="url(#rn-under)" />
+        {/* ribs: darker bands from the pivot to each rim point */}
+        {r.map(([x, y], k) => <path key={k} d={`M${PIV[0]} ${PIV[1]} L${x} ${y}`} stroke="#3c0a26" strokeWidth="26" opacity=".55" />)}
+        {/* the rim hem: a darker lip along the scallops */}
+        <path d={canopy.replace(/^M-200 -40 L/, 'M').replace(/ L2120 -40Z$/, '')} fill="none" stroke="#4a0f30" strokeWidth="18" />
+        <path d={canopy} fill={tint.grade} opacity={tint.gradeO} />
+      </g>
+      {falls.map(([k, f]) => {
+        const [x, y] = r[k];
+        return (
+          <g key={k} fill={tint.streak} filter="url(#rn-soften)" opacity=".85">
+            <ellipse cx={x} cy={y + 14 + f * 30} rx="7" ry="15" />
+            <ellipse cx={x + 4} cy={y + 90 + f * 60} rx="5" ry="18" />
+            <ellipse cx={x + 9} cy={y + 190 + f * 80} rx="4" ry="22" opacity=".6" />
+          </g>
+        );
+      })}
+    </g>
+  );
+}
+
 function Streaks({ level, frame, tint, dry }) {
   const list = streaksFor(level, frame);
   return (
@@ -137,7 +180,7 @@ function Glass({ level, frame, tint }) {
   );
 }
 
-export function RainOverlay({ level, bg, rm = false, umbrella = false, stageRef, beatKey }) {
+export function RainOverlay({ level, bg, rm = false, umbrella = false, under = false, stageRef, beatKey }) {
   const frames = framesOf(level, rm);
   const frame = useStep(Math.max(1, frames), 5, frames > 1);
   const nanda = useMeasure(stageRef, measureNanda, `${beatKey}/${umbrella}`);
@@ -150,10 +193,14 @@ export function RainOverlay({ level, bg, rm = false, umbrella = false, stageRef,
         <linearGradient id="rn-fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={tint.streak} stopOpacity="0" /><stop offset=".55" stopColor={tint.streak} stopOpacity=".7" /><stop offset="1" stopColor={tint.streak} /></linearGradient>
         <linearGradient id="rn-soft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={tint.streak} stopOpacity="0" /><stop offset=".5" stopColor={tint.streak} /><stop offset="1" stopColor={tint.streak} stopOpacity="0" /></linearGradient>
         <filter id="rn-blur" x="-2" y="-.2" width="5" height="1.4"><feGaussianBlur stdDeviation="5" /></filter>
-        {g && <mask id="rn-dry" maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}><rect width={W} height={H} fill="#fff" /><path d={shelterPath(g)} fill="#000" /></mask>}
+        <filter id="rn-lens" x="-.1" y="-.5" width="1.2" height="2"><feGaussianBlur stdDeviation="16" /></filter>
+        <filter id="rn-soften" x="-2" y="-1" width="5" height="3"><feGaussianBlur stdDeviation="3" /></filter>
+        <linearGradient id="rn-under" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#2a0619" stopOpacity=".7" /><stop offset="1" stopColor="#ee78a8" stopOpacity=".35" /></linearGradient>
+        {(g || under) && <mask id="rn-dry" maskUnits="userSpaceOnUse" x="0" y="0" width={W} height={H}><rect width={W} height={H} fill="#fff" />{g && <path d={shelterPath(g)} fill="#000" />}{under && <path d={nearCanopyPath()} fill="#000" />}</mask>}
       </defs>
       {g && <Umbrella g={g} tint={tint} frame={frame} />}
-      <Streaks level={level} frame={frame} tint={tint} dry={!!g} />
+      <Streaks level={level} frame={frame} tint={tint} dry={!!(g || under)} />
+      {under && <NearUmbrella tint={tint} frame={frame} />}
       <Glass level={level} frame={frame} tint={tint} />
     </svg>
   );
