@@ -155,14 +155,8 @@ export function VendingInsert({ props, rm }) {
         <rect x="-150" y="-8" width="128" height="44" rx="12" fill="#ff5f8f" stroke="#fff" strokeWidth="4" />
         <text x="-86" y="23" textAnchor="middle" className="r3-sign" fontSize="28" fill="#fff">SAME ♡</text>
       </g>
-      {/* her arm: a pink sleeve + mitten from behind her body (sprite x 730-1190) up-left to the hero drink */}
-      <path d="M900 760 C880 690 840 610 800 566" fill="none" stroke="#d1177f" strokeWidth="46" strokeLinecap="round" />
-      <path d="M900 760 C880 690 840 610 800 566" fill="none" stroke="#ffe3f1" strokeWidth="36" strokeLinecap="round" />
-      <path d="M900 760 C880 732 866 716 850 700" fill="none" stroke="#8a7ff0" strokeWidth="36" strokeLinecap="round" />
-      <g transform="translate(790 560) rotate(-52)">
-        <ellipse cx="0" cy="0" rx="30" ry="24" fill="#fff" stroke="#d1177f" strokeWidth="5" />
-        <path d="M-24 -6 L-70 -14 Q-80 -8 -72 0 L-26 8Z" fill="#fff" stroke="#d1177f" strokeWidth="5" strokeLinejoin="round" />
-      </g>
+      {/* r5 (AUDIT 059): no drawn-in sleeve + mitten here any more: her sprite stands in front of the glass (the near
+          frame) and holds the can she just bought in her own pin hand (packs/r5-ume.json) */}
     </g>
   );
   return (

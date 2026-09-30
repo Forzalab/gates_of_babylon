@@ -17,3 +17,5 @@ if (ART_INDEX.includes('...CURRY')) ART_NAMES.push(...idsOf('./date-beta/art/cur
 if (ART_INDEX.includes('...SHOP')) ART_NAMES.push(...idsOf('./date-beta/art/shop/index.js', 'export const SHOP'), 'shop-game');
 // ...TOWN (art/town/index.js, the town walk to curry lunch) adds its own ids.
 if (ART_INDEX.includes('...TOWN')) ART_NAMES.push(...idsOf('./date-beta/art/town/index.js', 'export const TOWN'));
+// ...R5 (art/r5/index.js, the r5-ume umeboshi-path close-ups) adds its own ids.
+if (ART_INDEX.includes('...R5')) ART_NAMES.push(...idsOf('./date-beta/art/r5/index.js', 'export const R5'));

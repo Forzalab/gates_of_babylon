@@ -32,7 +32,8 @@ test('intensity mapping: props.rain wins, the bg gives the default, off turns it
 });
 
 test('every outdoor rain beat in play has its level', () => {
-  const want = [['v2-rain', 0, 'heavy'], ['v2-rain', 1, 'heavy'], ['v2-rain', 2, 'medium'], ['v2-rain', 3, 'medium'], ['v2-rain', 4, 'stopping'],
+  // r5-ume (AUDIT 071): "The rain stops." = no rain falls on that beat (it was still streaming at the 'stopping' level)
+  const want = [['v2-rain', 0, 'heavy'], ['v2-rain', 1, 'heavy'], ['v2-rain', 2, 'medium'], ['v2-rain', 3, 'medium'], ['v2-rain', 4, null],
     ['v2-train', 8, 'heavy'], ['escape-win', 6, 'drizzle']];
   for (const [s, i, l] of want) assert.equal(rainOf(beat(s, i)), l, `${s} ${i}`);
   assert.equal(beat('v2-rain', 1).props.umbrella, true);
@@ -86,7 +87,9 @@ test('layer order in the player: bg -> Nanda -> rain overlay -> GUI -> wet marks
 });
 
 test('near-lens umbrella: v2-rain 1-4 (after she offers it), not the crossing / platform / train / escape', async () => {
-  for (const i of [2, 3, 4]) assert.equal(beat('v2-rain', i).props.underUmbrella, true, `v2-rain ${i}`);
+  // r5-ume: beats 2 and 4 are low shoe close-ups on the road (no canopy in that frame); beat 3 stays under it
+  for (const i of [3]) assert.equal(beat('v2-rain', i).props.underUmbrella, true, `v2-rain ${i}`);
+  for (const i of [2, 4]) assert.equal(beat('v2-rain', i).props.underUmbrella, false, `v2-rain ${i} (a shoe close-up)`);
   for (const [s, i] of [['v2-rain', 0], ['v2-rain', 1], ['v2-train', 8], ['escape-win', 6]]) assert.ok(!beat(s, i).props?.underUmbrella, `${s} ${i}`);
   const ov = src('./date-beta/fx/RainOverlay.jsx');
   assert.ok(ov.indexOf('<Streaks level') < ov.indexOf('<NearUmbrella tint') && ov.indexOf('<NearUmbrella tint') < ov.indexOf('<Glass level'), 'streaks -> near umbrella -> glass');

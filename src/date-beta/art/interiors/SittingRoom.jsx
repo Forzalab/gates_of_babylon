@@ -111,6 +111,31 @@ export function SittingRoomBook({ props = {} }) {
   );
 }
 
+
+// r5 (AUDIT 082): the table's dining chairs, one at each end (yours is the middle one, where the camera sits). Wood, the
+// lamp (top right) lights their right edges; a soft contact shadow under each on the floor.
+function SideChair({ flip = false }) {
+  const t = flip ? 'translate(1920 0) scale(-1 1)' : undefined;
+  const wood = '#5a321e', line = '#2a160e', lit = flip ? '#3e2214' : '#9a6a44';
+  return (
+    <g transform={t}>
+      <ellipse cx="170" cy="1066" rx="170" ry="22" fill="#0d0806" opacity=".45" />
+      {/* the back posts + top rail + a slat (the backrest faces the camera side) */}
+      <rect x="62" y="560" width="30" height="520" rx="8" fill={wood} stroke={line} strokeWidth="5" />
+      <rect x="132" y="578" width="28" height="500" rx="8" fill={wood} stroke={line} strokeWidth="5" />
+      <path d="M52 560 L170 578 L170 628 L52 612Z" fill="#6a3c26" stroke={line} strokeWidth="5" strokeLinejoin="round" />
+      <path d="M62 700 L160 712 L160 736 L62 724Z" fill="#6a3c26" stroke={line} strokeWidth="4" strokeLinejoin="round" />
+      <path d="M56 566 L166 582" stroke={lit} strokeWidth="6" strokeLinecap="round" />
+      {/* the seat, reaching toward the table, and the front legs */}
+      <path d="M58 880 L166 896 L318 890 L226 872Z" fill="#6a3c26" stroke={line} strokeWidth="5" strokeLinejoin="round" />
+      <path d="M58 880 L166 896 L166 914 L58 898Z" fill="#4a2a1c" stroke={line} strokeWidth="4" strokeLinejoin="round" />
+      <path d="M166 896 L318 890 L318 906 L166 914Z" fill="#3e2214" stroke={line} strokeWidth="4" strokeLinejoin="round" />
+      <rect x="226" y="900" width="24" height="180" fill={wood} stroke={line} strokeWidth="4" />
+      <rect x="292" y="900" width="24" height="180" fill={wood} stroke={line} strokeWidth="4" />
+    </g>
+  );
+}
+
 export default function SittingRoom({ props = {}, rm }) {
   const kind = props.feed || props.plate || null;
   const lamp = [1302, 262];
@@ -137,6 +162,7 @@ export default function SittingRoom({ props = {}, rm }) {
         <Curtain x0={0} x1={340} hem={FLOOR + 10} side="left" seed={5} tint="#9a86c0" shade="#3e3258" />
         <Curtain x0={1580} x1={1920} hem={FLOOR + 10} side="right" seed={6} tint="#c8a8c8" shade="#4a3a60" />
         <circle cx={lamp[0]} cy={lamp[1]} r="520" fill="url(#sr-lamp)" style={{ mixBlendMode: 'screen' }} />
+        <SideChair /><SideChair flip />
         <TableSet kind={kind} id="sr" />
         <Grade id="sr-grade" tone="night" sun={lamp} flareR={160} rm={rm} />
       </svg>

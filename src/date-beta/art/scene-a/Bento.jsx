@@ -10,6 +10,7 @@
 //   labels: { ume, tama }            button aria-labels (default 'Umeboshi' / 'Tamagoyaki')
 import { rng } from '../util.js';
 import { traceUrl, preloadTrace } from '../romance/Grade.jsx';
+import { Backdrop } from '../r5/parts.jsx'; // r5: the close-ups sit on the rooftop, out of focus
 import { INK, Umeboshi, UmeStain, ShisoLeaf, TamaSlice, TamaLog, TamaBlock, Chopstick, Glint } from './foods.jsx';
 
 preloadTrace('bento-pink');
@@ -174,28 +175,43 @@ export function BentoSvg({ className = '', style, ...p }) {
 }
 
 // ---------- full-frame shots (bg ids) ----------
-// Backdrop: her lap, out of focus: a dark pleated uniform like refs 10 / 01, tinted to Nanda's lavender skirt.
-function Lap({ uid }) {
+// r5 (AUDIT 006): the lid comes up in YOUR hand (navy sleeve, top right), tilted open; the box sits on the rooftop floor,
+// the roof soft behind it (Backdrop = rooftop-noon out of focus), so the insert stays on the scene's own bg.
+function Lid({ uid }) {
   return (
-    <g aria-hidden="true">
-      <linearGradient id={`${uid}-lap`} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#57507a" /><stop offset="1" stopColor="#2e2944" /></linearGradient>
-      <rect width="1920" height="1080" fill={`url(#${uid}-lap)`} />
-      {Array.from({ length: 11 }, (_, i) => (
-        <polygon key={i} points={`${i * 190 - 40},0 ${i * 190 + 40},0 ${i * 210 - 10},1080 ${i * 210 - 120},1080`} fill={i % 2 ? '#3f3960' : '#6a6392'} opacity=".5" />
-      ))}
+    <g transform="translate(1480 90) rotate(-16)">
+      <ellipse cx="40" cy="250" rx="420" ry="46" fill="#2a1022" opacity=".25" />
+      <rect x="-380" y="-70" width="780" height="300" rx="70" fill="#ff8fc0" stroke="#6b0f45" strokeWidth="10" />
+      <rect x="-350" y="-44" width="720" height="246" rx="54" fill="#ffb3d6" />
+      <path d="M-300 -20 Q0 -46 300 -20" stroke="#fff" strokeWidth="18" strokeLinecap="round" opacity=".7" fill="none" />
+      <path d={`M-40 80 C-60 40 -120 60 -80 110 L0 170 L80 110 C120 60 60 40 40 80Z`} fill="#ff5fa2" stroke="#6b0f45" strokeWidth="6" transform="translate(0 -30)" />
+      <g transform="translate(330 110) rotate(-70) scale(1.3)"><RoofHand uid={uid} /></g>
     </g>
   );
 }
-
-export function BentoInsert({ props = {} }) {
+function RoofHand() {
+  // a simple 5-finger grip over the lid's edge (the shop Hand kit's shape, navy sleeve), drawn in the lid's frame
+  return (
+    <g>
+      <path d="M-40 0 L-46 420 L46 420 L40 0Z" fill="#fcd8c4" stroke="#7a4a3a" strokeWidth="4" />
+      <path d="M-58 36 L-72 520 L72 520 L58 36Z" fill="#2d3a5a" stroke="#1b2238" strokeWidth="4" />
+      <path d="M-44 0 C-52 -40 -50 -70 -46 -100 L46 -100 C50 -70 52 -40 44 0Z" fill="#fcd8c4" stroke="#7a4a3a" strokeWidth="4" />
+      {[-30, -10, 10, 30].map((f) => <path key={f} d={`M${f - 9} -94 L${f - 9} -136 Q${f} -146 ${f + 9} -136 L${f + 9} -94Z`} fill="#fcd8c4" stroke="#7a4a3a" strokeWidth="4" />)}
+      <path d="M44 -20 C80 -40 84 -80 60 -104 L42 -92 C58 -76 56 -52 30 -40Z" fill="#fcd8c4" stroke="#7a4a3a" strokeWidth="4" />
+    </g>
+  );
+}
+export function BentoInsert({ props = {}, rm }) {
   return (
     <div className="art sa-bento-shot">
-      <svg viewBox="0 0 1920 1080" role="img" style={{ width: '100%', height: '100%', display: 'block' }}
-        aria-label="Nanda's pink bento: white rice with an umeboshi, two tamagoyaki slices, octopus sausages, potato salad, kinpira.">
-        <Lap uid="bi" />
-        <g transform="translate(960 552) rotate(-3) scale(1.16) translate(-580 -406)">
+      <Backdrop of="rooftop-noon" x={960} y={820} zoom={2} blur={9} dim={0.95} rm={rm} />
+      <svg viewBox="0 0 1920 1080" role="img" style={{ width: '100%', height: '100%', display: 'block', position: 'absolute', inset: 0 }}
+        aria-label="Close-up on the rooftop: her pink bento, the lid lifting off in your hand. White rice with an umeboshi, two tamagoyaki slices, octopus sausages, potato salad, kinpira.">
+        <ellipse cx="960" cy="960" rx="760" ry="90" fill="#2a1022" opacity=".3" />
+        <g transform="translate(960 600) rotate(-3) scale(1.02) translate(-580 -406)">
           <BentoBox uid="bi" lift={props.lift ?? null} focus={props.focus ?? null} />
         </g>
+        <Lid uid="bi" />
       </svg>
     </div>
   );
@@ -207,16 +223,16 @@ const LIFT = {
   ume: { box: 'translate(300 330) rotate(-4) scale(1.5)', at: [860, 400], shadow: [800, 870, 120, 46] },
 };
 
-export function BentoLift({ props = {} }) {
+export function BentoLift({ props = {}, rm }) {
   const food = props.lift === 'ume' ? 'ume' : 'tama';
   const L = LIFT[food], [ax, ay] = L.at, [sx, sy, srx, sry] = L.shadow;
   return (
     <div className="art sa-bento-shot">
-      <svg viewBox="0 0 1920 1080" role="img" style={{ width: '100%', height: '100%', display: 'block' }}
+      <Backdrop of="rooftop-noon" x={960} y={820} zoom={2} blur={9} dim={0.95} rm={rm} />
+      <svg viewBox="0 0 1920 1080" role="img" style={{ width: '100%', height: '100%', display: 'block', position: 'absolute', inset: 0 }}
         aria-label={food === 'ume' ? 'Chopsticks lift the umeboshi off the rice. A pink stain stays where it sat.' : 'Chopsticks lift a tamagoyaki slice. Its rolled layers swirl on the cut face.'}>
         <defs><filter id="bl-sh" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="22" /></filter>
           <radialGradient id="bl-key" cx="0.47" cy="0.3" r=".7"><stop offset="0" stopColor="#fff" stopOpacity="0" /><stop offset="1" stopColor="#2a1630" stopOpacity=".4" /></radialGradient></defs>
-        <Lap uid="bl" />
         <g transform={L.box}><BentoBox uid="bl" lift={food} /></g>
         <rect width="1920" height="1080" fill="url(#bl-key)" />
         <ellipse cx={sx} cy={sy} rx={srx} ry={sry} fill="#2a1022" opacity=".42" filter="url(#bl-sh)" />

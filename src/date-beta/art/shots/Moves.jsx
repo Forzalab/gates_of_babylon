@@ -102,8 +102,9 @@ export function Match({ props = {}, rm }) {
 export function Stamp({ props = {}, rm }) {
   const { of = 'shop-street', place = 'SHOP STREET', time = '3:10 PM' } = props;
   const Art = ART[of];
+  // r5: a stamp may frame a detail of its place (zoom > 1 at x, y): HER HOME on her shoes in their perfect line
   return (<div className="art shot stamp" role="img" aria-label={`${place}, ${time}`}>
-    {Art && <Art props={props.ofProps ?? {}} rm={rm} />}
+    {Art && (props.zoom > 1 ? <View of={of} x={props.x} y={props.y} zoom={props.zoom} props={props.ofProps ?? {}} rm={rm} /> : <Art props={props.ofProps ?? {}} rm={rm} />)}
     {props.air !== false && <div className="shot-air" />}
     <div className="shot-stamp"><b>{place}</b><i>·</i><span>{time}</span></div></div>);
 }

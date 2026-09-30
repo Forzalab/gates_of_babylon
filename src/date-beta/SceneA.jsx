@@ -7,7 +7,7 @@
 //   PovFood  : the POV "you eat" insert: the chosen piece big in the foreground, up in the chopsticks.
 //   PeekBento: the watching-you-eat foreground: the box low left, the eaten piece gone.
 import { useEffect, useState } from 'react';
-import { BentoSvg, TamaBlock, Umeboshi, Chopstick, Glint } from './art/scene-a/index.js';
+import { BentoSvg, BentoBox, TamaBlock, Umeboshi, Chopstick, Glint } from './art/scene-a/index.js';
 import { Parts, LoveChip } from './Say.jsx';
 import { fill } from './meta.js';
 import './scene-a.css';
@@ -46,17 +46,25 @@ export function Handout({ choices, map, on = [], onPick, left = null, total = nu
   };
   return (
     <div className="sa-handout" role="group" aria-label="She holds out her bento. Take one." onClick={(e) => e.stopPropagation()}>
-      {/* her arms: the gate's pink rim, out to the box's back corners (drawn under the box) */}
+      {/* her arms = her PIN LEADS (r5): out of her lower input pin (left) and her NOT bubble (right) to the box's back
+          corners, the pins' rim + lit core (drawn under the box) */}
       <svg className="sa-arms" viewBox="0 0 1920 1080" aria-hidden="true">
-        <path d="M806,318 Q716,356 668,414 M1106,318 Q1196,356 1252,414" fill="none" stroke="#d1177f" strokeWidth="36" strokeLinecap="round" />
-        <path d="M806,318 Q716,356 668,414 M1106,318 Q1196,356 1252,414" fill="none" stroke="#fff" strokeWidth="25" strokeLinecap="round" />
+        <path d="M770,338 C720,344 680,372 666,404 M1196,268 C1246,286 1262,340 1256,404" fill="none" stroke="#d1177f" strokeWidth="16" strokeLinecap="round" />
+        <path d="M768,334 C720,340 684,366 672,396 M1196,262 C1242,280 1256,332 1252,396" fill="none" stroke="#ffc4e6" strokeWidth="5" strokeLinecap="round" />
       </svg>
       <div className="sa-handout-box" style={{ left: HB.left, top: HB.top, width: HB.w }} onPointerOver={over} onPointerLeave={() => setHot(null)}
         onFocus={over} onBlur={() => setHot(null)}>
         <BentoSvg uid="ho" focus={hot ?? 'both'} labels={{ tama: label('tama'), ume: label('ume') }} onPick={(f) => onPick(idx[f])} />
       </div>
       <svg className="sa-arms hands" viewBox="0 0 1920 1080" aria-hidden="true">
-        {[[664, 404], [1256, 404]].map(([x, y]) => <g key={x}><circle cx={x} cy={y} r="24" fill="#fff" stroke="#d1177f" strokeWidth="5" /><path d={`M${x - 10},${y + 4} q10,8 20,0`} fill="none" stroke="#ffc4e6" strokeWidth="4" strokeLinecap="round" /></g>)}
+        {/* her pin hands on the box rim: a round pin nub each, two short pin fingers hooked over the rim */}
+        {[[664, 404, -1], [1256, 404, 1]].map(([x, y, d]) => (
+          <g key={x}>
+            <path d={`M${x} ${y} l${-8 * d} 34 M${x} ${y} l${10 * d} 32`} stroke="#d1177f" strokeWidth="11" strokeLinecap="round" />
+            <path d={`M${x - 4 * d} ${y + 12} l${-4 * d} 16 M${x + 5 * d} ${y + 12} l${5 * d} 15`} stroke="#ffc4e6" strokeWidth="4" strokeLinecap="round" />
+            <circle cx={x} cy={y} r="17" fill="#ffc4e6" stroke="#d1177f" strokeWidth="5" /><circle cx={x - 5} cy={y - 6} r="5" fill="#fff" opacity=".8" />
+          </g>
+        ))}
       </svg>
       {timed && (
         <div className="db-timebar sa-timebar" role="timer" aria-label={`${Math.ceil(left)} seconds left`}>
@@ -95,19 +103,21 @@ export function PovFood({ food = 'tama' }) {
       aria-label={ume ? 'Your view: the umeboshi comes up to your mouth in her pink chopsticks.' : 'Your view: a tamagoyaki slice comes up to your mouth in her pink chopsticks.'}>
       <defs><radialGradient id="pov-vig" cx=".5" cy=".46" r=".72"><stop offset=".62" stopColor="#1a0710" stopOpacity="0" /><stop offset="1" stopColor="#1a0710" stopOpacity=".5" /></radialGradient></defs>
       <rect width="1920" height="1080" fill="url(#pov-vig)" />
+      {/* r5 (AUDIT 008): your bento's pink corner low left (the BOOK), the piece held just above it in your chopsticks */}
+      <g transform="translate(-330 560) rotate(-6) scale(.78)"><BentoBox uid="pov-b" lift={ume ? 'ume' : 'tama'} /></g>
       {ume ? (
         <g>
-          <Chopstick from={[2080, 1180]} to={[1010, 640]} w0={64} w1={20} />
-          <g transform="translate(820 600) rotate(-8)"><Umeboshi r={170} uid="pov-u" /></g>
-          <Chopstick from={[2080, 900]} to={[990, 520]} w0={64} w1={20} />
-          <Glint x={700} y={470} s={30} />
+          <Chopstick from={[2080, 1180]} to={[700, 668]} w0={56} w1={18} />
+          <g transform="translate(560 640) rotate(-8)"><Umeboshi r={112} uid="pov-u" /></g>
+          <Chopstick from={[2080, 960]} to={[680, 586]} w0={56} w1={18} />
+          <Glint x={480} y={540} s={24} />
         </g>
       ) : (
         <g>
-          <Chopstick from={[2080, 1200]} to={[1030, 720]} w0={64} w1={20} />
-          <g transform="translate(800 610) rotate(-8) scale(1.45)"><TamaBlock uid="pov-t" /></g>
-          <Chopstick from={[2080, 880]} to={[1010, 470]} w0={64} w1={20} />
-          <Glint x={610} y={430} s={34} /><Glint x={1080} y={520} s={20} op={0.8} />
+          <Chopstick from={[2080, 1200]} to={[720, 700]} w0={56} w1={18} />
+          <g transform="translate(560 650) rotate(-8) scale(1)"><TamaBlock uid="pov-t" /></g>
+          <Chopstick from={[2080, 940]} to={[700, 560]} w0={56} w1={18} />
+          <Glint x={430} y={520} s={26} />
         </g>
       )}
     </svg>

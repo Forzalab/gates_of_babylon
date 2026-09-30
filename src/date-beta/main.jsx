@@ -207,7 +207,8 @@ function Player() {
   const stepped = useStep(lead || splitAt ? Math.max(500, cut.step ?? 600) : 0, pos);
   const face = beat.react ? (cut.reactFace ?? null) : (stepped && cut.face2) || cut.face || null;
   // her floor (art/floors.js): the per-bg / per-insert-shot floor line; props.cut.plant only where the bg has none.
-  const flo0 = floorOf(beat.bg, beat.props?.shot);
+  // props.cut.floor (r5): this beat's own floor line, for a camera shot that crops the bg (a close-up of her genkan step)
+  const flo0 = cut.floor ? { key: 'cut', y: cut.floor, book: null } : floorOf(beat.bg, beat.props?.shot);
   const flo = flo0.y ? flo0 : cut.plant ? { key: null, y: null } : flo0;
   const plant = flo.y ? 0 : cut.plant ?? 0;
   const off = !!scene.offstage; // she is in the house, not in the frame: no sprite, her lines are labelled from above
@@ -308,7 +309,9 @@ function Player() {
   const stampP = !pos.done && !end && beat.props?.shot === 'stamp' && beat.props.place ? beat.props : null;
   const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
   // the focus plane: only where the art blurs and she stands on a floor line in the medium shot (reduced-motion safe: still)
-  const plane = focus && !end && !off && frame === 'medium' && !!flo.y && !ART[beat.props?.shot] && !cut.noPlane && (here || speaksNanda(beat.line));
+  const plane = focus && !end && !off && frame === 'medium' && !!flo.y && !cut.noPlane && (here || speaksNanda(beat.line));
+  // the stepped cels (r5): props.cels2 replaces props.cels once a two-step line has stepped (a hit lands on "They laugh.")
+  const cels = (stepped && (lead || splitAt) && beat.props?.cels2) || beat.props?.cels;
   // outdoor rain (fx/rain.js): props.rain level, else the bg's default; keyed per beat so the wet marks re-measure
   const rain = !pos.done && !end ? rainOf(beat) : null;
   const rainKey = `${beat.scene}:${beat.index}:${beat.react ? 'r' : ''}:${!!beat.choices}`;
@@ -326,7 +329,7 @@ function Player() {
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
       <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''} frame-${frame}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
-        data-scene={scene.id} data-bg={beat.bg} data-floor={flo.key ?? undefined} data-shot={beat.props?.shot ?? undefined} data-scare={beat.scare}>
+        data-scene={scene.id} data-bg={beat.bg} data-floor={flo.key ?? undefined} data-floor-y={flo.y ?? undefined} data-shot={beat.props?.shot ?? undefined} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
           {!pos.done && (ART[beat.props?.shot] /* props.shot = art/shots id over the beat's bg */
             ? layer(beat.props.shot, 'db-bg', { home: isAssetId(beat.bg) ? BG_FALLBACK[beat.bg] : beat.bg, ...beat.props })
@@ -335,24 +338,26 @@ function Player() {
         </div>
         {/* r5 FOCUS PLANE (Tony's hybrid): while the art blurs behind a line, the ground she stands on stays sharp: an
             unblurred copy of the bg, masked to a horizontal band at her floor + a soft ellipse under her feet. No motion. */}
-        {plane && <div className="db-plane" style={{ '--floor': `${flo.y}px` }} aria-hidden="true">{layer(beat.bg, 'db-bg')}</div>}
+        {plane && <div className="db-plane" style={{ '--floor': `${flo.y}px`, '--dx': `${cut.dx ?? 0}px` }} aria-hidden="true">{ART[beat.props?.shot]
+          ? layer(beat.props.shot, 'db-bg', { home: isAssetId(beat.bg) ? BG_FALLBACK[beat.bg] : beat.bg, ...beat.props }) : layer(beat.bg, 'db-bg')}</div>}
         <div className="db-focus" aria-hidden="true" />
-        {!pos.done && !end && <Cels list={beat.props?.cels} front={false} rm={RM} />}
+        {!pos.done && !end && <Cels list={cels} front={false} rm={RM} />}
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && !end && !(off) && frame === 'medium' && (plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : (!!beat.choices || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px` } : { '--plant': `${plant}px` }} aria-hidden="true" />}
+        {!pos.done && !end && !(off) && frame === 'medium' && (plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : (!!beat.choices || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, '--dx': `${cut.dx ?? 0}px` } : { '--plant': `${plant}px`, '--dx': `${cut.dx ?? 0}px` }} aria-hidden="true" />}
+        {!pos.done && !end && !off && frame === 'pov' && (here || speaksNanda(beat.line)) && <div className="db-plant pov" aria-hidden="true" /> /* her shadow across the roof */}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
             planted={!end && frame === 'medium' && plant ? plant : 0}
-            floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
+            floor={!end && frame === 'medium' && flo.y ? flo.y : 0} dx={end ? 0 : cut.dx ?? 0}
             arms={end ? null : cut.arms ?? null} pose={end ? null : cut.pose ?? null} tilt={end ? 0 : (stepped && cut.tilt2) || cut.tilt || 0}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
         {!pos.done && !end && frame === 'medium' && flo.book && ART[`${beat.bg}-book`] && <div className="db-bookline" style={{ top: `${flo.book}px` }} aria-hidden="true" /> /* where the BOOK crops her (the float audit reads it) */}
-        {!pos.done && !end && <Cels list={beat.props?.cels} front rm={RM} /> /* r5 cels in front of her (your hands, sleeves, a table edge) */}
+        {!pos.done && !end && <Cels list={cels} front rm={RM} /> /* r5 cels in front of her (your hands, sleeves, a table edge) */}
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !(off && !end) && (frame === 'medium' || frame === 'close')} under={!!beat.props?.underUmbrella && !end} stageRef={stageRef} beatKey={rainKey} />}

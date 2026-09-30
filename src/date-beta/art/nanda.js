@@ -332,7 +332,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay =
   const s = E.pal, P = PAL[s], n = ++uid, cb = `nd-cb${n}`, gb = `nd-gb${n}`, sh = `nd-sh${n}`;
   const kneel = pose === 'kneel', lift = kneel ? 21 : 0;
   const legs = kneel
-    ? [39, 65].map((x) => `<rect x="${x - 8.5}" y="109" width="17" height="17.5" rx="7.5" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/><path d="M${x - 5},113 Q${x},110.5 ${x + 5},113" fill="none" stroke="${P.hair2}" stroke-width="1.1" stroke-linecap="round"/>`).join('')
+    ? [39, 65].map((x) => `<rect x="${x - 8.5}" y="111" width="17" height="17.5" rx="7.5" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/><path d="M${x - 5},115 Q${x},112.5 ${x + 5},115" fill="none" stroke="${P.hair2}" stroke-width="1.1" stroke-linecap="round"/>`).join('')
     : [40, 64].map((x) => `<rect x="${x - 3}" y="94" width="6" height="24" rx="3" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/>
     ${P.dark ? '' : `<rect x="${x - 3}" y="99" width="6" height="3" fill="${P.bow}"/>`}
     <path d="M${x - 9},125 C${x - 9},119 ${x - 4},117 ${x},117 C${x + 4},117 ${x + 9},119 ${x + 9},125 C${x + 9},127.5 ${x + 6},128.5 ${x},128.5 C${x - 6},128.5 ${x - 9},127.5 ${x - 9},125 Z" fill="${P.shoe}" stroke="${P.rim}" stroke-width="1.8"/>

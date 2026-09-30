@@ -10,15 +10,25 @@ import { ShopScene, Card, Hand, BasketBed, BasketGoods, Shadow, SP } from './par
 // the basket's top-down camera (rim ~a circle, a sliver of wall). Three identical copies, so they match; sprite 300 x 286.
 preloadTrace('shop/r2-cup');
 const CUPS = [[1195, 300, 0.56, -8], [1340, 455, 0.56, 6], [1150, 560, 0.56, 3]]; // x, y = sprite centre, scale, tilt
+// r5 (AUDIT 029): "Her hand puts one cup in the basket": cup 3 is still in her fingers, a hand's width above its place
+// (its shadow already on the goods below); her thumb + index pinch its far rim from behind, so the cup covers the tips.
+const HELD = [1175, 440];
 function BasketCupBowls() {
   return (
     <g>
-      {CUPS.map(([x, y, k, r], i) => (
-        <g key={i} transform={`translate(${x} ${y}) rotate(${r})`}>
-          <ellipse cx={22 * k} cy={112 * k} rx={150 * k} ry={70 * k} fill="#1c0c08" opacity=".5" />
-          <image href={traceUrl('shop/r2-cup')} x={-150 * k} y={-143 * k} width={300 * k} height={286 * k} />
-        </g>
-      ))}
+      {CUPS.map(([x, y, k, r], i) => {
+        const held = i === 2, [cx, cy] = held ? HELD : [x, y];
+        return (
+          <g key={i}>
+            {held && <ellipse cx={x + 22 * k} cy={y + 112 * k} rx={150 * k} ry={70 * k} fill="#1c0c08" opacity=".3" />}
+            {held && <Hand x={cx + 92} y={cy - 240} rot={200} s={1.15} her pose="pinch" thumb="right" />}
+            <g transform={`translate(${cx} ${cy}) rotate(${r})`}>
+              {!held && <ellipse cx={22 * k} cy={112 * k} rx={150 * k} ry={70 * k} fill="#1c0c08" opacity=".5" />}
+              <image href={traceUrl('shop/r2-cup')} x={-150 * k} y={-143 * k} width={300 * k} height={286 * k} />
+            </g>
+          </g>
+        );
+      })}
     </g>
   );
 }
@@ -110,8 +120,17 @@ export function BasketHandle() {
   return (
     <ShopScene id="handle" trace="cel-handle" tint="#fff0e0" label="Extreme close-up: a grey shop basket packed with groceries. Nanda's hand grips its handle. Her four pink nails press into the bar, hard.">
       <g transform={`rotate(${A} ${X} ${BAR})`}>
-        {[-30, -10, 10, 30].map((f) => <ellipse key={f} cx={X - 30 - f * 2} cy={BAR + 26} rx="14" ry="6" fill={SP.metalLo} opacity=".7" />)}
-        <Hand x={X + 41} y={BAR - 232} rot={190} s={2} her pose="grip" thumb="left" press />
+        {/* r5 (AUDIT 033): the hand hangs from above, its fingers go round the bar: the bar (a cel strip over the traced one)
+            crosses the middle of her fingers, so the handle is over the finger pads and only the nail tips show under it */}
+        <Hand x={X} y={BAR - 196} rot={180} s={1.6} her pose="grip" thumb="left" />
+        <rect x={X - 520} y={BAR - 34} width="1100" height="68" rx="30" fill="#b7aea4" stroke="#6f665e" strokeWidth="6" />
+        <rect x={X - 500} y={BAR - 26} width="1060" height="14" rx="7" fill="#e6e0d8" opacity=".85" />
+        {[-48, -16, 16, 48].map((f) => (
+          <g key={f}>
+            <path d={`M${X + f - 12} ${BAR + 30} q12 26 24 0`} fill={SP.nail} stroke={SP.nailLo} strokeWidth="3" />
+            <path d={`M${X + f - 14} ${BAR + 36} q14 10 28 0`} stroke="#6f665e" strokeWidth="3" fill="none" opacity=".7" />
+          </g>
+        ))}
       </g>
     </ShopScene>
   );

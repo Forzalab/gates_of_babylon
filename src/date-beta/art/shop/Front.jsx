@@ -90,11 +90,12 @@ const DoorFrame = () => (
 export function ShopExit() {
   return (
     <ShopScene id="exit" trace="cel-exit" tint={SKY} book={<DoorFrame />}
-      label="From inside the shop door, looking out at the bright street and the sunny sky. The shop bell hangs in the door frame. Your hand carries two NAND MART bags; carrots stick out. Nanda holds your sleeve.">
-      <path d="M1290 470 C1290 400 1350 400 1350 470 M1380 470 C1380 400 1440 400 1440 470" fill="none" stroke="#8a93a0" strokeWidth="8" />
-      <Bag x={1320} y={530} /><Bag x={1440} y={546} />
-      <Hand x={1520} y={420} rot={-90} s={0.7} pose="grip" thumb="right" />
-      <Hand x={1440} y={330} rot={120} s={0.55} her pose="pinch" thumb="left" />
+      label="From inside the shop door, looking out at the bright street and the sunny sky. The shop bell hangs in the door frame. Your arm comes in from the right, carrying two NAND MART bags. Nanda holds your sleeve.">
+      <path d="M1450 470 C1450 400 1510 400 1510 470 M1540 470 C1540 400 1600 400 1600 470" fill="none" stroke="#8a93a0" strokeWidth="8" />
+      <Bag x={1480} y={530} /><Bag x={1600} y={546} />
+      {/* your arm: the navy blazer sleeve runs off the right edge; your hand grips the two bag handles */}
+      <path d="M1700 360 L1960 330 L1960 470 L1700 486Z" fill={SP.player} stroke={SP.playerLo} strokeWidth="5" />
+      <Hand x={1700} y={420} rot={-90} s={0.72} pose="grip" thumb="right" sleeve={SP.player} />
     </ShopScene>
   );
 }

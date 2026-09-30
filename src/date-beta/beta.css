@@ -415,9 +415,9 @@ body { font-family: var(--cond); color: var(--ink); }
    pulled to where she stands. Same dim as the focused scene, no blur, no motion (a hard cut with the beat; rm-safe). */
 .db-plane { position: absolute; inset: 0; pointer-events: none; overflow: hidden; filter: brightness(.78);
   -webkit-mask-image: linear-gradient(180deg, transparent calc(var(--floor) - 120px), #000 calc(var(--floor) - 46px), #000 calc(var(--floor) + 40px), transparent calc(var(--floor) + 132px)),
-    radial-gradient(ellipse 390px 150px at 960px var(--floor), #000 42%, transparent 100%);
+    radial-gradient(ellipse 390px 150px at calc(960px + var(--dx, 0px)) var(--floor), #000 42%, transparent 100%);
   mask-image: linear-gradient(180deg, transparent calc(var(--floor) - 120px), #000 calc(var(--floor) - 46px), #000 calc(var(--floor) + 40px), transparent calc(var(--floor) + 132px)),
-    radial-gradient(ellipse 390px 150px at 960px var(--floor), #000 42%, transparent 100%);
+    radial-gradient(ellipse 390px 150px at calc(960px + var(--dx, 0px)) var(--floor), #000 42%, transparent 100%);
   -webkit-mask-composite: source-over; mask-composite: add; }
 .db-plane > .art, .db-plane > .db-bg { position: absolute; inset: 0; }
 :root[data-lowfx] .db-plane, .db-plane:has(.sw-mid), .db-plane:has(.art.basement, .art.cellar) { display: none; }
@@ -445,6 +445,14 @@ body { font-family: var(--cond); color: var(--ink); }
 .stage.frame-close .db-say { width: 820px; padding-right: 56px; }
 /* r5 REACH (park "Hold my hand"): a medium close-up on the right, 3 px per sprite unit, cut by the frame bottom; her
    pin arm comes out of the bubble toward the lens (the nub big in the foreground). The box keeps to the left. */
-.viewport .stage .db-nanda.frame-reach { left: 1000px; right: auto; bottom: 131px; width: 960px; height: 1035px; z-index: 5; animation: none; }
+.viewport .stage .db-nanda.frame-reach { left: 1000px; right: auto; bottom: 131px; width: 960px; height: 1035px; animation: none; }
 .stage.frame-reach .db-say { left: 60px; transform: none; width: 820px; padding-right: 56px; }
 .stage.frame-reach .db-choices { z-index: 7; }
+/* r5: props.cut.dx moves her (and her contact shadow) sideways in the medium shot (a beat where she stands off-centre) */
+.db-plant { translate: var(--dx, 0px) 0; }
+/* r5 (AUDIT 008) POV "Itadakimasu": she stands across the roof, feet on the floor in front of the stairhouse (y 790), with
+   her contact shadow; the food is low in your chopsticks over the bento corner (SceneA PovFood) */
+.viewport .stage .db-nanda.frame-pov { left: 1250px; bottom: 278px; }
+.db-plant.pov { left: 1290px; width: 228px; height: 30px; bottom: calc(1080px - 790px - 15px); }
+/* r5 close-ups (art/r5/shots.jsx) ARE the focus: their own lens depth of field does the blur, the player only dims them */
+.stage.focus .scene:has(.r5-shot) { filter: brightness(.9); }

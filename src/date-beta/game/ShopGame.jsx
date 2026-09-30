@@ -131,8 +131,9 @@ export default function ShopGame({ props = {}, onPick }) {
           {frame.aside && <span className="sg-aside">{frame.aside}</span>}
           <span><b>NANDA</b> {frame.sweet ? mood.sweet : mood.line}</span>
         </div>
+        {/* r5 (AUDIT 028): a wrong pick costs love, so her "sweet" answer is the smug, gloating ehehe, never a happy wink */}
         <Her emote={frame.sweet ? 'heart' : mood.face === 'pout' || mood.face === 'vein' ? 'pout' : null} scare={split ? 2 : 0}
-          layers={frame.sweet ? ['sparkle'] : mood.layers} />
+          face={frame.sweet ? 'smug-gloating' : null} layers={frame.sweet ? null : mood.layers} />
       </div>
     );
   }
