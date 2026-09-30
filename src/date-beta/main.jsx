@@ -14,7 +14,9 @@ import './theme.js';
 import baseData from './scenes.json';
 import { applyPacks } from './packs/index.js';
 import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, reactView, present, trail, ending, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
-import { ART } from './art/index.js';
+import { ART as ART0 } from './art/index.js';
+import { GAME } from './game/index.js';
+const ART = { ...ART0, ...GAME }; // game art ids (lock-game) own their beat: choices hidden, onPick(i) plays choice i
 import { BG_FALLBACK } from './art/fallbacks.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
@@ -199,12 +201,12 @@ function Player() {
     const name = isAssetId(v) ? (ASSETS.has(v) ? null : BG_FALLBACK[v]) : v;
     if (!name) return <img className={cls} src={ASSETS.src(v)} alt="" />;
     const Art = ART[name];
-    return <Art props={beat.props} rm={RM} onStart={() => advance(true)} />;
+    return <Art props={beat.props} rm={RM} onStart={() => advance(true)} onPick={(i) => setPos((p) => (p.done ? p : choose(SCENES, p, i, RM)))} />;
   };
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
   const onNext = waiting && ready && !card && !paused ? () => advance(true) : null;
-  const focus = !pos.done && !!(beat.text || beat.choices || card || end);
+  const focus = !pos.done && !GAME[beat.bg] && !!(beat.text || beat.choices || card || end);
   const hint = waiting && !paused; // only where a click does something (never on choice or auto beats)
   const closeTree = useCallback(() => setTree(false), []);
   const jump = useCallback((edge, choices) => {
@@ -232,7 +234,7 @@ function Player() {
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} />
         )}
         {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}
-        {beat.choices && !pos.done && !end && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} key={`c${beat.scene}${beat.index}`} />}
+        {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} key={`c${beat.scene}${beat.index}`} />}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {card && <GoalCard onNext={() => advance(true)} />}
         {onNext && !beat.text && <NextButton className="solo" onClick={onNext} />}
