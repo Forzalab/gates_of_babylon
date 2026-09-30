@@ -1,0 +1,3 @@
+/* fx/NearLens.jsx: the near-lens foreground cel. Between the scene and the HUD by DOM order; blur = depth of field.
+   Static by design (no motion), so reduced motion is the same frame. */
+.nl-near { position: absolute; inset: 0; width: 1920px; height: 1080px; pointer-events: none; overflow: visible; filter: blur(var(--nl-blur, 14px)); }

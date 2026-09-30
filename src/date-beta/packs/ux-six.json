@@ -19,8 +19,8 @@
     { "scene": "escape", "beat": 14, "beats": [
       { "speaker": "NANDA (ABOVE)", "text": "Four, five… Don't hide, darling. I always find you.", "sfx": "thump" }
     ] },
-    { "scene": "escape", "beat": 13, "set": { "props": { "shot": null, "shelf": null } } },
-    { "scene": "escape", "beat": 12, "set": { "props": { "shot": "stamp", "place": "BASEMENT", "time": "8:05 PM" } } },
+    { "scene": "escape", "beat": 13, "set": { "props": { "shot": null, "shelf": null, "near": "shelves" } } },
+    { "scene": "escape", "beat": 12, "set": { "props": { "shot": "stamp", "place": "BASEMENT", "time": "8:05 PM", "near": "shelves" } } },
     { "scene": "escape", "beat": 5, "choice": 0, "set": { "emote": "pout", "react": "You're looking too long." } },
     { "scene": "escape", "beat": 5, "choice": 1, "set": { "emote": "heart", "react": "Only looking. I trust you." } },
     { "scene": "escape", "beat": 0, "choice": 0, "set": { "emote": "pout", "react": "Don't touch the labels." } },
