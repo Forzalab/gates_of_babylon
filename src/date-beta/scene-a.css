@@ -51,3 +51,7 @@
 /* ---------- the smile tag: the love pick drawn where NEXT sits ---------- */
 .hud-next.sa-smile { gap: 16px; padding-left: 34px; }
 .hud-next.sa-smile b { padding: 6px 14px 7px; border-radius: 999px; background: #fff; color: #a8206f; font: 900 32px/1 var(--btn); text-shadow: none; }
+/* the tag is wider than NEXT: the line wraps before it instead of running under it */
+.db-say:has(.sa-smile) { padding-right: 400px; }
+/* the food tags' love chip: the HUD pink (#ffa6d6) under white text is 1.8:1, so the tags use her deep pink */
+.sa-food-tag .db-chip.up, .sa-other .db-chip.up { background: #a8206f; }

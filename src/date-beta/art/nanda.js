@@ -84,11 +84,14 @@ const FACES = {
 // ---- Scene A faces (research/sprint-0930/scene-a/FACES.md; refs 12-15). Same face coords as above, her palette's ink,
 // her blush pink. Picked by id (nandaSVG({ face })), never by emote, so the engine's emote list does not change.
 // Each may bring still decor outside her body clip (FACE_DECOR, gate units): drops, flicks, hearts.
-const bigEye = (x, y, rx, ry, P, lash = true) => `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${P.ink}"/>
+const bigEye = (x, y, rx, ry, P, lash = true) => {
+  const o = Math.sign(x || 1), ex = x + o * rx * 1.02, ey = y - ry * 0.42; // outer corner of the upper lid
+  return `<ellipse cx="${x}" cy="${y}" rx="${rx}" ry="${ry}" fill="${P.ink}"/>
       <ellipse cx="${x}" cy="${y + ry * 0.38}" rx="${rx * 0.72}" ry="${ry * 0.45}" fill="#b8508a" opacity=".55"/>
       <circle cx="${x + rx * 0.34}" cy="${y - ry * 0.4}" r="${rx * 0.42}" fill="#fff"/><circle cx="${x - rx * 0.38}" cy="${y + ry * 0.36}" r="${rx * 0.2}" fill="#fff"/>
-      <path d="M${x - rx * 1.15},${y - ry * 0.55} Q${x},${y - ry * 1.45} ${x + rx * 1.15},${y - ry * 0.55}" fill="none" stroke="${P.ink}" stroke-width="2.4" stroke-linecap="round"/>
-      ${lash ? `<path d="M${x + rx * 1.05 * Math.sign(x || 1)},${y - ry * 0.62} l${2.6 * Math.sign(x || 1)},-2.2" stroke="${P.ink}" stroke-width="1.6" stroke-linecap="round"/>` : ''}`;
+      <path d="M${x - rx * 1.1},${y - ry * 0.42} Q${x},${y - ry * 1.38} ${x + rx * 1.1},${y - ry * 0.42}" fill="none" stroke="${P.ink}" stroke-width="2.8" stroke-linecap="round"/>
+      ${lash ? `<path d="M${ex},${ey} l${o * 2.6},0.4 M${ex - o * 0.4},${ey + 1.6} l${o * 2.4},1.8" stroke="${P.ink}" stroke-width="1.3" stroke-linecap="round"/>` : ''}`;
+};
 // vertical hatch blush (ref 14): 3-4 short strokes per cheek over a faint flush
 const hatchV = (P, op = 0.35) => (P.blush === 'none' ? '' : `<ellipse cx="-21" cy="8" rx="7.5" ry="3.6" fill="${P.blush}" opacity="${op}"/><ellipse cx="17" cy="8" rx="7.5" ry="3.6" fill="${P.blush}" opacity="${op}"/>`)
   + `<path d="M-25,5.5 v4.5 M-22,5 v5 M-19,5 v5 M-16,5.5 v4.5 M13,5.5 v4.5 M16,5 v5 M19,5 v5 M22,5.5 v4.5" stroke="${P.ink}" stroke-width="1" stroke-linecap="round" opacity=".62"/>`;
@@ -102,14 +105,14 @@ Object.assign(FACES, {
   // ref 14: huge glossy eyes (2 highlights, lash flick), a tiny nose tick, a wide flat closed smile, hatch blush
   'anya-smile': (P) => `${hatchV(P)}${bigEye(-13, -5, 6, 7.6, P)}${bigEye(11, -5, 6, 7.6, P)}
       <path d="M-1,3 v2.4" stroke="${P.ink}" stroke-width="1.2" stroke-linecap="round"/>
-      <path d="M-13,11.5 Q-1,15.5 11,11.5" fill="none" stroke="${P.ink}" stroke-width="1.9" stroke-linecap="round"/>`,
+      <path d="M-15,11.5 Q-1,16 13,11.5" fill="none" stroke="${P.ink}" stroke-width="1.9" stroke-linecap="round"/>`,
   // ref 13 >///<: squeezed chevron eyes, a hot band with /// hatch, a wobbly flustered mouth (drops + flicks = decor)
   'blush-embarrassed': (P, sw) => `${band(P)}${squint(P, sw)}
       <path d="M-7,13 q1.75,-3 3.5,0 q1.75,3 3.5,0 q1.75,-3 3.5,0 q1.75,3 3.5,0" fill="none" stroke="${P.ink}" stroke-width="${sw * 0.8}" stroke-linecap="round" stroke-linejoin="round"/>`,
   // ref 15 + ref 13 laugh: >< eyes, raised brows, a tall open mouth with a tongue, red blush bands (hearts = decor)
   'heart-laugh': (P, sw) => `${band(P, 0.75)}${squint(P, sw + 0.4)}
       <path d="M-20,-17 Q-14,-20 -8,-17 M4,-17 Q10,-20 16,-17" fill="none" stroke="${P.ink}" stroke-width="1.8" stroke-linecap="round"/>
-      <path d="M-11,7 Q-1,9 9,7 Q8,21 -1,22 Q-10,21 -11,7Z" fill="${P.ink}" stroke="${P.ink}" stroke-width="1.6" stroke-linejoin="round"/>
+      <path d="M-12,6.5 Q-1,9 10,6.5 Q9,22 -1,23 Q-11,22 -12,6.5Z" fill="${P.ink}" stroke="${P.ink}" stroke-width="1.6" stroke-linejoin="round"/>
       <path d="M-7,17.5 Q-1,13.5 5,17.5 Q3,20.6 -1,20.8 Q-5,20.6 -7,17.5Z" fill="#ff7fa8"/>`,
   // ref 12 "Content": closed happy arcs, a small soft smile, a plain soft blush
   content: (P, sw) => `${blushOf(P, 0.5)}
