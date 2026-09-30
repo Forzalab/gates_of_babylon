@@ -72,8 +72,18 @@ def park():
     return ImageEnhance.Color(im).enhance(1.3)
 
 
+def apartment():
+    """Rainy walk-up (ref 3, 324x431 portrait) at full height on the LEFT (812 px wide): the frame edge cuts the building,
+    the street runs to its vanishing point at stage ~(739, 626). The umbrella walker is inpainted. Only the ref is
+    traced (812x1080, own viewBox); the hand overlay builds the right 1108 px (near side of the street: houses, pole,
+    wires, wet road, sky) on the same vanishing point."""
+    ref = inpaint(repo('rainy-apartment-street_f578c935.jpg'), [(284, 232, 312, 292)], 5)
+    k = H / ref.height
+    return ref.resize((round(ref.width * k), H), Image.LANCZOS)  # 812x1080: traced alone, drawn at x 0..812
+
+
 SMOOTH = lambda im: im.filter(ImageFilter.MedianFilter(5)).filter(ImageFilter.SMOOTH_MORE)
-jobs = {'basement': basement, 'park': park}
+jobs = {'basement': basement, 'park': park, 'apartment': apartment}
 
 os.makedirs(OUT, exist_ok=True)
 for k, f in jobs.items():

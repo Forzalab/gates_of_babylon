@@ -10,6 +10,8 @@ const SHOTS = {
   'cellar-newest': { bg: 'cellar', props: { shelf: 'newest', jar: 'umeboshi' } },
   'cellar-usu': { bg: 'cellar', props: { shelf: 'usu' } },
   'cellar-nanda': { bg: 'cellar', nanda: 1, line: 'NANDA: You found my collection. Do you like it? ♡' },
+  'apartment': { bg: 'apartment-trace' },
+  'apartment-nanda': { bg: 'apartment-trace', nanda: 1, line: 'NANDA: That\'s mine. I left the light on for you.' },
   'park': { bg: 'park' },
   'park-nanda': { bg: 'park', nanda: 1, line: 'NANDA: Sakura only last a week. Then they fall. I don\'t let things fall.' },
 };

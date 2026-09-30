@@ -2,6 +2,7 @@
 // art/index.js (AFTER the `park: Rooftop` fallback, so the real park wins).
 import Cellar from './Cellar.jsx';
 import Park from './Park.jsx';
+import ApartmentTrace from './ApartmentTrace.jsx';
 
-export const INTERIORS = { cellar: Cellar, park: Park };
+export const INTERIORS = { cellar: Cellar, park: Park, 'apartment-trace': ApartmentTrace };
 export default INTERIORS;

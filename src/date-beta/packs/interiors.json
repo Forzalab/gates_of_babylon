@@ -1,9 +1,40 @@
 {
-  "note": "T1b INTERIORS+BASEMENT: bg patches only (no copy). escape = the new cellar (0 + the returns from each blackout: 8, 10, 12); beat 13 stays the lock game (lockgame/obbp packs).",
+  "note": "T1b INTERIORS+BASEMENT: bg patches only (no copy). apartment = traced walk-up; escape = the new cellar (0 + the returns from each blackout: 8, 10, 12); escape 13 stays the lock game (lockgame/obbp packs).",
   "patch": [
-    { "scene": "escape", "beat": 0, "set": { "bg": "cellar" } },
-    { "scene": "escape", "beat": 8, "set": { "bg": "cellar" } },
-    { "scene": "escape", "beat": 10, "set": { "bg": "cellar" } },
-    { "scene": "escape", "beat": 12, "set": { "bg": "cellar" } }
+    {
+      "scene": "apartment",
+      "beat": 0,
+      "set": {
+        "bg": "apartment-trace"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 0,
+      "set": {
+        "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 8,
+      "set": {
+        "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 10,
+      "set": {
+        "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 12,
+      "set": {
+        "bg": "cellar"
+      }
+    }
   ]
 }

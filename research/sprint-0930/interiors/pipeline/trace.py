@@ -8,18 +8,21 @@ from PIL import Image, ImageFilter
 
 PREP, OUT = sys.argv[1], sys.argv[2]
 ONLY = sys.argv[3:]
-SCALE = 0.3
-COLORS = {'basement': 20}  # dark room: fewer colours keep the concrete from speckling
+SCALE = {'apartment': 0.5}  # of the prep PNG's own size (default 0.3 of 1920x1080 = 576x324)
+COLORS = {'basement': 20, 'apartment': 48}
+MEDIAN = {'apartment': 0}  # the small detailed ref loses its rails + bikes to the median pass  # dark room: fewer colours keep the concrete from speckling
 BASE = dict(colormode='color', hierarchical='stacked', mode='spline', filter_speckle=6, color_precision=8,
             layer_difference=8, corner_threshold=60, length_threshold=4.0, max_iterations=10, splice_threshold=45, path_precision=1)
-LIMIT = 560_000
+LIMIT = {'apartment': 700_000}  # default 560 KB
 
 for f in sorted(os.listdir(PREP)):
     k = f[:-4]
     if ONLY and k not in ONLY: continue
     im = Image.open(os.path.join(PREP, f)).convert('RGB')
-    w, h = round(1920 * SCALE), round(1080 * SCALE)
-    im = im.resize((w, h), Image.LANCZOS).filter(ImageFilter.MedianFilter(3))
+    sc = SCALE.get(k, 0.3)
+    w, h = round(im.width * sc), round(im.height * sc)
+    im = im.resize((w, h), Image.LANCZOS)
+    if MEDIAN.get(k, 3): im = im.filter(ImageFilter.MedianFilter(MEDIAN.get(k, 3)))
     im = im.quantize(COLORS.get(k, 24), method=Image.Quantize.MEDIANCUT, dither=Image.Dither.NONE).convert('RGB')
     tmp = os.path.join(tempfile.gettempdir(), f'int-{k}.png'); im.save(tmp)
     p = dict(BASE)
@@ -30,6 +33,6 @@ for f in sorted(os.listdir(PREP)):
         s = re.sub(r'<\?xml[^>]*>\s*|<!--[^>]*-->\s*', '', s).replace('<svg ', f'<svg viewBox="0 0 {w} {h}" preserveAspectRatio="none" ', 1)
         open(out, 'w').write(s)
         n = len(s.encode())
-        if n <= LIMIT: break
+        if n <= LIMIT.get(k, 560_000): break
         p['filter_speckle'] += 2
     print(k, n // 1024, 'KB speckle', p['filter_speckle'], flush=True)
