@@ -1,0 +1,842 @@
+{
+ "name": "variant-v1",
+ "notes": [
+  "V1 Shinkai (light / sky / restraint). Play: ?pack=story,meta,mech,lockgame,obbp,sequences,variant-v1. Design doc: research/sprint-0930/variants/V1.md",
+  "props.shot = shot id from SHOTS-SCHEMA.md (sprint/seq-visual); stamp beats carry props.place/time. bg stays the fallback art."
+ ],
+ "scenes": [
+  {
+   "id": "v1-park",
+   "title": "V1 park",
+   "short": "PARK",
+   "bg": "park",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "PARK · 1:00 PM. Cherry trees. Blue sky. Petals fall slowly.",
+     "sfx": "wind",
+     "props": {
+      "shot": "establish",
+      "place": "PARK",
+      "time": "1:00 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Hold my hand. Hands get lost if you let go.",
+     "sfx": "breath",
+     "props": {
+      "shot": "park-wide"
+     },
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Hold it tight",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Tight. Good. Now you cannot drift away."
+      },
+      {
+       "text": "Hold one finger",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "One finger today. All five later."
+      },
+      {
+       "text": "Pull your hand back",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Okay. Your hand is cold anyway."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "Close-up. Her fingers lock between yours. Tight.",
+     "sfx": "thump",
+     "props": {
+      "shot": "hands-lock"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Silence. Wind moves the petals. She does not let go.",
+     "sfx": "silence",
+     "props": {
+      "shot": "establish",
+      "tone": "day"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "One job before lunch. My groceries, or my library book?",
+     "props": {
+      "shot": "ots"
+     },
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Carry her groceries",
+       "side": "pink",
+       "set": {
+        "cold": "no",
+        "errand": "groceries"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "love-burst",
+       "react": "Groceries. For our dinner."
+      },
+      {
+       "text": "Return her book",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no",
+        "errand": "library"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "none",
+       "react": "The book. It is very late."
+      },
+      {
+       "text": "Do it alone, later",
+       "side": "purple",
+       "set": {
+        "cold": "yes",
+        "errand": "groceries"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Alone? No. Groceries. Now."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "Pull out. Two small people leave the park. The petals cover the path.",
+     "sfx": "wind",
+     "props": {
+      "shot": "push",
+      "to": 0.8
+     },
+     "choices": [
+      {
+       "text": "Walk with her",
+       "go": [
+        {
+         "if": {
+          "errand": "groceries"
+         },
+         "to": "v1-shop"
+        },
+        {
+         "to": "v1-library"
+        }
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v1-shop",
+   "title": "V1 shop street",
+   "short": "SHOP",
+   "bg": "shop-street",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "SHOP STREET · 2:00 PM. Small shops. Pink petals on the roofs.",
+     "sfx": "wind",
+     "props": {
+      "shot": "establish",
+      "place": "SHOP STREET",
+      "time": "2:00 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Carrots. Rice. And three cups. We need three cups.",
+     "props": {
+      "shot": "shop-street"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Close-up. Three cups in the basket. She touches the third one.",
+     "sfx": "thump",
+     "props": {
+      "shot": "three-cups-basket"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "You count. There are two of you. She bought three cups.",
+     "sfx": "silence",
+     "props": {
+      "shot": "reaction",
+      "emote": "sweat"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "You carry the bags. Now your hands are full. Good.",
+     "props": {
+      "shot": "shop-exit"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "The shop bell rings. The bags pull on your fingers.",
+     "sfx": "bell",
+     "props": {
+      "shot": "shop-exit"
+     },
+     "choices": [
+      {
+       "text": "Walk to lunch",
+       "go": "v1-curry"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v1-library",
+   "title": "V1 library",
+   "short": "BOOK",
+   "bg": "rail-crossing",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "RAIL CROSSING · 1:50 PM. The bell rings. The gate is down.",
+     "sfx": "bell",
+     "props": {
+      "shot": "stamp",
+      "place": "RAIL CROSSING",
+      "time": "1:50 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "A train is a big metal door. I hate doors. Stand closer.",
+     "sfx": "train-hum",
+     "props": {
+      "shot": "crossing-bell"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "LIBRARY · 2:00 PM. Cool air. Very quiet. Light on the floor.",
+     "sfx": "silence",
+     "props": {
+      "shot": "library-int",
+      "place": "LIBRARY",
+      "time": "2:00 PM"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Close-up. She drops the book in the return slot. Thunk.",
+     "sfx": "thump",
+     "props": {
+      "shot": "book-slot"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "The book was forty days late. You touched it once. So I kept it.",
+     "props": {
+      "shot": "library-int"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "The library doors close. Cold air behind you. Hot sun in front.",
+     "sfx": "wind",
+     "props": {
+      "shot": "establish"
+     },
+     "choices": [
+      {
+       "text": "Walk to lunch",
+       "go": "v1-curry"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v1-curry",
+   "title": "V1 curry house",
+   "short": "CURRY",
+   "bg": "cafe",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "CURRY HOUSE · 3:00 PM. Small and warm. Two seats, side by side.",
+     "sfx": "kettle",
+     "props": {
+      "shot": "curry-house-int",
+      "place": "CURRY HOUSE",
+      "time": "3:00 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I am hungry. You pick my lunch. Pick the right one.",
+     "props": {
+      "shot": "curry-house-int"
+     },
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Butter chicken for her",
+       "side": "pink",
+       "set": {
+        "cold": "no",
+        "food": "butter"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "With naan! You know me."
+      },
+      {
+       "text": "Katsu curry",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no",
+        "food": "katsu"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "none",
+       "react": "Crunchy. Good choice."
+      },
+      {
+       "text": "I am not hungry",
+       "side": "purple",
+       "set": {
+        "cold": "yes",
+        "food": "katsu"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Then you watch me eat."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "dish",
+     "sfx": "thump",
+     "props": {
+      "shot": "insert"
+     },
+     "vary": {
+      "food": {
+       "butter": {
+        "text": "Close-up. Butter chicken. Orange sauce. Steam rises from the naan.",
+        "props": {
+         "shot": "dish-butter"
+        }
+       },
+       "katsu": {
+        "text": "Close-up. Katsu curry. The knife cuts the pork. Crunch.",
+        "props": {
+         "shot": "dish-katsu"
+        }
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "feed",
+     "props": {
+      "shot": "ots"
+     },
+     "vary": {
+      "food": {
+       "butter": {
+        "text": "Tear the naan. Feed me the soft part. Then I feed you."
+       },
+       "katsu": {
+        "text": "Cut me a piece. Blow on it. Then feed me."
+       }
+      }
+     }
+    },
+    {
+     "speaker": false,
+     "text": "She eats. She looks at you, not at the food.",
+     "sfx": "breath",
+     "props": {
+      "shot": "reaction",
+      "emote": "hearts"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "The window light turns gold. The door bell rings. You leave.",
+     "sfx": "bell",
+     "props": {
+      "shot": "curry-house-ext"
+     },
+     "choices": [
+      {
+       "text": "Walk to the station",
+       "go": "v1-train"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v1-train",
+   "title": "V1 station and train",
+   "short": "TRAIN",
+   "bg": "train",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "STATION · 4:30 PM. Light comes through the glass roof.",
+     "sfx": "train-hum",
+     "props": {
+      "shot": "station-gate",
+      "place": "STATION",
+      "time": "4:30 PM"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Close-up. She taps her card. Then she taps it again, for you.",
+     "sfx": "tick",
+     "props": {
+      "shot": "ic-card-tap"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "loop",
+     "props": {
+      "shot": "train"
+     },
+     "vary": {
+      "run": {
+       "1": {
+        "text": "Twelve stops to my home. I counted them this morning."
+       },
+       "2": {
+        "text": "Twelve stops. We did this before. You forgot. I did not."
+       },
+       "3": {
+        "text": "Third time today. Same train. Same seat. Same you."
+       }
+      }
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Out the window, the sky goes orange, then grey. Rain starts.",
+     "sfx": "rain",
+     "props": {
+      "shot": "timelapse",
+      "place": "TRAIN",
+      "time": "4:40 → 5:20 PM",
+      "of": "train",
+      "tones": [
+       "day",
+       "dusk",
+       "night"
+      ]
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Her stop. The doors open. Cold, wet air comes in.",
+     "sfx": "bell",
+     "props": {
+      "shot": "train-door"
+     },
+     "choices": [
+      {
+       "text": "Step off the train",
+       "go": "v1-rain"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v1-rain",
+   "title": "V1 rain crossing",
+   "short": "RAIN",
+   "bg": "crossing-night",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "BIG CROSSING · 5:30 PM. Heavy rain. The signs glow. Nobody else.",
+     "sfx": "rain",
+     "props": {
+      "shot": "establish",
+      "place": "BIG CROSSING",
+      "time": "5:30 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Share my umbrella. It is small. We have to stand close.",
+     "props": {
+      "shot": "crossing-night"
+     },
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Step under, close",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 4,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Good. Now the rain cannot take you."
+      },
+      {
+       "text": "Hold it for her",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Tall and useful. I am keeping you."
+      },
+      {
+       "text": "I will just get wet",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Then get wet. Sick boys stay inside."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "Close-up. Her shoulder is wet. Yours is dry.",
+     "sfx": "rain",
+     "props": {
+      "shot": "umbrella-shoulder"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "She says nothing for three seconds. Only rain.",
+     "sfx": "silence",
+     "props": {
+      "shot": "crossing-night"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "The rain stops. The clouds open. Orange light on the wet road.",
+     "sfx": "wind",
+     "props": {
+      "shot": "timelapse",
+      "of": "crossing-night",
+      "tones": [
+       "night",
+       "dusk"
+      ]
+     },
+     "choices": [
+      {
+       "text": "Walk her home",
+       "go": "v1-street"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v1-street",
+   "title": "V1 her street",
+   "short": "STREET",
+   "bg": "street-day",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "HER STREET · 6:00 PM. Wet road. Low sun. She walks slower.",
+     "sfx": "wind",
+     "props": {
+      "shot": "establish",
+      "place": "HER STREET",
+      "time": "6:00 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "If we walk slowly, the day cannot end.",
+     "props": {
+      "shot": "street-day"
+     },
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Walk slower with her",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Slower. Slower. There. We are almost still."
+      },
+      {
+       "text": "Keep the same pace",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Same pace. Same day. Same you."
+      },
+      {
+       "text": "I need to go home",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -5,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Home? You are walking me home."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "The sky goes orange, then pink, then dark blue. One hour passes.",
+     "sfx": "silence",
+     "props": {
+      "shot": "timelapse",
+      "place": "HER STREET",
+      "time": "6:00 → 7:00 PM",
+      "of": "street-dusk",
+      "tones": [
+       "day",
+       "dusk",
+       "night"
+      ]
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Close-up. Her house key. It is warm. She held it all day.",
+     "sfx": "tick",
+     "props": {
+      "shot": "key-in-hand"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I held it since noon. So I would be ready. For you.",
+     "props": {
+      "shot": "closeup"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "The streetlights turn on, one by one. Her door. Unit 12.",
+     "sfx": "tick",
+     "props": {
+      "shot": "street-dusk"
+     },
+     "choices": [
+      {
+       "text": "Follow her inside",
+       "go": "v1-home"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v1-home",
+   "title": "V1 her home",
+   "short": "HOME",
+   "bg": "genkan-in",
+   "nanda": true,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "HER HOME · 7:05 PM. Men's slippers by the door. Your size.",
+     "sfx": "silence",
+     "props": {
+      "shot": "stamp",
+      "place": "HER HOME",
+      "time": "7:05 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Every road today came here. I planned all of them.",
+     "props": {
+      "shot": "genkan-in"
+     }
+    },
+    {
+     "bg": "BG-D2",
+     "speaker": false,
+     "text": "HER KITCHEN · 7:10 PM. Very clean. Three chairs. The kettle is warm.",
+     "sfx": "kettle",
+     "props": {
+      "shot": "kitchen-wide",
+      "place": "HER KITCHEN",
+      "time": "7:10 PM"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "Close-up. She pours tea into three cups.",
+     "sfx": "kettle",
+     "props": {
+      "shot": "tea-pour"
+     }
+    },
+    {
+     "speaker": false,
+     "text": "She pulls out a chair for you. The middle one.",
+     "sfx": "thump",
+     "props": {
+      "shot": "kitchen-wide"
+     },
+     "choices": [
+      {
+       "text": "Sit down",
+       "go": "cup"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "insert": [
+  {
+   "after": "rooftop",
+   "ids": [
+    "v1-park",
+    "v1-shop",
+    "v1-library",
+    "v1-curry",
+    "v1-train",
+    "v1-rain",
+    "v1-street",
+    "v1-home"
+   ]
+  }
+ ],
+ "patch": [
+  {
+   "scene": "rooftop",
+   "beat": 8,
+   "set": {
+    "choices": [
+     {
+      "text": "Stay a minute",
+      "side": "pink",
+      "set": {
+       "cold": "no"
+      },
+      "love": 3,
+      "emote": "hearts",
+      "fx": "love-burst",
+      "react": "A minute. Then another. Then the whole day.",
+      "go": "v1-park"
+     },
+     {
+      "text": "Walk with her",
+      "side": "mid",
+      "default": true,
+      "set": {
+       "cold": "no"
+      },
+      "love": 1,
+      "emote": "sweat",
+      "fx": "none",
+      "react": "Yay! Park first. I already planned it.",
+      "go": "v1-park"
+     },
+     {
+      "text": "{OR} Leave before the rain",
+      "side": "purple",
+      "set": {
+       "cold": "yes"
+      },
+      "love": -3,
+      "emote": "hate",
+      "fx": "hate-quake",
+      "react": "…Fine. The rain can have you. Later.",
+      "go": "v1-park"
+     }
+    ]
+   }
+  },
+  {
+   "scene": "rooftop",
+   "beat": 1,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "SCHOOL ROOFTOP · 12:00 NOON. Blue sky. One cloud. Rain is coming later.",
+     "sfx": "wind",
+     "props": {
+      "shot": "stamp",
+      "place": "SCHOOL ROOFTOP",
+      "time": "12:00 NOON"
+     }
+    }
+   ]
+  }
+ ]
+}
