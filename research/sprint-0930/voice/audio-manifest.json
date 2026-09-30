@@ -40,5 +40,12 @@
   "beat": "3 R−",
   "file": "public/date-beta/voice/01-rooftop/011_3-r.mp3",
   "text": "[sudden flat][quiet] Say that again. Slowly. So I can write it… [sweet] down."
+ },
+ {
+  "n": 12,
+  "scene": "rooftop",
+  "beat": "4 cold",
+  "file": "public/date-beta/voice/01-rooftop/012_4-cold.mp3",
+  "text": "[sudden flat][quiet] Salty. Noted. [perfectly even] …Forever."
  }
 ]
