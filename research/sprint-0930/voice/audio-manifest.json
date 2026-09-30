@@ -411,5 +411,12 @@
   "beat": "2 R= (k)",
   "file": "public/date-beta/voice/05-v2-curry/029_2-r-k.mp3",
   "text": "[happy] Crunchy. [flat, pleased] Good choice."
+ },
+ {
+  "n": 33,
+  "scene": "v2-train",
+  "beat": "3 run 1",
+  "file": "public/date-beta/voice/06-v2-train/033_3-run-1.mp3",
+  "text": "[proud][slow] Twelve stops. [sing-song] I count them on my fingers. [smiling] See?"
  }
 ]
