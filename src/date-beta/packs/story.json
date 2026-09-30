@@ -39,7 +39,7 @@
       },
       {
        "text": "It was clean",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -63,6 +63,7 @@
      ],
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Park. Now. Hold my hand on the way.",
         "speaker": "NANDA"
@@ -75,6 +76,7 @@
      "text": "Sakura only last a week. Then they fall. I don't let things fall.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Don't say that again. The petals are listening.",
         "speaker": "NANDA"
@@ -100,7 +102,7 @@
       },
       {
        "text": "Hold one finger",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -128,6 +130,7 @@
      "text": "Who needs friends? I'm the only friend you need. I'm like ten friends. In one!",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "I'll warm it later. I have ways.",
         "speaker": "NANDA"
@@ -155,7 +158,7 @@
       },
       {
        "text": "Return her book",
-       "side": "pink",
+       "side": "mid",
        "go": "errand-library",
        "default": true,
        "set": {
@@ -186,7 +189,7 @@
   },
   {
    "id": "errand-shop",
-   "short": "ERRAND-SHOP",
+   "short": "SHOP",
    "title": "errand-shop",
    "bg": "shop-street",
    "enter": "fade",
@@ -196,6 +199,7 @@
      "text": "A street of little shops. Pink petals on every roof.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Carrots first. Then you can talk.",
         "speaker": "NANDA"
@@ -221,7 +225,7 @@
       },
       {
        "text": "Why three?",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -249,6 +253,7 @@
      "text": "The shop lady smiled at you. It's okay! She has a bad face. Look at me.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Three. Say it. Three.",
         "speaker": "NANDA"
@@ -274,7 +279,7 @@
       },
       {
        "text": "The bags are fine",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -302,6 +307,7 @@
      "text": "I'm hungry. You look hungry too. Let's eat. Now.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "I carry a lot. You don't even know.",
         "speaker": "NANDA"
@@ -323,7 +329,7 @@
   },
   {
    "id": "errand-library",
-   "short": "ERRAND-LIBRARY",
+   "short": "LIBRARY",
    "title": "errand-library",
    "bg": "rail-crossing",
    "enter": "fade",
@@ -338,7 +344,7 @@
      "timer": 12,
      "choices": [
       {
-       "text": "That's so sweet",
+       "text": "That's so cute",
        "side": "pink",
        "set": {
         "cold": "no"
@@ -350,7 +356,7 @@
       },
       {
        "text": "I don't remember that",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -378,6 +384,7 @@
      "text": "The gate is down. The train is a big metal door. I hate doors. Stand closer.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Don't use words you can't take back.",
         "speaker": "NANDA"
@@ -403,7 +410,7 @@
       },
       {
        "text": "Let's go eat",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -437,6 +444,7 @@
      ],
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "You'll see. Tonight.",
         "speaker": "NANDA"
@@ -472,7 +480,7 @@
       },
       {
        "text": "Katsu curry",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no",
@@ -529,7 +537,7 @@
       },
       {
        "text": "It's just lunch",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -566,6 +574,7 @@
      "text": "The big crossing. A thousand people. She only looks at you.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Wipe my mouth. …Thank you. See? Easy.",
         "speaker": "NANDA"
@@ -591,7 +600,7 @@
       },
       {
        "text": "Keep walking",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -619,6 +628,7 @@
      "text": "Your phone buzzed. It's just people. We're busy being us.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Me. Only me finds you.",
         "speaker": "NANDA"
@@ -648,7 +658,7 @@
       },
       {
        "text": "I'm not that smart",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -676,6 +686,7 @@
      "text": "Train time. Twelve stops. I counted them this morning. For fun.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "See? You need me to be nice to you.",
         "speaker": "NANDA"
@@ -697,7 +708,7 @@
   },
   {
    "id": "station-talk",
-   "short": "STATION-TALK",
+   "short": "STATION",
    "title": "station-talk",
    "bg": "platform",
    "enter": "fade",
@@ -720,7 +731,7 @@
       },
       {
        "text": "It was crowded",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -748,6 +759,7 @@
      "text": "It's raining. Good. Rain keeps people inside. Inside is where people stay.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Every night. At this stop. Waiting.",
         "speaker": "NANDA"
@@ -759,7 +771,7 @@
   },
   {
    "id": "rain-crossing",
-   "short": "RAIN-CROSSING",
+   "short": "RAIN",
    "title": "rain-crossing",
    "bg": "crossing-night",
    "enter": "fade",
@@ -786,7 +798,7 @@
       },
       {
        "text": "Hold it for her",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -814,6 +826,7 @@
      "text": "If you ever left, I'd be fine. I'd just stand here. In the rain. Until you came back.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Don't run. It's slippery. People fall.",
         "speaker": "NANDA"
@@ -839,7 +852,7 @@
       },
       {
        "text": "It was a nice day",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -873,6 +886,7 @@
      ],
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Walk me home. That's not a question.",
         "speaker": "NANDA"
@@ -884,7 +898,7 @@
   },
   {
    "id": "walk-home",
-   "short": "WALK-HOME",
+   "short": "WALKHOME",
    "title": "walk-home",
    "bg": "street-day",
    "enter": "fade",
@@ -911,7 +925,7 @@
       },
       {
        "text": "It's a nice street",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -940,6 +954,7 @@
      "bg": "street-dusk",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "You'll get used to it. Everyone does.",
         "speaker": "NANDA"
@@ -965,7 +980,7 @@
       },
       {
        "text": "Keep the same pace",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -993,6 +1008,7 @@
      "text": "Everyone goes home at night. Not you. You come home with me.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Don't look back at the station. It's gone for you.",
         "speaker": "NANDA"
@@ -1014,7 +1030,7 @@
   },
   {
    "id": "genkan-talk",
-   "short": "GENKAN-TALK",
+   "short": "GENKAN",
    "title": "genkan-talk",
    "bg": "genkan-in",
    "enter": "fade",
@@ -1037,7 +1053,7 @@
       },
       {
        "text": "Thanks for having me",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -1065,6 +1081,7 @@
      "text": "Slippers on. I bought them in your size. Last year. Before we met. Don't think about it.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Shoes off. Now.",
         "speaker": "NANDA"
@@ -1090,7 +1107,7 @@
       },
       {
        "text": "What's number two?",
-       "side": "pink",
+       "side": "mid",
        "default": true,
        "set": {
         "cold": "no"
@@ -1118,6 +1135,7 @@
      "text": "Kitchen's this way. Don't open the other doors. They're shy.",
      "vary": {
       "cold": {
+       "no": {},
        "yes": {
         "text": "Don't go near the basement.",
         "speaker": "NANDA"
@@ -1180,7 +1198,7 @@
      },
      {
       "text": "Take the umeboshi",
-      "side": "pink",
+      "side": "mid",
       "default": true,
       "set": {
        "cold": "no",
@@ -1227,7 +1245,7 @@
      },
      {
       "text": "It's good",
-      "side": "pink",
+      "side": "mid",
       "default": true,
       "set": {
        "cold": "no"
@@ -1270,7 +1288,7 @@
      },
      {
       "text": "Walk with her",
-      "side": "pink",
+      "side": "mid",
       "default": true,
       "set": {
        "cold": "no"
@@ -1313,7 +1331,7 @@
      },
      {
       "text": "Nice building",
-      "side": "pink",
+      "side": "mid",
       "default": true,
       "set": {
        "cold": "no"
@@ -1357,7 +1375,7 @@
      },
      {
       "text": "One cup, then home",
-      "side": "pink",
+      "side": "mid",
       "go": "genkan-in",
       "default": true,
       "set": {
@@ -1402,7 +1420,7 @@
      },
      {
       "text": "Eat a little",
-      "side": "pink",
+      "side": "mid",
       "default": true,
       "set": {
        "cold": "no"
@@ -1446,7 +1464,7 @@
      },
      {
       "text": "Hold the cup",
-      "side": "pink",
+      "side": "mid",
       "go": "steeped",
       "default": true,
       "set": {
@@ -1491,7 +1509,7 @@
      },
      {
       "text": "Who's 'he'?",
-      "side": "pink",
+      "side": "mid",
       "default": true,
       "set": {
        "cold": "no"
@@ -1534,7 +1552,7 @@
      },
      {
       "text": "Forever sounds long",
-      "side": "pink",
+      "side": "mid",
       "go": "leave-yeah",
       "default": true,
       "set": {
@@ -1558,6 +1576,7 @@
     ],
     "vary": {
      "cold": {
+      "no": {},
       "yes": {
        "text": "だめ。You already said forever. I heard it.",
        "speaker": "NANDA"
@@ -1575,7 +1594,8 @@
       "butter": {
        "text": "Technically, that's a NAND gate. Not our lunch.",
        "speaker": "MC"
-      }
+      },
+      "katsu": {}
      }
     }
    }
@@ -1594,6 +1614,7 @@
       }
      },
      "cold": {
+      "no": {},
       "yes": {
        "text": "Salty. Noted. Forever.",
        "speaker": "NANDA"
@@ -1608,6 +1629,7 @@
    "set": {
     "vary": {
      "cold": {
+      "no": {},
       "yes": {
        "text": "Say it. …Good.",
        "speaker": "NANDA"
@@ -1630,6 +1652,7 @@
       }
      },
      "cold": {
+      "no": {},
       "yes": {
        "text": "I'll wait. I'm good at waiting.",
        "speaker": "NANDA"

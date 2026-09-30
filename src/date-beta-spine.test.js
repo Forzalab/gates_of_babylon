@@ -87,7 +87,7 @@ test('date-beta basement: the door beat converges (timer -> wait -> timeout, cli
 
 test('date-beta spine: the DOOR timer defaults to going in (pink)', () => {
   const b = scenes.find((x) => x.id === 'door').beats.find((x) => x.timer);
-  assert.equal(b.timer, 5);
+  assert.equal(b.timer, 12);
   assert.equal(b.choices.find((c) => c.default).go, 'genkan-in'); // alt's arrival insert, then cup
 });
 

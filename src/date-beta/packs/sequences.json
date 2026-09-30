@@ -1,0 +1,134 @@
+{
+  "name": "sequences",
+  "notes": [
+    "Tony's rule: every dating pick plays as a full scene (establishing, insert, reaction, exit). See research/sprint-0930/sequences/.",
+    "props.shot = the NEW art id the visual team builds (GAPS.md 'art to build'); until then the bg art draws as the fallback.",
+    "Patches inside one scene run from the highest slot down so earlier slots don't shift.",
+    "hungry 0 now jumps straight to seq-butter / seq-katsu; hungry 1-2 (feed lines) moved into those scenes."
+  ],
+  "scenes": [
+    {
+      "id": "seq-butter", "title": "Curry house / butter chicken", "short": "CURRY", "bg": "cafe", "enter": "fade",
+      "beats": [
+        { "text": "A tiny curry house. Warm yellow light. Spice in the air. Two seats, side by side.", "sfx": "kettle", "props": { "shot": "curry-house-int" } },
+        { "speaker": "NANDA", "text": "Side by side. Not across. Across is how strangers sit.", "props": { "shot": "curry-house-int" } },
+        { "text": "Close-up. Butter chicken lands. Orange and glossy. One naan, torn in two.", "sfx": "thump", "props": { "shot": "dish-butter" } },
+        { "speaker": "NANDA", "text": "Say ahh. No, I feed you first. Then you feed me. That's the rule.", "props": { "shot": "dish-butter" } },
+        { "speaker": "NANDA", "text": "Mm! See? You're so good at making me happy. Keep going. Forever.", "timer": 12, "props": { "shot": "nanda-eat-butter" },
+          "choices": [
+            { "text": "Anything for you", "side": "pink", "set": { "cold": "no" }, "love": 3, "emote": "hearts", "fx": "love-burst", "react": "Anything. I'll hold you to that. ♡" },
+            { "text": "It's just lunch", "side": "mid", "default": true, "set": { "cold": "no" }, "love": 1, "emote": "sweat", "fx": "none", "react": "Nothing is just anything with me." },
+            { "text": "Feed yourself", "side": "purple", "set": { "cold": "yes" }, "love": -4, "emote": "hate", "fx": "hate-quake", "react": "…I can. I just won't." }
+          ] },
+        { "text": "She wipes your mouth with her thumb. Then she licks the thumb.", "sfx": "breath", "props": { "shot": "nanda-eat-butter" } },
+        { "text": "The bell over the door. Outside, the big crossing roars again.", "sfx": "bell", "props": { "shot": "curry-house-ext" },
+          "choices": [ { "text": "Step outside", "go": "town" } ] }
+      ]
+    },
+    {
+      "id": "seq-katsu", "title": "Curry house / katsu curry", "short": "CURRY", "bg": "cafe", "enter": "fade",
+      "beats": [
+        { "text": "A tiny curry house. Oil hisses in the back. Two seats, side by side.", "sfx": "kettle", "props": { "shot": "curry-house-int" } },
+        { "speaker": "NANDA", "text": "You sit on the inside. By the wall. So nobody bumps you. So nobody gets you.", "props": { "shot": "curry-house-int" } },
+        { "text": "Close-up. Katsu curry lands. The knife goes in. Crunch.", "sfx": "thump", "props": { "shot": "dish-katsu" } },
+        { "speaker": "NANDA", "text": "Hear that crunch? Like a little bone. Ehehe. Kidding. Say ahh.", "props": { "shot": "dish-katsu" } },
+        { "speaker": "NANDA", "text": "Mm! See? You're so good at making me happy. Keep going. Forever.", "timer": 12, "props": { "shot": "nanda-eat-katsu" },
+          "choices": [
+            { "text": "Anything for you", "side": "pink", "set": { "cold": "no" }, "love": 3, "emote": "hearts", "fx": "love-burst", "react": "Anything. I'll hold you to that. ♡" },
+            { "text": "It's just lunch", "side": "mid", "default": true, "set": { "cold": "no" }, "love": 1, "emote": "sweat", "fx": "none", "react": "Nothing is just anything with me." },
+            { "text": "Feed yourself", "side": "purple", "set": { "cold": "yes" }, "love": -4, "emote": "hate", "fx": "hate-quake", "react": "…I can. I just won't." }
+          ] },
+        { "text": "She eats slowly. She never looks at the plate. Only at you.", "sfx": "breath", "props": { "shot": "nanda-eat-katsu" } },
+        { "text": "The bell over the door. Outside, the big crossing roars again.", "sfx": "bell", "props": { "shot": "curry-house-ext" },
+          "choices": [ { "text": "Step outside", "go": "town" } ] }
+      ]
+    },
+    {
+      "id": "seq-station", "title": "Station / ticket gate", "short": "GATE", "bg": "naan", "enter": "fade",
+      "beats": [
+        { "text": "The station. Noon light through the glass roof. A train sighs somewhere.", "sfx": "train-hum", "props": { "shot": "station-gate" } },
+        { "text": "Close-up. The ticket gate. She taps her card. Then taps it again. For you.", "sfx": "tick", "props": { "shot": "ic-card-tap" } },
+        { "speaker": "NANDA", "text": "I loaded your card last week. You're welcome. Don't ask how.", "props": { "shot": "station-gate" } },
+        { "text": "The door chime plays. She holds your sleeve the whole song.", "sfx": "bell", "props": { "shot": "train-door" },
+          "choices": [ { "text": "Board the train", "go": "train" } ] }
+      ]
+    }
+  ],
+  "patch": [
+    { "scene": "rooftop", "beat": 2, "beats": [
+      { "sfx": "tick", "props": { "shot": "bento-lid" }, "vary": { "bento": {
+        "tamagoyaki": { "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers." },
+        "umeboshi": { "text": "Close-up. The lid lifts. One red umeboshi on white rice." } } } },
+      { "sfx": "wind", "text": "She doesn't eat hers. She watches you chew.", "props": { "shot": "nanda-watch" } }
+    ] },
+
+    { "scene": "park", "beat": 3, "beats": [
+      { "sfx": "thump", "text": "Close-up. Her fingers lock between yours. Tight. Tighter.", "props": { "shot": "hands-lock" } },
+      { "speaker": "NANDA", "text": "See? A perfect fit. Like a lock. Click. ♡", "props": { "shot": "hands-lock" } }
+    ] },
+    { "scene": "park", "beat": 0, "beats": [
+      { "sfx": "wind", "text": "A sakura park. Blue sky. Petals fall like slow snow.", "props": { "shot": "park-wide" } }
+    ] },
+
+    { "scene": "errand-shop", "beat": 5, "beats": [
+      { "sfx": "bell", "text": "The shop door jingles shut. The bags cut into your fingers.", "props": { "shot": "shop-exit" } },
+      { "speaker": "NANDA", "text": "Heavy? Good. Heavy means you can't run. Ehehe. Kidding. ♡" }
+    ] },
+    { "scene": "errand-shop", "beat": 2, "beats": [
+      { "sfx": "thump", "text": "Close-up. Three cups in the basket. She strokes the third one.", "props": { "shot": "three-cups-basket" } }
+    ] },
+
+    { "scene": "errand-library", "beat": 4, "beats": [
+      { "sfx": "bell", "text": "Outside, the crossing bell starts again. She waits for it to stop.", "props": { "shot": "crossing-bell" } }
+    ] },
+    { "scene": "errand-library", "beat": 3, "beats": [
+      { "sfx": "silence", "text": "The library. Cool air. So quiet you can hear pages turn.", "props": { "shot": "library-int" } },
+      { "sfx": "thump", "text": "Close-up. The book drops in the return slot. Thunk.", "props": { "shot": "book-slot" } },
+      { "speaker": "NANDA", "text": "Bye, book. You were a good hostage. ♡", "props": { "shot": "library-int" } }
+    ] },
+
+    { "scene": "hungry", "beat": 0, "set": { "choices": [
+      { "text": "Butter chicken, for her", "side": "pink", "set": { "cold": "no", "food": "butter" }, "love": 3, "emote": "hearts", "fx": "love-burst", "react": "With naan! You know me so well. ♡", "go": "seq-butter" },
+      { "text": "Katsu curry", "side": "mid", "default": true, "set": { "cold": "no", "food": "katsu" }, "love": 2, "emote": "heart", "fx": "none", "react": "Crunchy! You chose. I'll pretend I did.", "go": "seq-katsu" },
+      { "text": "I'm not hungry", "side": "purple", "set": { "cold": "yes", "food": "katsu" }, "love": -4, "emote": "hate", "fx": "hate-quake", "react": "You don't eat? Then you watch me eat.", "go": "seq-katsu" }
+    ] } },
+
+    { "scene": "town", "beat": 9, "set": { "choices": [
+      { "text": "Walk to the station", "go": "seq-station" },
+      { "text": "Walk to the station… and nothing else", "go": "seq-station" }
+    ] } },
+
+    { "scene": "rain-crossing", "beat": 2, "beats": [
+      { "sfx": "rain", "text": "Close-up. Rain on the umbrella. Her shoulder gets wet. Yours doesn't.", "props": { "shot": "umbrella-shoulder" } },
+      { "speaker": "NANDA", "text": "I'm cold. I don't mind. Dry people don't leave." }
+    ] },
+
+    { "scene": "walk-home", "beat": 5, "beats": [
+      { "sfx": "tick", "text": "Close-up. Her house key is already in her hand. Warm. Held since noon.", "props": { "shot": "key-in-hand" } },
+      { "speaker": "NANDA", "text": "I held it all day. So I'd be ready. For us." }
+    ] },
+
+    { "scene": "genkan-talk", "beat": 4, "beats": [
+      { "bg": "BG-D2", "sfx": "kettle", "text": "The kitchen. Too clean. Three chairs. The kettle is already warm.", "props": { "shot": "kitchen-wide" } },
+      { "sfx": "kettle", "text": "Close-up. She pours. The steam curls up like a finger.", "props": { "shot": "tea-pour" } },
+      { "sfx": "breath", "speaker": "NANDA", "text": "Blow on it. No, let me. …There. Now it has my breath in it.", "props": { "shot": "tea-pour" } }
+    ] },
+
+    { "scene": "unknown", "beat": 2, "beats": [
+      { "sfx": "silence", "text": "Upstairs, the kettle clicks off. Her slippers stop moving.", "props": { "shot": "hatch-dark" } }
+    ] },
+    { "scene": "escape", "beat": 13, "beats": [
+      { "sfx": "thump", "text": "Above you, footsteps. Slow. Counting. One, two, three.", "props": { "shot": null } }
+    ] },
+
+    { "scene": "steeped", "beat": 4, "beats": [
+      { "sfx": "silence", "text": "Close-up. Your cup, empty. Hers, full. She never drank.", "props": { "shot": "cups-end" } }
+    ] },
+    { "scene": "escape-win", "beat": 6, "beats": [
+      { "sfx": "rain", "text": "Wide. Her street at night. One window lit. It's yours now.", "props": { "shot": "street-night-window" } }
+    ] },
+    { "scene": "leave-yeah", "beat": 4, "beats": [
+      { "sfx": "silence", "text": "Wide. The café. Every table has two cups. Every cup has your name.", "props": { "shot": "cafe-cups" } }
+    ] }
+  ]
+}

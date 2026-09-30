@@ -147,6 +147,9 @@ body { font-family: var(--cond); color: var(--ink); }
   filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)); animation: nanda-in 320ms ease-out both; }
 /* feet on the floor; lifted above the raised box only on choice beats */
 .db-nanda.raised { bottom: 470px; }
+/* OBBP: centred in play; back on the right while a modal card (goal card, end card) is up */
+.db-nanda { right: auto; left: 730px; }
+.stage.is-goal .db-nanda, .hud-scrim ~ .db-nanda { left: auto; right: 60px; }
 @keyframes nanda-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
 /* ================= HUD (Hud.jsx; research/date-beta-mockups/hud/ variant A, Tony's literal copy). `hud-` / `lv-` prefixed.

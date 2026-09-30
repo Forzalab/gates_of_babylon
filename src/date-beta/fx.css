@@ -1,0 +1,57 @@
+/* fx.css (T5): 3-choice layout, love chips, always-visible timer, default tag, pick effects. HUD look is reused (--lv-* tokens), not restyled. */
+
+/* ---------- 3 choices: mid button in the centre */
+.db-choices.n3 { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; left: 90px; right: 90px; }
+.db-choices.n3 .db-choice { font-size: 46px; padding: 22px 30px 26px; }
+.db-choice.mid { background: linear-gradient(180deg, #f6eefc 0%, #cdb8ee 55%, #a88bdc 100%); color: #3a1d5c; text-shadow: none;
+  box-shadow: inset 0 0 0 3px #7a5cb8, inset 0 -6px 0 rgba(58, 29, 92, .22), 0 0 0 9px var(--g-rim), 0 0 0 11px var(--g-rim-edge), 0 14px 0 2px var(--g-rim-edge), 0 20px 22px rgba(58, 10, 38, .32); }
+
+/* ---------- value chip (top-right corner of a choice) */
+.db-chip { position: absolute; top: -34px; right: 26px; z-index: 2; padding: 4px 20px 6px; border-radius: 999px; font: 900 34px/1.1 var(--btn); letter-spacing: .02em;
+  border: 4px solid var(--lv-ol); color: var(--lv-ink); background: var(--lv-panel); text-shadow: none; box-shadow: 0 5px 0 rgba(58, 10, 38, .35); }
+.db-chip.up { background: var(--lv-new); color: #fff; text-shadow: 0 2px 0 var(--lv-ol); }
+.db-chip.zero { background: var(--lv-empty); color: var(--lv-ink); }
+.db-chip.down { background: var(--lv-dark); color: var(--lv-dark-hot); border-color: var(--lv-dark-hot); }
+
+/* ---------- timer: a bar that drains across the whole button row, number in the middle. Always visible on timed beats. */
+.db-choices.timed { margin-bottom: 0; }
+.db-timebar { position: absolute; left: 0; right: 0; top: -72px; height: 34px; border-radius: 999px; overflow: hidden; z-index: 3;
+  background: rgba(26, 7, 16, .78); border: 4px solid var(--lv-ol); box-shadow: 0 0 0 3px #fff; }
+.db-timebar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--lv-fill); transition: width .1s linear; }
+.db-timebar .db-timer { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); min-width: 2.2em; font: 900 34px/1 var(--btn); color: #fff;
+  text-shadow: 0 0 6px #000, 0 2px 0 var(--lv-ol); }
+.rm .db-timebar i { transition: none; }
+.db-choices.timed .db-timebar { top: -76px; }
+.stage:has(.db-choices.timed) .db-say { bottom: 336px; }
+
+/* ---------- default option: visible outline + tag */
+.db-choice.is-default { outline: 8px dashed #fff; outline-offset: 14px; }
+.db-choice.is-default:hover, .db-choice.is-default:focus-visible { outline-style: solid; }
+.db-deftag { position: absolute; left: 50%; bottom: -34px; transform: translateX(-50%); padding: 2px 22px 4px; border-radius: 999px; background: #fff; color: var(--lv-ink);
+  border: 4px solid var(--lv-ol); font: 900 28px/1.1 var(--btn); letter-spacing: .06em; text-transform: uppercase; text-shadow: none; }
+
+/* ---------- pick effects */
+.db-fx { position: absolute; inset: 0; z-index: 30; pointer-events: none; overflow: hidden; }
+.fx-pinkflash { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 55%, rgba(255, 150, 210, .75), rgba(255, 79, 154, .35) 60%, rgba(255, 79, 154, 0) 85%);
+  animation: fx-flash 500ms ease-out both; }
+.fx-heart { position: absolute; top: -12%; height: auto; fill: #ff5fa2; stroke: #fff; stroke-width: 1.4; paint-order: stroke; filter: drop-shadow(0 4px 0 rgba(90, 8, 50, .35));
+  animation: fx-fall var(--f) cubic-bezier(.3, .1, .6, 1) var(--d) both; }
+.db-fx.still .fx-pinkflash { animation: none; opacity: .55; }
+.db-fx.still .fx-heart { animation: none; }
+@keyframes fx-flash { from { opacity: 1; } to { opacity: 0; } }
+@keyframes fx-fall { from { transform: translateY(0) rotate(-8deg); } to { transform: translateY(1250px) rotate(10deg); } }
+
+.stage.fx-quake { animation: fx-quake 334ms steps(1, end) 3; }
+@keyframes fx-quake { 0% { translate: -22px 8px; } 50% { translate: 20px -8px; } }
+.fx-vignette { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(120, 0, 20, 0) 38%, rgba(140, 0, 24, .55) 72%, rgba(60, 0, 10, .9) 100%);
+  animation: fx-vig 1700ms ease-out both; }
+.db-fx.still .fx-vignette { animation: none; }
+@keyframes fx-vig { 0%, 45% { opacity: 1; } 100% { opacity: 0; } }
+
+.fx-card { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%) rotate(-2deg); max-width: 1500px; padding: 44px 84px 52px; text-align: center;
+  background: var(--lv-dark); border: 10px solid var(--lv-dark-hot); border-radius: 22px; box-shadow: 0 0 0 8px #fff, 0 22px 0 8px rgba(0, 0, 0, .45);
+  animation: fx-pop 1800ms cubic-bezier(.2, 1.4, .4, 1) both; }
+.fx-card b { display: block; font: 900 104px/1.05 var(--btn); color: #fff; letter-spacing: .02em; text-shadow: 0 6px 0 var(--lv-dark-hot); overflow-wrap: anywhere; }
+.db-fx.still .fx-card { animation: none; }
+@keyframes fx-pop { 0% { transform: translate(-50%, -50%) scale(.3) rotate(-2deg); opacity: 0; } 12% { transform: translate(-50%, -50%) scale(1.06) rotate(-2deg); opacity: 1; }
+  20%, 85% { transform: translate(-50%, -50%) scale(1) rotate(-2deg); opacity: 1; } 100% { opacity: 0; } }

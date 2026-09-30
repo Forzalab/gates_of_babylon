@@ -11,12 +11,17 @@
 // pos.love is the running score, clamped 0..goal; goal = the best total any path can reach (loader walk), so 100% is
 // always reachable and never by accident. A scored pick returns a reaction frame (pos.react) that next() clears; a pick
 // made where she is absent carries its pop (pos.pending) to the next beat where she is present.
-export const MAX_WORDS = 12;
+export const MAX_WORDS = 30; // a line, a vary text, a react
+// Meta tokens (T3, meta.js fills them at render): allowed braces besides {OR}.
+export const TOKEN_RE = /\{(RUN|TIME|DAYPART|CLOTHES|CROWD\.[1-4])\}/g;
+export const MAX_CHOICE_WORDS = 12; // a button label
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
 export const WAITS = ['click', 'start', 'auto', 'choice']; // start = START button/keys; auto = timer; choice = a pick
 export const SCARES = [0, 1, 2];
-export const SIDES = ['pink', 'purple']; // pink = toward her, purple = leave
+export const SIDES = ['pink', 'purple', 'mid']; // pink = toward her, purple = leave, mid = the third option (3-choice beats: pink, mid, purple)
+export const FX = ['love-burst', 'hate-quake', 'chosen-flash', 'none'];
+export const MIN_TIMER = 12; // seconds: every timed choice gets at least this long
 export const OR_MARK = '{OR}';
 export const ASSET_ID = /^[A-Z]{2}-[A-Z0-9]+$/; // manifest ids look like "BG-03" / "SX-37"; anything else is a name
 export const VARY_KEYS = ['text', 'speaker', 'props', 'sprite', 'bg', 'sfx'];
@@ -24,7 +29,7 @@ export const VARY_KEYS = ['text', 'speaker', 'props', 'sprite', 'bg', 'sfx'];
 // on the flag (or with a variant that falls back to that text) fails at load. The picking choices are exempt.
 export const ECHO = { bento: /\b(umeboshi|tamagoyaki|sour|sweet)\b|すっぱい|甘い/iu };
 export const LOVE_MIN = -5, LOVE_MAX = 5;
-export const EMOTES = ['heart', 'hearts', 'sweat', 'pout', 'or', 'crack'];
+export const EMOTES = ['heart', 'hearts', 'sweat', 'pout', 'or', 'crack', 'hate'];
 export const CARDS = ['goal'];
 export const END_ID = /^[a-z][a-z-]{0,15}$/; // the ending's name (steeped | escape | leave), for the card's label
 export const SHORT = /^[A-Z0-9ÉÈ .'-]{1,8}$/u; // a scene's name on the route trail
@@ -33,7 +38,7 @@ const KEYS = {
   root: ['version', 'note', 'flags', 'love', 'scenes'],
   scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short'],
   beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end'],
-  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell'],
+  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake'],
 };
 // Default emote for a score change: +3 and up hearts, +2 heart, +1 sweat, -1 pout, -2 or, -3 and down crack.
 export const emoteFor = (love) => (love >= 3 ? 'hearts' : love === 2 ? 'heart' : love === 1 ? 'sweat'
@@ -114,7 +119,7 @@ export const isAssetId = (v) => typeof v === 'string' && ASSET_ID.test(v);
 // "f{OR}ever" -> [{ t: 'f' }, { t: 'OR', or: true }, { t: 'ever' }]. Any other brace is a typo and fails loudly.
 export function orParts(text, where = 'text') {
   const bits = text.split(OR_MARK);
-  if (bits.some((b) => /[{}]/.test(b))) fail(where, `stray brace in "${text}" (the only mark is ${OR_MARK})`);
+  if (bits.some((b) => /[{}]/.test(b.replace(TOKEN_RE, '')))) fail(where, `stray brace in "${text}" (the only mark is ${OR_MARK})`);
   const out = [];
   bits.forEach((t, i) => { if (i) out.push({ t: 'OR', or: true }); if (t) out.push({ t }); });
   return out;
@@ -175,7 +180,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       const auto = b.auto ?? null;
       if (auto !== null && auto < hold) fail(at, `auto ${auto} ms is shorter than the ${hold} ms hold`);
       if (wait === 'auto' && auto === null) fail(at, 'wait "auto" needs an auto time');
-      const timer = b.timer ?? null;
+      const timer = b.timer == null ? null : typeof b.timer === 'number' && b.timer > 0 ? Math.max(b.timer, MIN_TIMER) : b.timer;
       if (timer !== null && (!choices || typeof timer !== 'number' || !(timer > 0))) fail(at, 'timer must be a positive number of seconds, on a choice beat');
       const card = b.card ?? null;
       if (card !== null && !CARDS.includes(card)) fail(at, `card "${card}" is not one of ${CARDS.join('|')}`);
@@ -323,14 +328,14 @@ function loadChoices(list, at, decl = {}) {
   if (!Array.isArray(list) || !list.length || list.length > SIDES.length) fail(at, `choices must be 1..${SIDES.length} items`);
   if (list.filter((c) => c?.default).length > 1) fail(at, 'only one choice can be the default');
   const sides = new Set();
-  return Object.freeze(list.map((c, i) => {
+  const loaded = list.map((c, i) => {
     const where = `${at}.choices[${i}]`;
     if (!c || typeof c !== 'object') fail(where, 'needs text');
     keys(c, 'choice', where);
     if (typeof c.text !== 'string' || !c.text.trim()) fail(where, 'needs text');
-    if (words(c.text) > MAX_WORDS) fail(where, `text has ${words(c.text)} words, max ${MAX_WORDS}`);
+    if (words(c.text) > MAX_CHOICE_WORDS) fail(where, `text has ${words(c.text)} words, max ${MAX_CHOICE_WORDS}`);
     if (/\.\s*$/.test(c.text)) fail(where, 'button text ends with "." (actions are fragments, no period)');
-    const side = c.side ?? SIDES[i];
+    const side = c.side ?? (list.length === 3 ? ['pink', 'mid', 'purple'][i] : SIDES[i]);
     if (!SIDES.includes(side)) fail(where, `side "${side}" is not one of ${SIDES.join('|')}`);
     if (sides.has(side)) fail(where, `two choices on the ${side} side`);
     sides.add(side);
@@ -340,16 +345,26 @@ function loadChoices(list, at, decl = {}) {
     if (!love && (c.emote != null || c.react != null || c.tell != null)) fail(where, 'emote / react / tell need a non-zero love');
     if (c.emote != null && !EMOTES.includes(c.emote)) fail(where, `emote "${c.emote}" is not one of ${EMOTES.join('|')}`);
     if (c.tell != null && typeof c.tell !== 'boolean') fail(where, 'tell must be true or false');
+    if (c.fx != null && !FX.includes(c.fx)) fail(where, `fx "${c.fx}" is not one of ${FX.join('|')}`);
+    if (c.fake != null && typeof c.fake !== 'boolean') fail(where, 'fake must be true or false');
+    if (c.fake && i === 0) fail(where, 'the first choice cannot be fake (a fake pick is overridden to the first choice)');
+    const fx = c.fake ? 'chosen-flash' : c.fx ?? (love > 0 ? 'none' : 'none');
     let react = null;
     if (c.react != null) {
       if (typeof c.react !== 'string' || !c.react.trim()) fail(where, 'react must be a non-empty string (her line)');
       if (words(c.react) > MAX_WORDS) fail(where, `react has ${words(c.react)} words, max ${MAX_WORDS}`);
       react = parseLine(c.react, `${where}.react`, 'NANDA');
-      echoLint(c.react, null, `${where}.react`);
+      if (!Object.keys(c.set ?? {}).some((k) => ECHO[k])) echoLint(c.react, null, `${where}.react`); // a react to the pick that sets the flag is not an echo
     }
     return Object.freeze({ text: c.text, side, go: loadGo(c.go, where, decl), if: declared(decl, flagsField(c.if, where, 'if'), where),
       set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or),
-      love, emote: love ? c.emote ?? emoteFor(love) : null, react, tell: love ? c.tell ?? true : false });
+      love, fx, fake: !!c.fake, emote: love ? c.emote ?? (fx === 'hate-quake' ? 'hate' : emoteFor(love)) : null, react, tell: love ? c.tell ?? true : false });
+  });
+  // A fake choice plays the first choice's outcome (go / set / love / emote / react), so the goal walk and the route graph see it.
+  return Object.freeze(loaded.map((c) => {
+    if (!c.fake) return c;
+    const f = loaded[0];
+    return Object.freeze({ ...c, go: f.go, set: f.set, love: f.love, emote: f.emote, react: f.react, tell: f.tell });
   }));
 }
 
@@ -381,7 +396,7 @@ export const present = (scene, beat) => !!scene?.nanda && !!beat && beat.bg !== 
 // path = the scene ids entered this run, in order (the route trail's filled stops).
 const mk = (s, b, done, { flags, love, path, pending }) => (pending ? { s, b, done, flags, love, path, pending } : { s, b, done, flags, love, path });
 const runOf = (scenes, pos) => ({ flags: pos.flags ?? {}, love: pos.love ?? loveOf(scenes).start, path: pos.path ?? [], pending: pos.pending ?? null });
-const dropReact = ({ react, ...p }) => p;
+const dropReact = ({ react, fx, ...p }) => p;
 
 // Move forward from (s, b) inclusive until a beat that plays under this motion setting. Every beat reached,
 // including one reduced motion drops, merges its `set` into the flags.
@@ -433,7 +448,12 @@ export function choose(scenes, pos, i, rm = false) {
   if (pos.react) pos = dropReact(pos);
   const c = pos.done ? null : scenes[pos.s].beats[pos.b].choices?.[i];
   if (!c || !enabled(c, pos.flags)) return pos;
-  return take(scenes, pos, c, rm);
+  if (c.fake) { // overridden: the first choice happens, then chosen-flash names the action she made you take
+    const first = scenes[pos.s].beats[pos.b].choices[0];
+    return { ...take(scenes, pos, first, rm), fx: Object.freeze({ kind: 'chosen-flash', action: first.plain, fake: true }) };
+  }
+  const out = take(scenes, pos, c, rm);
+  return c.fx && c.fx !== 'none' ? { ...out, fx: Object.freeze({ kind: c.fx, action: c.plain, fake: false }) } : out;
 }
 // A go back to scene 1 is a new run (love back to start). A scored pick where she is present returns the reaction frame
 // (pos.react); where she is absent the score changes at once and the pop waits for her (pos.pending).
