@@ -11,3 +11,5 @@ if (ART_INDEX.includes('...SCENE_A')) ART_NAMES.push(...idsOf('./date-beta/art/r
 if (ART_INDEX.includes('...R3_STATION')) ART_NAMES.push(...idsOf('./date-beta/art/r3-station/index.js', 'export const R3_STATION'));
 // ...R3_RAIN (art/r3-rain/index.js, scenes-r3 G2 rain walk + G3 her street -> night) adds its own ids.
 if (ART_INDEX.includes('...R3_RAIN')) ART_NAMES.push(...idsOf('./date-beta/art/r3-rain/index.js', 'export const R3_RAIN'));
+// ...CURRY (art/curry/index.js, the curry rebuild: street choice + butter-chicken / katsu chains) adds its own ids.
+if (ART_INDEX.includes('...CURRY')) ART_NAMES.push(...idsOf('./date-beta/art/curry/index.js', 'export const CURRY'));
