@@ -8,3 +8,4 @@ Open notes (not test failures, not fixed here):
 - Rooftop f{OR}ecast word jokes stay (Tony's call).
 - Old date scenes (park, errand-shop, town, ...) remain in data, off-path; the Tree/debug view still lists them.
 - The crowdwork line is 29 words (rubric ideal ≤15, max 30). Kept verbatim per Tony.
+- #1/B-01: fixed by merging sprint/interiors (e7b7b37): add 'interiors' to the pack list, INTERIORS spread last in art/index.js. (Main owns the merge; park still draws the rooftop until then.)
