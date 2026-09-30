@@ -306,5 +306,12 @@
   "beat": "2 (t)",
   "file": "public/date-beta/voice/12-escape-win/062_2-t.mp3",
   "text": "[softly][warm] Home is warm, and sweet."
+ },
+ {
+  "n": 65,
+  "scene": "escape-win",
+  "beat": "5",
+  "file": "public/date-beta/voice/12-escape-win/065_5.mp3",
+  "text": "[whispers][perfectly even] Mine."
  }
 ]
