@@ -94,29 +94,29 @@ const BOWLS = ['#8fb3c9', '#c9a27a', '#6f8f6a', '#e6d8c0', '#3f4a5a', '#c98a8a']
 // face: one pale back panel, one plank, THE three identical cups (same drawing as the answer icons), a ¥880 tag each.
 export function AisleCups({ children }) {
   return (
-    <ShopScene id="cups" trace="r2-cups" label="Aisle 3, cups: a wooden tea-ware stand with iron teapots and glass pots. On one clean shelf stand three matching white cups with pink bands.">
+    <ShopScene id="cups" trace="r2-cups" label="Aisle 3, cups: a wooden tea-ware stand with iron teapots and glass pots. On one clean shelf stand three matching pink tea bowls.">
       <rect x="520" y="400" width="460" height="134" fill={SP.wall} />
       <rect x="520" y="400" width="460" height="10" fill={SP.shade} opacity=".18" />
       <rect x="512" y="530" width="476" height="10" fill={SP.plankTop} />
       <rect x="512" y="540" width="476" height="22" fill={SP.plank} />
-      {[620, 750, 880].map((x) => <Cup key={x} x={x} y={530} s={1} />)}
+      {[620, 750, 880].map((x) => <Cup key={x} x={x} y={530} s={0.8} />)}
       <Card x={1470} y={316} w={380} h={56} fill="#e8f3e2" stroke={SP.green} lines={[['CUPS FOR 2? FOR 3!', 30, SP.pink]]} />
       {children}
     </ShopScene>
   );
 }
 
-// R3 close-up (refs 09 + 10): exactly three identical cups (~130 px) on ONE plank, centred x 600-1300, a ¥880 tag on
+// R3 close-up (refs 09 + 10): exactly three identical cups (~115 px) on ONE plank, centred x 600-1300, a ¥880 tag on
 // the plank lip under each. Every other piece on the shelf is dimmed back to 35 %. Nothing at x > 1450 (her slot).
 export function CupsFront({ three = true }) {
   return (
-    <ShopScene id="cups-front" trace={null} label="Close-up: three matching white cups with pink bands stand in a row on one shelf, a 880 yen tag under each. The rest of the shelf is soft behind.">
+    <ShopScene id="cups-front" trace={null} label="Close-up: three matching pink tea bowls stand in a row on one shelf, a 880 yen tag under each. The rest of the shelf is soft behind.">
       <ShelfBay planks={[340, 640]} top={170}>
         <g opacity=".35">
           {Array.from({ length: 12 }, (_, i) => <Bowl key={i} x={150 + i * 150} y={340} c={BOWLS[i % BOWLS.length]} w={100} />)}
           {[150, 300, 1500, 1650].map((x, i) => <Bowl key={`m${x}`} x={x} y={640} c={BOWLS[(i + 3) % BOWLS.length]} w={100} />)}
         </g>
-        {three && [720, 960, 1200].map((x) => <Cup key={x} x={x} y={640} s={1.3} />)}
+        {three && [720, 960, 1200].map((x) => <Cup key={x} x={x} y={640} s={1.15} />)}
       </ShelfBay>
       {[720, 960, 1200].map((x) => <Card key={x} x={x - 70} y={652} w={140} h={44} r={4} lines={[['¥880', 32, '#d81e2a']]} />)}
     </ShopScene>

@@ -7,6 +7,7 @@
 // reduced motion needs no separate path. Rules live in shopgame.js (tested under node).
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { SHOP } from '../art/shop/index.js';
+import { traceUrl } from '../art/romance/Grade.jsx';
 import { Nanda } from '../Nanda.jsx';
 import { ROUNDS, SECS, HOLD, moodOf, bucket, keySlot, pickItem, timeOut, fresh, TIMEOUT_LINE } from './shopgame.js';
 import './shopgame.css';
@@ -24,8 +25,8 @@ function Icon({ id }) {
     case 'natto': return (<svg viewBox="0 0 60 60"><rect x="10" y="20" width="40" height="28" rx="3" fill="#f2e6c8" {...ol} /><circle cx="30" cy="34" r="8" fill="#b07a3a" /><path d="M10 20 L50 20" stroke="#d8262e" strokeWidth="5" /></svg>);
     default: { // cups: one, pair, three
       const n = id === 'three' ? 3 : id === 'pair' ? 2 : 1;
-      const xs = n === 3 ? [14, 30, 46] : n === 2 ? [21, 39] : [30];
-      return (<svg viewBox="0 0 60 60">{xs.map((x) => (<g key={x}><path d={`M${x - 8} 24 L${x - 6} 44 Q${x} 48 ${x + 6} 44 L${x + 8} 24 Z`} fill="#fbf8f2" {...ol} /><rect x={x - 7.5} y="31" width="15" height="5" fill="#ff8fb8" /></g>))}</svg>);
+      const xs = n === 3 ? [10, 30, 50] : n === 2 ? [20, 40] : [30]; // the same traced bowl, the same 18-unit width in all three
+      return (<svg viewBox="0 0 60 60">{xs.map((x) => (<image key={x} href={traceUrl('shop/r2-cup-side')} x={x - 9} y={30} width="18" height="17.6" />))}</svg>);
     }
   }
 }
