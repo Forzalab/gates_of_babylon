@@ -47,8 +47,10 @@ const MOTES = (() => {
 
 // ---------- shelf wall (left): front edge X -1.56, Z 2.1 .. 5.7
 const XF = -1.56, XM = -1.74, SZ = [2.1, 3.3, 4.5, 5.7], PLANK = [0.1, 0.62, 1.14, 1.66, 2.18], TH = 0.03, SH_TOP = 2.21;
-const JARS = [['2019.04.02', 'Kenji'], ['2019.10.11', 'Taro'], ['2020.11.19', 'Sora'], ['2021.05.03', 'Yuki'], ['2022.02.14', 'Ren'],
-  ['2022.09.09', 'Kaito'], ['2023.08.30', 'Haru'], ['2024.01.20', 'Minato'], ['2024.07.07', 'Riku'], ['2025.06.07', 'Daichi']];
+// Old jars: dates only (UX fix pack: the other names are gone). Today's jar is the only name on the wall: TODAY_NAME.
+const JARS = [['2019.04.02'], ['2019.10.11'], ['2020.11.19'], ['2021.05.03'], ['2022.02.14'],
+  ['2022.09.09'], ['2023.08.30'], ['2024.01.20'], ['2024.07.07'], ['2025.06.07']];
+export const TODAY_NAME = 'Kemey';
 const BENTOS = ['2024.12.01', '2025.03.12', '2026.05.20', '2026.09.27', '2026.09.28', '2026.09.29'];
 const today = () => { const d = new Date(); return `${d.getFullYear()}.${String(d.getMonth() + 1).padStart(2, '0')}.${String(d.getDate()).padStart(2, '0')}`; };
 
@@ -62,9 +64,9 @@ function Jar({ z, y, date, name, note, empty, open, rim = 0.5 }) {
       <path d="M-68 -230Q-78 -228 -78 -200V-22Q-78 0 -56 0H56Q78 0 78 -22V-200Q78 -228 68 -230Z" fill={empty ? '#b8c8e0' : '#233046'} fillOpacity={empty ? 0.12 : 0.55} stroke="#9fb2cf" strokeOpacity=".55" strokeWidth="5" />
       {!empty && <path d="M-70 -120H70V-24Q70 -8 54 -8H-54Q-70 -8 -70 -24Z" fill="#6e1426" />}
       {!empty && [[-40, -60], [0, -44], [36, -70], [-14, -92], [30, -30]].map(([x, yy]) => <circle key={x} cx={x} cy={yy} r="17" fill="#8e1c34" />)}
-      <rect x="-60" y="-190" width="120" height="58" rx="4" fill="#d9ccb4" />
+      <rect x="-60" y="-190" width="120" height={name ? 58 : 34} rx="4" fill="#d9ccb4" />
       <text x="0" y="-168" textAnchor="middle" fontSize="19" fontWeight="700" fontFamily="var(--mono, monospace)" fill="#3a1a10">{date}</text>
-      <text x="0" y="-142" textAnchor="middle" fontSize="24" fontWeight="800" fontFamily="var(--cond, sans-serif)" fill="#3a1a10">{name}</text>
+      {name && <text x="0" y="-142" textAnchor="middle" fontSize="24" fontWeight="800" fontFamily="var(--cond, sans-serif)" fill="#3a1a10">{name}</text>}
       {note && <text x="0" y="-100" textAnchor="middle" fontSize="18" fontWeight="700" fontFamily="var(--cond, sans-serif)" fill="#f4ead8">{note}</text>}
       {/* warm bulb-side glint (the bulb is room-side = right of the jar) + a cold window tick */}
       <rect x="52" y="-214" width="10" height="176" rx="5" fill="#ffc98a" opacity={rim} />
@@ -88,6 +90,40 @@ function Bento({ z, y, n, label }) {
   );
 }
 
+// Today's jar gets a lamp of its own (UX fix pack): a small bare bulb on a cord just above it, a warm pool on the jar and
+// the plank. Brighter while the beat looks at it (shelf = newest). Static.
+function TodayLamp({ z, on }) {
+  const [jx, jy] = P(XM, PLANK[3] + TH, z), [bx, by] = P(XM + 0.12, PLANK[3] + 0.42, z), [tx, ty] = P(XM + 0.12, SH_TOP, z);
+  return (
+    <g>
+      <ellipse cx={f2(jx + 10)} cy={f2(jy - 50)} rx="190" ry="170" fill="url(#cl-today)" opacity={on ? 1 : 0.6} />
+      <ellipse cx={f2(jx)} cy={f2(jy + 2)} rx="90" ry="10" fill="#ffc46b" opacity={on ? 0.45 : 0.25} />
+      <line x1={f2(tx)} y1={f2(ty)} x2={f2(bx)} y2={f2(by - 12)} stroke="#1a100a" strokeWidth="2.5" />
+      <rect x={f2(bx - 6)} y={f2(by - 16)} width="12" height="8" rx="2" fill="#3a3030" />
+      <ellipse cx={f2(bx)} cy={f2(by)} rx="9" ry="11" fill="#fff1c6" />
+      <circle cx={f2(bx)} cy={f2(by)} r="26" fill="#ffd98a" opacity=".35" />
+    </g>
+  );
+}
+
+// A paper tag tied to today's jar neck, turned to the room so it reads at 1920: the name, then today's date.
+// Screen x 250..390, y 370..460: left of the dialogue box and clear of the place chip (y <= 240).
+function TodayTag({ z, date }) {
+  const [jx, jy] = P(XM, PLANK[3] + TH, z);
+  const neck = [jx + 22, jy - 90], x = jx + 40, y = jy - 108;
+  return (
+    <g>
+      <path d={`M${f2(neck[0])} ${f2(neck[1])}Q${f2(neck[0] + 14)} ${f2(neck[1] - 16)} ${f2(x + 8)} ${f2(y + 14)}`} stroke="#e9dcc0" strokeWidth="2" fill="none" />
+      <g transform={`translate(${f2(x)} ${f2(y)}) rotate(4)`}>
+        <path d="M0 14L14 0H140V92H14L0 78Z" fill="#fff4dc" stroke="#c98a2e" strokeWidth="2.5" />
+        <circle cx="14" cy="46" r="5" fill="#2a1a10" />
+        <text x="80" y="42" textAnchor="middle" fontSize="30" fontWeight="800" fontFamily="var(--cond, sans-serif)" fill="#7a0f24">{TODAY_NAME}</text>
+        <text x="80" y="74" textAnchor="middle" fontSize="18" fontWeight="700" fontFamily="var(--mono, monospace)" fill="#4a2410">{date}</text>
+      </g>
+    </g>
+  );
+}
+
 function Section({ i, shelf, jar }) {
   const z0 = SZ[i], z1 = SZ[i + 1];
   const jarsTop = [], jarsMid = [], bentos = [];
@@ -95,8 +131,8 @@ function Section({ i, shelf, jar }) {
   zs.forEach((z, k) => {
     const idx = (i * 4 + k) % JARS.length;
     const newest = i === 0 && k === 0; // the nearest jar on the top shelf: today, you, lid off, empty
-    if (!newest) jarsTop.push({ z, date: JARS[idx][0], name: JARS[idx][1] });
-    jarsMid.push({ z, date: JARS[(idx + 5) % JARS.length][0], name: JARS[(idx + 5) % JARS.length][1] });
+    if (!newest) jarsTop.push({ z, date: JARS[idx][0] });
+    jarsMid.push({ z, date: JARS[(idx + 5) % JARS.length][0] });
   });
   [0.1, 0.36, 0.62, 0.88].forEach((d, k) => [0, 1, 2].forEach((lv) => { if (!(k === 3 && lv === 2)) bentos.push({ z: z0 + d, lv, n: i * 7 + k + lv }); }));
   const on = (k) => shelf === k;
@@ -121,10 +157,12 @@ function Section({ i, shelf, jar }) {
       </g>
       {i === 0 && (
         <g opacity={shelf && !on('newest') ? 0.7 : 1}>
-          <Jar z={zs[0]} y={PLANK[3] + TH} date={today()} name="you" note={jar} empty open rim={0.6} />
+          <TodayLamp z={zs[0]} on={on('newest')} />
+          <Jar z={zs[0]} y={PLANK[3] + TH} date={today()} name={TODAY_NAME} note={jar} empty open rim={0.9} />
           {/* its lid, set down beside it, tilted */}
           {(() => { const [x, y] = P(XM + 0.02, PLANK[3] + TH, zs[0] + 0.14); const s = C.f / (zs[0] + 0.14) / 1000; return (
             <g transform={`translate(${f2(x)} ${f2(y)}) scale(${s.toFixed(4)}) rotate(-14)`}><rect x="-62" y="-34" width="124" height="34" rx="8" fill="#3b2a22" /><rect x="-62" y="-34" width="124" height="8" rx="4" fill="#6a5040" /></g>); })()}
+          <TodayTag z={zs[0]} date={today()} />
         </g>
       )}
     </g>
@@ -320,6 +358,7 @@ export default function Cellar({ props = {}, rm }) {
             <stop offset="0" stopColor="#d8e6ff" stopOpacity=".34" /><stop offset=".7" stopColor="#9fb8ff" stopOpacity=".12" /><stop offset="1" stopColor="#9fb8ff" stopOpacity=".05" />
           </linearGradient>
           <radialGradient id="cl-bulb"><stop offset="0" stopColor="#ffd9a0" stopOpacity=".55" /><stop offset=".3" stopColor="#ff9a4a" stopOpacity=".16" /><stop offset="1" stopColor="#ff9a4a" stopOpacity="0" /></radialGradient>
+          <radialGradient id="cl-today"><stop offset="0" stopColor="#ffc46b" stopOpacity=".78" /><stop offset=".45" stopColor="#ff9a3c" stopOpacity=".2" /><stop offset="1" stopColor="#ff9a3c" stopOpacity="0" /></radialGradient>
           <radialGradient id="cl-focus"><stop offset="0" stopColor="#ffcf8a" stopOpacity=".38" /><stop offset="1" stopColor="#ffcf8a" stopOpacity="0" /></radialGradient>
           <linearGradient id="cl-glass" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#e8f0ff" /><stop offset="1" stopColor="#8aa4d8" /></linearGradient>
           <filter id="cl-soft" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="10" /></filter>

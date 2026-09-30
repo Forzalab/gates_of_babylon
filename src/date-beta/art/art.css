@@ -80,7 +80,7 @@
 /* ---------- basement: black + one CSS bulb + SVG shelves (Basement.jsx) ---------- */
 .art.basement { position: absolute; inset: 0; overflow: hidden; } /* black = the viewport */
 .basement .bulb-wire { position: absolute; left: 960px; top: 0; width: 2px; height: 250px; background: #2a1a1a; transform-origin: 50% 0;
-  animation: bulb-sway 5s steps(40) infinite alternate; }
+  animation: bulb-sway 5s steps(12) infinite alternate; } /* 12 steps / 5 s = 2.4 Hz, under 3 Hz */
 .basement .bulb { position: absolute; left: -17px; bottom: -40px; width: 36px; height: 48px; border-radius: 50% 50% 46% 46%;
   background: radial-gradient(circle at 50% 40%, #fff8dc, #ffd98a 60%, #c9923a); box-shadow: 0 0 40px 12px #ffd98a88; }
 .basement .bulb::after { content: ''; position: absolute; left: 50%; top: 50%; width: 2400px; height: 2400px; transform: translate(-50%, -50%);
@@ -99,6 +99,17 @@
 .basement .bento { fill: #5a1822; stroke: #2a0a0e; stroke-width: 3; } .basement .band { stroke: #d6b24a; stroke-width: 6; }
 .basement .usu, .basement .usu-top { fill: #6b4a2a; stroke: #2a1a10; stroke-width: 3; } .basement .kine { fill: #8a6238; } .basement .kine-h { stroke: #8a6238; stroke-width: 14; stroke-linecap: round; }
 .basement .plate { fill: #e8e2da; } .basement .mochi { fill: #fffaf2; }
+/* today's jar ("Kemey", today's date): a second warm lamp of its own; the label reads at 1920 (UX fix pack) */
+.basement .lamp2-wire { stroke: #2a1a1a; stroke-width: 3; }
+.basement .lamp2-shade { fill: #3b2a1c; stroke: #1a0f08; stroke-width: 3; }
+.basement .lamp2-bulb { fill: #fff1c6; }
+.basement .today .label { fill: #fff4dc; stroke: #c98a2e; stroke-width: 2; }
+.basement .today .lbl-date { font-size: 14px; fill: #4a2410; }
+.basement .today .lbl-name { font-size: 22px; fill: #7a0f24; letter-spacing: .02em; }
+.basement .glass-hi { fill: none; stroke: #ffe2a8; stroke-width: 3; stroke-linecap: round; opacity: .7; }
+.basement .echo { font-size: 20px; fill: #ffd9a0; }
+.basement .row.newest { opacity: .5; } .basement .row.newest.on { opacity: 1; }
+
 
 /* ---------- fallback art for missing BG files (fallbacks.js) ---------- */
 .door .unit { font: 800 72px/1 var(--cond); fill: #2a2440; text-anchor: middle; }
