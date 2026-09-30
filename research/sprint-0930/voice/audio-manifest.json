@@ -390,5 +390,12 @@
   "beat": "3 R=",
   "file": "public/date-beta/voice/02-v2-park/019_3-r.mp3",
   "text": "[smiling] One finger. [perfectly even][sweet] I will hold it very hard."
+ },
+ {
+  "n": 23,
+  "scene": "v2-park",
+  "beat": "5 R lib",
+  "file": "public/date-beta/voice/02-v2-park/023_5-r-lib.mp3",
+  "text": "[happy] The book. [giggles][too long] It is very late."
  }
 ]
