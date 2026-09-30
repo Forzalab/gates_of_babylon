@@ -49,7 +49,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'love', 'ux-six', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'love', 'ux-six', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -314,7 +314,7 @@ function Player() {
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
-          <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
+          <Nanda scare={beat.scare} raised={(!!beat.choices || !!cut.raise) && !end && frame === 'medium' && !tag} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}

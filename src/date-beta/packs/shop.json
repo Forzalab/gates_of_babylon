@@ -1,0 +1,178 @@
+{
+ "name": "shop",
+ "note": "SHOP rebuild (research/sprint-0930/shop/SHOTLIST.md; alt's _drift 2026-09-30T0200): v2-shop gets one traced shot per line (2:00 PM, one light), the chain street -> doors -> list -> cart -> HER LIST game -> basket -> snacks -> checkout -> register -> nails -> self-checkout -> exit. The camera shots (props.shot) are replaced by bgs, so no stale `shot` is left. The game beat (bg shop-game; v2-shop is only reached with errand=groceries, so the library route never sees it) plays choice 0/1/2 = 2+ misses / 1 miss / none. Runs before love so love's beat numbers stay final.",
+ "patch": [
+  {
+   "scene": "v2-shop",
+   "beat": 0,
+   "set": {
+    "bg": "shop-vending",
+    "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you to a shop.",
+    "props": {
+     "place": "SHOP STREET",
+     "time": "2:00 PM"
+    }
+   }
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 1,
+   "set": {
+    "bg": "shop-basket-cups",
+    "props": {
+     "cut": {
+      "frame": "off"
+     }
+    }
+   }
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 2,
+   "set": {
+    "bg": "shop-register",
+    "props": {
+     "emote": "pout"
+    }
+   }
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 3,
+   "set": {
+    "bg": "shop-basket-handle",
+    "props": {
+     "cut": {
+      "frame": "off"
+     }
+    }
+   }
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 4,
+   "set": {
+    "bg": "shop-self-close",
+    "props": null
+   }
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 5,
+   "set": {
+    "bg": "shop-way-out",
+    "props": null
+   }
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 4,
+   "beats": [
+    {
+     "speaker": false,
+     "bg": "shop-self-checkout",
+     "text": "She pulls you to the self-checkout. No shop lady there.",
+     "sfx": "tick"
+    }
+   ]
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 2,
+   "beats": [
+    {
+     "speaker": false,
+     "bg": "shop-snacks",
+     "text": "You walk past the sweets. She does not look at them. She looks at you.",
+     "sfx": "tick"
+    },
+    {
+     "speaker": false,
+     "bg": "shop-checkout",
+     "text": "Checkout. Lane 2 is open. You put the basket on the counter.",
+     "sfx": "thump"
+    }
+   ]
+  },
+  {
+   "scene": "v2-shop",
+   "beat": 1,
+   "beats": [
+    {
+     "speaker": false,
+     "bg": "shop-doors",
+     "text": "The shop doors slide open. A little tune plays.",
+     "sfx": "bell"
+    },
+    {
+     "speaker": "NANDA",
+     "bg": "shop-list",
+     "text": "Carrots, eggs, three cups, and you. My whole list. ♡"
+    },
+    {
+     "speaker": false,
+     "bg": "shop-cart",
+     "text": "Your hands push the cart. Her hand slides on top of yours.",
+     "sfx": "breath",
+     "props": {
+      "cut": {
+       "frame": "off"
+      }
+     }
+    },
+    {
+     "bg": "shop-game",
+     "props": {
+      "cut": {
+       "frame": "off"
+      },
+      "secs": 12
+     },
+     "vary": {
+      "bento": {
+       "tamagoyaki": {
+        "props": {
+         "cut": {
+          "frame": "off"
+         },
+         "secs": 12,
+         "eggs": "rolls"
+        }
+       },
+       "umeboshi": {
+        "props": {
+         "cut": {
+          "frame": "off"
+         },
+         "secs": 12
+        }
+       }
+      }
+     },
+     "choices": [
+      {
+       "text": "Two or more wrong",
+       "love": -2,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "You forgot my list. Next time I write it on your hand."
+      },
+      {
+       "text": "One wrong",
+       "love": 2,
+       "emote": "heart",
+       "react": "Almost perfect. I still keep you. ♡"
+      },
+      {
+       "text": "No wrong picks",
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Every item, first try. You know me. ♡"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

@@ -26,6 +26,7 @@ import './art.css';
 import { ROMANCE } from './romance/index.js';
 import { SHOTS } from './shots/index.js'; // camera tricks over these ids (closeup / insert / reaction / establish)
 import { SCENE_A } from './scene-a/index.js'; // rooftop-noon/-warm + the pink bento shots (scene-a/ART.md)
+import { SHOP } from './shop/index.js'; // SHOP rebuild (research/sprint-0930/shop/SHOTLIST.md): shop-* traced shots
 import { R3_STATION } from './r3-station/index.js'; // scenes-r3 G1: station-gate-r3, station-ads(-insert), train-sun/-rain, platform-rain
 import { R3_RAIN } from './r3-rain/index.js'; // scenes-r3 G2 + G3: the rain walk, her street -> night, curry-street, escape-night
 import { CURRY } from './curry/index.js'; // the curry rebuild: street choice + butter-chicken / katsu chains (research/sprint-0930/curry)
@@ -34,6 +35,7 @@ export const ART = { ...ROMANCE, ...SHOTS, ...SCENE_A, park: Rooftop, splash: Sp
   ...R3_STATION,
   ...R3_RAIN,
   ...CURRY,
+  ...SHOP,
   platform: Platform, underpass: Underpass, apartment: ApartmentExt, stairs: Stairs, 'genkan-in': GenkanArrival,
   // fallback art for missing BG files (fallbacks.js maps the ids here)
   door: Door, genkan: Genkan, teatable: TeaTable, cafe: Cafe, 'curry-house': CurryHouse, ...INTERIORS };

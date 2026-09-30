@@ -17,6 +17,13 @@ export const MAX_WORDS = 30; // a line, a vary text, a react
 export const TOKEN_RE = /\{(RUN|TIME|DAYPART|CLOTHES|CROWD\.[1-4])\}/g;
 export const MAX_CHOICE_WORDS = 12; // a button label
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
+// Beat-local props that never carry to the next beat: an `emote` (this line's face) and a hidden sprite (cut.frame
+// 'off', e.g. a mini-game that draws its own Nanda or a hand insert), so "hide Nanda" never leaks past its beat.
+export function carried(p) {
+  const { emote, ...rest } = p;
+  if (rest.cut?.frame === 'off') { const { frame, ...cut } = rest.cut; rest.cut = cut; }
+  return rest;
+}
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
 export const WAITS = ['click', 'start', 'auto', 'choice']; // start = START button/keys; auto = timer; choice = a pick
 export const SCARES = [0, 1, 2];
@@ -190,7 +197,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       // A camera shot (props.shot) is one cut: its props are this beat's only, so a stamp / establish never pins the
       // rest of the scene to its frame (the next beat shows the scene's bg again). Other props carry forward.
       const own = { ...props, ...b.props };
-      if (b.props?.shot == null) props = own;
+      if (b.props?.shot == null) props = carried(own);
       const text = b.text ?? '';
       if (words(text) > MAX_WORDS) fail(at, `text has ${words(text)} words, max ${MAX_WORDS}`);
       const rmAlt = b.rmAlt ?? 'same';
