@@ -6,6 +6,7 @@
 // as town-*-hybrid (traces *-hybrid.svg) for the comparison in research/sprint-0930/town/pure-compare/.
 // HUD-safe band: no text above y 140; Nanda's column is x 730-1190.
 import { traceUrl, preloadTrace } from '../romance/Grade.jsx';
+import { Haze } from '../sandwich.jsx';
 
 const JP = { fontFamily: "'IPAGothic', 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Yu Gothic', sans-serif", fontWeight: 700 };
 const EN = { fontFamily: "'DejaVu Sans', 'Arial Black', sans-serif", fontWeight: 900 };
@@ -40,12 +41,14 @@ export function HSign({ x, y, w, h, text, bg, fg, size, rim, sub }) {
   );
 }
 
-export function TownScene({ id, label, children }) {
-  preloadTrace(`town/${id}`);
+export function TownScene({ id, label, children, sw = null }) {
+  const t = sw ? `town/${id}-sw` : `town/${id}`;
+  preloadTrace(t);
   return (
-    <div className={`art town town-${id}`}>
+    <div className={`art town town-${id}${sw ? ' sw' : ''}`}>
       <svg viewBox="0 0 1920 1080" role="img" aria-label={label}>
-        <image href={traceUrl(`town/${id}`)} width="1920" height="1080" preserveAspectRatio="none" />
+        <image href={traceUrl(t)} width="1920" height="1080" preserveAspectRatio="none" />
+        {sw && <Haze id={`town-${id}`} href={traceUrl(t)} {...sw} />}
         {children}
       </svg>
     </div>

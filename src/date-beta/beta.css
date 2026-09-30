@@ -364,6 +364,8 @@ body { font-family: var(--cond); color: var(--ink); }
 :root[data-lowfx] .stage.focus .scene { filter: brightness(.72); }
 /* the basement's payoff is its labels (today's jar): no blur there, only the dim */
 .stage.focus .scene:has(.art.basement, .art.cellar) { filter: brightness(.86); }
+/* the SANDWICH shots (art/sandwich.jsx): the mid haze layer already carries the depth; the front cels stay crisp */
+.stage.focus .scene:has(.sw) { filter: brightness(.84); }
 .db-focus { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 334ms ease-out;
   background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(26, 7, 16, .55) 100%); }
 .stage.focus .db-focus { opacity: 1; }
