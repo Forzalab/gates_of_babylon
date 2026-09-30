@@ -21,9 +21,9 @@ export function OrSpans({ text }) {
 // Scene A two-step lines (props.cut, SceneA.jsx): `lead` = a line shown on top first, the beat's line reveals under it
 // once `stepped`; `at` = split the beat's line at that text, the rest reveals in place once `stepped`. Hidden parts keep
 // their space (visibility), so the box never jumps. action = drawn where NEXT sits (the smile tag) when there is no NEXT.
-export function Say({ line, onNext = null, lead = null, at = null, stepped = true, action = null }) {
+export function Say({ line, onNext = null, lead = null, at = null, stepped = true, action = null, label }) {
   const who = line.who;
-  const cls = ['db-say', who ? `who-${who.toLowerCase().replace(/\s+/g, '-')}` : 'narration', line.hasOr && 'has-or', lead && 'two-step'];
+  const cls = ['db-say', who ? `who-${who.toLowerCase().split(/[\s(]+/)[0]}` : 'narration', who && /\(/.test(who) && 'offscreen', line.hasOr && 'has-or', lead && 'two-step'];
   const [head, tail] = at ? splitParts(line.parts, at) : [line.parts, []];
   return (
     <div className={cls.filter(Boolean).join(' ')} role="status" data-step={lead || at ? (stepped ? '2' : '1') : undefined}>
@@ -32,7 +32,7 @@ export function Say({ line, onNext = null, lead = null, at = null, stepped = tru
       {lead && <p className="line lead"><Parts parts={orParts(lead, 'lead')} /></p>}
       {lead ? <p className={`line${stepped ? '' : ' db-later'}`}><Parts parts={line.parts} /></p>
         : <p className="line"><Parts parts={head} />{tail.length > 0 && <span className={stepped ? 'db-now' : 'db-later'}><Parts parts={tail} /></span>}</p>}
-      {onNext ? <NextButton onClick={onNext} /> : action}
+      {onNext ? <NextButton label={label} onClick={onNext} /> : action}
     </div>
   );
 }
@@ -41,17 +41,22 @@ export function Say({ line, onNext = null, lead = null, at = null, stepped = tru
 // Glossy choice pills (R2c). Pink = toward her, purple = leave; an OR choice keeps its side on the rim + key (rule C).
 // on[i] false = the choice's `if` fails (drawn, not pickable); left = timer seconds remaining (null = no timer).
 // later: drawn but invisible until a two-step line has stepped (keeps the layout still; no jump when they appear).
-export function Choices({ choices, onPick, on = [], left = null, total = null, def = -1, hidden = false, later = false }) {
+// ux-six: the first beat with hidden chips shows a one-time legend (once per page load, on that beat only).
+let legendAt = null;
+export function Choices({ choices, onPick, on = [], left = null, total = null, def = -1, hidden = false, later = false, beatKey = null }) {
   const chips = choices.some((c) => c.love);
+  if (hidden && chips && legendAt == null) legendAt = beatKey ?? '';
+  const legend = hidden && chips && legendAt === (beatKey ?? '');
   const timed = left != null && total > 0;
   return (
     <div className={`db-choices n${choices.length}${timed ? ' timed' : ''}${later ? ' db-later' : ''}`} role="group" aria-label="choose" aria-hidden={later || undefined}>
       {timed && (
         <div className="db-timebar" role="timer" aria-label={`${Math.ceil(left)} seconds left`}>
           <i style={{ width: `${Math.max(0, Math.min(100, (100 * left) / total))}%` }} />
-          <span className="db-timer">{Math.ceil(left)}</span>
+          <span className="db-timer">TIME ⏳ {Math.ceil(left)}</span>
         </div>
       )}
+      {legend && <div className="db-legend" role="note"><b>?? </b>= hidden, find out</div>}
       {choices.map((c, i) => (
         <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}${timed && i === def ? ' is-default' : ''}`}
           disabled={on[i] === false} aria-label={`${i + 1}: ${fill(c.plain)}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>

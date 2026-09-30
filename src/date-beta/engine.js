@@ -37,7 +37,7 @@ export const SHORT = /^[A-Z0-9ÉÈ .'-]{1,8}$/u; // a scene's name on the route 
 export const TIER = { win: 100, almost: 60 }; // ending cards: 100% = win, 60..99% = almost, below = low
 const KEYS = {
   root: ['version', 'note', 'flags', 'love', 'gacha', 'scenes'],
-  scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short'],
+  scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short', 'offstage'],
   beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end', 'loveHidden'],
   choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake', 'pass'],
 };
@@ -215,11 +215,15 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
     });
     for (const b of beats) for (const c of b.choices ?? []) for (const t of goTargets(c.go)) pending.push([`${b.scene}[${b.index}]`, t]);
     if (s.nanda != null && typeof s.nanda !== 'boolean') fail(s.id, '"nanda" must be true or false');
-    const nanda = s.nanda ?? beats.some((b) => views(b, decl).some((v) => v.line.who === 'NANDA'));
+    if (s.offstage != null && typeof s.offstage !== 'boolean') fail(s.id, '"offstage" must be true or false');
+    // offstage (ux-six): she is in the house but not in the frame (unknown / basement / lock game): the HUD, pops and
+    // reaction frames stay, the sprite does not draw (main.jsx), her lines carry an offscreen speaker label.
+    const offstage = !!s.offstage;
+    const nanda = s.nanda ?? (offstage || beats.some((b) => views(b, decl).some((v) => v.line.who === 'NANDA')));
     const ending = beats.some((b) => b.end);
     const short = s.short ?? (ending ? 'END' : s.id.toUpperCase().replace(/-/g, ' ').slice(0, 8).trim());
     if (typeof short !== 'string' || !SHORT.test(short)) fail(s.id, `short "${short}" must be 1-8 uppercase characters`);
-    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats, nanda, short, ending });
+    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats, nanda, offstage, short, ending });
   });
   for (const [at, go] of pending) if (!ids.has(go)) fail(at, `choice goes to unknown scene "${go}"`);
   scenes.love = loadLove(data.love, scenes);
@@ -393,6 +397,10 @@ export const sceneIndex = (scenes, id) => scenes.findIndex((s) => s.id === id);
 // ---------- love
 const loveOf = (scenes) => scenes.love ?? { start: 0, goal: 0 };
 export const clampLove = (n, goal) => Math.min(Math.max(0, n), Math.max(0, goal));
+// ux-six: one pick (base + gacha bonus, e.g. the pity love-bomb) never moves the meter more than this share of the goal.
+export const MAX_SWING = 0.25;
+export const swingCap = (goal) => Math.max(LOVE_MAX, Math.floor(MAX_SWING * goal));
+export const capSwing = (delta, goal) => Math.max(-swingCap(goal), Math.min(swingCap(goal), delta));
 // The shown percentage. 100 only when the heart is full, so a near miss never rounds up to a win.
 export function lovePct(love, goal) {
   if (!(goal > 0)) return 0;
@@ -409,7 +417,8 @@ export function ending(scenes, pos) {
   return Object.freeze({ kind: beat.end, scene: scenes[pos.s].id, pct, tier: tierFor(pct), love: pos.love ?? 0, goal });
 }
 // Is she on screen? Her scene (`nanda`) and not a blackout beat. Drives the HUD bar and the sprite.
-export const present = (scene, beat) => !!scene?.nanda && !!beat && beat.bg !== 'blackout';
+// An offstage scene (ux-six) keeps her HUD through its blackouts too (the sprite never draws there anyway).
+export const present = (scene, beat) => !!scene?.nanda && !!beat && (beat.bg !== 'blackout' || !!scene.offstage);
 
 // ---------- positions: { s, b, done, flags, love, path } (+ react = the reaction frame, + pending = a pop waiting for her)
 // path = the scene ids entered this run, in order (the route trail's filled stops). luck = the gacha state (gacha.js),
@@ -490,14 +499,14 @@ function take(scenes, pos, c, rm) {
   if (go != null && go === scenes[0].id) return start(scenes, { rm, flags, luck: nextRunLuck(pos.luck) });
   // gacha (gacha.js): a scored pick may roll a bonus tier. react.love = the whole change (base + bonus), react.gacha = the tier.
   const roll = rollGacha(scenes.gacha, pos.luck ?? null, c.love);
-  const was = pos.love ?? l0, love = clampLove(was + c.love + roll.bonus, goal);
+  const was = pos.love ?? l0, love = clampLove(was + capSwing(c.love + roll.bonus, goal), goal);
   const here = present(scenes[pos.s], beatAt(scenes, pos));
   const st = { ...runOf(scenes, pos), flags, love, pending: here ? null : pos.pending ?? null, luck: roll.luck };
   const dest = settle(scenes, go ? sceneIndex(scenes, go) : pos.s, go ? 0 : pos.b + 1, rm, st);
   if (!c.love) return dest;
   const t = roll.tier;
   const gacha = t ? Object.freeze({ id: t.id, fx: t.fx, face: t.face, label: t.label, bonus: t.bonus, base: c.love }) : null;
-  const react = Object.freeze({ love: c.love + roll.bonus, from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b,
+  const react = Object.freeze({ love: capSwing(c.love + roll.bonus, goal), from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b,
     ...(gacha ? { gacha } : {}) });
   return here && !c.pass ? { ...dest, react } : { ...dest, pending: react }; // pass: no frame, the pop shows on the next beat
 }

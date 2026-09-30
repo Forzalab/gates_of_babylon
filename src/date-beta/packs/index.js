@@ -11,7 +11,7 @@ export function applyPacks(base, packs = []) {
   for (const [n, pack] of packs.entries()) {
     const at = `pack[${pack?.name ?? n}]`;
     if (!pack || typeof pack !== 'object') fail(`${at}: must be an object`);
-    for (const k of Object.keys(pack)) if (!['name', 'note', 'notes', 'scenes', 'insert', 'patch', 'flags', 'drop', 'gacha'].includes(k)) fail(`${at}: unknown key "${k}"`);
+    for (const k of Object.keys(pack)) if (!['name', 'note', 'notes', 'scenes', 'insert', 'patch', 'flags', 'drop', 'gacha', 'sceneSet'].includes(k)) fail(`${at}: unknown key "${k}"`);
     for (const s of pack.scenes ?? []) {
       if (data.scenes.some((x) => x.id === s.id)) fail(`${at}: scene "${s.id}" already exists`);
       data.scenes.push(structuredClone(s));
@@ -36,10 +36,17 @@ export function applyPacks(base, packs = []) {
       if (p.beats) { if (p.beat < 0 || p.beat > sc.beats.length) fail(`${at}: patch: ${p.scene} has no slot ${p.beat}`); sc.beats.splice(p.beat, 0, ...structuredClone(p.beats)); continue; }
       const beat = sc.beats[p.beat];
       if (!beat) fail(`${at}: patch: ${p.scene} has no beat ${p.beat}`);
+      if (p.remove) { sc.beats.splice(p.beat, 1); continue; } // remove: true drops that beat (later patches see the new indexes)
       // `choice: i` merges `set` into that one choice of the beat instead of the beat itself.
       let target = beat;
       if (p.choice != null) { target = beat.choices?.[p.choice]; if (!target) fail(`${at}: patch: ${p.scene}[${p.beat}] has no choice ${p.choice}`); }
       for (const [k, v] of Object.entries(p.set ?? {})) { if (v === null) delete target[k]; else target[k] = structuredClone(v); }
+    }
+    // sceneSet: [{ scene, set: {sceneFields} }] shallow-merges scene-level fields (e.g. offstage), null deletes.
+    for (const p of pack.sceneSet ?? []) {
+      const sc = data.scenes.find((s) => s.id === p.scene);
+      if (!sc) fail(`${at}: sceneSet: unknown scene "${p.scene}"`);
+      for (const [k, v] of Object.entries(p.set ?? {})) { if (v === null) delete sc[k]; else sc[k] = structuredClone(v); }
     }
     for (const id of pack.drop ?? []) {
       const i = data.scenes.findIndex((s) => s.id === id);

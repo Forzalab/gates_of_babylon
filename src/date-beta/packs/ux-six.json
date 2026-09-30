@@ -1,0 +1,34 @@
+{
+  "note": "ux-six (sprint 0930): logic/copy only. Offstage Nanda (HUD + pops kept, voice/label from above) in unknown + escape (incl. the lock game); synonym pairs differ in her reaction; missing stamps (kitchen stand-up, escape-win) + the clock moves on 'Minutes gone'; steeped's lone {OR} beat dropped (no intended line exists; BIBLE: 'keep all'). Applied last so indexes are final; patches run top to bottom, high index first.",
+  "sceneSet": [
+    { "scene": "unknown", "set": { "offstage": true } },
+    { "scene": "escape", "set": { "offstage": true } }
+  ],
+  "patch": [
+    { "scene": "unknown", "beat": 3, "choice": 0, "set": { "emote": "or", "react": "Heavy feet. I can hear every step." } },
+    { "scene": "unknown", "beat": 3, "choice": 1, "set": { "emote": "heart", "react": "Quiet as a mouse. Still heard you." } },
+    { "scene": "unknown", "beat": 3, "beats": [
+      { "speaker": "NANDA (UPSTAIRS)", "text": "Darling? Where did you go?", "sfx": "breath" }
+    ] },
+    { "scene": "unknown", "beat": 1, "choice": 0, "set": { "emote": "pout", "react": "Did something creak down there?" } },
+    { "scene": "unknown", "beat": 1, "choice": 1, "set": { "emote": "heart", "react": "So gentle. You were always gentle with my things." } },
+    { "scene": "unknown", "beat": 0, "set": { "props": { "shot": "stamp", "place": "HER KITCHEN", "time": "7:30 PM" } } },
+
+    { "scene": "escape", "beat": 14, "choice": 0, "set": { "pass": true } },
+    { "scene": "escape", "beat": 14, "choice": 1, "set": { "pass": true } },
+    { "scene": "escape", "beat": 14, "beats": [
+      { "speaker": "NANDA (ABOVE)", "text": "Four, five… Don't hide, darling. I always find you.", "sfx": "thump" }
+    ] },
+    { "scene": "escape", "beat": 13, "set": { "props": { "shot": null, "shelf": null } } },
+    { "scene": "escape", "beat": 12, "set": { "props": { "shot": "stamp", "place": "BASEMENT", "time": "8:05 PM" } } },
+    { "scene": "escape", "beat": 5, "choice": 0, "set": { "emote": "pout", "react": "You're looking too long." } },
+    { "scene": "escape", "beat": 5, "choice": 1, "set": { "emote": "heart", "react": "Only looking. I trust you." } },
+    { "scene": "escape", "beat": 0, "choice": 0, "set": { "emote": "pout", "react": "Don't touch the labels." } },
+    { "scene": "escape", "beat": 0, "choice": 1, "set": { "emote": "heart", "react": "Pretty, right? I dust them every day." } },
+
+    { "scene": "escape-win", "beat": 0, "set": { "props": { "shot": "stamp", "place": "HER FRONT DOOR", "time": "8:10 PM" } } },
+
+    { "scene": "steeped", "beat": 1, "set": { "bg": "bedroom" } },
+    { "scene": "steeped", "beat": 0, "remove": true }
+  ]
+}
