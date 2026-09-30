@@ -66,6 +66,13 @@ const FACES = {
     const eye = (x) => `<ellipse cx="${x}" cy="-7" rx="4.2" ry="5.6" fill="${P.ink}"/><circle cx="${x + 1.5}" cy="-9.5" r="1.4" fill="#fff"/>`;
     return `${blushOf(P, 0.7, true)}${eye(-13)}${eye(11)}<path d="M-8,11 Q-5,8 -2.5,11 Q0,14 2.5,11 Q5,8 8,11" fill="none" stroke="${P.ink}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>`;
   },
+  // NEW puff (gacha anger, ref 11): open glaring eyes (flat lids slanting down to the centre), pouting brows angled down to
+  // the centre, a squashed mouth. Cheeks, blush hatching and the teardrop are the `puff` face layer (art/emotion/face.js).
+  puff: (P, sw) => {
+    const eye = (x, d) => `<path d="M${x - 5.5 * d},-10.5 L${x + 5.5 * d},-7.5 Q${x + 5 * d},1 ${x},1 Q${x - 5.5 * d},1 ${x - 5.5 * d},-10.5 Z" fill="${P.ink}"/><circle cx="${x + 1.4 * d}" cy="-3" r="1.4" fill="#fff"/>`;
+    return `${eye(-13, 1)}${eye(11, -1)}<path d="M-21,-17 L-8,-12 M19,-17 L6,-12" stroke="${P.ink}" stroke-width="${sw}" stroke-linecap="round"/>
+      <path d="M-7,12 Q-3.5,9.6 0,12 Q3.5,9.6 7,12 Q3.5,14.6 0,13.2 Q-3.5,14.6 -7,12 Z" fill="#e05a8a" stroke="${P.ink}" stroke-width="1.6" stroke-linejoin="round"/>`;
+  },
   // NEW pout (-1, hurt): eyes squeezed shut (> <), brows pinched, cheeks puffed (big blush), a small pursed mouth.
   pout: (P, sw) => `${blushOf(P, 0.85, false, 8.5, 5)}
       <path d="M-18,-10 L-10,-6.5 L-18,-3" fill="none" stroke="${P.ink}" stroke-width="${sw}" stroke-linecap="round" stroke-linejoin="round"/>
@@ -99,12 +106,24 @@ export const EMOTES = {
   or: { pal: 3, face: 3, bubble: 'or' },
   crack: { pal: 4, face: 4, bubble: 'crack' },
   hate: { pal: 5, face: 'hate', bubble: 'hate', aura: true },
+  puff: { pal: 1, face: 'puff', bubble: 'pout' },
 };
+
+// Face anchors for overlay layers (art/emotion/face.js), in gate units (the figure's own coords, before the x2 scale).
+// Face centre (57, 52); the face builders' eye / cheek coords + that offset. Measured off BODYB / FRINGEB above.
+export const ANCHORS = Object.freeze({
+  face: [57, 52], eyeL: [44, 45], eyeR: [68, 45], cheekL: [36, 60], cheekR: [76, 60], mouth: [57, 64],
+  temple: [30, 22], air: [-8, 6], tear: [77, 49], brow: 12,
+  eyeBand: { x: [14, 100], y: [30, 56] },
+  halo: [[-6, 14, 11], [118, 12, 7], [-14, 62, 6], [106, 100, 8], [30, -2, 5]],
+});
 const STAGE_EMOTE = { 1: 'heart', 2: 'hearts', 3: 'or', 4: 'crack' };
 
 let uid = 0;
 // One figure as an SVG fragment (no <svg> wrapper). ids are unique per call so several can share a page.
-export function nandaSVG({ stage = 1, emote, talk = true, big = false } = {}) {
+// overlay(P, ANCHORS) -> { under, over }: extra still layers (the gacha face layers). under = inside the body clip after
+// the face, before the fringe; over = after the figure, before the bubble.
+export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null } = {}) {
   const E = EMOTES[emote ?? STAGE_EMOTE[stage]] ?? EMOTES.heart;
   const s = E.pal, P = PAL[s], n = ++uid, cb = `nd-cb${n}`, gb = `nd-gb${n}`, sh = `nd-sh${n}`;
   const legs = [40, 64].map((x) => `<rect x="${x - 3}" y="94" width="6" height="24" rx="3" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/>
@@ -114,6 +133,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false } = {}) {
   const shade = s === 3 ? `<defs><linearGradient id="${sh}" gradientUnits="userSpaceOnUse" x1="0" y1="12" x2="0" y2="72"><stop offset="0" stop-color="#2a0714" stop-opacity=".62"/><stop offset=".55" stop-color="#2a0714" stop-opacity=".38"/><stop offset="1" stop-color="#2a0714" stop-opacity="0"/></linearGradient></defs><rect x="0" y="12" width="120" height="60" fill="url(#${sh})"/>` : '';
   const sweatDrop = E.face === 'sweat' ? `<path d="${DROP}" transform="translate(27 30) scale(.62)" fill="#8fd3ff" stroke="#1f5f96" stroke-width="2"/>` : '';
   const k = big ? 0.74 : 0.57;
+  const ov = overlay ? overlay(P, ANCHORS) : { under: '', over: '' };
   const gate = `<defs><clipPath id="${cb}"><path d="${BODYB}"/></clipPath>
       <radialGradient id="${gb}" cx=".42" cy=".4" r=".75"><stop offset="0" stop-color="${P.body}"/><stop offset="1" stop-color="${P.body2}"/></radialGradient></defs>
     ${E.aura ? `<radialGradient id="au${n}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#12040b" stop-opacity="0"/><stop offset=".6" stop-color="#12040b" stop-opacity=".55"/><stop offset="1" stop-color="#f0243f" stop-opacity="0"/></radialGradient><ellipse cx="58" cy="60" rx="98" ry="112" fill="url(#au${n})" class="nd-aura"/>` : ''}
@@ -121,7 +141,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false } = {}) {
     <path d="M-8 33H0M-8 75H0" stroke="${P.rim}" stroke-width="3" stroke-linecap="round"/><path d="M-3.5 31.5H6.5V34.5H-3.5ZM-3.5 73.5H6.5V76.5H-3.5Z" fill="${P.lit}"/>
     <path d="${BODYB}" fill="url(#${gb})" stroke="${P.rim}" stroke-width="3.2" stroke-linejoin="round"/>
     <g clip-path="url(#${cb})">
-      <g transform="translate(57 52)">${FACES[E.face](P, 2.6)}</g>${shade}
+      <g transform="translate(57 52)">${FACES[E.face](P, 2.6)}</g>${shade}${ov.under ?? ''}
       <path d="M12 12H22V84H12Z" fill="${P.hair}" stroke="${P.rim}" stroke-width="1.8"/>
       <path d="${FRINGEB}" fill="${P.hair}" stroke="${P.rim}" stroke-width="1.8" stroke-linejoin="round"/>
       <path d="M58 13C55 20 53 26 54 34M58 13C62 20 66 26 66 33M36 14C33 22 32 28 33 34" fill="none" stroke="${P.hair2}" stroke-width="1.4" stroke-linecap="round"/>
@@ -136,7 +156,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false } = {}) {
     <path d="${PONYB}" fill="${P.hair}" stroke="${P.rim}" stroke-width="2.2" stroke-linejoin="round"/><path d="M112 70C120 82 126 92 124 104" fill="none" stroke="${P.hair2}" stroke-width="1.5" stroke-linecap="round"/>
     <circle cx="112" cy="54" r="12" fill="${P.dark ? '#1a0610' : '#fff'}" stroke="${P.rim}" stroke-width="3.2"/>
     <circle cx="112" cy="54" r="5.2" fill="${P.mood}" opacity="${s === 2 ? 0.5 : 0.9}"/><circle cx="108" cy="50" r="2" fill="#fff" opacity="${s === 4 ? 0.25 : 0.9}"/>
-    ${bow(111, 41.5, 0.5, P)}${pinClip(78, 22, -18, 0.5, P)}${sweatDrop}
+    ${bow(111, 41.5, 0.5, P)}${pinClip(78, 22, -18, 0.5, P)}${sweatDrop}${ov.over ?? ''}
     ${talk ? `<g transform="translate(${big ? 100 : 104} ${big ? -22 : -14}) scale(${k})">${BUBBLES[E.bubble]()}</g>` : ''}`;
   return `<g transform="translate(-104 -252) scale(2)">${gate}</g>`;
 }

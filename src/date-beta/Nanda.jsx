@@ -4,12 +4,16 @@
 // overrides it with its emote (heart | hearts | sweat | pout | or | crack) and a big bubble.
 import { useMemo } from 'react';
 import { nandaSVG, stageFor } from './art/nanda.js';
+import { faceLayers } from './art/emotion/face.js';
 
-export function Nanda({ scare = 0, raised = false, emote = null, big = false, talk = true }) {
+// layers: gacha face layer ids (vein | puff | shadow-eyes | sparkle), still overlays on her face (art/emotion/face.js).
+export function Nanda({ scare = 0, raised = false, emote = null, big = false, talk = true, layers = null }) {
   const stage = stageFor(scare);
-  const svg = useMemo(() => nandaSVG({ stage, emote: emote ?? undefined, big, talk }), [stage, emote, big, talk]);
+  const key = layers?.join(',') ?? '';
+  const svg = useMemo(() => nandaSVG({ stage, emote: emote ?? undefined, big, talk,
+    overlay: key ? (P, A) => faceLayers(key.split(','), P, A) : null }), [stage, emote, big, talk, key]);
   return (
-    <svg className={`db-nanda stage-${stage}${raised ? ' raised' : ''}`} viewBox="-130 -330 320 345" role="img" aria-label="Nanda"
+    <svg className={`db-nanda stage-${stage}${raised ? ' raised' : ''}`} data-layers={key || undefined} viewBox="-130 -330 320 345" role="img" aria-label="Nanda"
       dangerouslySetInnerHTML={{ __html: svg }} />
   );
 }

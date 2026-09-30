@@ -9,7 +9,7 @@
   ],
   "penalty": [
    { "id": "rage", "bonus": -5, "rate": 0.12, "fx": "rage", "face": ["shadow-eyes", "vein"], "emote": "hate", "label": "FURIOUS −5" },
-   { "id": "anger", "bonus": -2, "rate": 0.25, "fx": "anger", "face": ["vein", "puff"], "emote": "pout", "label": "ANGRY −2" }
+   { "id": "anger", "bonus": -2, "rate": 0.25, "fx": "anger", "face": ["vein", "puff"], "emote": "puff", "label": "ANGRY −2" }
   ],
   "pity": { "id": "pity", "after": 2, "bonus": 10, "fx": "love-bomb", "face": ["sparkle"], "emote": "hearts", "label": "PITY +10 · redeemed" }
  }

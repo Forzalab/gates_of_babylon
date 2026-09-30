@@ -44,3 +44,40 @@ test('emotion css + component: nothing animates or transitions', () => {
     assert.doesNotMatch(src, /animation\s*:|transition\s*:|@keyframes|setInterval/, f);
   }
 });
+
+// ---------- face layers (art/emotion/face.js on art/nanda.js anchors)
+import { faceLayers, FACE_IDS } from './date-beta/art/emotion/face.js';
+import { nandaSVG, ANCHORS, PAL, EMOTES as NANDA_EMOTES } from './date-beta/art/nanda.js';
+import { FACE_LAYERS } from './date-beta/gacha.js';
+import { EMOTES } from './date-beta/engine.js';
+
+test('face layers: the four ids match the gacha list; each draws something; stills only', () => {
+  assert.deepEqual([...FACE_IDS].sort(), [...FACE_LAYERS].sort());
+  for (const id of FACE_IDS) {
+    const { under, over } = faceLayers([id], PAL[1], ANCHORS);
+    assert.ok((under + over).length > 40, id);
+    assert.doesNotMatch(under + over, /<animate|<set\b|animation|transition/i, id);
+  }
+  assert.deepEqual(faceLayers([], PAL[1], ANCHORS), { under: '', over: '' });
+});
+
+test('face layers: positioned from her anchors (move an anchor, the layer moves); rage gets the bigger vein pair', () => {
+  const moved = { ...ANCHORS, temple: [40, 30] };
+  assert.notEqual(faceLayers(['vein'], PAL[1], ANCHORS).over, faceLayers(['vein'], PAL[1], moved).over);
+  assert.match(faceLayers(['vein'], PAL[1], moved).over, /translate\(40 30\)/);
+  const furious = faceLayers(['shadow-eyes', 'vein'], PAL[5], ANCHORS).over;
+  assert.equal((furious.match(/<g /g) ?? []).length, 2, 'temple vein + one in the air');
+});
+
+test('face layers in nandaSVG: under sits after the face and before the fringe (bangs on top); over after the figure', () => {
+  const svg = nandaSVG({ emote: 'hate', overlay: (P, A) => faceLayers(['shadow-eyes', 'vein'], P, A) });
+  const face = svg.indexOf('translate(57 52)'), band = svg.indexOf('emo-se'), fringe = svg.indexOf('V0Z" fill'), vein = svg.indexOf('#e01010');
+  assert.ok(face < band && band < fringe && fringe < vein, `${face} < ${band} < ${fringe} < ${vein}`);
+  assert.equal(nandaSVG({ emote: 'hearts' }).includes('emo-'), false, 'no layers = the old figure');
+});
+
+test('puff: a Nanda emote (ref 11 face) the engine accepts', () => {
+  assert.ok(EMOTES.includes('puff'));
+  assert.deepEqual(NANDA_EMOTES.puff, { pal: 1, face: 'puff', bubble: 'pout' });
+  assert.match(nandaSVG({ emote: 'puff' }), /#e05a8a/, 'the squashed mouth');
+});
