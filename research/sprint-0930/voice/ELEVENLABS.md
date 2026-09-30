@@ -454,7 +454,7 @@ There are no Nanda lines here. The train ad text (すっぱい！/甘い！) is 
 | 176 | meta-crowd 0 | | Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. [whispers] Yes, you. I see you. |
 | 177 | meta-crowd 1 | | Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. [giggles] Everybody in here is thinking about me. That's the vibe, right? |
 | 178 | meta-crowd 2 | | Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. [whispers] I'm just remembering your face. For later. |
-| 179 | meta-crowd 3 | | I see you, the curly-haired guy. I see you, you gringo wearing a cap. [flatly] Don't gang up on me. You all NEVER stop my eternal bond with my lover. |
+| 179 | meta-crowd 3 | | (superseded: recorded as V2 line #32 at the station; do not record twice) |
 | 180 | meta-loop 0 r1 | | Hey… have we stood here before? No. Silly. It's just a nice day. It's {TIME}. [whispers] Remember that. |
 | 181 | meta-loop 0 r2 | | Wait. Why is everything the same? Same rain. Same {TIME}. You said that exact thing last time. [whispers] I remember. Do you? |
 | 182 | meta-loop 0 r3 | | Run {RUN}. Same day. You know, I know. Skip the small talk. It's {TIME} again. [flatly] Hold my hand. |
