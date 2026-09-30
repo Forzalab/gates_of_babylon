@@ -105,17 +105,19 @@ export function Price({ x, y, w = 330, h = 150, label, price, note }) {
   );
 }
 
-// THE cup (the three-cups gag): one drawing, used everywhere, always identical. (x, y) = the base centre on its surface.
-// s = scale (s 1 = 100 px wide). Rim ellipse = the eye-level view; the shadow falls down-left.
+// THE cup (the three-cups gag): one tea bowl, traced by vtracer from the shop ref (research/sprint-0930/fix3/cups/
+// trace_cup_side.py), SIDE view = the ref's own angle; the basket shows the same bowl top-down (r2-cup). Used everywhere,
+// always identical. (x, y) = the foot centre on its surface; s = scale (s 1 = 100 px wide). Light upper right: a tight
+// contact shadow under the foot + a soft shadow thrown down-left.
+preloadTrace('shop/r2-cup-side');
+export const CUP_H = 0.98; // sprite 300 x 294
 export function Cup({ x, y, s = 1, shadow = true }) {
+  const w = 100 * s;
   return (
-    <g transform={`translate(${x} ${y}) scale(${s})`}>
-      {shadow && <ellipse cx="-14" cy="3" rx="50" ry="9" fill={SP.shade} opacity=".26" />}
-      <path d="M-50 -96 L-40 -12 Q0 6 40 -12 L50 -96 Z" fill={SP.cup} stroke={SP.line} strokeWidth="4" strokeLinejoin="round" />
-      <path d="M30 -94 L22 -14 Q32 -12 40 -12 L50 -96 Z" fill="#fff" opacity=".9" />
-      <path d="M-47 -66 L47 -66 L45.3 -52 L-45.3 -52 Z" fill={SP.cupBand} />
-      <ellipse cx="0" cy="-96" rx="50" ry="12" fill={SP.cupIn} stroke={SP.line} strokeWidth="4" />
-      <path d="M0 -30 C-7 -37 -13 -31 -7 -25 L0 -19 L7 -25 C13 -31 7 -37 0 -30Z" fill={SP.pink} />
+    <g>
+      {shadow && <ellipse cx={x - w * 0.16} cy={y + 2} rx={w * 0.5} ry={w * 0.07} fill={SP.shade} opacity=".22" />}
+      {shadow && <ellipse cx={x - w * 0.03} cy={y} rx={w * 0.3} ry={w * 0.04} fill={SP.shade} opacity=".55" />}
+      <image href={traceUrl('shop/r2-cup-side')} x={x - w / 2} y={y - w * CUP_H} width={w} height={w * CUP_H} />
     </g>
   );
 }
@@ -201,8 +203,6 @@ export function BasketGoods({ x = 0, y = 0, s = 1, cups = 3, hand = null }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${s})`}>
       <Carrot x={-10} y={-60} len={210} a={16} /><Carrot x={20} y={-96} len={220} a={12} /><Carrot x={-30} y={-24} len={200} a={22} />
-      <EggPack x={-150} y={40} w={210} />
-      {BASKET.cupsX.slice(0, cups).map((cx) => <Cup key={cx} x={cx} y={BASKET.cupsY} s={0.9} />)}
       {hand}
     </g>
   );

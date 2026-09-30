@@ -49,7 +49,7 @@ test('HER LIST rules: 3 aisles (produce, eggs, the three-cups trap), one right i
     assert.ok(r.items.length >= 3 && r.items.length <= 4, r.id);
   }
   assert.ok(ROUNDS[2].items.find((i) => i.id === 'pair').aside.includes('third'));
-  assert.ok(ROUNDS.length * SECS * 1000 <= 45_000 - HOLD.end);
+  assert.ok(ROUNDS.length * SECS * 1000 <= 45_000);
   for (const v of Object.values(HOLD)) assert.ok(v >= 334);
   for (const r of ROUNDS) for (const id of [r.bg, r.close]) assert.match(src('./date-beta/art/shop/index.js'), new RegExp(`'${id}'`));
 });

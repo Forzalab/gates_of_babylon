@@ -3,7 +3,7 @@
 // A wrong pick (or the timer running out) raises her mood level for the rest of the game: 1 pout, 2 OCPD shelf
 // straighten, 3+ BPD split. The run ends in one score bucket = the index of the game beat's choice (its love value).
 export const SECS = 12; // per aisle; 3 x 12 s + the holds stays under the 45 s budget
-export const HOLD = { right: 1500, wrong: 1400, split: 900, end: 2000 }; // ms, every frame >= 334 ms (stepped, no motion)
+export const HOLD = { right: 1500, wrong: 1400, split: 900 }; // ms, every frame >= 334 ms (stepped, no motion)
 
 export const ROUNDS = [
   { id: 'produce', aisle: 'AISLE 1 · VEGETABLES', want: 'carrots', bg: 'shop-aisle-produce', close: 'shop-carrots',

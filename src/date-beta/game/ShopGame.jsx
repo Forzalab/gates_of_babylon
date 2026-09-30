@@ -2,11 +2,12 @@
 // You push the cart (POV: the red handle at the bottom edge). 3 aisles, one hard cut each: her list item at the top, a
 // shelf of 3-4 items (click, or keys 1-4), a stepped "She is waiting" timer. Right = the close-up + her happy line.
 // Wrong (or the timer) = her mood climbs for the rest of the game: pout -> OCPD (she straightens the shelf) -> BPD
-// split (flat, then sweet). End card: the cart with the three items + "you ♡", then onPick(bucket): the beat's choice
+// split (flat, then sweet). No end card: after the last reaction, onPick(bucket): the beat's choice
 // 0 (love -2) / 1 (+2) / 2 (+3). Like LockGame: every state is a static frame held >= 334 ms, no transitions, so
 // reduced motion needs no separate path. Rules live in shopgame.js (tested under node).
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { SHOP } from '../art/shop/index.js';
+import { traceUrl } from '../art/romance/Grade.jsx';
 import { Nanda } from '../Nanda.jsx';
 import { ROUNDS, SECS, HOLD, moodOf, bucket, keySlot, pickItem, timeOut, fresh, TIMEOUT_LINE } from './shopgame.js';
 import './shopgame.css';
@@ -24,8 +25,8 @@ function Icon({ id }) {
     case 'natto': return (<svg viewBox="0 0 60 60"><rect x="10" y="20" width="40" height="28" rx="3" fill="#f2e6c8" {...ol} /><circle cx="30" cy="34" r="8" fill="#b07a3a" /><path d="M10 20 L50 20" stroke="#d8262e" strokeWidth="5" /></svg>);
     default: { // cups: one, pair, three
       const n = id === 'three' ? 3 : id === 'pair' ? 2 : 1;
-      const xs = n === 3 ? [14, 30, 46] : n === 2 ? [21, 39] : [30];
-      return (<svg viewBox="0 0 60 60">{xs.map((x) => (<g key={x}><path d={`M${x - 8} 24 L${x - 6} 44 Q${x} 48 ${x + 6} 44 L${x + 8} 24 Z`} fill="#fbf8f2" {...ol} /><rect x={x - 7.5} y="31" width="15" height="5" fill="#ff8fb8" /></g>))}</svg>);
+      const xs = n === 3 ? [10, 30, 50] : n === 2 ? [20, 40] : [30]; // the same traced bowl, the same 18-unit width in all three
+      return (<svg viewBox="0 0 60 60">{xs.map((x) => (<image key={x} href={traceUrl('shop/r2-cup-side')} x={x - 9} y={30} width="18" height="17.6" />))}</svg>);
     }
   }
 }
@@ -55,8 +56,7 @@ export default function ShopGame({ props = {}, onPick }) {
   // same = back to the same aisle after a wrong pick: the clock keeps its time (it never refills, so a round is <= secs)
   const toShelf = useCallback((s, same = false) => {
     if (s.done) {
-      setFrame({ kind: 'end' });
-      later(HOLD.end, () => { if (!done.current) { done.current = true; onPick?.(bucket(s.wrongs)); } });
+      if (!done.current) { done.current = true; onPick?.(bucket(s.wrongs)); } // no end card: straight to the next beat
       return;
     }
     if (!same) setLeft(secs);
@@ -108,23 +108,6 @@ export default function ShopGame({ props = {}, onPick }) {
 
   const round = ROUNDS[st.r];
   const stop = (e) => e.stopPropagation();
-
-  if (frame.kind === 'end') {
-    return (
-      <div className="sg-root sg-end" onClick={stop}>
-        <Bg id="shop-cart-full" />
-        <div className="sg-card" role="status">
-          <div className="sg-list-title">HER LIST · DONE</div>
-          <ul className="sg-got">
-            {['carrots', 'eggs', 'three'].map((id) => <li key={id}><Icon id={id} /></li>)}
-            <li className="sg-you">you ♡</li>
-          </ul>
-          <div className="sg-line">{st.wrongs === 0 ? 'Every item. First try. You are perfect. ♡' : st.wrongs === 1 ? 'All done. Almost perfect. ♡' : 'All done. Next time, read my list.'}</div>
-        </div>
-        <Her emote={st.wrongs >= 2 ? 'pout' : 'hearts'} />
-      </div>
-    );
-  }
 
   if (frame.kind === 'right') {
     const line = frame.round.id === 'eggs' && rolls ? frame.round.rightRolls : frame.round.right;
