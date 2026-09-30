@@ -1,0 +1,10 @@
+{
+  "note": "Tony edits these at the demo. Fills {CLOTHES} and {CROWD.1}..{CROWD.4} in any line, choice or react.",
+  "CLOTHES": "cute jacket",
+  "CROWD": [
+    "you in the back row",
+    "you by the window",
+    "you with the laptop open",
+    "you pretending not to watch"
+  ]
+}

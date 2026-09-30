@@ -1,0 +1,37 @@
+{
+  "note": "T3 meta lines. Preview: ?pack=meta&scene=meta-park (or meta-crowd, meta-loop)&run=N. Integrator copies text into story beats (park 0, town 3, station-talk 0) by patch once story.json lands. Tokens filled by meta.js.",
+  "flags": { "run": ["1", "2", "3"] },
+  "scenes": [
+    { "id": "meta-park", "title": "Meta: park", "short": "PARK", "bg": "rooftop", "nanda": true, "beats": [
+      { "speaker": "NANDA", "text": "I love your {CLOTHES}. You wore it for me. I can tell. Don't say no, I already decided. ♡", "timer": 12, "choices": [
+        { "text": "I wore it for you", "love": 3, "emote": "hearts", "fx": "love-burst", "react": "I knew it. I know everything about you. Even the time. It's {TIME}. ♡" },
+        { "text": "It was clean", "default": true, "love": 1, "emote": "sweat", "fx": "none", "react": "Clean for me. That's the same thing, silly." },
+        { "text": "Not everything is about you", "love": -4, "emote": "hate", "fx": "hate-quake", "react": "…Everything is about me. You'll learn. You always learn, around run {RUN}." }
+      ] },
+      { "speaker": "NANDA", "text": "Good. Now we can have the perfect date. The same perfect date. Ehehe." }
+    ] },
+    { "id": "meta-crowd", "title": "Meta: crowdwork", "short": "CROWD", "bg": "platform", "nanda": true, "beats": [
+      { "speaker": "NANDA", "text": "Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. Yes, you. I see you." },
+      { "speaker": "NANDA", "text": "Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. Everybody in here is thinking about me. That's the vibe, right?" },
+      { "speaker": "NANDA", "text": "Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. I'm just remembering your face. For later. ♡" },
+      { "speaker": "NANDA", "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover." }
+    ] },
+    { "id": "meta-loop", "title": "Meta: loop", "short": "LOOP", "bg": "platform", "nanda": true, "beats": [
+      { "speaker": "NANDA", "text": "Hey… have we stood here before? No. Silly. It's just a nice day. It's {TIME}. Remember that.", "vary": { "run": {
+        "1": {},
+        "2": { "text": "Wait. Why is everything the same? Same rain. Same {TIME}. You said that exact thing last time. I remember. Do you?" },
+        "3": { "text": "Run {RUN}. Same day. You know, I know. Skip the small talk. It's {TIME} again. Hold my hand." }
+      } } },
+      { "speaker": "MC", "text": "(Weird. Feels like I've heard that before.)", "vary": { "run": {
+        "1": {},
+        "2": { "text": "Didn't we already do this? The bento, the train, the tea… Nanda, are we in a loop?" },
+        "3": { "text": "Run {RUN}. I know every line. So do you." }
+      } } },
+      { "speaker": "NANDA", "text": "Déjà vu is just your heart remembering me early. ♡", "vary": { "run": {
+        "1": {},
+        "2": { "text": "A loop? Ehehe. Then you can't leave. You picked me last time too. You'll pick me again." },
+        "3": { "text": "Of course it's a loop. I made it. Every ending comes back here, every {DAYPART}. And you keep coming back. That's love." }
+      } } }
+    ] }
+  ]
+}

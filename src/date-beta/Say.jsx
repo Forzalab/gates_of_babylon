@@ -2,11 +2,12 @@
 // The engine hands over parsed parts ({ t, or }); an OR exists only where the data wrote "{OR}". Nothing here
 // pattern-matches words. A line or choice with an OR renders on the dark scrim (#1A0710, OR #FF6B7D, cream text).
 import { orParts } from './engine.js';
+import { fill } from './meta.js';
 import { NextButton } from './Hud.jsx';
 // Class names are prefixed `db-` so they can never collide with art classes (R2b finding 2: the art used `.or`).
 
 export function Parts({ parts }) {
-  return parts.map((p, i) => (p.or ? <span key={i} className="db-or">OR</span> : p.t));
+  return parts.map((p, i) => (p.or ? <span key={i} className="db-or">OR</span> : fill(p.t)));
 }
 
 // SVG twin of <Parts> for signage inside art: tspans in a <text>, OR offset 1 px. Same explicit "{OR}" mark.
@@ -45,7 +46,7 @@ export function Choices({ choices, onPick, on = [], left = null, total = null, d
       )}
       {choices.map((c, i) => (
         <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}${timed && i === def ? ' is-default' : ''}`}
-          disabled={on[i] === false} aria-label={`${i + 1}: ${c.plain}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
+          disabled={on[i] === false} aria-label={`${i + 1}: ${fill(c.plain)}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
           {chips && <LoveChip love={c.love} />}
           <span className="line"><Parts parts={c.parts} /></span>
           {timed && i === def && <span className="db-deftag">default</span>}

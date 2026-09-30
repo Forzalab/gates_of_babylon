@@ -12,6 +12,8 @@
 // always reachable and never by accident. A scored pick returns a reaction frame (pos.react) that next() clears; a pick
 // made where she is absent carries its pop (pos.pending) to the next beat where she is present.
 export const MAX_WORDS = 30; // a line, a vary text, a react
+// Meta tokens (T3, meta.js fills them at render): allowed braces besides {OR}.
+export const TOKEN_RE = /\{(RUN|TIME|DAYPART|CLOTHES|CROWD\.[1-4])\}/g;
 export const MAX_CHOICE_WORDS = 12; // a button label
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
@@ -117,7 +119,7 @@ export const isAssetId = (v) => typeof v === 'string' && ASSET_ID.test(v);
 // "f{OR}ever" -> [{ t: 'f' }, { t: 'OR', or: true }, { t: 'ever' }]. Any other brace is a typo and fails loudly.
 export function orParts(text, where = 'text') {
   const bits = text.split(OR_MARK);
-  if (bits.some((b) => /[{}]/.test(b))) fail(where, `stray brace in "${text}" (the only mark is ${OR_MARK})`);
+  if (bits.some((b) => /[{}]/.test(b.replace(TOKEN_RE, '')))) fail(where, `stray brace in "${text}" (the only mark is ${OR_MARK})`);
   const out = [];
   bits.forEach((t, i) => { if (i) out.push({ t: 'OR', or: true }); if (t) out.push({ t }); });
   return out;
