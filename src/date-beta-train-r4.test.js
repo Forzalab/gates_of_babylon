@@ -86,3 +86,13 @@ test('train-r4 art: crowd + bumpers on the station beats, the machine echoes the
   assert.match(src('Vending.jsx'), /props\?\.drink === 'tamagoyaki'/);
   assert.match(src('TrainRain.jsx'), /export function TrainRainSleepy/);
 });
+
+test('train-r4: the new Irohauta takes exist and resolve from the shown line', async () => {
+  const { existsSync, statSync } = await import('node:fs');
+  const idx = buildIndex(read('./date-beta/voice/manifest.json'));
+  for (const f of ['238_5-crowd', '239_1-quote', '240_3-ume-quote', '241_3-tama-quote', '242_6-quote', '243_7-run-1-quote', '244_9-quote']) {
+    const u = new URL(`../public/date-beta/voice/06-v2-train/${f}.mp3`, import.meta.url);
+    assert.ok(existsSync(u) && statSync(u).size > 5000, f);
+  }
+  for (const i of [0, 5, 8]) assert.ok(fileForLine(idx, 'v2-train', T.beats[i].line.plain), `beat ${i}`);
+});

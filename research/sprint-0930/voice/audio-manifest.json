@@ -495,5 +495,54 @@
   "beat": "5 (t)",
   "file": "public/date-beta/voice/13-escape-timeout/069_5-t.mp3",
   "text": "[softly] One sweet bite…"
+ },
+ {
+  "n": 238,
+  "scene": "v2-train",
+  "beat": "5 crowd",
+  "file": "public/date-beta/voice/06-v2-train/238_5-crowd.mp3",
+  "text": "[annoyed] Hey, you. [pointed] Wavy hair. [sharp] And you. [mocking] Hat boy, the gringo. [firm] Stop pushing. [low, possessive] He is MINE."
+ },
+ {
+  "n": 239,
+  "scene": "v2-train",
+  "beat": "1 quote",
+  "file": "public/date-beta/voice/06-v2-train/239_1-quote.mp3",
+  "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'"
+ },
+ {
+  "n": 240,
+  "scene": "v2-train",
+  "beat": "3 ume quote",
+  "file": "public/date-beta/voice/06-v2-train/240_3-ume-quote.mp3",
+  "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'"
+ },
+ {
+  "n": 241,
+  "scene": "v2-train",
+  "beat": "3 tama quote",
+  "file": "public/date-beta/voice/06-v2-train/241_3-tama-quote.mp3",
+  "text": "Egg pudding drink. Sweet. 'Like the one you picked. I remember.'"
+ },
+ {
+  "n": 242,
+  "scene": "v2-train",
+  "beat": "6 quote",
+  "file": "public/date-beta/voice/06-v2-train/242_6-quote.mp3",
+  "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'"
+ },
+ {
+  "n": 243,
+  "scene": "v2-train",
+  "beat": "7 run 1 quote",
+  "file": "public/date-beta/voice/06-v2-train/243_7-run-1-quote.mp3",
+  "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'"
+ },
+ {
+  "n": 244,
+  "scene": "v2-train",
+  "beat": "9 quote",
+  "file": "public/date-beta/voice/06-v2-train/244_9-quote.mp3",
+  "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'"
  }
 ]
