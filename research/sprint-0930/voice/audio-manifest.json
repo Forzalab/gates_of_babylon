@@ -110,5 +110,12 @@
   "beat": "5 R−",
   "file": "public/date-beta/voice/02-v2-park/024_5-r.mp3",
   "text": "[sudden flat][quiet] Alone? No. [perfectly even] Groceries. [sweet] Now."
+ },
+ {
+  "n": 25,
+  "scene": "v2-shop",
+  "beat": "5",
+  "file": "public/date-beta/voice/03-v2-shop/025_5.mp3",
+  "text": "[perfectly even] Do not look at her. [smiling][close] Look at me. [bubbly][rushed] I bought you a cup."
  }
 ]
