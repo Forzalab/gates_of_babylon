@@ -166,5 +166,12 @@
   "beat": "3 run 3",
   "file": "public/date-beta/voice/06-v2-train/035_3-run-3.mp3",
   "text": "[slow] Three fingers. [whispers] Three times today. [perfectly even][smiling] Same train. Same you."
+ },
+ {
+  "n": 36,
+  "scene": "v2-rain",
+  "beat": "2",
+  "file": "public/date-beta/voice/07-v2-rain/036_2.mp3",
+  "text": "[bubbly] Share my umbrella. [sing-song] It is small. [whispers][close] Our arms have to touch."
  }
 ]
