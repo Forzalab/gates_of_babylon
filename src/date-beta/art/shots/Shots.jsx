@@ -53,7 +53,7 @@ export function Insert({ props = {}, rm }) {
           <rect x="580" y="170" width="760" height="720" rx="36" fill="#000" opacity=".22" transform="translate(18 22)" />
           <rect x="580" y="170" width="760" height="720" rx="36" className="shot-card" />
           <rect x="604" y="194" width="712" height="672" rx="24" className="shot-card-in" />
-          <g transform="translate(660 180) scale(1)"><Item /></g>
+          <g transform="translate(660 215) scale(1)"><Item /></g>
           {(caption ?? ITEM_LABEL[item]) && <text x="960" y="850" textAnchor="middle" className="shot-cap">{caption ?? ITEM_LABEL[item]}</text>}
         </g>
       </svg>
@@ -72,7 +72,7 @@ export function Reaction({ props = {}, rm }) {
     <div className={`art shot reaction emo-${emote}`} role="img" aria-label={`Nanda close-up, ${emote}`}>
       <Cam of={of} zoom={1.6} rm className="shot-blur" />
       <div className="shot-wash" style={{ background: `radial-gradient(ellipse at 50% 55%, transparent 20%, ${EMO_WASH[emote] ?? '#ffb6d9'}99 100%)` }} />
-      <svg className="art shot-face" viewBox="-150 -300 400 225" preserveAspectRatio="xMidYMid slice" dangerouslySetInnerHTML={{ __html: svg }} />
+      <svg className="art shot-face" viewBox="-190 -350 500 281" preserveAspectRatio="xMidYMid slice" dangerouslySetInnerHTML={{ __html: svg }} />
       <GradeLayer id="sh-re" tone={tone} rm={rm} sun={[300, 140]} sparkles={emote === 'hate' || emote === 'crack' ? 0 : 18} />
       <div className="shot-bars" />
     </div>

@@ -12,14 +12,14 @@ const PORT = 4181;
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 mkdirSync(OUT, { recursive: true });
 const beats = JSON.parse(readFileSync(join(ROOT, 'src/date-beta/packs/shots-demo.json'))).scenes[0].beats;
-const server = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort'], { cwd: ROOT, stdio: 'ignore' });
+const server = spawn('npx', ['vite', 'preview', '--port', String(PORT), '--strictPort', '--outDir', process.env.DIST ?? 'dist'], { cwd: ROOT, stdio: 'ignore' });
 await sleep(2500);
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--no-sandbox'] });
 const page = await browser.newPage({ viewport: { width: 1920, height: 1080 } });
 const files = [];
 for (const [i, b] of beats.entries()) {
-  const detail = b.props.item ?? b.props.emote ?? b.props.of;
-  const still = b.bg !== 'establish';
+  const detail = b.props.item ?? b.props.emote ?? b.props.of + (b.bg === 'push' ? (b.props.to > b.props.from ? '-in' : '-out') : '');
+  const still = !['establish', 'push', 'rack', 'pov', 'timelapse', 'match'].includes(b.bg);
   await page.goto(`http://localhost:${PORT}/date-beta.html?pack=shots-demo&scene=shots-demo&beat=${i}${still ? '&still' : ''}`);
   await sleep(2200);
   const f = `${String(i + 1).padStart(2, '0')}-${b.bg}-${detail}`;
