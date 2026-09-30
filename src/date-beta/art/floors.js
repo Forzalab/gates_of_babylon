@@ -40,6 +40,7 @@ export const FLOORS = {
   'station-ads-insert': { crop: true },
   'rain-sidewalk': { crop: true },
   'rain-alley': { crop: true },
+  'rain-puddle': { crop: true }, // v2-rain 2: a top-down close-up insert (only her reflection + real shoes), no feet-floor check
   'rain-eave': { crop: true },
   'street-bluehour': { crop: true },
   'street-dusk': { crop: true },

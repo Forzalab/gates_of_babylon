@@ -10,7 +10,7 @@ export const FRAME_MS = 625; // 5 ticks of the shared 125 ms clock
 
 // outdoor rain bgs (r3-rain + r3-station ids, and the older rain beats that still play the 'rain' sfx outdoors)
 export const RAIN_BG = {
-  'crossing-night': 'heavy', 'rain-sidewalk': 'heavy', 'rain-alley': 'medium', 'rain-eave': 'medium', 'rain-ending': 'stopping',
+  'crossing-night': 'heavy', 'rain-sidewalk': 'heavy', 'rain-alley': 'medium', 'rain-puddle': 'medium', 'rain-eave': 'medium', 'rain-ending': 'stopping',
   'platform-rain': 'heavy', platform: 'medium', 'escape-night': 'drizzle', 'apartment-trace': 'drizzle',
 };
 
