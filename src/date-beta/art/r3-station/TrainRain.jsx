@@ -32,10 +32,10 @@ export default function TrainRain({ rm }) {
       </defs>
       {/* ceiling: one cel toward the far door, the hanging ad strip (muted, it is raining), the light strips */}
       <linearGradient id="r3tr-ceil" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#b9aaa8" /><stop offset="1" stopColor="#8f8084" />
+        <stop offset="0" stopColor="#a67a6c" /><stop offset="1" stopColor="#7e5c58" />
       </linearGradient>
       <polygon points="600,0 1540,0 1340,412 1170,420 720,196" fill="url(#r3tr-ceil)" />
-      <polygon points="900,40 960,40 1150,380 1130,386" fill="#e6e2e6" opacity=".7" />
+      <polygon points="900,40 960,40 1150,380 1130,386" fill="#e6dcd8" opacity=".5" />
       <polygon points="1440,40 1480,40 1330,380 1318,382" fill="#e6e2e6" opacity=".6" />
       {[[1000, 160, 150, 90, '#7d8ea6'], [1150, 160, 140, 90, '#a0605e'], [1060, 262, 124, 56, '#8a9a7c'], [1188, 262, 100, 56, '#b8a488'], [1100, 334, 170, 40, '#6f8f8a']].map(([x, y, w, h, c]) => (
         <g key={`${x}-${y}`}><rect x={x} y={y} width={w} height={h} fill={c} /><rect x={x} y={y} width={w} height="6" fill="#d9d2d6" /></g>
@@ -45,20 +45,20 @@ export default function TrainRain({ rm }) {
       </g>
       {/* clean cels: the long green seat (back pads + cushion), the aisle floor, the right seat */}
       <linearGradient id="r3tr-floor" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#8d7e7e" /><stop offset=".5" stopColor="#6d5f62" /><stop offset="1" stopColor="#473a3f" />
+        <stop offset="0" stopColor="#8a6e68" /><stop offset=".5" stopColor="#6a5250" /><stop offset="1" stopColor="#4a3434" />
       </linearGradient>
       <linearGradient id="r3tr-seat" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stopColor="#56654c" /><stop offset="1" stopColor="#2e372b" />
+        <stop offset="0" stopColor="#555a40" /><stop offset="1" stopColor="#35301f" />
       </linearGradient>
       <polygon points="300,1080 760,790 1100,640 1290,640 1340,760 1395,1080" fill="url(#r3tr-floor)" />
       <polygon points="0,790 600,700 700,690 760,790 300,1080 0,1080" fill="url(#r3tr-seat)" />
       <polygon points="300,1080 760,790 772,806 330,1080" fill="#3a2226" />
-      <polygon points="0,618 600,598 600,700 0,790" fill="#56664d" />
+      <polygon points="0,618 600,598 600,700 0,790" fill="#5a5f45" />
       {[0, 1, 2, 3, 4, 5].map((i) => {
         const x0 = 10 + i * 98, x1 = x0 + 88, y = (x) => 618 - x * 0.033, b = (x) => 790 - x * 0.15;
         return (
           <g key={i}>
-            <polygon points={`${x0},${y(x0) + 8} ${x1},${y(x1) + 8} ${x1},${b(x1) - 8} ${x0},${b(x0) - 8}`} fill="#627359" />
+            <polygon points={`${x0},${y(x0) + 8} ${x1},${y(x1) + 8} ${x1},${b(x1) - 8} ${x0},${b(x0) - 8}`} fill="#666b4e" />
             {[0.25, 0.4, 0.55].map((t) => <line key={t} x1={x0 + 10} y1={y(x0) + (b(x0) - y(x0)) * t} x2={x1 - 10} y2={y(x1) + (b(x1) - y(x1)) * t} stroke="#7f8f73" strokeWidth="4" />)}
           </g>
         );

@@ -40,7 +40,7 @@ function Vending() {
     <g>
       <rect x="66" y="316" width="286" height="516" rx="6" fill="#2f9a4b" />
       <rect x="66" y="316" width="286" height="18" fill="#56c16f" />
-      <rect x="82" y="340" width="232" height="226" fill="#dff1e6" />
+      <rect x="82" y="340" width="232" height="226" fill="#9dbcae" />
       {[0, 1, 2, 3].map((r) => (
         <g key={r}>
           {Array.from({ length: 7 }, (_, i) => (
@@ -49,7 +49,7 @@ function Vending() {
           <rect x="88" y={394 + r * 54} width="220" height="6" fill="#9cc7ae" />
         </g>
       ))}
-      <rect x="82" y="580" width="178" height="150" rx="10" fill="#f4fff6" />
+      <rect x="82" y="580" width="178" height="150" rx="10" fill="#e2f0e6" />
       <text x="171" y="648" textAnchor="middle" className="r3-jp" fill="#2f9a4b" fontSize="52">おちゃ</text>
       <text x="171" y="704" textAnchor="middle" className="r3-sign" fill="#1d6b35" fontSize="36">TEA</text>
       <rect x="276" y="584" width="30" height="46" rx="4" fill="#1d3a2a" />
@@ -116,40 +116,42 @@ export default function StationAds({ rm }) {
   return (
     <R3Scene id="station-ads" tone="overcast" rm={rm}
       label="NAND station platform at 4:30 PM: benches under an ad wall, a red poster that says WATCHING YOU, a green tea vending machine.">
-      <polygon points={pts(STRIP)} fill="#e9bf3a" />
+      <polygon points={pts(STRIP)} fill="#d2ad3e" />
       <polygon points={pts([[500, 1080], [520, 1080], [1890, 556], [1880, 552]])} fill="#b8922a" />
       <StationAdsArt />
     </R3Scene>
   );
 }
 
-// v2-train 3: insert on the vending + gate side (x 0-960 of the art at 2x), ticket gate + IC reader drawn over it
+// v2-train 3: insert on the vending + gate side (the same art at 1.9x, left half), ticket gate + IC reader over it
 export function StationAdsInsert({ rm }) {
+  const gate = (
+    <g>
+      <defs>
+        <radialGradient id="r3in-pad"><stop offset="0" stopColor="#bff2ff" /><stop offset="1" stopColor="#2f8fd6" /></radialGradient>
+        <filter id="r3in-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14" /></filter>
+      </defs>
+      {/* gate cabinet, left third: top face + front */}
+      <polygon points="120,760 640,710 720,750 200,810" fill="#e7ecef" />
+      <polygon points="200,810 720,750 720,1080 200,1080" fill="#b9c4cb" />
+      <polygon points="120,760 200,810 200,1080 120,1080" fill="#8e9aa2" />
+      <rect x="200" y="840" width="520" height="16" fill="#2fb36b" />
+      {/* the IC reader on top, glowing */}
+      <ellipse cx="520" cy="738" rx="90" ry="30" fill="#6fd0ff" filter="url(#r3in-glow)" opacity=".8" />
+      <polygon points="440,720 600,706 620,740 460,756" fill="url(#r3in-pad)" stroke="#1d5f93" strokeWidth="4" />
+      <text x="530" y="742" textAnchor="middle" className="r3-sign" fill="#0d3a5e" fontSize="28">IC</text>
+      {/* twice: two beeps */}
+      <text x="300" y="560" className="r3-jp" fill="#fff" stroke="#2f8fd6" strokeWidth="6" paintOrder="stroke" fontSize="72">ピッ</text>
+      <text x="470" y="660" className="r3-jp" fill="#fff" stroke="#ff5fa2" strokeWidth="6" paintOrder="stroke" fontSize="72">ピッ♡</text>
+      {/* the gate flap, open */}
+      <polygon points="700,790 760,780 760,900 700,920" fill="#ff8fc0" opacity=".9" />
+    </g>
+  );
   return (
-    <div className="art r3 r3-station-ads-insert">
-      <div className="r3-cam" style={{ position: 'absolute', inset: 0, transform: 'scale(1.9) translate(0px, -260px)', transformOrigin: '0 0' }}>
-        <StationAds rm={rm} />
-      </div>
-      <svg className="r3-over" viewBox="0 0 1920 1080" role="img" aria-label="Close-up: the ticket gate at NAND station. The IC reader glows blue: beep, beep.">
-        <defs>
-          <radialGradient id="r3in-pad"><stop offset="0" stopColor="#bff2ff" /><stop offset="1" stopColor="#2f8fd6" /></radialGradient>
-          <filter id="r3in-glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="14" /></filter>
-        </defs>
-        {/* gate cabinet, left third: top face + front */}
-        <polygon points="120,760 640,710 720,750 200,810" fill="#e7ecef" />
-        <polygon points="200,810 720,750 720,1080 200,1080" fill="#b9c4cb" />
-        <polygon points="120,760 200,810 200,1080 120,1080" fill="#8e9aa2" />
-        <rect x="200" y="840" width="520" height="16" fill="#2fb36b" />
-        {/* the IC reader on top, glowing */}
-        <ellipse cx="520" cy="738" rx="90" ry="30" fill="#6fd0ff" filter="url(#r3in-glow)" opacity=".8" />
-        <polygon points="440,720 600,706 620,740 460,756" fill="url(#r3in-pad)" stroke="#1d5f93" strokeWidth="4" />
-        <text x="530" y="742" textAnchor="middle" className="r3-sign" fill="#0d3a5e" fontSize="28">IC</text>
-        {/* twice: two beeps */}
-        <text x="300" y="560" className="r3-jp" fill="#fff" stroke="#2f8fd6" strokeWidth="6" paintOrder="stroke" fontSize="72">ピッ</text>
-        <text x="470" y="660" className="r3-jp" fill="#fff" stroke="#ff5fa2" strokeWidth="6" paintOrder="stroke" fontSize="72">ピッ♡</text>
-        {/* the gate flap, open */}
-        <polygon points="700,790 760,780 760,900 700,920" fill="#ff8fc0" opacity=".9" />
-      </svg>
-    </div>
+    <R3Scene id="station-ads-insert" trace="station-ads" tone="overcast" rm={rm} cam="scale(1.9) translate(0 -260)" over={gate}
+      label="Close-up: the ticket gate at NAND station, next to the green tea machine. The IC reader glows blue: beep, beep.">
+      <polygon points={pts(STRIP)} fill="#d2ad3e" />
+      <StationAdsArt />
+    </R3Scene>
   );
 }

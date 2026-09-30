@@ -13,7 +13,7 @@ export { preloadTrace };
 
 export const TOD = {
   afternoon: { top: '#ffd9a0', bottom: '#ffb98a', top_op: 0.16, bottom_op: 0.1, shade: '#4a1f24', vig: 0.34, window: '#fff1c4', glow: '#ffe7a8' },
-  overcast: { top: '#c7d2da', bottom: '#8fa1ae', top_op: 0.22, bottom_op: 0.08, shade: '#1d2a36', vig: 0.3, window: '#fff3cf', glow: '#fff1c4' },
+  overcast: { top: '#c7d2da', bottom: '#5f7280', top_op: 0.1, bottom_op: 0.12, shade: '#1d2a36', vig: 0.3, window: '#fff3cf', glow: '#fff1c4' },
   'rain-dusk': { top: '#56637a', bottom: '#2a3246', top_op: 0.22, bottom_op: 0.18, shade: '#0c1220', vig: 0.46, window: '#ffd98a', glow: '#ffcf7a', rain: '#dbe6ff' },
   bluehour: { top: '#2b3f7a', bottom: '#f2a26b', top_op: 0.3, bottom_op: 0.12, shade: '#0b1030', vig: 0.44, window: '#ffd27a', glow: '#ffc26a' },
   night: { top: '#0d1433', bottom: '#1c2450', top_op: 0.36, bottom_op: 0.2, shade: '#03050f', vig: 0.55, window: '#ffd27a', glow: '#ffb85a' },
@@ -41,13 +41,18 @@ export function Wash({ id, tone }) {
   );
 }
 
-export function R3Scene({ id, trace = id, tone, label, rm, children }) {
+// cam = an SVG transform for a closer framing of the same art (the svg viewport clips it: no CSS overflow);
+// over = drawn after the wash, unscaled (the insert's own props).
+export function R3Scene({ id, trace = id, tone, label, cam, over = null, children }) {
   return (
     <div className={`art r3 r3-${id}`}>
       <svg viewBox="0 0 1920 1080" role="img" aria-label={label}>
-        <image href={traceUrl(trace)} width="1920" height="1080" preserveAspectRatio="none" />
-        {children}
-        <Wash id={`r3-${id}`} tone={tone} rm={rm} />
+        <g transform={cam}>
+          <image href={traceUrl(trace)} width="1920" height="1080" preserveAspectRatio="none" />
+          {children}
+        </g>
+        <Wash id={`r3-${id}`} tone={tone} />
+        {over}
       </svg>
     </div>
   );

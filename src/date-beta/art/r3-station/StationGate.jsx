@@ -1,7 +1,7 @@
 // v2-train 1: STATION · 4:30 PM (ref 12: platform 2, departure board, seats). Dry, overcast, clouds building.
 // Trace = walls, seats, plants, tracks, houses. Hand pass: the departure board ("4:30 → OR", the group's board gag),
 // the big wall ad (the ref's Chinese slogan -> our own poster), straight catenary poles, the yellow tactile strip and
-// the floor joints toward the vanishing point. The board sits top right, far above the dialogue box.
+// the floor joints toward the vanishing point. The board hangs at y 150-290: under the HUD bar, above the dialogue box.
 import { R3Scene, Pole, preloadTrace, pts } from './parts.jsx';
 
 preloadTrace('station-gate-r3');
@@ -9,20 +9,21 @@ preloadTrace('station-gate-r3');
 const VP = [1098, 452];
 
 function Board() {
+  // hung low (ref: top edge), so the HUD bar (y < 110) never covers it; the dialogue box starts at y 773
   return (
     <g>
       {/* hanger rods */}
-      <rect x="1060" y="0" width="6" height="16" fill="#46505a" /><rect x="1390" y="0" width="6" height="12" fill="#46505a" />
-      <rect x="990" y="10" width="330" height="134" rx="6" fill="#56636e" />
-      <rect x="998" y="18" width="314" height="118" rx="3" fill="#15202b" />
-      <text x="1155" y="66" textAnchor="middle" className="r3-led" fill="#ffc861" fontSize="46">4:30 → OR</text>
-      <rect x="1010" y="80" width="290" height="2" fill="#2b3a47" />
-      <text x="1016" y="118" className="r3-led" fill="#8dffb0" fontSize="24">つぎ NEXT</text>
-      <text x="1300" y="118" textAnchor="end" className="r3-led" fill="#c9d8ff" fontSize="24">12 stops</text>
+      <rect x="1060" y="0" width="6" height="160" fill="#46505a" /><rect x="1390" y="0" width="6" height="150" fill="#46505a" />
+      <rect x="990" y="156" width="330" height="134" rx="6" fill="#56636e" />
+      <rect x="998" y="164" width="314" height="118" rx="3" fill="#15202b" />
+      <text x="1155" y="212" textAnchor="middle" className="r3-led" fill="#ffc861" fontSize="46">4:30 → OR</text>
+      <rect x="1010" y="226" width="290" height="2" fill="#2b3a47" />
+      <text x="1016" y="264" className="r3-led" fill="#8dffb0" fontSize="24">つぎ NEXT</text>
+      <text x="1300" y="264" textAnchor="end" className="r3-led" fill="#c9d8ff" fontSize="24">12 stops</text>
       {/* platform number box */}
-      <rect x="1318" y="4" width="126" height="140" rx="6" fill="#56636e" />
-      <rect x="1326" y="12" width="110" height="124" rx="3" fill="#1c2c45" />
-      <text x="1381" y="116" textAnchor="middle" className="r3-sign" fill="#fff" fontSize="104">2</text>
+      <rect x="1318" y="150" width="126" height="140" rx="6" fill="#56636e" />
+      <rect x="1326" y="158" width="110" height="124" rx="3" fill="#1c2c45" />
+      <text x="1381" y="262" textAnchor="middle" className="r3-sign" fill="#fff" fontSize="104">2</text>
     </g>
   );
 }

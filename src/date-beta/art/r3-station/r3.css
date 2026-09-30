@@ -3,4 +3,3 @@
 .r3 .r3-led { font-family: var(--mono); font-weight: 700; letter-spacing: .02em; }
 .r3 .r3-sign { font-family: var(--cond); font-weight: 800; }
 .r3 .r3-jp { font-family: var(--jp); font-weight: 800; }
-.r3 .r3-over { position: absolute; inset: 0; }

@@ -110,10 +110,11 @@ export default function PlatformRain({ rm }) {
       {/* canopy post, straight */}
       <Pole x={1165} y0={262} y1={720} w={14} fill="#d8a46a" hi="#ffe0a8" />
       {/* the hanging station sign: 「OR駅」 */}
-      <rect x="820" y="300" width="4" height="30" fill="#2a2a2a" /><rect x="880" y="300" width="4" height="30" fill="#2a2a2a" />
-      <rect x="752" y="328" width="142" height="50" rx="4" fill="#f2c64a" stroke="#6a4a10" strokeWidth="3" />
-      <text x="823" y="366" textAnchor="middle" className="r3-jp" fill="#2a1d10" fontSize="34">OR駅</text>
-      <rect x="752" y="328" width="142" height="50" rx="4" fill={T.glow} opacity=".25" filter="url(#r3pr-soft)" />
+      {/* (moved left of the ref's spot so Nanda's raised choice pose, x 730-1190, never hides it) */}
+      <rect x="560" y="262" width="4" height="40" fill="#2a2a2a" /><rect x="660" y="262" width="4" height="40" fill="#2a2a2a" />
+      <rect x="540" y="300" width="148" height="52" rx="4" fill="#f2c64a" stroke="#6a4a10" strokeWidth="3" />
+      <text x="614" y="339" textAnchor="middle" className="r3-jp" fill="#2a1d10" fontSize="36">OR駅</text>
+      <rect x="540" y="300" width="148" height="52" rx="4" fill={T.glow} opacity=".25" filter="url(#r3pr-soft)" />
       <RainPair seed={5} n={220} box={[560, 0, 1360, 1080]} len={[40, 90]} slant={0.06} color={T.rain} opacity={0.45} width={2} clip="r3pr-sky" rm={rm} />
     </R3Scene>
   );
