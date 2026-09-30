@@ -474,5 +474,12 @@
   "beat": "3 (u)",
   "file": "public/date-beta/voice/12-escape-win/063_3-u.mp3",
   "text": "[smiling] Now every hour [whispers, slower] is ours."
+ },
+ {
+  "n": 64,
+  "scene": "escape-win",
+  "beat": "3 (t)",
+  "file": "public/date-beta/voice/12-escape-win/064_3-t.mp3",
+  "text": "[tender] Sleep now. [whispers, slower] You're mine to keep."
  }
 ]
