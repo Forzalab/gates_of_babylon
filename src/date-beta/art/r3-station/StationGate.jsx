@@ -5,6 +5,7 @@
 import { R3Scene, Pole, preloadTrace, pts } from './parts.jsx';
 import { Crowd, Shafts, WavyGuy, CapGuy, scatter } from './Crowd.jsx';
 import { PlatformVending } from './Vending.jsx';
+import { Mid, StationFront } from '../sandwichFronts.jsx';
 
 preloadTrace('station-gate-r3');
 
@@ -67,6 +68,7 @@ export default function StationGate({ props, rm }) {
   return (
     <R3Scene id="station-gate-r3" tone="overcast" rm={rm}
       label="Station platform 2 at 4:30 PM, full of people going home: flat silhouette commuters, sun shafts, a wavy-haired guy and a guy in an orange cap, a drink vending machine, the departure board reads 4:30 to OR.">
+      <Mid id="station-gate-r3" blur={3} op={0.5} tint="#e2ecee" wash={0.05} />
       {/* canopy underside: one clean slate cel, slats toward VP */}
       <polygon points="780,0 1305,0 1300,140 1160,252 1004,338 986,332 800,128" fill="#43535c" />
       <g stroke="#5d6f78" strokeWidth="4">
@@ -100,6 +102,7 @@ export default function StationGate({ props, rm }) {
       <Shafts id="r4sg" bands={SHAFTS} op={0.22} />
       <PlatformVending x={322} y={404} w={190} h={362} drink={props?.drink} />
       <Board />
+      <StationFront />
       {/* the far board above the platform end */}
       <rect x="1030" y="324" width="100" height="32" rx="3" fill="#15202b" />
       <text x="1080" y="348" textAnchor="middle" className="r3-led" fill="#ffc861" fontSize="18">4:30 OR</text>

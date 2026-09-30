@@ -3,6 +3,7 @@
 // the plaza, the zebra stripes in perspective, long sun shadows (day) / wet neon reflections (night).
 import { TraceScene, preloadTrace } from './Grade.jsx';
 import Rain from '../Rain.jsx';
+import { Mid, CrossingNightFront } from '../sandwichFronts.jsx';
 
 preloadTrace('crossing-day'); preloadTrace('crossing-night');
 
@@ -91,6 +92,7 @@ export function CrossingNight({ rm }) {
   return (
     <TraceScene id="crossing-night" rm={rm} grade={{ tone: 'night', sun: [1105, 290], sparkles: 30 }}
       label="A rainy night crossing lit by giant screens: pink hearts and the words ずっと一緒, wet asphalt full of neon reflections.">
+      <Mid id="crossing-night" blur={3} op={0.5} tint="#2a2350" wash={0.1} />
       <defs>
         <filter id="cn-halo" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="24" /></filter>
         <linearGradient id="cn-glass" x1="0" y1="0" x2="1" y2="1">
@@ -124,6 +126,7 @@ export function CrossingNight({ rm }) {
           <rect key={i} x={x - w / 2} y="890" width={w} height="190" fill={c} opacity={0.55 - i * 0.04} />
         ))}
       </g>
+      <CrossingNightFront />
       <Rain rm={rm} n={120} opacity={0.3} color="#cfd6ff" />
     </TraceScene>
   );
