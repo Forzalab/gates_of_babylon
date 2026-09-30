@@ -264,5 +264,12 @@
   "beat": "1 cold",
   "file": "public/date-beta/voice/10-cup/051_1-cold.mp3",
   "text": "[sudden flat][quiet] I'll wait. I'm good at… [sweet] waiting."
+ },
+ {
+  "n": 53,
+  "scene": "cup",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/10-cup/053_3-r.mp3",
+  "text": "[warm] Drink. It's warm. [whispers][close] It makes the thinking… [whispers, slower] stop."
  }
 ]
