@@ -1,0 +1,3 @@
+/* G2/G3 sign text: a dark outline under the fill (paint-order), so a sign stays legible under the player's focus blur
+   (blur 3px + brightness .78) and the rain streaks crossing it. Scoped to this set only. */
+.art.r3g23 svg text { paint-order: stroke fill; stroke: #0b0f1c; stroke-width: 4px; stroke-opacity: .6; stroke-linejoin: round; }

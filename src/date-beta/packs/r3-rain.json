@@ -1,0 +1,18 @@
+{
+ "name": "r3-rain",
+ "notes": [
+  "Scenes R3 G2 RAIN WALK + G3 HER STREET -> NIGHT (research/sprint-0930/scenes-r3/PLAN.md, G23-NOTES.md). Runs right after variant-v2 / r3-station, so the beat numbers are variant-v2's own; escape-win 6 is the wide street beat sequences.json added.",
+  "One background per line: v2-rain 1 rain-sidewalk (ref 04, the red umbrella) | 2 rain-alley (ref 01, puddles) | 3 rain-eave (refs 06+07, shelter) | 4 rain-ending (ref 02, drizzle, the sky brightens) | v2-street 2 street-bluehour (ref 16, 7:00 PM) | 5 her-building (ref 03, door 12) | v2-curry 5 curry-street (ref 05, 3:40 afternoon) | escape-win 6 escape-night (ref 15, 8:40 PM, stars).",
+  "Each beat replaces its props: the borrowed shots (umbrella / feet inserts over crossing-night, the rack, the street-day timelapse, the zoom-3 closeup, the shop-street closeup, the sunset street-dusk closeup) are gone, so the place itself is the picture. The two time jumps keep a stamp (shot 'stamp' frames the beat's own bg)."
+ ],
+ "patch": [
+  { "scene": "v2-rain", "beat": 1, "set": { "bg": "rain-sidewalk", "props": {} } },
+  { "scene": "v2-rain", "beat": 2, "set": { "bg": "rain-alley", "props": {} } },
+  { "scene": "v2-rain", "beat": 3, "set": { "bg": "rain-eave", "props": {} } },
+  { "scene": "v2-rain", "beat": 4, "set": { "bg": "rain-ending", "props": {} } },
+  { "scene": "v2-street", "beat": 2, "set": { "bg": "street-bluehour", "props": { "shot": "stamp", "place": "HER STREET", "time": "7:00 PM" } } },
+  { "scene": "v2-street", "beat": 5, "set": { "bg": "her-building", "props": {} } },
+  { "scene": "v2-curry", "beat": 5, "set": { "bg": "curry-street", "props": {} } },
+  { "scene": "escape-win", "beat": 6, "set": { "bg": "escape-night", "props": { "shot": "stamp", "place": "HER STREET", "time": "8:40 PM" } } }
+ ]
+}
