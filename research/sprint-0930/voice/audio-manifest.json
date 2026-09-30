@@ -229,5 +229,12 @@
   "beat": "5",
   "file": "public/date-beta/voice/08-v2-street/044_5.mp3",
   "text": "[warm][slow] I held it since noon. [flat, pleased] So I would be ready. [whispers][close] For you."
+ },
+ {
+  "n": 45,
+  "scene": "v2-home",
+  "beat": "3",
+  "file": "public/date-beta/voice/09-v2-home/045_3.mp3",
+  "text": "[smiling][slow] Every choice you made today led here. [pause][perfectly even] I planned them all."
  }
 ]
