@@ -341,5 +341,12 @@
   "beat": "6 (t)",
   "file": "public/date-beta/voice/13-escape-timeout/071_6-t.mp3",
   "text": "[whispers, slower] …then sleep. [perfectly even] You're mine to keep."
+ },
+ {
+  "n": 3,
+  "scene": "rooftop",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/01-rooftop/003_1-r.mp3",
+  "text": "[amused] Sour. [proud] Brave. [whispers][close] I'll remember… [whispers, slower] you like sour."
  }
 ]
