@@ -1,0 +1,1138 @@
+[
+ {
+  "scene": "rooftop",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Her shoes by the fence. Toes pointed at you."
+ },
+ {
+  "scene": "rooftop",
+  "beat": 4,
+  "k": "bento=umeboshi",
+  "who": null,
+  "text": "Close-up. The lid lifts. One red umeboshi on white rice."
+ },
+ {
+  "scene": "rooftop",
+  "beat": 4,
+  "k": "bento=tamagoyaki",
+  "who": null,
+  "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers."
+ },
+ {
+  "scene": "rooftop",
+  "beat": 6,
+  "k": "",
+  "who": "MC",
+  "text": "Itadakimasu."
+ },
+ {
+  "scene": "rooftop",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "She doesn't eat hers. She watches you chew."
+ },
+ {
+  "scene": "rooftop",
+  "beat": 8,
+  "k": "lead",
+  "who": null,
+  "text": "Sweet. Like me. Good input."
+ },
+ {
+  "scene": "rooftop",
+  "beat": 10,
+  "k": "",
+  "who": "MC",
+  "text": "Technically, rain wasn't f-OR-ecast.",
+  "at": "f-"
+ },
+ {
+  "scene": "v2-park",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "PARK · 1:00 PM. A path under cherry trees. Petals on the ground."
+ },
+ {
+  "scene": "v2-park",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Her thumb is on your wrist. She is counting your pulse. She wants every beat to be for her."
+ },
+ {
+  "scene": "v2-park",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "Two pairs of shoes walk out of the park. Hers stay close to yours."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you to a shop."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "The shop doors slide open. A little tune plays."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "Your hands push the cart. Her hand slides on top of yours."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Her hand puts one cup in the basket. Then two. Then three."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "You walk past the sweets. She does not look at them. She looks at you."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "Checkout. Lane 2 is open. You put the basket on the counter."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 8,
+  "k": "",
+  "who": null,
+  "text": "The shop lady smiles at you. Nanda sees it."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 9,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Her nails press into the basket handle. Hard."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 10,
+  "k": "",
+  "who": null,
+  "text": "She pulls you to the self-checkout. No shop lady there."
+ },
+ {
+  "scene": "v2-shop",
+  "beat": 12,
+  "k": "",
+  "who": null,
+  "text": "The shop bell rings. You carry the bags. She holds your sleeve."
+ },
+ {
+  "scene": "v2-library",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "RAIL CROSSING · 1:50 PM. The bell rings. The gate is down."
+ },
+ {
+  "scene": "v2-library",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "A train passes. Her hand grabs your sleeve until it is gone."
+ },
+ {
+  "scene": "v2-library",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "LIBRARY · 2:00 PM. Cool air. Very quiet."
+ },
+ {
+  "scene": "v2-library",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "Close-up. The book drops into the slot. Thunk."
+ },
+ {
+  "scene": "v2-library",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "Her empty hand finds your hand. You walk out."
+ },
+ {
+  "scene": "v2-town",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "AKIBA · 2:45 PM. Big signs. Big screens. She holds your hand."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "It is 2:55 PM. Two curry shops stand side by side."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "She opens the glass door. A bell rings."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "We go inside NAND HOUSE. A TV plays a dance video."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "We sit at a table by the window. She sits on your right. Her knee touches your knee."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "Lunch comes on a steel tray. Butter chicken, green saag, rice, and one very big naan."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "She tears off a piece of naan with two fingers."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "She pours more butter sauce. It is thick, orange, and shiny."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 8,
+  "k": "",
+  "who": null,
+  "text": "She dips the naan in the sauce. The sauce drips."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 10,
+  "k": "",
+  "who": null,
+  "text": "She eats the naan from your fingers. She looks at your face the whole time. There is sauce on her lip."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 11,
+  "k": "",
+  "who": null,
+  "text": "She pushes her mango lassi to you. It has only one straw."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 12,
+  "k": "",
+  "who": null,
+  "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them."
+ },
+ {
+  "scene": "v2-curry",
+  "beat": 13,
+  "k": "",
+  "who": null,
+  "text": "We walk out to the street. It is 3:40 PM."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "She opens the yellow door. A bell rings."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "We go inside OR OR CURRY. A TV plays a cooking show."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "We sit at the counter. She sits on your right. Her knee touches your knee."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "Lunch comes on a white plate. Rice, brown curry, and a fried pork cutlet."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "She cuts off one small piece with her spoon. Crunch."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "She pours more curry on the rice. It is thick, brown, and hot."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "She dips the small piece in the curry. The curry drips."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 8,
+  "k": "",
+  "who": null,
+  "text": "She eats the piece from your fingers. She looks at your face the whole time. There is curry on her lip."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 9,
+  "k": "",
+  "who": null,
+  "text": "She pushes her lemon water to you. It has only one straw."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 10,
+  "k": "",
+  "who": null,
+  "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them."
+ },
+ {
+  "scene": "v2-curry-katsu",
+  "beat": 11,
+  "k": "",
+  "who": null,
+  "text": "We walk out to the street. It is 3:40 PM."
+ },
+ {
+  "scene": "v2-curry-alone",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "She opens the yellow door. A bell rings."
+ },
+ {
+  "scene": "v2-curry-alone",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "She eats alone. You get no food. She looks at you the whole time."
+ },
+ {
+  "scene": "v2-curry-alone",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "She folds her napkin and keeps it. She collects them."
+ },
+ {
+  "scene": "v2-curry-alone",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "We walk out to the street. It is 3:40 PM."
+ },
+ {
+  "scene": "v2-train",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'"
+ },
+ {
+  "scene": "v2-train",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "STATION · 4:30 PM. The station is full. Everyone is going home."
+ },
+ {
+  "scene": "v2-train",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'"
+ },
+ {
+  "scene": "v2-train",
+  "beat": 2,
+  "k": "bento=tamagoyaki",
+  "who": null,
+  "text": "Egg pudding drink. Sweet. 'Like the one you picked. I remember.'"
+ },
+ {
+  "scene": "v2-train",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "Two men bump her bag. They laugh.",
+  "at": "They laugh."
+ },
+ {
+  "scene": "v2-train",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'"
+ },
+ {
+  "scene": "v2-train",
+  "beat": 6,
+  "k": "run=1",
+  "who": null,
+  "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'"
+ },
+ {
+  "scene": "v2-train",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away."
+ },
+ {
+  "scene": "v2-train",
+  "beat": 8,
+  "k": "",
+  "who": null,
+  "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'"
+ },
+ {
+  "scene": "v2-rain",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "BIG CROSSING · 5:30 PM. Heavy rain. The signs glow. Nobody else."
+ },
+ {
+  "scene": "v2-rain",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Her shoes are wet. She walks in the puddles for you."
+ },
+ {
+  "scene": "v2-rain",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "She looks up at you. Then down. Then up again."
+ },
+ {
+  "scene": "v2-rain",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "The rain stops. Two pairs of wet shoes walk toward her street."
+ },
+ {
+  "scene": "v2-street",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "HER STREET · 6:00 PM. Wet road. Low sun. Long shadows."
+ },
+ {
+  "scene": "v2-street",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "7:00 PM. The sky goes orange, then dark blue. You walked one hour."
+ },
+ {
+  "scene": "v2-street",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Her house key. Her fist opens. Red marks on her palm."
+ },
+ {
+  "scene": "v2-street",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "Close-up. The key turns. Click. Door 12 opens."
+ },
+ {
+  "scene": "v2-home",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "HER HOME · 7:05 PM. Very clean. Her shoes in a perfect line."
+ },
+ {
+  "scene": "v2-home",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "She kneels. She puts slippers on your feet. Your size."
+ },
+ {
+  "scene": "v2-home",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "HER KITCHEN · 7:10 PM. Three chairs. Three cups. Steam."
+ },
+ {
+  "scene": "v2-home",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "Her hand on your back. She sits you in the middle chair."
+ },
+ {
+  "scene": "park",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "A sakura park. Blue sky. Petals fall like slow snow."
+ },
+ {
+  "scene": "park",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Her fingers lock between yours. Tight. Tighter."
+ },
+ {
+  "scene": "errand-shop",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "A street of little shops. Pink petals on every roof."
+ },
+ {
+  "scene": "errand-shop",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Three cups in the basket. She strokes the third one."
+ },
+ {
+  "scene": "errand-shop",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "The shop door jingles shut. The bags cut into your fingers."
+ },
+ {
+  "scene": "errand-shop",
+  "beat": 8,
+  "k": "",
+  "who": null,
+  "text": "WALK TO THE FOOD STALLS"
+ },
+ {
+  "scene": "errand-library",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "A rail crossing. Bells ring. Sakura on the tracks."
+ },
+ {
+  "scene": "errand-library",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "The library. Cool air. So quiet you can hear pages turn."
+ },
+ {
+  "scene": "errand-library",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "Close-up. The book drops in the return slot. Thunk."
+ },
+ {
+  "scene": "errand-library",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "Outside, the crossing bell starts again. She waits for it to stop."
+ },
+ {
+  "scene": "errand-library",
+  "beat": 8,
+  "k": "",
+  "who": null,
+  "text": "WALK TO THE FOOD STALLS"
+ },
+ {
+  "scene": "town",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "The big crossing. A thousand people. She only looks at you."
+ },
+ {
+  "scene": "town",
+  "beat": 12,
+  "k": "",
+  "who": null,
+  "text": "WALK TO THE STATION"
+ },
+ {
+  "scene": "train",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "AND Line, local service. Home in twelve stops."
+ },
+ {
+  "scene": "train",
+  "beat": 1,
+  "k": "bento=umeboshi",
+  "who": null,
+  "text": "Nobody reads the ads. This one says すっぱい！ SOUR!"
+ },
+ {
+  "scene": "train",
+  "beat": 1,
+  "k": "bento=tamagoyaki",
+  "who": null,
+  "text": "Nobody reads the ads. This one says 甘い！ SWEET!"
+ },
+ {
+  "scene": "naan",
+  "beat": 1,
+  "k": "",
+  "who": "MC",
+  "text": "Technically, that's a NAND gate. Not bread."
+ },
+ {
+  "scene": "naan",
+  "beat": 1,
+  "k": "food=butter",
+  "who": "MC",
+  "text": "Technically, that's a NAND gate. Not our lunch."
+ },
+ {
+  "scene": "platform",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "Her stop. The rain followed us off the train."
+ },
+ {
+  "scene": "platform",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "The AND Line leaves. Just two of us now."
+ },
+ {
+  "scene": "platform",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "NEXT: this OR that. The sign never picks."
+ },
+ {
+  "scene": "station-talk",
+  "beat": 2,
+  "k": "",
+  "who": "MC",
+  "text": "(Weird. Feels like I've heard that before.)"
+ },
+ {
+  "scene": "station-talk",
+  "beat": 2,
+  "k": "run=2",
+  "who": "MC",
+  "text": "Didn't we already do this? The bento, the train, the tea… Nanda, are we in a loop?"
+ },
+ {
+  "scene": "station-talk",
+  "beat": 2,
+  "k": "run=3",
+  "who": "MC",
+  "text": "Run {RUN}. I know every line. So do you."
+ },
+ {
+  "scene": "rain-crossing",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "Rain. The signs glow. The crossing is empty now. It's {TIME}."
+ },
+ {
+  "scene": "rain-crossing",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Rain on the umbrella. Her shoulder gets wet. Yours doesn't."
+ },
+ {
+  "scene": "rain-crossing",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "WALK HER HOME"
+ },
+ {
+  "scene": "underpass",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "Your steps, her steps. Always an even count."
+ },
+ {
+  "scene": "walk-home",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "The rain stops. Sun on her street. She walks slower."
+ },
+ {
+  "scene": "walk-home",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "The sky goes orange. She stopped walking a while ago."
+ },
+ {
+  "scene": "walk-home",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Her house key is already in her hand. Warm. Held since noon."
+ },
+ {
+  "scene": "walk-home",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "FOLLOW HER INSIDE"
+ },
+ {
+  "scene": "apartment",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "Four floors. One window lit."
+ },
+ {
+  "scene": "genkan-in",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "Her shoes. Lined up to the millimetre."
+ },
+ {
+  "scene": "genkan-in",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "Men's slippers. Already set out."
+ },
+ {
+  "scene": "genkan-in",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "A tiny shrine. Inside: a circuit you built."
+ },
+ {
+  "scene": "genkan-talk",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "The kitchen. Too clean. Three chairs. The kettle is already warm."
+ },
+ {
+  "scene": "genkan-talk",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "Close-up. She pours. The steam curls up like a finger."
+ },
+ {
+  "scene": "cup",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "HER KITCHEN · 7:20 PM. The tea is poured. Three cups."
+ },
+ {
+  "scene": "cup",
+  "beat": 2,
+  "k": "bento=umeboshi",
+  "who": null,
+  "text": "Third teacup. Nobody poured it. One umeboshi on its saucer."
+ },
+ {
+  "scene": "cup",
+  "beat": 2,
+  "k": "bento=tamagoyaki",
+  "who": null,
+  "text": "Third teacup. Nobody poured it. Tamagoyaki on its saucer."
+ },
+ {
+  "scene": "cup",
+  "beat": 3,
+  "k": "",
+  "who": "MC",
+  "text": "Who's the third cup for?"
+ },
+ {
+  "scene": "steeped",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Your cup, empty. Hers, full. She never drank."
+ },
+ {
+  "scene": "steeped",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "STEEPED."
+ },
+ {
+  "scene": "unknown",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "You stand. The floor tilts a little."
+ },
+ {
+  "scene": "unknown",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "Under the table: a floor hatch. Too big for storage."
+ },
+ {
+  "scene": "unknown",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Upstairs, the kettle clicks off. Her slippers stop moving."
+ },
+ {
+  "scene": "unknown",
+  "beat": 3,
+  "k": "",
+  "who": "NANDA (UPSTAIRS)",
+  "text": "Darling? Where did you go?"
+ },
+ {
+  "scene": "unknown",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "A steep wooden ladder. Down into the dark."
+ },
+ {
+  "scene": "escape",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "BASEMENT · 7:40 PM. Concrete. One bulb. Rain at a high window."
+ },
+ {
+  "scene": "escape",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "Jars on the shelves. Each one: a date, a name."
+ },
+ {
+  "scene": "escape",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "The dates go back years. The names are all different."
+ },
+ {
+  "scene": "escape",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "Bento boxes, one per day. Your name on each. Untouched."
+ },
+ {
+  "scene": "escape",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "The oldest is dated before you met."
+ },
+ {
+  "scene": "escape",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "A mortar and a mallet. One fresh mochi. Hers only."
+ },
+ {
+  "scene": "escape",
+  "beat": 6,
+  "k": "bento=umeboshi",
+  "who": null,
+  "text": "Newest jar: today, your name, umeboshi. Lid off. Empty."
+ },
+ {
+  "scene": "escape",
+  "beat": 6,
+  "k": "bento=tamagoyaki",
+  "who": null,
+  "text": "Newest jar: today, your name, tamagoyaki. Lid off. Empty."
+ },
+ {
+  "scene": "escape",
+  "beat": 12,
+  "k": "",
+  "who": null,
+  "text": "Minutes gone. A clock upstairs chimed. You lost count."
+ },
+ {
+  "scene": "escape",
+  "beat": 13,
+  "k": "",
+  "who": null,
+  "text": "Above you, footsteps. Slow. Counting. One, two, three."
+ },
+ {
+  "scene": "escape",
+  "beat": 14,
+  "k": "",
+  "who": "NANDA (ABOVE)",
+  "text": "Four, five… Don't hide, darling. I always find you."
+ },
+ {
+  "scene": "escape-win",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "She's waiting at the outside door."
+ },
+ {
+  "scene": "escape-win",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "Wide. Her street at night. One window lit. It's yours now."
+ },
+ {
+  "scene": "escape-win",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "ESCAPE."
+ },
+ {
+  "scene": "escape-timeout",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "The ladder creaks. She's coming down."
+ },
+ {
+  "scene": "escape-timeout",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "You wake at the tea table. Four cups now."
+ },
+ {
+  "scene": "escape-timeout",
+  "beat": 3,
+  "k": "bento=umeboshi",
+  "who": null,
+  "text": "She holds out an umeboshi. You eat."
+ },
+ {
+  "scene": "escape-timeout",
+  "beat": 3,
+  "k": "bento=tamagoyaki",
+  "who": null,
+  "text": "She holds out the tamagoyaki. You eat."
+ },
+ {
+  "scene": "escape-timeout",
+  "beat": 7,
+  "k": "",
+  "who": null,
+  "text": "ESCAPE?"
+ },
+ {
+  "scene": "leave",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "XOR Coffee. 7:00 AM."
+ },
+ {
+  "scene": "leave-fu",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "Her hand rises. Time freezes. The café turns."
+ },
+ {
+  "scene": "leave-fu",
+  "beat": 2,
+  "k": "",
+  "who": "CROWD",
+  "text": "fORever and ever"
+ },
+ {
+  "scene": "leave-fu",
+  "beat": 3,
+  "k": "",
+  "who": "CROWD",
+  "text": "fORever and ever and ever"
+ },
+ {
+  "scene": "leave-fu",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "LEAVE."
+ },
+ {
+  "scene": "leave-yeah",
+  "beat": 2,
+  "k": "",
+  "who": "CROWD",
+  "text": "fORever and ever"
+ },
+ {
+  "scene": "leave-yeah",
+  "beat": 3,
+  "k": "",
+  "who": "CROWD",
+  "text": "fORever and ever and ever"
+ },
+ {
+  "scene": "leave-yeah",
+  "beat": 4,
+  "k": "",
+  "who": null,
+  "text": "Wide. The café. Every table has two cups. Every cup has your name."
+ },
+ {
+  "scene": "leave-yeah",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "LEAVE."
+ },
+ {
+  "scene": "seq-butter",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "A tiny curry house. Warm yellow light. Spice in the air. Two seats, side by side."
+ },
+ {
+  "scene": "seq-butter",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Butter chicken lands. Orange and glossy. One naan, torn in two."
+ },
+ {
+  "scene": "seq-butter",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "She wipes your mouth with her thumb. Then she licks the thumb."
+ },
+ {
+  "scene": "seq-butter",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "The bell over the door. Outside, the big crossing roars again."
+ },
+ {
+  "scene": "seq-katsu",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "A tiny curry house. Oil hisses in the back. Two seats, side by side."
+ },
+ {
+  "scene": "seq-katsu",
+  "beat": 2,
+  "k": "",
+  "who": null,
+  "text": "Close-up. Katsu curry lands. The knife goes in. Crunch."
+ },
+ {
+  "scene": "seq-katsu",
+  "beat": 5,
+  "k": "",
+  "who": null,
+  "text": "She eats slowly. She never looks at the plate. Only at you."
+ },
+ {
+  "scene": "seq-katsu",
+  "beat": 6,
+  "k": "",
+  "who": null,
+  "text": "The bell over the door. Outside, the big crossing roars again."
+ },
+ {
+  "scene": "seq-station",
+  "beat": 0,
+  "k": "",
+  "who": null,
+  "text": "The station. Noon light through the glass roof. A train sighs somewhere."
+ },
+ {
+  "scene": "seq-station",
+  "beat": 1,
+  "k": "",
+  "who": null,
+  "text": "Close-up. The ticket gate. She taps her card. Then taps it again. For you."
+ },
+ {
+  "scene": "seq-station",
+  "beat": 3,
+  "k": "",
+  "who": null,
+  "text": "The door chime plays. She holds your sleeve the whole song."
+ }
+]

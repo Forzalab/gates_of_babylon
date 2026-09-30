@@ -22,14 +22,13 @@ export const beepHz = (id) => 440 + ([...String(id)].reduce((h, c) => (h * 31 + 
 export function createLoader(manifest, base = '/') {
   const A = makeAssets(manifest);
   const bytes = new Map(), buffers = new Map(), images = new Map();
-  let ctx = null, master = null, beds = null, muted = false, ducked = false;
-  // Beds (loopable ambience) run through their own gain so they can sit -8 dB under a voice line; everything
-  // runs through master for the mute toggle.
-  const BEDS = new Set(['rain', 'wind', 'train-hum', 'drone', 'static', 'umbrella-rain'].map((c) => A.cueId(c)));
+  let ctx = null, master = null, muted = false, ducked = false;
+  // ONE sfx bus (master): M mutes it; it sits -8 dB (0.398) under a voice take (voice/index.js onSpeak).
+  const DUCK = 0.398;
   const gains = () => {
-    if (!master) { master = ctx.createGain(); master.connect(ctx.destination); beds = ctx.createGain(); beds.connect(master); }
-    master.gain.value = muted ? 0 : 1;
-    beds.gain.setTargetAtTime?.(ducked ? 0.398 : 1, ctx.currentTime, 0.08) ?? (beds.gain.value = ducked ? 0.398 : 1);
+    if (!master) { master = ctx.createGain(); master.gain.value = muted ? 0 : ducked ? DUCK : 1; master.connect(ctx.destination); }
+    const v = muted ? 0 : ducked ? DUCK : 1;
+    try { const t = ctx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(v, t, ducked ? 0.03 : 0.12); } catch { master.gain.value = v; }
   };
   let pending = null; // the last cue asked for before the context existed (the first beat's sound, red-team R5)
   // Start (or resume) the context inside a user gesture, then play the cue that was asked for before it: the first
@@ -66,7 +65,7 @@ export function createLoader(manifest, base = '/') {
       if (!id) return;
       if (!ctx) { pending = cue; return; }
       gains();
-      const out = BEDS.has(id) ? beds : master;
+      const out = master;
       const b = buffers.get(id);
       if (!b) { if (!synth(ctx, id, out)) beep(id); return; } // missing file: the synth stand-in, else the beep
       const s = ctx.createBufferSource(); s.buffer = b; s.connect(out); s.start();
