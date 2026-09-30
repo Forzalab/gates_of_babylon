@@ -89,7 +89,8 @@ export function StationAdsArt({ drink }) {
 // the yellow tactile strip, bottom left -> far right (ref 11); drawn under the pillars' feet
 const STRIP = [[150, 1080], [500, 1080], [1880, 552], [1830, 540]];
 
-// train-r4: the crowd (refs 07-08) + the two bumpers either side of her. props.bump: 'laugh' (beat 4: they laugh)
+// train-r4: the crowd (refs 07-08) + the two bumpers either side of her. props.bump: 'laugh' (v2-train 3: they bump into her
+// and laugh; R5: they touch her + ドンッ impact marks, fx/BumpFx.jsx)
 // | 'named' (beat 5: she calls them out; each gets the chip of her styled span: a teal wave, an orange cap).
 const BACK = scatter(52, 14, [1440, 1900], [520, 600], [100, 170]);
 const FRONT = [[1800, 1140, 720]];
@@ -104,8 +105,10 @@ export default function StationAds({ props, rm }) {
       <polygon points={pts([[500, 1080], [520, 1080], [1890, 556], [1880, 552]])} fill="#b8922a" />
       <StationAdsArt drink={props?.drink} />
       <Crowd seed={52} back={BACK} front={[]} />
-      <WavyGuy x={560} y={930} h={590} mood={mood} />
-      <CapGuy x={1330} y={940} h={610} mood={mood} />
+      {/* R5: on the bump beat the two men are shoulder-to-shoulder with her (contact, not 400 px away); the impact marks are
+          fx/BumpFx.jsx, over the focus blur (the action stays crisp) */}
+      <WavyGuy x={mood === 'laugh' ? 700 : 560} y={930} h={590} mood={mood} />
+      <CapGuy x={mood === 'laugh' ? 1215 : 1330} y={940} h={610} mood={mood} />
       <Crowd seed={54} back={[]} front={FRONT} />
       <Shafts id="r4sa" bands={SHAFTS} op={0.2} />
     </R3Scene>

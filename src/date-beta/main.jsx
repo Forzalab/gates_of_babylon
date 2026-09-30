@@ -39,7 +39,8 @@ import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
 import { rainOf } from './fx/rain.js';
-import { floorOf } from './art/floors.js';
+import { floorOf, UNDER_BOX } from './art/floors.js';
+import { BumpFx } from './fx/BumpFx.jsx';
 import './beta.css';
 import './fx.css';
 
@@ -93,7 +94,8 @@ function probeFrames() {
   };
   setTimeout(() => requestAnimationFrame(step), 1500);
 }
-if (!RM) probeFrames();
+// ?fx=full skips the probe (headless shots and a known-good demo machine keep the real blur + focus plane).
+if (!RM && !/[?&]fx=full\b/.test(location.search)) probeFrames();
 // Voice: Nanda's recorded lines (voice/), one at a time; silent where a line has no file. M = mute.
 const VOICE = createVoice(import.meta.env.BASE_URL);
 function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
@@ -295,6 +297,9 @@ function Player() {
   const say = !pos.done && !end && shown.parts.length > 0 && (!!beat.text || beat.wait === 'auto') && !GAME[beat.bg];
   const stampP = !pos.done && !end && beat.props?.shot === 'stamp' && beat.props.place ? beat.props : null;
   const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
+  // R5 focus plane (Tony 09-30, the HYBRID pick): when her feet stand on a visible floor, the ground around them stays
+  // sharp (a floor band + an ellipse round her feet, soft edges), the rest of the bg blurs. Camera focus pulled to her.
+  const fplane = focus && !end && frame === 'medium' && flo.y && flo.y < UNDER_BOX && (here || speaksNanda(beat.line)) ? flo.y : 0;
   // outdoor rain (fx/rain.js): props.rain level, else the bg's default; keyed per beat so the wet marks re-measure
   const rain = !pos.done && !end ? rainOf(beat) : null;
   const rainKey = `${beat.scene}:${beat.index}:${beat.react ? 'r' : ''}:${!!beat.choices}`;
@@ -311,7 +316,7 @@ function Player() {
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
-      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''} frame-${frame}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
+      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${fplane ? ' fplane' : ''}${card ? ' is-goal' : ''} frame-${frame}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-bg={beat.bg} data-floor={flo.key ?? undefined} data-shot={beat.props?.shot ?? undefined} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
           {!pos.done && (ART[beat.props?.shot] /* props.shot = art/shots id over the beat's bg */
@@ -320,6 +325,8 @@ function Player() {
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
+        {fplane ? <div className="db-fplane" style={{ '--fy': `${fplane}px` }} aria-hidden="true" /> : null}
+        {!pos.done && !end && beat.props?.bump === 'laugh' && <BumpFx />}
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
