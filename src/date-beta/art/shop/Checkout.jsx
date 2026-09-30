@@ -1,10 +1,10 @@
 // SHOP 6-12 (SHOTLIST.md + FIX-LOG.md; all hand-pass cel rebuilds on the shared light/VP/palette): the basket, the snack aisle on the way, the checkout lanes, the register, her nails, the
 // self-checkout. Refs: 8d83db1f (basket), 0a536433 (snacks), d110f421 (checkout wide), c6ec0ec2 (retro register),
 // 8873611d (basket handle), b56aeeaa (self-checkout).
-import { ShopScene, ShelfBay, Card, Cup, Hand, BasketBed, BASKET, Shadow, SP, VP, pts } from './parts.jsx';
+import { ShopScene, ShelfBay, Card, Cup, Hand, BasketBed, BasketGoods, BASKET, Shadow, SP, VP, pts } from './parts.jsx';
 
-// 6. Close-up (refs 03 + 05): THE basket bed in the cart. Cups 1 + 2 already stand on the basket floor (one baseline,
-// one shadow direction); her hand, from the upper right, lowers cup 3 into its slot, fingers round the rim.
+// vtrace r2: the basket is the trace of ref 03 (the green basket full of groceries, 3/4 from above); her list sits on
+// top (the shared BasketGoods: carrot bag, egg pack, cups 1 + 2 on one baseline) and her hand lowers cup 3.
 export function BasketCups() {
   const hand = (
     <g>
@@ -14,14 +14,9 @@ export function BasketCups() {
     </g>
   );
   return (
-    <ShopScene id="basket" trace={null} label="Close-up from above: the green shop basket in the cart, with carrots and a pack of eggs. Two matching cups stand in it. Nanda's hand puts the third cup in.">
-      <rect width="1920" height="1080" fill={SP.floor} />
-      <g stroke={SP.metalLo} strokeWidth="6" opacity=".55">
-        {Array.from({ length: 21 }, (_, i) => <line key={i} x1={i * 96} y1="0" x2={960 + (i * 96 - 960) * 1.25} y2="1080" />)}
-        {[120, 300, 500, 720, 960].map((y) => <line key={y} x1="0" y1={y} x2="1920" y2={y} />)}
-      </g>
-      <rect x="0" y="0" width="1920" height="36" fill={SP.metal} />
-      <BasketBed x={900} y={590} s={1.4} cups={2} hand={hand} />
+    <ShopScene id="basket" trace="r2-basket" label="Close-up from above: a green shop basket full of groceries. On top: carrots, a pack of eggs and two matching cups. Nanda's hand puts the third cup in.">
+      <Shadow x={980} y={690} w={640} h={60} op={0.28} />
+      <BasketGoods x={930} y={620} s={1.25} cups={2} hand={hand} />
     </ShopScene>
   );
 }

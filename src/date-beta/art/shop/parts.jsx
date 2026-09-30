@@ -195,6 +195,19 @@ export function Hand({ x, y, rot = 0, s = 1, her = false, pose = 'flat', thumb =
   );
 }
 
+// her list inside the basket (basket-local frame, see BasketBed): the carrot bag, the egg pack, THE three cups on one
+// baseline. Also drawn alone over the traced baskets (refs 03 / 05), so the list reads the same in every shot.
+export function BasketGoods({ x = 0, y = 0, s = 1, cups = 3, hand = null }) {
+  return (
+    <g transform={`translate(${x} ${y}) scale(${s})`}>
+      <Carrot x={-10} y={-60} len={210} a={16} /><Carrot x={20} y={-96} len={220} a={12} /><Carrot x={-30} y={-24} len={200} a={22} />
+      <EggPack x={-150} y={40} w={210} />
+      {BASKET.cupsX.slice(0, cups).map((cx) => <Cup key={cx} x={cx} y={BASKET.cupsY} s={0.9} />)}
+      {hand}
+    </g>
+  );
+}
+
 // THE basket bed (one sprite for the end card, the react frame, the cups insert, the counter and the nails shot):
 // a green shop basket seen 3/4 from above with her list inside: a carrot bag, an egg pack and the three cups.
 // Local frame: (0, 0) = the centre of the basket floor; the rim is 600 wide. items = false draws it empty.
@@ -210,16 +223,7 @@ export function BasketBed({ x, y, s = 1, rot = 0, items = true, cups = 3, handle
       <polygon points={pts([[-270, -170], [270, -170], [300, 60], [-300, 60]])} fill={SP.basketLo} />
       <polygon points={pts([[-250, -120], [250, -120], [270, 40], [-270, 40]])} fill="#2a7442" />
       {[-200, -100, 0, 100, 200].map((xx) => <path key={xx} d={`M${xx} -165 L${xx * 1.1} 50`} stroke={SP.basket} strokeWidth="6" opacity=".6" />)}
-      {items && (
-        <g>
-          {/* the carrot bag (back left) */}
-          <Carrot x={-10} y={-60} len={210} a={16} /><Carrot x={20} y={-96} len={220} a={12} /><Carrot x={-30} y={-24} len={200} a={22} />
-          {/* the egg pack (front left, tipped against the side) */}
-          <EggPack x={-150} y={40} w={210} />
-          {/* the three cups on the basket floor, one baseline */}
-          {BASKET.cupsX.slice(0, cups).map((cx) => <Cup key={cx} x={cx} y={BASKET.cupsY} s={0.9} />)}
-        </g>
-      )}
+      {items && <BasketGoods cups={cups} />}
       {hand}
       {/* front wall with the lattice (occludes the bottoms of everything inside) */}
       <polygon points={pts([[-300, 60], [300, 60], [262, 250], [-262, 250]])} fill={SP.basket} stroke={SP.basketLo} strokeWidth="5" />
@@ -286,6 +290,22 @@ export function AisleVP({ vp = VP, far = 0.86 }) {
 
 // A face-on shelf bay (the game aisles): the wall, a wooden shelf unit with planks, and a floor band (y base..1080)
 // so Nanda's feet land on the floor. Floor tile lines run to VP. children = what sits on the planks.
+// the floor band alone (the game frames over a trace): Nanda's feet land on it (y ~950); tiles run to VP.
+export function FloorBand({ base = 880, lip = null }) {
+  const [vx, vy] = VP;
+  const t = (base - 1080) / (vy - 1080);
+  return (
+    <g>
+      {lip && <rect y={base - 26} width="1920" height="26" fill={lip} />}
+      <rect y={base} width="1920" height={1080 - base} fill={SP.floor} />
+      <rect y={base} width="1920" height="6" fill={SP.floorLo} />
+      {[-400, 0, 400, 800, 1200, 1600, 2000, 2400].map((x) => <line key={x} x1={x} y1="1080" x2={x + (vx - x) * t} y2={base} stroke={SP.floorLine} strokeWidth="3" />)}
+      {[960, 1010].map((y) => <line key={y} x1="0" y1={y} x2="1920" y2={y} stroke={SP.floorLine} strokeWidth="3" />)}
+      <polygon points={pts([[1180, base + 20], [1700, base + 20], [1560, 1080], [980, 1080]])} fill={SP.floorHi} opacity=".7" />
+    </g>
+  );
+}
+
 export function ShelfBay({ base = 880, planks = [300, 560], x0 = 60, x1 = 1860, top = 150, children, wall = SP.wall }) {
   const [vx, vy] = VP;
   return (
