@@ -109,7 +109,8 @@ if (typeof document !== 'undefined') document.addEventListener('fullscreenchange
 const escIsForFullscreen = () => !!document.fullscreenElement || performance.now() - fullAt < 800
   || (innerHeight >= screen.height - 1 && innerWidth >= screen.width - 1);
 
-const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat') });
+const LOVE0 = params.has('love') && Number.isFinite(Number(params.get('love'))) ? Number(params.get('love')) : null; // ?love=N (testing)
+const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0 });
 
 function Player() {
   const [pos, setPos] = useState(startPos);
