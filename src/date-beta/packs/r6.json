@@ -119,6 +119,9 @@
    "set": {
     "text": "The station is full. Everyone is going home."
    }
-  }
+  },
+  { "scene": "v2-street", "beat": 0, "set": { "bg": "street-dusk" } },
+  { "scene": "v2-street", "beat": 1, "set": { "bg": "street-dusk" } },
+  { "scene": "v2-street", "beat": 3, "set": { "bg": "street-dusk" } }
  ]
 }
