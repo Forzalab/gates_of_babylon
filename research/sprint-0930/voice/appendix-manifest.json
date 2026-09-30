@@ -1,0 +1,1164 @@
+[
+ {
+  "n": 72,
+  "scene": "park",
+  "beat": "0",
+  "file": "public/date-beta/voice/14-park/072_0.mp3",
+  "text": "I love your {CLOTHES}. You wore it for me. [whispers] I can tell."
+ },
+ {
+  "n": 73,
+  "scene": "park",
+  "beat": "0 cold",
+  "file": "public/date-beta/voice/14-park/073_0-cold.mp3",
+  "text": "[flatly] Park. Now. Hold my hand on the way."
+ },
+ {
+  "n": 74,
+  "scene": "park",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/14-park/074_0-r.mp3",
+  "text": "[giggles] I knew it. I know EVERYTHING about you."
+ },
+ {
+  "n": 75,
+  "scene": "park",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/14-park/075_0-r.mp3",
+  "text": "Clean for me. [teasing] That's the same thing, silly."
+ },
+ {
+  "n": 76,
+  "scene": "park",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/14-park/076_0-r.mp3",
+  "text": "[flatly] …Everything is about me. You'll learn."
+ },
+ {
+  "n": 77,
+  "scene": "park",
+  "beat": "1",
+  "file": "public/date-beta/voice/14-park/077_1.mp3",
+  "text": "Sakura only last a week. Then they fall. [whispers] I don't let things fall."
+ },
+ {
+  "n": 78,
+  "scene": "park",
+  "beat": "1 cold",
+  "file": "public/date-beta/voice/14-park/078_1-cold.mp3",
+  "text": "[flatly] Don't say that again. The petals are listening."
+ },
+ {
+  "n": 79,
+  "scene": "park",
+  "beat": "2",
+  "file": "public/date-beta/voice/14-park/079_2.mp3",
+  "text": "Hold my hand. The whole way. [softly] Hands get lost if you let go."
+ },
+ {
+  "n": 80,
+  "scene": "park",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/14-park/080_2-r.mp3",
+  "text": "[smiling] Tighter. [sighs happily] Now you're mine till tonight."
+ },
+ {
+  "n": 81,
+  "scene": "park",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/14-park/081_2-r.mp3",
+  "text": "One finger is a start. [whispers] I'll collect the rest."
+ },
+ {
+  "n": 82,
+  "scene": "park",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/14-park/082_2-r.mp3",
+  "text": "[flatly] Oh. …Your hand is cold anyway."
+ },
+ {
+  "n": 83,
+  "scene": "park",
+  "beat": "3",
+  "file": "public/date-beta/voice/14-park/083_3.mp3",
+  "text": "Who needs friends? I'm the only friend you need. [giggles] I'm like ten friends. In one!"
+ },
+ {
+  "n": 84,
+  "scene": "park",
+  "beat": "3 cold",
+  "file": "public/date-beta/voice/14-park/084_3-cold.mp3",
+  "text": "[flatly] I'll warm it later. I have ways."
+ },
+ {
+  "n": 85,
+  "scene": "park",
+  "beat": "4",
+  "file": "public/date-beta/voice/14-park/085_4.mp3",
+  "text": "It's {TIME}. One job today. My groceries, or my library book? You pick. [whispers] I already know."
+ },
+ {
+  "n": 86,
+  "scene": "park",
+  "beat": "4 R shop",
+  "file": "public/date-beta/voice/14-park/086_4-r-shop.mp3",
+  "text": "[excited] Groceries! For our dinner. I mean mine. …Ours."
+ },
+ {
+  "n": 87,
+  "scene": "park",
+  "beat": "4 R lib",
+  "file": "public/date-beta/voice/14-park/087_4-r-lib.mp3",
+  "text": "The book! It's late. Like you. [softly] But you came."
+ },
+ {
+  "n": 88,
+  "scene": "park",
+  "beat": "4 R−",
+  "file": "public/date-beta/voice/14-park/088_4-r.mp3",
+  "text": "[flatly] Alone? There's no alone today. Groceries. Now."
+ },
+ {
+  "n": 89,
+  "scene": "errand-shop",
+  "beat": "0 cold",
+  "file": "public/date-beta/voice/15-errand-shop/089_0-cold.mp3",
+  "text": "[flatly] Carrots first. Then you can talk."
+ },
+ {
+  "n": 90,
+  "scene": "errand-shop",
+  "beat": "1",
+  "file": "public/date-beta/voice/15-errand-shop/090_1.mp3",
+  "text": "Carrots. Rice. Two cups. No, three cups. [whispers] We'll need three."
+ },
+ {
+  "n": 91,
+  "scene": "errand-shop",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/15-errand-shop/091_1-r.mp3",
+  "text": "[smiling] You get it. [sweetly] You always get me."
+ },
+ {
+  "n": 92,
+  "scene": "errand-shop",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/15-errand-shop/092_1-r.mp3",
+  "text": "Because it's always three of us. [giggles] Silly."
+ },
+ {
+  "n": 93,
+  "scene": "errand-shop",
+  "beat": "1 R−",
+  "file": "public/date-beta/voice/15-errand-shop/093_1-r.mp3",
+  "text": "[flatly] Normal people are lonely. Do you want lonely?"
+ },
+ {
+  "n": 94,
+  "scene": "errand-shop",
+  "beat": "2",
+  "file": "public/date-beta/voice/15-errand-shop/094_2.mp3",
+  "text": "The shop lady smiled at you. [cheerfully] It's okay! She has a bad face. [whispers] Look at me."
+ },
+ {
+  "n": 95,
+  "scene": "errand-shop",
+  "beat": "2 cold",
+  "file": "public/date-beta/voice/15-errand-shop/095_2-cold.mp3",
+  "text": "[flatly] Three. Say it. Three."
+ },
+ {
+  "n": 96,
+  "scene": "errand-shop",
+  "beat": "3",
+  "file": "public/date-beta/voice/15-errand-shop/096_3.mp3",
+  "text": "You carry the bags. I carry you. In my heart. [giggles] Heavy, right?"
+ },
+ {
+  "n": 97,
+  "scene": "errand-shop",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/15-errand-shop/097_3-r.mp3",
+  "text": "[laughs softly] Ehehe. Heavy means you can't run."
+ },
+ {
+  "n": 98,
+  "scene": "errand-shop",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/15-errand-shop/098_3-r.mp3",
+  "text": "[pouty] Fine is my least favorite word."
+ },
+ {
+  "n": 99,
+  "scene": "errand-shop",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/15-errand-shop/099_3-r.mp3",
+  "text": "[flatly] …Okay. I'll carry everything. I always do."
+ },
+ {
+  "n": 100,
+  "scene": "errand-shop",
+  "beat": "4",
+  "file": "public/date-beta/voice/15-errand-shop/100_4.mp3",
+  "text": "I'm hungry. You look hungry too. Let's eat. [firmly] Now."
+ },
+ {
+  "n": 101,
+  "scene": "errand-shop",
+  "beat": "4 cold",
+  "file": "public/date-beta/voice/15-errand-shop/101_4-cold.mp3",
+  "text": "[flatly] I carry a lot. You don't even know."
+ },
+ {
+  "n": 102,
+  "scene": "errand-library",
+  "beat": "1",
+  "file": "public/date-beta/voice/16-errand-library/102_1.mp3",
+  "text": "This book is forty days late. [softly] I kept it because you touched it once."
+ },
+ {
+  "n": 103,
+  "scene": "errand-library",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/16-errand-library/103_1-r.mp3",
+  "text": "I knew you'd say that. [whispers] I wrote it down."
+ },
+ {
+  "n": 104,
+  "scene": "errand-library",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/16-errand-library/104_1-r.mp3",
+  "text": "I do. [sweetly] I remember for both of us."
+ },
+ {
+  "n": 105,
+  "scene": "errand-library",
+  "beat": "1 R−",
+  "file": "public/date-beta/voice/16-errand-library/105_1-r.mp3",
+  "text": "[flatly] Creepy is a word for people who get left."
+ },
+ {
+  "n": 106,
+  "scene": "errand-library",
+  "beat": "2",
+  "file": "public/date-beta/voice/16-errand-library/106_2.mp3",
+  "text": "The gate is down. The train is a big metal door. I hate doors. [whispers] Stand closer."
+ },
+ {
+  "n": 107,
+  "scene": "errand-library",
+  "beat": "2 cold",
+  "file": "public/date-beta/voice/16-errand-library/107_2-cold.mp3",
+  "text": "[flatly] Don't use words you can't take back."
+ },
+ {
+  "n": 108,
+  "scene": "errand-library",
+  "beat": "3",
+  "file": "public/date-beta/voice/16-errand-library/108_3.mp3",
+  "text": "Book's back. Now the library can't keep you either. [whispers] Only I can."
+ },
+ {
+  "n": 109,
+  "scene": "errand-library",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/16-errand-library/109_3-r.mp3",
+  "text": "Only me. [giggles] Say it at the station too."
+ },
+ {
+  "n": 110,
+  "scene": "errand-library",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/16-errand-library/110_3-r.mp3",
+  "text": "[happily] Mm! Yes! Food, then more me."
+ },
+ {
+  "n": 111,
+  "scene": "errand-library",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/16-errand-library/111_3-r.mp3",
+  "text": "[flatly] Everybody gets kept. It's just who does it."
+ },
+ {
+  "n": 112,
+  "scene": "errand-library",
+  "beat": "4 cold",
+  "file": "public/date-beta/voice/16-errand-library/112_4-cold.mp3",
+  "text": "[flatly] You'll see. Tonight."
+ },
+ {
+  "n": 113,
+  "scene": "hungry",
+  "beat": "0",
+  "file": "public/date-beta/voice/17-hungry/113_0.mp3",
+  "text": "I'm so hungry. Feed me. Butter chicken, or katsu curry? [teasing] Pick the right one."
+ },
+ {
+  "n": 114,
+  "scene": "hungry",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/17-hungry/114_0-r.mp3",
+  "text": "[smiling] With naan! [excited] You know me so well."
+ },
+ {
+  "n": 115,
+  "scene": "hungry",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/17-hungry/115_0-r.mp3",
+  "text": "Crunchy! You chose. [giggles] I'll pretend I did."
+ },
+ {
+  "n": 116,
+  "scene": "hungry",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/17-hungry/116_0-r.mp3",
+  "text": "[flatly] You don't eat? Then you watch me eat."
+ },
+ {
+  "n": 117,
+  "scene": "hungry",
+  "beat": "1",
+  "file": "public/date-beta/voice/17-hungry/117_1.mp3",
+  "text": "Say ahh. No, I feed you first. Then you feed me. [bossy] That's the rule."
+ },
+ {
+  "n": 118,
+  "scene": "hungry",
+  "beat": "1 (b)",
+  "file": "public/date-beta/voice/17-hungry/118_1-b.mp3",
+  "text": "Tear the naan. Give me the soft part. [whispers] Always the soft part."
+ },
+ {
+  "n": 119,
+  "scene": "hungry",
+  "beat": "1 (k)",
+  "file": "public/date-beta/voice/17-hungry/119_1-k.mp3",
+  "text": "Cut the katsu. Blow on it. [whispers] I like it when you work for me."
+ },
+ {
+  "n": 120,
+  "scene": "hungry",
+  "beat": "2",
+  "file": "public/date-beta/voice/17-hungry/120_2.mp3",
+  "text": "Mm! See? You're so good at making me happy. Keep going. [whispers] Forever."
+ },
+ {
+  "n": 121,
+  "scene": "hungry",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/17-hungry/121_2-r.mp3",
+  "text": "Anything. [giggles] I'll hold you to that."
+ },
+ {
+  "n": 122,
+  "scene": "hungry",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/17-hungry/122_2-r.mp3",
+  "text": "[softly] Nothing is just anything with me."
+ },
+ {
+  "n": 123,
+  "scene": "hungry",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/17-hungry/123_2-r.mp3",
+  "text": "[flatly] …I can. I just won't."
+ },
+ {
+  "n": 124,
+  "scene": "town",
+  "beat": "0 cold",
+  "file": "public/date-beta/voice/18-town/124_0-cold.mp3",
+  "text": "[flatly] Wipe my mouth. …Thank you. See? Easy."
+ },
+ {
+  "n": 125,
+  "scene": "town",
+  "beat": "1",
+  "file": "public/date-beta/voice/18-town/125_1.mp3",
+  "text": "So many people. Don't look at them. [whispers] They can't love you like me."
+ },
+ {
+  "n": 126,
+  "scene": "town",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/18-town/126_1-r.mp3",
+  "text": "Good. [whispers] Your eyes are mine till bedtime."
+ },
+ {
+  "n": 127,
+  "scene": "town",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/18-town/127_1-r.mp3",
+  "text": "Walk close. [softly] Crowds eat people."
+ },
+ {
+  "n": 128,
+  "scene": "town",
+  "beat": "1 R−",
+  "file": "public/date-beta/voice/18-town/128_1-r.mp3",
+  "text": "[flatly] Then get lost in one. See who finds you."
+ },
+ {
+  "n": 129,
+  "scene": "town",
+  "beat": "2",
+  "file": "public/date-beta/voice/18-town/129_2.mp3",
+  "text": "Your phone buzzed. It's just people. [sweetly] We're busy being us."
+ },
+ {
+  "n": 130,
+  "scene": "town",
+  "beat": "2 cold",
+  "file": "public/date-beta/voice/18-town/130_2-cold.mp3",
+  "text": "[flatly] Me. Only me finds you."
+ },
+ {
+  "n": 131,
+  "scene": "town",
+  "beat": "4",
+  "file": "public/date-beta/voice/18-town/131_4.mp3",
+  "text": "You're so smart. Smarter than everyone here. They don't get you. [whispers] Only I get you."
+ },
+ {
+  "n": 132,
+  "scene": "town",
+  "beat": "4 R+",
+  "file": "public/date-beta/voice/18-town/132_4-r.mp3",
+  "text": "[softly] I'm the only one who ever will."
+ },
+ {
+  "n": 133,
+  "scene": "town",
+  "beat": "4 R=",
+  "file": "public/date-beta/voice/18-town/133_4-r.mp3",
+  "text": "Don't argue with me. [giggles] It's cute, but don't."
+ },
+ {
+  "n": 134,
+  "scene": "town",
+  "beat": "4 R−",
+  "file": "public/date-beta/voice/18-town/134_4-r.mp3",
+  "text": "[flatly] Fine. You're nothing. …That's how they'd say it."
+ },
+ {
+  "n": 135,
+  "scene": "town",
+  "beat": "5",
+  "file": "public/date-beta/voice/18-town/135_5.mp3",
+  "text": "Train time. Twelve stops. I counted them this morning. [giggles] For fun."
+ },
+ {
+  "n": 136,
+  "scene": "town",
+  "beat": "5 cold",
+  "file": "public/date-beta/voice/18-town/136_5-cold.mp3",
+  "text": "[flatly] See? You need me to be nice to you."
+ },
+ {
+  "n": 137,
+  "scene": "station-talk",
+  "beat": "0",
+  "file": "public/date-beta/voice/19-station-talk/137_0.mp3",
+  "text": "Twelve stops, and you held the pole. Not me. [pouty] Next time, hold me."
+ },
+ {
+  "n": 138,
+  "scene": "station-talk",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/19-station-talk/138_0-r.mp3",
+  "text": "There is no next time. Only this time. [whispers] Again."
+ },
+ {
+  "n": 139,
+  "scene": "station-talk",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/19-station-talk/139_0-r.mp3",
+  "text": "It's always crowded. [sweetly] That's why you need me."
+ },
+ {
+  "n": 140,
+  "scene": "station-talk",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/19-station-talk/140_0-r.mp3",
+  "text": "[flatly] The pole won't miss you. I will."
+ },
+ {
+  "n": 141,
+  "scene": "station-talk",
+  "beat": "1",
+  "file": "public/date-beta/voice/19-station-talk/141_1.mp3",
+  "text": "It's raining. Good. Rain keeps people inside. [whispers] Inside is where people stay."
+ },
+ {
+  "n": 142,
+  "scene": "station-talk",
+  "beat": "1 cold",
+  "file": "public/date-beta/voice/19-station-talk/142_1-cold.mp3",
+  "text": "[flatly] Every night. At this stop. Waiting."
+ },
+ {
+  "n": 143,
+  "scene": "rain-crossing",
+  "beat": "1",
+  "file": "public/date-beta/voice/20-rain-crossing/143_1.mp3",
+  "text": "Share my umbrella. It's small. We have to be very close. [whispers] That's the point."
+ },
+ {
+  "n": 144,
+  "scene": "rain-crossing",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/20-rain-crossing/144_1-r.mp3",
+  "text": "Your shoulder's wet. It's okay. [softly] I'll dry everything."
+ },
+ {
+  "n": 145,
+  "scene": "rain-crossing",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/20-rain-crossing/145_1-r.mp3",
+  "text": "Tall and useful. [giggles] I'm keeping you."
+ },
+ {
+  "n": 146,
+  "scene": "rain-crossing",
+  "beat": "1 R−",
+  "file": "public/date-beta/voice/20-rain-crossing/146_1-r.mp3",
+  "text": "[flatly] Then get wet. Sick boys stay home. My home."
+ },
+ {
+  "n": 147,
+  "scene": "rain-crossing",
+  "beat": "2",
+  "file": "public/date-beta/voice/20-rain-crossing/147_2.mp3",
+  "text": "If you ever left, I'd be fine. I'd just stand here. In the rain. [whispers] Until you came back."
+ },
+ {
+  "n": 148,
+  "scene": "rain-crossing",
+  "beat": "2 cold",
+  "file": "public/date-beta/voice/20-rain-crossing/148_2-cold.mp3",
+  "text": "[flatly] Don't run. It's slippery. People fall."
+ },
+ {
+  "n": 149,
+  "scene": "rain-crossing",
+  "beat": "3",
+  "file": "public/date-beta/voice/20-rain-crossing/149_3.mp3",
+  "text": "Say you had fun. Say it's the best day ever. [bossy] Say it twice."
+ },
+ {
+  "n": 150,
+  "scene": "rain-crossing",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/20-rain-crossing/150_3-r.mp3",
+  "text": "Then we'll have it again. [whispers] And again."
+ },
+ {
+  "n": 151,
+  "scene": "rain-crossing",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/20-rain-crossing/151_3-r.mp3",
+  "text": "Nice. Next time, same day, [sweetly] but better."
+ },
+ {
+  "n": 152,
+  "scene": "rain-crossing",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/20-rain-crossing/152_3-r.mp3",
+  "text": "[flatly] Too long? …It hasn't even started."
+ },
+ {
+  "n": 153,
+  "scene": "rain-crossing",
+  "beat": "4 cold",
+  "file": "public/date-beta/voice/20-rain-crossing/153_4-cold.mp3",
+  "text": "[flatly] Walk me home. That's not a question."
+ },
+ {
+  "n": 154,
+  "scene": "underpass",
+  "beat": "1",
+  "file": "public/date-beta/voice/21-underpass/154_1.mp3",
+  "text": "Don't read the ads. [whispers] Read me."
+ },
+ {
+  "n": 155,
+  "scene": "walk-home",
+  "beat": "1",
+  "file": "public/date-beta/voice/22-walk-home/155_1.mp3",
+  "text": "This is my street. I walk it every day and pretend you're next to me. [whispers] Now you are."
+ },
+ {
+  "n": 156,
+  "scene": "walk-home",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/22-walk-home/156_1-r.mp3",
+  "text": "Right here. [whispers] Don't move from right here."
+ },
+ {
+  "n": 157,
+  "scene": "walk-home",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/22-walk-home/157_1-r.mp3",
+  "text": "It's nicer with you on it. [softly] Stay on it."
+ },
+ {
+  "n": 158,
+  "scene": "walk-home",
+  "beat": "1 R−",
+  "file": "public/date-beta/voice/22-walk-home/158_1-r.mp3",
+  "text": "[flatly] A lot is how much I love you. Get used to it."
+ },
+ {
+  "n": 159,
+  "scene": "walk-home",
+  "beat": "2 cold",
+  "file": "public/date-beta/voice/22-walk-home/159_2-cold.mp3",
+  "text": "[flatly] You'll get used to it. Everyone does."
+ },
+ {
+  "n": 160,
+  "scene": "walk-home",
+  "beat": "3",
+  "file": "public/date-beta/voice/22-walk-home/160_3.mp3",
+  "text": "Walk slower. If we walk slow, the day can't end. [softly] It's {DAYPART}."
+ },
+ {
+  "n": 161,
+  "scene": "walk-home",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/22-walk-home/161_3-r.mp3",
+  "text": "Slower… slower… [whispers] there. Now we're almost still."
+ },
+ {
+  "n": 162,
+  "scene": "walk-home",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/22-walk-home/162_3-r.mp3",
+  "text": "Same pace. Same day. Same you. [flatly] Good."
+ },
+ {
+  "n": 163,
+  "scene": "walk-home",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/22-walk-home/163_3-r.mp3",
+  "text": "[flatly] Home? You're walking me home. That's where you're going."
+ },
+ {
+  "n": 164,
+  "scene": "walk-home",
+  "beat": "4",
+  "file": "public/date-beta/voice/22-walk-home/164_4.mp3",
+  "text": "Everyone goes home at night. Not you. [whispers] You come home with me."
+ },
+ {
+  "n": 165,
+  "scene": "walk-home",
+  "beat": "4 cold",
+  "file": "public/date-beta/voice/22-walk-home/165_4-cold.mp3",
+  "text": "[flatly] Don't look back at the station. It's gone for you."
+ },
+ {
+  "n": 166,
+  "scene": "apartment",
+  "beat": "1",
+  "file": "public/date-beta/voice/23-apartment/166_1.mp3",
+  "text": "That's mine. [softly] I left the light on for you."
+ },
+ {
+  "n": 167,
+  "scene": "door",
+  "beat": "1",
+  "file": "public/date-beta/voice/24-door/167_1.mp3",
+  "text": "This is me. Unit twelve. [teasing] Obviously you'll remember."
+ },
+ {
+  "n": 168,
+  "scene": "door",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/24-door/168_1-r.mp3",
+  "text": "Good. [giggles] I wrote it on your hand anyway."
+ },
+ {
+  "n": 169,
+  "scene": "door",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/24-door/169_1-r.mp3",
+  "text": "It's old. It has a basement. [whispers] Lots of room."
+ },
+ {
+  "n": 170,
+  "scene": "door",
+  "beat": "1 R−",
+  "file": "public/date-beta/voice/24-door/170_1-r.mp3",
+  "text": "[flatly] Twelve. Twelve. Twelve. Say it back."
+ },
+ {
+  "n": 171,
+  "scene": "door",
+  "beat": "2",
+  "file": "public/date-beta/voice/24-door/171_2.mp3",
+  "text": "Come in? [sweetly] Just for tea."
+ },
+ {
+  "n": 172,
+  "scene": "door",
+  "beat": "2 cold",
+  "file": "public/date-beta/voice/24-door/172_2-cold.mp3",
+  "text": "[flatly] Say it. …Good."
+ },
+ {
+  "n": 173,
+  "scene": "door",
+  "beat": "3",
+  "file": "public/date-beta/voice/24-door/173_3.mp3",
+  "text": "I already boiled the water. This morning. [whispers] Just in case."
+ },
+ {
+  "n": 174,
+  "scene": "door",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/24-door/174_3-r.mp3",
+  "text": "One cup. [whispers] I'll pour it slow."
+ },
+ {
+  "n": 175,
+  "scene": "door",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/24-door/175_3-r.mp3",
+  "text": "Then home. Sure. [sweetly] Come in."
+ },
+ {
+  "n": 176,
+  "scene": "door",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/24-door/176_3-r.mp3",
+  "text": "[flatly] …Goodnight? It's only {TIME}."
+ },
+ {
+  "n": 177,
+  "scene": "genkan-talk",
+  "beat": "0",
+  "file": "public/date-beta/voice/25-genkan-talk/177_0.mp3",
+  "text": "おかえり。(okaeri) Welcome home. I mean my home. I mean our home. [giggles] Same thing."
+ },
+ {
+  "n": 178,
+  "scene": "genkan-talk",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/25-genkan-talk/178_0-r.mp3",
+  "text": "[smiling] You said it! ただいま! (tadaima) [happily] I'm keeping that."
+ },
+ {
+  "n": 179,
+  "scene": "genkan-talk",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/25-genkan-talk/179_0-r.mp3",
+  "text": "Having you. [whispers] Yes. That's the word."
+ },
+ {
+  "n": 180,
+  "scene": "genkan-talk",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/25-genkan-talk/180_0-r.mp3",
+  "text": "[flatly] Not yet."
+ },
+ {
+  "n": 181,
+  "scene": "genkan-talk",
+  "beat": "1",
+  "file": "public/date-beta/voice/25-genkan-talk/181_1.mp3",
+  "text": "Slippers on. I bought them in your size. Last year. Before we met. [cheerfully] Don't think about it."
+ },
+ {
+  "n": 182,
+  "scene": "genkan-talk",
+  "beat": "1 cold",
+  "file": "public/date-beta/voice/25-genkan-talk/182_1-cold.mp3",
+  "text": "[flatly] Shoes off. Now."
+ },
+ {
+  "n": 183,
+  "scene": "genkan-talk",
+  "beat": "2",
+  "file": "public/date-beta/voice/25-genkan-talk/183_2.mp3",
+  "text": "I made a list of things you like. Forty things. I'm number one. [giggles] I checked."
+ },
+ {
+  "n": 184,
+  "scene": "genkan-talk",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/25-genkan-talk/184_2-r.mp3",
+  "text": "I knew it. [sweetly] The list is never wrong."
+ },
+ {
+  "n": 185,
+  "scene": "genkan-talk",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/25-genkan-talk/185_2-r.mp3",
+  "text": "Tea. Number two is tea. [softly] Come drink it."
+ },
+ {
+  "n": 186,
+  "scene": "genkan-talk",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/25-genkan-talk/186_2-r.mp3",
+  "text": "[flatly] I have copies. In the basement."
+ },
+ {
+  "n": 187,
+  "scene": "genkan-talk",
+  "beat": "3",
+  "file": "public/date-beta/voice/25-genkan-talk/187_3.mp3",
+  "text": "Kitchen's this way. Don't open the other doors. [whispers] They're shy."
+ },
+ {
+  "n": 188,
+  "scene": "genkan-talk",
+  "beat": "3 cold",
+  "file": "public/date-beta/voice/25-genkan-talk/188_3-cold.mp3",
+  "text": "[flatly] Don't go near the basement."
+ },
+ {
+  "n": 189,
+  "scene": "cup",
+  "beat": "0 (u)",
+  "file": "public/date-beta/voice/26-cup/189_0-u.mp3",
+  "text": "I bought umeboshi. For no reason. [firmly] Eat."
+ },
+ {
+  "n": 190,
+  "scene": "cup",
+  "beat": "0 (t)",
+  "file": "public/date-beta/voice/26-cup/190_0-t.mp3",
+  "text": "I made tamagoyaki. For no reason. [firmly] Eat."
+ },
+ {
+  "n": 191,
+  "scene": "cup",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/26-cup/191_0-r.mp3",
+  "text": "See? [whispers] You needed me."
+ },
+ {
+  "n": 192,
+  "scene": "cup",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/26-cup/192_0-r.mp3",
+  "text": "A little now. [whispers] A lot later."
+ },
+ {
+  "n": 193,
+  "scene": "cup",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/26-cup/193_0-r.mp3",
+  "text": "[flatly] You will be. Later."
+ },
+ {
+  "n": 194,
+  "scene": "cup",
+  "beat": "1 cold",
+  "file": "public/date-beta/voice/26-cup/194_1-cold.mp3",
+  "text": "[flatly] I'll wait. I'm good at waiting."
+ },
+ {
+  "n": 195,
+  "scene": "cup",
+  "beat": "3",
+  "file": "public/date-beta/voice/26-cup/195_3.mp3",
+  "text": "For Input B. Silly. [giggles] It's always three of us."
+ },
+ {
+  "n": 196,
+  "scene": "cup",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/26-cup/196_3-r.mp3",
+  "text": "Drink. It's warm. [whispers] It makes the thinking stop."
+ },
+ {
+  "n": 197,
+  "scene": "cup",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/26-cup/197_3-r.mp3",
+  "text": "Hold it. Smell it. Then drink. [softly] I'll wait."
+ },
+ {
+  "n": 198,
+  "scene": "cup",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/26-cup/198_3-r.mp3",
+  "text": "[flatly] Sit. The tea isn't finished."
+ },
+ {
+  "n": 199,
+  "scene": "steeped",
+  "beat": "1",
+  "file": "public/date-beta/voice/27-steeped/199_1.mp3",
+  "text": "Rest. [whispers] I'll do the remembering."
+ },
+ {
+  "n": 200,
+  "scene": "steeped",
+  "beat": "2 (u)",
+  "file": "public/date-beta/voice/27-steeped/200_2-u.mp3",
+  "text": "Bitter cup, sour hour. [whispers] Every hour is ours."
+ },
+ {
+  "n": 201,
+  "scene": "steeped",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/27-steeped/201_2-t.mp3",
+  "text": "Warm cup, sweet sleep. [whispers] You're mine to keep."
+ },
+ {
+  "n": 202,
+  "scene": "steeped",
+  "beat": "3",
+  "file": "public/date-beta/voice/27-steeped/202_3.mp3",
+  "text": "[whispers] いつまでも一緒。(itsumademo issho) …Forever. [slowly] Neee?"
+ },
+ {
+  "n": 203,
+  "scene": "escape-win",
+  "beat": "1",
+  "file": "public/date-beta/voice/28-escape-win/203_1.mp3",
+  "text": "[sweetly] You took the long way."
+ },
+ {
+  "n": 204,
+  "scene": "escape-win",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/28-escape-win/204_2-t.mp3",
+  "text": "[softly] Home is warm, and sweet."
+ },
+ {
+  "n": 205,
+  "scene": "escape-win",
+  "beat": "3 (u)",
+  "file": "public/date-beta/voice/28-escape-win/205_3-u.mp3",
+  "text": "Now every hour [whispers] is ours."
+ },
+ {
+  "n": 206,
+  "scene": "escape-win",
+  "beat": "3 (t)",
+  "file": "public/date-beta/voice/28-escape-win/206_3-t.mp3",
+  "text": "Sleep now. [whispers] You're mine to keep."
+ },
+ {
+  "n": 207,
+  "scene": "escape-win",
+  "beat": "5",
+  "file": "public/date-beta/voice/28-escape-win/207_5.mp3",
+  "text": "[whispers] Mine."
+ },
+ {
+  "n": 208,
+  "scene": "escape-timeout",
+  "beat": "4 (u)",
+  "file": "public/date-beta/voice/29-escape-timeout/208_4-u.mp3",
+  "text": "すっぱいでしょ。(suppai desho) [slowly] …Neee?"
+ },
+ {
+  "n": 209,
+  "scene": "escape-timeout",
+  "beat": "4 (t)",
+  "file": "public/date-beta/voice/29-escape-timeout/209_4-t.mp3",
+  "text": "甘いでしょ。(amai desho) [slowly] …Neee?"
+ },
+ {
+  "n": 210,
+  "scene": "escape-timeout",
+  "beat": "6 (u)",
+  "file": "public/date-beta/voice/29-escape-timeout/210_6-u.mp3",
+  "text": "[whispers] …then every hour is ours."
+ },
+ {
+  "n": 211,
+  "scene": "escape-timeout",
+  "beat": "6 (t)",
+  "file": "public/date-beta/voice/29-escape-timeout/211_6-t.mp3",
+  "text": "[whispers] …then sleep. You're mine to keep."
+ },
+ {
+  "n": 212,
+  "scene": "leave",
+  "beat": "0",
+  "file": "public/date-beta/voice/30-leave/212_0.mp3",
+  "text": "[flatly] Leaving is not an option."
+ },
+ {
+  "n": 213,
+  "scene": "leave",
+  "beat": "2",
+  "file": "public/date-beta/voice/30-leave/213_2.mp3",
+  "text": "He wakes at seven."
+ },
+ {
+  "n": 214,
+  "scene": "leave",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/30-leave/214_2-r.mp3",
+  "text": "[cheerfully] Good morning! Same as yesterday. Same as always."
+ },
+ {
+  "n": 215,
+  "scene": "leave",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/30-leave/215_2-r.mp3",
+  "text": "[flatly] Nobody. Not anymore."
+ },
+ {
+  "n": 216,
+  "scene": "leave",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/30-leave/216_2-r.mp3",
+  "text": "[flatly] I was here first."
+ },
+ {
+  "n": 217,
+  "scene": "leave",
+  "beat": "3",
+  "file": "public/date-beta/voice/30-leave/217_3.mp3",
+  "text": "From now on… [whispers] can we be forever?"
+ },
+ {
+  "n": 218,
+  "scene": "leave",
+  "beat": "3 cold",
+  "file": "public/date-beta/voice/30-leave/218_3-cold.mp3",
+  "text": "[flatly] だめ。(dame) You already said forever. I heard it."
+ },
+ {
+  "n": 219,
+  "scene": "leave-fu",
+  "beat": "1",
+  "file": "public/date-beta/voice/31-leave-fu/219_1.mp3",
+  "text": "[flatly] You said leave. I heard \"lea—\"."
+ },
+ {
+  "n": 220,
+  "scene": "leave-yeah",
+  "beat": "0",
+  "file": "public/date-beta/voice/32-leave-yeah/220_0.mp3",
+  "text": "[excited] Hooray! Forever and ever!"
+ },
+ {
+  "n": 221,
+  "scene": "leave-yeah",
+  "beat": "1",
+  "file": "public/date-beta/voice/32-leave-yeah/221_1.mp3",
+  "text": "[sweetly] Good input."
+ },
+ {
+  "n": 222,
+  "scene": "leave",
+  "beat": "CROWD chant",
+  "file": "public/date-beta/voice/30-leave/222_crowd-chant.mp3",
+  "text": "[whispers] forever and ever… forever and ever and ever."
+ },
+ {
+  "n": 223,
+  "scene": "meta-park",
+  "beat": "0",
+  "file": "public/date-beta/voice/33-meta-park/223_0.mp3",
+  "text": "I love your {CLOTHES}. You wore it for me. I can tell. [giggles] Don't say no, I already decided."
+ },
+ {
+  "n": 224,
+  "scene": "meta-park",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/33-meta-park/224_0-r.mp3",
+  "text": "I knew it. I know everything about you. Even the time. [whispers] It's {TIME}."
+ },
+ {
+  "n": 225,
+  "scene": "meta-park",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/33-meta-park/225_0-r.mp3",
+  "text": "[flatly] …Everything is about me. You'll learn. You always learn, around run {RUN}."
+ },
+ {
+  "n": 226,
+  "scene": "meta-park",
+  "beat": "1",
+  "file": "public/date-beta/voice/33-meta-park/226_1.mp3",
+  "text": "Good. Now we can have the perfect date. The same perfect date. [giggles] Ehehe."
+ },
+ {
+  "n": 227,
+  "scene": "meta-crowd",
+  "beat": "0",
+  "file": "public/date-beta/voice/34-meta-crowd/227_0.mp3",
+  "text": "Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. [whispers] Yes, you. I see you."
+ },
+ {
+  "n": 228,
+  "scene": "meta-crowd",
+  "beat": "1",
+  "file": "public/date-beta/voice/34-meta-crowd/228_1.mp3",
+  "text": "Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. [giggles] Everybody in here is thinking about me. That's the vibe, right?"
+ },
+ {
+  "n": 229,
+  "scene": "meta-crowd",
+  "beat": "2",
+  "file": "public/date-beta/voice/34-meta-crowd/229_2.mp3",
+  "text": "Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. [whispers] I'm just remembering your face. For later."
+ },
+ {
+  "n": 230,
+  "scene": "meta-loop",
+  "beat": "0 r1",
+  "file": "public/date-beta/voice/35-meta-loop/230_0-r1.mp3",
+  "text": "Hey… have we stood here before? No. Silly. It's just a nice day. It's {TIME}. [whispers] Remember that."
+ },
+ {
+  "n": 231,
+  "scene": "meta-loop",
+  "beat": "0 r2",
+  "file": "public/date-beta/voice/35-meta-loop/231_0-r2.mp3",
+  "text": "Wait. Why is everything the same? Same rain. Same {TIME}. You said that exact thing last time. [whispers] I remember. Do you?"
+ },
+ {
+  "n": 232,
+  "scene": "meta-loop",
+  "beat": "0 r3",
+  "file": "public/date-beta/voice/35-meta-loop/232_0-r3.mp3",
+  "text": "Run {RUN}. Same day. You know, I know. Skip the small talk. It's {TIME} again. [flatly] Hold my hand."
+ },
+ {
+  "n": 233,
+  "scene": "meta-loop",
+  "beat": "2 r1",
+  "file": "public/date-beta/voice/35-meta-loop/233_2-r1.mp3",
+  "text": "[softly] Déjà vu is just your heart remembering me early."
+ },
+ {
+  "n": 234,
+  "scene": "meta-loop",
+  "beat": "2 r2",
+  "file": "public/date-beta/voice/35-meta-loop/234_2-r2.mp3",
+  "text": "A loop? [giggles] Ehehe. Then you can't leave. You picked me last time too. [whispers] You'll pick me again."
+ },
+ {
+  "n": 235,
+  "scene": "meta-loop",
+  "beat": "2 r3",
+  "file": "public/date-beta/voice/35-meta-loop/235_2-r3.mp3",
+  "text": "Of course it's a loop. I made it. Every ending comes back here, every {DAYPART}. [whispers] And you keep coming back. That's love."
+ },
+ {
+  "n": 236,
+  "scene": "bible-unwired",
+  "beat": "1",
+  "file": "public/date-beta/voice/36-bible-unwired/236_1.mp3",
+  "text": "[smiling] You came! You actually came. I knew you would. I counted the minutes. There were a lot."
+ },
+ {
+  "n": 237,
+  "scene": "bible-unwired",
+  "beat": "2",
+  "file": "public/date-beta/voice/36-bible-unwired/237_2.mp3",
+  "text": "[flatly] …Oh. Okay. I'll remember that. I remember everything."
+ }
+]
