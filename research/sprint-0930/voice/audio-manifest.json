@@ -292,5 +292,12 @@
   "beat": "2 (t)",
   "file": "public/date-beta/voice/11-steeped/058_2-t.mp3",
   "text": "[slow] Warm cup, sweet sleep. [whispers][perfectly even] You're mine to keep."
+ },
+ {
+  "n": 59,
+  "scene": "steeped",
+  "beat": "3",
+  "file": "public/date-beta/voice/11-steeped/059_3.mp3",
+  "text": "[whispers][warm][slow] いつまでも一緒。 [pause][perfectly even] …Forever. [slow][sing-song] Neee?"
  }
 ]
