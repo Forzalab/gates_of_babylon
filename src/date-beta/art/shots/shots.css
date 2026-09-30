@@ -1,0 +1,26 @@
+/* shots/: camera tricks. The camera is a plain transform (no transition: moves are stepped). */
+.shot { overflow: hidden; background: #1a1024; }
+.shot-cam { position: absolute; inset: 0; overflow: hidden; }
+.shot-cam-in { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+.shot-cam-in > .art, .shot-cam-in > svg { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.shot-void { position: absolute; inset: 0; background: linear-gradient(#ffd2e6, #ffe6c2); }
+.shot-blur { filter: blur(14px) brightness(.8) saturate(1.2); }
+:root[data-lowfx] .shot-blur { filter: brightness(.6); }
+.shot-vig { position: absolute; inset: 0; background: radial-gradient(ellipse at center, transparent 55%, rgba(26, 12, 40, .55) 100%); }
+.shot-grade { pointer-events: none; }
+.shot-wash { position: absolute; inset: 0; mix-blend-mode: multiply; }
+.shot-face { position: absolute; inset: 0; width: 1920px; height: 1080px; }
+.shot-bars::before, .shot-bars::after { content: ''; position: absolute; left: 0; right: 0; height: 96px; background: #0c0612; }
+.shot-bars::before { top: 0; } .shot-bars::after { bottom: 0; }
+.shot-card { fill: #fffaf2; stroke: #4a1f3a; stroke-width: 8px; }
+.shot-card-in { fill: none; stroke: #ffb6d9; stroke-width: 6px; stroke-dasharray: 18 12; }
+.shot-cap { font: 400 64px/1 'Yellowtail', cursive; fill: #b0123e; }
+.shot-jp { font: 900 44px/1 var(--jp-serif, serif); fill: #4a1f3a; }
+.shot-pov-edge { position: absolute; inset: 0; box-shadow: inset 0 0 240px 80px rgba(20, 8, 30, .7); border-radius: 50% / 40%; }
+.shot-lid { position: absolute; left: 0; right: 0; background: #0c0612; }
+.shot-lid.top { top: 0; border-radius: 0 0 50% 50% / 0 0 30% 30%; } .shot-lid.bot { bottom: 0; border-radius: 50% 50% 0 0 / 30% 30% 0 0; }
+.shot-shoulder { fill: #1c1026; }
+.shot-stamp { position: absolute; left: 96px; top: 150px; display: flex; gap: 18px; align-items: baseline; padding: 18px 34px;
+  background: rgba(12, 6, 18, .78); border-left: 8px solid #ff5fa2; color: #fffaf2; font: 700 52px/1 var(--cond, sans-serif); letter-spacing: .08em; }
+.shot-stamp i { color: #ff5fa2; font-style: normal; } .shot-stamp span { font-weight: 400; }
+.reaction.emo-hate .shot-face, .reaction.emo-crack .shot-face { filter: saturate(.7) contrast(1.1); }
