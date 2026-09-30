@@ -23,6 +23,9 @@
   --g-pink: linear-gradient(180deg, #f27fc0 0%, #e0409a 38%, #d0308a 60%, #b8287a 100%); --g-pink-edge: #9c1458;
   --g-purple: linear-gradient(180deg, #a585f5 0%, #7a4fe0 38%, #6b45d0 60%, #5b37c4 100%); --g-purple-edge: #3e2596;
   --g-dark: linear-gradient(180deg, #4a1a2e 0%, #2a0c18 40%, #1a0710 100%);
+  /* NEXT pill + HUD delta pill: the pink pill one notch darker, so white text holds 4.5:1 on its flat colour */
+  --next-body: linear-gradient(180deg, #e8559f 0%, #c42a82 42%, #a8206f 70%, #8e1860 100%);
+  --rim-light: #ff9fd0; /* Nanda's pink rim-light */
   --g-ring: 1px 0 0 var(--g-ol), -1px 0 0 var(--g-ol), 0 1px 0 var(--g-ol), 0 -1px 0 var(--g-ol),
     1px 1px 0 var(--g-ol), -1px -1px 0 var(--g-ol), 1px -1px 0 var(--g-ol), -1px 1px 0 var(--g-ol);
 }

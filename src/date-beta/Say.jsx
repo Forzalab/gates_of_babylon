@@ -15,8 +15,20 @@ export function OrSpans({ text }) {
     : <tspan key={i} dy={i && parts[i - 1].or ? -1 : 0}>{p.t}</tspan>));
 }
 
-// line = engine beat.line: { who, parts, hasOr }. No speaker = narration.
-export function Say({ line, next = true }) {
+// NEXT ▸ (HUD SPEC): the HA glossy pill, one notch darker so white text holds 4.5:1. On the chip it straddles the bottom-right
+// edge (mirror of the name tag); the goal / end cards reuse it (GOT IT, PLAY AGAIN, TRY AGAIN). Click = the same as
+// Space / Enter / -> (the player's keys skip a focused button so one press never moves twice).
+export function NextPill({ label = 'NEXT', onClick, className = '' }) {
+  return (
+    <button type="button" className={`db-next${className ? ` ${className}` : ''}`} aria-label={label === 'NEXT' ? 'Next line' : label}
+      onClick={(e) => { e.stopPropagation(); onClick?.(); }}>
+      {label}<svg viewBox="0 0 26 30" aria-hidden="true"><path d="M3 3L23 15L3 27Z" /></svg>
+    </button>
+  );
+}
+
+// line = engine beat.line: { who, parts, hasOr }. No speaker = narration. next = show NEXT (a click beat past its hold).
+export function Say({ line, next = false, onNext }) {
   const who = line.who;
   const cls = ['db-say', who ? `who-${who.toLowerCase().replace(/\s+/g, '-')}` : 'narration', line.hasOr && 'has-or'];
   return (
@@ -24,7 +36,7 @@ export function Say({ line, next = true }) {
       <span className="pins top" aria-hidden="true" /><span className="pins bot" aria-hidden="true" />
       {who && <b className="who">{who}</b>}
       <p className="line"><Parts parts={line.parts} /></p>
-      {next && <span className="next" aria-hidden="true">▸</span>}
+      {next && <NextPill onClick={onNext} />}
     </div>
   );
 }

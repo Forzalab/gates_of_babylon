@@ -1,17 +1,22 @@
 // date-beta: a thin scene player for the v5 script. Scenes live in scenes.json; engine.js sequences them.
 // Controls: click / Space / Enter / -> = next, 1 / 2 = pick a choice, Esc or S = skip scene, F = fullscreen, P = pause.
 // A choice beat with `timer` counts down (frozen while paused or the tab is hidden) and auto-picks at 0.
-// URL: ?scene=<id> starts there (&beat=<n> steps n beats in), ?still forces reduced motion (same as prefers-reduced-motion).
+// URL: ?scene=<id> starts there (&beat=<n> steps n beats in), ?still forces reduced motion (same as prefers-reduced-motion),
+// ?love=<n> starts with that score (testing the end cards), ?noblur drops the focus blur (dim + vignette stay).
+// Love HUD (Hud.jsx, SPEC research/date-beta-mockups/hud/SPEC.txt): the ribbon shows in scenes where she is present; a scored
+// pick plays a reaction frame (pos.react); the goal card sits on rooftop beat 0; an `end` beat shows the result card.
 // Secret: ~ (Shift+Backquote) or ?debug opens the branch map (Tree.jsx). While it is open the timer and auto beats freeze
 // and game keys are swallowed. Only the map ever reads its saved picks; a normal boot starts fresh.
 import { createRoot } from 'react-dom/client';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './theme.js';
 import data from './scenes.json';
-import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
+import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId,
+  reactView, present, ending, trail } from './engine.js';
 import { ART } from './art/index.js';
 import { BG_FALLBACK } from './art/fallbacks.js';
-import { Say, Choices } from './Say.jsx';
+import { Say, Choices, NextPill } from './Say.jsx';
+import { Hud, Pop, GoalCard, EndCard, HudDefs, ClickHint } from './Hud.jsx';
 import { Tree } from './Tree.jsx';
 import { Nanda, speaksNanda } from './Nanda.jsx';
 import { createSession, bootDebug } from './debug.js';
@@ -22,6 +27,10 @@ import './beta.css';
 const params = new URLSearchParams(location.search);
 const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
+const GOAL = SCENES.love.goal;
+const LOVE0 = Number.isFinite(parseInt(params.get('love'), 10)) ? parseInt(params.get('love'), 10) : null;
+// Her face on the result card: full = hearts, near = heart, low = the reveal's cracked heart.
+const END_EMOTE = { win: 'hearts', almost: 'heart', low: 'crack' };
 export const W = 1920, H = 1080;
 const DEBUG = createSession(() => localStorage, SCENES, data.flags ?? {});
 
@@ -75,10 +84,13 @@ if (typeof document !== 'undefined') document.addEventListener('fullscreenchange
 const escIsForFullscreen = () => !!document.fullscreenElement || performance.now() - fullAt < 800
   || (innerHeight >= screen.height - 1 && innerWidth >= screen.width - 1);
 
-const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat') });
+const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0 });
+// The real first screen (the Figur collapse lands here), not a ?scene= deep link: the big "Click anywhere" hint shows on it.
+const ONBOARD = !params.get('scene');
 
 function Player() {
   const [pos, setPos] = useState(startPos);
+  const [boot] = useState(pos); // until the first move the big onboarding hint shows (ONBOARD only)
   const [full, setFull] = useState(false);
   const [paused, setPaused] = useState(false);
   const [left, setLeft] = useState(null); // timer seconds left on this beat, null = no timer
@@ -88,15 +100,22 @@ function Player() {
   const frozen = paused || tree;
   const since = useRef(0);
   const k = useFit();
-  const scene = SCENES[pos.s];
-  // The beat as this run sees it: `vary` overlays (bento echo) applied. Memoized on pos so effects don't re-fire.
-  const beat = useMemo(() => beatView(beatAt(SCENES, pos), pos.flags), [pos]);
+  const posRef = useRef(pos);
+  posRef.current = pos;
+  // The beat as this run sees it: `vary` overlays (bento echo) applied; on a reaction frame, the pick's beat with her
+  // reply (engine reactView). Memoized on pos so effects don't re-fire.
+  const beat = useMemo(() => (pos.react ? reactView(SCENES, pos) : beatView(beatAt(SCENES, pos), pos.flags)), [pos]);
+  const scene = SCENES[pos.react ? pos.react.s : pos.s];
+  const [ready, setReady] = useState(false); // the beat's hold has passed: NEXT / card buttons cut in
 
   useEffect(() => {
     since.current = performance.now();
     cue(beat.sfx);
-    document.documentElement.dataset.beat = `${beat.scene}:${beat.index}`;
+    document.documentElement.dataset.beat = `${beat.scene}:${beat.index}${pos.react ? ':react' : ''}`;
     setLeft(beat.timer && !pos.done ? beat.timer : null);
+    setReady(false);
+    const t = setTimeout(() => setReady(true), beat.hold);
+    return () => clearTimeout(t);
   }, [pos, beat]);
   // Auto beats wait while the map is open (the full wait restarts when it closes).
   useEffect(() => {
@@ -142,6 +161,7 @@ function Player() {
       if (treeRef.current) return; // the map owns the keyboard (its own handler does Esc + Tab)
       if (e.repeat) return;
       if (e.key === 'Escape' && escIsForFullscreen()) return; // Esc leaving fullscreen is not a skip (demo: no chain-skip)
+      if ((e.key === ' ' || e.key === 'Enter') && e.target?.closest?.('button')) return; // a focused button (NEXT) clicks itself
       if (e.key === 'Escape' || e.key === 's' || e.key === 'S') { e.preventDefault(); skipScene(); }
       else if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') { e.preventDefault(); advance(true); }
       else if (e.key === 'f' || e.key === 'F') toggleFull();
@@ -167,24 +187,45 @@ function Player() {
   const closeTree = useCallback(() => setTree(false), []);
   const jump = useCallback((edge, choices) => {
     ASSETS.unlock();
-    const { warn, ...p } = jumpTo(SCENES, edge, choices, RM);
+    const { warn, ...p } = jumpTo(SCENES, edge, choices, RM, posRef.current.love);
     if (warn) console.warn(`date-beta debug: ${warn}`);
     setPaused(false);
     setPos(p);
     setTree(false);
   }, []);
+  // What is on screen. here = she is present (the ribbon + her sprite); pop = a reaction, or a pick made while she was away
+  // that waits for her; end = the result card on an ending's title beat; card = the goal card.
+  const live = !pos.done;
+  const here = live && present(scene, beat);
+  const end = live ? ending(SCENES, pos) : null;
+  const pop = live ? (pos.react ?? (here && pos.pending ? pos.pending : null)) : null;
+  const card = live && beat.card === 'goal';
+  const say = live && !!beat.text && !end;
+  const emote = end ? END_EMOTE[end.tier] : pop ? pop.emote : card ? 'heart' : null;
+  // Focus: the art steps back whenever a chip, pop, card or overlay is up (scare-scaled; cards and overlays = "modal").
+  const focus = end || card || paused || tree ? 'modal' : say || pop || (live && beat.choices) ? String(beat.scare ?? 0) : undefined;
   return (
-    <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
+    <div className={`viewport${RM ? ' rm' : ''}${params.has('noblur') ? ' no-blur' : ''}`} onClick={() => advance(false)}>
       <div className="stage" style={{ transform: `translate(-50%, -50%) scale(${k})` }} data-scene={scene.id} data-scare={beat.scare}>
-        <div key={scene.id} className={`scene enter-${scene.enter}`}>
-          {!pos.done && layer(beat.bg, 'db-bg')}
-          {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
+        <HudDefs />
+        <div key={scene.id} className={`scene enter-${scene.enter}`} data-focus={focus}>
+          {live && layer(beat.bg, 'db-bg')}
+          {live && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
-        {!pos.done && speaksNanda(beat.line) && <Nanda scare={beat.scare} raised={!!beat.choices} />}
-        {beat.text && !pos.done && <Say line={beat.line} next={waiting} key={`${beat.scene}${beat.index}`} />}
-        {beat.choices && !pos.done && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} key={`c${beat.scene}${beat.index}`} />}
+        <div className="db-vignette" data-focus={focus} aria-hidden="true" />
+        {end && <div className="hud-scrim" aria-hidden="true" />}
+        {live && (here || speaksNanda(beat.line)) && (
+          <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={emote} big={!!(end || pop)} talk={!!emote || speaksNanda(beat.line)} />
+        )}
+        {say && <Say line={beat.line} next={waiting && ready && !card} onNext={() => advance(true)} key={`${beat.scene}${beat.index}${pos.react ? 'r' : ''}`} />}
+        {beat.choices && live && !end && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} key={`c${beat.scene}${beat.index}`} />}
+        {here && <Hud love={pos.love} goal={GOAL} react={pop} trail={trail(SCENES, pos)} ring={card} />}
+        {here && pop && <Pop react={pop} goal={GOAL} key={`p${beat.scene}${beat.index}`} />}
+        {card && <GoalCard ready={ready} onNext={() => advance(true)} />}
+        {end && <EndCard end={end} ready={ready} onAgain={() => pick(0)} />}
         {paused && <div className="db-paused" role="status">paused (P)</div>}
-        {waiting && !beat.text && <div className="nexthint" aria-hidden="true">click ▸</div>}
+        {waiting && !say && !card && ready && <NextPill className="solo" onClick={() => advance(true)} />}
+        {waiting && !paused && <ClickHint big={ONBOARD && pos === boot} key={ONBOARD && pos === boot ? 'big' : 'small'} />}
       </div>
       <div className="chrome">
         {/* The way back to Logic mode. The only way in is the Figur wordmark there (src/collapse.js). */}

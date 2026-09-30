@@ -40,14 +40,12 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-say .line { margin: 0; font: 400 52px/1.32 var(--cond); letter-spacing: .005em; overflow-wrap: anywhere; }
 .db-say.narration { padding-top: 46px; }
 .db-say.narration .line { font-style: italic; color: #5a2a50; }
-.db-say .next { position: absolute; right: 34px; bottom: 18px; font: 400 30px/1 var(--cond); color: var(--rim); }
 @keyframes say-in { from { opacity: 0; } to { opacity: 1; } }
 /* a line with a marked {OR}: hard-cut to the scrim box (no fade exists, so RM is the same) */
 .db-say.has-or { animation: none; background: var(--scrim); color: var(--scrim-ink); border-color: var(--her);
   box-shadow: inset 0 0 0 3px #3a0d1c, 0 10px 0 var(--edge); }
 .db-say.has-or .line, .db-say.has-or.narration .line { color: var(--scrim-ink); }
 .db-say.has-or .db-or { color: var(--or-on-dark); }
-.db-say.has-or .next { color: var(--or-on-dark); }
 .db-say.has-or .pins { background: repeating-linear-gradient(90deg, var(--scrim) 0 4px, #c890a8 4px 22px, var(--scrim) 22px 26px, transparent 26px 96px); }
 
 /* ---------- scare (dread) per beat: 0 sweet, 1 uneasy, 2 hers. The OR box gets heavier with it. ---------- */
@@ -89,8 +87,21 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-choice:active { transform: translateY(8px); filter: brightness(.9); }
 [data-scare="2"] .db-choice { outline: 4px solid var(--scrim); }
 
-.nexthint { position: absolute; right: 44px; bottom: 18px; font: 700 26px/1 var(--cond); letter-spacing: .1em;
-  color: rgba(255, 255, 255, .55); text-shadow: 0 1px 2px #000; pointer-events: none; }
+/* ---------- NEXT ▸ (HUD SPEC): the HA glossy pill straddling the chip's bottom-right edge (mirror of the name tag).
+   One notch darker pink than the choice pills so white text holds 4.5:1 on the flat colour. Shown on click beats once
+   the hold has passed (a hard cut in); hidden on choice and auto beats. On a beat with no chip it sits bottom-right. */
+.db-next { position: absolute; right: 44px; bottom: -40px; z-index: 4; display: inline-flex; align-items: center; gap: 14px;
+  padding: 12px 30px 14px 38px; border: 0; border-radius: 999px; color: #fff; background-color: #a8206f; background-image: var(--next-body);
+  font: 900 38px/1 var(--btn); letter-spacing: .04em; text-shadow: var(--g-ring); pointer-events: auto; cursor: pointer;
+  box-shadow: inset 0 0 0 3px var(--g-pink-edge), inset 0 -5px 0 rgba(90, 8, 50, .3), 0 0 0 7px var(--g-rim), 0 0 0 9px var(--g-rim-edge),
+    0 10px 0 2px var(--g-rim-edge); }
+.db-next svg { width: 26px; height: 30px; overflow: visible; }
+.db-next svg path { fill: #fff; stroke: var(--g-ol); stroke-width: 2.4; stroke-linejoin: round; paint-order: stroke; }
+.db-next:hover, .db-next:focus-visible { outline: 6px solid var(--edge); outline-offset: 10px; }
+.db-next:active { transform: translateY(6px); filter: brightness(.9); }
+.has-or .db-next { background-color: #3a0d1c; background-image: var(--g-dark); color: var(--scrim-ink);
+  box-shadow: inset 0 0 0 4px var(--her), 0 0 0 7px var(--g-rim), 0 0 0 9px var(--g-rim-edge), 0 10px 0 2px var(--g-rim-edge); }
+.db-next.solo { right: 56px; bottom: 56px; z-index: 6; }
 
 /* ---------- chrome (outside the stage, never scaled) ---------- */
 .chrome { position: fixed; top: 10px; right: 10px; display: flex; gap: 8px; z-index: 10; }
@@ -147,9 +158,30 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-ask-opts { width: 100%; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 56px; padding: 12px 20px 22px; }
 .db-ask .db-remember { color: var(--box-ink); }
 
-/* ---------- Nanda V1b sprite (Nanda.jsx): above the dialogue chip on the right, behind it, over the bg ---------- */
+/* ---------- Nanda V1b sprite (Nanda.jsx): above the dialogue chip on the right, behind it, over the bg.
+   A pink rim-light (a 3 px drop-shadow outline, Tony 9/29) keeps her on top of the stepped-back art. ---------- */
 .db-nanda { position: absolute; right: 60px; bottom: 160px; width: 460px; height: 496px; overflow: visible; pointer-events: none;
-  filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)); animation: nanda-in 320ms ease-out both; }
+  filter: drop-shadow(3px 0 0 var(--rim-light)) drop-shadow(-3px 0 0 var(--rim-light)) drop-shadow(0 -3px 0 var(--rim-light))
+    drop-shadow(0 12px 0 rgba(58, 10, 38, .22));
+  animation: nanda-in 320ms ease-out both; }
 /* feet on the floor; lifted above the raised box only on choice beats */
 .db-nanda.raised { bottom: 470px; }
 @keyframes nanda-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+
+/* ---------- focus (Tony 9/29): while a dialogue chip, pop, card or overlay is up, the scene art (only the art: not Nanda,
+   not the HUD, not the chip) steps back: blur + dim + a vignette, heavier with dread. Art-only beats stay sharp so signs
+   and gags can be read there. Cards / pause / the map use the scare-2 dim without the red tint. The change steps in
+   2 x 334 ms (no pulse); .rm = a hard cut, so it changes only when a box or card appears or goes.
+   .no-blur (?noblur) keeps dim + vignette only, the fallback if blur costs frames on the demo machine. */
+.scene { transition: filter 668ms steps(2, end); }
+.scene[data-focus] { filter: blur(var(--fb)) brightness(var(--fd)); }
+.scene[data-focus="0"] { --fb: 3px; --fd: .85; }
+.scene[data-focus="1"] { --fb: 4.5px; --fd: .75; }
+.scene[data-focus="2"], .scene[data-focus="modal"] { --fb: 6px; --fd: .65; }
+.no-blur .scene[data-focus] { filter: brightness(var(--fd)); }
+.db-vignette { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 668ms steps(2, end);
+  background: radial-gradient(ellipse 72% 68% at 50% 46%, rgba(26, 7, 16, 0) 58%, rgba(26, 7, 16, .45) 100%); }
+.db-vignette[data-focus] { opacity: 1; }
+.db-vignette[data-focus="1"] { background: radial-gradient(ellipse 70% 66% at 50% 46%, rgba(26, 7, 16, 0) 54%, rgba(26, 7, 16, .55) 100%); }
+.db-vignette[data-focus="2"] { background: radial-gradient(ellipse 68% 64% at 50% 46%, rgba(110, 8, 30, 0) 48%, rgba(110, 8, 30, .62) 100%); }
+.db-vignette[data-focus="modal"] { background: radial-gradient(ellipse 68% 64% at 50% 46%, rgba(26, 7, 16, 0) 48%, rgba(26, 7, 16, .62) 100%); }

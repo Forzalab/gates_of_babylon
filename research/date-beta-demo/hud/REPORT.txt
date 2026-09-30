@@ -1,0 +1,17 @@
+goal-card: beat rooftop:0, focus modal, next true, clear
+bar-midgame: beat cup:2, focus 1, next true, clear
+react-plus3: beat rooftop:1:react, focus 0, next true, clear
+react-minus2: beat cup:3:react, focus 2, next true, clear
+next-button: beat door:2, focus 0, next true, clear
+win-splash: beat steeped:4, focus modal, next true, clear
+almost-ending: beat escape-timeout:7, focus modal, next true, clear
+low-ending: beat leave-fu:4, focus modal, next true, clear
+rm-react-minus2: beat cup:3:react, focus 2, next true, clear
+focus-scare0: beat rooftop:2, focus 0, next true, clear
+focus-scare2: beat steeped:1, focus 2, next true, clear
+onboarding-first: beat rooftop:0, focus modal, next true, clear
+onboarding-later: beat rooftop:1:react, focus 0, next true, clear
+frames scene=rooftop&beat=2 (blur): avg 16.7 ms, p95 16.7 ms
+frames scene=rooftop&beat=2&noblur: avg 16.7 ms, p95 16.7 ms
+frames scene=platform&beat=0 (blur): avg 16.7 ms, p95 16.7 ms
+frames scene=platform&beat=0&noblur: avg 16.7 ms, p95 16.7 ms
