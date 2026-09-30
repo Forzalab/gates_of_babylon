@@ -14,7 +14,7 @@ const INDEX = readFileSync(new URL('./date-beta/art/interiors/index.js', import.
 const IDS = [...INDEX.slice(INDEX.indexOf('export const INTERIORS')).matchAll(/'?([\w-]+)'?: [A-Z]\w*/g)].map((m) => m[1]);
 
 test('interiors: index exports art ids, each component file exists, art/index.js spreads the map', () => {
-  for (const id of ['cellar', 'park', 'apartment-trace', 'sitting-room', 'bedroom']) assert.ok(IDS.includes(id), `${id} registered`);
+  for (const id of ['cellar', 'park', 'apartment-trace', 'sitting-room', 'bedroom', 'genkan-in', 'genkan-v2']) assert.ok(IDS.includes(id), `${id} registered`);
   for (const m of INDEX.matchAll(/import \w+ from '\.\/([\w.]+)'/g)) assert.ok(existsSync(new URL(`./date-beta/art/interiors/${m[1]}`, import.meta.url)), m[1]);
   assert.match(readFileSync(new URL('./date-beta/art/index.js', import.meta.url), 'utf8'), /\.\.\.INTERIORS \}/);
 });

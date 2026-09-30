@@ -1,0 +1,7 @@
+/* genkan v2 (GenkanV2.jsx, ported from alt's alt.css @ cb1ed9a; class .genkan -> .genkan2 so the BG-D3 fallback
+   Genkan.jsx (svg.art.genkan) is untouched). The insert = a smooth camera crop onto the slippers + shrine;
+   reduced motion: .rm kills the transition (hard cut). */
+.genkan2 > svg { width: 100%; height: 100%; display: block; }
+.genkan2.cam { transform-origin: 1202px 731px; transition: transform 1400ms cubic-bezier(.45, 0, .2, 1); }
+.genkan2.cam.insert { transform: scale(3.6); }
+.rm .genkan2.cam { transition: none; }

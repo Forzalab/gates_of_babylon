@@ -16,6 +16,8 @@ const SHOTS = {
   'sitting-room-nanda': { bg: 'sitting-room', nanda: 1, props: { plate: 'tamagoyaki' }, line: 'NANDA: For Input B. Silly. It\'s always three of us.' },
   'bedroom': { bg: 'bedroom' },
   'bedroom-nanda': { bg: 'bedroom', nanda: 1, line: 'NANDA: Rest. I\'ll do the remembering.' },
+  'genkan-v2': { bg: 'genkan-v2' },
+  'genkan-v2-insert': { bg: 'genkan-v2', props: { insert: true }, line: 'Men\'s slippers. Already set out.' },
   'park': { bg: 'park' },
   'park-nanda': { bg: 'park', nanda: 1, line: 'NANDA: Sakura only last a week. Then they fall. I don\'t let things fall.' },
 };
