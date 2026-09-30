@@ -26,5 +26,12 @@
   "beat": "2 (t)",
   "file": "public/date-beta/voice/01-rooftop/006_2-t.mp3",
   "text": "[happy][bubbly] Sweet. Like me. [perfectly even][smiling] Good input."
+ },
+ {
+  "n": 8,
+  "scene": "rooftop",
+  "beat": "3 (t)",
+  "file": "public/date-beta/voice/01-rooftop/008_3-t.mp3",
+  "text": "[sing-song] Sweet, ne? [proud][slow] I rolled it. Myself."
  }
 ]
