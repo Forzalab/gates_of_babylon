@@ -19,5 +19,12 @@
   "beat": "1 R−",
   "file": "public/date-beta/voice/01-rooftop/004_1-r.mp3",
   "text": "[sudden flat][quiet] …I woke up at four [sweet] for this."
+ },
+ {
+  "n": 6,
+  "scene": "rooftop",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/01-rooftop/006_2-t.mp3",
+  "text": "[happy][bubbly] Sweet. Like me. [perfectly even][smiling] Good input."
  }
 ]
