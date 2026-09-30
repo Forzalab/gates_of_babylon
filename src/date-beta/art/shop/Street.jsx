@@ -39,7 +39,7 @@ export function Cart({ items = false, hands = true, her = true, handle = true, a
 // on the shared VP (960, 330); the cart, basket, handle and hands stay hand-drawn on that same VP.
 export function ShopCart() {
   return (
-    <ShopScene id="cart" trace="r2-cart"
+    <ShopScene id="cart" trace="cel-cart" tint="#fff1dc"
       label="Your view down a bright supermarket aisle over a shopping cart with a green basket in it. Your two hands hold the red handle. Nanda's hand, with pink nails, lies on top of your right hand.">
       <Cart aisle={false} />
     </ShopScene>
@@ -50,7 +50,7 @@ export function ShopCart() {
 // and her list on top of it (the shared BasketGoods: carrot bag, egg pack, three cups), right of the end card.
 export function ShopCartFull() {
   return (
-    <ShopScene id="cart-full" trace="r2-basket-full"
+    <ShopScene id="cart-full" trace="cel-basket-full" tint="#fff0e0"
       label="Looking down into a shopping basket packed with groceries. On top: a bag of carrots, a pack of eggs and three matching cups.">
       <Shadow x={960} y={800} w={640} h={60} op={0.3} />
       <BasketGoods x={920} y={720} s={1.3} />
@@ -80,11 +80,11 @@ export function ShopList() {
     </g>
   );
   return (
-    <ShopScene id="list" trace={null} over={over}
+    <ShopScene id="list" trace="cel-cart" blur={10} tint="#fff1dc" over={over}
       label="Close-up of Nanda's handwritten shopping list on a little clipboard hooked to the cart handle: 1 carrots, 2 eggs, 3 three cups, 4 you, with a heart.">
       <defs><filter id="shop-list-soft" x="0" y="0" width="1" height="1"><feGaussianBlur stdDeviation="9" /></filter></defs>
       <g filter="url(#shop-list-soft)" transform="translate(-480 -540) scale(1.5)">
-        <Cart hands={false} handle={false} />
+        <Cart hands={false} handle={false} aisle={false} />
       </g>
       <rect width="1920" height="1080" fill={SP.shade} opacity=".12" />
       <rect x="0" y="150" width="1920" height="44" fill={SP.red} stroke={SP.redLo} strokeWidth="4" />

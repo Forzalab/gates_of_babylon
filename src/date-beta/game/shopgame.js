@@ -1,4 +1,5 @@
 // HER LIST (the v2-shop mini-game, brain _drift 2026-09-30T0200 alt spec): pure rules, no DOM, so node --test drives it.
+// Cards + aisle chips speak JP shop POP (jp = the big selling term, label = the small English subtitle).
 // 3 aisles reached by hard cut. Each: her list item, a shelf of 3-4 items (keys 1-4), a stepped "She is waiting" timer.
 // A wrong pick (or the timer running out) raises her mood level for the rest of the game: 1 pout, 2 OCPD shelf
 // straighten, 3+ BPD split. The run ends in one score bucket = the index of the game beat's choice (its love value).
@@ -6,27 +7,27 @@ export const SECS = 12; // per aisle; 3 x 12 s + the holds stays under the 45 s 
 export const HOLD = { right: 1500, wrong: 1400, split: 900 }; // ms, every frame >= 334 ms (stepped, no motion)
 
 export const ROUNDS = [
-  { id: 'produce', aisle: 'AISLE 1 · VEGETABLES', want: 'carrots', bg: 'shop-aisle-produce', close: 'shop-carrots',
+  { id: 'produce', aisle: '野菜売り場 · 本日のおすすめ', want: 'carrots', bg: 'shop-aisle-produce', close: 'shop-carrots',
     items: [
-      { id: 'carrots', label: 'Carrots', ok: true },
-      { id: 'daikon', label: 'White radish' },
-      { id: 'potato', label: 'Sweet potato' },
-      { id: 'jar', label: 'KEMEY jar', aside: 'Why is her name on a jar? Put it back.' },
+      { id: 'carrots', jp: 'にんじん 1袋', label: 'Carrots', ok: true },
+      { id: 'daikon', jp: '大根 1本', label: 'White radish' },
+      { id: 'potato', jp: 'さつまいも', label: 'Sweet potato' },
+      { id: 'jar', jp: 'KEMEYジャム', label: 'KEMEY jar', aside: 'Why is her name on a jar? Put it back.' },
     ],
     right: 'Carrots! You read my list. ♡' },
-  { id: 'eggs', aisle: 'AISLE 2 · EGGS + MILK', want: 'eggs', bg: 'shop-aisle-eggs', close: 'shop-eggs-rack',
+  { id: 'eggs', aisle: 'たまご・乳製品 · 特売', want: 'eggs', bg: 'shop-aisle-eggs', close: 'shop-eggs-rack',
     items: [
-      { id: 'milk', label: 'Milk' },
-      { id: 'eggs', label: 'Eggs', ok: true },
-      { id: 'natto', label: 'Natto beans' },
+      { id: 'milk', jp: '牛乳 1L', label: 'Milk' },
+      { id: 'eggs', jp: 'たまご 10個入', label: 'Eggs', ok: true },
+      { id: 'natto', jp: '納豆 3パック', label: 'Natto beans' },
     ],
     right: 'Eggs. For your lunch tomorrow. ♡',
     rightRolls: 'Eggs. For the egg rolls. You remember. ♡' },
-  { id: 'cups', aisle: 'AISLE 3 · CUPS', want: 'three cups', bg: 'shop-aisle-cups', close: 'shop-cups-front',
+  { id: 'cups', aisle: '食器売り場 · 湯のみ', want: 'three cups', bg: 'shop-aisle-cups', close: 'shop-cups-front',
     items: [
-      { id: 'one', label: 'One cup' },
-      { id: 'pair', label: 'Two cups', aside: 'Two? Then who is the third cup for?' },
-      { id: 'three', label: 'Three cups', ok: true },
+      { id: 'one', jp: '単品', label: 'One cup' },
+      { id: 'pair', jp: 'ペア', label: 'Two cups', aside: 'Two? Then who is the third cup for?' },
+      { id: 'three', jp: '3客セット', label: 'Three cups', ok: true },
     ],
     right: 'Three cups. One for you. Two for me. ♡' },
 ];
