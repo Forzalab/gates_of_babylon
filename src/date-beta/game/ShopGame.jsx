@@ -1,5 +1,5 @@
 // ShopGame "HER LIST": the v2-shop mini-game (groceries route only; packs/shop.json puts it after v2-shop's cart POV).
-// You push the cart (POV: the red handle at the bottom edge). 3 aisles, one hard cut each: her list item at the top, a
+// 3 aisles, one hard cut each: her list item at the top, a
 // shelf of 3-4 items (click, or keys 1-4), a stepped "She is waiting" timer. Right = the close-up + her happy line.
 // Wrong (or the timer) = her mood climbs for the rest of the game: pout -> OCPD (she straightens the shelf) -> BPD
 // split (flat, then sweet). No end card: after the last reaction, onPick(bucket): the beat's choice
@@ -150,14 +150,14 @@ export default function ShopGame({ props = {}, onPick }) {
       <div className="sg-shelf-row" role="group" aria-label="The shelf. Pick one.">
         {round.items.map((it, i) => (
           <button key={it.id} type="button" className="sg-item" data-item={it.id} onClick={(e) => { e.stopPropagation(); choose(i); }}
-            aria-label={`${i + 1}: ${it.label}`}>
+            aria-label={`${i + 1}: ${it.jp ? `${it.jp}, ` : ''}${it.label}`}>
             <span className="sg-key">{i + 1}</span>
             <Icon id={it.id} />
-            <span className="sg-label">{it.label}</span>
+            <span className="sg-label" lang="ja">{it.jp ?? it.label}</span>
+            {it.jp && <span className="sg-sub">{it.label}</span>}
           </button>
         ))}
       </div>
-      <div className="sg-handle" aria-hidden="true"><i /><i /><b /><b /></div>
       {st.wrongs > 0 && <Her emote={st.wrongs === 1 ? 'pout' : null} layers={moodOf(st.wrongs).layers} scare={Math.min(2, st.wrongs - 1)} />}
     </div>
   );

@@ -55,26 +55,42 @@ export function ShopWash({ id }) {
   );
 }
 
-export function ShopScene({ id, trace = id, label, cam, over, children }) {
+// MULTIPLANE (brain _drift 2026-09-30T0515 cel-over-vtrace; research/sprint-0930/shop/CEL-LOG.md):
+//   far   = a PURE vtrace of one of Tony's refs (public/date-beta/trace/shop/cel-<id>.svg; research/sprint-0930/shop/cel)
+//   mid + character = flat SVG cels (children): props, signs, hands, the cashier. They get the scene TINT (a multiply
+//           grade in the colour of the traced light) so they sit in the bg's light; their shadows lean by `Shadow dx`.
+//   BOOK  = a foreground cel (book) over everything, after the wash (a cart edge, a shelf end, a door frame).
+//   Nanda is the player's DOM sprite above the whole scene, so a BOOK is kept clear of her slot.
+export function ShopScene({ id, trace = id, label, cam, over, book, tint = '#fff4e4', blur = 0, children }) {
   if (trace) preloadTrace(`shop/${trace}`);
   const sid = `shop-${id}`;
+  const f = `r3-${sid}-tint`;
   return (
     <div className={`art r3 r3-${sid}`}>
       <svg viewBox="0 0 1920 1080" role="img" aria-label={label}>
+        <defs>
+          <filter id={f} x="-200" y="-200" width="2320" height="1480" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+            <feFlood floodColor={tint} result="t" />
+            <feComposite in="t" in2="SourceGraphic" operator="in" result="m" />
+            <feBlend in="m" in2="SourceGraphic" mode="multiply" />
+          </filter>
+          {blur > 0 && <filter id={`${f}-far`}><feGaussianBlur stdDeviation={blur} /></filter>}
+        </defs>
         <g transform={cam}>
-          {trace && <image href={traceUrl(`shop/${trace}`)} width="1920" height="1080" preserveAspectRatio="none" />}
-          {children}
+          {trace && <image href={traceUrl(`shop/${trace}`)} width="1920" height="1080" preserveAspectRatio="none" filter={blur > 0 ? `url(#${f}-far)` : undefined} />}
+          <g filter={`url(#${f})`}>{children}</g>
         </g>
         <ShopWash id={`r3-${sid}`} />
-        {over}
+        {(over || book) && <g filter={`url(#${f})`}>{over}{book}</g>}
       </svg>
     </div>
   );
 }
 
 // a contact shadow under something standing at (x, y): offset down-left, away from the upper-right sun
-export const Shadow = ({ x, y, w, h = w * 0.16, op = 0.28 }) => (
-  <ellipse cx={x + w * LIGHT.dx * 0.5} cy={y + h * 0.25} rx={w / 2} ry={h / 2} fill={SP.shade} opacity={op} />
+// dx = the per-scene lean: LIGHT.dx (down-left) for the sunny shots, ~0 under overhead shop lights (CEL-LOG.md)
+export const Shadow = ({ x, y, w, h = w * 0.16, op = 0.28, dx = LIGHT.dx }) => (
+  <ellipse cx={x + w * dx * 0.5} cy={y + h * 0.25} rx={w / 2} ry={h / 2} fill={SP.shade} opacity={op} />
 );
 
 // A flat sign card: a board with 1..n centred lines. lines = [[text, size, fill?, cls?], ...]

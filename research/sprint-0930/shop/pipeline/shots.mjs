@@ -6,7 +6,7 @@ import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 
 const [base = 'http://localhost:5321', out = 'research/sprint-0930/shop/shots', mode = ''] = process.argv.slice(2);
 mkdirSync(out, { recursive: true });
-const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--no-sandbox'] });
+const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
 const ctx = await b.newContext({ viewport: { width: 1920, height: 1080 }, reducedMotion: mode === 'rm' ? 'reduce' : 'no-preference' });
 const p = await ctx.newPage();
 const errs = [];
