@@ -20,6 +20,8 @@ import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { Nanda, speaksNanda } from './Nanda.jsx';
 import { Fx } from './Fx.jsx';
+import { setCrowd, bumpRun, runBucket } from './meta.js';
+import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
@@ -30,12 +32,13 @@ import './fx.css';
 const params = new URLSearchParams(location.search);
 const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
 // ?pack=a,b previews src/date-beta/packs/<name>.json on top of scenes.json (validation stays on).
-const PACK_FILES = import.meta.glob('./packs/*.json', { eager: true, import: 'default' });
+const PACK_FILES = import.meta.glob(['./packs/*.json', '!./packs/crowd.json'], { eager: true, import: 'default' });
 const packOf = (n) => {
   const p = PACK_FILES[`./packs/${n}.json`];
   if (!p) throw new Error(`date-beta: no pack "${n}"`);
   return { name: n, ...p };
 };
+setCrowd(crowd);
 const data = applyPacks(baseData, (params.get('pack') ?? '').split(',').filter(Boolean).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -121,12 +124,15 @@ function Player() {
   const scene = SCENES[pos.react ? pos.react.s : pos.s];
   // The beat as this run sees it: the reaction frame, else the beat with `vary` overlays (bento echo) applied.
   // Memoized on pos so effects don't re-fire.
-  const beat = useMemo(() => reactView(SCENES, pos) ?? beatView(beatAt(SCENES, pos), pos.flags), [pos]);
+  const beat = useMemo(() => reactView(SCENES, pos) ?? beatView(beatAt(SCENES, pos), { ...pos.flags, run: runBucket() }), [pos]);
   const here = !pos.done && present(scene, beat);
   const pop = pos.react ?? (here && pos.pending ? pos.pending : null);
   const end = ending(SCENES, pos);
   const card = !pos.done && beat.card === 'goal';
 
+  // Meta loop (meta.js): each arrival at the first scene (boot or a loop back) is a new run; `run` feeds vary/if.
+  const atFirst = !pos.done && pos.s === 0;
+  useEffect(() => { if (atFirst) bumpRun(); }, [atFirst]);
   useEffect(() => {
     since.current = performance.now();
     cue(beat.sfx);
