@@ -43,7 +43,7 @@
         { "props": { "zoom": false }, "text": "AND Line, local service. Home in twelve stops.", "sfx": "train-hum", "motion": true, "rmAlt": "static",
           "vary": {"bento": {"umeboshi": {"props": {"ad": "umeboshi"}}, "tamagoyaki": {"props": {"ad": "tamagoyaki"}}}} },
         { "props": { "zoom": true }, "sfx": "tick", "motion": true, "rmAlt": "hard-cut", "hold": 1600,
-          "vary": {"bento": {"umeboshi": {"text": "Nobody reads the ads. This one says すっぱい! SOUR!", "props": {"adCopy": "すっぱい! SOUR!"}}, "tamagoyaki": {"text": "Nobody reads the ads. This one says 甘い! SWEET!", "props": {"adCopy": "甘い! SWEET!"}}}} }
+          "vary": {"bento": {"umeboshi": {"text": "Nobody reads the ads. This one says すっぱい！ SOUR!", "props": {"adCopy": "すっぱい！ SOUR!"}}, "tamagoyaki": {"text": "Nobody reads the ads. This one says 甘い！ SWEET!", "props": {"adCopy": "甘い！ SWEET!"}}}} }
       ]
     },
     {
@@ -178,7 +178,7 @@
         { "text": "{OR}", "sfx": "breath", "hold": 1000 },
         { "text": "NANDA: Rest. I'll do the remembering.", "sfx": "silence" },
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: Bitter cup, sour hour. Every hour is ours."}, "tamagoyaki": {"text": "NANDA: Warm cup, sweet sleep. You're mine to keep."}}} },
-        { "text": "NANDA: ずっと。…F{OR}ever. Ne?", "sfx": "breath" },
+        { "text": "NANDA: いつまでも一緒。…F{OR}ever. ね？", "sfx": "breath" },
         { "text": "STEEPED.", "sfx": "static", "hold": 1500, "end": "steeped", "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
@@ -251,7 +251,7 @@
         { "bg": "blackout", "props": { "phase": "dark" }, "sfx": "drone", "auto": 1200 },
         { "bg": "BG-D2", "props": { "cups": 4 }, "text": "You wake at the tea table. Four cups now.", "sfx": "kettle" },
         { "sfx": "thump", "vary": {"bento": {"umeboshi": {"text": "She holds out an umeboshi. You eat.", "props": {"feed": "umeboshi"}}, "tamagoyaki": {"text": "She holds out the tamagoyaki. You eat.", "props": {"feed": "tamagoyaki"}}}} },
-        { "vary": {"bento": {"umeboshi": {"text": "NANDA: すっぱい？…ね。"}, "tamagoyaki": {"text": "NANDA: 甘い？…ね。"}}} },
+        { "vary": {"bento": {"umeboshi": {"text": "NANDA: すっぱいでしょ。…ね？"}, "tamagoyaki": {"text": "NANDA: 甘いでしょ。…ね？"}}} },
         { "vary": {"bento": {"umeboshi": {"text": "NANDA: One sour hour…"}, "tamagoyaki": {"text": "NANDA: One sweet bite…"}}} },
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: …then every hour is ours."}, "tamagoyaki": {"text": "NANDA: …then sleep. You're mine to keep."}}} },
         { "text": "ESCAPE?", "sfx": "static", "hold": 1500, "end": "escape", "choices": [{ "text": "Back to start", "go": "rooftop" }] }

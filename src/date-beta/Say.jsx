@@ -2,6 +2,7 @@
 // The engine hands over parsed parts ({ t, or }); an OR exists only where the data wrote "{OR}". Nothing here
 // pattern-matches words. A line or choice with an OR renders on the dark scrim (#1A0710, OR #FF6B7D, cream text).
 import { orParts } from './engine.js';
+import { NextButton } from './Hud.jsx';
 // Class names are prefixed `db-` so they can never collide with art classes (R2b finding 2: the art used `.or`).
 
 export function Parts({ parts }) {
@@ -15,8 +16,8 @@ export function OrSpans({ text }) {
     : <tspan key={i} dy={i && parts[i - 1].or ? -1 : 0}>{p.t}</tspan>));
 }
 
-// line = engine beat.line: { who, parts, hasOr }. No speaker = narration.
-export function Say({ line, next = true }) {
+// line = engine beat.line: { who, parts, hasOr }. No speaker = narration. onNext set = the NEXT pill (click beats, after hold).
+export function Say({ line, onNext = null }) {
   const who = line.who;
   const cls = ['db-say', who ? `who-${who.toLowerCase().replace(/\s+/g, '-')}` : 'narration', line.hasOr && 'has-or'];
   return (
@@ -24,7 +25,7 @@ export function Say({ line, next = true }) {
       <span className="pins top" aria-hidden="true" /><span className="pins bot" aria-hidden="true" />
       {who && <b className="who">{who}</b>}
       <p className="line"><Parts parts={line.parts} /></p>
-      {next && <span className="next" aria-hidden="true">▸</span>}
+      {onNext && <NextButton onClick={onNext} />}
     </div>
   );
 }

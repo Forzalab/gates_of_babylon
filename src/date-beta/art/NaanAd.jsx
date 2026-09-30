@@ -357,7 +357,7 @@ export default function NaanAd({ x = 0, y = 0, width = NAAN_AD_W, rm = false, ho
           <circle cx="58" cy="24" r="7" fill="none" stroke={C.curry} strokeWidth="6" />
         </g>
         <text x="126" y="776" className="na-house">NAND HOUSE</text>
-        <text x="500" y="772" className="na-walk">渋谷駅 徒歩3分</text>
+        <text x="500" y="772" className="na-walk">池NOR袋駅 徒歩3分</text>
         <text x="1440" y="770" textAnchor="end" className="na-spons">sponsored by</text>
         <text x="1560" y="776" textAnchor="end" className="na-figur">Figur</text>
       </g>
