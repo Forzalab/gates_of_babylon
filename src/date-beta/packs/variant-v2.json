@@ -27,10 +27,7 @@
      "text": "Close-up. Her feet. Two small steps for each of yours.",
      "sfx": "tick",
      "props": {
-      "shot": "closeup",
-      "of": "park",
-      "y": 900,
-      "zoom": 2
+      "shot": "feet-park"
      }
     },
     {
@@ -80,7 +77,7 @@
     },
     {
      "speaker": false,
-     "text": "Her thumb is on your wrist. She is counting your pulse.",
+     "text": "Her thumb is on your wrist. She is counting your pulse. She wants every beat to be for her.",
      "sfx": "silence",
      "props": {
       "shot": "closeup",
@@ -142,10 +139,7 @@
      "text": "Two pairs of shoes walk out of the park. Hers stay close to yours.",
      "sfx": "tick",
      "props": {
-      "shot": "closeup",
-      "of": "park",
-      "y": 900,
-      "zoom": 2
+      "shot": "feet-park"
      },
      "choices": [
       {
@@ -409,7 +403,7 @@
     },
     {
      "speaker": false,
-     "text": "She wipes your fingers with her napkin. Then she keeps the napkin.",
+     "text": "She wipes your fingers with her napkin. Then she keeps the napkin for her collection.",
      "sfx": "bell",
      "props": {
       "shot": "curry-house-ext"
@@ -432,12 +426,31 @@
    "beats": [
     {
      "speaker": false,
+     "text": "The plate is empty. Now: a round clock. 4:30 PM.",
+     "sfx": "tick",
+     "props": {
+      "shot": "match",
+      "of": "cafe",
+      "to": "platform"
+     }
+    },
+    {
+     "speaker": false,
      "text": "STATION · 4:30 PM. Many feet walk past. Hers stop next to yours.",
      "sfx": "train-hum",
      "props": {
       "shot": "station-gate",
       "place": "STATION",
       "time": "4:30 PM"
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover.",
+     "props": {
+      "shot": "ots",
+      "of": "platform",
+      "emote": "pout"
      }
     },
     {
@@ -462,7 +475,7 @@
         "text": "Twelve stops. I count them on my fingers. See?"
        },
        "2": {
-        "text": "Twelve stops. Two days. I count those too. You forgot."
+        "text": "Twelve stops. Second time today. You forgot. I did not."
        },
        "3": {
         "text": "Three fingers. Three times today. Same train. Same you."
@@ -562,10 +575,7 @@
      "text": "Close-up. Her shoes are wet. She walks in the puddles for you.",
      "sfx": "rain",
      "props": {
-      "shot": "closeup",
-      "of": "crossing-night",
-      "y": 900,
-      "zoom": 2.2
+      "shot": "feet-wet"
      }
     },
     {
@@ -583,7 +593,7 @@
      "text": "The rain stops. Two pairs of wet shoes walk toward her street.",
      "sfx": "wind",
      "props": {
-      "shot": "crossing-night"
+      "shot": "feet-wet"
      },
      "choices": [
       {
@@ -615,10 +625,7 @@
      "speaker": "NANDA",
      "text": "Take small steps. Small steps make the day longer.",
      "props": {
-      "shot": "closeup",
-      "of": "street-day",
-      "y": 900,
-      "zoom": 2
+      "shot": "feet-wet"
      },
      "timer": 12,
      "choices": [
@@ -661,12 +668,18 @@
     {
      "bg": "street-dusk",
      "speaker": false,
-     "text": "7:00 PM. The same street, now dark blue. You walked one hour.",
+     "text": "7:00 PM. The sky goes orange, then dark blue. You walked one hour.",
      "sfx": "silence",
      "props": {
-      "shot": "stamp",
+      "shot": "timelapse",
       "place": "HER STREET",
-      "time": "7:00 PM"
+      "time": "7:00 PM",
+      "of": "street-day",
+      "tones": [
+       "day",
+       "dusk",
+       "night"
+      ]
      }
     },
     {
@@ -733,7 +746,7 @@
     },
     {
      "speaker": "NANDA",
-     "text": "Every road today came here. I planned all of them.",
+     "text": "Every choice you made today led here. I planned them all.",
      "props": {
       "shot": "closeup"
      }
@@ -842,6 +855,36 @@
      }
     }
    ]
+  },
+  {
+   "scene": "cup",
+   "beat": 0,
+   "beats": [
+    {
+     "speaker": false,
+     "text": "HER KITCHEN · 7:20 PM. The tea is poured. Three cups.",
+     "sfx": "kettle",
+     "props": {
+      "shot": "stamp",
+      "of": "teatable",
+      "place": "HER KITCHEN",
+      "time": "7:20 PM"
+     }
+    }
+   ]
+  },
+  {
+   "scene": "escape",
+   "beat": 0,
+   "set": {
+    "text": "BASEMENT · 7:40 PM. Concrete. One bulb. Rain at a high window.",
+    "props": {
+     "shot": "stamp",
+     "of": "basement",
+     "place": "BASEMENT",
+     "time": "7:40 PM"
+    }
+   }
   }
  ]
 }

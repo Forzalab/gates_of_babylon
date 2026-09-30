@@ -85,7 +85,7 @@ export const ITEMS = {
   </g>),
 };
 export const ITEM_LABEL = { curry: 'curry', 'butter-chicken': 'butter chicken', katsu: 'katsu curry', book: 'library book', grocery: 'groceries', teacup: 'tea', bento: 'bento',
-  hands: 'click.', cups3: 'three cups', 'ic-card': 'loaded ♡', umbrella: 'one umbrella', key: 'her key', 'cups-end': 'empty / full' };
+  hands: 'click.', cups3: 'three cups', 'ic-card': 'loaded ♡', umbrella: 'one umbrella', key: 'her key', 'cups-end': 'empty / full', feet: 'her shoes, your shoes' };
 
 const Cup = ({ x, y, full = true, k = 1 }) => (<g transform={`translate(${x} ${y}) scale(${k})`}>
   <path d="M-70 -40 H70 Q70 50 0 56 Q-70 50 -70 -40Z" fill="#fdfbf5" {...O} />
@@ -137,4 +137,39 @@ Object.assign(ITEMS, {
     <Cup x={190} y={380} full={false} /><Cup x={420} y={380} full />
     <path d="M410 300 q-10 -30 10 -50 q20 -20 5 -50" fill="none" stroke="#fff" strokeWidth="7" opacity=".6" strokeLinecap="round" />
   </g>),
+});
+
+// Feet insert (V2 Yamada): her small pink shoes, toes pointed at your big purple sneakers. pose = 'park' (gravel, day) | 'wet' (street, puddle, rain).
+const PINK = '#ff8fc6', PINK_D = '#ff5fa2', PURP = '#8a7ff0', PURP_D = '#5a4fb8';
+const HerShoe = ({ x, y, r = 0, wet }) => (<g transform={`translate(${x} ${y}) rotate(${r})`}>
+  <path d="M-18 -120 Q-26 -60 -22 -20 L22 -20 Q26 -60 18 -120Z" fill="#fff0e6" {...O} />
+  <path d="M-20 -58 H20" stroke={INK} strokeWidth="4" opacity=".35" />
+  <path d="M-46 -24 Q-50 -54 -8 -56 Q46 -56 58 -30 Q66 -6 40 4 H-38 Q-52 0 -46 -24Z" fill={PINK} {...O} />
+  <path d="M-30 -40 Q4 -52 30 -40" fill="none" stroke={INK} strokeWidth="6" strokeLinecap="round" />
+  <circle cx="30" cy="-40" r="7" fill="#ffd34d" stroke={INK} strokeWidth="3" />
+  <path d="M-44 4 H42" stroke={PINK_D} strokeWidth="8" strokeLinecap="round" />
+  {wet && <path d="M-30 -30 q6 10 0 18 M48 -26 q6 10 0 18" stroke="#9fb4ff" strokeWidth="5" fill="none" strokeLinecap="round" />}
+</g>);
+const YourShoe = ({ x, y, r = 0 }) => (<g transform={`translate(${x} ${y}) rotate(${r})`}>
+  <path d="M-34 -150 Q-40 -80 -34 -34 L34 -34 Q40 -80 34 -150Z" fill="#3a3f55" {...O} />
+  <path d="M-70 -30 Q-74 -76 -16 -80 Q60 -82 84 -44 Q98 -12 62 6 H-58 Q-78 0 -70 -30Z" fill={PURP} {...O} />
+  <path d="M-72 -4 H86" stroke="#fdfbf5" strokeWidth="12" strokeLinecap="round" />
+  {[-20, 0, 20].map((d) => <path key={d} d={`M${d - 12} ${-66 + (d + 20) / 4} l24 6`} stroke="#fdfbf5" strokeWidth="5" strokeLinecap="round" />)}
+  <path d="M-58 -52 Q-50 -64 -30 -66" fill="none" stroke={PURP_D} strokeWidth="6" strokeLinecap="round" />
+</g>);
+Object.assign(ITEMS, {
+  feet: ({ pose = 'park' } = {}) => {
+    const wet = pose === 'wet';
+    return (<g>
+      <rect x="-40" y="360" width="680" height="300" rx="20" fill={wet ? '#3b3f66' : '#e9d8b4'} />
+      {wet
+        ? <g><ellipse cx="200" cy="470" rx="170" ry="36" fill="#6f7fd0" opacity=".7" stroke="#9fb4ff" strokeWidth="4" />
+            <ellipse cx="200" cy="470" rx="90" ry="18" fill="none" stroke="#c9d4ff" strokeWidth="4" />
+            {[...Array(12)].map((_, i) => <path key={i} d={`M${20 + i * 52} ${40 + (i % 4) * 40} l-12 44`} stroke="#9fb4ff" strokeWidth="5" strokeLinecap="round" />)}</g>
+        : [...Array(26)].map((_, i) => <circle key={i} cx={(i * 97) % 620} cy={390 + ((i * 53) % 230)} r={5 + (i % 3) * 3} fill="#b89d74" />)}
+      <HerShoe x={150} y={470} r={-6} wet={wet} /><HerShoe x={250} y={478} r={4} wet={wet} />
+      <g transform="scale(-1 1) translate(-980 0)"><YourShoe x={420} y={500} r={-4} /><YourShoe x={540} y={506} r={3} /></g>
+      <path d="M300 200 C282 180 256 196 274 216 L300 240 L326 216 C344 196 318 180 300 200Z" fill={PINK_D} stroke={INK} strokeWidth="4" />
+    </g>);
+  },
 });

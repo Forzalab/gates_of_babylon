@@ -53,7 +53,7 @@ export function Insert({ props = {}, rm }) {
           <rect x="580" y="170" width="760" height="720" rx="36" fill="#000" opacity=".22" transform="translate(18 22)" />
           <rect x="580" y="170" width="760" height="720" rx="36" className="shot-card" />
           <rect x="604" y="194" width="712" height="672" rx="24" className="shot-card-in" />
-          <g transform="translate(660 215) scale(1)"><Item /></g>
+          <g transform="translate(660 215) scale(1)"><Item pose={props.pose} /></g>
           {(caption ?? ITEM_LABEL[item]) && <text x="960" y="850" textAnchor="middle" className="shot-cap">{caption ?? ITEM_LABEL[item]}</text>}
         </g>
       </svg>

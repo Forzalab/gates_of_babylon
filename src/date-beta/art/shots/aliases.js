@@ -1,6 +1,8 @@
 // Named shots for packs/sequences.json `props.shot` ids (GAPS.md "art to build"), built from shots/ over existing art.
 // Each alias = { bg: shot component id, props }. `borrowed: true` = no real art for that place yet (see VISUAL-GAPS.md).
 export const SHOT_ALIASES = {
+  'feet-park': { bg: 'insert', props: { item: 'feet', pose: 'park', of: 'park', tone: 'day' } },
+  'feet-wet': { bg: 'insert', props: { item: 'feet', pose: 'wet', of: 'crossing-night', tone: 'night' } },
   'bento-lid': { bg: 'insert', props: { item: 'bento', of: 'rooftop', caption: 'itadakimasu ♡' } },
   'nanda-watch': { bg: 'reaction', props: { emote: 'hearts', of: 'rooftop' } },
   'park-wide': { bg: 'establish', props: { of: 'street-day', from: [420, 420], to: [1500, 380], zoom: 1.4, tone: 'day' }, borrowed: true },
