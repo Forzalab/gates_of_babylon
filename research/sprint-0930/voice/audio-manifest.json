@@ -369,5 +369,12 @@
   "beat": "3 R+",
   "file": "public/date-beta/voice/01-rooftop/009_3-r.mp3",
   "text": "[pouty][smiling] …Obviously. [rushed] Don't stare."
+ },
+ {
+  "n": 10,
+  "scene": "rooftop",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/01-rooftop/010_3-r.mp3",
+  "text": "[warm] Good is a start. [sweetly][perfectly even] Tomorrow I'll do better."
  }
 ]
