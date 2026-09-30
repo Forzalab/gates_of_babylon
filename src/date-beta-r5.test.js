@@ -29,3 +29,17 @@ test('r5: the focus plane keeps the floor round her feet sharp (band + ellipse m
   assert.match(css, /\.db-fplane \{[^}]*backdrop-filter: blur\(3px\)[^}]*linear-gradient[^}]*radial-gradient/);
   assert.match(src('./date-beta/main.jsx'), /className="db-fplane"/);
 });
+
+test('r5: park beat 1 (feet close-up) cut; "Hold my hand" is on the real park bg with her pin reaching out', async () => {
+  const { applyPacks } = await import('./date-beta/packs/index.js');
+  const read = (p) => JSON.parse(src(p));
+  const PLAY = /const PLAY = \[([^\]]+)\]/.exec(src('./date-beta/main.jsx'))[1].match(/'([\w-]+)'/g).map((s) => s.slice(1, -1));
+  const d = applyPacks(read('./date-beta/scenes.json'), PLAY.map((n) => ({ name: n, ...read(`./date-beta/packs/${n}.json`) })));
+  const park = d.scenes.find((s) => s.id === 'v2-park');
+  assert.ok(!park.beats.some((b) => /Her feet\. Two small steps/.test(b.text)));
+  const hold = park.beats[1];
+  assert.match(hold.text, /^Hold my hand/);
+  assert.equal(hold.props.shot, undefined);
+  assert.equal(hold.props.cut.reach, true);
+  assert.match(nandaSVG({ stage: 1, reach: true }), /<circle cx="-44" cy="66" r="17"/);
+});

@@ -40,6 +40,19 @@ export const pinArm = ([x0, y0], [x1, y1], P, { bend = 0, w = 3, nub = 3.6 } = {
   return `<path d="${d}" fill="none" stroke="${P.rim}" stroke-width="${w}" stroke-linecap="round"/><path d="${d}" fill="none" stroke="${P.lit}" stroke-width="${w * 0.4}" stroke-linecap="round"/>`
     + `<circle cx="${x1}" cy="${y1}" r="${nub}" fill="${P.lit}" stroke="${P.rim}" stroke-width="${w * 0.6}"/>`;
 };
+// R5 park "Hold my hand": the upper pin reaches OUT at the viewer. Foreshortened: the lead widens toward the camera and
+// the nub is big (it is near the lens), a few shake ticks round it (her hand is shaking). Gate units.
+export const reachArm = ([x0, y0], [x1, y1], P, { w0 = 3, w1 = 14, nub = 17, bend = 10 } = {}) => {
+  const dx = x1 - x0, dy = y1 - y0, L = Math.hypot(dx, dy) || 1, nx = -dy / L, ny = dx / L;
+  const cx = (x0 + x1) / 2 + nx * bend, cy = (y0 + y1) / 2 + ny * bend, wm = (w0 + w1) / 2;
+  const f = (v) => v.toFixed(1);
+  const d = `M${f(x0 + nx * w0 / 2)} ${f(y0 + ny * w0 / 2)}Q${f(cx + nx * wm / 2)} ${f(cy + ny * wm / 2)} ${f(x1 + nx * w1 / 2)} ${f(y1 + ny * w1 / 2)}`
+    + `L${f(x1 - nx * w1 / 2)} ${f(y1 - ny * w1 / 2)}Q${f(cx - nx * wm / 2)} ${f(cy - ny * wm / 2)} ${f(x0 - nx * w0 / 2)} ${f(y0 - ny * w0 / 2)}Z`;
+  const tick = (a, r) => { const c = Math.cos(a), si = Math.sin(a); return `M${f(x1 + c * r)} ${f(y1 + si * r)}l${f(c * 6)} ${f(si * 6)}`; };
+  return `<path d="${d}" fill="${P.lit}" stroke="${P.rim}" stroke-width="2.2" stroke-linejoin="round"/>`
+    + `<circle cx="${x1}" cy="${y1}" r="${nub}" fill="${P.lit}" stroke="${P.rim}" stroke-width="3"/><circle cx="${x1 - nub * 0.35}" cy="${y1 - nub * 0.35}" r="${nub * 0.28}" fill="#fff" opacity=".8"/>`
+    + `<path d="${[2.3, 2.8, 3.3, 3.9, 4.4].map((a) => tick(a, nub + 4)).join('')}" stroke="${P.rim}" stroke-width="2" stroke-linecap="round"/>`;
+};
 const heart = (x, y, s, f) => `<path d="${HEARTP}" transform="translate(${x} ${y}) scale(${s})" fill="${f}"/>`;
 const nand = (x, y, r, fill, stroke = 'none', sw = 0) => `<path d="M${x - r},${y - r} L${x},${y - r} A${r},${r} 0 0 1 ${x},${y + r} L${x - r},${y + r} Z" fill="${fill}" stroke="${stroke}" stroke-width="${sw}" stroke-linejoin="round"/><circle cx="${x + r + r * 0.32}" cy="${y}" r="${r * 0.32}" fill="${fill}" stroke="${stroke}" stroke-width="${sw}"/>`;
 const bow = (x, y, s, P) => `<g transform="translate(${x} ${y}) scale(${s})"><path d="M0,0 L-17,-11 L-15,11 Z M0,0 L17,-11 L15,11 Z" fill="${P.bow}" stroke="${P.rim}" stroke-width="2.6" stroke-linejoin="round"/><circle r="5" fill="${P.bow}" stroke="${P.rim}" stroke-width="2.6"/></g>`;
@@ -247,7 +260,7 @@ let uid = 0;
 // overlay(P, ANCHORS) -> { under, over }: extra still layers (the gacha face layers). under = inside the body clip after
 // the face, before the fringe; over = after the figure, before the bubble.
 // face: a Scene A face id (SCENE_FACES) or any FACES key; it replaces the emote's face (the palette + bubble stay the emote's).
-export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null } = {}) {
+export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null, reach = false } = {}) {
   const E0 = EMOTES[emote ?? STAGE_EMOTE[stage]] ?? EMOTES.heart;
   const E = face != null && FACES[face] ? { ...E0, face, bubble: FACE_BUBBLE[face] ?? E0.bubble } : E0;
   const s = E.pal, P = PAL[s], n = ++uid, cb = `nd-cb${n}`, gb = `nd-gb${n}`, sh = `nd-sh${n}`;
@@ -263,7 +276,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay =
       <radialGradient id="${gb}" cx=".42" cy=".4" r=".75"><stop offset="0" stop-color="${P.body}"/><stop offset="1" stop-color="${P.body2}"/></radialGradient></defs>
     ${E.aura ? `<radialGradient id="au${n}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#12040b" stop-opacity="0"/><stop offset=".6" stop-color="#12040b" stop-opacity=".55"/><stop offset="1" stop-color="#f0243f" stop-opacity="0"/></radialGradient><ellipse cx="58" cy="60" rx="98" ry="112" fill="url(#au${n})" class="nd-aura"/>` : ''}
     <ellipse cx="52" cy="129" rx="58" ry="6.5" fill="${P.shadow}" opacity=".16"/>${legs}
-    ${[33, 75].map((y) => pinArm([0, y], [-9, y], P)).join('')}
+    ${reach ? pinArm([0, 75], [-9, 75], P) : [33, 75].map((y) => pinArm([0, y], [-9, y], P)).join('')}
     <path d="${BODYB}" fill="url(#${gb})" stroke="${P.rim}" stroke-width="3.2" stroke-linejoin="round"/>
     <g clip-path="url(#${cb})">
       <g transform="translate(57 52)">${FACES[E.face](P, 2.6)}</g>${shade}${ov.under ?? ''}
@@ -280,7 +293,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay =
     ${P.dark ? '' : '<ellipse cx="90" cy="26" rx="7" ry="3.4" transform="rotate(40 90 26)" fill="#fff" opacity=".75"/>'}
     <circle cx="112" cy="54" r="12" fill="${P.dark ? '#1a0610' : '#fff'}" stroke="${P.rim}" stroke-width="3.2"/>
     <circle cx="112" cy="54" r="5.2" fill="${P.mood}" opacity="${s === 2 ? 0.5 : 0.9}"/><circle cx="108" cy="50" r="2" fill="#fff" opacity="${s === 4 ? 0.25 : 0.9}"/>
-    ${bow(111, 41.5, 0.5, P)}${pinClip(78, 22, -18, 0.5, P)}${sweatDrop}${FACE_DECOR[E.face]?.(P) ?? ''}${ov.over ?? ''}
+    ${reach ? reachArm([0, 33], [-44, 66], P, { bend: -8 }) : ''}${bow(111, 41.5, 0.5, P)}${pinClip(78, 22, -18, 0.5, P)}${sweatDrop}${FACE_DECOR[E.face]?.(P) ?? ''}${ov.over ?? ''}
     ${talk ? `<g transform="translate(${big ? 100 : 104} ${big ? -22 : -14}) scale(${k})">${BUBBLES[E.bubble]()}</g>` : ''}`;
   return `<g transform="translate(-104 -252) scale(2)">${gate}</g>`;
 }

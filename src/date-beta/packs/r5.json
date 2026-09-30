@@ -1,0 +1,12 @@
+{
+ "name": "r5",
+ "notes": [
+  "R5 umeboshi deep pass (Tony 09-30, brain _drift/2026-09-30T0805-alt-R5-plan.md). Applied LAST, so the older packs keep their beat indexes.",
+  "v2-park: beat 1 (the feet close-up) is cut; 'Hold my hand' plays on the real park bg with her upper pin reaching out at the viewer (props.cut.reach, a nervous face: her hand shakes); the rack shot's huge blurred duplicate of her is gone (plain park bg, her own sprite)."
+ ],
+ "patch": [
+  { "scene": "v2-park", "beat": 1, "remove": true },
+  { "scene": "v2-park", "beat": 1, "set": { "props": { "cut": { "face": "nervous", "reach": true } } } },
+  { "scene": "v2-park", "beat": 3, "set": { "props": { "cut": { "face": "anya-smile" } } } }
+ ]
+}

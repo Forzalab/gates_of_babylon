@@ -55,7 +55,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -336,7 +336,7 @@ function Player() {
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
-            face={end ? null : face} frame={end ? 'medium' : frame} />
+            face={end ? null : face} frame={end ? 'medium' : frame} reach={!end && !beat.react && !!cut.reach} />
         )}
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
