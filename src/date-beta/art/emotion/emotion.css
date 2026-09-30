@@ -6,6 +6,6 @@
 .emo-badge { position: absolute; right: 64px; top: 128px; margin: 0; padding: 14px 30px 16px; border-radius: 16px;
   font: 900 44px/1.1 var(--btn, 'Nunito Variable', sans-serif); letter-spacing: .03em; white-space: nowrap;
   background: #fff; color: #7a0f4e; border: 5px solid #7a0f4e; box-shadow: 0 8px 0 rgba(58, 10, 38, .3); }
-.emo-love-bomb .emo-badge { color: #5a1a8a; border-color: #5a1a8a; }
+.emo-love-bomb .emo-badge { color: #6b0f45; border-color: #d1177f; }
 .emo-anger .emo-badge { color: #9a0808; border-color: #9a0808; }
 .emo-rage .emo-badge { background: #1a1020; color: #f4f8c8; border-color: #f4f8c8; box-shadow: 0 8px 0 rgba(0, 0, 0, .5); }

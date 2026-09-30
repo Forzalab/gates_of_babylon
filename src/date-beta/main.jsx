@@ -2,6 +2,8 @@
 // Controls: click / Space / Enter / -> = next, 1 / 2 = pick a choice, Esc or S = skip scene, F = fullscreen, P = pause.
 // A choice beat with `timer` counts down (frozen while paused or the tab is hidden) and auto-picks at 0.
 // URL: ?scene=<id> starts there (&beat=<n> steps n beats in), ?still forces reduced motion (same as prefers-reduced-motion).
+// Gacha (gacha.js): ?seed=N, ?gacha=<tier id> forces a tier, ?pick=N takes choice N on the start beat, ?layers=a,b
+// overrides her face layers on a gacha pop (FX / face-layer shots).
 // HUD (Hud.jsx): love ribbon + route trail while Nanda is present, a pop after a scored pick, the goal card, the end card.
 // NEXT pill on every click beat once its hold has passed; "Click anywhere to continue" big on the goal card (the first
 // screen after the Figur collapse), then small in the bottom-left corner; hidden where a click does nothing.
@@ -14,7 +16,7 @@ import './theme.js';
 import baseData from './scenes.json';
 import { applyPacks } from './packs/index.js';
 import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, reactView, present, trail, ending, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
-import { nextRunLuck } from './gacha.js';
+import { nextRunLuck, tierById } from './gacha.js';
 import { ART as ART0 } from './art/index.js';
 import { GAME } from './game/index.js';
 const ART = { ...ART0, ...GAME }; // game art ids (lock-game) own their beat: choices hidden, onPick(i) plays choice i
@@ -114,8 +116,14 @@ const escIsForFullscreen = () => !!document.fullscreenElement || performance.now
 const LOVE0 = params.has('love') && Number.isFinite(Number(params.get('love'))) ? Number(params.get('love')) : null; // ?love=N (testing)
 // Gacha luck (gacha.js): ?seed=N replays a seed, else a new seed per boot; ?gacha=<tier id> forces that tier (shots / testing).
 const SEED = params.has('seed') && Number.isInteger(Number(params.get('seed'))) ? Number(params.get('seed')) : (Math.random() * 2 ** 31) >>> 0;
-const FORCE = SCENES.gacha && params.get('gacha') ? params.get('gacha') : null;
-const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0, seed: SEED, force: FORCE });
+const FORCE = tierById(SCENES.gacha, params.get('gacha')) ? params.get('gacha') : null; // an unknown id is ignored, never a boot crash
+// ?pick=N (testing / shots): take choice N (1-based) on the start beat, so a URL can open straight on a reaction frame.
+const PICK = Number(params.get('pick')) - 1;
+const LAYERS = params.has('layers') ? params.get('layers').split(',').filter(Boolean) : null; // ?layers=vein,puff: override her face layers on a gacha pop (shots)
+const startPos = () => {
+  const p = startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0, seed: SEED, force: FORCE });
+  return PICK >= 0 && !p.done && beatAt(SCENES, p).choices?.[PICK] ? choose(SCENES, p, PICK, RM) : p;
+};
 
 function Player() {
   const [pos, setPos] = useState(startPos);
@@ -246,7 +254,7 @@ function Player() {
         {end && <EndCard end={end} onAgain={() => pick(0)} />}
         {!pos.done && (here || speaksNanda(beat.line)) && (
           <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={end ? (end.tier === 'win' ? 'hearts' : 'crack') : pop?.emote}
-            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : pop?.gacha?.face} />
+            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face} />
         )}
         {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}
         {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`c${beat.scene}${beat.index}`} />}
