@@ -49,11 +49,14 @@ export function Insert({ props = {}, rm }) {
       <Cam of={of} zoom={1.15} rm className="shot-blur" />
       <GradeLayer id="sh-in" tone={tone} rm={rm} sun={[1560, 160]} sparkles={20} />
       <svg className="art" viewBox="0 0 1920 1080">
+        <defs>
+          <radialGradient id="sh-in-pool"><stop offset="0" stopColor="#1a0710" stopOpacity=".42" /><stop offset="1" stopColor="#1a0710" stopOpacity="0" /></radialGradient>
+          <filter id="sh-in-drop" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="10" dy="16" stdDeviation="10" floodColor="#1a0710" floodOpacity=".45" /></filter>
+        </defs>
         <g transform={`rotate(${tilt} 960 520)`}>
-          <rect x="580" y="170" width="760" height="720" rx="36" fill="#000" opacity=".22" transform="translate(18 22)" />
-          <rect x="580" y="170" width="760" height="720" rx="36" className="shot-card" />
-          <rect x="604" y="194" width="712" height="672" rx="24" className="shot-card-in" />
-          <g transform="translate(660 215) scale(1)"><Item pose={props.pose} /></g>
+          {/* R5 (Tony 09-30): no beige card. The item IS the close-up: big, on the blurred place, a soft dark pool under it */}
+          <ellipse cx="960" cy="440" rx="560" ry="380" fill="url(#sh-in-pool)" />
+          <g transform="translate(960 420) scale(1.05) translate(-300 -325)" filter="url(#sh-in-drop)"><Item pose={props.pose} /></g>
           {(caption ?? ITEM_LABEL[item]) && <text x="960" y="850" textAnchor="middle" className="shot-cap">{caption ?? ITEM_LABEL[item]}</text>}
         </g>
       </svg>

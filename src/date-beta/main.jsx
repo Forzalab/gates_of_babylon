@@ -27,6 +27,7 @@ import { createVoice } from './voice/index.js';
 import { Nanda, speaksNanda, FRAMES } from './Nanda.jsx';
 import { stageFor } from './art/nanda.js';
 import { autoFaces } from './art/autoface.js';
+import { SHOT_ALIASES } from './art/shots/aliases.js';
 import { Handout, SmileTag, PovFood, PeekBento, useStep } from './SceneA.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
@@ -191,7 +192,10 @@ function Player() {
   // sharp (no focus blur), handout (bento = the choices), tag (the one choice drawn as the NEXT pill).
   const cut = beat.props?.cut ?? {};
   // A reaction frame on the handout keeps her medium shot (the box is gone); every other frame holds through its react.
-  const frame = !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
+  // R5: an insert shot (art/shots Insert: a close-up of one item) IS the close-up: she steps out of that frame (no
+  // floating over the item), unless the beat picks its own frame.
+  const insert = SHOT_ALIASES[beat.props?.shot]?.bg === 'insert' && !beat.react;
+  const frame = insert && !cut.frame ? 'off' : !FRAMES.includes(cut.frame) || (beat.react && cut.frame === 'handout') ? 'medium' : cut.frame;
   const lead = !beat.react && cut.lead ? cut.lead : null;
   const splitAt = !beat.react && cut.at ? cut.at : null;
   const stepped = useStep(lead || splitAt ? Math.max(500, cut.step ?? 600) : 0, pos);

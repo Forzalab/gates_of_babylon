@@ -37,8 +37,8 @@ test('r3-rain: every beat shows its own bg in normal play (no later pack overrid
   for (const [scene, i, bg] of BEATS) {
     const b = data.scenes.find((s) => s.id === scene).beats[i];
     assert.equal(b.bg, bg, `${scene}[${i}]`);
-    // R5: a close-up ON its own bg (the door 12 close-up) is still its own bg, only a different camera
-    assert.ok([undefined, 'stamp'].includes(b.props?.shot) || (b.props.shot === 'closeup' && b.props.of === bg), `${scene}[${i}] frames its own bg (no borrowed shot)`);
+    // R5: a close-up / insert ON its own bg (the door 12 close-up, the wet shoes) is still its own bg, only a different camera
+    assert.ok([undefined, 'stamp'].includes(b.props?.shot) || b.props.of === bg, `${scene}[${i}] frames its own bg (no borrowed shot)`);
     assert.ok(b.props?.of === undefined || b.props.of === bg, `${scene}[${i}] no borrowed 'of'`);
   }
   const esc = data.scenes.find((s) => s.id === 'escape-win').beats[6];
