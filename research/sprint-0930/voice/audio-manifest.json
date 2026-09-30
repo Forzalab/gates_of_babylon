@@ -418,5 +418,12 @@
   "beat": "3 run 1",
   "file": "public/date-beta/voice/06-v2-train/033_3-run-1.mp3",
   "text": "[proud][slow] Twelve stops. [sing-song] I count them on my fingers. [smiling] See?"
+ },
+ {
+  "n": 46,
+  "scene": "cup",
+  "beat": "0 (u)",
+  "file": "public/date-beta/voice/10-cup/046_0-u.mp3",
+  "text": "[sing-song] I bought umeboshi. [smiling] For no reason. [perfectly even][sweet] Eat."
  }
 ]
