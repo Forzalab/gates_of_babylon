@@ -96,5 +96,12 @@
   "beat": "5",
   "file": "public/date-beta/voice/02-v2-park/021_5.mp3",
   "text": "[bright] One job before lunch. [sing-song] My groceries, or my library book?"
+ },
+ {
+  "n": 22,
+  "scene": "v2-park",
+  "beat": "5 R shop",
+  "file": "public/date-beta/voice/02-v2-park/022_5-r-shop.mp3",
+  "text": "[excited][bubbly] Groceries. [warm][slow] For our dinner."
  }
 ]
