@@ -145,5 +145,12 @@
   "beat": "4",
   "file": "public/date-beta/voice/05-v2-curry/031_4.mp3",
   "text": "[sweet][close] Feed me. [whispers] With your hand. [perfectly even] Not the spoon. [whispers, slower] Your hand."
+ },
+ {
+  "n": 32,
+  "scene": "v2-train",
+  "beat": "station crowd (Tony, → the class, 4:30 PM)",
+  "file": "public/date-beta/voice/06-v2-train/032_station-crowd-tony-the-class-4-30-pm.mp3",
+  "text": "[playful][bubbly] I see you, the curly-haired guy. [giggles][too long] I see you, you gringo wearing a cap. [pouty][sing-song] Don't gang up on me, [smiling][close] you all NEVER stop my [perfectly even] eternal bond [flat, pleased] with my lover."
  }
 ]
