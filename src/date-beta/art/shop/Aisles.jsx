@@ -19,7 +19,7 @@ export function AisleProduce({ children }) {
       <Price x={300} y={2} w={310} h={116} label="トマト TOMATO" price="¥399" />
       <Price x={690} y={2} w={330} h={116} label="ミニトマト MINI" price="¥299" />
       <Price x={1190} y={2} w={340} h={116} label="トマト TOMATO" price="¥399" />
-      <Price x={745} y={812} w={360} h={170} label="あかい RED ONLY" price="¥299" note="NOT GREEN" />
+      <Price x={700} y={812} w={470} h={170} label="あかい RED ONLY" price="¥299" note="NOT GREEN" />
       {children}
     </ShopScene>
   );
@@ -63,7 +63,7 @@ export function EggsRack() {
 export function AisleCups({ children }) {
   return (
     <ShopScene id="cups" trace="aisle-cups" label="Aisle 3, cups and tea bowls on wooden shelves, with a big green card that says Enjoy Tea.">
-      <polygon points={pts([[1290, 580], [1520, 530], [1520, 980], [1290, 1040]])} fill="#fbfbf6" />
+      <polygon points={pts([[1280, 580], [1700, 440], [1920, 520], [1920, 1080], [1290, 1080]])} fill="#fbfbf6" />
       <text transform="translate(1570 860) rotate(-24)" textAnchor="middle" fontSize="80" fill="#2b2a33" className="shop-sign">Enjoy Tea!</text>
       <text transform="translate(1420 700) rotate(-24)" textAnchor="middle" fontSize="54" fill="#e0467f" className="shop-sign">CUPS FOR 2?</text>
       <text transform="translate(1440 780) rotate(-24)" textAnchor="middle" fontSize="54" fill="#e0467f" className="shop-sign">FOR 3!</text>

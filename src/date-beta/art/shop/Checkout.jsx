@@ -7,6 +7,7 @@ import { ShopScene, Card, Cup, HerHand, pts } from './parts.jsx';
 export function BasketCups() {
   return (
     <ShopScene id="basket" trace="basket-cups" label="Close-up from above: a green shop basket full of food. Three matching white cups with pink bands sit on top.">
+      {[[700, 430], [930, 470], [1160, 430]].map(([x, y]) => <ellipse key={x} cx={x} cy={y + 122} rx="80" ry="18" fill="#3a2a20" opacity=".35" />)}
       <Cup x={700} y={430} s={1.5} /><Cup x={930} y={470} s={1.5} /><Cup x={1160} y={430} s={1.5} />
     </ShopScene>
   );
@@ -104,8 +105,8 @@ function Machine({ screen }) {
 
 const SCREEN = (
   <g>
-    <text transform="translate(792 196) rotate(-3.5)" textAnchor="middle" fontSize="44" fill="#1d3a6a" className="shop-sign">NO LADY HERE</text>
-    <text transform="translate(796 268) rotate(-3.5)" textAnchor="middle" fontSize="40" fill="#e0467f" className="shop-sign">JUST YOU + ME ♡</text>
+    <text transform="translate(792 196) rotate(-3.5)" textAnchor="middle" fontSize="36" fill="#1d3a6a" className="shop-sign">NO LADY HERE</text>
+    <text transform="translate(796 268) rotate(-3.5)" textAnchor="middle" fontSize="32" fill="#e0467f" className="shop-sign">JUST YOU + ME ♡</text>
   </g>
 );
 

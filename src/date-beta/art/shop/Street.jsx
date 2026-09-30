@@ -5,7 +5,7 @@ import { ShopScene, Card, PlayerHand, HerHand, pts } from './parts.jsx';
 // 1. SHOP STREET · 2:00 PM: the vending machines outside the shop, under the arcade roof (establishing + stamp).
 export function ShopVending() {
   return (
-    <ShopScene id="vending" label="The shop street at 2:00 PM, under a covered roof: a row of vending machines outside the shop. Nanda stands in front of them.">
+    <ShopScene id="vending" trace="shop-vending" label="The shop street at 2:00 PM, under a covered roof: a row of vending machines outside the shop. Nanda stands in front of them.">
       {/* the arcade banner (establishes the place in words) */}
       <rect x="96" y="96" width="4" height="40" fill="#6d6a72" /><rect x="506" y="70" width="4" height="40" fill="#6d6a72" />
       <Card x={60} y={130} w={500} h={110} rot={-6} fill="#ffe7a8" stroke="#8a4b2a" lines={[['ようこそ 商店街', 40, '#8a4b2a', 'shop-jp'], ['WELCOME TO THE SHOP STREET', 26, '#b8322f']]} />
@@ -39,6 +39,9 @@ function Inside({ out = false }) {
         <polygon points={pts([[440, 760], [1160, 760], [1160, 1080], [440, 1080]])} fill="#e9d9b8" />
         {[520, 700, 880, 1060].map((x) => <rect key={x} x={x} y="360" width="70" height="400" fill="#f3c98a" opacity=".6" />)}
         <rect x="1250" y="520" width="200" height="280" fill="#e3e8dc" />
+        <rect x="1270" y="540" width="160" height="190" rx="6" fill="#fff6d8" stroke="#d8262e" strokeWidth="5" />
+        <text x="1350" y="620" textAnchor="middle" fontSize="36" fill="#d8262e" className="shop-sign">OPEN</text>
+        <text x="1350" y="680" textAnchor="middle" fontSize="30" fill="#2c57a8" className="shop-sign">10-21</text>
       </g>
     );
   }
@@ -67,6 +70,10 @@ function Inside({ out = false }) {
       <rect x="1100" y="220" width="60" height="860" fill="#cfe3e0" opacity=".55" stroke="#4d4a3e" strokeWidth="10" />
       <rect x="1250" y="520" width="200" height="280" fill="#e0e6da" />
       <rect x="1250" y="740" width="200" height="60" fill="#c4b9a5" />
+      {/* a sale poster on the glass (covers the removed clerk) */}
+      <rect x="1270" y="540" width="160" height="190" rx="6" fill="#fff6d8" stroke="#d8262e" strokeWidth="5" />
+      <text x="1350" y="610" textAnchor="middle" fontSize="40" fill="#d8262e" className="shop-sign">EGGS</text>
+      <text x="1350" y="680" textAnchor="middle" fontSize="44" fill="#2c57a8" className="shop-price">¥168</text>
     </g>
   );
 }
@@ -74,7 +81,7 @@ function Inside({ out = false }) {
 // 2. The shop doors slide open (16981cdc): NAND MART.
 export function ShopDoors() {
   return (
-    <ShopScene id="doors" label="The front of the NAND MART shop. The glass doors are open. Nanda stands in the doorway.">
+    <ShopScene id="doors" trace="shop-doors" label="The front of the NAND MART shop. The glass doors are open. Nanda stands in the doorway.">
       <Inside />
       <rect x="440" y="700" width="720" height="36" fill="#2e8a4a" /><rect x="440" y="736" width="720" height="12" fill="#b9dcc0" />
       {/* the banner over the door: our own shop name + a sale strip with the gate gag */}
@@ -97,8 +104,8 @@ function Bag({ x, y, flip = false }) {
       <path d="M22 -150 l-20 -40 M22 -150 l0 -46 M22 -150 l22 -38" stroke="#3f9a3a" strokeWidth="8" strokeLinecap="round" />
       <path d="M-120 -60 L120 -60 L140 200 L-140 200Z" fill="#f4f6f8" stroke="#8a93a0" strokeWidth="5" strokeLinejoin="round" />
       <path d="M-70 -60 C-70 -140 -10 -140 -10 -60 M10 -60 C10 -140 70 -140 70 -60" fill="none" stroke="#8a93a0" strokeWidth="8" />
-      <text x="0" y="60" textAnchor="middle" fontSize="40" fill="#e0262e" className="shop-sign">NAND</text>
-      <text x="0" y="104" textAnchor="middle" fontSize="40" fill="#e0262e" className="shop-sign">MART</text>
+      <text x="0" y="60" textAnchor="middle" fontSize="40" fill="#e0262e" className="shop-sign" transform={flip ? 'scale(-1 1)' : undefined}>NAND</text>
+      <text x="0" y="104" textAnchor="middle" fontSize="40" fill="#e0262e" className="shop-sign" transform={flip ? 'scale(-1 1)' : undefined}>MART</text>
     </g>
   );
 }
@@ -162,7 +169,7 @@ export function ShopCart() {
     </g>
   );
   return (
-    <ShopScene id="cart" over={over}
+    <ShopScene id="cart" trace="shop-cart" over={over}
       label="Your view down at an empty shopping cart in a bright aisle. Your two hands hold the red handle. Nanda's hand, with pink nails, rests on top of your right hand.">
       <EmptyCart />
     </ShopScene>
@@ -189,7 +196,7 @@ export function ShopList() {
     </g>
   );
   return (
-    <ShopScene id="list" trace="shop-cart" cam="translate(-960 -1300) scale(2)" over={over}
+    <ShopScene id="list" trace="shop-cart" cam="translate(-960 -1080) scale(2)" over={over}
       label="Close-up of Nanda's handwritten shopping list, clipped to the cart handle: 1 carrots, 2 eggs, 3 three cups, 4 you, with a heart.">
       <EmptyCart />
     </ShopScene>
