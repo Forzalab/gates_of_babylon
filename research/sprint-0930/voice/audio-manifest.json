@@ -460,5 +460,12 @@
   "beat": "1",
   "file": "public/date-beta/voice/12-escape-win/060_1.mp3",
   "text": "[sweetly][smiling] You took the long way."
+ },
+ {
+  "n": 61,
+  "scene": "escape-win",
+  "beat": "2 (u)",
+  "file": "public/date-beta/voice/12-escape-win/061_2-u.mp3",
+  "text": "[softly] You picked sour."
  }
 ]
