@@ -77,15 +77,17 @@ test('ux-six 3: stamps on the kitchen stand-up + escape-win; the basement clock 
   assert.notEqual(gone.props.time, t0);
 });
 
-test('ux-six 6: one pick never moves the meter more than 25% of the goal (pity love-bomb included)', () => {
+test('ux-six 6: one pick never moves the meter more than 25% of the goal (the pity love-bomb alone is exempt: +15)', () => {
   const cap = swingCap(S.love.goal);
   assert.ok(cap <= Math.max(5, Math.floor(S.love.goal / 4)));
-  let p = start(S, { force: 'pity', seed: 3 });
+  let p = start(S, { force: 'pity', seed: 3 }), bombs = 0;
   for (let i = 0; i < 400 && !p.done; i++) {
     const b = beatAt(S, p);
     const was = p.love;
     p = b.choices ? choose(S, p, 0) : next(S, p);
-    if (p.react) assert.ok(Math.abs(p.love - was) <= cap, `swing ${p.love - was} > ${cap}`);
+    if (p.react?.gacha?.id === 'pity') { bombs++; assert.ok(p.react.love >= 15, 'the love-bomb lands its full +15'); }
+    else if (p.react) assert.ok(Math.abs(p.love - was) <= cap, `swing ${p.love - was} > ${cap}`);
     if (ending(S, p)) break;
   }
+  assert.ok(bombs > 0, 'the forced pity tier fired');
 });

@@ -156,7 +156,8 @@ test('engine: a penalty takes love down and clamps at 0; streak of 2 then a ♥ 
   assert.equal(p.react.gacha.id, 'pity');
   assert.equal(p.react.gacha.fx, 'love-bomb');
   assert.equal(S.love.goal, 18);
-  assert.equal(p.love, before + swingCap(18), 'the love-bomb 3 + 15 is capped at +swingCap');
+  assert.equal(p.react.love, 18, 'the love-bomb 3 + 15 is exempt from capSwing (Tony: +15, more vibrant)');
+  assert.equal(p.love, Math.min(18, before + 18));
   assert.equal(capSwing(40, 100), 25, 'cap = 25% of the goal');
   assert.equal(capSwing(-40, 100), -25);
 });

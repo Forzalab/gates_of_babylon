@@ -499,14 +499,16 @@ function take(scenes, pos, c, rm) {
   if (go != null && go === scenes[0].id) return start(scenes, { rm, flags, luck: nextRunLuck(pos.luck) });
   // gacha (gacha.js): a scored pick may roll a bonus tier. react.love = the whole change (base + bonus), react.gacha = the tier.
   const roll = rollGacha(scenes.gacha, pos.luck ?? null, c.love);
-  const was = pos.love ?? l0, love = clampLove(was + capSwing(c.love + roll.bonus, goal), goal);
+  // Tony: the pity love-bomb (and only it) is exempt from capSwing, so it lands its full +15 bonus.
+  const swing = roll.tier?.id === 'pity' ? c.love + roll.bonus : capSwing(c.love + roll.bonus, goal);
+  const was = pos.love ?? l0, love = clampLove(was + swing, goal);
   const here = present(scenes[pos.s], beatAt(scenes, pos));
   const st = { ...runOf(scenes, pos), flags, love, pending: here ? null : pos.pending ?? null, luck: roll.luck };
   const dest = settle(scenes, go ? sceneIndex(scenes, go) : pos.s, go ? 0 : pos.b + 1, rm, st);
   if (!c.love) return dest;
   const t = roll.tier;
   const gacha = t ? Object.freeze({ id: t.id, fx: t.fx, face: t.face, label: t.label, bonus: t.bonus, base: c.love }) : null;
-  const react = Object.freeze({ love: capSwing(c.love + roll.bonus, goal), from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b,
+  const react = Object.freeze({ love: swing, from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b,
     ...(gacha ? { gacha } : {}) });
   return here && !c.pass ? { ...dest, react } : { ...dest, pending: react }; // pass: no frame, the pop shows on the next beat
 }
