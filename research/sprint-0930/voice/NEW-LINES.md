@@ -1,5 +1,7 @@
 # Nanda: new lines from packs/sequences.json (play order)
 
+> **Off the V2 live path.** The V2 variant replaces these scenes; the live script is `ELEVENLABS.md` section 2. Kept for the `sequences` pack only.
+
 ElevenLabs v3 audio tags. Voice rule (BIBLE §1): calm and sweet, knife at the end; hate reacts go flat, no smile.
 IDs = `SEQ-<scene>-<beat>` (beat index after the pack is applied). Reacts marked `(react)`.
 
