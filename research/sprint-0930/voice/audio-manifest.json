@@ -173,5 +173,12 @@
   "beat": "2",
   "file": "public/date-beta/voice/07-v2-rain/036_2.mp3",
   "text": "[bubbly] Share my umbrella. [sing-song] It is small. [whispers][close] Our arms have to touch."
+ },
+ {
+  "n": 37,
+  "scene": "v2-rain",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/07-v2-rain/037_2-r.mp3",
+  "text": "[breathless][happy] Our arms touch. [warm][slow] Now I am warm."
  }
 ]
