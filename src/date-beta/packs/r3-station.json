@@ -16,6 +16,6 @@
   {"scene": "v2-train", "beat": 5, "set": {"bg": "station-ads-insert", "props": {"cut": {"face": "content", "sharp": true}}, "vary": {"bento": {"umeboshi": {"props": {"drink": "umeboshi"}}, "tamagoyaki": {"props": {"drink": "tamagoyaki"}}}}}},
   {"scene": "v2-train", "beat": 6, "set": {"bg": "train-sun", "props": {"cut": {"face": "happy", "raise": true, "plant": 90}}}},
   {"scene": "v2-train", "beat": 7, "set": {"bg": "train-rain-sleepy", "props": {"place": "TRAIN", "time": "5:20 PM", "cut": {"face": "dazed-sleepy", "frame": "off", "sharp": true}}}},
-  {"scene": "v2-train", "beat": 8, "set": {"bg": "platform-rain", "props": {"cut": {"face": "smug-gloating", "plant": 100, "layers": ["black-eye"]}}}}
+  {"scene": "v2-train", "beat": 8, "set": {"bg": "platform-rain", "props": {"rain": "heavy", "cut": {"face": "smug-gloating", "plant": 100, "layers": ["black-eye"]}}}}
  ]
 }

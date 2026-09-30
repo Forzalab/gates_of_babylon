@@ -1,0 +1,220 @@
+[
+ {
+  "name": "v2-rain-0-crossing",
+  "scene": "v2-rain",
+  "beat": 0,
+  "rain": "heavy",
+  "frames": "3",
+  "marks": "15",
+  "umbrella": false,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    773,
+    1400,
+    243
+   ]
+  ],
+  "text": [
+   "BIG CROSSING · 5:30 PM. Heavy rain. The signs glow. Nobody else."
+  ],
+  "errs": []
+ },
+ {
+  "name": "v2-rain-1-umbrella",
+  "scene": "v2-rain",
+  "beat": 1,
+  "rain": "heavy",
+  "frames": "3",
+  "marks": "31",
+  "umbrella": true,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    489,
+    1400,
+    255
+   ],
+   [
+    90,
+    860,
+    553,
+    150
+   ],
+   [
+    683,
+    860,
+    553,
+    150
+   ],
+   [
+    1277,
+    860,
+    553,
+    150
+   ]
+  ],
+  "text": [
+   "Share my umbrella. It is small. Our arms have to touch.",
+   "Step under, close",
+   "Hold it for her",
+   "I will just get wet"
+  ],
+  "errs": []
+ },
+ {
+  "name": "v2-rain-2-alley",
+  "scene": "v2-rain",
+  "beat": 2,
+  "rain": "medium",
+  "frames": "3",
+  "marks": "15",
+  "umbrella": false,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    773,
+    1400,
+    243
+   ]
+  ],
+  "text": [
+   "Close-up. Her shoes are wet. She walks in the puddles for you."
+  ],
+  "errs": []
+ },
+ {
+  "name": "v2-rain-3-eave",
+  "scene": "v2-rain",
+  "beat": 3,
+  "rain": "medium",
+  "frames": "3",
+  "marks": "12",
+  "umbrella": false,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    773,
+    1400,
+    243
+   ]
+  ],
+  "text": [
+   "She looks up at you. Then down. Then up again."
+  ],
+  "errs": []
+ },
+ {
+  "name": "v2-rain-4-stopping",
+  "scene": "v2-rain",
+  "beat": 4,
+  "rain": "stopping",
+  "frames": "2",
+  "marks": "8",
+  "umbrella": false,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    773,
+    1400,
+    243
+   ]
+  ],
+  "text": [
+   "The rain stops. Two pairs of wet shoes walk toward her street."
+  ],
+  "errs": []
+ },
+ {
+  "name": "v2-train-8-platform",
+  "scene": "v2-train",
+  "beat": 8,
+  "rain": "heavy",
+  "frames": "3",
+  "marks": "18",
+  "umbrella": false,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    773,
+    1400,
+    243
+   ]
+  ],
+  "text": [
+   "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'"
+  ],
+  "errs": []
+ },
+ {
+  "name": "escape-win-6-night",
+  "scene": "escape-win",
+  "beat": 6,
+  "rain": "drizzle",
+  "frames": "2",
+  "marks": "10",
+  "umbrella": false,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    773,
+    1400,
+    243
+   ]
+  ],
+  "text": [
+   "Wide. Her street at night. One window lit. It's yours now."
+  ],
+  "errs": []
+ },
+ {
+  "name": "v2-rain-1-umbrella-rm",
+  "scene": "v2-rain",
+  "beat": 1,
+  "rain": "heavy",
+  "frames": "1",
+  "marks": "31",
+  "umbrella": true,
+  "overlap": 0,
+  "boxes": [
+   [
+    260,
+    489,
+    1400,
+    255
+   ],
+   [
+    90,
+    860,
+    553,
+    150
+   ],
+   [
+    683,
+    860,
+    553,
+    150
+   ],
+   [
+    1277,
+    860,
+    553,
+    150
+   ]
+  ],
+  "text": [
+   "Share my umbrella. It is small. Our arms have to touch.",
+   "Step under, close",
+   "Hold it for her",
+   "I will just get wet"
+  ],
+  "errs": []
+ }
+]
