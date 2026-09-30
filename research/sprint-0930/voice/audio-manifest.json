@@ -236,5 +236,12 @@
   "beat": "3",
   "file": "public/date-beta/voice/09-v2-home/045_3.mp3",
   "text": "[smiling][slow] Every choice you made today led here. [pause][perfectly even] I planned them all."
+ },
+ {
+  "n": 47,
+  "scene": "cup",
+  "beat": "0 (t)",
+  "file": "public/date-beta/voice/10-cup/047_0-t.mp3",
+  "text": "[bubbly] I made tamagoyaki. [smiling] For no reason. [perfectly even][sweet] Eat."
  }
 ]
