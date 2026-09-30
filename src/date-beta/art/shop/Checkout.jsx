@@ -6,17 +6,10 @@ import { ShopScene, ShelfBay, Card, Cup, Hand, BasketBed, BasketGoods, BASKET, S
 // vtrace r2: the basket is the trace of ref 03 (the green basket full of groceries, 3/4 from above); her list sits on
 // top (the shared BasketGoods: carrot bag, egg pack, cups 1 + 2 on one baseline) and her hand lowers cup 3.
 export function BasketCups() {
-  const hand = (
-    <g>
-      <Cup x={BASKET.cupsX[2]} y={BASKET.cupsY - 46} s={0.9} shadow={false} />
-      <ellipse cx={BASKET.cupsX[2] - 10} cy={BASKET.cupsY + 3} rx="40" ry="7" fill={SP.shade} opacity=".16" />
-      <Hand x={BASKET.cupsX[2] + 40} y={BASKET.cupsY - 46 - 86 - 128} rot={188} s={0.78} her thumb="right" />
-    </g>
-  );
   return (
-    <ShopScene id="basket" trace="r2-basket" label="Close-up from above: a green shop basket full of groceries. On top: carrots, a pack of eggs and two matching cups. Nanda's hand puts the third cup in.">
+    <ShopScene id="basket" trace="r2-basket" label="Close-up from above: a green shop basket full of groceries. On top: carrots.">
       <Shadow x={980} y={690} w={640} h={60} op={0.28} />
-      <BasketGoods x={930} y={620} s={1.25} cups={2} hand={hand} />
+      <BasketGoods x={930} y={620} s={1.25} />
     </ShopScene>
   );
 }
