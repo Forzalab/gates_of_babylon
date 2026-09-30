@@ -14,6 +14,7 @@ import './theme.js';
 import baseData from './scenes.json';
 import { applyPacks } from './packs/index.js';
 import { loadScenes, start, startAt, next, skip, choose, jumpTo, beatAt, beatView, reactView, present, trail, ending, canAdvance, canChoose, enabled, timeoutPick, tick, isAssetId } from './engine.js';
+import { nextRunLuck } from './gacha.js';
 import { ART as ART0 } from './art/index.js';
 import { GAME } from './game/index.js';
 const ART = { ...ART0, ...GAME }; // game art ids (lock-game) own their beat: choices hidden, onPick(i) plays choice i
@@ -42,7 +43,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'love'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'love', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -110,7 +111,10 @@ const escIsForFullscreen = () => !!document.fullscreenElement || performance.now
   || (innerHeight >= screen.height - 1 && innerWidth >= screen.width - 1);
 
 const LOVE0 = params.has('love') && Number.isFinite(Number(params.get('love'))) ? Number(params.get('love')) : null; // ?love=N (testing)
-const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0 });
+// Gacha luck (gacha.js): ?seed=N replays a seed, else a new seed per boot; ?gacha=<tier id> forces that tier (shots / testing).
+const SEED = params.has('seed') && Number.isInteger(Number(params.get('seed'))) ? Number(params.get('seed')) : (Math.random() * 2 ** 31) >>> 0;
+const FORCE = SCENES.gacha && params.get('gacha') ? params.get('gacha') : null;
+const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0, seed: SEED, force: FORCE });
 
 function Player() {
   const [pos, setPos] = useState(startPos);
@@ -178,13 +182,13 @@ function Player() {
     setPos((p) => choose(SCENES, p, i, RM));
   }, [pos, beat, paused]);
   const advance = useCallback((button = false) => {
-    if (pos.done) { setPos(start(SCENES, { rm: RM })); return; }
+    if (pos.done) { setPos(start(SCENES, { rm: RM, luck: nextRunLuck(pos.luck) })); return; }
     if (paused) return;
     if (end) { if (button) pick(0); return; } // the end card: its button / Space / Enter = play again (choice 0)
     if (!canAdvance(beat, performance.now() - since.current, { button })) return;
     setPos((p) => next(SCENES, p, RM));
   }, [pos, beat, paused, end, pick]);
-  const skipScene = useCallback(() => setPos((p) => (p.done ? start(SCENES, { rm: RM }) : skip(SCENES, p, RM))), []);
+  const skipScene = useCallback(() => setPos((p) => skip(SCENES, p, RM)), []); // skip() on a done run = a new run (keeps the luck going)
 
   useEffect(() => {
     const onKey = (e) => {

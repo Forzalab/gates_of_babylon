@@ -92,6 +92,9 @@ Layer order below is back to front.
 - Shape grammar: (a) 4-point star: two thin long rays crossing at 90 degrees, ray length ~10x core width, concave (pinched) sides. (b) 8-point: 4-point + a shorter 45 degree pair (~60% length). (c) soft glow disc at the core (radial gradient white > blue > transparent). (d) ring + small offset dots = lens-flare variants (skip for anime; too "photo").
 - Tapered rays: each ray fades from bright to transparent along its length.
 
+### 11 Cheek puff (Tony, added 0930; 600x338)
+- Pout: puffed cheeks, flat squashed mouth, brows angled down to the centre, blush hatching on the cheeks, one small teardrop at the eye corner; backdrop = pink halftone polka dots (white field, dots #F4A8C8-ish, bigger/denser at the edges) = the no-motion `anger` backdrop (with the vein); `rage` stays black + lightning. Composition + palette only, never the character.
+
 ## 3. FX specs
 
 Shared rules for all FX (still):

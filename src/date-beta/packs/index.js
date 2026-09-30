@@ -1,5 +1,6 @@
 // packs/index.js: merge content packs into the base scenes.json data (raw JSON in, raw JSON out; loadScenes validates after).
 // pack = { scenes?: [scene], insert?: [{ after, ids: [sceneId] }], patch?: [{ scene, beat, set: {beatFields} }], flags?: {flag:[values]} }
+// gacha: the gacha rules object (gacha.js / research/sprint-0930/emotion-fx/SCHEMA.md), copied to the root `gacha`; a later pack replaces it.
 // notes: ignored. patch with `beats:[...]` inserts those beats before index `beat` (no `set`). drop: [sceneId] removes scenes last.
 // patch with `choice: i` (and `set`) merges into choices[i] of that beat (e.g. a love value).
 // Order: add scenes (appended), insert (move named scenes to sit right after `after`), patch (shallow-merge fields into a beat).
@@ -10,11 +11,12 @@ export function applyPacks(base, packs = []) {
   for (const [n, pack] of packs.entries()) {
     const at = `pack[${pack?.name ?? n}]`;
     if (!pack || typeof pack !== 'object') fail(`${at}: must be an object`);
-    for (const k of Object.keys(pack)) if (!['name', 'note', 'notes', 'scenes', 'insert', 'patch', 'flags', 'drop'].includes(k)) fail(`${at}: unknown key "${k}"`);
+    for (const k of Object.keys(pack)) if (!['name', 'note', 'notes', 'scenes', 'insert', 'patch', 'flags', 'drop', 'gacha'].includes(k)) fail(`${at}: unknown key "${k}"`);
     for (const s of pack.scenes ?? []) {
       if (data.scenes.some((x) => x.id === s.id)) fail(`${at}: scene "${s.id}" already exists`);
       data.scenes.push(structuredClone(s));
     }
+    if (pack.gacha !== undefined) data.gacha = structuredClone(pack.gacha);
     for (const [f, vals] of Object.entries(pack.flags ?? {})) data.flags = { ...data.flags, [f]: vals };
     for (const ins of pack.insert ?? []) {
       let anchor = ins.after;
