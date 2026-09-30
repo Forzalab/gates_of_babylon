@@ -6,7 +6,7 @@ import { buildIndex, fileForLine } from './voice.js';
 const INDEX = buildIndex(manifest);
 const KEY = 'date-beta-voice-muted';
 
-export function createVoice(base = '/', storage = () => localStorage) {
+export function createVoice(base = '/', storage = () => localStorage, onSpeaking = () => {}) {
   let muted = false;
   try { muted = storage().getItem(KEY) === '1'; } catch { /* storage blocked: default sound on */ }
   let unlocked = false, cur = null, want = null;
@@ -14,7 +14,7 @@ export function createVoice(base = '/', storage = () => localStorage) {
   const emit = () => subs.forEach((f) => f(muted));
 
   const stop = () => {
-    if (cur) { try { cur.pause(); } catch { /* ignore */ } cur = null; }
+    if (cur) { try { cur.pause(); } catch { /* ignore */ } cur = null; onSpeaking(false); }
   };
   let queued = null; // a second take to play when this one ends (a two-step beat: lead line, then its own line)
   const start = (file, then = null) => {
@@ -23,7 +23,9 @@ export function createVoice(base = '/', storage = () => localStorage) {
     if (!file || muted || !unlocked || typeof Audio === 'undefined') return;
     try {
       const a = new Audio(`${base}${file}`);
-      a.addEventListener('error', () => { if (cur === a) cur = null; });
+      a.addEventListener('error', () => { if (cur === a) { cur = null; onSpeaking(false); } });
+      a.addEventListener('ended', () => { if (cur === a && !then) onSpeaking(false); });
+      a.addEventListener('playing', () => { if (cur === a) onSpeaking(true); });
       if (then) a.addEventListener('ended', () => { if (cur === a && queued === then) start(then); });
       cur = a;
       a.play()?.catch(() => { if (cur === a) cur = null; });

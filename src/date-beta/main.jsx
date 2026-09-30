@@ -97,7 +97,8 @@ function probeFrames() {
 }
 if (!RM) probeFrames();
 // Voice: Nanda's recorded lines (voice/), one at a time; silent where a line has no file. M = mute.
-const VOICE = createVoice(import.meta.env.BASE_URL);
+const VOICE = createVoice(import.meta.env.BASE_URL, undefined, (on) => ASSETS.duck(on)); // beds -8 dB under a line
+ASSETS.setMuted(VOICE.muted); VOICE.subscribe((m) => ASSETS.setMuted(m)); // M mutes sfx too
 function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
 
 function useFit() {
