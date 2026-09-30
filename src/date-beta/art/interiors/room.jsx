@@ -10,7 +10,7 @@ export function SidePanes({ x0, x1, top = 0, sill, sky = ['#15223e', '#27406a'],
   const id = `sp-${seed}`;
   return (
     <g>
-      <defs><linearGradient id={id} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor={sky[0]} /><stop offset="1" stopColor={sky[1]} /></linearGradient></defs>
+      <defs><linearGradient id={id} x1="0" y1="0" x2="0" y2="1">{sky.map((c, i) => <stop key={i} offset={i / (sky.length - 1)} stopColor={c} />)}</linearGradient></defs>
       <rect x={x0} y={top} width={x1 - x0} height={sill - top} fill={`url(#${id})`} />
       {/* out-of-focus towers + window lights (the rain on the glass blurs them) */}
       <g opacity=".55">
