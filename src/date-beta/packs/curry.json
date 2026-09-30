@@ -72,7 +72,8 @@
             "cut": {
               "frame": "off",
               "sharp": true
-            }
+            },
+            "sfx": "crunch"
           }
         },
         {
@@ -118,7 +119,8 @@
             "cut": {
               "frame": "off",
               "sharp": true
-            }
+            },
+            "sfx": "crunch"
           }
         },
         {

@@ -30,9 +30,9 @@
       "beats": [
         { "text": "A tiny curry house. Oil hisses in the back. Two seats, side by side.", "sfx": "kettle", "props": { "shot": "curry-house-int" } },
         { "speaker": "NANDA", "text": "You sit on the inside. By the wall. So nobody bumps you. So nobody gets you.", "props": { "shot": "curry-house-int" } },
-        { "text": "Close-up. Katsu curry lands. The knife goes in. Crunch.", "sfx": "thump", "props": { "shot": "dish-katsu" } },
+        { "text": "Close-up. Katsu curry lands. The knife goes in. Crunch.", "sfx": "thump", "props": { "shot": "dish-katsu", "sfx": ["crunch@700"] } },
         { "speaker": "NANDA", "text": "Hear that crunch? Like a little bone. Ehehe. Kidding. Say ahh.", "props": { "shot": "dish-katsu" } },
-        { "speaker": "NANDA", "text": "Mm! See? You're so good at making me happy. Keep going. Forever.", "timer": 12, "props": { "shot": "nanda-eat-katsu" },
+        { "speaker": "NANDA", "text": "Mm! See? You're so good at making me happy. Keep going. Forever.", "timer": 12, "props": { "shot": "nanda-eat-katsu", "sfx": "crunch" },
           "choices": [
             { "text": "Anything for you", "side": "pink", "set": { "cold": "no" }, "love": 3, "emote": "hearts", "fx": "love-burst", "react": "Anything. I'll hold you to that. ♡" },
             { "text": "It's just lunch", "side": "mid", "default": true, "set": { "cold": "no" }, "love": 1, "emote": "sweat", "fx": "none", "react": "Nothing is just anything with me." },
@@ -47,7 +47,7 @@
       "id": "seq-station", "title": "Station / ticket gate", "short": "GATE", "bg": "naan", "enter": "fade",
       "beats": [
         { "text": "The station. Noon light through the glass roof. A train sighs somewhere.", "sfx": "train-hum", "props": { "shot": "station-gate" } },
-        { "text": "Close-up. The ticket gate. She taps her card. Then taps it again. For you.", "sfx": "tick", "props": { "shot": "ic-card-tap" } },
+        { "text": "Close-up. The ticket gate. She taps her card. Then taps it again. For you.", "sfx": "tick", "props": { "shot": "ic-card-tap", "sfx": ["ic-beep", "ic-beep@700"] } },
         { "speaker": "NANDA", "text": "I loaded your card last week. You're welcome. Don't ask how.", "props": { "shot": "station-gate" } },
         { "text": "The door chime plays. She holds your sleeve the whole song.", "sfx": "bell", "props": { "shot": "train-door" },
           "choices": [ { "text": "Board the train", "go": "train" } ] }
@@ -99,7 +99,7 @@
     ] } },
 
     { "scene": "rain-crossing", "beat": 2, "beats": [
-      { "sfx": "rain", "text": "Close-up. Rain on the umbrella. Her shoulder gets wet. Yours doesn't.", "props": { "shot": "umbrella-shoulder" } },
+      { "sfx": "rain", "text": "Close-up. Rain on the umbrella. Her shoulder gets wet. Yours doesn't.", "props": { "shot": "umbrella-shoulder", "sfx": "umbrella-rain" } },
       { "speaker": "NANDA", "text": "I'm cold. I don't mind. Dry people don't leave." }
     ] },
 

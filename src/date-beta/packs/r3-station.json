@@ -61,7 +61,8 @@
             "face": "anya-smile",
             "sharp": true
           },
-          "near": "crowd"
+          "near": "crowd",
+          "sfx": "vending-clunk"
         }
       }
     },
@@ -136,7 +137,8 @@
             "face": "content",
             "sharp": true
           },
-          "near": "crowd-bump"
+          "near": "crowd-bump",
+          "sfx": ["ic-beep", "ic-beep@700"]
         },
         "vary": {
           "bento": {
