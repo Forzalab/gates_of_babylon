@@ -164,6 +164,8 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       if (!bg) fail(at, 'no bg (set it on the scene or the beat)');
       if (b.speaker != null && b.speaker !== false && (typeof b.speaker !== 'string' || !b.speaker.trim())) fail(at, 'speaker must be a non-empty string (or false)');
       props = { ...props, ...b.props };
+      // props.shot (art/shots camera id) is per beat, not carried: a shot lasts only on the beats that name it.
+      if (!b.props || !('shot' in b.props)) delete props.shot;
       const text = b.text ?? '';
       if (words(text) > MAX_WORDS) fail(at, `text has ${words(text)} words, max ${MAX_WORDS}`);
       const rmAlt = b.rmAlt ?? 'same';
