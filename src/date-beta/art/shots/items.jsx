@@ -84,4 +84,57 @@ export const ITEMS = {
     <path d="M360 350 l20 30 M430 345 l-10 35" stroke="#ff9aa8" strokeWidth="10" strokeLinecap="round" />
   </g>),
 };
-export const ITEM_LABEL = { curry: 'curry', 'butter-chicken': 'butter chicken', katsu: 'katsu curry', book: 'library book', grocery: 'groceries', teacup: 'tea', bento: 'bento' };
+export const ITEM_LABEL = { curry: 'curry', 'butter-chicken': 'butter chicken', katsu: 'katsu curry', book: 'library book', grocery: 'groceries', teacup: 'tea', bento: 'bento',
+  hands: 'click.', cups3: 'three cups', 'ic-card': 'loaded ♡', umbrella: 'one umbrella', key: 'her key', 'cups-end': 'empty / full' };
+
+const Cup = ({ x, y, full = true, k = 1 }) => (<g transform={`translate(${x} ${y}) scale(${k})`}>
+  <path d="M-70 -40 H70 Q70 50 0 56 Q-70 50 -70 -40Z" fill="#fdfbf5" {...O} />
+  <ellipse cx="0" cy="-40" rx="70" ry="18" fill={full ? '#b6c95a' : '#e8e0cf'} {...O} />
+  <path d="M-40 10 q40 14 80 0" fill="none" stroke="#ff5fa2" strokeWidth="7" strokeLinecap="round" />
+</g>);
+// Sequence inserts (GAPS.md art-to-build)
+Object.assign(ITEMS, {
+  hands: () => (<g>
+    <path d="M40 420 Q160 330 250 300 L330 300 Q360 330 330 360 L250 380 Q150 430 60 500Z" fill="#ffd9c4" {...O} />
+    <path d="M560 180 Q450 250 380 280 L300 290 Q270 320 300 350 L390 340 Q470 300 560 260Z" fill="#fff0e6" {...O} />
+    {[0, 1, 2, 3].map((i) => <rect key={i} x={250 + i * 22} y={250 + i * 6} width="26" height="110" rx="13" fill={i % 2 ? '#ffd9c4' : '#fff0e6'} stroke={INK} strokeWidth="5" transform={`rotate(${-18 + i * 4} ${263 + i * 22} ${305 + i * 6})`} />)}
+    <path d="M300 200 C280 180 255 196 272 214 L300 236 L328 214 C345 196 320 180 300 200Z" fill="#ff5fa2" stroke={INK} strokeWidth="4" />
+    <path d="M470 150 l20 -20 M500 170 l28 -8 M440 130 l4 -28" stroke="#ff5fa2" strokeWidth="7" strokeLinecap="round" />
+  </g>),
+  cups3: () => (<g>
+    <path d="M160 260 Q160 120 300 120 Q440 120 440 260" fill="none" stroke={INK} strokeWidth="12" />
+    <Cup x={200} y={250} k={0.8} full={false} /><Cup x={300} y={230} k={0.8} full={false} /><Cup x={400} y={250} k={0.8} full={false} />
+    <path d="M100 260 H500 L460 500 H140Z" fill="#e8c48f" {...O} />
+    {[190, 250, 310, 370, 420].map((x) => <path key={x} d={`M${x} 290 V470`} stroke="#c9a06a" strokeWidth="6" />)}
+    <path d="M400 150 C388 136 368 148 382 162 L400 176 L418 162 C432 148 412 136 400 150Z" fill="#ff5fa2" stroke={INK} strokeWidth="4" />
+  </g>),
+  'ic-card': () => (<g>
+    <rect x="120" y="330" width="360" height="200" rx="20" fill="#3a3f55" {...O} />
+    <circle cx="300" cy="420" r="60" fill="#8fd3ff" stroke={INK} strokeWidth="5" />
+    <path d="M270 420 q30 -40 60 0 M255 420 q45 -60 90 0" fill="none" stroke="#fff" strokeWidth="6" />
+    <g transform="rotate(-14 300 250)"><rect x="170" y="140" width="260" height="165" rx="18" fill="#ff8fc6" {...O} />
+      <rect x="190" y="160" width="60" height="44" rx="6" fill="#ffd34d" stroke={INK} strokeWidth="4" />
+      <text x="410" y="285" textAnchor="end" className="shot-jp">IC ♡</text></g>
+    <path d="M120 120 l-30 -30 M480 120 l30 -30 M300 80 v-40" stroke="#8fd3ff" strokeWidth="8" strokeLinecap="round" />
+  </g>),
+  umbrella: () => (<g>
+    {[...Array(14)].map((_, i) => <path key={i} d={`M${60 + i * 38} ${60 + (i % 3) * 30} l-14 40`} stroke="#9fb4ff" strokeWidth="5" strokeLinecap="round" />)}
+    <path d="M90 300 Q300 60 510 300 Q470 280 440 300 Q400 270 370 300 Q330 270 300 300 Q270 270 230 300 Q200 270 160 300 Q130 280 90 300Z" fill="#ff8fc6" {...O} />
+    <path d="M300 300 V480 q0 30 -30 30" fill="none" stroke={INK} strokeWidth="10" strokeLinecap="round" />
+    <path d="M430 330 Q520 360 540 520 H400 Q400 400 430 330Z" fill="#8a7ff0" {...O} />
+    <path d="M470 350 q20 60 10 120" stroke="#5a4fb8" strokeWidth="14" opacity=".6" fill="none" />
+    <circle cx="500" cy="380" r="7" fill="#9fb4ff" /><circle cx="520" cy="420" r="6" fill="#9fb4ff" />
+  </g>),
+  key: () => (<g>
+    <g transform="rotate(-24 330 250)"><circle cx="230" cy="250" r="70" fill="#ffd34d" {...O} /><circle cx="230" cy="250" r="26" fill="#fff0e6" stroke={INK} strokeWidth="5" />
+      <path d="M296 238 H500 V262 H470 V300 H440 V262 H410 V290 H380 V262 H296Z" fill="#ffd34d" {...O} /></g>
+    <path d="M100 520 Q140 380 230 340 L400 320 Q460 330 450 380 Q420 420 320 420 Q260 470 230 540Z" fill="#fff0e6" {...O} />
+    <path d="M200 160 C185 145 162 158 178 176 L200 194 L222 176 C238 158 215 145 200 160Z" fill="#ff5fa2" stroke={INK} strokeWidth="4" />
+    {[330, 370, 410].map((x) => <path key={x} d={`M${x} 350 q10 30 0 60`} fill="none" stroke={INK} strokeWidth="4" />)}
+  </g>),
+  'cups-end': () => (<g>
+    <ellipse cx="300" cy="470" rx="260" ry="50" fill="#000" opacity=".2" />
+    <Cup x={190} y={380} full={false} /><Cup x={420} y={380} full />
+    <path d="M410 300 q-10 -30 10 -50 q20 -20 5 -50" fill="none" stroke="#fff" strokeWidth="7" opacity=".6" strokeLinecap="round" />
+  </g>),
+});

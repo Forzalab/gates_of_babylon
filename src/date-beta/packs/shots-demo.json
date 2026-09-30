@@ -91,6 +91,60 @@
      "text": ""
     },
     {
+     "bg": "insert",
+     "props": {
+      "item": "hands",
+      "of": "street-day",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "cups3",
+      "of": "shop-street",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "ic-card",
+      "of": "naan",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "umbrella",
+      "of": "crossing-night",
+      "tone": "night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "key",
+      "of": "street-dusk",
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "cups-end",
+      "of": "teatable",
+      "tone": "night"
+     },
+     "text": ""
+    },
+    {
      "bg": "reaction",
      "props": {
       "emote": "heart",
@@ -144,6 +198,86 @@
       ],
       "zoom": 1.5,
       "tone": "night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "push",
+     "props": {
+      "of": "genkan-in",
+      "x": 960,
+      "y": 520,
+      "from": 1,
+      "to": 1.8
+     },
+     "text": ""
+    },
+    {
+     "bg": "push",
+     "props": {
+      "of": "street-dusk",
+      "x": 960,
+      "y": 540,
+      "from": 1.8,
+      "to": 1,
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "rack",
+     "props": {
+      "of": "street-dusk",
+      "emote": "hearts",
+      "focus": "her"
+     },
+     "text": ""
+    },
+    {
+     "bg": "pov",
+     "props": {
+      "of": "shop-street"
+     },
+     "text": ""
+    },
+    {
+     "bg": "ots",
+     "props": {
+      "of": "street-dusk",
+      "emote": "heart"
+     },
+     "text": ""
+    },
+    {
+     "bg": "timelapse",
+     "props": {
+      "of": "street-day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "dutch",
+     "props": {
+      "of": "basement"
+     },
+     "text": ""
+    },
+    {
+     "bg": "match",
+     "props": {
+      "of": "crossing-day",
+      "to": "teatable",
+      "x": 960,
+      "y": 560
+     },
+     "text": ""
+    },
+    {
+     "bg": "stamp",
+     "props": {
+      "of": "shop-street",
+      "place": "SHOP STREET",
+      "time": "3:10 PM"
      },
      "text": ""
     }
