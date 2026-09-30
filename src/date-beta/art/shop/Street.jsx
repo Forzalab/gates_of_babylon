@@ -1,11 +1,11 @@
 // SHOP cart POV + her list (FIX-LOG.md). Refs 13 + 15 (cart POV down an aisle, one vanishing point).
-import { ShopScene, Hand, BasketBed, AisleVP, SP, VP, pts } from './parts.jsx';
+import { ShopScene, Hand, BasketBed, BasketGoods, AisleVP, Shadow, SP, VP, pts } from './parts.jsx';
 
 // 4. Cart POV (refs 13 + 15; FIX-LOG): one vanishing point (VP) for the aisle AND the cart, the green shop basket in
 // the cart, the red handle at y 560 (hands clear of the dialogue box top, y ~770), your two knit-sleeved hands wrapped round it (5 fingers,
 // thumbs under the bar), and her hand coming in from the right, lying on top of your right hand.
 export const HANDLE_Y = 560;
-export function Cart({ items = false, hands = true, her = true, handle = true }) {
+export function Cart({ items = false, hands = true, her = true, handle = true, aisle = true }) {
   const [vx, vy] = VP;
   const toVP = ([x, y], u) => [x + (vx - x) * u, y + (vy - y) * u];
   const nearL = [430, HANDLE_Y - 20], nearR = [1490, HANDLE_Y - 20], fl = [480, HANDLE_Y + 300], fr = [1440, HANDLE_Y + 300];
@@ -15,7 +15,7 @@ export function Cart({ items = false, hands = true, her = true, handle = true })
   for (let i = 1; i < 6; i++) { const u = i / 6 * 0.42; wires.push([toVP(nearL, u), toVP(fl, u * 0.5 / 0.42)]); wires.push([toVP(nearR, u), toVP(fr, u * 0.5 / 0.42)]); }
   return (
     <g>
-      <AisleVP />
+      {aisle && <AisleVP />}
       {/* the cart: inner floor, far wall, sides, wire mesh, rims on the VP */}
       <polygon points={pts([ffL, ffR, fr, fl])} fill={SP.metalLo} opacity=".35" />
       <g stroke={SP.metalLo} strokeWidth="4" opacity=".8">
@@ -35,21 +35,25 @@ export function Cart({ items = false, hands = true, her = true, handle = true })
   );
 }
 
+// vtrace r2 (research/sprint-0930/shop/vtrace-r2): the aisle is the trace of ref 15, placed so its vanishing point sits
+// on the shared VP (960, 330); the cart, basket, handle and hands stay hand-drawn on that same VP.
 export function ShopCart() {
   return (
-    <ShopScene id="cart" trace={null}
-      label="Your view down the aisle over a shopping cart with a green basket in it. Your two hands hold the red handle. Nanda's hand, with pink nails, lies on top of your right hand.">
-      <Cart />
+    <ShopScene id="cart" trace="r2-cart"
+      label="Your view down a bright supermarket aisle over a shopping cart with a green basket in it. Your two hands hold the red handle. Nanda's hand, with pink nails, lies on top of your right hand.">
+      <Cart aisle={false} />
     </ShopScene>
   );
 }
 
-// the end card + react frame of the game: the same cart, her list in the basket (carrot, eggs, three cups)
+// the end card + react frame of the game (refs 03 / 05): the trace of a basket packed with groceries, seen from above,
+// and her list on top of it (the shared BasketGoods: carrot bag, egg pack, three cups), right of the end card.
 export function ShopCartFull() {
   return (
-    <ShopScene id="cart-full" trace={null}
-      label="The cart again. In the green basket: a bag of carrots, a pack of eggs and three matching cups.">
-      <Cart items her={false} />
+    <ShopScene id="cart-full" trace="r2-basket-full"
+      label="Looking down into a shopping basket packed with groceries. On top: a bag of carrots, a pack of eggs and three matching cups.">
+      <Shadow x={960} y={800} w={640} h={60} op={0.3} />
+      <BasketGoods x={920} y={720} s={1.3} />
     </ShopScene>
   );
 }

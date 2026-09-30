@@ -107,7 +107,17 @@
     {
      "speaker": "NANDA",
      "bg": "shop-list",
-     "text": "Carrots, eggs, three cups, and you. My whole list. ♡"
+     "text": "Carrots, eggs, three cups, and you. My whole list. ♡",
+     "props": {
+      "emote": "hearts",
+      "cut": {
+       "frame": "medium",
+       "face": "anya-smile",
+       "at": "and you",
+       "step": 900,
+       "face2": "heart-laugh"
+      }
+     }
     },
     {
      "speaker": false,
