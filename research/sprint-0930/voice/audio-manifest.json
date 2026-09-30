@@ -201,5 +201,12 @@
   "beat": "2",
   "file": "public/date-beta/voice/08-v2-street/040_2.mp3",
   "text": "[tender][slow] Take small steps. [whispers][close] Small steps… [whispers, slower] make the day longer."
+ },
+ {
+  "n": 41,
+  "scene": "v2-street",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/08-v2-street/041_2-r.mp3",
+  "text": "[whispers] Smaller. [whispers, slower] Smaller. [whispers, slowest] There. [giggles][too long] We are almost still."
  }
 ]
