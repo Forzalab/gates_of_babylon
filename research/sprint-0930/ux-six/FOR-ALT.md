@@ -1,0 +1,11 @@
+# ux-six → alt: items that need alt-owned files (not touched on sprint/ux-six)
+
+Branch: sprint/ux-six (off ccr-8b4548b6-08uz6t). Shots: research/sprint-0930/ux-six/shots/ (1920x1080, 256 colours), checks.json.
+
+1. **Ending card placement (Hud.jsx EndCard / .hud-end, yours):** the ESCAPE card renders off-centre (box spans about x 210-1290 of 1920, shot 1c) and the escape-win end beat draws a black bg behind it. The routing is right: a lock-game win goes escape-win → ending card "ESCAPE", never GAME OVER (checks.json lockWinCard = "ending / ESCAPE", test src/date-beta-uxsix.test.js). Only the card layout/visuals are left.
+2. **Stamp now drawn by the player:** main.jsx draws the place/time stamp as `.db-stamp` (z above her sprite and emote bubble, under the +N pop lane, top 206 px). beta.css hides the art-side `.shot-stamp`. If Rooftop.jsx / scene-a draw a stamp of their own (not the shots Stamp), hide it the same way or it shows twice. The "PLACE · TIME." lead-in is removed from the dialogue text at render time only (data and voice keys are unchanged).
+3. **Basement (Basement.jsx / cellar):** the stamp box now sits at y 206-294, clear of the Kemey tag (y ~380 on escape:12). If you move the tag up, keep it below y 300.
+4. **packs/love.json:** no edits. ux-six.json runs after love (PLAY: ..., love, ux-six, gacha) and inserts two beats: unknown gains beat 3 (NANDA (UPSTAIRS)), escape gains beat 14 (NANDA (ABOVE)), so the lock game is now escape:15. Any love.json or test patch that names escape ≥ 14 or unknown ≥ 3 by index after this merge must move up one.
+5. **Steeped:** the lone "{OR}" beat 0 was dropped (ux-six.json `remove`); the bedroom bg moved to the "Rest." beat. If your ending-card or steeped art expects 6 beats, it is now 5.
+6. **Pity love-bomb:** one pick now moves the meter by no more than max(5, 25% of goal) = 7 points at goal 29 (engine.capSwing). The pity tier still fires and still plays its FX; only the size of the jump changed. If love.json tuning assumed +13, retune it.
+7. **Pink contrast:** `.viewport` overrides --g-pink and --next-body with darker stops (white text ≥ 4.5:1) and dark ink on the `+N` chips. If your end-card buttons use their own pinks, check them against the same ratio.
