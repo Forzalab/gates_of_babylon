@@ -278,5 +278,12 @@
   "beat": "3 R−",
   "file": "public/date-beta/voice/10-cup/055_3-r.mp3",
   "text": "[sudden flat][quiet] Sit. The tea isn't… [sweet] finished."
+ },
+ {
+  "n": 57,
+  "scene": "steeped",
+  "beat": "2 (u)",
+  "file": "public/date-beta/voice/11-steeped/057_2-u.mp3",
+  "text": "[slow] Bitter cup, sour hour. [whispers][perfectly even] Every hour is ours."
  }
 ]
