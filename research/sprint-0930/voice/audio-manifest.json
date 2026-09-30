@@ -243,5 +243,12 @@
   "beat": "0 (t)",
   "file": "public/date-beta/voice/10-cup/047_0-t.mp3",
   "text": "[bubbly] I made tamagoyaki. [smiling] For no reason. [perfectly even][sweet] Eat."
+ },
+ {
+  "n": 48,
+  "scene": "cup",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/10-cup/048_0-r.mp3",
+  "text": "[happy] See? [whispers][close][flat, pleased] You needed me."
  }
 ]
