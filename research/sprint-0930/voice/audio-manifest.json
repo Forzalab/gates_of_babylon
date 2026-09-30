@@ -453,5 +453,12 @@
   "beat": "1",
   "file": "public/date-beta/voice/11-steeped/056_1.mp3",
   "text": "[tender] Rest. [whispers][close] I'll do the remembering."
+ },
+ {
+  "n": 60,
+  "scene": "escape-win",
+  "beat": "1",
+  "file": "public/date-beta/voice/12-escape-win/060_1.mp3",
+  "text": "[sweetly][smiling] You took the long way."
  }
 ]
