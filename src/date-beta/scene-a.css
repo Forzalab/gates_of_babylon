@@ -39,11 +39,11 @@
 .db-choice.sa-mini .db-chip { font-size: 28px; top: -28px; }
 .db-choice.sa-mini .db-deftag { bottom: -30px; font-size: 24px; }
 .db-choice.sa-mini.right { left: 1340px; top: 440px; }
-.db-choice.sa-mini.left { right: 1340px; top: 530px; }
-.db-choice.sa-mini.left.rest0 { top: 690px; }
+.db-choice.sa-mini.left { right: 1340px; top: 420px; }
+.db-choice.sa-mini.left.rest0 { top: 600px; }
 .db-choice.sa-mini.left.rest1 { top: 820px; }
 .db-choice.sa-mini.hot { outline: 6px solid #fff; outline-offset: 10px; }
-.sa-timebar.db-timebar { position: absolute; left: 90px; right: auto; top: 450px; width: 480px; }
+.sa-timebar.db-timebar { position: absolute; left: 90px; right: auto; top: 330px; width: 480px; }
 
 /* ---------- the smile tag: the love pick drawn where NEXT sits ---------- */
 .hud-next.sa-smile { gap: 16px; padding-left: 34px; }
