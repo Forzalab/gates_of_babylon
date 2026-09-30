@@ -194,5 +194,12 @@
   "beat": "2 R−",
   "file": "public/date-beta/voice/07-v2-rain/039_2-r.mp3",
   "text": "[sudden flat][quiet] Then get wet. Sick boys stay… [sweet] inside."
+ },
+ {
+  "n": 40,
+  "scene": "v2-street",
+  "beat": "2",
+  "file": "public/date-beta/voice/08-v2-street/040_2.mp3",
+  "text": "[tender][slow] Take small steps. [whispers][close] Small steps… [whispers, slower] make the day longer."
  }
 ]
