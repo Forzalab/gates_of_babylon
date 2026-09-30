@@ -23,6 +23,7 @@ const ART = { ...ART0, ...GAME }; // game art ids (lock-game) own their beat: ch
 import { BG_FALLBACK } from './art/fallbacks.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
+import { createVoice } from './voice/index.js';
 import { Nanda, speaksNanda } from './Nanda.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
@@ -86,6 +87,8 @@ function probeFrames() {
   setTimeout(() => requestAnimationFrame(step), 1500);
 }
 if (!RM) probeFrames();
+// Voice: Nanda's recorded lines (voice/), one at a time; silent where a line has no file. M = mute.
+const VOICE = createVoice(import.meta.env.BASE_URL);
 function cue(name) { if (name) { document.documentElement.dataset.sfx = name; ASSETS.play(name); } }
 
 function useFit() {
@@ -160,6 +163,13 @@ function Player() {
     const t = setTimeout(() => setReady(true), beat.hold ?? 0);
     return () => clearTimeout(t);
   }, [pos, beat]);
+  // Voice: each new beat (or reaction frame) stops the last line and plays its own, if recorded.
+  const [vmuted, setVmuted] = useState(VOICE.muted);
+  useEffect(() => VOICE.subscribe(setVmuted), []);
+  useEffect(() => {
+    if (pos.done || end) VOICE.stop();
+    else VOICE.show(beat.scene, beat.line?.plain);
+  }, [pos, beat, end]);
   // Auto beats wait while the map is open (the full wait restarts when it closes).
   useEffect(() => {
     if (beat.auto == null || pos.done || tree) return undefined;
@@ -209,6 +219,7 @@ function Player() {
       else if (e.key === ' ' || e.key === 'Enter' || e.key === 'ArrowRight') { e.preventDefault(); advance(true); }
       else if (e.key === 'f' || e.key === 'F') toggleFull();
       else if (e.key === 'p' || e.key === 'P') setPaused((v) => !v);
+      else if (e.key === 'm' || e.key === 'M') VOICE.setMuted(!VOICE.muted);
       else if (/^[1-9]$/.test(e.key)) pick(+e.key - 1);
     };
     const onFull = () => setFull(!!document.fullscreenElement);
@@ -268,6 +279,7 @@ function Player() {
         {/* The way back to Logic mode. The only way in is the Figur wordmark there (src/collapse.js). */}
         <a href={import.meta.env.BASE_URL} onClick={(e) => e.stopPropagation()} title="Back to Logic mode">◂ LOGIC</a>
         {canFull && <button type="button" onClick={stop(toggleFull)} title="Fullscreen (F)">{full ? '✕ exit full' : '⛶ fullscreen'}</button>}
+        <button type="button" onClick={stop(() => VOICE.setMuted(!vmuted))} title="Voice on/off (M)" aria-pressed={vmuted}>{vmuted ? '🔇 voice off' : '🔊 voice'}</button>
         <button type="button" onClick={stop(skipScene)} title="Skip scene (Esc or S)">skip ▸▸</button>
       </div>
       {tree && <Tree scenes={SCENES} decl={data.flags ?? {}} sess={DEBUG} k={k} here={scene.id} onJump={jump} onClose={closeTree} />}
