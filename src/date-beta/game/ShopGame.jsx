@@ -2,7 +2,7 @@
 // You push the cart (POV: the red handle at the bottom edge). 3 aisles, one hard cut each: her list item at the top, a
 // shelf of 3-4 items (click, or keys 1-4), a stepped "She is waiting" timer. Right = the close-up + her happy line.
 // Wrong (or the timer) = her mood climbs for the rest of the game: pout -> OCPD (she straightens the shelf) -> BPD
-// split (flat, then sweet). End card: the cart with the three items + "you ♡", then onPick(bucket): the beat's choice
+// split (flat, then sweet). No end card: after the last reaction, onPick(bucket): the beat's choice
 // 0 (love -2) / 1 (+2) / 2 (+3). Like LockGame: every state is a static frame held >= 334 ms, no transitions, so
 // reduced motion needs no separate path. Rules live in shopgame.js (tested under node).
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -55,8 +55,7 @@ export default function ShopGame({ props = {}, onPick }) {
   // same = back to the same aisle after a wrong pick: the clock keeps its time (it never refills, so a round is <= secs)
   const toShelf = useCallback((s, same = false) => {
     if (s.done) {
-      setFrame({ kind: 'end' });
-      later(HOLD.end, () => { if (!done.current) { done.current = true; onPick?.(bucket(s.wrongs)); } });
+      if (!done.current) { done.current = true; onPick?.(bucket(s.wrongs)); } // no end card: straight to the next beat
       return;
     }
     if (!same) setLeft(secs);
@@ -108,23 +107,6 @@ export default function ShopGame({ props = {}, onPick }) {
 
   const round = ROUNDS[st.r];
   const stop = (e) => e.stopPropagation();
-
-  if (frame.kind === 'end') {
-    return (
-      <div className="sg-root sg-end" onClick={stop}>
-        <Bg id="shop-cart-full" />
-        <div className="sg-card" role="status">
-          <div className="sg-list-title">HER LIST · DONE</div>
-          <ul className="sg-got">
-            {['carrots', 'eggs', 'three'].map((id) => <li key={id}><Icon id={id} /></li>)}
-            <li className="sg-you">you ♡</li>
-          </ul>
-          <div className="sg-line">{st.wrongs === 0 ? 'Every item. First try. You are perfect. ♡' : st.wrongs === 1 ? 'All done. Almost perfect. ♡' : 'All done. Next time, read my list.'}</div>
-        </div>
-        <Her emote={st.wrongs >= 2 ? 'pout' : 'hearts'} />
-      </div>
-    );
-  }
 
   if (frame.kind === 'right') {
     const line = frame.round.id === 'eggs' && rolls ? frame.round.rightRolls : frame.round.right;

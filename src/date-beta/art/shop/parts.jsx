@@ -201,8 +201,6 @@ export function BasketGoods({ x = 0, y = 0, s = 1, cups = 3, hand = null }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${s})`}>
       <Carrot x={-10} y={-60} len={210} a={16} /><Carrot x={20} y={-96} len={220} a={12} /><Carrot x={-30} y={-24} len={200} a={22} />
-      <EggPack x={-150} y={40} w={210} />
-      {BASKET.cupsX.slice(0, cups).map((cx) => <Cup key={cx} x={cx} y={BASKET.cupsY} s={0.9} />)}
       {hand}
     </g>
   );
