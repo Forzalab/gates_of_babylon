@@ -43,3 +43,16 @@ test('r5: park beat 1 (feet close-up) cut; "Hold my hand" is on the real park bg
   assert.equal(hold.props.cut.reach, true);
   assert.match(nandaSVG({ stage: 1, reach: true }), /<circle cx="-44" cy="66" r="17"/);
 });
+
+test('r5: auto faces: a beat without its own face gets one, never the same as the beat before', async () => {
+  const { autoFaces } = await import('./date-beta/art/autoface.js');
+  const beats = ['Hi.', 'We walk.', 'So many people. I will hold your arm. Tight.', 'Wow! A giant board!', 'Right?', 'Ok.', 'Ok.']
+    .map((text) => ({ text, props: {} }));
+  beats.push({ text: 'mine', props: { cut: { face: 'happy' } } });
+  const f = autoFaces(beats, () => 1);
+  assert.equal(f.at(-1), null);
+  for (let i = 1; i < 7; i++) assert.notEqual(f[i], f[i - 1], `beat ${i}`);
+  assert.equal(f[2], 'nervous');
+  assert.equal(f[3], 'heart-laugh');
+  assert.equal(autoFaces([{ text: 'x', props: {} }], () => 4)[0], null);
+});

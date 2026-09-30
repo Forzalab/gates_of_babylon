@@ -419,5 +419,5 @@ body { font-family: var(--cond); color: var(--ink); }
 /* Offscreen speaker label (NANDA (ABOVE)): same tag, dashed = not in the frame */
 .db-say.offscreen .who { border-style: dashed; }
 
-/* R5 v2-train 3: the bump impact marks (fx/BumpFx.jsx), over the blur, under Nanda + the box */
-.db-bumpfx { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; font-family: var(--btn); }
+/* R5 cels (fx/Cels.jsx: the bump marks, the key palm, the door click), over the blur, under Nanda + the box */
+.db-cel { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; font-family: var(--btn); }
