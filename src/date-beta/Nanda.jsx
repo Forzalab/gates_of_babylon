@@ -10,7 +10,7 @@ import { nandaSVG, stageFor } from './art/nanda.js';
 import { faceLayers } from './art/emotion/face.js';
 
 const VIEW = { medium: '-130 -330 320 345', eyes: '-65 -188 150 84.375' };
-export const FRAMES = ['off', 'medium', 'handout', 'pov', 'eyes', 'peek', 'close'];
+export const FRAMES = ['off', 'medium', 'handout', 'pov', 'eyes', 'peek', 'close', 'reach']; // reach (r5): her medium close-up on the right, one pin arm thrust toward the lens
 const BUBBLE = new Set(['medium', 'pov']);
 
 // layers: gacha face layer ids (vein | puff | shadow-eyes | sparkle), still overlays on her face (art/emotion/face.js).

@@ -3,9 +3,10 @@
   "patch": [
     {"scene": "rooftop", "beat": 3, "props": {"cut": {"frame": "handout", "handout": {"tama": 0, "ume": 1}, "face": "blush-embarrassed"}}},
     {"scene": "rooftop", "beat": 9, "props": {"cut": {"frame": "medium", "face": "shy-away", "tag": true}}},
+    {"scene": "v2-park", "beat": 1, "remove": true},
     {"scene": "v2-park", "beat": 0, "props": {"cut": {"face": "content"}}},
-    {"scene": "v2-park", "beat": 2, "props": {"cut": {"face": "nervous", "reactFace": "anya-smile"}}},
-    {"scene": "v2-park", "beat": 4, "props": {"cut": {"face": "big-eyes-peek", "reactFace": "heart-laugh"}}},
+    {"scene": "v2-park", "beat": 1, "props": {"shot": null, "cut": {"frame": "reach", "face": "nervous", "arms": [{"to": [12, 84], "c1": [142, 72], "c2": [96, 120], "w": [3, 15], "r": 17, "front": true, "shake": true, "fingers": [-150, -118, -86, -54, 170]}]}, "react": {"cut": {"reactFace": "anya-smile", "arms": [{"to": [196, 83], "c1": [150, 56], "c2": [176, 92]}]}, "cels": [{"id": "mc-hand-hold", "x": 1331, "y": 601}]}}},
+    {"scene": "v2-park", "beat": 3, "props": {"cut": {"face": "big-eyes-peek", "reactFace": "heart-laugh"}}},
     {"scene": "v2-shop", "beat": 0, "props": {"cut": {"face": "happy"}}},
     {"scene": "v2-shop", "beat": 1, "props": {"cut": {"face": "content"}}},
     {"scene": "v2-shop", "beat": 6, "props": {"cut": {"face": "big-eyes-peek"}}},

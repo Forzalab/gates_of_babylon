@@ -441,3 +441,10 @@ body { font-family: var(--cond); color: var(--ink); }
    (the float audit counts it like the dialogue box); the tea-table BOOK sits in the room night grade under a line */
 .db-bookline { position: absolute; left: 0; width: 1920px; height: 0; pointer-events: none; }
 .stage.focus .db-book .sr-book, .stage.focus .sr-book { filter: brightness(.8); }
+/* r5: in her close-up the box keeps to the left of her body (it never covers her; the text wraps a little earlier) */
+.stage.frame-close .db-say { width: 820px; padding-right: 56px; }
+/* r5 REACH (park "Hold my hand"): a medium close-up on the right, 3 px per sprite unit, cut by the frame bottom; her
+   pin arm comes out of the bubble toward the lens (the nub big in the foreground). The box keeps to the left. */
+.viewport .stage .db-nanda.frame-reach { left: 1000px; right: auto; bottom: 131px; width: 960px; height: 1035px; z-index: 5; animation: none; }
+.stage.frame-reach .db-say { left: 60px; transform: none; width: 820px; padding-right: 56px; }
+.stage.frame-reach .db-choices { z-index: 7; }

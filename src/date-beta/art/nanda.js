@@ -304,7 +304,7 @@ function armSVG(arm, P) {
   // the lit stripe sits on the side facing the one light (upper left)
   const m = cub(a, b, c, d, 0.5), q = cub(a, b, c, d, 0.52), tx = q[0] - m[0], ty = q[1] - m[1];
   const side = (ty * 0.6 - tx * 0.8) > 0 ? 1 : -1;
-  const r = arm.r ?? w1 * 0.95 + 1.9, fw = Math.max(1.6, w1 * 0.72);
+  const r = arm.r ?? w1 * 0.95 + 1.9, fw = Math.max(1.6, Math.min(w1 * 0.72, r * 0.42));
   const fingers = (arm.fingers ?? []).map((deg) => {
     const k = (deg * Math.PI) / 180, e = [d[0] + Math.cos(k) * r * 2.05, d[1] + Math.sin(k) * r * 2.05];
     return `<path d="M${fx2(d)} L${fx2(e)}" stroke="${P.rim}" stroke-width="${fw.toFixed(2)}" stroke-linecap="round"/><path d="M${fx2([d[0] + Math.cos(k) * r, d[1] + Math.sin(k) * r])} L${fx2([e[0] - Math.cos(k) * fw * 0.3, e[1] - Math.sin(k) * fw * 0.3])}" stroke="${P.lit}" stroke-width="${(fw * 0.36).toFixed(2)}" stroke-linecap="round"/>`;
@@ -315,8 +315,9 @@ function armSVG(arm, P) {
     const t = (deg * Math.PI) / 180, x0 = d[0] + Math.cos(t) * r * k, y0 = d[1] + Math.sin(t) * r * k;
     return `<path d="M${fx2([x0, y0])} l${(Math.cos(t) * r * 0.5).toFixed(2)},${(Math.sin(t) * r * 0.5).toFixed(2)}" stroke="${P.rim}" stroke-width="${Math.max(1.2, w1 * 0.3).toFixed(2)}" stroke-linecap="round"/>`;
   }).join('') : '';
-  return `<g class="nd-arm nd-arm-${Array.isArray(from) ? 'x' : from}">${shake}${tube(a, b, c, d, w0, w1, P.rim)}${tube(a, b, c, d, w0 * 0.36, w1 * 0.36, P.lit, side * 0.9, 0.04, 0.94)}${arm.under ? '' : item}
-    <circle cx="${d[0]}" cy="${d[1]}" r="${r.toFixed(2)}" fill="${P.lit}" stroke="${P.rim}" stroke-width="${Math.max(1.4, w1 * 0.5).toFixed(2)}"/><circle cx="${(d[0] - r * 0.32).toFixed(2)}" cy="${(d[1] - r * 0.34).toFixed(2)}" r="${(r * 0.3).toFixed(2)}" fill="#fff" opacity=".8"/>${arm.under ? item : ''}${fingers}</g>`;
+  const nsw = Math.max(1.4, Math.min(w1 * 0.5, r * 0.16));
+  return `<g class="nd-arm nd-arm-${Array.isArray(from) ? 'x' : from}">${shake}${tube(a, b, c, d, w0, w1, P.rim)}${tube(a, b, c, d, w0 * 0.36, w1 * 0.36, P.lit, side * 0.9, 0.04, 0.94)}${arm.under ? '' : item}${fingers}
+    <circle cx="${d[0]}" cy="${d[1]}" r="${r.toFixed(2)}" fill="${P.lit}" stroke="${P.rim}" stroke-width="${nsw.toFixed(2)}"/><circle cx="${(d[0] - r * 0.32).toFixed(2)}" cy="${(d[1] - r * 0.34).toFixed(2)}" r="${(r * 0.3).toFixed(2)}" fill="#fff" opacity=".8"/>${arm.under ? item : ''}</g>`;
 }
 
 let uid = 0;
