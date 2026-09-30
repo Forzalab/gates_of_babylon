@@ -187,5 +187,12 @@
   "beat": "2 R=",
   "file": "public/date-beta/voice/07-v2-rain/038_2-r.mp3",
   "text": "[smiling] Your hand on the handle. [perfectly even] My hand on yours."
+ },
+ {
+  "n": 39,
+  "scene": "v2-rain",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/07-v2-rain/039_2-r.mp3",
+  "text": "[sudden flat][quiet] Then get wet. Sick boys stay… [sweet] inside."
  }
 ]
