@@ -439,5 +439,12 @@
   "beat": "3",
   "file": "public/date-beta/voice/10-cup/052_3.mp3",
   "text": "[amused] For Input B. [giggles][too long] Silly. [perfectly even][smiling] It's always three of us."
+ },
+ {
+  "n": 54,
+  "scene": "cup",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/10-cup/054_3-r.mp3",
+  "text": "[whispers] Hold it. [whispers, slower] Smell it. [whispers, slowest] Then drink. [sweet] I'll wait."
  }
 ]
