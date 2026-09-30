@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><link rel="icon" href="data:,"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HUD mockups</title>
+<link rel="stylesheet" href="../../../src/date-beta/tokens.css">
+<link rel="stylesheet" href="hud.css">
+<style>html, body { margin: 0; background: #1a0710; }</style>
+</head>
+<body>
+<main class="hub">
+  <h1>date-beta · HUD mockups</h1>
+  <p>Love score you must fill, a route minimap with beat pips, per-choice pops with her reaction, a clear NEXT, the goal card, the win splash and the low-score ending. Two bar variants over real engine plates. Add <code>&amp;play</code> to any state for the stepped motion (every step holds 334 ms or longer).</p>
+  <p><a href="sheet.html">Contact sheet</a> · <a href="emotes.html">Emote scale</a> · <a href="SPEC.txt">SPEC.txt (engine contract + draft branches)</a></p>
+  <h2>A · top-edge ribbon</h2>
+  <div class="grid" id="ga"></div>
+  <h2>B · love thermometer beside Nanda</h2>
+  <div class="grid" id="gb"></div>
+</main>
+<script>
+  const S = ['goal', 'line', 'choice', 'plus', 'minus', 'none', 'win', 'low'];
+  for (const v of ['A', 'B']) {
+    document.getElementById(`g${v.toLowerCase()}`).innerHTML = S.map((s) =>
+      `<a class="tile" href="hud.html?v=${v}&amp;s=${s}"><img src="${v}-${s}.png" alt="Variant ${v}, ${s}" width="1920" height="1080" loading="lazy"><span>${v} · ${s}</span></a>`).join('');
+  }
+</script>
+</body>
+</html>

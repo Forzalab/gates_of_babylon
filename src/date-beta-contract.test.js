@@ -4,8 +4,8 @@ import assert from 'node:assert/strict';
 import { loadScenes, start, next, skip, choose, beatAt, beatView, timeoutPick, tick, enabled, resolveGo } from './date-beta/engine.js';
 import data from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
+import { ART_NAMES } from './date-beta-art-names.js';
 
-const ART_NAMES = ['splash', 'rooftop', 'train', 'naan', 'blackout', 'basement'];
 const tiny = (beats, extra = {}) => ({ scenes: [{ id: 'a', bg: 'x', beats, ...extra }] });
 const pair = (a = {}, b = {}, beat = {}) =>
   loadScenes(tiny([{ timer: 5, ...beat, choices: [{ text: 'stay', ...a }, { text: 'leave', ...b }] }]))[0].beats[0];
@@ -25,6 +25,9 @@ test('date-beta contract: explicit speaker wins; "NANDA:" prefix is the fallback
   assert.equal(s.beats[1].line.plain, 'Hi there.');
   assert.equal(s.beats[2].line.who, null);
   assert.throws(() => loadScenes(tiny([{ text: 'x', speaker: '' }])), /speaker/);
+  const [sign] = loadScenes(tiny([{ text: 'NEXT: this {OR} that.', speaker: false }]));
+  assert.equal(sign.beats[0].line.who, null, 'speaker: false = narration, no prefix parse');
+  assert.equal(sign.beats[0].line.plain, 'NEXT: this OR that.');
 });
 
 test('date-beta timer: 0 picks the default, else pink; disabled default -> the other; none enabled -> no pick', () => {

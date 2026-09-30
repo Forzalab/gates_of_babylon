@@ -1,34 +1,41 @@
 {
   "version": 1,
-  "note": "date-beta demo spine: shared scenes -> door -> cup (steeped | unknown -> escape) | leave; every ending card goes back to scene 1, the rooftop (the Figur collapse in Logic mode lands there, as if START was pressed; the old fake-site Splash art is kept but out of the play path). bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
+  "note": "date-beta demo spine: shared scenes (rooftop, train, naan at dusk, blackout, then alt's night walk: platform = the same station at night, underpass, apartment) -> door (stairs beat first) -> genkan-in -> cup (steeped | unknown -> escape) | leave; every ending card goes back to scene 1, the rooftop (the Figur collapse in Logic mode lands there, as if START was pressed; the old fake-site Splash art is kept but out of the play path). bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
   "flags": { "bento": ["umeboshi", "tamagoyaki"] },
+  "love": { "start": 0, "goal": "auto" },
   "scenes": [
     {
       "id": "rooftop",
+      "short": "ROOF",
       "title": "Rooftop / clock tower",
       "bg": "rooftop",
       "enter": "fade",
       "defaults": { "stayed": false, "bento": "umeboshi" },
       "beats": [
-        { "props": { "clock": "live" }, "sfx": "wind", "hold": 1200 },
+        { "props": { "clock": "live" }, "sfx": "wind", "hold": 1200, "card": "goal" },
         { "props": { "clock": "noon" }, "text": "NANDA: Don't look at me like that. It's not for you.", "sfx": "tick",
           "choices": [
-            { "text": "Take the tamagoyaki", "side": "pink", "set": { "bento": "tamagoyaki" } },
-            { "text": "Take the umeboshi", "side": "purple", "set": { "bento": "umeboshi" } }
+            { "text": "Take the tamagoyaki", "side": "pink", "set": { "bento": "tamagoyaki" }, "love": 3 },
+            { "text": "Take the umeboshi", "side": "purple", "set": { "bento": "umeboshi" }, "default": true, "love": 1 }
           ] },
         { "vary": {"bento": {"umeboshi": {"text": "NANDA: Sour. Hm. You like things that bite?"}, "tamagoyaki": {"text": "NANDA: Sweet. Like me. Good input."}}} },
-        { "vary": {"bento": {"umeboshi": {"text": "NANDA: Sour, ne?", "props": {"pucker": true}}, "tamagoyaki": {"text": "NANDA: Sweet, ne? I rolled it myself.", "props": {"pucker": false}}}} },
+        { "vary": {"bento": {"umeboshi": {"text": "NANDA: Sour, ne?", "props": {"pucker": true}}, "tamagoyaki": {"text": "NANDA: Sweet, ne? I rolled it myself.", "props": {"pucker": false}}}},
+          "choices": [
+            { "text": "Best I've ever had", "side": "pink", "love": 1, "emote": "sweat", "react": "…Obviously. Don't stare." },
+            { "text": "Bit salty, honestly", "side": "purple", "love": -2, "emote": "or", "react": "Say that again. Slowly." }
+          ] },
         { "vary": {"bento": {"umeboshi": {"text": "You smile for her anyway."}, "tamagoyaki": {"text": "You smile for her. It's easy."}}} },
         { "text": "MC: Technically, rain wasn't f-{OR}-ecast.", "sfx": "bell" },
         { "props": { "clock": "noon" }, "text": "NANDA: Stay f{OR}ever? The rain can wait.", "scare": 1, "sfx": "breath", "timer": 10,
           "choices": [
-            { "text": "Stay a minute", "side": "pink", "default": true, "set": { "stayed": true } },
-            { "text": "{OR} Leave before the rain", "side": "purple", "set": { "stayed": false } }
+            { "text": "Stay a minute", "side": "pink", "default": true, "set": { "stayed": true }, "love": 3 },
+            { "text": "{OR} Leave before the rain", "side": "purple", "set": { "stayed": false }, "love": -2, "emote": "or", "react": "…Fine. The rain can have you." }
           ] }
       ]
     },
     {
       "id": "train",
+      "short": "TRAIN",
       "title": "Train window / NOT Sweet ad",
       "bg": "train",
       "enter": "fade",
@@ -41,6 +48,7 @@
     },
     {
       "id": "naan",
+      "short": "STATION",
       "title": "Hot NAAN billboard",
       "bg": "naan",
       "enter": "fade",
@@ -51,6 +59,7 @@
     },
     {
       "id": "blackout",
+      "short": "NIGHT",
       "title": "Blackout / ADORE ME",
       "bg": "blackout",
       "scare": 2,
@@ -68,35 +77,95 @@
       ]
     },
     {
+      "id": "platform",
+      "short": "STATION",
+      "title": "Platform / NEXT: {OR} (alt)",
+      "bg": "platform",
+      "enter": "fade",
+      "scare": 1,
+      "beats": [
+        { "props": { "train": "here" }, "text": "Her stop. The rain followed us off the train.", "sfx": "rain", "hold": 1200 },
+        { "props": { "train": "gone" }, "text": "The AND Line leaves. Just two of us now.", "sfx": "train-hum", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },
+        { "text": "NEXT: this {OR} that. The sign never picks.", "speaker": false, "sfx": "breath" }
+      ]
+    },
+    {
+      "id": "underpass",
+      "short": "NIGHT",
+      "title": "Underpass / ads (alt)",
+      "bg": "underpass",
+      "enter": "fade",
+      "scare": 1,
+      "beats": [
+        { "text": "Your steps, her steps. Always an even count.", "sfx": "tick", "hold": 1200 },
+        { "text": "NANDA: Don't read the ads. Read me.", "sfx": "tick" }
+      ]
+    },
+    {
+      "id": "apartment",
+      "short": "HER HOME",
+      "title": "Her building / one lit window (alt)",
+      "bg": "apartment",
+      "enter": "fade",
+      "scare": 1,
+      "beats": [
+        { "text": "Four floors. One window lit.", "sfx": "rain", "hold": 1000 },
+        { "text": "NANDA: That's mine. I left the light on for you.", "sfx": "rain" }
+      ]
+    },
+    {
       "id": "door",
+      "short": "HER HOME",
       "title": "DOOR / Unit 12",
       "bg": "BG-D1",
       "enter": "fade",
       "scare": 1,
       "beats": [
-        { "text": "NANDA: This is me. Unit 12. Obviously you'll remember.", "scare": 0, "sfx": "rain" },
+        { "bg": "stairs", "props": { "door": "shut" }, "sfx": "tick", "hold": 1000 },
+        { "bg": "BG-D1", "text": "NANDA: This is me. Unit 12. Obviously you'll remember.", "scare": 0, "sfx": "rain",
+          "choices": [
+            { "text": "I'll never forget it", "side": "pink", "love": 2, "emote": "heart", "react": "Good. I wrote it on your hand anyway." },
+            { "text": "Which unit again?", "side": "purple", "love": -1, "emote": "pout", "react": "Twelve. Twelve. Twelve. Say it back." }
+          ] },
         { "text": "NANDA: Come in? Just for tea.", "scare": 0, "sfx": "tick" },
         { "text": "NANDA: I already boiled the water. This morning. Just in case.", "sfx": "kettle", "timer": 5,
           "choices": [
-            { "text": "Just one cup", "side": "pink", "default": true, "go": "cup" },
-            { "text": "Say goodnight", "side": "purple", "go": "leave" }
+            { "text": "Just one cup", "side": "pink", "default": true, "go": "genkan-in", "love": 2 },
+            { "text": "Say goodnight", "side": "purple", "go": "leave", "love": -3 }
           ] }
       ]
     },
     {
+      "id": "genkan-in",
+      "short": "HER HOME",
+      "title": "Genkan arrival insert (alt)",
+      "bg": "genkan-in",
+      "scare": 1,
+      "beats": [
+        { "props": { "insert": false }, "text": "Her shoes. Lined up to the millimetre.", "sfx": "thump", "hold": 1000 },
+        { "props": { "insert": true }, "text": "Men's slippers. Already set out.", "sfx": "thump", "motion": true, "rmAlt": "hard-cut", "hold": 1600 },
+        { "text": "A tiny shrine. Inside: a circuit you built.", "sfx": "breath" }
+      ]
+    },
+    {
       "id": "cup",
+      "short": "TEA",
       "title": "Third cup",
       "bg": "BG-D2",
       "enter": "fade",
       "scare": 1,
       "beats": [
-        { "sfx": "kettle", "vary": {"bento": {"umeboshi": {"text": "NANDA: I bought umeboshi. For no reason. Eat.", "props": {"fridge": "umeboshi", "plate": "umeboshi"}}, "tamagoyaki": {"text": "NANDA: I made tamagoyaki. For no reason. Eat.", "props": {"fridge": "tamagoyaki", "plate": "tamagoyaki"}}}} },
+        { "sfx": "kettle", "vary": {"bento": {"umeboshi": {"text": "NANDA: I bought umeboshi. For no reason. Eat.", "props": {"fridge": "umeboshi", "plate": "umeboshi"}}, "tamagoyaki": {"text": "NANDA: I made tamagoyaki. For no reason. Eat.", "props": {"fridge": "tamagoyaki", "plate": "tamagoyaki"}}}},
+          "choices": [
+            { "text": "Eat it all", "side": "pink", "love": 2, "emote": "hearts", "react": "See? You needed me." },
+            { "text": "I'm not hungry", "side": "purple", "love": -1, "emote": "pout", "react": "You will be. Later." }
+          ] },
         { "sfx": "thump", "vary": {"bento": {"umeboshi": {"text": "Third teacup. Nobody poured it. One umeboshi on its saucer."}, "tamagoyaki": {"text": "Third teacup. Nobody poured it. Tamagoyaki on its saucer."}}} },
         { "text": "MC: Who's the third cup for?", "sfx": "tick" },
         { "text": "NANDA: For Input B. Silly. It's always three of us.", "scare": 2, "sfx": "breath",
           "choices": [
-            { "text": "Drink", "side": "pink", "go": "steeped" },
-            { "text": "Stand up", "side": "purple", "go": "unknown" }
+            { "text": "Drink", "side": "pink", "go": "steeped", "love": 3 },
+            { "text": "Stand up", "side": "purple", "go": "unknown", "love": -2, "emote": "or", "react": "Sit. The tea isn't finished." }
           ] }
       ]
     },
@@ -110,11 +179,12 @@
         { "text": "NANDA: Rest. I'll do the remembering.", "sfx": "silence" },
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: Bitter cup, sour hour. Every hour is ours."}, "tamagoyaki": {"text": "NANDA: Warm cup, sweet sleep. You're mine to keep."}}} },
         { "text": "NANDA: ずっと。…F{OR}ever. Ne?", "sfx": "breath" },
-        { "text": "STEEPED.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
+        { "text": "STEEPED.", "sfx": "static", "hold": 1500, "end": "steeped", "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
       "id": "unknown",
+      "short": "HER HOME",
       "title": "Hatch / ladder",
       "bg": "BG-D2",
       "scare": 1,
@@ -128,6 +198,7 @@
     },
     {
       "id": "escape",
+      "short": "HER HOME",
       "title": "ESCAPE / basement (choice steps; 4x4 puzzle later)",
       "bg": "basement",
       "enter": "fade",
@@ -150,8 +221,8 @@
         { "bg": "basement", "props": { "shelf": null }, "text": "Minutes gone. A clock upstairs chimed. You lost count.", "sfx": "bell" },
         { "text": "A heavy door. Behind it, stairs to the street.", "sfx": "rain", "timer": 12,
           "choices": [
-            { "text": "Wait for her", "side": "pink", "default": true, "go": "escape-timeout" },
-            { "text": "Leave her house", "side": "purple", "go": "escape-win" }
+            { "text": "Wait for her", "side": "pink", "default": true, "go": "escape-timeout", "love": 1 },
+            { "text": "Leave her house", "side": "purple", "go": "escape-win", "love": -3 }
           ] }
       ]
     },
@@ -167,7 +238,7 @@
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: Now every hour is ours."}, "tamagoyaki": {"text": "NANDA: Sleep now. You're mine to keep."}}} },
         { "bg": "blackout", "props": { "phase": "dark" }, "sfx": "drone", "auto": 1200 },
         { "text": "NANDA: Mine.", "sfx": "silence" },
-        { "text": "ESCAPE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
+        { "text": "ESCAPE.", "sfx": "static", "hold": 1500, "end": "escape", "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
@@ -183,22 +254,27 @@
         { "vary": {"bento": {"umeboshi": {"text": "NANDA: すっぱい？…ね。"}, "tamagoyaki": {"text": "NANDA: 甘い？…ね。"}}} },
         { "vary": {"bento": {"umeboshi": {"text": "NANDA: One sour hour…"}, "tamagoyaki": {"text": "NANDA: One sweet bite…"}}} },
         { "sfx": "breath", "vary": {"bento": {"umeboshi": {"text": "NANDA: …then every hour is ours."}, "tamagoyaki": {"text": "NANDA: …then sleep. You're mine to keep."}}} },
-        { "text": "ESCAPE?", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
+        { "text": "ESCAPE?", "sfx": "static", "hold": 1500, "end": "escape", "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
       "id": "leave",
+      "short": "CAFÉ",
       "title": "LEAVE / XOR Coffee 7:00 AM",
       "bg": "BG-D1",
       "scare": 1,
       "beats": [
         { "text": "NANDA: Leaving is not an option.", "scare": 2, "sfx": "thump" },
         { "bg": "BG-X1", "text": "XOR Coffee. 7:00 AM.", "scare": 0, "sfx": "static" },
-        { "text": "NANDA: He wakes at 7:00.", "sfx": "tick" },
+        { "text": "NANDA: He wakes at 7:00.", "sfx": "tick",
+          "choices": [
+            { "text": "Who's 'he'?", "side": "pink", "love": 1, "emote": "sweat", "react": "Nobody. Not anymore." },
+            { "text": "Stop following me", "side": "purple", "love": -2, "emote": "or", "react": "I was here first." }
+          ] },
         { "text": "NANDA: From now on… can we be f{OR}ever?", "scare": 2, "sfx": "breath",
           "choices": [
-            { "text": "uhmmm yeah ig", "side": "pink", "go": "leave-yeah" },
-            { "text": "FUCK YOU. I'm leaving", "side": "purple", "go": "leave-fu" }
+            { "text": "uhmmm yeah ig", "side": "pink", "go": "leave-yeah", "love": 1 },
+            { "text": "FUCK YOU. I'm leaving", "side": "purple", "go": "leave-fu", "love": -5 }
           ] }
       ]
     },
@@ -212,7 +288,7 @@
         { "text": "NANDA: You said leave. I heard 'lea—'.", "sfx": "breath" },
         { "text": "CROWD: f{OR}ever and ever", "sfx": "drone" },
         { "text": "CROWD: f{OR}ever and ever and ever", "sfx": "drone" },
-        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
+        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "end": "leave", "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     },
     {
@@ -225,7 +301,7 @@
         { "text": "NANDA: Good input.", "sfx": "breath" },
         { "text": "CROWD: f{OR}ever and ever", "sfx": "drone" },
         { "text": "CROWD: f{OR}ever and ever and ever", "sfx": "drone" },
-        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "choices": [{ "text": "Back to start", "go": "rooftop" }] }
+        { "text": "LEAVE.", "sfx": "static", "hold": 1500, "end": "leave", "choices": [{ "text": "Back to start", "go": "rooftop" }] }
       ]
     }
   ]

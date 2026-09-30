@@ -24,48 +24,41 @@
 .train .ad-bang { font: 400 64px/1 'Bangers', var(--cond); fill: #d7102b; }
 .train .line-name { font: 800 26px/1 'Inter Tight', var(--cond); fill: #2a2a2a; }
 
-/* naan billboard: HTML copy over the SVG illustration */
+/* naan: the light-box scene (Naan.jsx) + the NaanAd SVG (NaanAd.jsx). Ad copy is SVG text, so it scales with the ad. */
 .naan { overflow: hidden; }
 .naan > .board { position: absolute; inset: 0; width: 100%; height: 100%; }
-.naan p, .naan h2 { position: absolute; margin: 0; white-space: nowrap; }
-.naan .hl { left: 16px; right: 16px; top: 24px; height: 160px; display: flex; align-items: center; justify-content: center; gap: 26px;
-  color: #e60012; font-weight: 400; }
-.naan .hl-heart { width: 96px; height: 84px; }
-.naan .hl-hot { font: 400 120px/1 'Yellowtail', cursive; transform: rotate(-6deg); color: #e60012; }
-.naan .hl-naan { display: inline-block; width: 390px; text-align: center; font: 400 150px/1 'Bangers', var(--cond); letter-spacing: .03em;
-  color: #e60012; -webkit-text-stroke: 5px #fff; paint-order: stroke fill; margin-top: 14px; }
-.naan .gl { font-style: normal; display: inline-block; background: #111; color: var(--her); -webkit-text-stroke: 0; padding: 0 4px;
-  margin: 0 1px; transform: translate(3px, -4px) skewX(-6deg); box-shadow: -6px 0 0 #ff5fa2; }
-.naan .gl-rm { margin-left: 22px; }
-.naan .hl-area { font: 900 italic 76px/1 'Inter Tight', var(--cond); color: #111; letter-spacing: -.01em; }
+.naan-ad .na-hot { font: 400 132px/1 'Yellowtail', cursive; fill: #b0102c; }
+.naan-ad .na-naan { font: 400 176px/1 'Bangers', var(--cond); fill: #fff4dc; stroke: #3a1500; stroke-width: 9px; paint-order: stroke fill; stroke-linejoin: round; }
+.naan-ad .na-naan-shadow { fill: #f47a0c; }
+.naan-ad .na-gl { fill: var(--her); stroke: none; }
+.naan-ad .na-area { font: 900 italic 84px/1 'Inter Tight', var(--cond); fill: #0b3431; letter-spacing: -.01em; }
+.naan-ad .na-tabe { font: 800 28px/1 var(--jp); fill: #fff4dc; }
+.naan-ad .na-price { font: 400 124px/1 'Bangers', var(--cond); fill: #fff4dc; stroke: #3a1500; stroke-width: 8px; paint-order: stroke fill; letter-spacing: .02em; }
+.naan-ad .na-tax { font: 800 26px/1 var(--jp); fill: #3a1500; }
+.naan-ad .na-tag { font: 800 46px/1 var(--jp); fill: #fff4dc; letter-spacing: 6px; }
+.naan-ad .na-house { font: 900 italic 50px/1 'Inter Tight', var(--cond); fill: #fff4dc; letter-spacing: -.01em; }
+.naan-ad .na-walk { font: 800 38px/1 var(--jp); fill: #ffc15a; }
+.naan-ad .na-spons { font: 700 22px/1 var(--cond); fill: #c7efe9; }
+.naan-ad .na-figur { font: 400 52px/1 'Yellowtail', cursive; fill: #ff5fa2; }
 
-.naan .v-curry { left: 40px; top: 230px; width: 150px; height: 590px; writing-mode: vertical-rl; background: #e60012; border: 7px solid #ffe100;
-  outline: 5px solid #111; display: flex; align-items: center; justify-content: center;
-  font: 900 66px/1 var(--jp); letter-spacing: 6px; color: #ffe100; }
-.naan .burst { left: 250px; top: 334px; width: 300px; text-align: center; transform: rotate(-12deg);
-  font: 900 64px/1 var(--jp); color: #e60012; }
-.naan .burst span { font: 400 74px/1 'Bangers', var(--cond); }
-.naan .pb { left: 1390px; top: 236px; width: 480px; text-align: center; font: 900 50px/1.1 var(--jp); color: #fff; }
-.naan .pb b { display: block; font: 400 92px/1 'Bangers', var(--cond); letter-spacing: .05em; color: #ff5fa2; -webkit-text-stroke: 3px #fff;
-  paint-order: stroke fill; }
-.naan .pb-spons { left: 1390px; top: 736px; width: 480px; text-align: center; font: 700 26px/1 var(--cond); color: #fff; }
-.naan .pb-spons span { background: #111; padding: 4px 16px 8px; border-radius: 6px; box-shadow: 0 0 0 3px #ff5fa2; }
-.naan .pb-spons b { font: 400 44px/1 'Yellowtail', cursive; color: #ff5fa2; margin-left: 6px; }
-.naan .tabehodai { left: 250px; top: 812px; padding: 12px 34px 16px; background: #e60012; transform: rotate(-4deg);
-  font: 900 86px/1 var(--jp); color: #fff; -webkit-text-stroke: 3px #111; paint-order: stroke fill; border: 6px solid #ffe100; }
-.naan .price { right: 50px; top: 786px; text-align: right; font: 400 150px/1 'Bangers', var(--cond); letter-spacing: .02em; color: #e60012;
-  -webkit-text-stroke: 12px #ffe100; paint-order: stroke fill; transform: rotate(-3deg); }
-.naan .price small { font: 900 40px/1 var(--jp); color: #111; -webkit-text-stroke: 0; background: #ffe100; padding: 6px 10px; margin-left: 8px;
-  vertical-align: 16px; }
-.naan .bang { font: 400 110px/1 'Bangers', var(--cond); color: #e60012; -webkit-text-stroke: 5px #ffe100; paint-order: stroke fill; }
-.naan .b1 { left: 566px; top: 236px; transform: rotate(12deg); }
-.naan .b2 { left: 1250px; top: 660px; transform: rotate(-10deg); }
-.naan .b3 { left: 1040px; top: 820px; transform: rotate(8deg); }
-.naan .foot { left: 170px; top: 958px; height: 92px; display: flex; align-items: center; gap: 44px; }
-.naan .foot b { font: 900 italic 82px/1 'Inter Tight', var(--cond); color: #fff; letter-spacing: -.01em; }
-.naan .foot span { font: 900 62px/1 var(--jp); color: #ffe100; }
-.naan .foot-figur { right: 44px; top: 964px; font: 400 56px/1 'Yellowtail', cursive; color: #ff5fa2; }
-.naan .qr { position: absolute; right: 200px; top: 950px; width: 104px; height: 104px; }
+/* naan platform (NaanPlatform.jsx + stationParts.jsx): station signs + the ad placeholder */
+.naan-platform .sg-num { font: 800 100px/1 'Inter Tight', var(--cond); }
+.naan-platform .sg-jp { font: 700 40px/1 'Inter Tight', var(--jp); letter-spacing: .08em; }
+.naan-platform .sg-jp2 { font: 700 30px/1 'Inter Tight', var(--jp); letter-spacing: .06em; }
+.naan-platform .sg-en { font: 400 28px/1 'Inter Tight', var(--cond); }
+.naan-platform .nb-code { font: 800 18px/1 'Inter Tight', var(--cond); fill: #1c1830; }
+.naan-platform .nb-codenum { font: 800 22px/1 'Inter Tight', var(--cond); fill: #1c1830; }
+.naan-platform .nb-jp { font: 700 52px/1 'Inter Tight', var(--jp); letter-spacing: .12em; fill: #1c1830; }
+.naan-platform .nb-en { font: 400 26px/1 'Inter Tight', var(--cond); fill: #1c1830; }
+.naan-platform .nb-next { font: 700 20px/1 'Inter Tight', var(--jp); fill: #fff; }
+.naan-platform .np-roof { font: 700 30px/1 'Inter Tight', var(--jp); fill: #f4f1ea; }
+.naan-platform .np-plate { font: 700 30px/1 'Inter Tight', var(--jp); fill: #c8102e; }
+/* train='gone' (alt's night platform): the train pulls away into the VP in 3 stepped poses (500 ms each); .rm = hard cut */
+.naan-platform .np-train { transform-box: view-box; transform-origin: 900px 600px; transition: transform 1500ms steps(3, end); }
+.naan-platform .np-train.gone { transform: scale(0); }
+.naan-platform .ad-ph-hl { font: 400 64px/1 'Bangers', var(--cond); letter-spacing: .03em; fill: #e60012; }
+.naan-platform .ad-ph-foot { font: 900 italic 30px/1 'Inter Tight', var(--cond); fill: #fff; }
+.naan-platform .ad-ph-tag { font: 700 20px/1 'Inter Tight', var(--cond); fill: #ffe100; }
 
 /* blackout */
 .blackout { background: #000; display: grid; place-items: center; }
@@ -106,3 +99,16 @@
 .basement .bento { fill: #5a1822; stroke: #2a0a0e; stroke-width: 3; } .basement .band { stroke: #d6b24a; stroke-width: 6; }
 .basement .usu, .basement .usu-top { fill: #6b4a2a; stroke: #2a1a10; stroke-width: 3; } .basement .kine { fill: #8a6238; } .basement .kine-h { stroke: #8a6238; stroke-width: 14; stroke-linecap: round; }
 .basement .plate { fill: #e8e2da; } .basement .mochi { fill: #fffaf2; }
+
+/* ---------- fallback art for missing BG files (fallbacks.js) ---------- */
+.door .unit { font: 800 72px/1 var(--cond); fill: #2a2440; text-anchor: middle; }
+.door .rain line { stroke: #9fb0d8; stroke-width: 2; opacity: .45; }
+.door .rain.on { animation: door-rain 500ms steps(4) infinite; }
+@keyframes door-rain { from { transform: translateY(-44px); } to { transform: translateY(0); } }
+.cafe .sign { font: 400 96px/1 'Yellowtail', cursive; fill: #fdf0dc; text-anchor: middle; }
+.cafe .sign-sub { font: 700 24px/1 var(--cond); letter-spacing: .2em; fill: #e8c46a; text-anchor: middle; text-transform: uppercase; }
+.cafe .menu { font: 700 34px/1 var(--mono); fill: #f4eef6; }
+
+/* train, tamagoyaki ad (Train.jsx AdTamago): the sweet echo, same Figur series as the umeboshi ad */
+.train .ad-ama { font: 900 64px/1 var(--jp-serif); fill: #fff8ea; }
+.train .ad-ama-jp { font: 900 70px/1 var(--jp); fill: #d92b6e; stroke: #ffe100; stroke-width: 9px; paint-order: stroke; letter-spacing: 2px; }

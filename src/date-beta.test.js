@@ -7,8 +7,8 @@ const tiny = (beats, extra = {}) => ({ scenes: [{ id: 'a', bg: 'x', beats, ...ex
 
 test('date-beta: the shipped scenes.json loads, shared scenes then the demo spine', () => {
   const scenes = loadScenes(data);
-  assert.deepEqual(scenes.map((s) => s.id), ['rooftop', 'train', 'naan', 'blackout', 'door', 'cup', 'steeped',
-    'unknown', 'escape', 'escape-win', 'escape-timeout', 'leave', 'leave-fu', 'leave-yeah']);
+  assert.deepEqual(scenes.map((s) => s.id), ['rooftop', 'train', 'naan', 'blackout', 'platform', 'underpass', 'apartment',
+    'door', 'genkan-in', 'cup', 'steeped', 'unknown', 'escape', 'escape-win', 'escape-timeout', 'leave', 'leave-fu', 'leave-yeah']);
 });
 
 test('date-beta: every shipped beat obeys the hard rules (<=12 words, >=500 ms, motion has an RM alt)', () => {
@@ -47,9 +47,9 @@ test('date-beta loader: word count ignores lone punctuation; hold is clamped up 
 test('date-beta sequencer: next walks beats, then scenes, then reports done', () => {
   const scenes = loadScenes({ scenes: [{ id: 'a', bg: 'x', beats: [{}, {}] }, { id: 'b', bg: 'y', beats: [{}] }] });
   let p = start(scenes);
-  assert.deepEqual(p, { s: 0, b: 0, done: false, flags: {} });
-  p = next(scenes, p); assert.deepEqual(p, { s: 0, b: 1, done: false, flags: {} });
-  p = next(scenes, p); assert.deepEqual(p, { s: 1, b: 0, done: false, flags: {} });
+  assert.deepEqual(p, { s: 0, b: 0, done: false, flags: {}, love: 0, path: ['a'] });
+  p = next(scenes, p); assert.deepEqual(p, { s: 0, b: 1, done: false, flags: {}, love: 0, path: ['a'] });
+  p = next(scenes, p); assert.deepEqual(p, { s: 1, b: 0, done: false, flags: {}, love: 0, path: ['a', 'b'] });
   assert.equal(beatAt(scenes, p).bg, 'y');
   p = next(scenes, p); assert.equal(p.done, true);
   assert.deepEqual(next(scenes, p), p, 'done is sticky');
@@ -62,7 +62,8 @@ test('date-beta sequencer: skip (Esc) jumps to the next scene; start can jump to
   assert.equal(scenes[p.s].id, 'train');
   assert.equal(scenes[start(scenes, { at: 'naan' }).s].id, 'naan');
   assert.equal(start(scenes, { at: 'nope' }).s, 0, 'unknown id falls back to the first scene');
-  assert.equal(scenes[skip(scenes, start(scenes, { at: 'blackout' })).s].id, 'door');
+  assert.equal(scenes[skip(scenes, start(scenes, { at: 'blackout' })).s].id, 'platform');
+  assert.equal(scenes[skip(scenes, start(scenes, { at: 'apartment' })).s].id, 'door');
 });
 
 test('date-beta sequencer: reduced motion drops rmAlt "skip" beats (ADORE ME = 3 hard-cut states)', () => {
@@ -118,7 +119,7 @@ test('date-beta choices: a choice beat waits for a pick; go jumps; validation', 
   assert.equal(canChoose(b, 100), false);
   assert.equal(canChoose(b, 600), true);
   const p = start(scenes);
-  assert.deepEqual(choose(scenes, p, 0), { s: 0, b: 1, done: false, flags: {} });
+  assert.deepEqual(choose(scenes, p, 0), { s: 0, b: 1, done: false, flags: {}, love: 0, path: ['a'] });
   assert.equal(scenes[choose(scenes, p, 1).s].id, 'c');
   assert.deepEqual(choose(scenes, p, 5), p, 'no such choice = no move');
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a', go: 'nope' }] }])), /unknown scene/);

@@ -15,6 +15,15 @@
         "value": "roboto",
         "createdAt": "2026-09-29T00:39:17.386Z",
         "reason": "intentional-fonts-tested-separately"
+      },
+      {
+        "rule": "shape-assembled-illustration",
+        "value": "*",
+        "files": [
+          "**/research/date-beta-mockups/hud/**"
+        ],
+        "createdAt": "2026-09-29T21:29:35.653Z",
+        "reason": "HUD mockups: inline SVG is Nanda V1b, the locked hand-built character art (src/date-beta/art/nanda.js), not placeholder clip art"
       }
     ]
   }
