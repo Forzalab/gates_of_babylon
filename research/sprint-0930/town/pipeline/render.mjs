@@ -6,7 +6,7 @@ import { resolve, basename } from 'node:path';
 import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 const [out, ...files] = process.argv.slice(2);
 mkdirSync(out, { recursive: true });
-const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--no-sandbox', '--allow-file-access-from-files'] });
+const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox', '--allow-file-access-from-files'] });
 const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
 for (const f of files) {
   // a wrapper page next to the svg: the svg is drawn at 1920x1080 whatever its own width/height say

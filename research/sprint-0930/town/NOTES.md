@@ -76,3 +76,20 @@ Every Nanda beat is `frame: medium` with `plant: 90`. That puts her shoes on the
   - The chrome has 1 finding, `layout-transition`. It is the shared dialogue chrome, not the town art, and curry reports the same one.
 - **Tests:** `src/date-beta-town.test.js` covers the routing (shop / library → town → curry, and nothing else goes into curry), the PLAY order, the stamp, one face per beat, the plants, the ≤ 700 KB traces and the pun signs. The voice lookup tests are unchanged and pass.
 - **Voice:** `NEW-VOICE-LINES.md` (#248-252, Irohauta, folder `37-v2-town`) is waiting for the rotated ElevenLabs key.
+
+## PURE vtrace (live since 09-30, Tony: "vtrace PURE and compare")
+
+The live bgs are now **one** vtracer pass of the ref, with no hand repaint. This is Tony's cel-over-vtrace technique: the traced background (背景), our flat hand cels (セル) on top, and a BOOK foreground cel.
+
+- `pipeline/pure.py` does the only pre-trace steps. It crops each ref to 16:9 and scales it to 1920x1080 (04 → street, 05 → crossing, 07 → board). It pixelates and blurs every real face, brand logo, watermark and third-party key visual until none can be recognised, and applies a light 2:45 PM grade. Then `trace.py` runs once.
+- The cels are in `Town.jsx`: オア電, メイド・イン・NAND, ANDロイド, NANDでも推せる！, ゲートちゃん, and our ゲートちゃん board (`gate-chan.svg`, built by `pipeline/cels.py` from hand.py's `gate_chan`). Each scene applies one tint and one soft shadow to them (`Cels`). The street has a BOOK lamp pole in front of Nanda, `town-street-book`, which `main.jsx` renders after her as `<bg>-book`.
+- The old shots are kept as `town-*-hybrid` (`trace/town/*-hybrid.svg`).
+- `pure-compare/<id>.png` shows HAND-HYBRID | PURE + cels | REF (blurred). It is built by `pipeline/pure_art.mjs`, run with and without `HYBRID=1`, and then `pipeline/pure_compare.py`. The REF panels of the older `compare/*.png` are now blurred (`--scrub-old`).
+- For the shadow fixes, see `SHADOWS.md`.
+
+```
+python3 pure.py $S/town-refs $S/pure/prep && python3 trace.py $S/pure/prep public/date-beta/trace/town
+python3 research/sprint-0930/town/pipeline/cels.py
+node pure_art.mjs http://localhost:5212 $S/pure/art-pure; HYBRID=1 node pure_art.mjs http://localhost:5212 $S/pure/art-hybrid
+python3 pure_compare.py $S/town-refs $S/pure/art-hybrid $S/pure/art-pure
+```

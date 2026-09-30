@@ -168,6 +168,14 @@ body { font-family: var(--cond); color: var(--ink); }
 /* OBBP: centred in play; back on the right while a modal card (goal card, end card) is up */
 .db-nanda { right: auto; left: 730px; }
 .stage.is-goal .db-nanda, .hud-scrim ~ .db-nanda { left: auto; right: 60px; }
+/* town (research/sprint-0930/town/SHADOWS.md): all 3 pure-vtrace bgs have the street in soft light (04: the street floor is in
+   the buildings' open shade; 05 / 07: overcast), so her contact shadow sits straight UNDER her feet (centred on her
+   column, x 960), soft-edged, cool open-shade ink, and paints BEHIND her sprite and the box (no z-index), never over
+   them. Her body drop-shadow is the same softness (no hard 12 px offset). */
+.stage[data-bg^="town-"] .db-plant { z-index: auto; left: 820px; width: 280px; height: 34px; transform: none;
+  background: radial-gradient(closest-side, rgba(34, 38, 62, .42), rgba(34, 38, 62, .22) 55%, rgba(34, 38, 62, 0)); }
+.stage[data-bg^="town-"] .db-nanda { filter: drop-shadow(0 4px 6px rgba(34, 38, 62, .22)); }
+.db-book { pointer-events: none; }
 @keyframes nanda-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
 /* ================= HUD (Hud.jsx; research/date-beta-mockups/hud/ variant A, Tony's literal copy). `hud-` / `lv-` prefixed.

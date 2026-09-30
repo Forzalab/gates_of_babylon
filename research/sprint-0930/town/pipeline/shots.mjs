@@ -5,7 +5,7 @@ import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 
 const [base = 'http://localhost:5205', out = 'research/sprint-0930/town/shots'] = process.argv.slice(2);
 mkdirSync(out, { recursive: true });
-const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--no-sandbox'] });
+const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
 const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });
 const errs = [];
 p.on('pageerror', (e) => errs.push(e.message));

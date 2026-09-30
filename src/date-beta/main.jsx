@@ -303,7 +303,7 @@ function Player() {
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
       <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''} frame-${frame}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
-        data-scene={scene.id} data-scare={beat.scare}>
+        data-scene={scene.id} data-bg={beat.bg} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
           {!pos.done && (ART[beat.props?.shot] /* props.shot = art/shots id over the beat's bg */
             ? layer(beat.props.shot, 'db-bg', { home: isAssetId(beat.bg) ? BG_FALLBACK[beat.bg] : beat.bg, ...beat.props })
@@ -321,6 +321,7 @@ function Player() {
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             face={end ? null : face} frame={end ? 'medium' : frame} />
         )}
+        {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}

@@ -57,3 +57,17 @@ test('town art: 3 ids registered, each trace <= 700 KB, the pun signs are in the
   const jsx = src('./date-beta/art/town/Town.jsx');
   for (const pun of ['メイド・イン・NAND', 'NANDでも推せる！', 'ANDロイド']) assert.ok(jsx.includes(pun), pun);
 });
+
+test('town pure: live traces are the pure vtrace, the hybrids stay exported, cels + BOOK + town shadows', () => {
+  for (const k of ['street', 'crossing', 'board']) {
+    assert.ok(ART_NAMES.includes(`town-${k}-hybrid`), `${k} hybrid id`);
+    assert.ok(existsSync(new URL(`../public/date-beta/trace/town/${k}-hybrid.svg`, import.meta.url)), `${k} hybrid trace`);
+  }
+  assert.ok(ART_NAMES.includes('town-street-book'));
+  assert.ok(existsSync(new URL('../public/date-beta/trace/town/gate-chan.svg', import.meta.url)));
+  const jsx = src('./date-beta/art/town/Town.jsx');
+  assert.ok(jsx.includes('オア電') && jsx.includes('ゲートちゃん'));
+  const css = src('./date-beta/beta.css');
+  assert.match(css, /\.stage\[data-bg\^="town-"\] \.db-plant \{ z-index: auto;[^}]*transform: none;/);
+});
+
