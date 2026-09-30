@@ -89,5 +89,12 @@
   "beat": "3 R−",
   "file": "public/date-beta/voice/02-v2-park/020_3-r.mp3",
   "text": "[sudden flat][quiet] Okay. My hand can wait. It is good at… [sweet] waiting."
+ },
+ {
+  "n": 21,
+  "scene": "v2-park",
+  "beat": "5",
+  "file": "public/date-beta/voice/02-v2-park/021_5.mp3",
+  "text": "[bright] One job before lunch. [sing-song] My groceries, or my library book?"
  }
 ]
