@@ -1,0 +1,69 @@
+{
+ "log": [
+  {
+   "nm": "90-v2-park-4-RM.png",
+   "beat": "v2-park:4",
+   "who": "NANDA",
+   "line": "One job before lunch. My groceries, or my library book?",
+   "ch": [
+    {
+     "text": "Carry her groceries",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Return her book",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Do it alone, later",
+     "chip": "♡ ??",
+     "cls": "db-chip down"
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "0",
+   "pop": null
+  },
+  {
+   "nm": "91-v2-park-4-RM.png",
+   "beat": "v2-park:4",
+   "who": "NANDA",
+   "line": "The book. It is very late.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "2",
+   "pop": "+2 She liked that."
+  },
+  {
+   "nm": "92-v2-park-5-RM.png",
+   "beat": "v2-park:5",
+   "who": "",
+   "line": "Two pairs of shoes walk out of the park. Hers stay close to yours.",
+   "ch": [
+    {
+     "text": "Walk with her",
+     "chip": "",
+     "cls": ""
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "2",
+   "pop": null
+  }
+ ],
+ "errs": []
+}

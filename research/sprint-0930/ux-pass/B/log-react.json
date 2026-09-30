@@ -1,0 +1,33 @@
+{
+ "log": [
+  {
+   "nm": "20-v2-park-4-react.png",
+   "beat": "v2-park:4-react",
+   "who": "NANDA",
+   "line": "The book. It is very late.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "2",
+   "pop": "+2 She liked that."
+  },
+  {
+   "nm": "21-v2-curry-1-react.png",
+   "beat": "v2-curry:1-react",
+   "who": "NANDA",
+   "line": "Crunchy. Good choice.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "5",
+   "pop": "+3 She liked that."
+  }
+ ],
+ "errs": []
+}

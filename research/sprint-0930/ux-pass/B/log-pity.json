@@ -1,0 +1,315 @@
+{
+ "log": [
+  {
+   "nm": "40-rooftop-2-choices-pick1.png",
+   "beat": "rooftop:2-choices",
+   "who": "NANDA",
+   "line": "I made two. One's for you. Don't look at me like that.",
+   "ch": [
+    {
+     "text": "Take the tamagoyaki",
+     "chip": "♥ +3",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Take the umeboshi",
+     "chip": "♥ +1",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Take neither",
+     "chip": "♡ −3",
+     "cls": "db-chip down"
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "0",
+   "pop": null
+  },
+  {
+   "nm": "41-rooftop-2-flash-pick1-flash.png",
+   "beat": "rooftop:2-flash",
+   "who": "NANDA",
+   "line": "…I woke up at four for this.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": "db-fx hate-quake",
+   "fxText": "",
+   "love": "0",
+   "pop": "−3 She did not like that."
+  },
+  {
+   "nm": "42-rooftop-2-result-pick1-result.png",
+   "beat": "rooftop:2-result",
+   "who": "NANDA",
+   "line": "…I woke up at four for this.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "0",
+   "pop": "−3 She did not like that."
+  },
+  {
+   "nm": "43-rooftop-6-choices-pick2.png",
+   "beat": "rooftop:6-choices",
+   "who": "NANDA",
+   "line": "Sour, ne?",
+   "ch": [
+    {
+     "text": "Best I've ever had",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "It's good",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Bit salty, honestly",
+     "chip": "♡ ??",
+     "cls": "db-chip down"
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "0",
+   "pop": null
+  },
+  {
+   "nm": "44-rooftop-6-flash-pick2-flash.png",
+   "beat": "rooftop:6-flash",
+   "who": "NANDA",
+   "line": "Say that again. Slowly. So I can write it down.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": "db-fx hate-quake",
+   "fxText": "",
+   "love": "0",
+   "pop": "−3 She did not like that."
+  },
+  {
+   "nm": "45-rooftop-6-result-pick2-result.png",
+   "beat": "rooftop:6-result",
+   "who": "NANDA",
+   "line": "Say that again. Slowly. So I can write it down.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "0",
+   "pop": "−3 She did not like that."
+  },
+  {
+   "nm": "46-rooftop-9-choices-pick3.png",
+   "beat": "rooftop:9-choices",
+   "who": "NANDA",
+   "line": "Stay fORever? The rain can wait.",
+   "ch": [
+    {
+     "text": "Stay a minute",
+     "chip": "♥ +3",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Walk with her",
+     "chip": "♥ +1",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "OR Leave before the rain",
+     "chip": "♡ −3",
+     "cls": "db-chip down"
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "0",
+   "pop": null
+  },
+  {
+   "nm": "47-rooftop-9-flash-pick3-flash.png",
+   "beat": "rooftop:9-flash",
+   "who": "NANDA",
+   "line": "A minute. Then another. Then the whole day.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "13",
+   "pop": "+13 She liked that."
+  },
+  {
+   "nm": "48-rooftop-9-result-pick3-result.png",
+   "beat": "rooftop:9-result",
+   "who": "NANDA",
+   "line": "A minute. Then another. Then the whole day.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "13",
+   "pop": "+13 She liked that."
+  },
+  {
+   "nm": "49-v2-park-2-choices-pick4.png",
+   "beat": "v2-park:2-choices",
+   "who": "NANDA",
+   "line": "Hold my hand. My hand is shaking. Only yours can stop it.",
+   "ch": [
+    {
+     "text": "Hold it tight",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Hold one finger",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Pull your hand back",
+     "chip": "♡ ??",
+     "cls": "db-chip down"
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "13",
+   "pop": null
+  },
+  {
+   "nm": "50-v2-park-2-flash-pick4-flash.png",
+   "beat": "v2-park:2-flash",
+   "who": "NANDA",
+   "line": "Okay. My hand can wait. It is good at waiting.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "7",
+   "pop": "−6 She did not like that."
+  },
+  {
+   "nm": "51-v2-park-2-result-pick4-result.png",
+   "beat": "v2-park:2-result",
+   "who": "NANDA",
+   "line": "Okay. My hand can wait. It is good at waiting.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "7",
+   "pop": "−6 She did not like that."
+  },
+  {
+   "nm": "52-v2-park-4-choices-pick5.png",
+   "beat": "v2-park:4-choices",
+   "who": "NANDA",
+   "line": "One job before lunch. My groceries, or my library book?",
+   "ch": [
+    {
+     "text": "Carry her groceries",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Return her book",
+     "chip": "♥ ??",
+     "cls": "db-chip up"
+    },
+    {
+     "text": "Do it alone, later",
+     "chip": "♡ ??",
+     "cls": "db-chip down"
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "7",
+   "pop": null
+  },
+  {
+   "nm": "53-v2-park-4-flash-pick5-flash.png",
+   "beat": "v2-park:4-flash",
+   "who": "NANDA",
+   "line": "Alone? No. Groceries. Now.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": "db-fx hate-quake",
+   "fxText": "",
+   "love": "3",
+   "pop": "−4 She did not like that."
+  },
+  {
+   "nm": "54-v2-park-4-result-pick5-result.png",
+   "beat": "v2-park:4-result",
+   "who": "NANDA",
+   "line": "Alone? No. Groceries. Now.",
+   "ch": [],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "3",
+   "pop": "−4 She did not like that."
+  },
+  {
+   "nm": "55-v2-park-5-choices-pick6.png",
+   "beat": "v2-park:5-choices",
+   "who": "",
+   "line": "Two pairs of shoes walk out of the park. Hers stay close to yours.",
+   "ch": [
+    {
+     "text": "Walk with her",
+     "chip": "",
+     "cls": ""
+    }
+   ],
+   "card": false,
+   "end": null,
+   "game": false,
+   "fx": null,
+   "fxText": null,
+   "love": "3",
+   "pop": null
+  }
+ ],
+ "errs": []
+}

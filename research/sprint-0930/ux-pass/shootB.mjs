@@ -6,7 +6,7 @@ const BASE = 'http://localhost:5191/date-beta.html?seed=2';
 const OUT = new URL('./B/', import.meta.url).pathname;
 const MODE = process.argv[2] || 'main'; // main | timeout | rm
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
-const SHOOT = (b) => /^(v2-library:|unknown:|escape:|escape-win:|escape-timeout:)/.test(b) || b === 'v2-curry:2';
+const SHOOT = (b) => MODE !== 'pity' && MODE !== 'react' && ( /^(v2-library:|unknown:|escape:|escape-win:|escape-timeout:)/.test(b) || b === 'v2-curry:2');
 const LOOK = () => {
   const d = document.documentElement.dataset, q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)];
   const ch = qa('.db-choice').map((c) => ({ text: c.querySelector('.line')?.innerText ?? c.innerText, chip: c.querySelector('.db-chip')?.textContent ?? '', cls: c.querySelector('.db-chip')?.className ?? '' }));
@@ -15,10 +15,10 @@ const LOOK = () => {
 const ctx = await browser.newContext({ viewport: { width: 1920, height: 1080 }, reducedMotion: MODE === 'rm' ? 'reduce' : 'no-preference' });
 const page = await ctx.newPage();
 const errs = []; page.on('pageerror', (e) => errs.push(e.message)); page.on('console', (m) => m.type() === 'error' && errs.push(m.text()));
-const start = MODE === 'timeout' ? '&scene=escape&beat=5' : '&scene=v2-park&beat=4';
+const start = MODE === 'pity' ? '&scene=rooftop&beat=2' : MODE === 'timeout' ? '&scene=escape&beat=5' : '&scene=v2-park&beat=4';
 await page.goto(BASE + start, { waitUntil: 'networkidle' });
 await page.waitForFunction(() => document.documentElement.dataset.beat || document.querySelector('.hud-card'), null, { timeout: 15000 });
-let n = MODE === 'timeout' ? 60 : MODE === 'rm' ? 90 : 0;
+let n = MODE === 'react' ? 20 : MODE === 'pity' ? 40 : MODE === 'timeout' ? 60 : MODE === 'rm' ? 90 : 0;
 const log = [];
 const shot = async (s, tag = '') => { const nm = `${String(n++).padStart(2, '0')}-${(s.beat || 'x').replace(':', '-')}${tag}${MODE === 'rm' ? '-RM' : ''}.png`; await page.screenshot({ path: OUT + nm }); log.push({ nm, ...s }); console.log(nm, s.who, '|', s.line.slice(0, 60), '|', s.ch.map((c) => c.chip + c.text).join(' / '), s.fx ? 'FX:' + s.fx + ' ' + s.fxText : '', s.love ?? ''); };
 const PLAN = { 'v2-park:4': 'Return her book', 'v2-curry:1': 'Katsu', 'cup:4': 'Stand up' };
@@ -50,7 +50,7 @@ while (Date.now() - t0 < 400000) {
   if (s.card) { await page.waitForTimeout(1200); await page.locator('.hud-card .hud-next').click().catch(() => {}); await page.waitForTimeout(400); continue; }
   if (s.ch.length) {
     await page.waitForTimeout(300);
-    let idx = -1; const want = PLAN[s.beat]; if (want) idx = s.ch.findIndex((c) => c.text.includes(want));
+    let idx = -1; const want = MODE === 'pity' ? null : PLAN[s.beat]; if (want) idx = s.ch.findIndex((c) => c.text.includes(want));
     if (idx < 0) { // D,D,U pattern: two 💔 in a row, then a ♥ (pity love-bomb check)
       const down = s.ch.findIndex((c) => /down/.test(c.cls)), up = s.ch.map((c, i) => [i, +(c.chip.match(/\d+/) || [0])[0]]).filter(([i]) => !/down/.test(s.ch[i].cls)).sort((a, b) => b[1] - a[1])[0];
       if (downs < 2 && down >= 0 && !/Run home alone/.test(s.ch[down].text)) { idx = down; downs++; } else { idx = up ? up[0] : 0; downs = 0; }
@@ -59,10 +59,12 @@ while (Date.now() - t0 < 400000) {
     if (MODE !== 'timeout' && /^escape:14/.test(s.beat)) idx = s.ch.findIndex((c) => /Leave her house/.test(c.text));
     if (MODE === 'timeout' && /^escape:14/.test(s.beat)) idx = s.ch.findIndex((c) => /Wait for her/.test(c.text));
     if (idx < 0) idx = 0;
-    if (SHOOT(s.beat) || s.fx) { /* choice frame already shot */ }
+    if (MODE === 'pity') { await shot({ ...s, beat: s.beat + '-choices' }, '-pick' + (++picks)); if (picks > 5) break; }
     await page.locator('.db-choice').nth(idx).click({ timeout: 4000 }).catch(() => {});
-    await page.waitForTimeout(500);
-    const a = await page.evaluate(LOOK); if (a.fx && !fxSeen.has(a.fx + '@' + s.beat)) { fxSeen.add(a.fx + '@' + s.beat); await shot({ ...a, beat: s.beat + '-after' }, '-pick-fx'); }
+    if (MODE === 'react' && PLAN[s.beat]) { await page.waitForTimeout(700); const r = await page.evaluate(LOOK); await shot({ ...r, beat: s.beat + '-react' }, ''); if (s.beat === 'v2-curry:1') break; }
+    if (MODE === 'pity') { for (let t = 0; t < 14; t++) { await page.waitForTimeout(90); const q = await page.evaluate(LOOK); if (q.fx || q.pop) { await shot({ ...q, beat: s.beat + '-flash' }, '-pick' + picks + '-flash'); break; } } }
+    await page.waitForTimeout(MODE === 'pity' ? 900 : 500);
+    const a = await page.evaluate(LOOK); if (MODE === 'pity') await shot({ ...a, beat: s.beat + '-result' }, '-pick' + picks + '-result'); else if (a.fx && !fxSeen.has(a.fx + '@' + s.beat)) { fxSeen.add(a.fx + '@' + s.beat); await shot({ ...a, beat: s.beat + '-after' }, '-pick-fx'); }
     continue;
   }
   const nb = page.locator('.hud-next').first();
