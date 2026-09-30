@@ -1,7 +1,8 @@
 // SHOP (research/sprint-0930/shop/SHOTLIST.md): art id -> component ({ props, rm }), spread into ART in art/index.js.
 // Order = the spatial chain: street -> doors -> list -> cart -> aisles 1-3 (the HER LIST game) -> basket -> snacks ->
 // checkout -> register -> nails -> self-checkout -> way out.
-import { ShopVending, ShopDoors, ShopList, ShopCart, ShopCartFull, ShopExit } from './Street.jsx';
+import { ShopList, ShopCart, ShopCartFull } from './Street.jsx';
+import { ShopVending, ShopDoors, ShopExit } from './Front.jsx';
 import { AisleProduce, ProduceCarrots, AisleEggs, EggsRack, AisleCups, CupsFront, TeaTins } from './Aisles.jsx';
 import { BasketCups, ShopSnacks, CheckoutWide, Register, BasketHandle, SelfCheckout, SelfCheckoutClose } from './Checkout.jsx';
 

@@ -1,7 +1,7 @@
-// SHOP 6-12 (SHOTLIST.md): the basket, the snack aisle on the way, the checkout lanes, the register, her nails, the
+// SHOP 6-12 (SHOTLIST.md + FIX-LOG.md; all hand-pass cel rebuilds on the shared light/VP/palette): the basket, the snack aisle on the way, the checkout lanes, the register, her nails, the
 // self-checkout. Refs: 8d83db1f (basket), 0a536433 (snacks), d110f421 (checkout wide), c6ec0ec2 (retro register),
 // 8873611d (basket handle), b56aeeaa (self-checkout).
-import { ShopScene, Card, Cup, Hand, BasketBed, BASKET, Shadow, SP, pts } from './parts.jsx';
+import { ShopScene, ShelfBay, Card, Cup, Hand, BasketBed, BASKET, Shadow, SP, VP, pts } from './parts.jsx';
 
 // 6. Close-up (refs 03 + 05): THE basket bed in the cart. Cups 1 + 2 already stand on the basket floor (one baseline,
 // one shadow direction); her hand, from the upper right, lowers cup 3 into its slot, fingers round the rim.
@@ -26,42 +26,81 @@ export function BasketCups() {
   );
 }
 
-// 7. On the way to the checkout: the snack shelf (0a536433). Our own package names.
+// 7. On the way to the checkout (ref 04): the strawberry-snack shelf, face-on (one ShelfBay, the shared VP), the
+// NAND BITES header hung level from the plank lip on two hangers.
+const SnackBag = ({ x, y, c = '#ff9ab8' }) => (
+  <g>
+    <rect x={x - 12} y={y - 4} width="120" height="8" fill={SP.shade} opacity=".2" />
+    <path d={`M${x} ${y} L${x + 4} ${y - 150} L${x + 116} ${y - 150} L${x + 120} ${y} Z`} fill={c} stroke={SP.line} strokeWidth="3" strokeLinejoin="round" />
+    <rect x={x + 4} y={y - 150} width="112" height="14" fill="#fff" opacity=".6" />
+    <circle cx={x + 60} cy={y - 76} r="26" fill={SP.red} /><path d={`M${x + 50} ${y - 102} l10 -10 l10 10`} stroke={SP.leaf} strokeWidth="5" fill="none" />
+    <text x={x + 60} y={y - 20} textAnchor="middle" fontSize="20" fill="#fff" className="shop-jp">いちご</text>
+  </g>
+);
 export function ShopSnacks() {
   return (
-    <ShopScene id="snacks" trace="shop-snacks" label="Aisle 4, a snack shelf: strawberry sweets in pink bags, with little price tags.">
-      <g transform="rotate(-8 1270 440)">
-        <rect x="1060" y="360" width="420" height="140" rx="30" fill="#fff4f6" stroke="#e0467f" strokeWidth="6" />
-        <text x="1270" y="428" textAnchor="middle" fontSize="54" fill="#e0467f" className="shop-jp">いちご</text>
-        <text x="1270" y="484" textAnchor="middle" fontSize="44" fill="#d8262e" className="shop-sign">NAND BITES</text>
-      </g>
-      <Card x={400} y={870} w={170} h={70} r={4} rot={-6} lines={[['¥128', 44, '#d81e2a']]} />
-      <Card x={800} y={790} w={170} h={70} r={4} rot={-6} lines={[['NOT ON', 26], ['THE LIST', 26]]} />
+    <ShopScene id="snacks" trace={null} label="Aisle 4, a snack shelf: strawberry sweets in pink bags, under a level NAND BITES sign.">
+      <ShelfBay planks={[380, 620]} top={180}>
+        {Array.from({ length: 13 }, (_, i) => <SnackBag key={i} x={80 + i * 136} y={380} c={['#ff9ab8', '#f6c1d4', '#e8574e'][i % 3]} />)}
+        {Array.from({ length: 13 }, (_, i) => <SnackBag key={`b${i}`} x={80 + i * 136} y={620} c={['#f6c1d4', '#e8574e', '#ff9ab8'][i % 3]} />)}
+        {Array.from({ length: 13 }, (_, i) => <SnackBag key={`c${i}`} x={80 + i * 136} y={850} c={['#e8574e', '#ff9ab8', '#f6c1d4'][i % 3]} />)}
+      </ShelfBay>
+      <path d="M1320 412 L1320 440 M1520 412 L1520 440" stroke={SP.metalLo} strokeWidth="5" />
+      <Card x={1260} y={440} w={320} h={110} r={20} fill="#fff4f6" stroke={SP.pink} lines={[['いちご', 40, SP.pink, 'shop-jp'], ['NAND BITES', 36, SP.red]]} />
+      <Card x={200} y={396} w={150} h={50} r={4} lines={[['¥128', 34, '#d81e2a']]} />
+      <Card x={420} y={636} w={170} h={60} r={4} lines={[['NOT ON', 22], ['THE LIST', 22]]} />
     </ShopScene>
   );
 }
 
-// 8. The checkout lanes (d110f421): hanging lane boards redrawn; lane 2 lit.
-function Hang({ x, y, n, on, s = 1 }) {
+// 8. The checkout lanes (refs 07 + 08): one-point view down the front of the shop. Counters on the left run to the
+// shared VP; the lane boards hang on the same lines, so they shrink monotonically (2 nearest). Floor with lane
+// markings, two shopper silhouettes for scale, your basket on the lane-2 counter (x 1250-1700).
+function Board({ x, y, n, s, on }) {
   return (
     <g transform={`translate(${x} ${y}) scale(${s})`}>
-      <line x1="0" y1="-400" x2="0" y2="0" stroke="#3a3440" strokeWidth="3" />
-      <rect x="-44" y="0" width="88" height="130" rx="6" fill="#1f1d26" />
-      <circle cx="0" cy="40" r="30" fill={on ? '#fff3b0' : '#6a6870'} />
-      <text x="0" y="54" textAnchor="middle" fontSize="40" fill="#1f1d26" className="shop-sign">{n}</text>
-      <text x="0" y="112" textAnchor="middle" fontSize="28" fill="#fff" className="shop-jp">レジ</text>
+      <line x1="0" y1="-300" x2="0" y2="0" stroke={SP.metalLo} strokeWidth="4" />
+      <rect x="-50" y="0" width="100" height="120" rx="8" fill="#1f1d26" />
+      <circle cx="0" cy="44" r="32" fill={on ? '#fff3b0' : '#6a6870'} />
+      <text x="0" y="58" textAnchor="middle" fontSize="44" fill="#1f1d26" className="shop-sign">{n}</text>
+      <text x="0" y="108" textAnchor="middle" fontSize="26" fill="#fff" className="shop-jp">レジ</text>
     </g>
   );
 }
-
 export function CheckoutWide() {
+  const [vx, vy] = VP;
+  const lane = (x0, u) => [x0 + (vx - x0) * u, 1080 + (vy - 1080) * u];
+  const counters = [[1500, 0.05], [1500, 0.35], [1500, 0.55], [1500, 0.68]];
   return (
-    <ShopScene id="checkout" trace="checkout-wide" label="The checkout lanes: wooden counters under hanging lane boards. Lane 2 is lit and open.">
-      <Hang x={1595} y={44} n="2" on s={1.2} />
-      <Hang x={1468} y={206} n="3" s={0.8} />
-      <Hang x={1065} y={180} n="4" s={0.75} />
-      <Hang x={787} y={236} n="5" s={0.5} />
-      <Card x={640} y={950} w={520} h={100} rot={-4} fill="#2f2f3a" stroke="#f2c14e" lines={[['LANE 2 OPEN · 1 IS NOT', 40, '#f2c14e']]} />
+    <ShopScene id="checkout" trace={null} label="The checkout lanes: counters in a row under hanging lane boards. Lane 2 is lit and open; your basket is on its counter.">
+      <rect width="1920" height="1080" fill={SP.wall} />
+      <rect width="1920" height="90" fill={SP.ceil} />
+      {[-500, 0, 500].map((x) => <polygon key={x} points={pts([[960 + x - 60, 0], [960 + x + 60, 0], [vx + x * 0.2 + 12, vy - 150], [vx + x * 0.2 - 12, vy - 150]])} fill={SP.lamp} />)}
+      <rect y={vy} width="1920" height={1080 - vy} fill={SP.floor} />
+      {[-600, -100, 400, 900, 1400, 1900, 2400].map((x) => <line key={x} x1={x} y1="1080" x2={vx} y2={vy} stroke={SP.floorLine} strokeWidth="3" />)}
+      {[0.3, 0.55, 0.72].map((u) => <line key={u} x1="0" y1={1080 + (vy - 1080) * u} x2="1920" y2={1080 + (vy - 1080) * u} stroke={SP.floorLine} strokeWidth="3" />)}
+      {/* shelving far back */}
+      <rect x="0" y="200" width="1920" height={vy - 200} fill={SP.wallLo} />
+      {Array.from({ length: 24 }, (_, i) => <rect key={i} x={i * 80 + 10} y="230" width="60" height="80" rx="4" fill={['#e8574e', '#f2c14e', '#6fb56b', '#5b8fd6', '#f08fb8'][i % 5]} opacity=".7" />)}
+      {/* shoppers (flat silhouettes) */}
+      {[[300, 0.5], [620, 0.35]].map(([x, u]) => { const [px, fy] = lane(x, u); const k = 1 - u; return <g key={x} fill="#8a93a0"><path d={`M${px - 50 * k} ${fy} L${px - 60 * k} ${fy - 330 * k} Q${px} ${fy - 400 * k} ${px + 60 * k} ${fy - 330 * k} L${px + 50 * k} ${fy} Z`} /><circle cx={px} cy={fy - 430 * k} r={46 * k} /></g>; })}
+      {/* counters from far to near (right side), all on the VP */}
+      {counters.slice().reverse().map(([x0, u], i) => {
+        const k = 1 - u;
+        const [x, y] = lane(x0, u);
+        return (
+          <g key={u}>
+            <polygon points={pts([[x - 40 * k, y - 380 * k], [x + 440 * k, y - 380 * k], [x + 440 * k, y], [x - 40 * k, y]])} fill={SP.plank} stroke={SP.plankLo} strokeWidth="3" />
+            <rect x={x - 40 * k} y={y - 390 * k} width={480 * k} height={16 * k} fill={SP.plankTop} />
+          </g>
+        );
+      })}
+      {[[0.63, '5'], [0.5, '4'], [0.3, '3'], [0, '2']].map(([u, n]) => (
+        <Board key={n} x={1470 + (vx - 1470) * u} y={170 + (vy - 170) * u} n={n} s={0.9 * (1 - u)} on={n === '2'} />
+      ))}
+      {/* your basket on the lane-2 counter */}
+      <BasketBed x={1560} y={566} s={0.42} />
+      <Card x={140} y={600} w={440} h={80} rot={0} fill="#2f2f3a" stroke={SP.gold} lines={[['LANE 2 OPEN · 1 IS NOT', 34, SP.gold]]} />
     </ShopScene>
   );
 }
@@ -148,48 +187,59 @@ export function BasketHandle() {
   );
 }
 
-// 11. The self-checkout lane (b56aeeaa): the caption + the man removed; the near machine and the cold case redrawn.
+// 11. The self-checkout lane (ref 08): the near machine stands RIGHT of Nanda's slot (x 1240-1760) on a pedestal, its
+// bag tray level (horizontal, like the shelf rows behind), the monitor on a post with a base. Tiled floor with one
+// window reflection from the upper right. 11b = the same layers scaled about ONE point (960, 600).
 function Machine({ screen }) {
   return (
     <g>
-      {/* cold case at the back */}
-      <polygon points={pts([[880, 150], [1500, 120], [1500, 600], [880, 600]])} fill="#f1f5f8" />
-      {[230, 330, 430, 530].map((y) => <rect key={y} x="900" y={y} width="590" height="10" fill="#c7d2da" />)}
-      {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => [190, 290, 390, 490].map((y, j) => <rect key={`${i}${j}`} x={912 + i * 72} y={y} width="52" height="36" rx="4" fill={['#bde0f5', '#fff', '#f5c8a8', '#d8f0c8'][(i + j) % 4]} />))}
-      {/* the near machine: pole + a tilted screen + the bag scale */}
-      <rect x="760" y="110" width="22" height="360" fill="#7a818c" />
-      <polygon points={pts([[620, 110], [940, 90], [960, 330], [640, 350]])} fill="#2a3240" stroke="#141820" strokeWidth="6" />
-      <polygon points={pts([[640, 126], [924, 108], [940, 314], [656, 332]])} fill="#dff3ff" />
+      <rect width="1920" height="1080" fill={SP.wall} />
+      <rect width="1920" height="80" fill={SP.ceil} />
+      {/* the cold case at the back: level rows */}
+      <rect x="80" y="170" width="1100" height="520" fill="#f1f5f8" stroke={SP.metalLo} strokeWidth="4" />
+      {[270, 380, 490, 600].map((y) => <rect key={y} x="80" y={y} width="1100" height="10" fill="#c7d2da" />)}
+      {Array.from({ length: 14 }, (_, i) => [210, 320, 430, 540].map((y, j) => <rect key={`${i}${j}`} x={100 + i * 76} y={y + 6} width="56" height="54" rx="4" fill={['#bde0f5', '#fff', '#f5c8a8', '#d8f0c8'][(i + j) % 4]} />))}
+      {/* floor + the window reflection */}
+      <rect y="760" width="1920" height="320" fill={SP.floor} />
+      {[-600, -200, 200, 600, 1000, 1400, 1800, 2200, 2600].map((x) => <line key={x} x1={x} y1="1080" x2={x + (VP[0] - x) * (320 / 750)} y2="760" stroke={SP.floorLine} strokeWidth="3" />)}
+      {[840, 950].map((y) => <line key={y} x1="0" y1={y} x2="1920" y2={y} stroke={SP.floorLine} strokeWidth="3" />)}
+      <polygon points={pts([[1300, 770], [1760, 770], [1640, 1080], [1080, 1080]])} fill={SP.floorHi} opacity=".8" />
+      {/* the machine: pedestal, body, level tray, post + monitor */}
+      <Shadow x={1500} y={780} w={560} h={50} op={0.3} />
+      <rect x="1300" y="560" width="400" height="220" fill="#dfe4ea" stroke={SP.metalLo} strokeWidth="5" />
+      <rect x="1680" y="566" width="14" height="208" fill="#fff" opacity=".6" />
+      <rect x="1240" y="520" width="520" height="44" rx="6" fill="#c9d5e2" stroke="#6c7887" strokeWidth="5" />
+      <rect x="1480" y="250" width="26" height="270" fill={SP.metalLo} />
+      <rect x="1440" y="506" width="106" height="16" rx="4" fill={SP.metalLo} />
+      <rect x="1310" y="150" width="380" height="250" rx="12" fill="#2a3240" stroke="#141820" strokeWidth="6" />
+      <rect x="1330" y="168" width="340" height="214" rx="6" fill="#dff3ff" />
       {screen}
-      <polygon points={pts([[560, 440], [1260, 420], [1300, 600], [600, 620]])} fill="#c9d5e2" stroke="#6c7887" strokeWidth="5" />
-      <polygon points={pts([[1500, 300], [1920, 280], [1920, 1080], [1500, 1080]])} fill="#e8ecef" />
-      <rect x="1500" y="560" width="420" height="30" fill="#b4bec8" />
       {/* the lane number flag: ours */}
-      <rect x="752" y="0" width="70" height="84" fill="#d8262e" />
-      <text x="787" y="66" textAnchor="middle" fontSize="60" fill="#fff" className="shop-sign">0</text>
+      <rect x="1720" y="160" width="70" height="84" fill={SP.red} />
+      <text x="1755" y="224" textAnchor="middle" fontSize="60" fill="#fff" className="shop-sign">0</text>
     </g>
   );
 }
 
 const SCREEN = (
   <g>
-    <text transform="translate(792 196) rotate(-3.5)" textAnchor="middle" fontSize="36" fill="#1d3a6a" className="shop-sign">NO LADY HERE</text>
-    <text transform="translate(796 268) rotate(-3.5)" textAnchor="middle" fontSize="32" fill="#e0467f" className="shop-sign">JUST YOU + ME ♡</text>
+    <text x="1500" y="250" textAnchor="middle" fontSize="36" fill="#1d3a6a" className="shop-sign">NO LADY HERE</text>
+    <text x="1500" y="320" textAnchor="middle" fontSize="32" fill={SP.pink} className="shop-sign">JUST YOU + ME ♡</text>
   </g>
 );
 
 export function SelfCheckout() {
   return (
-    <ShopScene id="self" trace="self-checkout" label="The self-checkout lane: machines in a row, no staff. The near machine's screen says: no lady here, just you and me.">
+    <ShopScene id="self" trace={null} label="The self-checkout lane: a machine on a pedestal, no staff. Its screen says: no lady here, just you and me.">
       <Machine screen={SCREEN} />
     </ShopScene>
   );
 }
 
-// 11b. Closer on the same machine (her line to you): the screen fills the left third.
+// 11b. Closer on the same machine: every layer scaled 1.35x about one point (1500, 600), so the tray keeps its level.
 export function SelfCheckoutClose() {
   return (
-    <ShopScene id="self-close" trace="self-checkout" cam="translate(-560 -60) scale(1.6)" label="Closer at the self-checkout machine. Its screen says: no lady here, just you and me.">
+    <ShopScene id="self-close" trace={null} cam="translate(1400 480) scale(1.35) translate(-1400 -480)" label="Closer at the self-checkout machine. Its screen says: no lady here, just you and me.">
       <Machine screen={SCREEN} />
     </ShopScene>
   );
