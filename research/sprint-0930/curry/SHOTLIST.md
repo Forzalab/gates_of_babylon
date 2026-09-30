@@ -61,3 +61,10 @@ Art ids live in `src/date-beta/art/curry/` (Butter.jsx, Katsu.jsx, parts.jsx). T
 Takes are keyed by scene and words. So every recorded v2-curry line stays in v2-curry with its words unchanged: 027, 028 (the butter react), 030 (the not-hungry react), and 031 ("Feed me").
 - The katsu react (029) plays on the street, on the pick.
 - The katsu path's "Feed me" is in v2-curry-katsu, so it has no take.
+
+## Impeccable (1920x1080, `pipeline/impeccable.sh`, all 23 beats)
+- **Art:** 0 real findings in the curry art.
+  - Two contrast hits were flagged, and neither is in this sprint's art:
+    - 「そば」 on v2-curry[12] is alt's `curry-street` plate. It is not ours to touch.
+    - 「KATSU」 on katsu[5] is the poster sitting under the full-screen eyes frame, so it is hidden in play.
+- **Chrome:** the shared HUD issues were already there before this sprint: layout-transition on every beat, plus the usual choice and close-frame findings.
