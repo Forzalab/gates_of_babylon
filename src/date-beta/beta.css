@@ -287,6 +287,17 @@ body { font-family: var(--cond); color: var(--ink); }
 .hud-end .sub { margin: 16px 0 0; font: 500 40px/1.25 var(--cond); }
 .hud-end.low .sub { color: #f3c6d6; }
 .hud-end .hud-next { position: absolute; left: 50%; right: auto; bottom: -44px; transform: translateX(-50%); white-space: nowrap; }
+/* fail card: the line is her reason (5-8 words), smaller than the win headline so it fits 2 lines */
+.hud-end.low h2 { font-size: 64px; line-height: 1.1; max-width: 900px; text-wrap: balance; }
+/* ending card (STEEPED / ESCAPE / ESCAPE?): the story ending, not a loss. Dark, her red rim, the name huge. */
+.hud-end.ending { border: 6px solid var(--her); background: var(--scrim); color: var(--scrim-ink); box-shadow: inset 0 0 0 4px #5a0a1c, 0 14px 0 #8b0f2c; padding-top: 72px; }
+.hud-end.ending .kicker { color: var(--or-on-dark); }
+.hud-end.ending h2 { font-size: 150px; line-height: 1; letter-spacing: .04em; color: var(--scrim-ink); }
+.hud-end.ending .sub { color: #f3c6d6; }
+.hud-end.ending .stat { display: inline-flex; align-items: center; gap: 10px; margin: 28px 0 0; padding: 8px 20px; border-radius: 999px;
+  background: #2a0714; color: var(--scrim-ink); font: 700 30px/1 var(--cond); letter-spacing: .12em; }
+.hud-end.ending .stat svg { width: 30px; height: 28px; }
+.hud-end.ending .stat svg path { fill: var(--or-on-dark); }
 .low-heart path.shell { fill: #2a0714; stroke: var(--her); stroke-width: 7; stroke-linejoin: round; }
 .low-heart path.crack { fill: none; stroke: var(--her); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; }
 .low-heart path.part { fill: url(#lvLowFill); }

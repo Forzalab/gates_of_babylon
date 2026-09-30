@@ -64,7 +64,7 @@ Flag values are strings, numbers, booleans or `null`. Root keys: `version`, `not
 | deferred pop | A pick with `love` where she is absent (the basement) changes the score at once; the pop and emote show on the next beat where she is present. |
 | skip | Esc / S scores every pick it passes over as the timer would pick it (`default`, else pink). The pick it lands on (a branch) is not scored. |
 | timer | The auto-pick scores like a click. |
-| ending card | On the `end` beat: 100% = win, 60-99% = almost, below 60% = low. PLAY AGAIN / TRY AGAIN go back to the rooftop at love 0. |
+| ending card | On the `end` beat (endcard.js): 100% = the win card. STEEPED / ESCAPE / ESCAPE? (steeped, escape-win, escape-timeout) keep their own ENDING card at any love %. Any other ending below 100% is a real loss: the GAME OVER card with one of her ~8 fail lines, picked by seed + run, by ending and by love band (60-99% almost, below 60% low). PLAY AGAIN / TRY AGAIN go back to the rooftop at love 0. |
 | trail | Scenes entered this run (filled), this one (a capsule with `short` and one pip per beat, or `n/N` over 8 beats), then the shortest route to an ending (hollow; the ending is a heart). |
 
 ## Flags and `vary` (echo rule)

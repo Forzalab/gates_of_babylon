@@ -27,7 +27,8 @@ import { createVoice } from './voice/index.js';
 import { Nanda, speaksNanda } from './Nanda.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
-import { setCrowd, bumpRun, runBucket } from './meta.js';
+import { setCrowd, bumpRun, runBucket, getRun, fill } from './meta.js';
+import { cardFor, failLine } from './endcard.js';
 import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
@@ -262,9 +263,9 @@ function Player() {
         <div className="db-focus" aria-hidden="true" />
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
-        {end && <EndCard end={end} onAgain={() => pick(0)} />}
+        {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
         {!pos.done && (here || speaksNanda(beat.line)) && (
-          <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={end ? (end.tier === 'win' ? 'hearts' : 'crack') : pop?.emote}
+          <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end || !pop?.gacha ? null : LAYERS ?? pop.gacha.face} />
         )}
         {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}

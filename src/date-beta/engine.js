@@ -384,13 +384,13 @@ export function lovePct(love, goal) {
   return Math.max(0, Math.min(99, Math.round((100 * love) / goal)));
 }
 export const tierFor = (pct) => (pct >= TIER.win ? 'win' : pct >= TIER.almost ? 'almost' : 'low');
-// The result card for an `end` beat: { kind, pct, tier, love, goal }. null off an ending, or when the script has no love.
+// The result card for an `end` beat: { kind, scene, pct, tier, love, goal } (scene = the ending scene's id). null off an ending, or when the script has no love.
 export function ending(scenes, pos) {
   if (pos.done || pos.react) return null;
   const beat = beatAt(scenes, pos), { goal } = loveOf(scenes);
   if (!beat.end || !(goal > 0)) return null;
   const pct = lovePct(pos.love ?? 0, goal);
-  return Object.freeze({ kind: beat.end, pct, tier: tierFor(pct), love: pos.love ?? 0, goal });
+  return Object.freeze({ kind: beat.end, scene: scenes[pos.s].id, pct, tier: tierFor(pct), love: pos.love ?? 0, goal });
 }
 // Is she on screen? Her scene (`nanda`) and not a blackout beat. Drives the HUD bar and the sprite.
 export const present = (scene, beat) => !!scene?.nanda && !!beat && beat.bg !== 'blackout';
