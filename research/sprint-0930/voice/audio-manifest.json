@@ -54,5 +54,12 @@
   "beat": "6 R+",
   "file": "public/date-beta/voice/01-rooftop/014_6-r.mp3",
   "text": "[whispers][close] A minute. [whispers, slower] Then another. [whispers, slowest] Then the whole day."
+ },
+ {
+  "n": 15,
+  "scene": "rooftop",
+  "beat": "6 R=",
+  "file": "public/date-beta/voice/01-rooftop/015_6-r.mp3",
+  "text": "[excited] Yay! Park first. [flat, pleased] I already planned it."
  }
 ]
