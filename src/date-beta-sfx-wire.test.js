@@ -222,10 +222,24 @@ test('sfx-wire: the loader starts the first bed on unlock, keeps it single, rout
   } finally { globalThis.AudioContext = saved; }
 });
 
-test('sfx-wire: levels: beds and the loud one-shots are trimmed under her voice', () => {
-  for (const id of SFX_IDS.filter((i) => A.get(i).loop)) assert.ok(A.get(id).gain > 0 && A.get(id).gain <= 0.8, `${id} bed gain`);
-  for (const id of ['ic-beep', 'lock-fail']) assert.ok(A.get(id).gain <= 0.5, `${id}: a near full-scale tone, trimmed`);
+test('sfx-wire: levels: beds and one-shots sit under her voice (levels.json, measured by levels.py)', () => {
+  for (const id of SFX_IDS.filter((i) => A.get(i).loop)) assert.ok(A.get(id).gain > 0 && A.get(id).gain <= 0.5, `${id} bed gain`);
   assert.match(MAIN, /createVoice\(.*ASSETS\.duck/, 'the sfx bus ducks under a voice take');
+  const LV = JSON.parse(readFileSync(new URL('../research/sprint-0930/sfx-wire/levels.json', import.meta.url), 'utf8'));
+  const rows = Object.fromEntries(LV.sfx.map((r) => [r.id, r]));
+  for (const id of SFX_IDS.filter((i) => A.get(i).path)) {
+    const r = rows[id];
+    assert.ok(r, `${id}: not measured (rerun research/sprint-0930/sfx-wire/levels.py)`);
+    assert.ok(Math.abs(20 * Math.log10(A.get(id).gain ?? 1) - r.gain_db) < 0.06, `${id}: levels.json is stale (gain changed)`);
+    if (/^SX-C/.test(id)) continue; // the Logic-side collapse: no voice there
+    if (r.bed) {
+      assert.ok(r.I <= LV.voice_I_median - 5, `${id}: bed ${r.I} LUFS is not under the voice (${LV.voice_I_median})`);
+      assert.ok(r.I_ducked <= LV.voice_I_median - 12, `${id}: ducked bed ${r.I_ducked} LUFS`);
+    } else {
+      assert.ok(r.M <= -15, `${id}: one-shot momentary max ${r.M} LUFS > -15`);
+      assert.ok(r.M + LV.duck_db <= LV.voice_M_max_median - 3, `${id}: ducked it would ride over her line`);
+    }
+  }
 });
 
 test('sfx-wire: the player and the lock game are hooked up', () => {

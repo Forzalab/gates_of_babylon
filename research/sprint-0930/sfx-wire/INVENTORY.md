@@ -8,6 +8,9 @@ Where sounds live:
 - `src/date-beta/fx/sound.js` (new): the pure sound director. Per beat it turns the beat cue, `props.sfx` and the
   pick events (love pop, gacha tier, pick FX) into { bed, one-shots }. The lock game emits through its tiny bus.
 - Voice lines (`src/date-beta/voice/`) are not sfx; they duck the sfx bus by -8 dB while a take plays.
+- Hooks outside the sound files (audio lines only): `main.jsx` (the per-frame sfx effect goes through the director; the
+  audio dispatch lives there, not in engine.js), `game/LockGame.jsx` (3 `emitSfx` calls), `engine.js` `carried()` (props.sfx
+  is beat-local). Levels: every bed and loud one-shot has a manifest `gain` trim, measured against the voice in QA.md.
 
 Counts = beats in the normal play order (18 packs over scenes.json) that name the cue in `beat.sfx`.
 
@@ -15,9 +18,9 @@ Counts = beats in the normal play order (18 packs over scenes.json) that name th
 |---|---|---|---|---|
 | SX-45 | tick | one-shot | yes, beat.sfx (23) | unchanged |
 | SX-04 | thump | one-shot | yes, beat.sfx (27) | unchanged |
-| SX-23 | bell | one-shot | yes, beat.sfx (18) | unchanged |
-| SX-28 | breath | one-shot | yes, beat.sfx (20) | unchanged |
-| SX-37 | kettle | one-shot (rising, not a loop) | yes, beat.sfx (11) | unchanged |
+| SX-23 | bell | one-shot | yes, beat.sfx (18) | unchanged wiring; level trim 0.6 (it rode over her lines, QA.md) |
+| SX-28 | breath | one-shot | yes, beat.sfx (20) | unchanged wiring; level trim 0.7 |
+| SX-37 | kettle | one-shot (rising, not a loop) | yes, beat.sfx (11) | unchanged wiring; level trim 0.5 |
 | SX-06 | static | one-shot sting | yes, beat.sfx (7: end cards, blackout, the café cut) | unchanged (kept a sting: a looping hiss under the end card / café would bury her lines) |
 | SX-15 | wind | BED | yes, beat.sfx (10), played once (7.5 s) | loops from its beat until the scene changes (or `silence` / another bed) |
 | SX-20 | rain | BED | yes, beat.sfx (11), played once | loops, as wind |

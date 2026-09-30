@@ -1,0 +1,231 @@
+{
+ "voice_takes_sampled": 67,
+ "voice_I_median": -24.0,
+ "voice_M_max_median": -19.5,
+ "duck_db": -8.0,
+ "sfx": [
+  {
+   "id": "SX-37",
+   "bed": false,
+   "gain_db": -6.0,
+   "I": -19.5,
+   "M": -15.8
+  },
+  {
+   "id": "SX-20",
+   "bed": true,
+   "gain_db": -11.7,
+   "I": -29.9,
+   "M": -28.8,
+   "I_ducked": -37.9,
+   "seam_step": 0.0239,
+   "seam_typ99": 0.1691,
+   "seam_rms_db": 0.7
+  },
+  {
+   "id": "SX-04",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -19.5,
+   "M": -15.9
+  },
+  {
+   "id": "SX-06",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -24.9,
+   "M": -22.2
+  },
+  {
+   "id": "SX-15",
+   "bed": true,
+   "gain_db": -14.0,
+   "I": -30.0,
+   "M": -26.8,
+   "I_ducked": -38.0,
+   "seam_step": 0.0484,
+   "seam_typ99": 0.1338,
+   "seam_rms_db": -0.4
+  },
+  {
+   "id": "SX-21",
+   "bed": true,
+   "gain_db": -9.9,
+   "I": -30.0,
+   "M": -29.3,
+   "I_ducked": -38.0,
+   "seam_step": 0.003,
+   "seam_typ99": 0.0238,
+   "seam_rms_db": 0.2
+  },
+  {
+   "id": "SX-23",
+   "bed": false,
+   "gain_db": -4.4,
+   "I": -18.3,
+   "M": -15.1
+  },
+  {
+   "id": "SX-27",
+   "bed": true,
+   "gain_db": -14.0,
+   "I": -30.2,
+   "M": -26.9,
+   "I_ducked": -38.2,
+   "seam_step": 0.0022,
+   "seam_typ99": 0.023,
+   "seam_rms_db": -1.8
+  },
+  {
+   "id": "SX-28",
+   "bed": false,
+   "gain_db": -3.1,
+   "I": -19.2,
+   "M": -15.9
+  },
+  {
+   "id": "SX-45",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -26.4,
+   "M": -26.4
+  },
+  {
+   "id": "SX-C1",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -21.6,
+   "M": -21.6
+  },
+  {
+   "id": "SX-C2",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -15.7,
+   "M": -12.4
+  },
+  {
+   "id": "SX-C3",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -20.8,
+   "M": -18.9
+  },
+  {
+   "id": "SX-C4",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -1.7,
+   "M": 0.7
+  },
+  {
+   "id": "crunch",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -21.0,
+   "M": -19.6
+  },
+  {
+   "id": "heart-pop",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -16.5,
+   "M": -16.5
+  },
+  {
+   "id": "love-up",
+   "bed": false,
+   "gain_db": -6.0,
+   "I": -18.2,
+   "M": -15.8
+  },
+  {
+   "id": "love-down",
+   "bed": false,
+   "gain_db": -6.0,
+   "I": -19.0,
+   "M": -16.0
+  },
+  {
+   "id": "gacha-crit",
+   "bed": false,
+   "gain_db": -4.4,
+   "I": -17.8,
+   "M": -15.7
+  },
+  {
+   "id": "love-bomb",
+   "bed": false,
+   "gain_db": -6.0,
+   "I": -17.2,
+   "M": -16.0
+  },
+  {
+   "id": "anger-pop",
+   "bed": false,
+   "gain_db": -1.9,
+   "I": -16.1,
+   "M": -16.1
+  },
+  {
+   "id": "rage-thunder",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -31.8,
+   "M": -21.3
+  },
+  {
+   "id": "hate-quake",
+   "bed": false,
+   "gain_db": -3.1,
+   "I": -19.6,
+   "M": -17.9
+  },
+  {
+   "id": "lock-click",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -27.0,
+   "M": -27.0
+  },
+  {
+   "id": "lock-win",
+   "bed": false,
+   "gain_db": -3.1,
+   "I": -18.7,
+   "M": -15.7
+  },
+  {
+   "id": "lock-fail",
+   "bed": false,
+   "gain_db": -14.0,
+   "I": -18.2,
+   "M": -16.0
+  },
+  {
+   "id": "vending-clunk",
+   "bed": false,
+   "gain_db": 0.0,
+   "I": -21.7,
+   "M": -19.4
+  },
+  {
+   "id": "ic-beep",
+   "bed": false,
+   "gain_db": -10.5,
+   "I": -18.1,
+   "M": -16.4
+  },
+  {
+   "id": "umbrella-rain",
+   "bed": true,
+   "gain_db": -8.0,
+   "I": -29.6,
+   "M": -27.3,
+   "I_ducked": -37.6,
+   "seam_step": 0.042,
+   "seam_typ99": 0.0368,
+   "seam_rms_db": 4.0
+  }
+ ]
+}
