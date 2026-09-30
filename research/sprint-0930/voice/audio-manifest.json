@@ -425,5 +425,12 @@
   "beat": "0 (u)",
   "file": "public/date-beta/voice/10-cup/046_0-u.mp3",
   "text": "[sing-song] I bought umeboshi. [smiling] For no reason. [perfectly even][sweet] Eat."
+ },
+ {
+  "n": 49,
+  "scene": "cup",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/10-cup/049_0-r.mp3",
+  "text": "[whispers] A little now. [whispers, slower] A lot later."
  }
 ]
