@@ -19,11 +19,13 @@ import { BG_FALLBACK } from './art/fallbacks.js';
 import { Say, Choices } from './Say.jsx';
 import { Tree } from './Tree.jsx';
 import { Nanda, speaksNanda } from './Nanda.jsx';
+import { Fx } from './Fx.jsx';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
 import { createLoader } from './assets.js';
 import './beta.css';
+import './fx.css';
 
 const params = new URLSearchParams(location.search);
 const RM = params.has('still') || matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -113,6 +115,7 @@ function Player() {
   const frozen = paused || tree;
   const since = useRef(0);
   const k = useFit();
+  const stageRef = useRef(null);
   const [ready, setReady] = useState(false); // the beat's hold has passed (NEXT shows)
   // On a reaction frame the scene is the pick's scene, even when the pick already jumped on.
   const scene = SCENES[pos.react ? pos.react.s : pos.s];
@@ -215,20 +218,21 @@ function Player() {
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
-      <div className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
+      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
           {!pos.done && layer(beat.bg, 'db-bg')}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
+        <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} onAgain={() => pick(0)} />}
         {!pos.done && (here || speaksNanda(beat.line)) && (
           <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={end ? (end.tier === 'win' ? 'hearts' : 'crack') : pop?.emote}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} />
         )}
         {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}
-        {beat.choices && !pos.done && !end && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} key={`c${beat.scene}${beat.index}`} />}
+        {beat.choices && !pos.done && !end && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} key={`c${beat.scene}${beat.index}`} />}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {card && <GoalCard onNext={() => advance(true)} />}
         {onNext && !beat.text && <NextButton className="solo" onClick={onNext} />}

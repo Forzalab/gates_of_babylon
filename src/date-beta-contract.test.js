@@ -13,7 +13,7 @@ const pair = (a = {}, b = {}, beat = {}) =>
 test('date-beta contract: the shipped scenes validate against the manifest and art names', () => {
   assert.doesNotThrow(() => loadScenes(data, { manifest, art: ART_NAMES }));
   const roof = loadScenes(data).find((s) => s.id === 'rooftop').beats.find((b) => b.timer);
-  assert.equal(roof.timer, 10);
+  assert.equal(roof.timer, 12);
   assert.equal(timeoutPick(roof), 0);
 });
 

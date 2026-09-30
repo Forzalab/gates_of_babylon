@@ -124,6 +124,6 @@ test('date-beta choices: a choice beat waits for a pick; go jumps; validation', 
   assert.deepEqual(choose(scenes, p, 5), p, 'no such choice = no move');
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a', go: 'nope' }] }])), /unknown scene/);
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a' }, { text: 'b', side: 'pink' }] }])), /two choices/);
-  assert.throws(() => loadScenes(tiny([{ choices: [] }])), /1\.\.2/);
+  assert.throws(() => loadScenes(tiny([{ choices: [] }])), /1\.\.3/);
   assert.throws(() => loadScenes(tiny([{ choices: [{ text: 'a' }], auto: 900 }])), /auto-advance/);
 });
