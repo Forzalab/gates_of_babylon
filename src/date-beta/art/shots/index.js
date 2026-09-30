@@ -10,7 +10,10 @@ import { ITEMS } from './items.jsx';
 import { SHOT_ALIASES } from './aliases.js';
 import { Push, Rack, Pov, Ots, Timelapse, Dutch, Match, Stamp } from './Moves.jsx';
 
-const preset = (C, fixed) => function Preset({ props, rm }) { return createElement(C, { props: { ...fixed, ...props }, rm }); };
+const preset = (C, fixed) => Object.assign(function Preset({ props, rm }) { return createElement(C, { props: { ...fixed, ...props }, rm }); }, { solo: C.solo });
+// solo = the shot owns the frame (main.jsx hides the Nanda sprite and the focus blur): inserts and her big-face reaction.
+Insert.solo = true;
+Reaction.solo = true;
 
 export const SHOTS = {
   closeup: Closeup, insert: Insert, reaction: Reaction, establish: Establish,

@@ -133,6 +133,9 @@ function Player() {
   const pop = pos.react ?? (here && pos.pending ? pos.pending : null);
   const end = ending(SCENES, pos);
   const card = !pos.done && beat.card === 'goal';
+  // props.shot (art/shots id) replaces the bg; a `solo` shot (insert / reaction) owns the frame: no Nanda sprite, no focus blur.
+  const bgId = ART[beat.props?.shot] ? beat.props.shot : beat.bg;
+  const solo = !pos.done && !end && !!ART[bgId]?.solo;
 
   // Meta loop (meta.js): each arrival at the first scene (boot or a loop back) is a new run; `run` feeds vary/if.
   const atFirst = !pos.done && pos.s === 0;
@@ -228,16 +231,16 @@ function Player() {
   return (
     <div className={`viewport${RM ? ' rm' : ''}`} onClick={() => advance(false)}>
       <HudDefs />
-      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
+      <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}${solo ? ' shot-solo' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
-          {!pos.done && layer(ART[beat.props?.shot] ? beat.props.shot : beat.bg, 'db-bg') /* props.shot = art/shots id, bg = fallback */}
+          {!pos.done && layer(bgId, 'db-bg') /* props.shot = art/shots id, bg = fallback */}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} onAgain={() => pick(0)} />}
-        {!pos.done && (here || speaksNanda(beat.line)) && (
+        {!pos.done && !solo && (here || speaksNanda(beat.line)) && (
           <Nanda scare={beat.scare} raised={!!beat.choices && !end} emote={end ? (end.tier === 'win' ? 'hearts' : 'crack') : pop?.emote}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} />
         )}

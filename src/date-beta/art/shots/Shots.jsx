@@ -49,7 +49,7 @@ export function Insert({ props = {}, rm }) {
       <Cam of={of} zoom={1.15} rm className="shot-blur" />
       <GradeLayer id="sh-in" tone={tone} rm={rm} sun={[1560, 160]} sparkles={20} />
       <svg className="art" viewBox="0 0 1920 1080">
-        <g transform={`rotate(${tilt} 960 520)`}>
+        <g transform={`translate(115 -40) scale(.88) rotate(${tilt} 960 520)`}>
           <rect x="580" y="170" width="760" height="720" rx="36" fill="#000" opacity=".22" transform="translate(18 22)" />
           <rect x="580" y="170" width="760" height="720" rx="36" className="shot-card" />
           <rect x="604" y="194" width="712" height="672" rx="24" className="shot-card-in" />
