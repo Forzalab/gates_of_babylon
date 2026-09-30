@@ -964,7 +964,7 @@
     },
     {
      "speaker": "NANDA",
-     "text": "Walk slower. If we walk slow, the day can't end. It's {DAYPART}.",
+     "text": "Walk slower. If we walk slow, the day can't end.",
      "timer": 12,
      "choices": [
       {
@@ -1548,7 +1548,8 @@
       },
       "love": 1,
       "emote": "sweat",
-      "fx": "love-burst"
+      "fx": "love-burst",
+      "react": "Yeah? Say it again. I'm keeping it."
      },
      {
       "text": "Forever sounds long",
@@ -1571,7 +1572,8 @@
       },
       "love": -5,
       "emote": "hate",
-      "fx": "hate-quake"
+      "fx": "hate-quake",
+      "react": "Leave, then. I'll be here. I'm always here."
      }
     ],
     "vary": {

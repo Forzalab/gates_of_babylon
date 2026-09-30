@@ -1,0 +1,92 @@
+{
+ "endcard-win-100": {
+  "q": "?scene=steeped&beat=4&love=69",
+  "beat": "steeped:4",
+  "end": "GAME OVER 0% She does not love you enough. LOVE 0%. You needed 100%. TRY AGAIN",
+  "goal": false,
+  "pct": "0%",
+  "errs": []
+ },
+ "endcard-almost-99": {
+  "q": "?scene=steeped&beat=4&love=68",
+  "beat": "steeped:4",
+  "end": "GAME OVER 0% She does not love you enough. LOVE 0%. You needed 100%. TRY AGAIN",
+  "goal": false,
+  "pct": "0%",
+  "errs": []
+ },
+ "endcard-almost-70": {
+  "q": "?scene=steeped&beat=4&love=48",
+  "beat": "steeped:4",
+  "end": "GAME OVER 0% She does not love you enough. LOVE 0%. You needed 100%. TRY AGAIN",
+  "goal": false,
+  "pct": "0%",
+  "errs": []
+ },
+ "endcard-low-0": {
+  "q": "?scene=steeped&beat=4&love=0",
+  "beat": "steeped:4",
+  "end": "GAME OVER 0% She does not love you enough. LOVE 0%. You needed 100%. TRY AGAIN",
+  "goal": false,
+  "pct": "0%",
+  "errs": []
+ },
+ "goal-card": {
+  "q": "",
+  "beat": "rooftop:0",
+  "end": null,
+  "goal": true,
+  "pct": "0%",
+  "errs": []
+ },
+ "endcard-escape-timeout": {
+  "q": "?scene=escape-timeout&beat=7&love=62",
+  "beat": "escape-timeout:7",
+  "end": "GAME OVER 0% She does not love you enough. LOVE 0%. You needed 100%. TRY AGAIN",
+  "goal": false,
+  "pct": "0%",
+  "errs": []
+ },
+ "endcard-escape-win": {
+  "q": "?scene=escape-win&beat=6&love=59",
+  "beat": "escape-win:6",
+  "end": "GAME OVER 0% She does not love you enough. LOVE 0%. You needed 100%. TRY AGAIN",
+  "goal": false,
+  "errs": []
+ },
+ "endcard-leave-fu": {
+  "q": "?scene=leave-fu&beat=4&love=47",
+  "beat": "leave-fu:4",
+  "end": "GAME OVER 0% She does not love you enough. LOVE 0%. You needed 100%. TRY AGAIN",
+  "goal": false,
+  "pct": "0%",
+  "errs": []
+ },
+ "overflowProbe": {
+  "before": {
+   "say": {
+    "sh": 267,
+    "ch": 245,
+    "ov": "visible"
+   },
+   "choice": {
+    "sh": 150,
+    "ch": 150,
+    "ov": "visible"
+   }
+  },
+  "after": {
+   "say": {
+    "sh": 245,
+    "ch": 245,
+    "ov": "visible"
+   },
+   "choice": {
+    "sh": 150,
+    "ch": 150,
+    "ov": "visible"
+   }
+  },
+  "pinsPos": "absolute"
+ }
+}

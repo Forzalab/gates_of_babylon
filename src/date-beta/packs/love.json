@@ -1,0 +1,348 @@
+{
+ "name": "love",
+ "note": "Love audit (Tony, PR #27): every choice with 2+ options gives every option a love value and the options differ. The plain / neutral move picks (walk to the food stalls, open the hatch, ...) had no love at all: plain = -1, the cute or obsessive wording = +1. A fake pick (walk-home:7 'Run home alone') plays choice 0, so it takes choice 0's value. Runs last in the play order so the beat numbers are the final ones. Variable reward (Tony): loveHidden shows '??' on the chip instead of the number. Hidden = every other choice beat in play order (the 2nd, 4th, ... of the 46) plus every consequential choice (options go to different scenes, or set a flag a go / if reads: errand, cup, lock game, ...).",
+ "patch": [
+  {
+   "scene": "errand-shop",
+   "beat": 8,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "errand-shop",
+   "beat": 8,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "errand-library",
+   "beat": 8,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "errand-library",
+   "beat": 8,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 9,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 9,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 12,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 12,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "rain-crossing",
+   "beat": 6,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "rain-crossing",
+   "beat": 6,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "walk-home",
+   "beat": 7,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "walk-home",
+   "beat": 7,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 1,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 1,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 3,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 3,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 0,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 0,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 5,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 5,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "rooftop",
+   "beat": 6,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "v2-park",
+   "beat": 2,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "v2-park",
+   "beat": 4,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "v2-curry",
+   "beat": 1,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "v2-street",
+   "beat": 1,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "cup",
+   "beat": 4,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 3,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 5,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 14,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "park",
+   "beat": 1,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "park",
+   "beat": 7,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "errand-shop",
+   "beat": 4,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "errand-library",
+   "beat": 1,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "errand-library",
+   "beat": 8,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "hungry",
+   "beat": 0,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "hungry",
+   "beat": 2,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 5,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 10,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "station-talk",
+   "beat": 0,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "rain-crossing",
+   "beat": 5,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "walk-home",
+   "beat": 1,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "walk-home",
+   "beat": 7,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "door",
+   "beat": 3,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "genkan-talk",
+   "beat": 2,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "leave",
+   "beat": 3,
+   "set": {
+    "loveHidden": true
+   }
+  },
+  {
+   "scene": "seq-katsu",
+   "beat": 4,
+   "set": {
+    "loveHidden": true
+   }
+  }
+ ]
+}

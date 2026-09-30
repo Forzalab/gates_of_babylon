@@ -33,7 +33,7 @@ export function Say({ line, onNext = null }) {
 
 // Glossy choice pills (R2c). Pink = toward her, purple = leave; an OR choice keeps its side on the rim + key (rule C).
 // on[i] false = the choice's `if` fails (drawn, not pickable); left = timer seconds remaining (null = no timer).
-export function Choices({ choices, onPick, on = [], left = null, total = null, def = -1 }) {
+export function Choices({ choices, onPick, on = [], left = null, total = null, def = -1, hidden = false }) {
   const chips = choices.some((c) => c.love);
   const timed = left != null && total > 0;
   return (
@@ -47,7 +47,7 @@ export function Choices({ choices, onPick, on = [], left = null, total = null, d
       {choices.map((c, i) => (
         <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}${timed && i === def ? ' is-default' : ''}`}
           disabled={on[i] === false} aria-label={`${i + 1}: ${fill(c.plain)}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
-          {chips && <LoveChip love={c.love} />}
+          {chips && <LoveChip love={c.love} hidden={hidden} />}
           <span className="line"><Parts parts={c.parts} /></span>
           {timed && i === def && <span className="db-deftag">default</span>}
         </button>
@@ -57,7 +57,8 @@ export function Choices({ choices, onPick, on = [], left = null, total = null, d
 }
 
 // The value chip on a choice (hooks into the HUD's heart look: same pink / crack colours). +n = heart, 0 = plain, -n = cracked.
-export function LoveChip({ love }) {
+// hidden (beat `loveHidden`): the number reads "??" (same chip, same colours; the score still changes on the pick).
+export function LoveChip({ love, hidden = false }) {
   const cls = love > 0 ? 'up' : love < 0 ? 'down' : 'zero';
-  return <span className={`db-chip ${cls}`} aria-hidden="true">{love < 0 ? '\u2661' : '\u2665'} {love > 0 ? `+${love}` : love < 0 ? `\u2212${-love}` : '0'}</span>;
+  return <span className={`db-chip ${cls}`} aria-hidden="true">{love < 0 ? '\u2661' : '\u2665'} {hidden ? '??' : love > 0 ? `+${love}` : love < 0 ? `\u2212${-love}` : '0'}</span>;
 }

@@ -1,0 +1,65 @@
+[
+ {
+  "scene": "rooftop",
+  "beat": 1,
+  "start": {
+   "beat": "rooftop:1",
+   "secs": "10",
+   "def": "Take the umeboshi",
+   "line": "I made two. One's for you. Don't look at me like that."
+  },
+  "at7s": {
+   "beat": "rooftop:1",
+   "secs": "4",
+   "def": "Take the umeboshi",
+   "line": "I made two. One's for you. Don't look at me like that."
+  },
+  "after13s": {
+   "beat": "rooftop:1",
+   "line": "Sour. Brave. I'll remember you like sour.",
+   "pop": "+1 She liked that."
+  }
+ },
+ {
+  "scene": "door",
+  "beat": 3,
+  "start": {
+   "beat": "door:3",
+   "secs": "10",
+   "def": "One cup, then home",
+   "line": "I already boiled the water. This morning. Just in case."
+  },
+  "at7s": {
+   "beat": "door:3",
+   "secs": "4",
+   "def": "One cup, then home",
+   "line": "I already boiled the water. This morning. Just in case."
+  },
+  "after13s": {
+   "beat": "door:3",
+   "line": "Then home. Sure. Come in.",
+   "pop": "+1 She liked that."
+  }
+ },
+ {
+  "scene": "leave",
+  "beat": 3,
+  "start": {
+   "beat": "leave:3",
+   "secs": "11",
+   "def": "Forever sounds long",
+   "line": "From now on… can we be fORever?"
+  },
+  "at7s": {
+   "beat": "leave:3",
+   "secs": "5",
+   "def": "Forever sounds long",
+   "line": "From now on… can we be fORever?"
+  },
+  "after13s": {
+   "beat": "leave:3",
+   "line": "From now on… can we be fORever?",
+   "pop": "+1 She liked that."
+  }
+ }
+]

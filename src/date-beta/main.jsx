@@ -42,7 +42,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'love'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -109,7 +109,8 @@ if (typeof document !== 'undefined') document.addEventListener('fullscreenchange
 const escIsForFullscreen = () => !!document.fullscreenElement || performance.now() - fullAt < 800
   || (innerHeight >= screen.height - 1 && innerWidth >= screen.width - 1);
 
-const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat') });
+const LOVE0 = params.has('love') && Number.isFinite(Number(params.get('love'))) ? Number(params.get('love')) : null; // ?love=N (testing)
+const startPos = () => startAt(SCENES, { rm: RM, at: params.get('scene'), beat: params.get('beat'), love: LOVE0 });
 
 function Player() {
   const [pos, setPos] = useState(startPos);
@@ -231,7 +232,7 @@ function Player() {
       <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
-          {!pos.done && layer(beat.bg, 'db-bg')}
+          {!pos.done && layer(ART[beat.props?.shot] ? beat.props.shot : beat.bg, 'db-bg') /* props.shot = art/shots id, bg = fallback */}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
@@ -242,7 +243,7 @@ function Player() {
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} />
         )}
         {beat.text && !pos.done && !end && <Say line={beat.line} onNext={onNext} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`} />}
-        {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} key={`c${beat.scene}${beat.index}`} />}
+        {beat.choices && !pos.done && !end && !GAME[beat.bg] && <Choices choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`c${beat.scene}${beat.index}`} />}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {card && <GoalCard onNext={() => advance(true)} />}
         {onNext && !beat.text && <NextButton className="solo" onClick={onNext} />}

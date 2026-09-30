@@ -1,5 +1,5 @@
 {
- "note": "OBBP integration: meta lines placed into story, MOVE placeholders filled (mech pattern), lock-game win/lose re-pointed to mech choice order, meta preview scenes dropped.",
+ "note": "OBBP integration: meta lines placed into story, MOVE placeholders filled (mech pattern), lock-game win/lose re-pointed to mech choice order, meta preview scenes dropped. B-08: blackout auto beats trimmed to 7.5 s total (was 17.1 s).",
  "patch": [
   {
    "scene": "park",
@@ -59,7 +59,7 @@
    "scene": "town",
    "beat": 3,
    "set": {
-    "text": "Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. Yes, you. I see you."
+    "text": "Want to see a magic trick? It's {TIME}. Hi, {CROWD.1}. I see you."
    }
   },
   {
@@ -163,15 +163,101 @@
    "beats": [
     {
      "speaker": "NANDA",
-     "text": "Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. Everybody in here is thinking about me. That's the vibe, right?"
+     "text": "Trick two. I know what {CROWD.2} is thinking. Snacks."
     },
     {
      "speaker": "NANDA",
-     "text": "Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. I'm just remembering your face. For later. ♡"
+     "text": "And {CROWD.3}? Thinking about me. Everyone is.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Only about you",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "See? Even the class agrees. ♡"
+      },
+      {
+       "text": "Maybe a little",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "A little is a start. I'll take it."
+      },
+      {
+       "text": "Leave them alone",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "They're not yours to protect. They're mine to watch."
+      }
+     ]
     },
     {
      "speaker": "NANDA",
-     "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover."
+     "text": "Trick three. I heard a laugh. It was {CROWD.4}."
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I'm not mad. I'm just remembering your face. For later. ♡"
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap."
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Don't gang up on me, you all NEVER stop my eternal bond with my lover.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Our eternal bond",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Say it louder. They should hear you."
+      },
+      {
+       "text": "They're just watching",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Watching is how it starts. I'll watch back."
+      },
+      {
+       "text": "It's just a class",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Just a class. Just a date. Just… you leaving."
+      }
+     ]
     }
    ]
   },
@@ -225,6 +311,76 @@
      }
     }
    ]
+  },
+  {
+   "scene": "blackout",
+   "beat": 0,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 1,
+   "set": {
+    "auto": 1200
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 2,
+   "set": {
+    "auto": 1100
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 3,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 4,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 5,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 6,
+   "set": {
+    "auto": 1500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 7,
+   "set": {
+    "auto": 700
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 8,
+   "set": {
+    "auto": 500
+   }
+  },
+  {
+   "scene": "blackout",
+   "beat": 9,
+   "set": {
+    "hold": 500
+   }
   }
  ],
  "drop": [

@@ -37,7 +37,7 @@ export const TIER = { win: 100, almost: 60 }; // ending cards: 100% = win, 60..9
 const KEYS = {
   root: ['version', 'note', 'flags', 'love', 'scenes'],
   scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short'],
-  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end'],
+  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end', 'loveHidden'],
   choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake'],
 };
 // Default emote for a score change: +3 and up hearts, +2 heart, +1 sweat, -1 pout, -2 or, -3 and down crack.
@@ -182,6 +182,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       if (wait === 'auto' && auto === null) fail(at, 'wait "auto" needs an auto time');
       const timer = b.timer == null ? null : typeof b.timer === 'number' && b.timer > 0 ? Math.max(b.timer, MIN_TIMER) : b.timer;
       if (timer !== null && (!choices || typeof timer !== 'number' || !(timer > 0))) fail(at, 'timer must be a positive number of seconds, on a choice beat');
+      if (b.loveHidden != null && (typeof b.loveHidden !== 'boolean' || !choices)) fail(at, 'loveHidden must be true or false, on a choice beat');
       const card = b.card ?? null;
       if (card !== null && !CARDS.includes(card)) fail(at, `card "${card}" is not one of ${CARDS.join('|')}`);
       if (card && wait !== 'click') fail(at, 'a card beat waits for a click (no choices, no auto)');
@@ -196,7 +197,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
         if (!Object.keys(c.set ?? {}).some((k) => ECHO[k])) echoLint(c.text, null, `${at}.choices[${j}]`);
       }
       return Object.freeze({ scene: s.id, index: i, ...base, rmAlt, motion: !!b.motion, hold, auto, wait, scare, choices, timer,
-        set: declared(decl, flagsField(b.set, at, 'set'), at), vary, card, end });
+        set: declared(decl, flagsField(b.set, at, 'set'), at), vary, card, end, loveHidden: !!b.loveHidden });
     });
     for (const b of beats) for (const c of b.choices ?? []) for (const t of goTargets(c.go)) pending.push([`${b.scene}[${b.index}]`, t]);
     if (s.nanda != null && typeof s.nanda !== 'boolean') fail(s.id, '"nanda" must be true or false');
