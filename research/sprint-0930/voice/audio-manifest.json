@@ -180,5 +180,12 @@
   "beat": "2 R+",
   "file": "public/date-beta/voice/07-v2-rain/037_2-r.mp3",
   "text": "[breathless][happy] Our arms touch. [warm][slow] Now I am warm."
+ },
+ {
+  "n": 38,
+  "scene": "v2-rain",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/07-v2-rain/038_2-r.mp3",
+  "text": "[smiling] Your hand on the handle. [perfectly even] My hand on yours."
  }
 ]
