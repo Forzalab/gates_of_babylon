@@ -8,8 +8,8 @@ import { CurryScene, Plate, Steam, Bell, usePose, preloadTrace } from './parts.j
 export function CurryKatsuDoor() {
   return (
     <CurryScene id="katsu-door" label="Insert: the yellow front of OR OR CURRY, a glass door with a brass bell above it.">
-      <rect x="180" y="84" width="1500" height="220" rx="10" fill="#c8202e" />
-      <text className="cu-jp" x="930" y="232" textAnchor="middle" fontSize="130" fill="#fff4d0">OR OR カレー</text>
+      <rect x="180" y="84" width="1500" height="250" rx="10" fill="#c8202e" />
+      <text className="cu-jp" x="930" y="292" textAnchor="middle" fontSize="120" fill="#fff4d0">OR OR カレー</text>
       <rect x="392" y="572" width="896" height="508" fill="#7a5a3c" />
       <rect x="420" y="600" width="410" height="480" fill="#e8d7a8" opacity=".78" />
       <rect x="850" y="600" width="410" height="480" fill="#e8d7a8" opacity=".78" />

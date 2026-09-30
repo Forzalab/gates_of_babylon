@@ -44,8 +44,11 @@ export function CurryChoice() {
 export function CurryButterDoor() {
   return (
     <CurryScene id="butter-door" label="Insert: the glass door of NAND HOUSE under its pink awning, a brass bell hanging on the frame.">
-      <rect x="930" y="0" width="560" height="74" rx="8" fill="#fbf7ef" />
-      <text className="cu-sign" x="1210" y="58" textAnchor="middle" fontSize="60" fill="#c8202e">NAND HOUSE</text>
+      {/* our sign, on the slanted sign band over the old shop name (kept below the y=140 HUD band) */}
+      <g transform="rotate(-13 1180 232)">
+        <rect x="950" y="178" width="460" height="108" rx="10" fill="#fbf7ef" stroke="#c8202e" strokeWidth="6" />
+        <text className="cu-sign" x="1180" y="256" textAnchor="middle" fontSize="66" fill="#c8202e">NAND HOUSE</text>
+      </g>
       <Bell x={520} y={420} s={1.6} />
       <Plate x={1340} y={560} w={230} h={120} bg="#c8202e" fg="#fff4ea" jp="営業中" en="OPEN" jpSize={50} enSize={30} />
     </CurryScene>
@@ -139,7 +142,7 @@ export function CurryButterBite() {
 export function CurryLassi() {
   return (
     <CurryScene id="lassi" label="A mango lassi in a tall glass with one pink straw, on the orange tablecloth next to the lunch tray. A menu card says LASSI.">
-      <g transform="translate(1440 620)">
+      <g transform="translate(1440 420)">
         <path d="M0 150L40 0H260L300 150z" fill="#fbf6ea" stroke="#c8202e" strokeWidth="6" />
         <text className="cu-sign" x="150" y="70" textAnchor="middle" fontSize="46" fill="#c8202e">LASSI</text>
         <text className="cu-jp" x="150" y="128" textAnchor="middle" fontSize="32" fill="#5a3a2a">マンゴー ¥300</text>

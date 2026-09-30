@@ -23,4 +23,6 @@ All art comes from `pipeline/draw.py`. It is hand-drawn flat cel and is written 
 - **Output:** chain-butter.png and chain-katsu.png, re-shot.
 
 ## Batch 2: physics pass (CURRY-PHYSICS.md), all HIGH fixed
-See CURRY-PHYSICS.md.
+- NAND HOUSE door plate moved out of the HUD band onto the slanted sign band. OR OR カレー lettering lowered below y=140.
+- Not-hungry hate beat: `close` → `medium` + `face: hate` (no floating legs). LASSI menu card moved clear of the box.
+- CURRY-PHYSICS.md written (HIGH / MED / LOW, open MEDs listed). Chains re-shot.
