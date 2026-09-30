@@ -1,0 +1,166 @@
+{
+ "name": "love",
+ "note": "Love audit (Tony, PR #27): every choice with 2+ options gives every option a love value and the options differ. The plain / neutral move picks (walk to the food stalls, open the hatch, ...) had no love at all: plain = -1, the cute or obsessive wording = +1. A fake pick (walk-home:7 'Run home alone') plays choice 0, so it takes choice 0's value. Runs last in the play order so the beat numbers are the final ones.",
+ "patch": [
+  {
+   "scene": "errand-shop",
+   "beat": 8,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "errand-shop",
+   "beat": 8,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "errand-library",
+   "beat": 8,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "errand-library",
+   "beat": 8,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 9,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 9,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 12,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "town",
+   "beat": 12,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "rain-crossing",
+   "beat": 6,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "rain-crossing",
+   "beat": 6,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "walk-home",
+   "beat": 7,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "walk-home",
+   "beat": 7,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 1,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 1,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 3,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "unknown",
+   "beat": 3,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 0,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 0,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 5,
+   "choice": 0,
+   "set": {
+    "love": -1
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 5,
+   "choice": 1,
+   "set": {
+    "love": 1
+   }
+  }
+ ]
+}

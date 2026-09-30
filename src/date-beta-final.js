@@ -11,7 +11,8 @@ import lockgame from './date-beta/packs/lockgame.json' with { type: 'json' };
 import obbp from './date-beta/packs/obbp.json' with { type: 'json' };
 import sequences from './date-beta/packs/sequences.json' with { type: 'json' };
 import v2 from './date-beta/packs/variant-v2.json' with { type: 'json' };
+import love from './date-beta/packs/love.json' with { type: 'json' };
 
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
-export const RAW = applyPacks(base, [story, meta, mech, lockgame, obbp, sequences, v2]);
+export const RAW = applyPacks(base, [story, meta, mech, lockgame, obbp, sequences, v2, love]);
 export const FINAL = loadScenes(RAW, { manifest, art: [...ART_NAMES, ...ROMANCE, 'lock-game'] });

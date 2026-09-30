@@ -2,7 +2,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { applyPacks } from './date-beta/packs/index.js';
-import { loadScenes, enabled, resolveGo, start, next, choose, beatAt, ending } from './date-beta/engine.js';
+import { loadScenes, enabled, resolveGo, start, next, choose, beatAt, ending, timeoutPick } from './date-beta/engine.js';
 import base from './date-beta/scenes.json' with { type: 'json' };
 import manifest from './date-beta/assets.json' with { type: 'json' };
 import { ART_NAMES } from './date-beta-art-names.js';
@@ -13,9 +13,10 @@ import lockgame from './date-beta/packs/lockgame.json' with { type: 'json' };
 import obbp from './date-beta/packs/obbp.json' with { type: 'json' };
 import sequences from './date-beta/packs/sequences.json' with { type: 'json' };
 import v2 from './date-beta/packs/variant-v2.json' with { type: 'json' };
+import love from './date-beta/packs/love.json' with { type: 'json' };
 
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
-const S = loadScenes(applyPacks(base, [story, meta, mech, lockgame, obbp, sequences, v2]), { manifest, art: [...ART_NAMES, ...ROMANCE, 'lock-game'] });
+const S = loadScenes(applyPacks(base, [story, meta, mech, lockgame, obbp, sequences, v2, love]), { manifest, art: [...ART_NAMES, ...ROMANCE, 'lock-game'] });
 const goal = S.love.goal;
 
 // Best total love per errand x food route (same walk as the loader's goal, but keyed by the flags at the ending).
@@ -64,3 +65,22 @@ test('B-03: an all-worst run stays below 100%', () => {
   const e = ending(S, p);
   assert.ok(e && e.pct < 100, `all-worst ended at ${e?.pct}%`);
 });
+
+// Love audit: with every pick changing the score, a run that lets every timer run out (default picks) and one that always
+// takes the last enabled option still cannot win. The goal stays reachable on every route (test above).
+for (const [name, pickOf] of [
+  ['every timer running out (default picks)', (b, flags) => timeoutPick(b, flags)],
+  ['always the last enabled option', (b, flags) => b.choices.reduce((last, c, k) => (enabled(c, flags) ? k : last), 0)],
+]) {
+  test(`love audit: ${name} never reaches 100%`, () => {
+    let p = start(S);
+    for (let n = 0; n < 400; n++) {
+      const b = beatAt(S, p);
+      if (b.end) break;
+      if (p.react || !b.choices) { p = next(S, p); continue; }
+      p = choose(S, p, pickOf(b, p.flags));
+    }
+    const e = ending(S, p);
+    assert.ok(e && e.pct < 100, `${name} ended at ${e?.pct}%`);
+  });
+}

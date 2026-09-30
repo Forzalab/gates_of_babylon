@@ -1,6 +1,7 @@
 // packs/index.js: merge content packs into the base scenes.json data (raw JSON in, raw JSON out; loadScenes validates after).
 // pack = { scenes?: [scene], insert?: [{ after, ids: [sceneId] }], patch?: [{ scene, beat, set: {beatFields} }], flags?: {flag:[values]} }
 // notes: ignored. patch with `beats:[...]` inserts those beats before index `beat` (no `set`). drop: [sceneId] removes scenes last.
+// patch with `choice: i` (and `set`) merges into choices[i] of that beat (e.g. a love value).
 // Order: add scenes (appended), insert (move named scenes to sit right after `after`), patch (shallow-merge fields into a beat).
 const fail = (m) => { throw new Error(`date-beta packs: ${m}`); };
 
@@ -33,7 +34,10 @@ export function applyPacks(base, packs = []) {
       if (p.beats) { if (p.beat < 0 || p.beat > sc.beats.length) fail(`${at}: patch: ${p.scene} has no slot ${p.beat}`); sc.beats.splice(p.beat, 0, ...structuredClone(p.beats)); continue; }
       const beat = sc.beats[p.beat];
       if (!beat) fail(`${at}: patch: ${p.scene} has no beat ${p.beat}`);
-      for (const [k, v] of Object.entries(p.set ?? {})) { if (v === null) delete beat[k]; else beat[k] = structuredClone(v); }
+      // `choice: i` merges `set` into that one choice of the beat instead of the beat itself.
+      let target = beat;
+      if (p.choice != null) { target = beat.choices?.[p.choice]; if (!target) fail(`${at}: patch: ${p.scene}[${p.beat}] has no choice ${p.choice}`); }
+      for (const [k, v] of Object.entries(p.set ?? {})) { if (v === null) delete target[k]; else target[k] = structuredClone(v); }
     }
     for (const id of pack.drop ?? []) {
       const i = data.scenes.findIndex((s) => s.id === id);
