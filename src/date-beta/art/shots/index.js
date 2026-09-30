@@ -10,11 +10,17 @@ import { ITEMS } from './items.jsx';
 import { SHOT_ALIASES } from './aliases.js';
 import { Push, Rack, Pov, Ots, Timelapse, Dutch, Match, Stamp } from './Moves.jsx';
 
-const preset = (C, fixed) => function Preset({ props, rm }) { return createElement(C, { props: { ...fixed, ...props }, rm }); };
+// props.home = the beat's own bg (main.jsx passes it on a props.shot beat). A shot with no `of` frames THAT art, never a
+// component default (the bug that put park / shop street / rain / her street all on crossing-day, the rooftop on shop-street).
+// An explicit `of` (beat or alias) still wins; `match` also cuts back `to` home.
+const withHome = (p = {}) => (p.of || !p.home ? p : { ...p, of: p.home });
+const homed = (C) => function Homed({ props, rm }) { return createElement(C, { props: withHome(props), rm }); };
+const preset = (C, fixed) => function Preset({ props, rm }) { return createElement(C, { props: withHome({ ...fixed, ...props }), rm }); };
 
 export const SHOTS = {
-  closeup: Closeup, insert: Insert, reaction: Reaction, establish: Establish,
-  push: Push, rack: Rack, pov: Pov, ots: Ots, timelapse: Timelapse, dutch: Dutch, match: Match, stamp: Stamp,
+  ...Object.fromEntries(Object.entries({ closeup: Closeup, insert: Insert, reaction: Reaction, establish: Establish,
+    push: Push, rack: Rack, pov: Pov, ots: Ots, timelapse: Timelapse, dutch: Dutch, stamp: Stamp }).map(([k, C]) => [k, homed(C)])),
+  match: function MatchHome({ props, rm }) { const p = withHome(props); return createElement(Match, { props: p.to || !p.home ? p : { ...p, to: p.home }, rm }); },
   ...Object.fromEntries(Object.keys(ITEMS).map((k) => [`insert-${k}`, preset(Insert, { item: k })])),
 };
 // sequences.json shot ids (bento-lid, dish-butter, ...) registered as plain art ids too.

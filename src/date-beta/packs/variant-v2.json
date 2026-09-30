@@ -866,7 +866,6 @@
      "sfx": "kettle",
      "props": {
       "shot": "stamp",
-      "of": "teatable",
       "place": "HER KITCHEN",
       "time": "7:20 PM"
      }
@@ -880,7 +879,6 @@
     "text": "BASEMENT · 7:40 PM. Concrete. One bulb. Rain at a high window.",
     "props": {
      "shot": "stamp",
-     "of": "basement",
      "place": "BASEMENT",
      "time": "7:40 PM"
     }

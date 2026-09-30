@@ -15,6 +15,8 @@ import Underpass from './Underpass.jsx';
 import ApartmentExt from './ApartmentExt.jsx';
 import Stairs from './Stairs.jsx';
 import GenkanArrival from './GenkanArrival.jsx';
+// T1b interiors + basement (sprint-0930): cellar, park, ... (spread LAST so the real park beats obbp's Rooftop fallback)
+import { INTERIORS } from './interiors/index.js';
 import '../theme.js'; // fonts + --cond/--jp tokens: the art must not depend on the chrome's CSS
 import './art.css';
 
@@ -26,4 +28,4 @@ import { SHOTS } from './shots/index.js'; // camera tricks over these ids (close
 export const ART = { ...ROMANCE, ...SHOTS, park: Rooftop, splash: Splash, rooftop: Rooftop, train: Train, naan: NaanPlatform, 'naan-platform': NaanPlatform, blackout: Blackout, basement: Basement,
   platform: Platform, underpass: Underpass, apartment: ApartmentExt, stairs: Stairs, 'genkan-in': GenkanArrival,
   // fallback art for missing BG files (fallbacks.js maps the ids here)
-  door: Door, genkan: Genkan, teatable: TeaTable, cafe: Cafe };
+  door: Door, genkan: Genkan, teatable: TeaTable, cafe: Cafe, ...INTERIORS };

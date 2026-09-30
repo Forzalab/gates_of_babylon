@@ -48,7 +48,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'love', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'interiors', 'love', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -231,11 +231,12 @@ function Player() {
 
   // bg / sprite: a manifest id draws the asset image (grey placeholder if missing); a name draws the art component.
   // A loaded file always wins; a missing one draws its registered fallback art (art/fallbacks.js), else the grey box.
-  const layer = (v, cls) => {
+  // A props.shot beat frames the beat's own bg: it goes in as props.home (art/shots/index.js), used when the shot has no `of`.
+  const layer = (v, cls, props = beat.props) => {
     const name = isAssetId(v) ? (ASSETS.has(v) ? null : BG_FALLBACK[v]) : v;
     if (!name) return <img className={cls} src={ASSETS.src(v)} alt="" />;
     const Art = ART[name];
-    return <Art props={beat.props} rm={RM} onStart={() => advance(true)} onPick={(i) => setPos((p) => (p.done ? p : choose(SCENES, p, i, RM)))} />;
+    return <Art props={props} rm={RM} onStart={() => advance(true)} onPick={(i) => setPos((p) => (p.done ? p : choose(SCENES, p, i, RM)))} />;
   };
   const stop = (f) => (e) => { e.stopPropagation(); f(); };
   const waiting = beat.wait === 'click' && !pos.done;
@@ -257,7 +258,9 @@ function Player() {
       <div ref={stageRef} className={`stage${focus ? ' focus' : ''}${card ? ' is-goal' : ''}`} style={{ transform: `translate(-50%, -50%) scale(${k})` }}
         data-scene={scene.id} data-scare={beat.scare}>
         <div key={scene.id} className={`scene enter-${scene.enter}`}>
-          {!pos.done && layer(ART[beat.props?.shot] ? beat.props.shot : beat.bg, 'db-bg') /* props.shot = art/shots id, bg = fallback */}
+          {!pos.done && (ART[beat.props?.shot] /* props.shot = art/shots id over the beat's bg */
+            ? layer(beat.props.shot, 'db-bg', { home: isAssetId(beat.bg) ? BG_FALLBACK[beat.bg] : beat.bg, ...beat.props })
+            : layer(beat.bg, 'db-bg'))}
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />

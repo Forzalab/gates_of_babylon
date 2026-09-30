@@ -178,7 +178,8 @@ const PLAY_SRC = readFileSync(new URL('./date-beta/main.jsx', import.meta.url), 
 const PLAY = JSON.parse(PLAY_SRC.match(/const PLAY = (\[[^\]]*\])/)[1].replace(/'/g, '"'));
 const packs = Object.fromEntries(PLAY.map((n) => [n, JSON.parse(readFileSync(new URL(`./date-beta/packs/${n}.json`, import.meta.url), 'utf8'))]));
 const ROMANCE = ['street-day', 'street-dusk', 'shop-street', 'rail-crossing', 'crossing-day', 'crossing-night'];
-const ARTS = [...ART_NAMES, ...ROMANCE, 'lock-game'];
+const INTERIORS = ['cellar', 'park', 'apartment-trace', 'sitting-room', 'bedroom', 'genkan-in', 'genkan-v2']; // art/interiors (packs/interiors.json)
+const ARTS = [...ART_NAMES, ...ROMANCE, ...INTERIORS, 'lock-game'];
 
 test('pack: gacha is LAST in main.jsx PLAY; applyPacks carries it to the root; later packs replace it', () => {
   assert.equal(PLAY.at(-1), 'gacha');

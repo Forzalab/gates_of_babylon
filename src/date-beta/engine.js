@@ -164,7 +164,10 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       bg = b.bg ?? bg;
       if (!bg) fail(at, 'no bg (set it on the scene or the beat)');
       if (b.speaker != null && b.speaker !== false && (typeof b.speaker !== 'string' || !b.speaker.trim())) fail(at, 'speaker must be a non-empty string (or false)');
-      props = { ...props, ...b.props };
+      // A camera shot (props.shot) is one cut: its props are this beat's only, so a stamp / establish never pins the
+      // rest of the scene to its frame (the next beat shows the scene's bg again). Other props carry forward.
+      const own = { ...props, ...b.props };
+      if (b.props?.shot == null) props = own;
       const text = b.text ?? '';
       if (words(text) > MAX_WORDS) fail(at, `text has ${words(text)} words, max ${MAX_WORDS}`);
       const rmAlt = b.rmAlt ?? 'same';
@@ -190,7 +193,7 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       const end = b.end ?? null;
       if (end !== null && (typeof end !== 'string' || !END_ID.test(end))) fail(at, 'end must be a lowercase ending name like "steeped"');
       if (end && !choices) fail(at, 'an end beat needs its "Back to start" choice (the result card\'s button takes choice 0)');
-      const base = { bg, sprite: b.sprite ?? null, props: Object.freeze({ ...props }), text, speaker: b.speaker ?? null,
+      const base = { bg, sprite: b.sprite ?? null, props: Object.freeze(own), text, speaker: b.speaker ?? null,
         line: parseLine(text, at, b.speaker ?? null), sfx: b.sfx ?? null };
       const vary = loadVary(b.vary, base, at, decl, manifest, art, cueNames);
       echoLint(text, vary, at);

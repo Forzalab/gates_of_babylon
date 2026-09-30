@@ -29,6 +29,13 @@ test('date-beta loader: bg and props carry forward from beat to beat', () => {
   assert.deepEqual(s.beats[0].props, { clock: 'live', sky: 'day' }, 'earlier beat is not mutated');
 });
 
+test('date-beta loader: a props.shot beat is one cut; its props do not carry (restore: scenes show their own bg)', () => {
+  const [s] = loadScenes(tiny([{ props: { clock: 'live' } }, { props: { shot: 'stamp', of: 'y', place: 'P' } }, {}, { props: { clock: 'noon' } }]));
+  assert.deepEqual(s.beats[1].props, { clock: 'live', shot: 'stamp', of: 'y', place: 'P' }, 'the shot beat sees carried + own props');
+  assert.deepEqual(s.beats[2].props, { clock: 'live' }, 'the next beat is back on the bg, no stamp');
+  assert.deepEqual(s.beats[3].props, { clock: 'noon' });
+});
+
 test('date-beta loader: rejects a 13-word line, a motion beat without an RM alt, a duplicate id', () => {
   assert.throws(() => loadScenes(tiny([{ text: Array.from({ length: 31 }, (_, i) => 'w' + i).join(' ') }])), /31 words/);
   assert.throws(() => loadScenes(tiny([{ motion: true }])), /reduced-motion/);
