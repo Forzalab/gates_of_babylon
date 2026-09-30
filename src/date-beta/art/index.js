@@ -9,6 +9,7 @@ import Door from './Door.jsx';
 import Genkan from './Genkan.jsx';
 import TeaTable from './TeaTable.jsx';
 import Cafe from './Cafe.jsx';
+import CurryHouse from './CurryHouse.jsx'; // v2-curry: noren, curry menu, clock at 3:00 (UX fix pack)
 // the night walk after the blackout (alt account): platform = the naan station at night (NaanPlatform v3)
 import Platform from './Platform.jsx';
 import Underpass from './Underpass.jsx';
@@ -28,4 +29,4 @@ import { SHOTS } from './shots/index.js'; // camera tricks over these ids (close
 export const ART = { ...ROMANCE, ...SHOTS, park: Rooftop, splash: Splash, rooftop: Rooftop, train: Train, naan: NaanPlatform, 'naan-platform': NaanPlatform, blackout: Blackout, basement: Basement,
   platform: Platform, underpass: Underpass, apartment: ApartmentExt, stairs: Stairs, 'genkan-in': GenkanArrival,
   // fallback art for missing BG files (fallbacks.js maps the ids here)
-  door: Door, genkan: Genkan, teatable: TeaTable, cafe: Cafe, ...INTERIORS };
+  door: Door, genkan: Genkan, teatable: TeaTable, cafe: Cafe, 'curry-house': CurryHouse, ...INTERIORS };
