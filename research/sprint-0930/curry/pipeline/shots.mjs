@@ -5,9 +5,9 @@ import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 const [base, out] = process.argv.slice(2);
 const n = (s, k) => Array.from({ length: k }, (_, i) => [s, i]);
 export const CHAINS = {
-  butter: n('v2-curry', 13),
-  katsu: [['v2-curry', 0], ['v2-curry', 1], ...n('v2-curry-katsu', 7)],
-  alone: [['v2-curry', 0], ['v2-curry', 1], ...n('v2-curry-alone', 3)],
+  butter: n('v2-curry', 14),
+  katsu: [['v2-curry', 0], ['v2-curry', 1], ...n('v2-curry-katsu', 12)],
+  alone: [['v2-curry', 0], ['v2-curry', 1], ...n('v2-curry-alone', 4)],
 };
 const b = await pkg.chromium.launch({ executablePath: '/opt/pw-browsers/chromium-1194/chrome-linux/chrome', args: ['--no-sandbox'] });
 const p = await b.newPage({ viewport: { width: 1920, height: 1080 } });

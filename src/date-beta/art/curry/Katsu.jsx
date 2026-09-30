@@ -2,7 +2,7 @@
 // Refs + order: research/sprint-0930/curry/SHOTLIST.md.
 import { CurryScene, Plate, Steam, Bell, usePose, preloadTrace } from './parts.jsx';
 
-['katsu-door', 'katsu-int', 'katsu-dish', 'katsu-close', 'katsu-spoon'].forEach((k) => preloadTrace(`curry/${k}`));
+['katsu-door', 'katsu-int', 'katsu-counter', 'katsu-dish', 'katsu-cut', 'katsu-pour', 'katsu-close', 'katsu-feed', 'katsu-bite', 'katsu-water', 'katsu-napkin', 'napkin-fold'].forEach((k) => preloadTrace(`curry/${k}`));
 
 // the yellow door (da264766): our sign, a glass door, a bell
 export function CurryKatsuDoor() {
@@ -54,49 +54,70 @@ export function CurryKatsuInt({ rm }) {
   );
 }
 
-// HERO DISH (d612440e + a katsu cutlet on top): curry rice, the water jug, a spoon on the napkin
+// Every shot below is HAND-DRAWN flat cel (pipeline/draw.py, KATSU-ANALYSIS.md): the window light from the upper left, the
+// SAME plate sprite in every close-up, 5-finger hands on sleeves. Beat for beat the same chain as the butter path.
+
+// the counter two-shot: she sits on the red stool at the counter; her plate is on the counter at the left
+export function CurryKatsuCounter() {
+  return (
+    <CurryScene id="katsu-counter" label="Two seats at the wooden counter of OR OR CURRY. A red stool, a plate of katsu curry on the counter, menu boards on the wall.">
+      <text className="cu-jp" x="655" y="258" textAnchor="middle" fontSize="54" fill="#c8202e">カレー</text>
+      <text className="cu-jp" x="875" y="258" textAnchor="middle" fontSize="54" fill="#c8202e">カツ</text>
+      <text className="cu-sign" x="1495" y="256" textAnchor="middle" fontSize="50" fill="#3a2e2c">¥980</text>
+      <text className="cu-sign" x="1715" y="256" textAnchor="middle" fontSize="46" fill="#2a6ab0">WATER</text>
+    </CurryScene>
+  );
+}
+
+// HERO DISH: rice, glossy roux, the sliced cutlet fanned across the seam, fukujinzuke, a spoon on a napkin
 export function CurryKatsuDish({ rm }) {
   return (
-    <CurryScene id="katsu-dish" label="The katsu curry: rice, brown curry, a golden fried cutlet cut in strips on top, red pickles, a water jug and a spoon on a napkin.">
-      {/* the cutlet: one breaded oval, cut in 6 strips (dark cut lines, pale pork showing at each cut), laid over rice + roux */}
-      <g transform="rotate(-18 900 560)">
-        <rect x="660" y="450" width="500" height="230" rx="110" fill="#b8702a" />
-        <rect x="672" y="460" width="476" height="206" rx="100" fill="#dc9c44" />
-        {[1, 2, 3, 4, 5].map((i) => (
-          <g key={i}>
-            <rect x={660 + i * 83 - 5} y="452" width="12" height="226" fill="#f3e2c0" />
-            <rect x={660 + i * 83 - 9} y="452" width="5" height="226" fill="#7a4418" />
-          </g>
-        ))}
-        {Array.from({ length: 34 }, (_, i) => <circle key={i} cx={690 + ((i * 137) % 440)} cy={478 + ((i * 71) % 170)} r={i % 3 ? 5 : 7} fill={i % 2 ? '#a8641e' : '#f0bf6a'} />)}
-      </g>
-      <g fill="#c8202e">{[[1110, 760], [1136, 748], [1128, 780], [1156, 770], [1100, 790]].map(([x, y]) => <rect key={x + y} x={x} y={y} width="26" height="16" rx="5" />)}</g>
-      <Steam x={940} y={380} rm={rm} />
+    <CurryScene id="katsu-dish" label="The katsu curry on a white plate: white rice, glossy brown curry with potato and carrot, a golden fried pork cutlet cut in slices with pink insides, red pickles, and a spoon on a napkin.">
+      <Steam x={620} y={420} h={200} rm={rm} o={0.4} />
     </CurryScene>
   );
 }
 
-// close-up: the roux and the chunks by a glass of water (eb6e7a8f)
-export function CurryKatsuClose({ rm }) {
+// she cuts one small piece with the edge of her spoon (crunch lines, no text)
+export function CurryKatsuCut() {
+  return <CurryScene id="katsu-cut" label="Close: her hand presses the edge of a spoon through the end of the cutlet. One small piece comes off. Crunch." />;
+}
+
+// a steel boat pours more roux onto the rice
+export function CurryKatsuPour({ rm }) {
   return (
-    <CurryScene id="katsu-close" label="Extreme close-up: thick brown curry, soft potato and carrot, white rice, a cold glass of water.">
-      <Steam x={1300} y={420} h={200} rm={rm} o={0.4} />
+    <CurryScene id="katsu-pour" label="Close: more brown curry pours from a small steel boat onto the white rice. It is thick and hot.">
+      <Steam x={780} y={460} h={180} rm={rm} o={0.35} />
     </CurryScene>
   );
 }
 
-// "not the spoon": the tray with the milk carton and a spoon on the rim (21dbf8f4)
-export function CurryKatsuSpoon({ rm }) {
-  return (
-    <CurryScene id="katsu-spoon" label="The tray: curry rice, a milk carton, a bowl of fruit, and a silver spoon lying on the tray.">
-      <text className="cu-jp" x="188" y="836" textAnchor="middle" fontSize="32" fill="#2a6ab0" transform="rotate(-8 188 836)">ぎゅうにゅう</text>
-      <text className="cu-sign" x="188" y="890" textAnchor="middle" fontSize="40" fill="#2a6ab0" transform="rotate(-8 188 890)">MILK</text>
-      <g transform="rotate(-4 1450 176)">
-        <ellipse cx="1290" cy="176" rx="58" ry="30" fill="#dfe6ec" stroke="#8a96a4" strokeWidth="5" />
-        <ellipse cx="1280" cy="170" rx="28" ry="12" fill="#ffffff" opacity=".8" />
-        <rect x="1340" y="166" width="300" height="20" rx="10" fill="#dfe6ec" stroke="#8a96a4" strokeWidth="5" />
-      </g>
-      <Steam x={800} y={320} h={180} rm={rm} o={0.35} />
-    </CurryScene>
-  );
+// her fingers dip the small piece in the roux; the roux drips
+export function CurryKatsuClose() {
+  return <CurryScene id="katsu-close" label="Very close: her fingers dip the small piece of cutlet in the brown curry. The curry drips off it." />;
+}
+
+// POV, extreme close-up: your hand holds the piece at her open mouth
+export function CurryKatsuFeed() {
+  return <CurryScene id="katsu-feed" label="Your view, very close: your fingers hold the piece of cutlet with curry at her open mouth. Her eyes look at you." />;
+}
+
+// she eats from your fingers: roux at the corner of her mouth
+export function CurryKatsuBite() {
+  return <CurryScene id="katsu-bite" label="Very close: she eats the cutlet from your fingers. There is brown curry at the corner of her mouth. Her eyes look at you." />;
+}
+
+// her lemon water: one glass, one straw, on the counter by the plate
+export function CurryKatsuWater() {
+  return <CurryScene id="katsu-water" label="A tall glass of water with ice, a lime slice and one pink straw, on the wooden counter next to the katsu plate." />;
+}
+
+// the napkin: her hand wipes the curry off your fingers
+export function CurryKatsuNapkin() {
+  return <CurryScene id="katsu-napkin" label="Close: her hand wipes the brown curry off your fingers with a white paper napkin, over the katsu plate." />;
+}
+
+// not hungry: she holds up her folded napkin (you got no food, so no fingers to wipe)
+export function CurryNapkinFold() {
+  return <CurryScene id="napkin-fold" label="Close: her hand holds up her folded paper napkin over the counter, next to her empty katsu plate." />;
 }
