@@ -1663,16 +1663,16 @@
   "beat": "N 2",
   "chars": 16,
   "file": "date-beta/voice/narration/leave-fu/380_2.mp3",
-  "audioMs": 2377,
-  "holdMs": 2727
+  "audioMs": 2534,
+  "holdMs": 2884
  },
  {
   "scene": "leave-fu",
   "beat": "N 3",
   "chars": 25,
   "file": "date-beta/voice/narration/leave-fu/381_3.mp3",
-  "audioMs": 3265,
-  "holdMs": 3615
+  "audioMs": 3422,
+  "holdMs": 3772
  },
  {
   "scene": "leave-fu",
@@ -1687,16 +1687,16 @@
   "beat": "N 2",
   "chars": 16,
   "file": "date-beta/voice/narration/leave-yeah/383_2.mp3",
-  "audioMs": 2299,
-  "holdMs": 2649
+  "audioMs": 2456,
+  "holdMs": 2806
  },
  {
   "scene": "leave-yeah",
   "beat": "N 3",
   "chars": 25,
   "file": "date-beta/voice/narration/leave-yeah/384_3.mp3",
-  "audioMs": 3265,
-  "holdMs": 3615
+  "audioMs": 3422,
+  "holdMs": 3772
  },
  {
   "scene": "leave-yeah",
