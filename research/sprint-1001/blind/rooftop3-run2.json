@@ -1,0 +1,61 @@
+{
+ "case": "rooftop3",
+ "run": "2",
+ "beat": "rooftop:3",
+ "love0": "0",
+ "say": "NANDA I made two. One's for you. Don't look at me like that.",
+ "sayBox": [
+  260,
+  761,
+  1660,
+  1016
+ ],
+ "choiceBox": null,
+ "legend": false,
+ "shown": [
+  "1:tamagoyaki|chip=♥ +3|def=false",
+  "2:umeboshi|chip=♥ +1|def=true",
+  "3:Take neither|chip=♡ −3|def=false"
+ ],
+ "timebar": true,
+ "clicks": {
+  "tamagoyaki": {
+   "slot": 1,
+   "loveAfter": "3",
+   "pop": "+3 She liked that.",
+   "nextBeat": "rooftop:3",
+   "say": "NANDA Sweet egg for my sweet boy. ♡"
+  },
+  "umeboshi": {
+   "slot": 2,
+   "loveAfter": "1",
+   "pop": "+1 She liked that.",
+   "nextBeat": "rooftop:3",
+   "say": "NANDA Sour. Brave. I'll remember you like sour."
+  },
+  "Take neither": {
+   "slot": 3,
+   "loveAfter": "0",
+   "pop": "−3 She did not like that.",
+   "nextBeat": "rooftop:3",
+   "say": "NANDA …I woke up at four for this."
+  }
+ },
+ "keys": {
+  "1": {
+   "labelOfKey": "1: Take the tamagoyaki",
+   "routedTo": "tamagoyaki",
+   "say": "NANDA Sweet egg for my sweet boy. ♡"
+  },
+  "2": {
+   "labelOfKey": "2: Take the umeboshi",
+   "routedTo": "umeboshi",
+   "say": "NANDA Sour. Brave. I'll remember you like sour."
+  },
+  "3": {
+   "labelOfKey": "3: Take neither",
+   "routedTo": "Take neither",
+   "say": "NANDA …I woke up at four for this."
+  }
+ }
+}
