@@ -1438,5 +1438,23 @@
   "beat": "1",
   "file": "date-beta/voice/32-leave-yeah/221_1.mp3",
   "text": "[sweetly] Good input."
+ },
+ {
+  "scene": "steeped",
+  "beat": "3",
+  "file": "date-beta/voice/11-steeped/059_3.mp3",
+  "text": "いつまでも一緒。…FORever. ね？"
+ },
+ {
+  "scene": "escape-timeout",
+  "beat": "4 (u)",
+  "file": "date-beta/voice/29-escape-timeout/208_4-u.mp3",
+  "text": "すっぱいでしょ。…ね？"
+ },
+ {
+  "scene": "escape-timeout",
+  "beat": "4 (t)",
+  "file": "date-beta/voice/29-escape-timeout/209_4-t.mp3",
+  "text": "甘いでしょ。…ね？"
  }
 ]

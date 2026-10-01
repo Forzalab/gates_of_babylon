@@ -966,6 +966,14 @@
   "date-beta/voice/32-leave-yeah/221_1.mp3": {
    "audioMs": 1750,
    "holdMs": 2100
+  },
+  "date-beta/voice/29-escape-timeout/208_4-u.mp3": {
+   "audioMs": 4075,
+   "holdMs": 4425
+  },
+  "date-beta/voice/29-escape-timeout/209_4-t.mp3": {
+   "audioMs": 7158,
+   "holdMs": 7508
   }
  }
 }

@@ -22,7 +22,13 @@ const TIMING = 'src/date-beta/voice/timing.json', APPX = 'research/sprint-0930/v
 // Never shown: the base text of a beat whose vary covers every run (v2-train 6 "loop").
 const IGNORE = new Set(['v2-train|loop']);
 // Same spoken words, different digits: the take says "seven", the caption "7:00". Wired with the caption's text.
-const ALIAS = { 'leave|He wakes at 7:00.': 'public/date-beta/voice/30-leave/213_2.mp3' };
+// Same for ね: the takes say "Neee?" (= ね read aloud) where the caption has ね？.
+const ALIAS = {
+  'leave|He wakes at 7:00.': 'public/date-beta/voice/30-leave/213_2.mp3',
+  'steeped|いつまでも一緒。…FORever. ね？': 'public/date-beta/voice/11-steeped/059_3.mp3',
+  'escape-timeout|すっぱいでしょ。…ね？': 'public/date-beta/voice/29-escape-timeout/208_4-u.mp3',
+  'escape-timeout|甘いでしょ。…ね？': 'public/date-beta/voice/29-escape-timeout/209_4-t.mp3',
+};
 
 export function liveLines() {
   const main = fs.readFileSync(P('src/date-beta/main.jsx'), 'utf8');
@@ -85,11 +91,11 @@ export function gaps() {
 
 function wire(A) {
   const slim = read(SLIM), full = read(FULL), timing = read(TIMING);
-  const have = new Set(full.map((e) => e.file));
+  const have = new Set(full.map((e) => `${e.file}|${e.text}`)); // an alias re-uses a wired file under the caption's words
   let n = 0;
   for (const { take } of A) {
-    if (have.has(take.file)) continue;
-    have.add(take.file);
+    if (have.has(`${take.file}|${take.text}`)) continue;
+    have.add(`${take.file}|${take.text}`);
     const e = { scene: take.scene, beat: take.beat, file: take.file, text: take.text };
     full.push(take.n != null ? { n: take.n, ...e } : e);
     const rel = take.file.replace(/^public\//, '');

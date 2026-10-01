@@ -63,13 +63,6 @@
   "cls": "C"
  },
  {
-  "scene": "steeped",
-  "beat": "2",
-  "kind": "line",
-  "text": "いつまでも一緒。…FORever. ね？",
-  "cls": "B"
- },
- {
   "scene": "unknown",
   "beat": "1.c0",
   "kind": "react",
@@ -123,20 +116,6 @@
   "beat": "5.c1",
   "kind": "react",
   "text": "Only looking. I trust you.",
-  "cls": "C"
- },
- {
-  "scene": "escape-timeout",
-  "beat": "4 bento=umeboshi",
-  "kind": "vary",
-  "text": "すっぱいでしょ。…ね？",
-  "cls": "C"
- },
- {
-  "scene": "escape-timeout",
-  "beat": "4 bento=tamagoyaki",
-  "kind": "vary",
-  "text": "甘いでしょ。…ね？",
   "cls": "C"
  },
  {

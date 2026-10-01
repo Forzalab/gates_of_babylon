@@ -6,7 +6,10 @@
   1.02,
   4.51
  ],
- "fixed": [],
+ "fixed": [
+  "date-beta/voice/29-escape-timeout/208_4-u.mp3",
+  "date-beta/voice/29-escape-timeout/209_4-t.mp3"
+ ],
  "hard": [],
  "spot": [
   "date-beta/voice/narration/escape/363_3.mp3",
@@ -4580,6 +4583,65 @@
    "clippedStart": false,
    "clippedEnd": false,
    "speedOutlier": false
+  },
+  {
+   "file": "date-beta/voice/11-steeped/059_3.mp3",
+   "scene": "steeped",
+   "beat": "3",
+   "who": "nanda",
+   "text": "\u3044\u3064\u307e\u3067\u3082\u4e00\u7dd2\u3002\u2026FORever. \u306d\uff1f",
+   "ms": 5120,
+   "lufs": -24.1,
+   "peak": 0.5133242607116699,
+   "clipped": 0,
+   "head": 0.13,
+   "tail": 0.35,
+   "span": 4.64,
+   "wps": 0.22,
+   "dLufs": 0.0,
+   "clippedStart": false,
+   "clippedEnd": false,
+   "speedOutlier": false
+  },
+  {
+   "file": "date-beta/voice/29-escape-timeout/208_4-u.mp3",
+   "scene": "escape-timeout",
+   "beat": "4 (u)",
+   "who": "nanda",
+   "text": "\u3059\u3063\u3071\u3044\u3067\u3057\u3087\u3002\u2026\u306d\uff1f",
+   "ms": 4000,
+   "lufs": -24.1,
+   "peak": 0.4322361946105957,
+   "clipped": 0,
+   "head": 0.03,
+   "tail": 1.06,
+   "span": 2.91,
+   "wps": 0.0,
+   "dLufs": 0.0,
+   "clippedStart": false,
+   "clippedEnd": false,
+   "speedOutlier": false,
+   "fixed": true
+  },
+  {
+   "file": "date-beta/voice/29-escape-timeout/209_4-t.mp3",
+   "scene": "escape-timeout",
+   "beat": "4 (t)",
+   "who": "nanda",
+   "text": "\u7518\u3044\u3067\u3057\u3087\u3002\u2026\u306d\uff1f",
+   "ms": 7080,
+   "lufs": -24.0,
+   "peak": 0.5517243146896362,
+   "clipped": 0,
+   "head": 0.04,
+   "tail": 1.18,
+   "span": 5.86,
+   "wps": 0.0,
+   "dLufs": 0.1,
+   "clippedStart": false,
+   "clippedEnd": false,
+   "speedOutlier": false,
+   "fixed": true
   }
  ]
 }

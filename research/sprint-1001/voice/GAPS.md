@@ -1,19 +1,18 @@
 # Voice gaps: reachable Nanda lines with no wired take
 
-Made by `node scripts/voice-gaps.mjs`. 96 reachable Nanda lines (beat lines, reacts, vary overlays), 22 silent.
+Made by `node scripts/voice-gaps.mjs`. 96 reachable Nanda lines (beat lines, reacts, vary overlays), 19 silent.
 
 ## A. recorded, not wired (wire it) (0)
 
 | scene | beat | kind | line | take |
 |---|---|---|---|---|
 
-## B. drift: a take with nearly the same words (re-record or revert the text) (1)
+## B. drift: a take with nearly the same words (re-record or revert the text) (0)
 
 | scene | beat | kind | line | take |
 |---|---|---|---|---|
-| steeped | 2 | line | いつまでも一緒。…FORever. ね？ | `11-steeped/059_3.mp3` (0.78)<br>[whispers][warm][slow] いつまでも一緒。 [pause][perfectly even] …Forever. [slow][sing-song] Neee? |
 
-## C. unrecorded (21)
+## C. unrecorded (19)
 
 | scene | beat | kind | line | take |
 |---|---|---|---|---|
@@ -34,7 +33,5 @@ Made by `node scripts/voice-gaps.mjs`. 96 reachable Nanda lines (beat lines, rea
 | escape | 0.c1 | react | Pretty, right? I dust them every day. |  |
 | escape | 5.c0 | react | You're looking too long. |  |
 | escape | 5.c1 | react | Only looking. I trust you. |  |
-| escape-timeout | 4 bento=umeboshi | vary | すっぱいでしょ。…ね？ |  |
-| escape-timeout | 4 bento=tamagoyaki | vary | 甘いでしょ。…ね？ |  |
 | leave | 3.c0 | react | Yeah? Say it again. I'm keeping it. |  |
 | leave | 3.c2 | react | Leave, then. I'll be here. I'm always here. |  |
