@@ -570,3 +570,27 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .bundle-tag { position: absolute; width: 28px; height: 28px; display: grid; place-items: center; background: var(--ink); color: var(--paper);
   font: 700 15px/1 var(--font); font-variant-numeric: tabular-nums; pointer-events: none; }
 .bundle-tag.on { background: var(--one); }
+
+/* Truth table: open / close icon button (the full-table popup, TTPopup.jsx). Tertiary: no box at rest, --ink-2 stroke (RUI p.52-53);
+   hover / keyboard focus = the .pal-tab inversion (ink tile, paper stroke). 24-unit grid, strokes only, butt caps, miter joins.
+   Sits top-right of its cell on the TRUTH TABLE label line; hit target never under 44px. */
+.tt-ico { position: absolute; top: calc(56 * var(--u)); right: calc(20 * var(--u)); z-index: 2; width: max(calc(44 * var(--u)), 44px); height: max(calc(44 * var(--u)), 44px);
+  margin: 0; padding: 0; background: none; border: 0; border-radius: 0; cursor: pointer; display: grid; place-items: center; }
+.tt-ico svg { width: max(calc(24 * var(--u)), 20px); height: max(calc(24 * var(--u)), 20px); overflow: visible; }
+.tt-ico path { fill: none; stroke: var(--ink-2); stroke-width: 2; stroke-linecap: butt; stroke-linejoin: miter; }
+.tt-ico:hover, .tt-ico:focus-visible { background: var(--ink); } .tt-ico:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.tt-ico:hover path, .tt-ico:focus-visible path { stroke: var(--paper); }
+
+/* Popup: a veil over the whole .app (paper at .92: no blur, no shadow, flat) and a square paper panel with one ink rule.
+   The panel reuses .truth, so label, table and live row are the inline ones; wider box => more columns before it scrolls sideways. */
+.tpop { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--paper) 92%, transparent); }
+.truth.tpanel { position: relative; box-sizing: border-box; width: min(calc(860 * var(--u)), calc(100% - 80 * var(--u))); max-height: calc(100% - 80 * var(--u)); overflow: hidden;
+  background: var(--paper); border: var(--rule) solid var(--ink); padding-bottom: calc(28 * var(--u)); outline: 0; }
+.truth.tpanel .tt table { width: calc(max(8, var(--n)) * 12.5%); } /* a column keeps about its inline width (1/4 of the 437u inline box = 12.5% here) */
+@container page style(--zoomed: 1) and ((width < 70rem) or (height < 39.375rem)) {
+  .tpop { display: block; }
+  .truth.tpanel { position: sticky; top: 1rem; width: auto; max-height: calc(100vh - 2rem); margin: 1rem; padding: 1.5rem 20px 1.5rem; align-items: stretch; grid-area: auto; }
+  .truth.tpanel .label, .truth.tpanel table { width: auto; }
+  .truth.tpanel .tt table { width: calc(max(4, var(--n)) * 25%); }
+  .tpanel .tt-ico { top: 1.5rem; right: 20px; }
+}

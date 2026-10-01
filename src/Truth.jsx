@@ -1,6 +1,7 @@
-import { memo, useMemo } from 'react';
+import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import { evaluate } from './sim.js';
 import TTBox from './TTBox.jsx';
+import TTPopup, { OpenIcon } from './TTPopup.jsx';
 import { partNames } from './names.js';
 
 // Truth table built from the circuit (Kerney req. 2). Inputs = switches ordered top-to-bottom on the canvas (then
@@ -31,6 +32,9 @@ function Truth({ circuit, view, fig, setSwitches }) {
   const heads = [...ins, ...outs].map((id) => names[id]);
   const classic = ins.length === 2 && outs.length === 1; // the fitted A / B / OUT header glyphs apply only here
 
+  const [open, setOpen] = useState(false), openBtn = useRef(null);
+  const close = useCallback(() => { setOpen(false); requestAnimationFrame(() => openBtn.current?.focus()); }, []);
+
   // Inline cell: the box ends 32u above the row-03 rule (combo-2, Tony), the same margin as under TRUTH TABLE.
   // J-6 anchors the block at the top, so it fills downward.
   const limit = (el) => el.closest('.truth').getBoundingClientRect().bottom - 32 * (el.closest('.frame').clientWidth / 1440);
@@ -47,7 +51,10 @@ function Truth({ circuit, view, fig, setSwitches }) {
   return (
     <aside className="cell c-side r2 truth" aria-label="Truth table">
       <h2 className="label">Truth table</h2>
+      <button className="tt-ico" ref={openBtn} aria-label="Open full truth table" aria-haspopup="dialog" onClick={() => setOpen(true)}><OpenIcon /></button>
       <TTBox rows={rows} ins={ins} heads={heads} live={live} setSwitches={setSwitches} fig={fig} classic={classic} limit={limit} />
+      {open && openBtn.current?.closest('.app') && <TTPopup host={openBtn.current.closest('.app')} onClose={close}
+        rows={rows} ins={ins} heads={heads} live={live} setSwitches={setSwitches} fig={fig} classic={classic} />}
     </aside>
   );
 }
