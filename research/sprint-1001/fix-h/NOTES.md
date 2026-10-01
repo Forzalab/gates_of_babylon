@@ -56,3 +56,8 @@ Scope: H4/H5/M4/L4/C1 were fixed elsewhere. The coordinator moved H6 (and curry 
   The ceiling arm is deleted. The text and voice are unchanged.
 - **Files:** src/date-beta/art/shop/Front.jsx, src/date-beta/art/shop/parts.jsx.
 - **After:** shop12. Her own pin lead visibly comes out of her side and ends on your sleeve. Nothing comes from the ceiling, the sleeve reaches the frame edge, and nothing floats.
+
+## Final checks (on 4100446)
+- `npm test`: 437 pass, 0 fail. `node scripts/voice-gaps.mjs`: 96 live lines, 0 silent. `npx vite build`: ok.
+- Float audit (`node research/sprint-0930/float-audit/audit.mjs`, preview on :5218): 94 Nanda beats, 0 flags. Its result.json was not committed.
+- H6 (including curry 13) and H7 were not touched here: the coordinator reassigned them to main.
