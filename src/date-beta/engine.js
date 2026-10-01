@@ -14,7 +14,7 @@
 import { loadGacha, rollGacha, freshLuck, nextRunLuck } from './gacha.js';
 export const MAX_WORDS = 30; // a line, a vary text, a react
 // Meta tokens (T3, meta.js fills them at render): allowed braces besides {OR}.
-export const TOKEN_RE = /\{(RUN|TIME|DAYPART|CLOTHES|CROWD\.[1-4])\}/g;
+export const TOKEN_RE = /\{(RUN|TIME|NOW|DAYPART|CLOTHES|CROWD\.[1-4])\}/g;
 export const MAX_CHOICE_WORDS = 12; // a button label
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
 // Beat-local props that never carry to the next beat: an `emote` (this line's face) and a hidden sprite (cut.frame

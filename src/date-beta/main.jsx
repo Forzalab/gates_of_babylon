@@ -32,7 +32,7 @@ import { SHOT_ALIASES } from './art/shots/aliases.js';
 import { Handout, SmileTag, PovFood, PeekBento, useStep } from './SceneA.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
-import { setCrowd, bumpRun, runBucket, getRun, fill } from './meta.js';
+import { setCrowd, bumpRun, runBucket, getRun, fill, setSceneTime, stampAt } from './meta.js';
 import { cardFor, failLine } from './endcard.js';
 import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
@@ -351,6 +351,8 @@ function Player() {
   const onNext = (waiting || solo) && ready && !card && !paused ? () => advance(true) : null;
   const say = !pos.done && !end && shown.parts.length > 0 && (!!beat.text || beat.wait === 'auto') && !GAME[beat.bg];
   const stampP = !pos.done && !end && beat.props?.shot === 'stamp' && beat.props.place ? beat.props : null;
+  const inForce = stampAt(SCENES, pos.react ? { ...pos, s: pos.react.s, b: pos.react.b } : pos); // a react line: the time where it was said
+  setSceneTime(inForce && !inForce.live ? inForce.time : null); // {TIME} = the stamp in force (set before Say renders, SLOP 1001 H5)
   const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
   // R5 focus plane (Tony 09-30, the HYBRID pick): when her feet stand on a visible floor, the ground around them stays
   // sharp (a floor band + an ellipse round her feet, soft edges), the rest of the bg blurs. Camera focus pulled to her.

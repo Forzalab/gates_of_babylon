@@ -4,14 +4,14 @@
   "scenes": [
     { "id": "meta-park", "title": "Meta: park", "short": "PARK", "bg": "rooftop", "nanda": true, "beats": [
       { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "big-eyes-peek" } }, "text": "I love your {CLOTHES}. You wore it for me. I can tell. Don't say no, I already decided. ♡", "timer": 12, "choices": [
-        { "text": "I wore it for you", "love": 3, "emote": "hearts", "fx": "love-burst", "react": "I knew it. I know everything about you. Even the time. It's {TIME}. ♡" },
+        { "text": "I wore it for you", "love": 3, "emote": "hearts", "fx": "love-burst", "react": "I knew it. I know everything about you. Even the time. It's {NOW}. ♡" },
         { "text": "It was clean", "default": true, "love": 1, "emote": "sweat", "fx": "none", "react": "Clean for me. That's the same thing, silly." },
         { "text": "Not everything is about you", "love": -4, "emote": "hate", "fx": "hate-quake", "react": "…Everything is about me. You'll learn. You always learn, around run {RUN}." }
       ] },
       { "speaker": "NANDA", "text": "Good. Now we can have the perfect date. The same perfect date. Ehehe." }
     ] },
     { "id": "meta-crowd", "title": "Meta: crowdwork", "short": "CROWD", "bg": "platform", "nanda": true, "beats": [
-      { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "big-eyes-peek" } }, "text": "Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. Yes, you. I see you." },
+      { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "big-eyes-peek" } }, "text": "Want to see a magic trick? It's {NOW}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. Yes, you. I see you." },
       { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "smug-gloating" } }, "text": "Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. Everybody in here is thinking about me. That's the vibe, right?" },
       { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "4" } }, "text": "Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. I'm just remembering your face. For later. ♡" },
       { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "anya-smile" } }, "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover." }
