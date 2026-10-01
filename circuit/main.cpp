@@ -57,14 +57,14 @@ void printCircuit(const std::vector<Node> &nodes) {
     for (size_t i = 0; i < nodes.size(); ++i) {
         const Node &n = nodes[i];
         std::cout << "Gate Type: " << (n.type == INPUT ? "INPUT" : NAMES[n.type]) << "\n"
-                  << "Input Connected to Index: ";
+                  << "\tInput Connected to Index: ";
         if (n.in.empty()) std::cout << "N.C. and N.C.";
         else if (n.in.size() == 1) std::cout << n.in[0];
         else std::cout << n.in[0] << " and " << n.in[1];
-        std::cout << "\nOutput Connected to Index: ";
+        std::cout << "\n\tOutput Connected to Index: ";
         if (i + 1 == nodes.size()) std::cout << "OUTPUT PIN";
         else std::cout << n.out;
-        std::cout << "\nValue: X\n\n";
+        std::cout << "\n\tValue: X\n\n";
     }
 }
 
