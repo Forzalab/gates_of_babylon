@@ -28,7 +28,7 @@ export function Steam({ x, y, h = 220, w = 70, rm, o = 0.5 }) {
   );
 }
 
-// a wall / pole clock; h, m = the time it shows (fixed: Tony, Oct 1 -- the 2:55 street keeps 2:55, off the story clock)
+// a wall / pole clock; h, m = the time it shows (fixed: Tony, Oct 1 -- curry clocks stay off the story clock)
 export function Clock({ cx, cy, r = 50, h, m }) {
   const hand = (deg, len) => [cx + Math.sin((deg * Math.PI) / 180) * len, cy - Math.cos((deg * Math.PI) / 180) * len];
   const [hx, hy] = hand((h % 12) * 30 + m / 2, r * 0.56), [mx, my] = hand(m * 6, r * 0.8);

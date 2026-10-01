@@ -34,6 +34,7 @@
             "shot": "stamp",
             "place": "OR OR CURRY",
             "time": "3:00 PM",
+            "fixed": true,
             "cut": {
               "frame": "off",
               "sharp": true
@@ -192,6 +193,7 @@
             "shot": "stamp",
             "place": "OR OR CURRY",
             "time": "3:00 PM",
+            "fixed": true,
             "cut": {
               "frame": "medium",
               "face": "smug-gloating"
@@ -422,6 +424,7 @@
             "shot": "stamp",
             "place": "NAND HOUSE",
             "time": "3:00 PM",
+            "fixed": true,
             "cut": {
               "frame": "off",
               "sharp": true

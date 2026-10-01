@@ -4,7 +4,6 @@
 // curry pot, rice cooker, spice shelf on white tile), a red chochin, and a hanging wooden-plank curry menu on the right.
 // Composition keeps the story props clear of the chrome: noren / clock / menu sit in the top 60% (the dialogue box is
 // y >= 773), and the centre (her sprite) is only background kitchen. Foreground = the counter the two of them sit at.
-import { useStoryTime } from './util.js';
 const WOOD = '#3b2414';
 const INK = '#2e1a0c';
 
@@ -27,8 +26,7 @@ function Plank({ y, name, heat, price }) {
 
 export default function CurryHouse() {
   const hour = 3, minute = 0; // the stamp says 3:00 PM
-  const [h, m] = useStoryTime(hour, minute);
-  const hA = (h % 12) * 30 + m * 0.5, mA = m * 6;
+  const hA = (hour % 12) * 30 + minute * 0.5, mA = minute * 6;
   return (
     <svg className="art curry-house" viewBox="0 0 1920 1080" role="img"
       aria-label="A small curry house at 3:00 PM: an indigo noren curtain in the doorway, a wall clock at 3:00, a curry pot in the open kitchen, a wooden curry menu on the wall.">
