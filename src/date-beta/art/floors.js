@@ -43,6 +43,10 @@ export const FLOORS = {
   // a longer cast shadow to the right, warm-brown shadow ink.
   'curry-street': { y: 790, step: 'walk',
     light: { side: -1, rim: '#ffe6c0', bounce: '#e8a878', dx: -6, dy: 7, rot: 5, len: 2.0, ink: '58, 34, 30', a: 0.62, grade: 'saturate(.95) sepia(.06)' } },
+  // H6 (SLOP v2-curry 13): R6 made that line two rows (box top ~773), so the rivets ate her shoes at 790. That one beat
+  // (props.cut.floor in r6.json) stands a step further up the street, same walk pose + sun.
+  'curry-street-up': { y: 748, step: 'walk',
+    light: { side: -1, rim: '#ffe6c0', bounce: '#e8a878', dx: -6, dy: 7, rot: 5, len: 2.0, ink: '58, 34, 30', a: 0.62, grade: 'saturate(.95) sepia(.06)' } },
   'town-board': { y: UNDER_BOX },
   // insert-card shots (a card over the bg): no ground in the card, feet tuck behind the box
   'feet-park': { y: UNDER_BOX },

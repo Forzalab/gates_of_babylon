@@ -94,7 +94,8 @@
    "beat": 13,
    "set": {
     "text": "We walk out of the curry shop. It is 3:40 PM. Lunch is done. Now we walk to her station."
-   }
+   },
+   "props": { "cut": { "frame": "medium", "face": "heart-laugh", "floor": "curry-street-up" } }
   },
   {
    "scene": "v2-train",

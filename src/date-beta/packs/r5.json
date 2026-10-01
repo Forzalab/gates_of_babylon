@@ -81,7 +81,7 @@
    "beat": 1,
    "props": {
     "cut": {
-     "plant": 70,
+     "frame": "close",
      "reach": true,
      "face": "content"
     }
