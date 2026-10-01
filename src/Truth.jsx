@@ -4,7 +4,7 @@ import { ScrollCues } from './Palette.jsx';
 import { partNames } from './names.js';
 
 // Truth table built from the circuit (Kerney req. 2). Inputs = switches ordered top-to-bottom on the canvas (then
-// left-to-right), outputs = lamps in the same order. 2^n rows, MSB = the top switch. Rows are computed once per circuit
+// left-to-right), then one column per gate (same order), then outputs = lamps in the same order. 2^n rows, MSB = the top switch. Rows are computed once per circuit
 // SHAPE (wires, parts, order), not per toggle; only a window of rows is rendered, so 13 switches (8,192 rows) stay cheap.
 // The live row = the switches' current values. Clicking a row sets the switches to it.
 
@@ -12,8 +12,8 @@ export default memo(Truth);
 function Truth({ circuit, view, fig, setSwitches }) {
   const byPos = (kind) => view.filter((n) => circuit.nodes[n.id]?.kind === kind)
     .sort((a, b) => a.position.y - b.position.y || a.position.x - b.position.x).map((n) => n.id);
-  const ins = byPos('S'), outs = byPos('L');
-  const shape = JSON.stringify([ins, outs, circuit.wires, Object.values(circuit.nodes).map((n) => [n.id, n.kind, n.type])]);
+  const ins = byPos('S'), gates = byPos('G'), outs = byPos('L');
+  const shape = JSON.stringify([ins, gates, outs, circuit.wires, Object.values(circuit.nodes).map((n) => [n.id, n.kind, n.type])]);
   const rows = useMemo(() => {
     const n = ins.length, all = [];
     for (let r = 0; r < 2 ** n; r++) {
@@ -21,24 +21,30 @@ function Truth({ circuit, view, fig, setSwitches }) {
       const nodes = { ...circuit.nodes };
       ins.forEach((id, i) => { nodes[id] = { ...nodes[id], value: !!bits[i] }; });
       const v = evaluate({ ...circuit, nodes });
-      all.push([...bits, ...outs.map((id) => +!!v[id])]);
+      all.push([...bits, ...gates.map((id) => +!!v[id]), ...outs.map((id) => +!!v[id])]);
     }
     return all;
   }, [shape]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const live = ins.reduce((acc, id) => acc * 2 + (circuit.nodes[id].value ? 1 : 0), 0);
   const names = partNames(view, circuit); // same function the canvas plates use
-  const heads = [...ins, ...outs].map((id) => names[id]);
+  const heads = [...ins, ...gates, ...outs].map((id) => names[id] || circuit.nodes[id].type);
   const classic = ins.length === 2 && outs.length === 1; // the fitted A / B / OUT header glyphs apply only here
 
   // Windowing: fixed row height measured from the first rendered row.
-  const box = useRef(null);
+  const box = useRef(null), cell = useRef(null);
+  const [full, setFull] = useState(false); // Fullscreen API on the .truth cell; Esc is the browser's, we only mirror it
+  useEffect(() => { const f = () => setFull(document.fullscreenElement === cell.current); document.addEventListener('fullscreenchange', f); return () => document.removeEventListener('fullscreenchange', f); }, []);
+  const toggleFull = () => { if (document.fullscreenElement) document.exitFullscreen(); else cell.current?.requestFullscreen?.(); };
   const [rowH, setRowH] = useState(40), [top, setTop] = useState(0), [boxH, setBoxH] = useState(400);
   const [more, setMore] = useState({ up: false, down: false, left: false, right: false }); // palette's scroll cues: only where rows / columns remain
   const cues = (el) => {
     const m = { up: el.scrollTop > 1, down: el.scrollTop + el.clientHeight < el.scrollHeight - 1,
       left: el.scrollLeft > 1, right: el.scrollLeft + el.clientWidth < el.scrollWidth - 1 };
     setMore((o) => (Object.keys(m).some((k) => m[k] !== o[k]) ? m : o));
+    // The bottom fade is a mask, which also hides the native horizontal scrollbar. Tell the CSS how tall that strip is, so the fade ends above it.
+    const sb = `${el.offsetHeight - el.clientHeight}px`;
+    el.style.setProperty('--sb', sb); el.parentElement.style.setProperty('--sb', sb); // the wrap too, so the bottom cue sits above the strip
   };
   useEffect(() => {
     const el = box.current; if (!el) return;
@@ -52,12 +58,13 @@ function Truth({ circuit, view, fig, setSwitches }) {
     // Was: capped only when the rows overflowed 100vh, so a taller row 02 let 8-16 rows run to the cell's bottom rule.
     const room = cell.bottom - 32 * u - el.getBoundingClientRect().top;
     const cap = Math.min(parseFloat(getComputedStyle(el).maxHeight), room);
-    if (el.scrollHeight > cap + 0.5) el.style.maxHeight = `${head + Math.floor((cap - head) / rowH) * rowH}px`;
+    const sb = el.offsetHeight - el.clientHeight; // horizontal scrollbar strip: sits below the whole rows, not inside them
+    if (el.scrollHeight > cap + 0.5) el.style.maxHeight = `${head + Math.floor((cap - head - sb) / rowH) * rowH + sb}px`;
     setBoxH(el.clientHeight);
     cues(el);
     // Tony: the table snapped back while scrolling. This effect ran after EVERY render, and a scroll re-renders (setTop):
     // clearing maxHeight each time shrank/regrew the box and clamped scrollTop. Re-measure only when the table or the frame changes.
-  }, [shape, fig, rowH]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [shape, fig, rowH, full]); // eslint-disable-line react-hooks/exhaustive-deps
   const first = Math.max(0, Math.floor(top / rowH) - 2), last = Math.min(rows.length, first + Math.ceil(boxH / rowH) + 5);
   // Keep the live row in view when the switches change.
   useEffect(() => {
@@ -71,7 +78,7 @@ function Truth({ circuit, view, fig, setSwitches }) {
   }, [live, rowH]);
 
   const cls = (h) => ({ A: 'hA', B: 'hB' })[h];
-  const kind = (j) => (j < ins.length ? 'k-S' : 'k-L'); // column kind: switch (input) or lamp (output)
+  const kind = (j) => (j < ins.length ? 'k-S' : j < ins.length + gates.length ? 'k-G' : 'k-L'); // column kind: switch, gate (intermediate) or lamp
   const stop = live >= first && live < last ? live : first;
   // T4-tt: no switch or no lamp = nothing to tabulate. Show an empty state, never stale rows or a stale live row.
   if (!ins.length || !outs.length) return (
@@ -83,10 +90,13 @@ function Truth({ circuit, view, fig, setSwitches }) {
     </aside>
   );
   return (
-    <aside className="cell c-side r2 truth" aria-label="Truth table">
+    <aside className="cell c-side r2 truth" aria-label="Truth table" ref={cell}>
       <h2 className="label">Truth table</h2>
+      <button type="button" className="tt-full" aria-pressed={full} aria-label={full ? 'Exit full screen' : 'Full screen truth table'} onClick={toggleFull}>
+        <svg aria-hidden="true" viewBox="0 0 16 16"><path d={full ? 'M6 1v5H1M10 1v5h5M6 15v-5H1M10 15v-5h5' : 'M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5'} /></svg>
+      </button>
       <div className="tt-wrap">
-      <div className={`tt ${classic ? 'classic' : ''} ${more.down ? 'fd' : ''}`} ref={box} onScroll={(e) => { setTop(e.currentTarget.scrollTop); cues(e.currentTarget); }}>
+      <div className={`tt ${classic ? 'classic' : ''} ${gates.length ? 'gates' : ''} ${more.down ? 'fd' : ''}`} ref={box} onScroll={(e) => { setTop(e.currentTarget.scrollTop); cues(e.currentTarget); }}>
         <table style={{ '--n': heads.length }} role="grid" aria-label="Truth table rows; arrow keys set the switches">
           <thead><tr>
             {heads.map((h, j) => h === 'OUT' && classic
