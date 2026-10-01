@@ -110,7 +110,7 @@ export function Tree({ scenes, decl, sess, k, here, onJump, onClose }) {
         {Remember}
         <button type="button" className="db-tree-btn" onClick={trash} title="Clear every pick">🗑 Reset picks</button>
         <button type="button" className="db-tree-btn db-tree-close" onClick={onClose} title="Close (Esc or ~)">✕ Close</button>
-        <p className="db-tree-hint">Click a pink or purple pill to play that choice · thin lines play on their own · every ending returns to the rooftop · drag to pan</p>
+        <p className="db-tree-hint">Click a pink or purple pill to play that choice · thin lines play on their own · every ending returns to the rooftop</p>
         <span className="db-tree-zoom">
           <button type="button" className="db-tree-btn" data-zoom="fit" onClick={fit} title="Fit the whole map">Fit</button>
           <button type="button" className="db-tree-btn" data-zoom="out" onClick={() => zoom(z / STEP)} title="Zoom out">−</button>

@@ -138,7 +138,7 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-tree-btn { padding: 12px 22px; border-radius: 999px; border: 3px solid var(--g-rim); background: var(--g-dark); color: var(--scrim-ink);
   font: 700 24px/1 var(--cond); letter-spacing: .04em; cursor: pointer; }
 .db-tree-btn:hover, .db-tree-btn:focus-visible, .db-remember:focus-within { outline: 4px solid var(--pink); outline-offset: 4px; }
-.db-tree-hint { flex: 1 1 900px; margin: 0; font: 400 24px/1 var(--cond); color: rgba(255, 233, 241, .7); }
+.db-tree-hint { flex: 1 1 900px; margin: 0; font: 400 22px/1.1 var(--cond); color: rgba(255, 233, 241, .7); }
 .db-tree-lines { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
 .db-tree-lines path { fill: none; stroke: rgba(255, 233, 241, .35); stroke-width: 3; }
 .db-tree-lines path.spine { stroke: rgba(255, 233, 241, .22); }
