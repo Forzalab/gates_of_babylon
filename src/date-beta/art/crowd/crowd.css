@@ -14,3 +14,6 @@
 @keyframes cw-look { from { transform: translateX(-3px); } to { transform: translateX(3px); } }
 @keyframes cw-sway { from { transform: translate(-3px, 0); } to { transform: translate(3px, -2px); } }
 @media (prefers-reduced-motion: reduce) { .cw-crowd * { animation: none !important; } }
+/* the café menu board sits right where the right wing stands: its joke lines would peek out between heads as
+   half-words (illegible noise, impeccable low-contrast x4), so on a crowd beat the board goes dark and the eyes own it */
+.stage:has(.cw-back) .art.cafe .menu { opacity: 0; }

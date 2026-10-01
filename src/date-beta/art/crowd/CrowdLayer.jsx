@@ -14,7 +14,7 @@ const dur = (f) => ({ '--cw-dur': `${f.dur.toFixed(2)}s` });
 function Eyes({ f, kind }) {
   const { x, y, r } = f;
   const ey = y + r * 0.1, dx = r * 0.4;
-  const rx = kind === 'dot' ? Math.max(1.6, r * 0.16) : r * 0.2, ry = kind === 'dot' ? rx * 0.8 : rx * 0.78;
+  const rx = kind === 'dot' ? Math.max(1.8, r * 0.17) : kind === 'glow' ? r * 0.23 : r * 0.2, ry = kind === 'dot' ? rx * 0.8 : rx * 0.78;
   const look = (f.look ?? 0) * rx * 0.25;
   return (
     <g className="cw-eyes" style={{ ...dly(f.blink), ...dur(f) }}>
@@ -114,7 +114,7 @@ export function CrowdBack({ crowd }) {
               <path d={personPath(f.x, f.y, f.r, 660)} fill="#24090f" />
             </g>
           ))}
-          <rect x="0" y="470" width="1920" height="200" fill="url(#cw-haze)" />
+          <rect x="0" y="430" width="1920" height="240" fill="url(#cw-haze)" />
           <g className="cw-far-eyes">{c.far.map((f, i) => <Eyes key={i} f={f} kind="dot" />)}</g>
         </g>
         <g className="cw-mid">

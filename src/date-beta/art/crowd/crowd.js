@@ -9,7 +9,8 @@
 // Keep-outs (stage px, 1920x1080): Nanda's column (x CLEAR), the HUD ribbon (eyes below EYE_TOP) and the dialogue
 // box / name tag / choices (eyes above EYE_BOTTOM; the bodies run down BEHIND the box, which is opaque).
 
-export const CLEAR = [700, 1220]; // her column: no figure's eyes or head inside it
+export const CLEAR = [700, 1220]; // her column: no mid / near figure's eyes or head inside it
+export const FAR_CLEAR = [820, 1100]; // the far row may stand behind her, high over her head (y < 470), never above her face
 export const EYE_TOP = 140; // under the love ribbon
 export const EYE_BOTTOM = 760; // over the box top (--boxtop ~ 800-823 on a crowd beat)
 
@@ -32,10 +33,10 @@ function rng(seed) {
 }
 
 // x in the left or right wing (never the clear column), spread evenly by slot then jittered
-const wingX = (r, i, n, lo, hi, pad) => {
+const wingX = (r, i, n, lo, hi, pad, clear = CLEAR) => {
   const left = i % 2 === 0;
   const k = Math.floor(i / 2), m = Math.ceil(n / 2);
-  const [a, b] = left ? [lo, CLEAR[0] - pad] : [CLEAR[1] + pad, hi];
+  const [a, b] = left ? [lo, clear[0] - pad] : [clear[1] + pad, hi];
   return a + ((k + 0.15 + r() * 0.7) / m) * (b - a);
 };
 
@@ -46,7 +47,7 @@ export function buildCrowd({ density = 1, seed = 1001 } = {}) {
   const nFar = Math.round(34 * density);
   for (let i = 0; i < nFar; i++) {
     const hr = 9 + r() * 6;
-    far.push({ x: wingX(r, i, nFar, 10, 1910, 30), y: 470 + r() * 70 + (i % 3) * 10, r: hr, tone: 0.55 + r() * 0.35, blink: r() * 9, dur: 6 + r() * 6 });
+    far.push({ x: wingX(r, i, nFar, 10, 1910, 14, FAR_CLEAR), y: 385 + r() * 40 + (i % 3) * 16, r: hr, tone: 0.6 + r() * 0.35, blink: r() * 9, dur: 6 + r() * 6 });
   }
   far.sort((a, b) => a.y - b.y);
   const nMid = Math.round(14 * density);
