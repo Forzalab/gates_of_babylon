@@ -10,7 +10,7 @@
 //   labels: { ume, tama }            button aria-labels (default 'Umeboshi' / 'Tamagoyaki')
 import { rng } from '../util.js';
 import { traceUrl, preloadTrace } from '../romance/Grade.jsx';
-import { INK, Umeboshi, UmeStain, ShisoLeaf, TamaSlice, TamaLog, TamaBlock, Chopstick, Glint } from './foods.jsx';
+import { INK, Umeboshi, UmeStain, ShisoLeaf, TamaSlice, TamaLog, TamaBlock, Chopstick, Glint, HeldChopsticks } from './foods.jsx';
 
 preloadTrace('bento-pink');
 
@@ -203,8 +203,8 @@ export function BentoInsert({ props = {} }) {
 
 // The extreme close-up: one piece up in her chopsticks (ref 01), the box big and low, the gap it left in view.
 const LIFT = {
-  tama: { box: 'translate(-300 408) rotate(-4) scale(1.5)', at: [930, 370], shadow: [1250, 660, 120, 44] },
-  ume: { box: 'translate(300 330) rotate(-4) scale(1.5)', at: [860, 400], shadow: [800, 870, 120, 46] },
+  tama: { box: 'translate(-300 408) rotate(-4) scale(1.5)', at: [930, 370], shadow: [1250, 660, 120, 44], grip: [190, 470], hs: 1.3 },
+  ume: { box: 'translate(300 330) rotate(-4) scale(1.5)', at: [860, 400], shadow: [800, 870, 120, 46], grip: [200, 560], hs: 1.3 },
 };
 
 export function BentoLift({ props = {} }) {
@@ -220,19 +220,19 @@ export function BentoLift({ props = {} }) {
         <g transform={L.box}><BentoBox uid="bl" lift={food} /></g>
         <rect width="1920" height="1080" fill="url(#bl-key)" />
         <ellipse cx={sx} cy={sy} rx={srx} ry={sry} fill="#2a1022" opacity=".42" filter="url(#bl-sh)" />
+        {/* H1: the sticks are held: YOUR hand comes in from the lower left (the green knit sleeve off the frame edge) */}
         {food === 'tama' ? (
           <g>
-            {/* lower stick behind the piece (tip hidden under it), upper stick resting on its seared top */}
-            <Chopstick from={[-140, 20]} to={[ax + 10, ay + 30]} />
-            <g transform={`translate(${ax} ${ay}) rotate(-6)`}><TamaBlock uid="bl-t" /></g>
-            <Chopstick from={[-140, -250]} to={[ax - 10, ay - 158]} />
+            <HeldChopsticks tips={[[ax + 10, ay + 30], [ax - 10, ay - 158]]} grip={L.grip} s={L.hs}>
+              <g transform={`translate(${ax} ${ay}) rotate(-6)`}><TamaBlock uid="bl-t" /></g>
+            </HeldChopsticks>
             <Glint x={ax - 130} y={ay - 150} s={26} /><Glint x={ax + 250} y={ay - 60} s={16} op={0.8} />
           </g>
         ) : (
           <g>
-            <Chopstick from={[-140, 140]} to={[ax + 10, ay + 50]} />
-            <g transform={`translate(${ax} ${ay})`}><Umeboshi r={128} uid="bl-u" leaf={false} /></g>
-            <Chopstick from={[-140, -170]} to={[ax - 20, ay - 92]} />
+            <HeldChopsticks tips={[[ax + 10, ay + 50], [ax - 20, ay - 92]]} grip={L.grip} s={L.hs}>
+              <g transform={`translate(${ax} ${ay})`}><Umeboshi r={128} uid="bl-u" leaf={false} /></g>
+            </HeldChopsticks>
             <Glint x={ax - 150} y={ay - 130} s={24} /><Glint x={ax + 160} y={ay - 40} s={14} op={0.8} />
           </g>
         )}
