@@ -8,8 +8,9 @@ import { speak } from './eleven.mjs';
 import { mp3Ms } from './timing.mjs';
 import { buildIndex, fileForLine } from '../../src/date-beta/voice/voice.js';
 
-export const NARRATOR = { voice: 'onwK4e9ZLuTAKqWW03F9', name: 'Daniel - Steady Broadcaster', model: 'eleven_multilingual_v2',
-  settings: { stability: 0.6, similarity_boost: 0.8, style: 0, speed: 1.08 } };
+// Tony, Oct 1: v4 + Sean (was Daniel - Steady Broadcaster on eleven_multilingual_v2). Same as research/sprint-1001/voice/rerecord-v4.mjs.
+export const NARRATOR = { voice: '4NJLA7OQNVkeKe4jVdHw', name: 'Sean - Squeaky voice', model: 'eleven_v4',
+  settings: { stability: 0.5, similarity_boost: 0.8, style: 0, speed: 1.05 } };
 const U = (p) => new URL(`../../${p}`, import.meta.url);
 const FULL = U('research/sprint-0930/voice/audio-manifest.json'), SLIM = U('src/date-beta/voice/manifest.json');
 const full = JSON.parse(fs.readFileSync(FULL, 'utf8')), slim = JSON.parse(fs.readFileSync(SLIM, 'utf8'));

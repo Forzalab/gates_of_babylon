@@ -1,10 +1,10 @@
-// Records RECORD-KIT.md rows in Nanda's voice (Irohauta, eleven_v3; brain 2026-09-29T2330) that have no mp3 yet, and
+// Records RECORD-KIT.md rows in Nanda's voice (Irohauta, eleven_v4 since Oct 1; brain 2026-09-29T2330) that have no mp3 yet, and
 // appends them to research/sprint-0930/voice/appendix-manifest.json. Then: node scripts/voice-gaps.mjs --wire, qa --fix.
 // ELEVEN_ENV=<key file> node research/sprint-1001/voice/record-kit.mjs [n ...]   (no n = every missing row)
 import fs from 'node:fs';
 import { speak } from '../../../scripts/narration/eleven.mjs';
 const U = (p) => new URL(`../../../${p}`, import.meta.url);
-export const NANDA = { voice: 'uYwU1hsbnP5viqq9qhob', model: 'eleven_v3', settings: { stability: 0.5, similarity_boost: 0.75, style: 0.35 } };
+export const NANDA = { voice: 'uYwU1hsbnP5viqq9qhob', model: 'eleven_v4', settings: { stability: 0.5, similarity_boost: 0.75, style: 0.35 } };
 const KIT = fs.readFileSync(new URL('./RECORD-KIT.md', import.meta.url), 'utf8');
 const APPX = U('research/sprint-0930/voice/appendix-manifest.json');
 const rows = [...KIT.matchAll(/^\| (\d+) \| ([\w-]+) \| ([^|]+?) \| ([^|]+?) \| `([^`]+)` \|$/gm)].map(([, n, scene, beat, file, text]) => ({ n: +n, scene, beat, file: `public/date-beta/voice/${file}`, text }));
