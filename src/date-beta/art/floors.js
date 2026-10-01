@@ -13,7 +13,11 @@ export const FLOORS = {
   'rain-ending': { y: 700, wet: true, step: 'walk',
     light: { side: 1, wet: true, rim: '#e6eef0', dx: -96, dy: 8, rot: -8, len: 1.25, ink: '14, 22, 24', a: 0.62, grade: 'saturate(.84) brightness(.97)' } },      // the wet road at her x, a step up the road so her soles + reflection clear the box rivets (R7 legs)
   'her-building': { y: 790, wet: true },     // the dark street in front of door 12 (v2-street 5)
-  'shop-way-out': { y: 760 },     // the pavement outside the shop doors
+  // the pavement outside the shop doors. R7 legs: 760 put her soles ON the two-line box's rivets (~772, the contact
+  // hidden): up to 742. Walking out (she holds your sleeve): the walk pose. Sunny 2 PM from behind the camera, front-left
+  // (the facade + its glass are lit evenly, brighter on the left): her shadow falls away from us, back and right.
+  'shop-way-out': { y: 742, step: 'walk',
+    light: { side: -1, rim: '#fff6e6', bounce: '#d4d9dd', dx: -13, dy: -4, rot: -6, len: 1.5, ink: '34, 44, 60', a: 0.55, grade: 'saturate(.96)' } },
   'train-sun': { y: 690 },        // the carriage floor (v2-train 6, matched to the Tony-approved plant 90)
   'platform-rain': { y: 698, wet: true },    // the platform edge (v2-train 8, plant 100)
   // R7 legs: the station feet (v2-train 3 bumped, 4 "Hey, you"): planted beats (cut.plant 90 wins for the y) still take

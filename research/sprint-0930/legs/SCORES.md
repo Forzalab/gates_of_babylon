@@ -7,3 +7,4 @@
 | 3 | v2-curry 13 street walking | 3 | 9 | PASS | compare/04-v2-curry-13-street-walk.jpg |
 | 4 | v2-train 3 station feet | 2 | 10 | PASS | compare/05-v2-train-3-station-feet.jpg |
 | 5 | rooftop 2 shoes by the fence | 2 | 10 | PASS | compare/06-rooftop-2-shoes-by-fence.jpg |
+| 6 | v2-shop 12 walk out with the bags | 1 | 9 | PASS | compare/07-v2-shop-12-walk-out.jpg |

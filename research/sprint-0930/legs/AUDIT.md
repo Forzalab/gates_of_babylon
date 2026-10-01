@@ -38,3 +38,7 @@
   floor for one beat (main.jsx, floors test + float audit read it through the stage's data-floor).
 - Nishiya/KyoAni: "toes pointed at you" played as a shy uchimata (knees in, toes a touch in), ref 06 (indoor shoes on tiles).
 - Light: noon, high, front-left (the stair-house's left face is lit): short, crisper cast shadow to the right.
+
+## 6. v2-shop 12 (shop-way-out), walking out
+- UI: her soles sat on the box rivets (two-line box top ~772); contact shadow under the rivets. Pose: static on a walk-out.
+- Light: sunny 2 PM, the key behind the camera to the left (the facade glass is brightest on the left): shadow back-right.
