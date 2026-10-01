@@ -1,0 +1,89 @@
+{
+ "log": [
+  {
+   "nm": "001-menu-index.png",
+   "leg": "alone",
+   "scene": "",
+   "beat": "",
+   "tag": "index",
+   "text": "Logic mode front page (index.html)",
+   "choices": []
+  },
+  {
+   "nm": "002-v2-curry-1-choice.png",
+   "leg": "alone",
+   "scene": "v2-curry",
+   "beat": "1",
+   "tag": "choice",
+   "text": "NANDA: I am hungry. You pick my lunch. Pick the right one.",
+   "choices": [
+    "♥ ?? Butter chicken for her",
+    "♥ ?? Katsu curry [default]",
+    "♡ ?? I am not hungry"
+   ],
+   "pop": null,
+   "taken": "♡ ?? I am not hungry"
+  },
+  {
+   "nm": "003-v2-curry-1-react.png",
+   "leg": "alone",
+   "scene": "v2-curry",
+   "beat": "1",
+   "tag": "react",
+   "text": "NANDA: Then you watch me eat.",
+   "choices": [],
+   "pop": "−4 She did not like that."
+  },
+  {
+   "nm": "004-v2-curry-alone-0.png",
+   "leg": "alone",
+   "scene": "v2-curry-alone",
+   "beat": "0",
+   "tag": "",
+   "text": "She opens the yellow door. A bell rings.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "005-v2-curry-alone-1.png",
+   "leg": "alone",
+   "scene": "v2-curry-alone",
+   "beat": "1",
+   "tag": "",
+   "text": "She eats alone. You get no food. She looks at you the whole time.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "006-v2-curry-alone-2.png",
+   "leg": "alone",
+   "scene": "v2-curry-alone",
+   "beat": "2",
+   "tag": "",
+   "text": "She folds her napkin and keeps it. She collects them.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "007-v2-curry-alone-3.png",
+   "leg": "alone",
+   "scene": "v2-curry-alone",
+   "beat": "3",
+   "tag": "",
+   "text": "We walk out to the street. It is 3:40 PM.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "008-v2-train-0-next-scene.png",
+   "leg": "alone",
+   "scene": "v2-train",
+   "beat": "0",
+   "tag": "next-scene",
+   "text": "4:30 PM. Her station. She takes your hand. 'Now we go to MY home. On MY train.'",
+   "choices": [],
+   "pop": null
+  }
+ ],
+ "errs": []
+}
