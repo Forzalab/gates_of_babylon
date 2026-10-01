@@ -43,6 +43,8 @@ import { watchLock } from './fx/lockSfx.js';
 import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
+import { CrowdBack, CrowdNear } from './art/crowd/CrowdLayer.jsx';
+import { crowdOf } from './art/crowd/crowd.js';
 import { rainOf } from './fx/rain.js';
 import { floorOf, UNDER_BOX, castVars } from './art/floors.js';
 import { Cel, celOf } from './fx/Cels.jsx';
@@ -60,7 +62,7 @@ const packOf = (n) => {
 };
 setCrowd(crowd);
 // Normal play: the sprint packs in fixed order. ?pack=a,b replaces the list (preview).
-const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'r6', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
+const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'crowd-eyes', 'love', 'ux-six', 'r5', 'r6', 'gacha'].filter((n) => PACK_FILES[`./packs/${n}.json`]);
 const data = applyPacks(baseData, (params.has('pack') ? params.get('pack').split(',').filter(Boolean) : PLAY).map(packOf));
 const SCENES = loadScenes(data, { manifest, art: Object.keys(ART) });
 export const W = 1920, H = 1080;
@@ -365,6 +367,8 @@ function Player() {
   const fplane = focus && !end && frame === 'medium' && flo.y && flo.y < UNDER_BOX && (here || speaksNanda(beat.line)) ? flo.y : 0;
   // outdoor rain (fx/rain.js): props.rain level, else the bg's default; keyed per beat so the wet marks re-measure
   const rain = !pos.done && !end ? rainOf(beat) : null;
+  // crowd-eyes (art/crowd): props.crowd on a CROWD-speaker beat; far + mid behind Nanda, the near bokeh over her, under the HUD
+  const throng = !pos.done && !end && !GAME[beat.bg] ? crowdOf(beat.props) : null;
   // R6 (Tony: rain 1 react): once you step under her umbrella (a liked pick on an umbrella beat), the reaction is seen from
   // UNDER it, the same near-lens canopy as beats 2-4 (and her own umbrella cel goes, so there is one umbrella, not two).
   const shared = !!(beat.react && beat.props?.umbrella && (beat.react.love ?? 0) > 0);
@@ -391,6 +395,7 @@ function Player() {
           {!pos.done && beat.sprite && layer(beat.sprite, 'db-sprite')}
         </div>
         <div className="db-focus" aria-hidden="true" />
+        {throng && <CrowdBack crowd={throng} key={`cb${beat.scene}${beat.index}`} />}
         {fplane ? <div className="db-fplane" style={{ '--fy': `${fplane}px` }} aria-hidden="true" /> : null}
         {!pos.done && !end && celOf(beat.props) && <Cel id={celOf(beat.props)} /> /* R5 cels over the blur (fx/Cels.jsx) */}
         {pop?.gacha && <EmotionFx gacha={pop.gacha} love={pop.love} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
@@ -411,6 +416,7 @@ function Player() {
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !shared && !(off && !end) && frame === 'medium'} under={(!!beat.props?.underUmbrella || shared) && !end} stageRef={stageRef} beatKey={rainKey} />}
         {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
+        {throng && <CrowdNear crowd={throng} key={`cn${beat.scene}${beat.index}`} />}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} blind={isBlind} key={`h${beat.scene}${beat.index}`} />}
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
           action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} blind={isBlind} /> : null} />}

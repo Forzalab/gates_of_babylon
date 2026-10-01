@@ -30,7 +30,8 @@ export function Cart({ items = false, hands = true, her = true, handle = true, a
       {handle && <rect x="400" y={HANDLE_Y - 14} width="1120" height="8" rx="4" fill="#fff" opacity=".45" />}
       {hands && <Hand x={610} y={HANDLE_Y + 122} rot={10} pose="grip" thumb="right" />}
       {hands && <Hand x={1320} y={HANDLE_Y + 122} rot={-10} pose="grip" thumb="left" />}
-      {hands && her && <Hand x={1355} y={HANDLE_Y + 87} rot={-72} s={0.92} her pose="flat" thumb="right" />}
+      {/* H2: her pin (not a hand) comes in from the right, its nub resting on the back of your right hand */}
+      {hands && her && <Hand x={1402} y={HANDLE_Y + 104} rot={-72} s={0.92} her pose="flat" thumb="right" />}
     </g>
   );
 }

@@ -2,7 +2,7 @@
 // the vending machines (their gags: BROKEN / 1011), the NAND MART name band, the A-board, your hand + the bags, her
 // pinch. The sun in ref 16 is high, behind the camera and to the right: cel shadows fall down-left (LIGHT), a cool
 // sky tint on every cel. Nanda's slot (x 730-1190, y 424-920) stays clear; no sign text above y 140 (HUD band).
-import { ShopScene, Card, Hand, Carrot, Shadow, SP } from './parts.jsx';
+import { ShopScene, Card, Hand, PinLead, Carrot, Shadow, SP } from './parts.jsx';
 
 const SKY = '#e6efff'; // the cel tint: the cool fill of a clear 2:00 PM sky
 
@@ -91,10 +91,13 @@ export function ShopExit() {
   return (
     <ShopScene id="exit" trace="cel-exit" tint={SKY} book={<DoorFrame />}
       label="From inside the shop door, looking out at the bright street and the sunny sky. The shop bell hangs in the door frame. Your hand carries two NAND MART bags; carrots stick out. Nanda holds your sleeve.">
-      <path d="M1290 470 C1290 400 1350 400 1350 470 M1380 470 C1380 400 1440 400 1440 470" fill="none" stroke="#8a93a0" strokeWidth="8" />
-      <Bag x={1320} y={530} /><Bag x={1440} y={546} />
-      <Hand x={1520} y={420} rot={-90} s={0.7} pose="grip" thumb="right" />
-      <Hand x={1440} y={330} rot={120} s={0.55} her pose="pinch" thumb="left" />
+      {/* H3 (SLOP 10-01): no arm from the ceiling. The bags + your hand sit right next to her (her pin side, the left);
+          her upper pin lead comes out from behind her body (x 800 = hidden under her sprite, at her upper pin's height)
+          and its nub pinches the cuff of your green sleeve from below, just behind your fist. */}
+      <path d="M580 470 C580 400 520 400 520 470 M490 470 C490 400 430 400 430 470" fill="none" stroke="#8a93a0" strokeWidth="8" />
+      <Bag x={550} y={530} /><Bag x={430} y={546} />
+      <Hand x={430} y={414} rot={90} s={0.7} pose="grip" thumb="left" />
+      <PinLead from={[800, 457]} ctrl={[620, 620]} nub={[392, 448]} r={30} />
     </ShopScene>
   );
 }
