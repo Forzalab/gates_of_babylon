@@ -1,0 +1,370 @@
+{
+ "log": [
+  {
+   "nm": "001-menu-index.png",
+   "leg": "gacha",
+   "scene": "",
+   "beat": "",
+   "tag": "index",
+   "text": "Logic mode front page (index.html)",
+   "choices": []
+  },
+  {
+   "nm": "002-rooftop-3-crit10-p1-t0.png",
+   "leg": "gacha-crit10-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "crit10-p1-t0",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "003-rooftop-3-crit10-p1-t1.png",
+   "leg": "gacha-crit10-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "crit10-p1-t1",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "004-rooftop-3-crit10-p1-t2.png",
+   "leg": "gacha-crit10-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "crit10-p1-t2",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "005-rooftop-3-crit5-p1-t0.png",
+   "leg": "gacha-crit5-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "crit5-p1-t0",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "006-rooftop-3-crit5-p1-t1.png",
+   "leg": "gacha-crit5-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "crit5-p1-t1",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "007-rooftop-3-crit5-p1-t2.png",
+   "leg": "gacha-crit5-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "crit5-p1-t2",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "008-rooftop-3-pity-p1-t0.png",
+   "leg": "gacha-pity-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "pity-p1-t0",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+18 She liked that."
+  },
+  {
+   "nm": "009-rooftop-3-pity-p1-t1.png",
+   "leg": "gacha-pity-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "pity-p1-t1",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+18 She liked that."
+  },
+  {
+   "nm": "010-rooftop-3-pity-p1-t2.png",
+   "leg": "gacha-pity-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "pity-p1-t2",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+18 She liked that."
+  },
+  {
+   "nm": "011-rooftop-3-anger-p1-t0.png",
+   "leg": "gacha-anger-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "anger-p1-t0",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "012-rooftop-3-anger-p1-t1.png",
+   "leg": "gacha-anger-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "anger-p1-t1",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "013-rooftop-3-anger-p1-t2.png",
+   "leg": "gacha-anger-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "anger-p1-t2",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "014-rooftop-3-rage-p1-t0.png",
+   "leg": "gacha-rage-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "rage-p1-t0",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "015-rooftop-3-rage-p1-t1.png",
+   "leg": "gacha-rage-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "rage-p1-t1",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "016-rooftop-3-rage-p1-t2.png",
+   "leg": "gacha-rage-p1",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "rage-p1-t2",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "017-rooftop-3-anger-p3-t0.png",
+   "leg": "gacha-anger-p3",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "anger-p3-t0",
+   "text": "NANDA: …I woke up at four for this.",
+   "choices": [],
+   "pop": "−5 She did not like that."
+  },
+  {
+   "nm": "018-rooftop-3-anger-p3-t1.png",
+   "leg": "gacha-anger-p3",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "anger-p3-t1",
+   "text": "NANDA: …I woke up at four for this.",
+   "choices": [],
+   "pop": "−5 She did not like that."
+  },
+  {
+   "nm": "019-rooftop-3-anger-p3-t2.png",
+   "leg": "gacha-anger-p3",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "anger-p3-t2",
+   "text": "NANDA: …I woke up at four for this.",
+   "choices": [],
+   "pop": "−5 She did not like that."
+  },
+  {
+   "nm": "020-rooftop-3-rage-p3-t0.png",
+   "leg": "gacha-rage-p3",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "rage-p3-t0",
+   "text": "NANDA: …I woke up at four for this.",
+   "choices": [],
+   "pop": "−8 She did not like that."
+  },
+  {
+   "nm": "021-rooftop-3-rage-p3-t1.png",
+   "leg": "gacha-rage-p3",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "rage-p3-t1",
+   "text": "NANDA: …I woke up at four for this.",
+   "choices": [],
+   "pop": "−8 She did not like that."
+  },
+  {
+   "nm": "022-rooftop-3-rage-p3-t2.png",
+   "leg": "gacha-rage-p3",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "rage-p3-t2",
+   "text": "NANDA: …I woke up at four for this.",
+   "choices": [],
+   "pop": "−8 She did not like that."
+  },
+  {
+   "nm": "023-rooftop-3-choice.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "choice",
+   "text": "NANDA: I made two. One's for you. Don't look at me like that.",
+   "choices": [
+    "♥ +3 tamagoyaki",
+    "♥ +1 umeboshi [default]",
+    "♡ −3 Take neither"
+   ],
+   "pop": null,
+   "taken": "♥ +3 tamagoyaki"
+  },
+  {
+   "nm": "024-rooftop-3-react.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "react",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "025-rooftop-4.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "4",
+   "tag": "",
+   "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "026-rooftop-5.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "5",
+   "tag": "",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "027-rooftop-6.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "6",
+   "tag": "",
+   "text": "MC: Itadakimasu.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "028-rooftop-7.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "7",
+   "tag": "",
+   "text": "She doesn't eat hers. She watches you chew.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "029-rooftop-8-choice.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "8",
+   "tag": "choice",
+   "text": "NANDA: Sweet. Like me. Good input.",
+   "choices": [
+    "♥ ?? Best I've ever had",
+    "♥ ?? It's good [default]",
+    "♡ ?? Bit salty, honestly"
+   ],
+   "pop": null,
+   "taken": "♥ ?? Best I've ever had"
+  },
+  {
+   "nm": "030-rooftop-9-react.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "9",
+   "tag": "react",
+   "text": "NANDA: …Obviously. Don't stare.",
+   "choices": [],
+   "pop": "+7 She liked that.",
+   "taken": "smile\n♥ +1"
+  },
+  {
+   "nm": "031-rooftop-10-react.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "10",
+   "tag": "react",
+   "text": "MC: Technically, rain wasn't",
+   "choices": [],
+   "pop": "+1 She liked that."
+  },
+  {
+   "nm": "032-rooftop-10-react.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "10",
+   "tag": "react",
+   "text": "MC: Technically, rain wasn't f-OR-ecast.",
+   "choices": [],
+   "pop": "+1 She liked that."
+  },
+  {
+   "nm": "033-rooftop-11-choice.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "11",
+   "tag": "choice",
+   "text": "NANDA: Stay fORever? The rain can wait.",
+   "choices": [
+    "♥ +3 Stay a minute",
+    "♥ +1 Walk with her [default]",
+    "♡ −3 OR Leave before the rain"
+   ],
+   "pop": null,
+   "taken": "♥ +3 Stay a minute"
+  },
+  {
+   "nm": "034-rooftop-11-react.png",
+   "leg": "gacha-natural",
+   "scene": "rooftop",
+   "beat": "11",
+   "tag": "react",
+   "text": "NANDA: A minute. Then another. Then the whole day.",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "035-v2-park-0-next-scene.png",
+   "leg": "gacha-natural",
+   "scene": "v2-park",
+   "beat": "0",
+   "tag": "next-scene",
+   "text": "PARK · 1:00 PM. A path under cherry trees. Petals on the ground.",
+   "choices": [],
+   "pop": null
+  }
+ ],
+ "errs": []
+}
