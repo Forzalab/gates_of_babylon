@@ -87,6 +87,16 @@ function ClockFace({ time, live, rm }) {
   );
 }
 
+// the side face (seen edge-on): same story time, hands squashed to the ellipse (rx 34 / ry 100)
+function SideHands({ time }) {
+  const [hh, mm] = storyTime(12, 0, time);
+  const hand = (deg, len, w) => {
+    const a = (deg * Math.PI) / 180;
+    return <line x1="1392" y1="430" x2={1392 + Math.sin(a) * len * 0.34} y2={430 - Math.cos(a) * len} stroke="#2b2440" strokeWidth={w} strokeLinecap="round" />;
+  };
+  return <g>{hand(((hh % 12) + mm / 60) * 30, 52, 6)}{hand(mm * 6, 80, 4)}</g>;
+}
+
 export default function Rooftop({ props, rm }) {
   const live = props.clock !== 'noon';
   const now = useNow(true);
@@ -126,7 +136,7 @@ export default function Rooftop({ props, rm }) {
       <rect x="1320" y="266" width="14" height="340" fill="#976c94" />
       <ellipse cx="1392" cy="430" rx="46" ry="118" fill="#d6a93f" stroke="#8a6320" strokeWidth="4" />
       <ellipse cx="1392" cy="430" rx="34" ry="100" fill="#efe6ee" stroke="#3b3350" strokeWidth="3" />
-      <line x1="1392" y1="430" x2="1392" y2="352" stroke="#2b2440" strokeWidth="5" />
+      <SideHands time={now} />
       <ClockFace time={now} live={live} rm={rm} />
 
       {/* ledge, belfry, ledge */}
