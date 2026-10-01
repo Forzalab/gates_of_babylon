@@ -1,0 +1,48 @@
+[
+ {
+  "nm": "01-station-talk-0-choice.png",
+  "beat": "station-talk:0",
+  "text": "NANDA: Twelve stops, and you held the pole. Not me. Next time, hold me.",
+  "choices": [
+   "Next time, I'll hold you",
+   "It was crowded",
+   "I needed the pole"
+  ],
+  "pop": null
+ },
+ {
+  "nm": "02-station-talk-0-react.png",
+  "beat": "station-talk:0",
+  "text": "NANDA: There is no next time. Only this time. Again. ♡",
+  "choices": [],
+  "pop": "+3 She liked that."
+ },
+ {
+  "nm": "03-station-talk-1.png",
+  "beat": "station-talk:1",
+  "text": "NANDA: Hey… have we stood here before? No. Silly. It's just a nice day. It's 5:58 AM. Remember that.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "04-station-talk-2.png",
+  "beat": "station-talk:2",
+  "text": "MC: (Weird. Feels like I've heard that before.)",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "05-station-talk-3.png",
+  "beat": "station-talk:3",
+  "text": "NANDA: Déjà vu is just your heart remembering me early. ♡",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "06-station-talk-4.png",
+  "beat": "station-talk:4",
+  "text": "NANDA: It's raining. Good. Rain keeps people inside. Inside is where people stay.",
+  "choices": [],
+  "pop": null
+ }
+]
