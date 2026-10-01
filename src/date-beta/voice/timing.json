@@ -930,6 +930,42 @@
   "date-beta/voice/03-v2-shop/403_2.mp3": {
    "audioMs": 9979,
    "holdMs": 10329
+  },
+  "date-beta/voice/30-leave/212_0.mp3": {
+   "audioMs": 2900,
+   "holdMs": 3250
+  },
+  "date-beta/voice/30-leave/213_2.mp3": {
+   "audioMs": 1593,
+   "holdMs": 1943
+  },
+  "date-beta/voice/30-leave/214_2-r.mp3": {
+   "audioMs": 4911,
+   "holdMs": 5261
+  },
+  "date-beta/voice/30-leave/215_2-r.mp3": {
+   "audioMs": 3187,
+   "holdMs": 3537
+  },
+  "date-beta/voice/30-leave/216_2-r.mp3": {
+   "audioMs": 2821,
+   "holdMs": 3171
+  },
+  "date-beta/voice/30-leave/217_3.mp3": {
+   "audioMs": 4310,
+   "holdMs": 4660
+  },
+  "date-beta/voice/31-leave-fu/219_1.mp3": {
+   "audioMs": 2873,
+   "holdMs": 3223
+  },
+  "date-beta/voice/32-leave-yeah/220_0.mp3": {
+   "audioMs": 2743,
+   "holdMs": 3093
+  },
+  "date-beta/voice/32-leave-yeah/221_1.mp3": {
+   "audioMs": 1750,
+   "holdMs": 2100
   }
  }
 }
