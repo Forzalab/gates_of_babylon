@@ -1,0 +1,540 @@
+{
+ "log": [
+  {
+   "nm": "001-menu-index.png",
+   "leg": "A",
+   "scene": "",
+   "beat": "",
+   "tag": "index",
+   "text": "Logic mode front page (index.html)",
+   "choices": []
+  },
+  {
+   "nm": "002-rooftop-0-card.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "0",
+   "tag": "card",
+   "text": "CARD: GOAL Make Nanda like you. Her LOVE score must reach 100%. Each choice changes it. Choose carefully. +3 s",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "003-rooftop-1.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "1",
+   "tag": "",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "004-rooftop-2.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "2",
+   "tag": "",
+   "text": "Her shoes by the fence. Toes pointed at you.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "005-rooftop-3-choice.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "choice",
+   "text": "NANDA: I made two. One's for you. Don't look at me like that.",
+   "choices": [
+    "♥ +3 tamagoyaki",
+    "♥ +1 umeboshi [default]",
+    "♡ −3 Take neither"
+   ],
+   "pop": null,
+   "taken": "♥ +3 tamagoyaki"
+  },
+  {
+   "nm": "006-rooftop-3-react.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "3",
+   "tag": "react",
+   "text": "NANDA: Sweet egg for my sweet boy. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "007-rooftop-4.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "4",
+   "tag": "",
+   "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "008-rooftop-5.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "5",
+   "tag": "",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "009-rooftop-6.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "6",
+   "tag": "",
+   "text": "MC: Itadakimasu.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "010-rooftop-7.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "7",
+   "tag": "",
+   "text": "She doesn't eat hers. She watches you chew.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "011-rooftop-8-choice.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "8",
+   "tag": "choice",
+   "text": "NANDA: Sweet. Like me. Good input.",
+   "choices": [
+    "♥ ?? ",
+    "♥ ??  [default]",
+    "♡ ?? "
+   ],
+   "pop": null,
+   "taken": "♥ ?? "
+  },
+  {
+   "nm": "012-rooftop-9-react.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "9",
+   "tag": "react",
+   "text": "NANDA: …Obviously. Don't stare.",
+   "choices": [],
+   "pop": "+7 She liked that.",
+   "taken": "smile\n♥ +1"
+  },
+  {
+   "nm": "013-rooftop-10-react.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "10",
+   "tag": "react",
+   "text": "MC: Technically, rain wasn't",
+   "choices": [],
+   "pop": "+1 She liked that."
+  },
+  {
+   "nm": "014-rooftop-10-react.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "10",
+   "tag": "react",
+   "text": "MC: Technically, rain wasn't f-OR-ecast.",
+   "choices": [],
+   "pop": "+1 She liked that."
+  },
+  {
+   "nm": "015-rooftop-11-choice.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "11",
+   "tag": "choice",
+   "text": "NANDA: Stay fORever? The rain can wait.",
+   "choices": [
+    "♥ +3 Stay a minute",
+    "♥ +1 Walk with her [default]",
+    "♡ −3 OR Leave before the rain"
+   ],
+   "pop": null,
+   "taken": "♥ +3 Stay a minute"
+  },
+  {
+   "nm": "016-rooftop-11-react.png",
+   "leg": "A",
+   "scene": "rooftop",
+   "beat": "11",
+   "tag": "react",
+   "text": "NANDA: A minute. Then another. Then the whole day.",
+   "choices": [],
+   "pop": "+8 She liked that."
+  },
+  {
+   "nm": "017-v2-park-0.png",
+   "leg": "A",
+   "scene": "v2-park",
+   "beat": "0",
+   "tag": "",
+   "text": "PARK · 1:00 PM. A path under cherry trees. Petals on the ground.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "018-v2-park-1-choice.png",
+   "leg": "A",
+   "scene": "v2-park",
+   "beat": "1",
+   "tag": "choice",
+   "text": "NANDA: Hold my hand. My hand is shaking. Only yours can stop it.",
+   "choices": [
+    "♥ ?? Hold it tight",
+    "♥ ?? Hold one finger [default]",
+    "♡ ?? Pull your hand back"
+   ],
+   "pop": null,
+   "taken": "♥ ?? Hold it tight"
+  },
+  {
+   "nm": "019-v2-park-1-react.png",
+   "leg": "A",
+   "scene": "v2-park",
+   "beat": "1",
+   "tag": "react",
+   "text": "NANDA: It stopped. See? It only needed you.",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "020-v2-park-2.png",
+   "leg": "A",
+   "scene": "v2-park",
+   "beat": "2",
+   "tag": "",
+   "text": "Her thumb is on your wrist. She is counting your pulse. She wants every beat to be for her.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "021-v2-park-3-choice.png",
+   "leg": "A",
+   "scene": "v2-park",
+   "beat": "3",
+   "tag": "choice",
+   "text": "NANDA: One job before lunch. My groceries, or my library book?",
+   "choices": [
+    "♥ ?? Carry her groceries",
+    "♥ ?? Return her book [default]",
+    "♡ ?? Do it alone, later"
+   ],
+   "pop": null,
+   "taken": "♥ ?? Carry her groceries"
+  },
+  {
+   "nm": "022-v2-park-3-react.png",
+   "leg": "A",
+   "scene": "v2-park",
+   "beat": "3",
+   "tag": "react",
+   "text": "NANDA: Groceries. For our dinner.",
+   "choices": [],
+   "pop": "+2 She liked that."
+  },
+  {
+   "nm": "023-v2-shop-0.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "0",
+   "tag": "",
+   "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you into a shop. You are here to buy her groce",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "024-v2-shop-1.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "1",
+   "tag": "",
+   "text": "The shop doors slide open. A little tune plays.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "025-v2-shop-2.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "2",
+   "tag": "",
+   "text": "NANDA: We are here to shop. You buy what is on my list: carrots, eggs, three cups. And you. ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "026-v2-shop-3.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "3",
+   "tag": "",
+   "text": "Your hands push the cart. Her hand slides on top of yours.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "027-v2-shop-4-game-sg-shelf.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf produce HER LIST carrots ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "028-v2-shop-4-game-sg-right.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-right",
+   "text": "GAME sg-right NANDA Carrots! You read my list. ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "029-v2-shop-4-game-sg-shelf.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf eggs HER LIST eggs ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "030-v2-shop-4-game-sg-right.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-right",
+   "text": "GAME sg-right NANDA Eggs. For the egg rolls. You remember. ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "031-v2-shop-4-game-sg-shelf.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf cups HER LIST three cups ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "032-v2-shop-4-game-sg-right.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-right",
+   "text": "GAME sg-right NANDA Three cups. One for you. Two for me. ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "033-v2-shop-4-game-sg-right.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-right",
+   "text": "GAME sg-right NANDA Three cups. One for you. Two for me. ♡",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "034-v2-shop-4-game-sg-shelf.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf produce HER LIST carrots ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "035-v2-shop-4-game-sg-wrong.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong",
+   "text": "GAME sg-wrong Why is her name on a jar? Put it back. NANDA Oh. That is not on my list.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "036-v2-shop-4-game-sg-shelf.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf produce HER LIST carrots ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "037-v2-shop-4-game-sg-right.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-right",
+   "text": "GAME sg-right NANDA Carrots! You read my list. ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "038-v2-shop-4-game-sg-shelf.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf eggs HER LIST eggs ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "039-v2-shop-4-game-sg-wrong.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong",
+   "text": "GAME sg-wrong NANDA She puts it back. She lines up the whole shelf. \"It goes here. Always here.\"",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "040-v2-shop-4-game-sg-shelf.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf eggs HER LIST eggs ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "041-v2-shop-4-game-sg-wrong-sg-split.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong-sg-split",
+   "text": "GAME sg-wrong sg-split NANDA You forgot me already?",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "042-v2-shop-4-game-sg-wrong.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong",
+   "text": "GAME sg-wrong NANDA Ehehe. Try again, ne? ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "043-v2-shop-4-game-sg-shelf.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf eggs HER LIST eggs ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "044-v2-shop-4-game-sg-right.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-right",
+   "text": "GAME sg-right NANDA Eggs. For your lunch tomorrow. ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "045-v2-shop-4-game-sg-shelf.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf cups HER LIST three cups ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "046-v2-shop-4-game-sg-wrong-sg-split.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong-sg-split",
+   "text": "GAME sg-wrong sg-split Two? Then who is the third cup for? NANDA You forgot me already?",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "047-v2-shop-4-game-sg-wrong.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong",
+   "text": "GAME sg-wrong Two? Then who is the third cup for? NANDA Ehehe. Try again, ne? ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "048-v2-shop-4-game-sg-shelf.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-shelf",
+   "text": "GAME sg-shelf cups HER LIST three cups ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "049-v2-shop-4-game-sg-wrong-sg-split.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong-sg-split",
+   "text": "GAME sg-wrong sg-split She is done waiting. She takes it herself. NANDA You forgot me already?",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "050-v2-shop-4-game-sg-wrong.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong",
+   "text": "GAME sg-wrong She is done waiting. She takes it herself. NANDA Ehehe. Try again, ne? ♡",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "051-v2-shop-4-game-sg-wrong.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "4",
+   "tag": "game-sg-wrong",
+   "text": "GAME sg-wrong She is done waiting. She takes it herself. NANDA Ehehe. Try again, ne? ♡",
+   "choices": [],
+   "pop": "−2 She did not like that."
+  }
+ ],
+ "errs": []
+}

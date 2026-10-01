@@ -37,11 +37,12 @@ export function daypart(d = new Date()) {
 // Fill every token in a display string. Unknown braces are left alone (the loader already rejected them).
 export function fill(text, { now = new Date(), n = getRun(), c = crowd } = {}) {
   if (typeof text !== 'string' || !text.includes('{')) return text;
-  return text.replace(TOKEN_RE, (_, k) => {
+  return text.replace(TOKEN_RE, (m, k, off) => {
     if (k === 'RUN') return String(n);
     if (k === 'TIME') return clock(now);
     if (k === 'DAYPART') return daypart(now);
     if (k === 'CLOTHES') return c.CLOTHES || 'outfit';
-    return c.CROWD?.[+k.slice(6) - 1] || 'you';
+    const w = c.CROWD?.[+k.slice(6) - 1] || 'you';
+    return /(^|[.!?…]\s+)$/.test(text.slice(0, off)) ? w.charAt(0).toUpperCase() + w.slice(1) : w; // a crowd name opening a sentence gets a capital
   });
 }

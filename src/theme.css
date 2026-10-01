@@ -163,9 +163,10 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
    the NAND module is sliced by the bottom margin (the peek) and the arrowhead sits in that margin. */
 .pal-list, .pal-list ul { list-style: none; margin: 0; padding: 0; }
 .pal-list { height: 100%; overflow-y: auto; scrollbar-width: none; padding: calc(20 * var(--u)) 0; box-sizing: border-box; }
-.pal-list, .truth .tt { --fa: 0px; --fb: 0px;
-  -webkit-mask-image: linear-gradient(to bottom, transparent calc(var(--fa) * .5), #000 var(--fa), #000 calc(100% - var(--fb)), transparent calc(100% - var(--fb) * .5));
-          mask-image: linear-gradient(to bottom, transparent calc(var(--fa) * .5), #000 var(--fa), #000 calc(100% - var(--fb)), transparent calc(100% - var(--fb) * .5)); }
+.pal-list, .truth .tt { --fa: 0px; --fb: 0px; --sb: 0px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent calc(var(--fa) * .5), #000 var(--fa), #000 calc(100% - var(--sb) - var(--fb)), transparent calc(100% - var(--sb) - var(--fb) * .5), transparent calc(100% - var(--sb)), #000 calc(100% - var(--sb)));
+          mask-image: linear-gradient(to bottom, transparent calc(var(--fa) * .5), #000 var(--fa), #000 calc(100% - var(--sb) - var(--fb)), transparent calc(100% - var(--sb) - var(--fb) * .5), transparent calc(100% - var(--sb)), #000 calc(100% - var(--sb))); }
+/* --sb = the native horizontal scrollbar's height (set by Truth.jsx): the fade ends above it and the strip stays opaque, so the bar shows at scrollTop 0. */
 /* Edge fade (Tony: the hard cut read as broken): a transparency MASK, not a colour gradient, so ink and paper stay flat.
    Only on a side with more parts; it runs over one 40u span and is fully clear at the 20u margin holding the arrowhead. */
 .pal-list.fd, .truth .tt.fd { --fb: calc(40 * var(--u)); } .pal-list.fu { --fa: calc(40 * var(--u)); }
@@ -327,7 +328,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .truth .pal-more.left, .truth .pal-more.right { top: 0; bottom: 0; height: auto; }
 .truth .pal-more.left { left: auto; right: 100%; }
 .truth .pal-more.left svg, .truth .pal-more.right svg { width: calc(8 * var(--u)); height: calc(16 * var(--u)); }
-.truth .pal-more.down { left: 0; right: 0; width: auto; top: auto; bottom: 0; }   /* centred bottom cue over the fade, as in the sidebar */
+.truth .pal-more.down { left: 0; right: 0; width: auto; top: auto; bottom: var(--sb, 0px); }   /* centred bottom cue over the fade, as in the sidebar */
 .truth .tt table { width: calc(max(4, var(--n)) * 25%); } /* never squeeze: a column keeps its n = 3 width (1/4 of the box); past 4 columns the table scrolls sideways */
 /* The header line box (0.71em) is exactly cap height, so round caps (O, C) overshoot it; inside the scroller that overshoot
    was clipped at the box top. 0.2em of headroom inside the box, taken back from the margin above: nothing moves. */
@@ -569,3 +570,28 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .bundle-tag { position: absolute; width: 28px; height: 28px; display: grid; place-items: center; background: var(--ink); color: var(--paper);
   font: 700 15px/1 var(--font); font-variant-numeric: tabular-nums; pointer-events: none; }
 .bundle-tag.on { background: var(--one); }
+
+/* Truth table: open / close icon button (the full-table popup, TTPopup.jsx). Same language as the row-03 .cb buttons: square paper
+   cell, one ink rule, glyph = 50% of the cell on the 24-unit grid at 2px non-scaling ink stroke (butt, miter), hover = ink fill + paper
+   stroke, keyboard focus = the inset ring. Top right of its cell: centred on the TRUTH TABLE cap height, right edge on the table's. */
+.tt-ico { position: absolute; top: calc(49 * var(--u)); right: calc(20 * var(--u)); z-index: 2; box-sizing: border-box; width: max(calc(44 * var(--u)), 44px); height: max(calc(44 * var(--u)), 44px);
+  margin: 0; padding: 0; background: var(--paper); color: var(--ink); border: var(--rule) solid var(--ink); border-radius: 0; cursor: pointer; display: grid; place-items: center; -webkit-tap-highlight-color: transparent; }
+.tt-ico svg { width: 50%; height: 50%; overflow: visible; }
+.tt-ico path { fill: none; stroke: currentColor; stroke-width: 2px; vector-effect: non-scaling-stroke; stroke-linecap: butt; stroke-linejoin: miter; stroke-miterlimit: 10; }
+.tt-ico:hover { background: var(--ink); color: var(--paper); }
+.tt-ico:active { background: var(--ink); color: var(--paper); box-shadow: inset 0 0 0 calc(5 * var(--u)) var(--ink), inset 0 0 0 calc(5 * var(--u) + var(--rule)) var(--paper); }
+.tt-ico:focus-visible { outline: var(--rule) solid currentColor; outline-offset: calc(-8 * var(--u)); }
+
+/* Popup: a veil over the whole .app (paper at .92: no blur, no shadow, flat) and a square paper panel with one ink rule.
+   The panel reuses .truth, so label, table and live row are the inline ones; wider box => more columns before it scrolls sideways. */
+.tpop { position: absolute; inset: 0; z-index: 30; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--paper) 92%, transparent); }
+.truth.tpanel { position: relative; box-sizing: border-box; width: min(calc(860 * var(--u)), calc(100% - 80 * var(--u))); max-height: calc(100% - 80 * var(--u)); overflow: hidden;
+  background: var(--paper); border: var(--rule) solid var(--ink); padding-bottom: calc(28 * var(--u)); outline: 0; }
+.truth.tpanel .tt table { width: calc(max(8, var(--n)) * 12.5%); } /* a column keeps about its inline width (1/4 of the 437u inline box = 12.5% here) */
+@container page style(--zoomed: 1) and ((width < 70rem) or (height < 39.375rem)) {
+  .tpop { display: block; }
+  .truth.tpanel { position: sticky; top: 1rem; width: auto; max-height: calc(100vh - 2rem); margin: 1rem; padding: 1.5rem 20px 1.5rem; align-items: stretch; grid-area: auto; }
+  .truth.tpanel .label, .truth.tpanel table { width: auto; }
+  .truth.tpanel .tt table { width: calc(max(4, var(--n)) * 25%); }
+  .tpanel .tt-ico { top: calc(1.5rem - 7 * var(--u)); right: 20px; }
+}

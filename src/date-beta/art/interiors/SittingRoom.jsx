@@ -78,6 +78,7 @@ function Plate({ X, Z, kind }) {
 
 export default function SittingRoom({ props = {}, rm }) {
   const kind = props.feed || props.plate || null;
+  const cups = props.cups ?? 3;
   const lamp = [1302, 262];
   const top = pts([[-TX, TOP, TZ0], [TX, TOP, TZ0], [TX, TOP, TZ1], [-TX, TOP, TZ1]]);
   const front = pts([[-TX, TOP - 0.04, TZ0], [TX, TOP - 0.04, TZ0], [TX, TOP, TZ0], [-TX, TOP, TZ0]]);
@@ -85,7 +86,7 @@ export default function SittingRoom({ props = {}, rm }) {
   return (
     <div className="art sitting-room">
       <svg viewBox="0 0 1920 1080" width="1920" height="1080" role="img"
-        aria-label={`Her sitting room at night: a wall of windows over the rainy city, lilac curtains, her desk lamp on; a low tea table with three cups, two poured, the third empty${kind ? `, and a plate of ${kind}` : ''}.`}>
+        aria-label={`Her sitting room at night: a wall of windows over the rainy city, lilac curtains, her desk lamp on; a low tea table with ${cups >= 4 ? 'four cups, two poured, two empty' : 'three cups, two poured, the third empty'}${kind ? `, and a plate of ${kind}` : ''}.`}>
         <defs>
           <linearGradient id="sr-floor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#3a2418" /><stop offset="1" stopColor="#1e120c" /></linearGradient>
           <linearGradient id="sr-table" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stopColor="#4a2a1c" /><stop offset=".7" stopColor="#6a3c26" /><stop offset="1" stopColor="#7e4a2e" /></linearGradient>
@@ -117,6 +118,9 @@ export default function SittingRoom({ props = {}, rm }) {
         <Cup X={-0.7} Z={1.46} full />
         <Plate X={0.4} Z={1.42} kind={kind} />
         <Cup X={0.64} Z={1.5} />
+        {/* M1 route B (escape-timeout 2, "Four cups now"): props.cups 4 = one more empty cup, front right of the third (clear
+            of her sprite in the middle and of the plate) */}
+        {cups >= 4 && <Cup X={0.52} Z={1.3} />}
         <Grade id="sr-grade" tone="night" sun={lamp} flareR={160} rm={rm} />
       </svg>
     </div>

@@ -1,0 +1,30 @@
+[
+ {
+  "nm": "01-meta-loop-0.png",
+  "beat": "meta-loop:0",
+  "text": "NANDA: Hey… have we stood here before? No. Silly. It's just a nice day. It's 4:46 AM. Remember that.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "02-meta-loop-1.png",
+  "beat": "meta-loop:1",
+  "text": "MC: (Weird. Feels like I've heard that before.)",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "03-meta-loop-2.png",
+  "beat": "meta-loop:2",
+  "text": "NANDA: Déjà vu is just your heart remembering me early. ♡",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "04-meta-loop-2.png",
+  "beat": "meta-loop:2",
+  "text": "",
+  "choices": [],
+  "pop": null
+ }
+]

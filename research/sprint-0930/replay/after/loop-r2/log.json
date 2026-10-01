@@ -1,0 +1,30 @@
+[
+ {
+  "nm": "01-meta-loop-0.png",
+  "beat": "meta-loop:0",
+  "text": "NANDA: Wait. Why is everything the same? Same rain. Same 6:54 AM. You said that exact thing last time. I remember. Do you?",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "02-meta-loop-1.png",
+  "beat": "meta-loop:1",
+  "text": "MC: Didn't we already do this? The bento, the train, the tea… Nanda, are we in a loop?",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "03-meta-loop-2.png",
+  "beat": "meta-loop:2",
+  "text": "NANDA: A loop? Ehehe. Then you can't leave. You picked me last time too. You'll pick me again.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "04-meta-loop-3-end.png",
+  "beat": "meta-loop:3",
+  "text": "END: GAME OVER 0% One jar for each try. This is 2. LOVE 0%. You needed 100%. TRY AGAIN",
+  "choices": [],
+  "pop": null
+ }
+]

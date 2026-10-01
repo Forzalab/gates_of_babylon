@@ -15,6 +15,25 @@ export function createVoice(base = '/', storage = () => localStorage, onSpeak = 
   const subs = new Set();
   const emit = () => subs.forEach((f) => f(muted));
 
+  // Speech bus: +6 dB then a compressor/limiter so a take never clips (the takes sit near -24 LUFS, quieter than the beds).
+  let ctx = null, bus = null;
+  const GAIN = 2;
+  const route = (a) => {
+    try {
+      if (!ctx) {
+        const AC = globalThis.AudioContext || globalThis.webkitAudioContext;
+        if (!AC) return;
+        ctx = new AC();
+        const g = ctx.createGain(); g.gain.value = GAIN;
+        const c = ctx.createDynamicsCompressor();
+        c.threshold.value = -14; c.knee.value = 6; c.ratio.value = 8; c.attack.value = 0.003; c.release.value = 0.15;
+        g.connect(c); c.connect(ctx.destination); bus = g;
+      }
+      if (ctx.state === 'suspended') ctx.resume?.().catch(() => {});
+      ctx.createMediaElementSource(a).connect(bus);
+    } catch { /* plain element playback at volume 1 */ }
+  };
+
   let speaking = false;
   const speak = (v) => { if (v !== speaking) { speaking = v; try { onSpeak(v); } catch { /* ignore */ } } };
   const stop = () => {
@@ -33,6 +52,7 @@ export function createVoice(base = '/', storage = () => localStorage, onSpeak = 
         if (cur !== a) return;
         if (then && queued === then) start(then); else { cur = null; speak(false); }
       });
+      route(a);
       cur = a;
       speak(true);
       a.play()?.catch(() => { if (cur === a) { cur = null; speak(false); } });

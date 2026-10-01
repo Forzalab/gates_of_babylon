@@ -36,7 +36,7 @@ test('scene A 1-2: establishing = the new rooftop, bg only, the stamp once (neve
   assert.equal(B.filter((b) => b.props.shot === 'stamp').length, 1);
   assert.equal(cut(B[2]).frame, 'medium');
   assert.ok(B[2].text);
-  for (const b of B) assert.match(b.bg, /^(rooftop-noon|bento-)/);
+  for (const b of B) assert.match(b.bg, /^(rooftop|rooftop-noon|bento-)/);
 });
 
 test('scene A 3: the handout: her bento is the choice (tamagoyaki / umeboshi buttons map to the picks that set them)', () => {

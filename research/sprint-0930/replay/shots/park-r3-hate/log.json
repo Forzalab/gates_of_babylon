@@ -1,0 +1,27 @@
+[
+ {
+  "nm": "01-meta-park-0-choice.png",
+  "beat": "meta-park:0",
+  "text": "NANDA: I love your cute jacket. You wore it for me. I can tell. Don't say no, I already decided. ♡",
+  "choices": [
+   "I wore it for you",
+   "It was clean",
+   "Not everything is about you"
+  ],
+  "pop": null
+ },
+ {
+  "nm": "02-meta-park-0-react.png",
+  "beat": "meta-park:0",
+  "text": "NANDA: …Everything is about me. You'll learn. You always learn, around run 3.",
+  "choices": [],
+  "pop": "−4 She did not like that."
+ },
+ {
+  "nm": "03-meta-park-1.png",
+  "beat": "meta-park:1",
+  "text": "NANDA: Good. Now we can have the perfect date. The same perfect date. Ehehe.",
+  "choices": [],
+  "pop": null
+ }
+]

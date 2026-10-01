@@ -56,8 +56,8 @@ export function createLoader(manifest, base = '/') {
   const A = makeAssets(manifest);
   const bytes = new Map(), buffers = new Map(), images = new Map();
   let ctx = null, master = null, muted = false, ducked = false;
-  // ONE sfx bus (master): M mutes it; it sits -8 dB (0.398) under a voice take (voice/index.js onSpeak).
-  const DUCK = 0.398;
+  // ONE sfx bus (master): M mutes it; it sits -14 dB (0.2) under a voice take (voice/index.js onSpeak).
+  const DUCK = 0.2;
   const gains = () => {
     if (!master) { master = ctx.createGain(); master.gain.value = muted ? 0 : ducked ? DUCK : 1; master.connect(ctx.destination); }
     const v = muted ? 0 : ducked ? DUCK : 1;

@@ -84,7 +84,7 @@ export const ITEMS = {
     <path d="M360 350 l20 30 M430 345 l-10 35" stroke="#ff9aa8" strokeWidth="10" strokeLinecap="round" />
   </g>),
 };
-export const ITEM_LABEL = { curry: 'curry', 'butter-chicken': 'butter chicken', katsu: 'katsu curry', book: 'library book', grocery: 'groceries', teacup: 'tea', bento: 'bento',
+export const ITEM_LABEL = { curry: 'curry', 'butter-chicken': 'butter chicken', katsu: 'katsu curry', book: 'library book', 'book-return': 'the return slot', grocery: 'groceries', teacup: 'tea', bento: 'bento',
   hands: 'click.', cups3: 'three cups', 'ic-card': 'loaded ♡', umbrella: 'one umbrella', key: 'her key', 'cups-end': 'empty / full', feet: 'her shoes, your shoes' };
 
 const Cup = ({ x, y, full = true, k = 1 }) => (<g transform={`translate(${x} ${y}) scale(${k})`}>
@@ -131,6 +131,29 @@ Object.assign(ITEMS, {
     <path d="M100 520 Q140 380 230 340 L400 320 Q460 330 450 380 Q420 420 320 420 Q260 470 230 540Z" fill="#fff0e6" {...O} />
     <path d="M200 160 C185 145 162 158 178 176 L200 194 L222 176 C238 158 215 145 200 160Z" fill="#ff5fa2" stroke={INK} strokeWidth="4" />
     {[330, 370, 410].map((x) => <path key={x} d={`M${x} 350 q10 30 0 60`} fill="none" stroke={INK} strokeWidth="4" />)}
+  </g>),
+  // M1 route B (v2-library 4 "The book drops into the slot. Thunk."): the library's return post, the same blue book half
+  // into its slot (the book is clipped at the slot line, the steel lip drawn over it), speed lines above.
+  'book-return': () => (<g>
+    <ellipse cx="300" cy="560" rx="240" ry="26" fill="#000" opacity=".16" />
+    <rect x="70" y="250" width="460" height="310" rx="18" fill="#2f6a5a" {...O} />
+    <rect x="70" y="250" width="460" height="40" rx="18" fill="#3f8a74" stroke={INK} strokeWidth="5" />
+    <rect x="90" y="300" width="420" height="10" fill="#24564a" opacity=".6" />
+    <clipPath id="it-slot-clip"><rect x="0" y="0" width="600" height="322" /></clipPath>
+    <g clipPath="url(#it-slot-clip)"><g transform="translate(300 170) rotate(3) scale(.62) translate(-305 -315)">
+      <rect x="150" y="120" width="310" height="390" rx="12" fill="#3a5aa8" {...O} />
+      <rect x="150" y="120" width="40" height="390" fill="#2c4486" stroke={INK} strokeWidth="6" />
+      <rect x="440" y="130" width="20" height="370" fill="#fff8e8" stroke={INK} strokeWidth="4" />
+      <rect x="230" y="190" width="180" height="120" rx="8" fill="#fbe7c4" stroke={INK} strokeWidth="5" />
+      <path d="M320 270 C290 240 262 262 290 285 L320 305 L350 285 C378 262 350 240 320 270Z" fill="#ff5fa2" stroke={INK} strokeWidth="4" />
+      <path d="M410 120 v90 l14 -14 l14 14 v-90" fill="#ff5fa2" stroke={INK} strokeWidth="4" />
+    </g></g>
+    <rect x="150" y="314" width="300" height="22" rx="8" fill="#0e1e1a" stroke={INK} strokeWidth="5" />
+    <path d="M150 314 H450" stroke="#a8d8c8" strokeWidth="4" opacity=".7" />
+    <rect x="210" y="390" width="180" height="76" rx="8" fill="#f4f1e6" stroke={INK} strokeWidth="5" />
+    <text x="300" y="444" textAnchor="middle" className="shot-jp">返却</text>
+    <path d="M200 60 v40 M300 40 v50 M400 60 v40" stroke="#ffffff" strokeWidth="8" strokeLinecap="round" opacity=".8" />
+    <path d="M110 330 l-40 -10 M490 330 l40 -10 M120 300 l-36 -24 M480 300 l36 -24" stroke="#ff5fa2" strokeWidth="7" strokeLinecap="round" />
   </g>),
   'cups-end': () => (<g>
     <ellipse cx="300" cy="470" rx="260" ry="50" fill="#000" opacity=".2" />
