@@ -783,10 +783,33 @@
      "props": {
       "shot": "tea-pour"
      },
+     "timer": 12,
+     "loveHidden": true,
      "choices": [
       {
        "text": "Sit down",
+       "side": "pink",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "pass": true,
        "go": "cup"
+      },
+      {
+       "text": "Say goodnight",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "…Goodnight? It's only 7:10.",
+       "go": "leave"
       }
      ]
     }
@@ -813,6 +836,7 @@
    "scene": "rooftop",
    "beat": 8,
    "set": {
+    "loveHidden": true,
     "choices": [
      {
       "text": "Stay a minute",
@@ -849,7 +873,7 @@
       "emote": "hate",
       "fx": "hate-quake",
       "react": "…Fine. The rain can have you. Later.",
-      "go": "v2-park"
+      "go": "leave"
      }
     ]
    }
