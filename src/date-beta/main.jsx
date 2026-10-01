@@ -385,7 +385,7 @@ function Player() {
         <div className="db-focus" aria-hidden="true" />
         {fplane ? <div className="db-fplane" style={{ '--fy': `${fplane}px` }} aria-hidden="true" /> : null}
         {!pos.done && !end && celOf(beat.props) && <Cel id={celOf(beat.props)} /> /* R5 cels over the blur (fx/Cels.jsx) */}
-        {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
+        {pop?.gacha && <EmotionFx gacha={pop.gacha} love={pop.love} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
         {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, ...castVars(flo.light) } : { '--plant': `${cut.plant}px`, ...castVars(flo.light) }} data-cast={flo.light ? 'lit' : undefined} aria-hidden="true" />}

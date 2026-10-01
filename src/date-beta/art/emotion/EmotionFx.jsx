@@ -5,7 +5,11 @@ import { useEffect, useMemo, useRef } from 'react';
 import { EMOTION_FX } from './index.js';
 import './emotion.css';
 
-export function EmotionFx({ gacha }) {
+// The badge number is the change that actually landed (react.love, after capSwing), so a crit10 capped to +8 reads
+// "CRITICAL +8" next to the +8 pop, not "+10" (SLOP 1001 M4).
+export const badgeText = (label, love) => (Number.isFinite(love) ? label.replace(/\s*[+\u2212-]\d+$/, '') + ` ${love < 0 ? '\u2212' : '+'}${Math.abs(love)}` : label);
+
+export function EmotionFx({ gacha, love }) {
   const art = useMemo(() => (gacha && EMOTION_FX[gacha.fx] ? EMOTION_FX[gacha.fx](gacha) : null), [gacha]);
   const ref = useRef(null);
   // Anger vein "grows a bit": ONE stepped swap small -> big after 600 ms (>= 500 ms per step, then it holds; 0 tweens).
@@ -20,7 +24,7 @@ export function EmotionFx({ gacha }) {
   return (
     <div ref={ref} className={`emo-fx emo-${gacha.fx}`} data-gacha={gacha.id}>
       <div className="emo-bg" aria-hidden="true" dangerouslySetInnerHTML={{ __html: art }} />
-      <p className="emo-badge" role="status">{gacha.label}</p>
+      <p className="emo-badge" role="status">{badgeText(gacha.label, love)}</p>
     </div>
   );
 }
