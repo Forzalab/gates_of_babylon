@@ -125,7 +125,7 @@
         { "bg": "BG-D1", "text": "NANDA: This is me. Unit 12. Obviously you'll remember.", "scare": 0, "sfx": "rain",
           "choices": [
             { "text": "I'll never forget it", "side": "pink", "love": 2, "emote": "heart", "react": "Good. I wrote it on your hand anyway." },
-            { "text": "Which unit again?", "side": "purple", "love": -1, "emote": "pout", "react": "Twelve. Twelve. Twelve. Say it back." }
+            { "text": "Which unit again?", "side": "purple", "love": -1, "emote": "pout", "react": "Twelve. Twelve. Twelve. Say it back.", "next": "12" }
           ] },
         { "text": "NANDA: Come in? Just for tea.", "scare": 0, "sfx": "tick" },
         { "text": "NANDA: I already boiled the water. This morning. Just in case.", "sfx": "kettle", "timer": 5,

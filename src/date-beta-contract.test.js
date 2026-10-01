@@ -175,3 +175,14 @@ test('date-beta beatView: overlays text/speaker/props/bg/sfx per value; unset or
   assert.equal(u.choices, b.choices);
   assert.equal(u.hold, b.hold);
 });
+
+test('choice `next`: the NEXT button on its react frame says the label (door:1 "Say it back" -> "12")', async () => {
+  const { loadScenes, start, choose, reactView } = await import('./date-beta/engine.js');
+  const tiny = { version: 1, scenes: [{ id: 's', bg: 'x', beats: [
+    { text: 'Base.', speaker: 'NANDA', choices: [{ text: 'Which unit?', love: -1, react: 'Twelve. Say it back.', next: '12' }, { text: 'Nice', love: 1 }] },
+    { text: 'Good.', speaker: 'NANDA' }] }] };
+  const s = loadScenes(tiny);
+  const p = choose(s, start(s), 0);
+  assert.equal(reactView(s, p).react.next, '12');
+  assert.throws(() => loadScenes({ ...tiny, scenes: [{ ...tiny.scenes[0], beats: [{ ...tiny.scenes[0].beats[0], choices: [{ text: 'A', love: 1, next: '12' }, { text: 'B', love: 1 }] }, tiny.scenes[0].beats[1]] }] }), /next/);
+});

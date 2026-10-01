@@ -1350,7 +1350,8 @@
       "love": -3,
       "emote": "hate",
       "fx": "hate-quake",
-      "react": "Twelve. Twelve. Twelve. Say it back."
+      "react": "Twelve. Twelve. Twelve. Say it back.",
+      "next": "12"
      }
     ]
    }
