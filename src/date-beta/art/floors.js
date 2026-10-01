@@ -8,7 +8,10 @@
 export const UNDER_BOX = 840;
 export const FLOORS = {
   // measured ground lines (feet visible)
-  'rain-ending': { y: 700, wet: true },      // the wet road at her x, a step up the road so her soles + reflection clear the box rivets (R7 legs)
+  // R7 legs: the rain walk. Overcast, the key = the brightening sky gap up-right, behind her (x 1086-1640): a soft,
+  // short cast shadow falling toward the camera and to the left (dx from the plant's x 960 to her soles ~x 893, then -30), a cool sky rim on her right-hand edges, grade to the grey-green.
+  'rain-ending': { y: 700, wet: true, step: 'walk',
+    light: { side: 1, wet: true, rim: '#e6eef0', dx: -96, dy: 8, rot: -8, len: 1.25, ink: '14, 22, 24', a: 0.62, grade: 'drop-shadow(0 4px 6px rgba(28, 40, 42, .24)) saturate(.84) brightness(.97)' } },      // the wet road at her x, a step up the road so her soles + reflection clear the box rivets (R7 legs)
   'her-building': { y: 790, wet: true },     // the dark street in front of door 12 (v2-street 5)
   'shop-way-out': { y: 760 },     // the pavement outside the shop doors
   'train-sun': { y: 690 },        // the carriage floor (v2-train 6, matched to the Tony-approved plant 90)
@@ -62,8 +65,14 @@ export const FLOORS = {
   'park': { crop: true },
   'rail-crossing': { crop: true },
 };
+// the cast shadow (.db-plant[data-cast]) from the floor's key light: offset, turn, stretch, ink (rgb triplet)
+export function castVars(l) {
+  if (!l) return {};
+  return { '--cast-dx': `${l.dx ?? 0}px`, '--cast-dy': `${l.dy ?? 0}px`, '--cast-rot': `${l.rot ?? 0}deg`, '--cast-len': l.len ?? 1, '--cast-ink': l.ink ?? '24, 12, 22', '--cast-a': l.a ?? 0.46 };
+}
 export function floorOf(bg, shot) {
   const key = shot && FLOORS[shot] ? shot : bg;
   const f = FLOORS[key];
-  return { key, y: f && !f.crop ? f.y ?? null : null, wet: !!(f && !f.crop && f.wet) };
+  const on = f && !f.crop;
+  return { key, y: on ? f.y ?? null : null, wet: !!(on && f.wet), step: (on && f.step) || null, light: (on && f.light) || null };
 }

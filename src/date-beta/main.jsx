@@ -43,7 +43,7 @@ import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
 import { rainOf } from './fx/rain.js';
-import { floorOf, UNDER_BOX } from './art/floors.js';
+import { floorOf, UNDER_BOX, castVars } from './art/floors.js';
 import { Cel, celOf } from './fx/Cels.jsx';
 import './beta.css';
 import './fx.css';
@@ -347,13 +347,14 @@ function Player() {
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px` } : { '--plant': `${cut.plant}px` }} aria-hidden="true" />}
+        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, ...castVars(flo.light) } : { '--plant': `${cut.plant}px` }} data-cast={flo.light ? 'lit' : undefined} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={((!!beat.choices && !solo) || !!cut.raise) && !end && frame === 'medium' && !tag /* R5: a solo NEXT keeps the low box, so she stays down */} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
             wet={!end && frame === 'medium' && !!flo.wet}
+            step={!end && frame === 'medium' && !pop ? flo.step : null} lit={!end && frame === 'medium' ? flo.light : null}
             face={end ? null : face} frame={end ? 'medium' : frame} reach={!end && !beat.react && !!cut.reach} />
         )}
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}
