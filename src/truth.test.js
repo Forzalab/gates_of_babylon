@@ -11,14 +11,14 @@ import { builder } from './testkit.js';
 // ---- verbatim copy of Truth.jsx lines (only `ins`/`outs` made parameters) ----
 const byPos = (circuit, view, kind) => view.filter((n) => circuit.nodes[n.id]?.kind === kind)
   .sort((a, b) => a.position.y - b.position.y || a.position.x - b.position.x).map((n) => n.id);
-function truthRows(circuit, ins, outs) {
+function truthRows(circuit, ins, outs, gates = []) {
   const n = ins.length, all = [];
   for (let r = 0; r < 2 ** n; r++) {
     const bits = ins.map((_, i) => (r >> (n - 1 - i)) & 1);
     const nodes = { ...circuit.nodes };
     ins.forEach((id, i) => { nodes[id] = { ...nodes[id], value: !!bits[i] }; });
     const v = evaluate({ ...circuit, nodes });
-    all.push([...bits, ...outs.map((id) => +!!v[id])]);
+    all.push([...bits, ...gates.map((id) => +!!v[id]), ...outs.map((id) => +!!v[id])]);
   }
   return all;
 }
@@ -33,7 +33,7 @@ test('drift guard: the copied lines still appear verbatim in Truth.jsx', () => {
     'const bits = ins.map((_, i) => (r >> (n - 1 - i)) & 1);',
     'ins.forEach((id, i) => { nodes[id] = { ...nodes[id], value: !!bits[i] }; });',
     'const v = evaluate({ ...circuit, nodes });',
-    'all.push([...bits, ...outs.map((id) => +!!v[id])]);',
+    'all.push([...bits, ...gates.map((id) => +!!v[id]), ...outs.map((id) => +!!v[id])]);',
     "const live = ins.reduce((acc, id) => acc * 2 + (circuit.nodes[id].value ? 1 : 0), 0);",
   ]) assert.ok(src.includes(line), `Truth.jsx changed: ${line}`);
 });
@@ -98,4 +98,13 @@ test('13 switches -> 8192 rows, each row width 13 + lamps, all distinct input pa
   assert.equal(rows.length, 8192);
   assert.equal(new Set(rows.map((r) => r.slice(0, 13).join(''))).size, 8192);
   for (const r of rows) assert.deepEqual(r.slice(13), r.slice(0, 13)); // lamp i mirrors switch i
+});
+
+test('gate columns: inputs | gates | outputs, gate values per row (AND then OR)', () => {
+  const b = builder();
+  const A = b.sw('A'), B = b.sw('B'), g1 = b.g('AND', A, B), g2 = b.g('OR', g1, B), L = b.out(g2, 'L');
+  const view = withView(b, { A: [0, 0], B: [0, 100], [g1]: [100, 0], [g2]: [200, 0], L: [300, 0] });
+  const gates = byPos(b.circuit, view, 'G');
+  assert.deepEqual(gates, [g1, g2]);
+  assert.deepEqual(truthRows(b.circuit, ['A', 'B'], [L], gates), [[0, 0, 0, 0, 0], [0, 1, 0, 1, 1], [1, 0, 0, 0, 0], [1, 1, 1, 1, 1]]);
 });
