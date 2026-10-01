@@ -354,12 +354,6 @@
   "text": "[happy] Crunchy. [flat, pleased] Good choice."
  },
  {
-  "scene": "v2-train",
-  "beat": "3 run 1",
-  "file": "date-beta/voice/06-v2-train/033_3-run-1.mp3",
-  "text": "[proud][slow] Twelve stops. [sing-song] I count them on my fingers. [smiling] See?"
- },
- {
   "scene": "cup",
   "beat": "0 (u)",
   "file": "date-beta/voice/10-cup/046_0-u.mp3",
@@ -760,12 +754,6 @@
   "beat": "N 3",
   "file": "date-beta/voice/narration/v2-curry-alone/296_3.mp3",
   "text": "We walk out to the street. It is 3:40 PM."
- },
- {
-  "scene": "v2-train",
-  "beat": "N 3",
-  "file": "date-beta/voice/narration/v2-train/298_3.mp3",
-  "text": "Two men bump her bag. They laugh."
  },
  {
   "scene": "v2-train",

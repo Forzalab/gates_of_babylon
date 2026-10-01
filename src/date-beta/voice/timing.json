@@ -237,10 +237,6 @@
    "audioMs": 2612,
    "holdMs": 2962
   },
-  "date-beta/voice/06-v2-train/033_3-run-1.mp3": {
-   "audioMs": 4937,
-   "holdMs": 5287
-  },
   "date-beta/voice/10-cup/046_0-u.mp3": {
    "audioMs": 4624,
    "holdMs": 4974
@@ -511,13 +507,6 @@
   "date-beta/voice/narration/v2-curry-alone/296_3.mp3": {
    "audioMs": 3370,
    "holdMs": 3720
-  },
-  "date-beta/voice/narration/v2-train/298_3.mp3": {
-   "audioMs": 2769,
-   "holdMs": 3119,
-   "marks": {
-    "They laugh.": 1765
-   }
   },
   "date-beta/voice/narration/v2-train/299_7.mp3": {
    "audioMs": 6609,
