@@ -508,6 +508,7 @@
     {
      "speaker": false,
      "text": "5:20 PM. Rain on the window. Her stop.",
+     "bg": "train-rain",
      "sfx": "rain",
      "props": {
       "shot": "stamp",

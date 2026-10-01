@@ -1,0 +1,110 @@
+[
+ {
+  "it": "v2-train:8",
+  "nm": "v2-train-8.png",
+  "beat": "v2-train:8",
+  "nandaTop": 524,
+  "nandaCls": "db-nanda stage-1 frame-medium planted",
+  "boxTop": 773,
+  "line": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve."
+ },
+ {
+  "it": "v2-train:7",
+  "nm": "v2-train-7.png",
+  "beat": "v2-train:7",
+  "nandaTop": null,
+  "nandaCls": null,
+  "boxTop": 773,
+  "line": "5:20 PM. It's raining. She lays her head on yours. She drift"
+ },
+ {
+  "it": "v2-shop:10",
+  "nm": "v2-shop-10.png",
+  "beat": "v2-shop:10",
+  "nandaTop": 424,
+  "nandaCls": "db-nanda stage-1 frame-medium",
+  "boxTop": 773,
+  "line": "She pulls you to the self-checkout. No shop lady there."
+ },
+ {
+  "it": "v2-shop:11",
+  "nm": "v2-shop-11.png",
+  "beat": "v2-shop:11",
+  "nandaTop": 424,
+  "nandaCls": "db-nanda stage-1 frame-medium",
+  "boxTop": 761,
+  "line": "Do not look at her. Look at me. I bought you a cup."
+ },
+ {
+  "it": "v2-home:1",
+  "nm": "v2-home-1.png",
+  "beat": "v2-home:1",
+  "nandaTop": 494,
+  "nandaCls": "db-nanda stage-1 frame-medium planted",
+  "boxTop": 773,
+  "line": "She kneels. She puts slippers on your feet. Your size."
+ },
+ {
+  "it": "station-talk:1:2",
+  "nm": "station-talk-1-2.png",
+  "beat": "station-talk:1",
+  "nandaTop": 321,
+  "nandaCls": "db-nanda stage-1 frame-medium raised",
+  "boxTop": 692,
+  "line": "Wait. Why is everything the same? Same rain. Same 4:30 PM. Y"
+ },
+ {
+  "it": "station-talk:3:2",
+  "nm": "station-talk-3-2.png",
+  "beat": "station-talk:3",
+  "nandaTop": 390,
+  "nandaCls": "db-nanda stage-1 frame-medium raised",
+  "boxTop": 761,
+  "line": "A loop? Ehehe. Then you can't leave. You picked me last time"
+ },
+ {
+  "it": "station-talk:1:3",
+  "nm": "station-talk-1-3.png",
+  "beat": "station-talk:1",
+  "nandaTop": 390,
+  "nandaCls": "db-nanda stage-1 frame-medium raised",
+  "boxTop": 761,
+  "line": "Run 3. Same day. You know, I know. Skip the small talk. It's"
+ },
+ {
+  "it": "station-talk:3:3",
+  "nm": "station-talk-3-3.png",
+  "beat": "station-talk:3",
+  "nandaTop": 321,
+  "nandaCls": "db-nanda stage-1 frame-medium raised",
+  "boxTop": 692,
+  "line": "Of course it's a loop. I made it. Every ending comes back he"
+ },
+ {
+  "it": "v2-curry:13",
+  "nm": "v2-curry-13.png",
+  "beat": "v2-curry:13",
+  "nandaTop": 298,
+  "nandaCls": "db-nanda stage-1 frame-medium floored",
+  "boxTop": 773,
+  "line": "We walk out of the curry shop. It is 3:40 PM. Lunch is done."
+ },
+ {
+  "it": "leave-yeah:4",
+  "nm": "leave-yeah-4.png",
+  "beat": "leave-yeah:4",
+  "nandaTop": null,
+  "nandaCls": null,
+  "boxTop": 773,
+  "line": "Wide. The café. Every table has two cups. Every cup has your"
+ },
+ {
+  "it": "v3-train:3:1:variant-v3",
+  "nm": "v3-train-3-1-variant-v3.png",
+  "beat": "v3-train:3",
+  "nandaTop": 424,
+  "nandaCls": "db-nanda stage-1 frame-medium",
+  "boxTop": 826,
+  "line": "5:20 PM. Rain on the window. Her stop."
+ }
+]
