@@ -27,7 +27,7 @@ const FOOD_OF = { tama: 'tamagoyaki', ume: 'umeboshi' };
 // Stage geometry of the handout box (BentoSvg viewBox -20 -20 1200 872 drawn 720 wide at left 600, top 360).
 const HB = { left: 600, top: 360, w: 720 };
 
-export function Handout({ choices, map, on = [], onPick, left = null, total = null, def = -1, hidden = false }) {
+export function Handout({ choices, map, on = [], onPick, left = null, total = null, def = -1, hidden = false, blind = false }) {
   const [hot, setHot] = useState(null);
   const idx = { tama: map.tama, ume: map.ume };
   const rest = choices.map((c, i) => i).filter((i) => i !== idx.tama && i !== idx.ume);
@@ -41,7 +41,7 @@ export function Handout({ choices, map, on = [], onPick, left = null, total = nu
       <button type="button" key={i} className={`db-choice ${c.side} sa-mini ${cls}${f && hot === f ? ' hot' : ''}${timed && i === def ? ' is-default' : ''}`}
         disabled={on[i] === false} aria-label={`${i + 1}: ${fill(c.plain)}`}
         onClick={(e) => { e.stopPropagation(); onPick(i); }} onPointerEnter={f ? () => setHot(f) : undefined} onPointerLeave={f ? () => setHot(null) : undefined}>
-        <LoveChip love={c.love} hidden={hidden} />
+        {!blind && <LoveChip love={c.love} hidden={hidden} />}
         <span className="line">{text}</span>
         {timed && i === def && <span className="db-deftag">default</span>}
       </button>
@@ -75,12 +75,12 @@ export function Handout({ choices, map, on = [], onPick, left = null, total = nu
 }
 
 // The NEXT pill's place, but it is the beat's only choice: its words + the love it gives ("smile ♥ +1").
-export function SmileTag({ choice, onPick }) {
+export function SmileTag({ choice, onPick, blind = false }) {
   const n = choice.love;
   return (
-    <button type="button" className="hud-next sa-smile" aria-label={`${fill(choice.plain)}: love ${n > 0 ? 'plus' : 'minus'} ${Math.abs(n)}`}
+    <button type="button" className="hud-next sa-smile" aria-label={blind ? fill(choice.plain) : `${fill(choice.plain)}: love ${n > 0 ? 'plus' : 'minus'} ${Math.abs(n)}`}
       onClick={(e) => { e.stopPropagation(); onPick(0); }}>
-      <span className="line"><Parts parts={choice.parts} /></span><b aria-hidden="true">{n > 0 ? '♥' : '♡'} {n > 0 ? `+${n}` : `−${-n}`}</b>
+      <span className="line"><Parts parts={choice.parts} /></span><b aria-hidden="true">{n > 0 ? '♥' : '♡'}{blind ? '' : ` ${n > 0 ? `+${n}` : `−${-n}`}`}</b>
     </button>
   );
 }

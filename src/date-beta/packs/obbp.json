@@ -18,7 +18,7 @@
       "love": 3,
       "emote": "hearts",
       "fx": "love-burst",
-      "react": "I knew it. I know everything about you. Even the time. It's {TIME}. ♡"
+      "react": "I knew it. I know everything about you. Even the time. It's {NOW}. ♡"
      },
      {
       "text": "It was clean",
@@ -59,7 +59,7 @@
    "scene": "town",
    "beat": 3,
    "set": {
-    "text": "Want to see a magic trick? It's {TIME}. Hi, {CROWD.1}. I see you."
+    "text": "Want to see a magic trick? It's {NOW}. Hi, {CROWD.1}. I see you."
    }
   },
   {

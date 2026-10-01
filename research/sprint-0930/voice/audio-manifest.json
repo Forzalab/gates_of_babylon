@@ -1768,5 +1768,222 @@
   "beat": "2",
   "file": "public/date-beta/voice/03-v2-shop/403_2.mp3",
   "text": "[bubbly][proud] We are here to shop. [smiling] You buy what is on my list: carrots, eggs, three cups. [giggles][too long] And you. ♡"
+ },
+ {
+  "n": 212,
+  "scene": "leave",
+  "beat": "0",
+  "file": "public/date-beta/voice/30-leave/212_0.mp3",
+  "text": "[flatly] Leaving is not an option."
+ },
+ {
+  "n": 213,
+  "scene": "leave",
+  "beat": "2",
+  "file": "public/date-beta/voice/30-leave/213_2.mp3",
+  "text": "He wakes at 7:00."
+ },
+ {
+  "n": 214,
+  "scene": "leave",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/30-leave/214_2-r.mp3",
+  "text": "[cheerfully] Good morning! Same as yesterday. Same as always."
+ },
+ {
+  "n": 215,
+  "scene": "leave",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/30-leave/215_2-r.mp3",
+  "text": "[flatly] Nobody. Not anymore."
+ },
+ {
+  "n": 216,
+  "scene": "leave",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/30-leave/216_2-r.mp3",
+  "text": "[flatly] I was here first."
+ },
+ {
+  "n": 217,
+  "scene": "leave",
+  "beat": "3",
+  "file": "public/date-beta/voice/30-leave/217_3.mp3",
+  "text": "From now on… [whispers] can we be forever?"
+ },
+ {
+  "n": 219,
+  "scene": "leave-fu",
+  "beat": "1",
+  "file": "public/date-beta/voice/31-leave-fu/219_1.mp3",
+  "text": "[flatly] You said leave. I heard \"lea—\"."
+ },
+ {
+  "n": 220,
+  "scene": "leave-yeah",
+  "beat": "0",
+  "file": "public/date-beta/voice/32-leave-yeah/220_0.mp3",
+  "text": "[excited] Hooray! Forever and ever!"
+ },
+ {
+  "n": 221,
+  "scene": "leave-yeah",
+  "beat": "1",
+  "file": "public/date-beta/voice/32-leave-yeah/221_1.mp3",
+  "text": "[sweetly] Good input."
+ },
+ {
+  "n": 59,
+  "scene": "steeped",
+  "beat": "3",
+  "file": "public/date-beta/voice/11-steeped/059_3.mp3",
+  "text": "いつまでも一緒。…FORever. ね？"
+ },
+ {
+  "n": 208,
+  "scene": "escape-timeout",
+  "beat": "4 (u)",
+  "file": "public/date-beta/voice/29-escape-timeout/208_4-u.mp3",
+  "text": "すっぱいでしょ。…ね？"
+ },
+ {
+  "n": 209,
+  "scene": "escape-timeout",
+  "beat": "4 (t)",
+  "file": "public/date-beta/voice/29-escape-timeout/209_4-t.mp3",
+  "text": "甘いでしょ。…ね？"
+ },
+ {
+  "n": 411,
+  "scene": "v2-shop",
+  "beat": "4 R−",
+  "file": "public/date-beta/voice/03-v2-shop/411_4-r.mp3",
+  "text": "[sing-song] You forgot my list. [flatly] Next time I write it on your hand."
+ },
+ {
+  "n": 412,
+  "scene": "v2-shop",
+  "beat": "4 R=",
+  "file": "public/date-beta/voice/03-v2-shop/412_4-r.mp3",
+  "text": "[smiling] Almost perfect. [warm] I still keep you."
+ },
+ {
+  "n": 413,
+  "scene": "v2-shop",
+  "beat": "4 R+",
+  "file": "public/date-beta/voice/03-v2-shop/413_4-r.mp3",
+  "text": "[proud][happy] Every item, first try. [sweet] You know me."
+ },
+ {
+  "n": 406,
+  "scene": "v2-town",
+  "beat": "1",
+  "file": "public/date-beta/voice/37-v2-town/406_1.mp3",
+  "text": "[bubbly] We are going out for curry. [smiling] Just you and me."
+ },
+ {
+  "n": 407,
+  "scene": "v2-town",
+  "beat": "2",
+  "file": "public/date-beta/voice/37-v2-town/407_2.mp3",
+  "text": "[nervous][giggles] So many people. I will hold your arm. [possessive] Tight."
+ },
+ {
+  "n": 408,
+  "scene": "v2-town",
+  "beat": "3",
+  "file": "public/date-beta/voice/37-v2-town/408_3.mp3",
+  "text": "[excited] Wow! A giant oshi board. [teaching, cute] Oshi means \"my favorite.\""
+ },
+ {
+  "n": 409,
+  "scene": "v2-town",
+  "beat": "4",
+  "file": "public/date-beta/voice/37-v2-town/409_4.mp3",
+  "text": "[pouty] But not one of them is as cute as me. [sweet] Right?"
+ },
+ {
+  "n": 410,
+  "scene": "v2-curry-katsu",
+  "beat": "7",
+  "file": "public/date-beta/voice/05-v2-curry/410_7.mp3",
+  "text": "[sweet][demanding] Feed me. With your hand. [flat] Not the spoon. [whispers] Your hand."
+ },
+ {
+  "n": 414,
+  "scene": "v2-home",
+  "beat": "4 R",
+  "file": "public/date-beta/voice/09-v2-home/414_4-r.mp3",
+  "text": "[flatly] …Goodnight? [slow] It's only 7:10."
+ },
+ {
+  "n": 415,
+  "scene": "unknown",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/38-unknown/415_1-r.mp3",
+  "text": "[from far, curious] Did something creak down there?"
+ },
+ {
+  "n": 416,
+  "scene": "unknown",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/38-unknown/416_1-r.mp3",
+  "text": "[warm] So gentle. [whispers] You were always gentle with my things."
+ },
+ {
+  "n": 417,
+  "scene": "unknown",
+  "beat": "4 R+",
+  "file": "public/date-beta/voice/38-unknown/417_4-r.mp3",
+  "text": "[amused] Heavy feet. [whispers] I can hear every step."
+ },
+ {
+  "n": 418,
+  "scene": "unknown",
+  "beat": "4 R=",
+  "file": "public/date-beta/voice/38-unknown/418_4-r.mp3",
+  "text": "[sweet] Quiet as a mouse. [flatly] Still heard you."
+ },
+ {
+  "n": 419,
+  "scene": "escape",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/39-escape/419_0-r.mp3",
+  "text": "[sharp][quiet] Don't touch the labels."
+ },
+ {
+  "n": 420,
+  "scene": "escape",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/39-escape/420_0-r.mp3",
+  "text": "[proud] Pretty, right? [sweet] I dust them every day."
+ },
+ {
+  "n": 421,
+  "scene": "escape",
+  "beat": "5 R+",
+  "file": "public/date-beta/voice/39-escape/421_5-r.mp3",
+  "text": "[flatly] You're looking too long."
+ },
+ {
+  "n": 422,
+  "scene": "escape",
+  "beat": "5 R=",
+  "file": "public/date-beta/voice/39-escape/422_5-r.mp3",
+  "text": "[sweet] Only looking. [whispers] I trust you."
+ },
+ {
+  "n": 404,
+  "scene": "leave",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/30-leave/404_3-r.mp3",
+  "text": "[breathless][happy] Yeah? Say it again. [whispers] I'm keeping it."
+ },
+ {
+  "n": 405,
+  "scene": "leave",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/30-leave/405_3-r.mp3",
+  "text": "[flatly] Leave, then. [quiet] I'll be here. [sweet] I'm always here."
  }
 ]

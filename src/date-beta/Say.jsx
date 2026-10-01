@@ -52,8 +52,9 @@ export function Say({ line, onNext = null, lead = null, at = null, stepped = tru
 // later: drawn but invisible until a two-step line has stepped (keeps the layout still; no jump when they appear).
 // ux-six: the first beat with hidden chips shows a one-time legend (once per page load, on that beat only).
 let legendAt = null;
-export function Choices({ choices, onPick, on = [], left = null, total = null, def = -1, hidden = false, later = false, beatKey = null }) {
-  const chips = choices.some((c) => c.love);
+// order[slot] = the choice index shown in that slot (run 1 shuffles it, main.jsx); blind = no chips (run 1).
+export function Choices({ choices, onPick, on = [], left = null, total = null, def = -1, hidden = false, later = false, beatKey = null, order = null, blind = false }) {
+  const chips = !blind && choices.some((c) => c.love);
   if (hidden && chips && legendAt == null) legendAt = beatKey ?? '';
   const legend = hidden && chips && legendAt === (beatKey ?? '');
   const timed = left != null && total > 0;
@@ -66,14 +67,14 @@ export function Choices({ choices, onPick, on = [], left = null, total = null, d
         </div>
       )}
       {legend && <div className="db-legend" role="note"><b>?? </b>= hidden, find out</div>}
-      {choices.map((c, i) => (
+      {(order ?? choices.map((_, i) => i)).map((i, slot) => { const c = choices[i]; return (
         <button type="button" key={i} className={`db-choice ${c.side}${c.hasOr ? ' has-or' : ''}${timed && i === def ? ' is-default' : ''}`}
-          disabled={on[i] === false} aria-label={`${i + 1}: ${fill(c.plain)}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
+          disabled={on[i] === false} aria-label={`${slot + 1}: ${fill(c.plain)}`} onClick={(e) => { e.stopPropagation(); onPick(i); }}>
           {chips && <LoveChip love={c.love} hidden={hidden} />}
           <span className="line"><Parts parts={c.parts} /></span>
           {timed && i === def && <span className="db-deftag">default</span>}
         </button>
-      ))}
+      ); })}
     </div>
   );
 }

@@ -50,3 +50,14 @@ test('recorded lines are reachable: most manifest takes resolve from the live V2
   }
   assert.ok(seen.size >= manifest.length * 0.8, `only ${seen.size}/${manifest.length} takes reachable`);
 });
+
+// Voice gaps (scripts/voice-gaps.mjs): a recorded take is never left unwired, and a new silent Nanda line on a
+// reachable scene fails here until it is recorded or listed (run the script: it rewrites the list + GAPS.md).
+test('no reachable Nanda line is silent unless listed in sprint-1001/voice/gaps.json', async () => {
+  const { gaps } = await import('../scripts/voice-gaps.mjs');
+  const { miss } = gaps();
+  assert.deepEqual(miss.filter((m) => m.cls === 'A').map((m) => `${m.scene} ${m.beat}`), [], 'recorded takes not wired: node scripts/voice-gaps.mjs --wire');
+  const listed = new Set(JSON.parse(fs.readFileSync(new URL('../research/sprint-1001/voice/gaps.json', import.meta.url), 'utf8')).map((m) => `${m.scene}|${m.text}`));
+  const fresh = miss.filter((m) => !listed.has(`${m.scene}|${m.text}`)).map((m) => `${m.scene} ${m.beat}: ${m.text}`);
+  assert.deepEqual(fresh, []);
+});

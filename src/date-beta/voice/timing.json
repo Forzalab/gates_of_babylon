@@ -2,96 +2,96 @@
  "pad": 350,
  "files": {
   "date-beta/voice/01-rooftop/001_1.mp3": {
-   "audioMs": 6139,
-   "holdMs": 6489
+   "audioMs": 5904,
+   "holdMs": 6254
   },
   "date-beta/voice/01-rooftop/002_1-r.mp3": {
-   "audioMs": 5669,
-   "holdMs": 6019
+   "audioMs": 5512,
+   "holdMs": 5862
   },
   "date-beta/voice/01-rooftop/004_1-r.mp3": {
-   "audioMs": 2952,
-   "holdMs": 3302
+   "audioMs": 3030,
+   "holdMs": 3380
   },
   "date-beta/voice/01-rooftop/006_2-t.mp3": {
-   "audioMs": 3500,
-   "holdMs": 3850
+   "audioMs": 3344,
+   "holdMs": 3694
   },
   "date-beta/voice/01-rooftop/008_3-t.mp3": {
+   "audioMs": 4859,
+   "holdMs": 5209
+  },
+  "date-beta/voice/01-rooftop/011_3-r.mp3": {
    "audioMs": 4624,
    "holdMs": 4974
   },
-  "date-beta/voice/01-rooftop/011_3-r.mp3": {
-   "audioMs": 4702,
-   "holdMs": 5052
-  },
   "date-beta/voice/01-rooftop/012_4-cold.mp3": {
-   "audioMs": 3579,
-   "holdMs": 3929
-  },
-  "date-beta/voice/01-rooftop/014_6-r.mp3": {
-   "audioMs": 5172,
-   "holdMs": 5522
-  },
-  "date-beta/voice/01-rooftop/015_6-r.mp3": {
-   "audioMs": 3814,
-   "holdMs": 4164
-  },
-  "date-beta/voice/01-rooftop/016_6-r.mp3": {
    "audioMs": 3657,
    "holdMs": 4007
   },
+  "date-beta/voice/01-rooftop/014_6-r.mp3": {
+   "audioMs": 5016,
+   "holdMs": 5366
+  },
+  "date-beta/voice/01-rooftop/015_6-r.mp3": {
+   "audioMs": 3736,
+   "holdMs": 4086
+  },
+  "date-beta/voice/01-rooftop/016_6-r.mp3": {
+   "audioMs": 3579,
+   "holdMs": 3929
+  },
   "date-beta/voice/02-v2-park/017_3.mp3": {
-   "audioMs": 6374,
-   "holdMs": 6724
+   "audioMs": 6217,
+   "holdMs": 6567
   },
   "date-beta/voice/02-v2-park/018_3-r.mp3": {
-   "audioMs": 4232,
-   "holdMs": 4582
+   "audioMs": 4153,
+   "holdMs": 4503
   },
   "date-beta/voice/02-v2-park/020_3-r.mp3": {
-   "audioMs": 4624,
-   "holdMs": 4974
+   "audioMs": 4545,
+   "holdMs": 4895
   },
   "date-beta/voice/02-v2-park/021_5.mp3": {
-   "audioMs": 5355,
-   "holdMs": 5705
+   "audioMs": 5433,
+   "holdMs": 5783
   },
   "date-beta/voice/02-v2-park/022_5-r-shop.mp3": {
    "audioMs": 2873,
    "holdMs": 3223
   },
   "date-beta/voice/02-v2-park/024_5-r.mp3": {
-   "audioMs": 4232,
-   "holdMs": 4582
+   "audioMs": 4075,
+   "holdMs": 4425
   },
   "date-beta/voice/03-v2-shop/025_5.mp3": {
-   "audioMs": 4545,
-   "holdMs": 4895
+   "audioMs": 4389,
+   "holdMs": 4739
   },
   "date-beta/voice/04-v2-library/026_4.mp3": {
-   "audioMs": 5512,
-   "holdMs": 5862
+   "audioMs": 5277,
+   "holdMs": 5627
   },
   "date-beta/voice/05-v2-curry/028_2-r-b.mp3": {
-   "audioMs": 3657,
-   "holdMs": 4007
+   "audioMs": 3579,
+   "holdMs": 3929
   },
   "date-beta/voice/05-v2-curry/030_2-r.mp3": {
-   "audioMs": 2612,
-   "holdMs": 2962
+   "audioMs": 2534,
+   "holdMs": 2884
   },
   "date-beta/voice/05-v2-curry/031_4.mp3": {
-   "audioMs": 5669,
-   "holdMs": 6019
+   "audioMs": 5825,
+   "holdMs": 6175
   },
   "date-beta/voice/06-v2-train/032_station-crowd-tony-the-class-4-30-pm.mp3": {
-   "audioMs": 13349,
-   "holdMs": 13699
+   "audioMs": 13662,
+   "holdMs": 14012
   },
   "date-beta/voice/06-v2-train/034_3-run-2.mp3": {
-   "audioMs": 5355,
-   "holdMs": 5705
+   "audioMs": 5590,
+   "holdMs": 5940
   },
   "date-beta/voice/06-v2-train/035_3-run-3.mp3": {
    "audioMs": 5982,
@@ -102,28 +102,28 @@
    "holdMs": 5862
   },
   "date-beta/voice/07-v2-rain/037_2-r.mp3": {
-   "audioMs": 4153,
-   "holdMs": 4503
+   "audioMs": 4310,
+   "holdMs": 4660
   },
   "date-beta/voice/07-v2-rain/038_2-r.mp3": {
    "audioMs": 3892,
    "holdMs": 4242
   },
   "date-beta/voice/07-v2-rain/039_2-r.mp3": {
-   "audioMs": 4075,
-   "holdMs": 4425
+   "audioMs": 4153,
+   "holdMs": 4503
   },
   "date-beta/voice/08-v2-street/040_2.mp3": {
    "audioMs": 5982,
    "holdMs": 6332
   },
   "date-beta/voice/08-v2-street/041_2-r.mp3": {
-   "audioMs": 7732,
-   "holdMs": 8082
+   "audioMs": 10057,
+   "holdMs": 10407
   },
   "date-beta/voice/08-v2-street/042_2-r.mp3": {
-   "audioMs": 3814,
-   "holdMs": 4164
+   "audioMs": 5016,
+   "holdMs": 5366
   },
   "date-beta/voice/08-v2-street/043_2-r.mp3": {
    "audioMs": 3657,
@@ -138,84 +138,84 @@
    "holdMs": 5052
   },
   "date-beta/voice/10-cup/047_0-t.mp3": {
-   "audioMs": 4310,
-   "holdMs": 4660
+   "audioMs": 4232,
+   "holdMs": 4582
   },
   "date-beta/voice/10-cup/048_0-r.mp3": {
-   "audioMs": 2456,
-   "holdMs": 2806
+   "audioMs": 2534,
+   "holdMs": 2884
   },
   "date-beta/voice/10-cup/050_0-r.mp3": {
-   "audioMs": 2456,
-   "holdMs": 2806
+   "audioMs": 2377,
+   "holdMs": 2727
   },
   "date-beta/voice/10-cup/051_1-cold.mp3": {
-   "audioMs": 3344,
-   "holdMs": 3694
-  },
-  "date-beta/voice/10-cup/053_3-r.mp3": {
-   "audioMs": 5016,
-   "holdMs": 5366
-  },
-  "date-beta/voice/10-cup/055_3-r.mp3": {
    "audioMs": 3187,
    "holdMs": 3537
   },
+  "date-beta/voice/10-cup/053_3-r.mp3": {
+   "audioMs": 4859,
+   "holdMs": 5209
+  },
+  "date-beta/voice/10-cup/055_3-r.mp3": {
+   "audioMs": 3344,
+   "holdMs": 3694
+  },
   "date-beta/voice/11-steeped/057_2-u.mp3": {
-   "audioMs": 5433,
-   "holdMs": 5783
+   "audioMs": 5355,
+   "holdMs": 5705
   },
   "date-beta/voice/11-steeped/058_2-t.mp3": {
    "audioMs": 4624,
    "holdMs": 4974
   },
   "date-beta/voice/11-steeped/059_3.mp3": {
-   "audioMs": 5172,
-   "holdMs": 5522
+   "audioMs": 5016,
+   "holdMs": 5366
   },
   "date-beta/voice/12-escape-win/062_2-t.mp3": {
-   "audioMs": 2612,
-   "holdMs": 2962
+   "audioMs": 2717,
+   "holdMs": 3067
   },
   "date-beta/voice/12-escape-win/065_5.mp3": {
-   "audioMs": 1176,
-   "holdMs": 1526
+   "audioMs": 1332,
+   "holdMs": 1682
   },
   "date-beta/voice/13-escape-timeout/066_4-u.mp3": {
    "audioMs": 3422,
    "holdMs": 3772
   },
   "date-beta/voice/13-escape-timeout/067_4-t.mp3": {
-   "audioMs": 3187,
-   "holdMs": 3537
+   "audioMs": 3030,
+   "holdMs": 3380
   },
   "date-beta/voice/13-escape-timeout/070_6-u.mp3": {
-   "audioMs": 3109,
-   "holdMs": 3459
+   "audioMs": 3265,
+   "holdMs": 3615
   },
   "date-beta/voice/13-escape-timeout/071_6-t.mp3": {
-   "audioMs": 3187,
-   "holdMs": 3537
+   "audioMs": 3500,
+   "holdMs": 3850
   },
   "date-beta/voice/01-rooftop/003_1-r.mp3": {
-   "audioMs": 5825,
-   "holdMs": 6175
+   "audioMs": 5747,
+   "holdMs": 6097
   },
   "date-beta/voice/01-rooftop/005_2-u.mp3": {
-   "audioMs": 4153,
-   "holdMs": 4503
+   "audioMs": 4075,
+   "holdMs": 4425
   },
   "date-beta/voice/01-rooftop/007_3-u.mp3": {
-   "audioMs": 2873,
-   "holdMs": 3223
+   "audioMs": 2795,
+   "holdMs": 3145
   },
   "date-beta/voice/01-rooftop/009_3-r.mp3": {
    "audioMs": 2873,
    "holdMs": 3223
   },
   "date-beta/voice/01-rooftop/010_3-r.mp3": {
-   "audioMs": 3657,
-   "holdMs": 4007
+   "audioMs": 3736,
+   "holdMs": 4086
   },
   "date-beta/voice/01-rooftop/013_6.mp3": {
    "audioMs": 4153,
@@ -226,52 +226,52 @@
    "holdMs": 4347
   },
   "date-beta/voice/02-v2-park/023_5-r-lib.mp3": {
-   "audioMs": 4545,
-   "holdMs": 4895
+   "audioMs": 4467,
+   "holdMs": 4817
   },
   "date-beta/voice/05-v2-curry/027_2.mp3": {
-   "audioMs": 4937,
-   "holdMs": 5287
+   "audioMs": 4780,
+   "holdMs": 5130
   },
   "date-beta/voice/05-v2-curry/029_2-r-k.mp3": {
-   "audioMs": 2612,
-   "holdMs": 2962
+   "audioMs": 2717,
+   "holdMs": 3067
   },
   "date-beta/voice/10-cup/046_0-u.mp3": {
    "audioMs": 4624,
    "holdMs": 4974
   },
   "date-beta/voice/10-cup/049_0-r.mp3": {
-   "audioMs": 3265,
-   "holdMs": 3615
+   "audioMs": 3344,
+   "holdMs": 3694
   },
   "date-beta/voice/10-cup/052_3.mp3": {
-   "audioMs": 5747,
-   "holdMs": 6097
-  },
-  "date-beta/voice/10-cup/054_3-r.mp3": {
    "audioMs": 5669,
    "holdMs": 6019
   },
+  "date-beta/voice/10-cup/054_3-r.mp3": {
+   "audioMs": 5590,
+   "holdMs": 5940
+  },
   "date-beta/voice/11-steeped/056_1.mp3": {
-   "audioMs": 3030,
-   "holdMs": 3380
+   "audioMs": 2952,
+   "holdMs": 3302
   },
   "date-beta/voice/12-escape-win/060_1.mp3": {
-   "audioMs": 2142,
-   "holdMs": 2492
-  },
-  "date-beta/voice/12-escape-win/061_2-u.mp3": {
    "audioMs": 2064,
    "holdMs": 2414
   },
+  "date-beta/voice/12-escape-win/061_2-u.mp3": {
+   "audioMs": 1907,
+   "holdMs": 2257
+  },
   "date-beta/voice/12-escape-win/063_3-u.mp3": {
-   "audioMs": 3344,
-   "holdMs": 3694
+   "audioMs": 3500,
+   "holdMs": 3850
   },
   "date-beta/voice/12-escape-win/064_3-t.mp3": {
-   "audioMs": 3344,
-   "holdMs": 3694
+   "audioMs": 3500,
+   "holdMs": 3850
   },
   "date-beta/voice/13-escape-timeout/068_5-u.mp3": {
    "audioMs": 2220,
@@ -282,654 +282,774 @@
    "holdMs": 2414
   },
   "date-beta/voice/06-v2-train/238_5-crowd.mp3": {
-   "audioMs": 10136,
-   "holdMs": 10486
+   "audioMs": 8542,
+   "holdMs": 8892
   },
   "date-beta/voice/06-v2-train/239_1-quote.mp3": {
-   "audioMs": 4389,
-   "holdMs": 4739
+   "audioMs": 7576,
+   "holdMs": 7926
   },
   "date-beta/voice/06-v2-train/240_3-ume-quote.mp3": {
-   "audioMs": 3396,
-   "holdMs": 3746
+   "audioMs": 5512,
+   "holdMs": 5862
   },
   "date-beta/voice/06-v2-train/241_3-tama-quote.mp3": {
-   "audioMs": 3944,
-   "holdMs": 4294
+   "audioMs": 5094,
+   "holdMs": 5444
   },
   "date-beta/voice/06-v2-train/242_6-quote.mp3": {
-   "audioMs": 2873,
-   "holdMs": 3223
+   "audioMs": 7340,
+   "holdMs": 7690
   },
   "date-beta/voice/06-v2-train/243_7-run-1-quote.mp3": {
-   "audioMs": 5355,
-   "holdMs": 5705
+   "audioMs": 8150,
+   "holdMs": 8500
   },
   "date-beta/voice/06-v2-train/244_9-quote.mp3": {
-   "audioMs": 2534,
-   "holdMs": 2884
+   "audioMs": 7497,
+   "holdMs": 7847
   },
   "date-beta/voice/narration/rooftop/245_2.mp3": {
-   "audioMs": 3030,
-   "holdMs": 3380
+   "audioMs": 3657,
+   "holdMs": 4007
   },
   "date-beta/voice/narration/rooftop/246_4-bento-umeboshi.mp3": {
-   "audioMs": 4206,
-   "holdMs": 4556
+   "audioMs": 5172,
+   "holdMs": 5522
   },
   "date-beta/voice/narration/rooftop/247_4-bento-tamagoyaki.mp3": {
-   "audioMs": 4859,
-   "holdMs": 5209
+   "audioMs": 5747,
+   "holdMs": 6097
   },
   "date-beta/voice/narration/rooftop/248_6.mp3": {
-   "audioMs": 1228,
-   "holdMs": 1578
+   "audioMs": 1254,
+   "holdMs": 1604
   },
   "date-beta/voice/narration/rooftop/249_7.mp3": {
-   "audioMs": 2900,
-   "holdMs": 3250
+   "audioMs": 3422,
+   "holdMs": 3772
   },
   "date-beta/voice/narration/rooftop/250_10.mp3": {
-   "audioMs": 2978,
-   "holdMs": 3328,
+   "audioMs": 3344,
+   "holdMs": 3694,
    "marks": {
-    "f-": 1625
+    "f-": 2000
    }
   },
   "date-beta/voice/narration/v2-park/251_0.mp3": {
-   "audioMs": 5303,
-   "holdMs": 5653
+   "audioMs": 6217,
+   "holdMs": 6567
   },
   "date-beta/voice/narration/v2-park/252_2.mp3": {
-   "audioMs": 7158,
-   "holdMs": 7508
+   "audioMs": 6713,
+   "holdMs": 7063
   },
   "date-beta/voice/narration/v2-shop/255_1.mp3": {
-   "audioMs": 3918,
-   "holdMs": 4268
+   "audioMs": 3736,
+   "holdMs": 4086
   },
   "date-beta/voice/narration/v2-shop/256_3.mp3": {
-   "audioMs": 4023,
-   "holdMs": 4373
-  },
-  "date-beta/voice/narration/v2-shop/257_5.mp3": {
-   "audioMs": 5956,
-   "holdMs": 6306
-  },
-  "date-beta/voice/narration/v2-shop/258_6.mp3": {
-   "audioMs": 4702,
-   "holdMs": 5052
-  },
-  "date-beta/voice/narration/v2-shop/259_7.mp3": {
    "audioMs": 4467,
    "holdMs": 4817
   },
-  "date-beta/voice/narration/v2-shop/260_8.mp3": {
-   "audioMs": 2952,
-   "holdMs": 3302
+  "date-beta/voice/narration/v2-shop/257_5.mp3": {
+   "audioMs": 6139,
+   "holdMs": 6489
   },
-  "date-beta/voice/narration/v2-shop/261_9.mp3": {
-   "audioMs": 4153,
-   "holdMs": 4503
+  "date-beta/voice/narration/v2-shop/258_6.mp3": {
+   "audioMs": 4780,
+   "holdMs": 5130
   },
-  "date-beta/voice/narration/v2-shop/262_10.mp3": {
-   "audioMs": 3500,
-   "holdMs": 3850
-  },
-  "date-beta/voice/narration/v2-shop/263_12.mp3": {
+  "date-beta/voice/narration/v2-shop/259_7.mp3": {
    "audioMs": 4389,
    "holdMs": 4739
   },
+  "date-beta/voice/narration/v2-shop/260_8.mp3": {
+   "audioMs": 3422,
+   "holdMs": 3772
+  },
+  "date-beta/voice/narration/v2-shop/261_9.mp3": {
+   "audioMs": 4937,
+   "holdMs": 5287
+  },
+  "date-beta/voice/narration/v2-shop/262_10.mp3": {
+   "audioMs": 3657,
+   "holdMs": 4007
+  },
+  "date-beta/voice/narration/v2-shop/263_12.mp3": {
+   "audioMs": 4780,
+   "holdMs": 5130
+  },
   "date-beta/voice/narration/v2-library/264_0.mp3": {
-   "audioMs": 5590,
-   "holdMs": 5940
+   "audioMs": 5904,
+   "holdMs": 6254
   },
   "date-beta/voice/narration/v2-library/265_1.mp3": {
-   "audioMs": 4284,
-   "holdMs": 4634
+   "audioMs": 4389,
+   "holdMs": 4739
   },
   "date-beta/voice/narration/v2-library/266_2.mp3": {
-   "audioMs": 4336,
-   "holdMs": 4686
+   "audioMs": 5016,
+   "holdMs": 5366
   },
   "date-beta/voice/narration/v2-library/267_4.mp3": {
-   "audioMs": 4101,
-   "holdMs": 4451
+   "audioMs": 4389,
+   "holdMs": 4739
   },
   "date-beta/voice/narration/v2-library/268_5.mp3": {
-   "audioMs": 3918,
-   "holdMs": 4268
+   "audioMs": 3579,
+   "holdMs": 3929
   },
   "date-beta/voice/narration/v2-town/269_0.mp3": {
-   "audioMs": 6531,
-   "holdMs": 6881
+   "audioMs": 7262,
+   "holdMs": 7612
   },
   "date-beta/voice/narration/v2-curry/270_0.mp3": {
-   "audioMs": 4807,
-   "holdMs": 5157
+   "audioMs": 5355,
+   "holdMs": 5705
   },
   "date-beta/voice/narration/v2-curry/271_2.mp3": {
-   "audioMs": 3030,
-   "holdMs": 3380
+   "audioMs": 3265,
+   "holdMs": 3615
   },
   "date-beta/voice/narration/v2-curry/272_3.mp3": {
-   "audioMs": 4049,
-   "holdMs": 4399
+   "audioMs": 4232,
+   "holdMs": 4582
   },
   "date-beta/voice/narration/v2-curry/273_4.mp3": {
    "audioMs": 5825,
    "holdMs": 6175
   },
   "date-beta/voice/narration/v2-curry/274_5.mp3": {
-   "audioMs": 6557,
-   "holdMs": 6907
+   "audioMs": 7105,
+   "holdMs": 7455
   },
   "date-beta/voice/narration/v2-curry/275_6.mp3": {
-   "audioMs": 3030,
-   "holdMs": 3380
-  },
-  "date-beta/voice/narration/v2-curry/276_7.mp3": {
-   "audioMs": 4807,
-   "holdMs": 5157
-  },
-  "date-beta/voice/narration/v2-curry/277_8.mp3": {
-   "audioMs": 3265,
-   "holdMs": 3615
-  },
-  "date-beta/voice/narration/v2-curry/278_10.mp3": {
-   "audioMs": 7131,
-   "holdMs": 7481
-  },
-  "date-beta/voice/narration/v2-curry/279_11.mp3": {
-   "audioMs": 3866,
-   "holdMs": 4216
-  },
-  "date-beta/voice/narration/v2-curry/280_12.mp3": {
-   "audioMs": 5355,
-   "holdMs": 5705
-  },
-  "date-beta/voice/narration/v2-curry-katsu/282_0.mp3": {
-   "audioMs": 2900,
-   "holdMs": 3250
-  },
-  "date-beta/voice/narration/v2-curry-katsu/283_1.mp3": {
-   "audioMs": 4153,
-   "holdMs": 4503
-  },
-  "date-beta/voice/narration/v2-curry-katsu/284_2.mp3": {
-   "audioMs": 5120,
-   "holdMs": 5470
-  },
-  "date-beta/voice/narration/v2-curry-katsu/285_3.mp3": {
-   "audioMs": 5590,
-   "holdMs": 5940
-  },
-  "date-beta/voice/narration/v2-curry-katsu/286_4.mp3": {
-   "audioMs": 3683,
-   "holdMs": 4033
-  },
-  "date-beta/voice/narration/v2-curry-katsu/287_5.mp3": {
-   "audioMs": 4754,
-   "holdMs": 5104
-  },
-  "date-beta/voice/narration/v2-curry-katsu/288_6.mp3": {
-   "audioMs": 3683,
-   "holdMs": 4033
-  },
-  "date-beta/voice/narration/v2-curry-katsu/289_8.mp3": {
-   "audioMs": 6609,
-   "holdMs": 6959
-  },
-  "date-beta/voice/narration/v2-curry-katsu/290_9.mp3": {
-   "audioMs": 3814,
-   "holdMs": 4164
-  },
-  "date-beta/voice/narration/v2-curry-katsu/291_10.mp3": {
-   "audioMs": 5172,
-   "holdMs": 5522
-  },
-  "date-beta/voice/narration/v2-curry-katsu/292_11.mp3": {
    "audioMs": 3187,
    "holdMs": 3537
   },
-  "date-beta/voice/narration/v2-curry-alone/293_0.mp3": {
-   "audioMs": 3082,
-   "holdMs": 3432
+  "date-beta/voice/narration/v2-curry/276_7.mp3": {
+   "audioMs": 4937,
+   "holdMs": 5287
   },
-  "date-beta/voice/narration/v2-curry-alone/294_1.mp3": {
-   "audioMs": 4624,
-   "holdMs": 4974
+  "date-beta/voice/narration/v2-curry/277_8.mp3": {
+   "audioMs": 3892,
+   "holdMs": 4242
   },
-  "date-beta/voice/narration/v2-curry-alone/295_2.mp3": {
-   "audioMs": 3396,
-   "holdMs": 3746
+  "date-beta/voice/narration/v2-curry/278_10.mp3": {
+   "audioMs": 7105,
+   "holdMs": 7455
   },
-  "date-beta/voice/narration/v2-curry-alone/296_3.mp3": {
-   "audioMs": 3370,
-   "holdMs": 3720
+  "date-beta/voice/narration/v2-curry/279_11.mp3": {
+   "audioMs": 4310,
+   "holdMs": 4660
   },
-  "date-beta/voice/narration/v2-train/299_7.mp3": {
-   "audioMs": 6609,
-   "holdMs": 6959
+  "date-beta/voice/narration/v2-curry/280_12.mp3": {
+   "audioMs": 5669,
+   "holdMs": 6019
   },
-  "date-beta/voice/narration/v2-rain/300_0.mp3": {
-   "audioMs": 7367,
-   "holdMs": 7717
+  "date-beta/voice/narration/v2-curry-katsu/282_0.mp3": {
+   "audioMs": 3422,
+   "holdMs": 3772
   },
-  "date-beta/voice/narration/v2-rain/301_2.mp3": {
-   "audioMs": 4389,
-   "holdMs": 4739
+  "date-beta/voice/narration/v2-curry-katsu/283_1.mp3": {
+   "audioMs": 5094,
+   "holdMs": 5444
   },
-  "date-beta/voice/narration/v2-rain/302_3.mp3": {
-   "audioMs": 3448,
-   "holdMs": 3798
+  "date-beta/voice/narration/v2-curry-katsu/284_2.mp3": {
+   "audioMs": 5433,
+   "holdMs": 5783
   },
-  "date-beta/voice/narration/v2-rain/303_4.mp3": {
-   "audioMs": 4101,
-   "holdMs": 4451
+  "date-beta/voice/narration/v2-curry-katsu/285_3.mp3": {
+   "audioMs": 5747,
+   "holdMs": 6097
   },
-  "date-beta/voice/narration/v2-street/304_0.mp3": {
-   "audioMs": 5486,
-   "holdMs": 5836
-  },
-  "date-beta/voice/narration/v2-street/305_2.mp3": {
-   "audioMs": 5486,
-   "holdMs": 5836
-  },
-  "date-beta/voice/narration/v2-street/306_3.mp3": {
-   "audioMs": 4885,
-   "holdMs": 5235
-  },
-  "date-beta/voice/narration/v2-street/307_5.mp3": {
-   "audioMs": 4232,
-   "holdMs": 4582
-  },
-  "date-beta/voice/narration/v2-home/308_0.mp3": {
-   "audioMs": 5642,
-   "holdMs": 5992
-  },
-  "date-beta/voice/narration/v2-home/309_1.mp3": {
+  "date-beta/voice/narration/v2-curry-katsu/286_4.mp3": {
    "audioMs": 4153,
    "holdMs": 4503
   },
-  "date-beta/voice/narration/v2-home/310_3.mp3": {
-   "audioMs": 5486,
-   "holdMs": 5836
+  "date-beta/voice/narration/v2-curry-katsu/287_5.mp3": {
+   "audioMs": 5277,
+   "holdMs": 5627
   },
-  "date-beta/voice/narration/v2-home/311_4.mp3": {
-   "audioMs": 3918,
-   "holdMs": 4268
+  "date-beta/voice/narration/v2-curry-katsu/288_6.mp3": {
+   "audioMs": 4153,
+   "holdMs": 4503
   },
-  "date-beta/voice/narration/park/312_0.mp3": {
-   "audioMs": 4885,
-   "holdMs": 5235
+  "date-beta/voice/narration/v2-curry-katsu/289_8.mp3": {
+   "audioMs": 7105,
+   "holdMs": 7455
   },
-  "date-beta/voice/narration/park/313_4.mp3": {
-   "audioMs": 4807,
-   "holdMs": 5157
+  "date-beta/voice/narration/v2-curry-katsu/290_9.mp3": {
+   "audioMs": 4232,
+   "holdMs": 4582
   },
-  "date-beta/voice/narration/errand-shop/314_0.mp3": {
-   "audioMs": 3605,
-   "holdMs": 3955
+  "date-beta/voice/narration/v2-curry-katsu/291_10.mp3": {
+   "audioMs": 5512,
+   "holdMs": 5862
   },
-  "date-beta/voice/narration/errand-shop/315_2.mp3": {
-   "audioMs": 5068,
-   "holdMs": 5418
+  "date-beta/voice/narration/v2-curry-katsu/292_11.mp3": {
+   "audioMs": 3814,
+   "holdMs": 4164
   },
-  "date-beta/voice/narration/errand-shop/316_6.mp3": {
-   "audioMs": 3736,
-   "holdMs": 4086
+  "date-beta/voice/narration/v2-curry-alone/293_0.mp3": {
+   "audioMs": 3422,
+   "holdMs": 3772
   },
-  "date-beta/voice/narration/errand-shop/317_8.mp3": {
-   "audioMs": 1829,
-   "holdMs": 2179
+  "date-beta/voice/narration/v2-curry-alone/294_1.mp3": {
+   "audioMs": 5277,
+   "holdMs": 5627
   },
-  "date-beta/voice/narration/errand-library/318_0.mp3": {
-   "audioMs": 4101,
-   "holdMs": 4451
+  "date-beta/voice/narration/v2-curry-alone/295_2.mp3": {
+   "audioMs": 3657,
+   "holdMs": 4007
   },
-  "date-beta/voice/narration/errand-library/319_3.mp3": {
-   "audioMs": 4571,
-   "holdMs": 4921
+  "date-beta/voice/narration/v2-curry-alone/296_3.mp3": {
+   "audioMs": 3814,
+   "holdMs": 4164
   },
-  "date-beta/voice/narration/errand-library/320_4.mp3": {
-   "audioMs": 4441,
-   "holdMs": 4791
+  "date-beta/voice/narration/v2-train/299_7.mp3": {
+   "audioMs": 6713,
+   "holdMs": 7063
   },
-  "date-beta/voice/narration/errand-library/321_7.mp3": {
+  "date-beta/voice/narration/v2-rain/300_0.mp3": {
+   "audioMs": 7262,
+   "holdMs": 7612
+  },
+  "date-beta/voice/narration/v2-rain/301_2.mp3": {
    "audioMs": 4702,
    "holdMs": 5052
   },
+  "date-beta/voice/narration/v2-rain/302_3.mp3": {
+   "audioMs": 4075,
+   "holdMs": 4425
+  },
+  "date-beta/voice/narration/v2-rain/303_4.mp3": {
+   "audioMs": 4780,
+   "holdMs": 5130
+  },
+  "date-beta/voice/narration/v2-street/304_0.mp3": {
+   "audioMs": 6557,
+   "holdMs": 6907
+  },
+  "date-beta/voice/narration/v2-street/305_2.mp3": {
+   "audioMs": 6452,
+   "holdMs": 6802
+  },
+  "date-beta/voice/narration/v2-street/306_3.mp3": {
+   "audioMs": 5982,
+   "holdMs": 6332
+  },
+  "date-beta/voice/narration/v2-street/307_5.mp3": {
+   "audioMs": 5172,
+   "holdMs": 5522
+  },
+  "date-beta/voice/narration/v2-home/308_0.mp3": {
+   "audioMs": 7027,
+   "holdMs": 7377
+  },
+  "date-beta/voice/narration/v2-home/309_1.mp3": {
+   "audioMs": 4310,
+   "holdMs": 4660
+  },
+  "date-beta/voice/narration/v2-home/310_3.mp3": {
+   "audioMs": 6635,
+   "holdMs": 6985
+  },
+  "date-beta/voice/narration/v2-home/311_4.mp3": {
+   "audioMs": 3814,
+   "holdMs": 4164
+  },
+  "date-beta/voice/narration/park/312_0.mp3": {
+   "audioMs": 5747,
+   "holdMs": 6097
+  },
+  "date-beta/voice/narration/park/313_4.mp3": {
+   "audioMs": 5590,
+   "holdMs": 5940
+  },
+  "date-beta/voice/narration/errand-shop/314_0.mp3": {
+   "audioMs": 4545,
+   "holdMs": 4895
+  },
+  "date-beta/voice/narration/errand-shop/315_2.mp3": {
+   "audioMs": 4937,
+   "holdMs": 5287
+  },
+  "date-beta/voice/narration/errand-shop/316_6.mp3": {
+   "audioMs": 4859,
+   "holdMs": 5209
+  },
+  "date-beta/voice/narration/errand-shop/317_8.mp3": {
+   "audioMs": 1750,
+   "holdMs": 2100
+  },
+  "date-beta/voice/narration/errand-library/318_0.mp3": {
+   "audioMs": 4545,
+   "holdMs": 4895
+  },
+  "date-beta/voice/narration/errand-library/319_3.mp3": {
+   "audioMs": 5590,
+   "holdMs": 5940
+  },
+  "date-beta/voice/narration/errand-library/320_4.mp3": {
+   "audioMs": 4467,
+   "holdMs": 4817
+  },
+  "date-beta/voice/narration/errand-library/321_7.mp3": {
+   "audioMs": 4624,
+   "holdMs": 4974
+  },
   "date-beta/voice/narration/errand-library/322_8.mp3": {
-   "audioMs": 1829,
-   "holdMs": 2179
+   "audioMs": 1750,
+   "holdMs": 2100
   },
   "date-beta/voice/narration/town/323_0.mp3": {
-   "audioMs": 4049,
-   "holdMs": 4399
+   "audioMs": 5538,
+   "holdMs": 5888
   },
   "date-beta/voice/narration/town/324_12.mp3": {
    "audioMs": 1593,
    "holdMs": 1943
   },
   "date-beta/voice/narration/train/325_0.mp3": {
-   "audioMs": 3814,
-   "holdMs": 4164
+   "audioMs": 4075,
+   "holdMs": 4425
   },
   "date-beta/voice/narration/train/326_1-bento-umeboshi.mp3": {
-   "audioMs": 4807,
-   "holdMs": 5157
-  },
-  "date-beta/voice/narration/train/327_1-bento-tamagoyaki.mp3": {
-   "audioMs": 3866,
-   "holdMs": 4216
-  },
-  "date-beta/voice/narration/naan/328_1.mp3": {
-   "audioMs": 2847,
-   "holdMs": 3197
-  },
-  "date-beta/voice/narration/naan/329_1-food-butter.mp3": {
-   "audioMs": 3135,
-   "holdMs": 3485
-  },
-  "date-beta/voice/narration/platform/330_0.mp3": {
-   "audioMs": 3500,
-   "holdMs": 3850
-  },
-  "date-beta/voice/narration/platform/331_1.mp3": {
-   "audioMs": 3213,
-   "holdMs": 3563
-  },
-  "date-beta/voice/narration/platform/332_2.mp3": {
-   "audioMs": 4101,
-   "holdMs": 4451
-  },
-  "date-beta/voice/narration/station-talk/333_2.mp3": {
-   "audioMs": 3187,
-   "holdMs": 3537
-  },
-  "date-beta/voice/narration/station-talk/334_2-run-2.mp3": {
-   "audioMs": 7367,
-   "holdMs": 7717
-  },
-  "date-beta/voice/narration/station-talk/335_2-run-3.mp3": {
-   "audioMs": 3265,
-   "holdMs": 3615
-  },
-  "date-beta/voice/narration/rain-crossing/336_0.mp3": {
-   "audioMs": 5460,
-   "holdMs": 5810
-  },
-  "date-beta/voice/narration/rain-crossing/337_2.mp3": {
-   "audioMs": 5773,
-   "holdMs": 6123
-  },
-  "date-beta/voice/narration/rain-crossing/338_6.mp3": {
-   "audioMs": 1228,
-   "holdMs": 1578
-  },
-  "date-beta/voice/narration/underpass/339_0.mp3": {
-   "audioMs": 3396,
-   "holdMs": 3746
-  },
-  "date-beta/voice/narration/walk-home/340_0.mp3": {
-   "audioMs": 4049,
-   "holdMs": 4399
-  },
-  "date-beta/voice/narration/walk-home/341_2.mp3": {
-   "audioMs": 3631,
-   "holdMs": 3981
-  },
-  "date-beta/voice/narration/walk-home/342_5.mp3": {
-   "audioMs": 5642,
-   "holdMs": 5992
-  },
-  "date-beta/voice/narration/walk-home/343_7.mp3": {
-   "audioMs": 1541,
-   "holdMs": 1891
-  },
-  "date-beta/voice/narration/apartment/344_0.mp3": {
-   "audioMs": 2482,
-   "holdMs": 2832
-  },
-  "date-beta/voice/narration/genkan-in/345_0.mp3": {
-   "audioMs": 2795,
-   "holdMs": 3145
-  },
-  "date-beta/voice/narration/genkan-in/346_1.mp3": {
-   "audioMs": 2377,
-   "holdMs": 2727
-  },
-  "date-beta/voice/narration/genkan-in/347_2.mp3": {
-   "audioMs": 4023,
-   "holdMs": 4373
-  },
-  "date-beta/voice/narration/genkan-talk/348_4.mp3": {
-   "audioMs": 5224,
-   "holdMs": 5574
-  },
-  "date-beta/voice/narration/genkan-talk/349_5.mp3": {
-   "audioMs": 4519,
-   "holdMs": 4869
-  },
-  "date-beta/voice/narration/cup/350_0.mp3": {
    "audioMs": 5172,
    "holdMs": 5522
   },
-  "date-beta/voice/narration/cup/351_2-bento-umeboshi.mp3": {
-   "audioMs": 4807,
-   "holdMs": 5157
+  "date-beta/voice/narration/train/327_1-bento-tamagoyaki.mp3": {
+   "audioMs": 4937,
+   "holdMs": 5287
   },
-  "date-beta/voice/narration/cup/352_2-bento-tamagoyaki.mp3": {
+  "date-beta/voice/narration/naan/328_1.mp3": {
+   "audioMs": 3500,
+   "holdMs": 3850
+  },
+  "date-beta/voice/narration/naan/329_1-food-butter.mp3": {
+   "audioMs": 3657,
+   "holdMs": 4007
+  },
+  "date-beta/voice/narration/platform/330_0.mp3": {
+   "audioMs": 3657,
+   "holdMs": 4007
+  },
+  "date-beta/voice/narration/platform/331_1.mp3": {
+   "audioMs": 3265,
+   "holdMs": 3615
+  },
+  "date-beta/voice/narration/platform/332_2.mp3": {
    "audioMs": 4467,
    "holdMs": 4817
   },
-  "date-beta/voice/narration/cup/353_3.mp3": {
-   "audioMs": 1593,
-   "holdMs": 1943
+  "date-beta/voice/narration/station-talk/333_2.mp3": {
+   "audioMs": 3344,
+   "holdMs": 3694
   },
-  "date-beta/voice/narration/steeped/354_3.mp3": {
-   "audioMs": 5407,
-   "holdMs": 5757
+  "date-beta/voice/narration/station-talk/334_2-run-2.mp3": {
+   "audioMs": 7419,
+   "holdMs": 7769
   },
-  "date-beta/voice/narration/steeped/355_4.mp3": {
-   "audioMs": 862,
-   "holdMs": 1212
+  "date-beta/voice/narration/station-talk/335_2-run-3.mp3": {
+   "audioMs": 3997,
+   "holdMs": 4347
   },
-  "date-beta/voice/narration/unknown/356_0.mp3": {
-   "audioMs": 2612,
-   "holdMs": 2962
-  },
-  "date-beta/voice/narration/unknown/357_1.mp3": {
-   "audioMs": 4049,
-   "holdMs": 4399
-  },
-  "date-beta/voice/narration/unknown/358_2.mp3": {
-   "audioMs": 4153,
-   "holdMs": 4503
-  },
-  "date-beta/voice/narration/unknown/359_4.mp3": {
-   "audioMs": 3318,
-   "holdMs": 3668
-  },
-  "date-beta/voice/narration/escape/360_0.mp3": {
-   "audioMs": 6191,
-   "holdMs": 6541
-  },
-  "date-beta/voice/narration/escape/361_1.mp3": {
-   "audioMs": 4441,
-   "holdMs": 4791
-  },
-  "date-beta/voice/narration/escape/362_2.mp3": {
-   "audioMs": 3553,
-   "holdMs": 3903
-  },
-  "date-beta/voice/narration/escape/363_3.mp3": {
-   "audioMs": 4284,
-   "holdMs": 4634
-  },
-  "date-beta/voice/narration/escape/364_4.mp3": {
-   "audioMs": 2482,
-   "holdMs": 2832
-  },
-  "date-beta/voice/narration/escape/365_5.mp3": {
-   "audioMs": 4101,
-   "holdMs": 4451
-  },
-  "date-beta/voice/narration/escape/366_6-bento-umeboshi.mp3": {
-   "audioMs": 5224,
-   "holdMs": 5574
-  },
-  "date-beta/voice/narration/escape/367_6-bento-tamagoyaki.mp3": {
-   "audioMs": 4650,
-   "holdMs": 5000
-  },
-  "date-beta/voice/narration/escape/368_12.mp3": {
-   "audioMs": 4153,
-   "holdMs": 4503
-  },
-  "date-beta/voice/narration/escape/369_13.mp3": {
-   "audioMs": 5355,
-   "holdMs": 5705
-  },
-  "date-beta/voice/narration/escape-win/370_0.mp3": {
-   "audioMs": 2351,
-   "holdMs": 2701
-  },
-  "date-beta/voice/narration/escape-win/371_6.mp3": {
-   "audioMs": 4336,
-   "holdMs": 4686
-  },
-  "date-beta/voice/narration/escape-win/372_7.mp3": {
-   "audioMs": 940,
-   "holdMs": 1290
-  },
-  "date-beta/voice/narration/escape-timeout/373_0.mp3": {
-   "audioMs": 2482,
-   "holdMs": 2832
-  },
-  "date-beta/voice/narration/escape-timeout/374_2.mp3": {
-   "audioMs": 2717,
-   "holdMs": 3067
-  },
-  "date-beta/voice/narration/escape-timeout/375_3-bento-umeboshi.mp3": {
-   "audioMs": 2795,
-   "holdMs": 3145
-  },
-  "date-beta/voice/narration/escape-timeout/376_3-bento-tamagoyaki.mp3": {
-   "audioMs": 2717,
-   "holdMs": 3067
-  },
-  "date-beta/voice/narration/escape-timeout/377_7.mp3": {
-   "audioMs": 940,
-   "holdMs": 1290
-  },
-  "date-beta/voice/narration/leave/378_1.mp3": {
-   "audioMs": 2325,
-   "holdMs": 2675
-  },
-  "date-beta/voice/narration/leave-fu/379_0.mp3": {
-   "audioMs": 4389,
-   "holdMs": 4739
-  },
-  "date-beta/voice/narration/leave-fu/380_2.mp3": {
-   "audioMs": 1515,
-   "holdMs": 1865
-  },
-  "date-beta/voice/narration/leave-fu/381_3.mp3": {
-   "audioMs": 2011,
-   "holdMs": 2361
-  },
-  "date-beta/voice/narration/leave-fu/382_4.mp3": {
-   "audioMs": 862,
-   "holdMs": 1212
-  },
-  "date-beta/voice/narration/leave-yeah/383_2.mp3": {
-   "audioMs": 1829,
-   "holdMs": 2179
-  },
-  "date-beta/voice/narration/leave-yeah/384_3.mp3": {
-   "audioMs": 1881,
-   "holdMs": 2231
-  },
-  "date-beta/voice/narration/leave-yeah/385_4.mp3": {
-   "audioMs": 6191,
-   "holdMs": 6541
-  },
-  "date-beta/voice/narration/leave-yeah/386_5.mp3": {
-   "audioMs": 862,
-   "holdMs": 1212
-  },
-  "date-beta/voice/narration/seq-butter/387_0.mp3": {
-   "audioMs": 6949,
-   "holdMs": 7299
-  },
-  "date-beta/voice/narration/seq-butter/388_2.mp3": {
-   "audioMs": 6139,
-   "holdMs": 6489
-  },
-  "date-beta/voice/narration/seq-butter/389_5.mp3": {
-   "audioMs": 3918,
-   "holdMs": 4268
-  },
-  "date-beta/voice/narration/seq-butter/390_6.mp3": {
-   "audioMs": 4153,
-   "holdMs": 4503
-  },
-  "date-beta/voice/narration/seq-katsu/391_0.mp3": {
-   "audioMs": 5721,
-   "holdMs": 6071
-  },
-  "date-beta/voice/narration/seq-katsu/392_2.mp3": {
-   "audioMs": 4885,
-   "holdMs": 5235
-  },
-  "date-beta/voice/narration/seq-katsu/393_5.mp3": {
-   "audioMs": 4441,
-   "holdMs": 4791
-  },
-  "date-beta/voice/narration/seq-katsu/394_6.mp3": {
-   "audioMs": 4624,
-   "holdMs": 4974
-  },
-  "date-beta/voice/narration/seq-station/395_0.mp3": {
-   "audioMs": 5538,
-   "holdMs": 5888
-  },
-  "date-beta/voice/narration/seq-station/396_1.mp3": {
-   "audioMs": 6296,
-   "holdMs": 6646
-  },
-  "date-beta/voice/narration/seq-station/397_3.mp3": {
-   "audioMs": 3918,
-   "holdMs": 4268
-  },
-  "date-beta/voice/narration/v2-train/398_3.mp3": {
-   "audioMs": 2612,
-   "holdMs": 2962,
-   "marks": {
-    "They laugh.": 1660
-   }
-  },
-  "date-beta/voice/narration/v2-rain/399_4.mp3": {
+  "date-beta/voice/narration/rain-crossing/336_0.mp3": {
    "audioMs": 5590,
    "holdMs": 5940
   },
+  "date-beta/voice/narration/rain-crossing/337_2.mp3": {
+   "audioMs": 5669,
+   "holdMs": 6019
+  },
+  "date-beta/voice/narration/rain-crossing/338_6.mp3": {
+   "audioMs": 1515,
+   "holdMs": 1865
+  },
+  "date-beta/voice/narration/underpass/339_0.mp3": {
+   "audioMs": 3892,
+   "holdMs": 4242
+  },
+  "date-beta/voice/narration/walk-home/340_0.mp3": {
+   "audioMs": 4859,
+   "holdMs": 5209
+  },
+  "date-beta/voice/narration/walk-home/341_2.mp3": {
+   "audioMs": 4310,
+   "holdMs": 4660
+  },
+  "date-beta/voice/narration/walk-home/342_5.mp3": {
+   "audioMs": 6557,
+   "holdMs": 6907
+  },
+  "date-beta/voice/narration/walk-home/343_7.mp3": {
+   "audioMs": 1672,
+   "holdMs": 2022
+  },
+  "date-beta/voice/narration/apartment/344_0.mp3": {
+   "audioMs": 2952,
+   "holdMs": 3302
+  },
+  "date-beta/voice/narration/genkan-in/345_0.mp3": {
+   "audioMs": 3265,
+   "holdMs": 3615
+  },
+  "date-beta/voice/narration/genkan-in/346_1.mp3": {
+   "audioMs": 2795,
+   "holdMs": 3145
+  },
+  "date-beta/voice/narration/genkan-in/347_2.mp3": {
+   "audioMs": 4310,
+   "holdMs": 4660
+  },
+  "date-beta/voice/narration/genkan-talk/348_4.mp3": {
+   "audioMs": 5904,
+   "holdMs": 6254
+  },
+  "date-beta/voice/narration/genkan-talk/349_5.mp3": {
+   "audioMs": 5016,
+   "holdMs": 5366
+  },
+  "date-beta/voice/narration/cup/350_0.mp3": {
+   "audioMs": 5590,
+   "holdMs": 5940
+  },
+  "date-beta/voice/narration/cup/351_2-bento-umeboshi.mp3": {
+   "audioMs": 5094,
+   "holdMs": 5444
+  },
+  "date-beta/voice/narration/cup/352_2-bento-tamagoyaki.mp3": {
+   "audioMs": 4859,
+   "holdMs": 5209
+  },
+  "date-beta/voice/narration/cup/353_3.mp3": {
+   "audioMs": 1829,
+   "holdMs": 2179
+  },
+  "date-beta/voice/narration/steeped/354_3.mp3": {
+   "audioMs": 6060,
+   "holdMs": 6410
+  },
+  "date-beta/voice/narration/steeped/355_4.mp3": {
+   "audioMs": 1176,
+   "holdMs": 1526
+  },
+  "date-beta/voice/narration/unknown/356_0.mp3": {
+   "audioMs": 2873,
+   "holdMs": 3223
+  },
+  "date-beta/voice/narration/unknown/357_1.mp3": {
+   "audioMs": 4310,
+   "holdMs": 4660
+  },
+  "date-beta/voice/narration/unknown/358_2.mp3": {
+   "audioMs": 4545,
+   "holdMs": 4895
+  },
+  "date-beta/voice/narration/unknown/359_4.mp3": {
+   "audioMs": 3892,
+   "holdMs": 4242
+  },
+  "date-beta/voice/narration/escape/360_0.mp3": {
+   "audioMs": 7184,
+   "holdMs": 7534
+  },
+  "date-beta/voice/narration/escape/361_1.mp3": {
+   "audioMs": 4545,
+   "holdMs": 4895
+  },
+  "date-beta/voice/narration/escape/362_2.mp3": {
+   "audioMs": 3997,
+   "holdMs": 4347
+  },
+  "date-beta/voice/narration/escape/363_3.mp3": {
+   "audioMs": 5094,
+   "holdMs": 5444
+  },
+  "date-beta/voice/narration/escape/364_4.mp3": {
+   "audioMs": 2795,
+   "holdMs": 3145
+  },
+  "date-beta/voice/narration/escape/365_5.mp3": {
+   "audioMs": 4937,
+   "holdMs": 5287
+  },
+  "date-beta/voice/narration/escape/366_6-bento-umeboshi.mp3": {
+   "audioMs": 6139,
+   "holdMs": 6489
+  },
+  "date-beta/voice/narration/escape/367_6-bento-tamagoyaki.mp3": {
+   "audioMs": 6217,
+   "holdMs": 6567
+  },
+  "date-beta/voice/narration/escape/368_12.mp3": {
+   "audioMs": 4937,
+   "holdMs": 5287
+  },
+  "date-beta/voice/narration/escape/369_13.mp3": {
+   "audioMs": 7340,
+   "holdMs": 7690
+  },
+  "date-beta/voice/narration/escape-win/370_0.mp3": {
+   "audioMs": 2220,
+   "holdMs": 2570
+  },
+  "date-beta/voice/narration/escape-win/371_6.mp3": {
+   "audioMs": 5512,
+   "holdMs": 5862
+  },
+  "date-beta/voice/narration/escape-win/372_7.mp3": {
+   "audioMs": 1097,
+   "holdMs": 1447
+  },
+  "date-beta/voice/narration/escape-timeout/373_0.mp3": {
+   "audioMs": 3109,
+   "holdMs": 3459
+  },
+  "date-beta/voice/narration/escape-timeout/374_2.mp3": {
+   "audioMs": 3265,
+   "holdMs": 3615
+  },
+  "date-beta/voice/narration/escape-timeout/375_3-bento-umeboshi.mp3": {
+   "audioMs": 3109,
+   "holdMs": 3459
+  },
+  "date-beta/voice/narration/escape-timeout/376_3-bento-tamagoyaki.mp3": {
+   "audioMs": 3109,
+   "holdMs": 3459
+  },
+  "date-beta/voice/narration/escape-timeout/377_7.mp3": {
+   "audioMs": 1019,
+   "holdMs": 1369
+  },
+  "date-beta/voice/narration/leave/378_1.mp3": {
+   "audioMs": 2873,
+   "holdMs": 3223
+  },
+  "date-beta/voice/narration/leave-fu/379_0.mp3": {
+   "audioMs": 5172,
+   "holdMs": 5522
+  },
+  "date-beta/voice/narration/leave-fu/380_2.mp3": {
+   "audioMs": 2377,
+   "holdMs": 2727
+  },
+  "date-beta/voice/narration/leave-fu/381_3.mp3": {
+   "audioMs": 3265,
+   "holdMs": 3615
+  },
+  "date-beta/voice/narration/leave-fu/382_4.mp3": {
+   "audioMs": 940,
+   "holdMs": 1290
+  },
+  "date-beta/voice/narration/leave-yeah/383_2.mp3": {
+   "audioMs": 2299,
+   "holdMs": 2649
+  },
+  "date-beta/voice/narration/leave-yeah/384_3.mp3": {
+   "audioMs": 3265,
+   "holdMs": 3615
+  },
+  "date-beta/voice/narration/leave-yeah/385_4.mp3": {
+   "audioMs": 6296,
+   "holdMs": 6646
+  },
+  "date-beta/voice/narration/leave-yeah/386_5.mp3": {
+   "audioMs": 940,
+   "holdMs": 1290
+  },
+  "date-beta/voice/narration/seq-butter/387_0.mp3": {
+   "audioMs": 7654,
+   "holdMs": 8004
+  },
+  "date-beta/voice/narration/seq-butter/388_2.mp3": {
+   "audioMs": 7105,
+   "holdMs": 7455
+  },
+  "date-beta/voice/narration/seq-butter/389_5.mp3": {
+   "audioMs": 4310,
+   "holdMs": 4660
+  },
+  "date-beta/voice/narration/seq-butter/390_6.mp3": {
+   "audioMs": 5355,
+   "holdMs": 5705
+  },
+  "date-beta/voice/narration/seq-katsu/391_0.mp3": {
+   "audioMs": 6139,
+   "holdMs": 6489
+  },
+  "date-beta/voice/narration/seq-katsu/392_2.mp3": {
+   "audioMs": 5433,
+   "holdMs": 5783
+  },
+  "date-beta/voice/narration/seq-katsu/393_5.mp3": {
+   "audioMs": 5094,
+   "holdMs": 5444
+  },
+  "date-beta/voice/narration/seq-katsu/394_6.mp3": {
+   "audioMs": 5433,
+   "holdMs": 5783
+  },
+  "date-beta/voice/narration/seq-station/395_0.mp3": {
+   "audioMs": 5904,
+   "holdMs": 6254
+  },
+  "date-beta/voice/narration/seq-station/396_1.mp3": {
+   "audioMs": 6635,
+   "holdMs": 6985
+  },
+  "date-beta/voice/narration/seq-station/397_3.mp3": {
+   "audioMs": 4389,
+   "holdMs": 4739
+  },
+  "date-beta/voice/narration/v2-train/398_3.mp3": {
+   "audioMs": 3109,
+   "holdMs": 3459,
+   "marks": {
+    "They laugh.": 2000
+   }
+  },
+  "date-beta/voice/narration/v2-rain/399_4.mp3": {
+   "audioMs": 5669,
+   "holdMs": 6019
+  },
   "date-beta/voice/narration/v2-shop/400_0.mp3": {
-   "audioMs": 9300,
-   "holdMs": 9650
+   "audioMs": 9744,
+   "holdMs": 10094
   },
   "date-beta/voice/narration/v2-curry/401_13.mp3": {
-   "audioMs": 6949,
-   "holdMs": 7299
+   "audioMs": 7105,
+   "holdMs": 7455
   },
   "date-beta/voice/narration/v2-train/402_1.mp3": {
-   "audioMs": 2847,
-   "holdMs": 3197
+   "audioMs": 3657,
+   "holdMs": 4007
   },
   "date-beta/voice/03-v2-shop/403_2.mp3": {
-   "audioMs": 9979,
-   "holdMs": 10329
+   "audioMs": 8464,
+   "holdMs": 8814
+  },
+  "date-beta/voice/30-leave/212_0.mp3": {
+   "audioMs": 2142,
+   "holdMs": 2492
+  },
+  "date-beta/voice/30-leave/213_2.mp3": {
+   "audioMs": 2064,
+   "holdMs": 2414
+  },
+  "date-beta/voice/30-leave/214_2-r.mp3": {
+   "audioMs": 3892,
+   "holdMs": 4242
+  },
+  "date-beta/voice/30-leave/215_2-r.mp3": {
+   "audioMs": 2534,
+   "holdMs": 2884
+  },
+  "date-beta/voice/30-leave/216_2-r.mp3": {
+   "audioMs": 1829,
+   "holdMs": 2179
+  },
+  "date-beta/voice/30-leave/217_3.mp3": {
+   "audioMs": 3500,
+   "holdMs": 3850
+  },
+  "date-beta/voice/31-leave-fu/219_1.mp3": {
+   "audioMs": 3344,
+   "holdMs": 3694
+  },
+  "date-beta/voice/32-leave-yeah/220_0.mp3": {
+   "audioMs": 3265,
+   "holdMs": 3615
+  },
+  "date-beta/voice/32-leave-yeah/221_1.mp3": {
+   "audioMs": 1672,
+   "holdMs": 2022
+  },
+  "date-beta/voice/29-escape-timeout/208_4-u.mp3": {
+   "audioMs": 2456,
+   "holdMs": 2806
+  },
+  "date-beta/voice/29-escape-timeout/209_4-t.mp3": {
+   "audioMs": 2142,
+   "holdMs": 2492
+  },
+  "date-beta/voice/03-v2-shop/411_4-r.mp3": {
+   "audioMs": 4702,
+   "holdMs": 5052
+  },
+  "date-beta/voice/03-v2-shop/412_4-r.mp3": {
+   "audioMs": 3657,
+   "holdMs": 4007
+  },
+  "date-beta/voice/03-v2-shop/413_4-r.mp3": {
+   "audioMs": 3657,
+   "holdMs": 4007
+  },
+  "date-beta/voice/37-v2-town/406_1.mp3": {
+   "audioMs": 3500,
+   "holdMs": 3850
+  },
+  "date-beta/voice/37-v2-town/407_2.mp3": {
+   "audioMs": 5094,
+   "holdMs": 5444
+  },
+  "date-beta/voice/37-v2-town/408_3.mp3": {
+   "audioMs": 5590,
+   "holdMs": 5940
+  },
+  "date-beta/voice/37-v2-town/409_4.mp3": {
+   "audioMs": 3997,
+   "holdMs": 4347
+  },
+  "date-beta/voice/05-v2-curry/410_7.mp3": {
+   "audioMs": 5094,
+   "holdMs": 5444
+  },
+  "date-beta/voice/09-v2-home/414_4-r.mp3": {
+   "audioMs": 3814,
+   "holdMs": 4164
+  },
+  "date-beta/voice/38-unknown/415_1-r.mp3": {
+   "audioMs": 2299,
+   "holdMs": 2649
+  },
+  "date-beta/voice/38-unknown/416_1-r.mp3": {
+   "audioMs": 4780,
+   "holdMs": 5130
+  },
+  "date-beta/voice/38-unknown/417_4-r.mp3": {
+   "audioMs": 4075,
+   "holdMs": 4425
+  },
+  "date-beta/voice/38-unknown/418_4-r.mp3": {
+   "audioMs": 3579,
+   "holdMs": 3929
+  },
+  "date-beta/voice/39-escape/419_0-r.mp3": {
+   "audioMs": 1829,
+   "holdMs": 2179
+  },
+  "date-beta/voice/39-escape/420_0-r.mp3": {
+   "audioMs": 3500,
+   "holdMs": 3850
+  },
+  "date-beta/voice/39-escape/421_5-r.mp3": {
+   "audioMs": 1985,
+   "holdMs": 2335
+  },
+  "date-beta/voice/39-escape/422_5-r.mp3": {
+   "audioMs": 2795,
+   "holdMs": 3145
+  },
+  "date-beta/voice/30-leave/404_3-r.mp3": {
+   "audioMs": 3500,
+   "holdMs": 3850
+  },
+  "date-beta/voice/30-leave/405_3-r.mp3": {
+   "audioMs": 4467,
+   "holdMs": 4817
   }
  }
 }

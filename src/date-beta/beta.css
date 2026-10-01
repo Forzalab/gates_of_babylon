@@ -116,12 +116,21 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-paused { position: absolute; top: 40px; left: 50%; transform: translateX(-50%); padding: 8px 20px; background: #000a; color: #fff; font: 700 32px/1 var(--cond, sans-serif); }
 .db-choice:disabled { opacity: 0.4; cursor: not-allowed; }
 
-/* ---------- debug branch map (~ or ?debug). Own 1920x1080 layer, scaled like the stage. ---------- */
-.db-tree { position: fixed; inset: 0; z-index: 50; background: rgba(26, 7, 16, .94); cursor: default; }
-.db-tree-stage { position: absolute; left: 50%; top: 50%; width: 1920px; height: 1080px; transform-origin: 50% 50%; }
-.db-tree-head { position: absolute; left: 60px; right: 60px; top: 40px; display: flex; align-items: center; gap: 24px; }
+/* ---------- debug branch map (~ or ?debug). Opaque layer: a fixed header (zoomed like the stage) over a pannable
+   canvas (scroll or drag; Fit / - / + / 100%). Boxes are drawn at the exact sizes debug.js layout() gives them. ---------- */
+.db-tree { position: fixed; inset: 0; z-index: 50; background: #1a0710; cursor: default; display: flex; flex-direction: column; }
+.db-tree-head { flex: none; display: flex; flex-wrap: wrap; align-items: center; gap: 14px 22px; padding: 26px 60px 18px;
+  background: #1a0710; border-bottom: 3px solid rgba(255, 233, 241, .18); position: relative; z-index: 3; }
 .db-tree-head h2 { margin: 0 auto 0 0; font: 700 44px/1 var(--cond); letter-spacing: .14em; color: var(--scrim-ink); }
-.db-tree-picks { display: flex; gap: 10px; }
+.db-tree-picks { display: flex; flex-wrap: wrap; gap: 10px; }
+.db-tree-zoom { display: flex; align-items: center; gap: 8px; }
+.db-tree-zoom output { min-width: 3.4em; text-align: center; font: 700 22px/1 var(--mono); color: rgba(255, 233, 241, .7); }
+.db-tree-pan { flex: 1; min-height: 0; overflow: auto; cursor: grab; position: relative; }
+.db-tree-pan.dragging { cursor: grabbing; user-select: none; }
+.db-tree-canvas { position: relative; transform-origin: 0 0; }
+.db-tree-lane { position: absolute; left: 0; right: 0; border-top: 3px dashed rgba(255, 233, 241, .25); background: rgba(255, 233, 241, .04); }
+.db-tree-lane span { position: absolute; left: 60px; top: 18px; font: 700 26px/1 var(--cond); letter-spacing: .14em; text-transform: uppercase;
+  color: rgba(255, 233, 241, .55); }
 .db-tree-chip { padding: 8px 16px; border-radius: 999px; background: var(--box); color: var(--box-ink); font: 700 22px/1 var(--mono); }
 .db-tree-chip.off { background: none; color: rgba(255, 233, 241, .5); border: 2px dashed rgba(255, 233, 241, .3); }
 .db-remember { display: flex; align-items: center; gap: 10px; font: 700 24px/1 var(--cond); color: var(--scrim-ink); cursor: pointer; }
@@ -129,23 +138,27 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-tree-btn { padding: 12px 22px; border-radius: 999px; border: 3px solid var(--g-rim); background: var(--g-dark); color: var(--scrim-ink);
   font: 700 24px/1 var(--cond); letter-spacing: .04em; cursor: pointer; }
 .db-tree-btn:hover, .db-tree-btn:focus-visible, .db-remember:focus-within { outline: 4px solid var(--pink); outline-offset: 4px; }
-.db-tree-hint { position: absolute; left: 60px; top: 108px; margin: 0; font: 400 24px/1 var(--cond); color: rgba(255, 233, 241, .7); }
-.db-tree-lines { position: absolute; inset: 0; pointer-events: none; }
+.db-tree-hint { flex: 1 1 900px; margin: 0; font: 400 22px/1.1 var(--cond); color: rgba(255, 233, 241, .7); }
+.db-tree-lines { position: absolute; left: 0; top: 0; pointer-events: none; overflow: visible; }
 .db-tree-lines path { fill: none; stroke: rgba(255, 233, 241, .35); stroke-width: 3; }
-.db-tree-lines path.br { stroke-width: 5; }
+.db-tree-lines path.spine { stroke: rgba(255, 233, 241, .22); }
+.db-tree-lines path.br { stroke-width: 4; opacity: .8; }
 .db-tree-lines path.br.pink { stroke: var(--pink); }
 .db-tree-lines path.br.purple { stroke: var(--purple); }
-.db-tree-node { position: absolute; transform: translate(-50%, -50%); padding: 11px 18px; border-radius: 999px; white-space: nowrap;
-  background: var(--g-dark); color: var(--scrim-ink); border: 3px solid rgba(255, 233, 241, .55); font: 400 18px/1.1 var(--mono);
-  text-align: center; z-index: 1; }
-.db-tree-node.here { border-color: var(--or-on-dark); box-shadow: 0 0 0 5px rgba(255, 107, 125, .35); }
-.db-tree-edge { position: absolute; transform: translate(-50%, -50%); z-index: 2; max-width: 142px; padding: 7px 14px 8px; border: 0;
-  border-radius: 999px; cursor: pointer; text-align: center; color: #fff; font: 900 17px/1.1 var(--btn); text-shadow: var(--g-ring);
+.db-tree-lines path.legacy { opacity: .35; }
+.db-tree-node, .db-tree-edge { position: absolute; box-sizing: border-box; white-space: nowrap; display: flex; align-items: center; justify-content: center; }
+.db-tree-node { padding: 0 18px; border-radius: 999px; background: var(--g-dark); color: var(--scrim-ink);
+  border: 3px solid rgba(255, 233, 241, .55); font: 400 18px/1 var(--mono); z-index: 1; }
+.db-tree-node.here { border-color: var(--or-on-dark); box-shadow: 0 0 0 5px rgba(255, 107, 125, .35); background: #4a1030; }
+.db-tree-edge { z-index: 2; padding: 0 16px 2px; border: 0;
+  border-radius: 999px; cursor: pointer; color: #fff; font: 900 17px/1 var(--btn); text-shadow: var(--g-ring);
   background: var(--g-pink); box-shadow: inset 0 0 0 2px var(--g-pink-edge), 0 0 0 4px var(--g-rim), 0 5px 0 3px var(--g-rim-edge); }
 .db-tree-edge.purple { background: var(--g-purple); box-shadow: inset 0 0 0 2px var(--g-purple-edge), 0 0 0 4px var(--g-rim), 0 5px 0 3px var(--g-rim-edge); }
-.db-tree-edge:hover, .db-tree-edge:focus-visible { outline: 4px solid var(--or-on-dark); outline-offset: 6px; }
-.db-tree-edge:active { transform: translate(-50%, calc(-50% + 3px)); filter: brightness(.9); }
-.db-ask-scrim { position: absolute; inset: 0; z-index: 5; background: rgba(26, 7, 16, .6); display: grid; place-items: center; }
+.db-tree-edge:hover, .db-tree-edge:focus-visible { outline: 4px solid var(--or-on-dark); outline-offset: 6px; z-index: 3; }
+.db-tree-edge:active { transform: translateY(3px); filter: brightness(.9); }
+.db-tree-node.legacy, .db-tree-edge.legacy { opacity: .5; }
+.db-tree-edge.legacy:hover, .db-tree-edge.legacy:focus-visible { opacity: 1; }
+.db-ask-scrim { position: fixed; inset: 0; z-index: 5; background: rgba(26, 7, 16, .6); display: grid; place-items: center; }
 .db-ask { width: 1180px; padding: 56px 72px 48px; border: 5px solid var(--rim); border-radius: 18px; background: var(--box); color: var(--box-ink);
   box-shadow: inset 0 0 0 3px #fff, 0 10px 0 var(--edge); display: grid; justify-items: center; gap: 30px; }
 .db-ask-kicker { margin: 0; font: 700 28px/1 var(--cond); letter-spacing: .12em; text-transform: uppercase; color: var(--magenta); }
@@ -160,7 +173,9 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-nanda.raised { bottom: 470px; }
 /* R5: lifted over a choice box with no floor under her, her legs would dangle in the air: the frame crops her at the
    skirt instead (a soft fade), so she reads as a waist-up shot, never as floating. Floored / planted beats keep legs. */
-.db-nanda.raised:not(.floored):not(.planted) { -webkit-mask-image: linear-gradient(to bottom, #000 77.6%, transparent 78%); mask-image: linear-gradient(to bottom, #000 77.6%, transparent 78%); }
+/* M2 leave audit: a fixed 470 fit the 2-line box only; over a 1-line box the cut hem hung ~56 px above it = floating.
+   Now the hem (77.6% of 496 = 385 px down) sits 14 px behind the box's top edge (--boxtop, main.jsx): 1080 - top - 14 - 111. */
+.db-nanda.raised:not(.floored):not(.planted) { bottom: calc(955px - var(--boxtop, 485px)); -webkit-mask-image: linear-gradient(to bottom, #000 77.6%, transparent 78%); mask-image: linear-gradient(to bottom, #000 77.6%, transparent 78%); }
 /* props.cut.plant = px she is lowered from her default spot (explicit, per beat). .floored = the per-bg / per-insert floor
    line (art/floors.js, --floor = stage y of the ground at her column): her feet sit ON it whatever the box does.
    .db-plant = her contact shadow, GLOBAL (research/sprint-0930/town/SHADOWS.md, float-audit/REPORT.md): straight under her

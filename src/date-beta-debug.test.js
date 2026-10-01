@@ -1,7 +1,8 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { loadScenes, jumpTo, beatAt, beatView } from './date-beta/engine.js';
+import { loadScenes, jumpTo, beatAt, beatView, routeTo } from './date-beta/engine.js';
+import { applyPacks } from './date-beta/packs/index.js';
 import { graph, layout, prereqs, missing, schemaHash, storeKey, loadPicks, savePicks, createSession, bootDebug, LAYOUT } from './date-beta/debug.js';
 import data from './date-beta/scenes.json' with { type: 'json' };
 
@@ -35,18 +36,42 @@ test('debug: edge snapshot', () => {
     'leave.2.0>leave-fu:choice', 'leave.2.1>leave-fu:choice', 'leave.3.0>leave-yeah:branch', 'leave.3.1>leave-fu:branch', 'leave-fu.4.0>rooftop:back', 'leave-yeah.4.0>rooftop:back']);
 });
 
-test('debug: layout keeps every node and edge pill inside 1920x1080, columns follow the longest path', () => {
+// Was "inside 1920x1080": the map is now a pannable canvas sized to the script, so the rule is "inside L.W x L.H and
+// no two boxes (scene nodes + pills) overlap", checked on the base script and on the full play script (all packs).
+const PLAY = /const PLAY = \[([^\]]+)\]/.exec(readFileSync(new URL('./date-beta/main.jsx', import.meta.url), 'utf8'))[1].match(/'([\w-]+)'/g).map((s) => s.slice(1, -1));
+const readJson = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
+const FULL = loadScenes(applyPacks(readJson('./date-beta/scenes.json'), PLAY.map((n) => ({ name: n, ...readJson(`./date-beta/packs/${n}.json`) }))));
+const legacyOf = (sc) => new Set(sc.filter((_, i) => i > 0 && !routeTo(sc, i).length).map((x) => x.id));
+function boxesOk(L, label) {
+  const boxes = [...Object.entries(L.pos), ...Object.entries(L.pills)];
+  for (const [id, p] of boxes) {
+    assert.ok(p.x - p.w / 2 >= 0 && p.x + p.w / 2 <= L.W && p.y - p.h / 2 >= 0 && p.y + p.h / 2 <= L.H, `${label}: ${id} outside`);
+  }
+  for (let i = 0; i < boxes.length; i++) for (let j = i + 1; j < boxes.length; j++) {
+    const [a, p] = boxes[i], [b, q] = boxes[j];
+    const apart = p.x + p.w / 2 <= q.x - q.w / 2 || q.x + q.w / 2 <= p.x - p.w / 2 || p.y + p.h / 2 <= q.y - q.h / 2 || q.y + q.h / 2 <= p.y - p.h / 2;
+    assert.ok(apart, `${label}: ${a} overlaps ${b}`);
+  }
+}
+test('debug: layout boxes stay on the canvas and never overlap, columns follow the longest path', () => {
   const L = layout(G);
   assert.equal(L.pos.rooftop.col, 0);
   assert.equal(L.pos.door.col, 7);
   assert.ok(L.pos['escape-timeout'].col > L.pos.escape.col);
-  for (const [id, p] of Object.entries(L.pos)) {
-    assert.ok(p.x - p.w / 2 >= 0 && p.x + p.w / 2 <= LAYOUT.W, `${id} x ${p.x}`);
-    assert.ok(p.y - 25 >= LAYOUT.top && p.y + 25 <= LAYOUT.H, `${id} y ${p.y}`);
-  }
-  const all = Object.entries(L.pos);
-  for (const [a, p] of all) for (const [b, q] of all) {
-    if (a < b && Math.abs(p.y - q.y) < 50) assert.ok(p.x + p.w / 2 <= q.x - q.w / 2 || q.x + q.w / 2 <= p.x - p.w / 2, `${a} overlaps ${b}`);
+  assert.equal(Object.keys(L.pills).length, G.edges.filter((e) => e.branching && e.to).length, 'one pill per branching edge');
+  boxesOk(L, 'base');
+  const g = graph(FULL), legacy = legacyOf(FULL);
+  const F = layout(g, LAYOUT, legacy);
+  boxesOk(F, 'full');
+  for (const id of legacy) assert.ok(F.pos[id].legacy && F.pos[id].y > F.lanes[0].bottom, `${id} sits in the legacy lane`);
+  for (const n of g.nodes) if (!legacy.has(n.id)) assert.ok(!F.pos[n.id].legacy && F.pos[n.id].y < F.lanes[0].bottom + 1, `${n.id} in the main lane`);
+});
+test('debug: a scene\'s pills sit in one column right under it', () => {
+  const L = layout(G);
+  for (const e of G.edges.filter((x) => x.branching && x.to)) {
+    const p = L.pills[e.id], n = L.pos[e.from];
+    assert.equal(p.x - p.w / 2, n.x - n.w / 2 + LAYOUT.indent, e.id);
+    assert.ok(p.y > n.y, e.id);
   }
 });
 

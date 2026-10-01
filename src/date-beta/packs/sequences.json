@@ -128,7 +128,7 @@
       { "sfx": "rain", "text": "Wide. Her street at night. One window lit. It's yours now.", "props": { "shot": "street-night-window" } }
     ] },
     { "scene": "leave-yeah", "beat": 4, "beats": [
-      { "sfx": "silence", "text": "Wide. The café. Every table has two cups. Every cup has your name.", "props": { "shot": "cafe-cups" } }
+      { "sfx": "silence", "text": "Wide. The café. Every table has two cups. Every cup has your name.", "props": { "shot": "cafe-cups", "cut": { "frame": "off", "sharp": true } } }
     ] }
   ]
 }

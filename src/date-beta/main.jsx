@@ -32,7 +32,7 @@ import { SHOT_ALIASES } from './art/shots/aliases.js';
 import { Handout, SmileTag, PovFood, PeekBento, useStep } from './SceneA.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
-import { setCrowd, bumpRun, runBucket, getRun, fill, storyStamp } from './meta.js';
+import { setCrowd, bumpRun, runBucket, getRun, fill, storyStamp, setSceneTime, stampAt, blind, shuffleOrder } from './meta.js';
 import { cardFor, failLine } from './endcard.js';
 import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
@@ -184,6 +184,25 @@ function Player() {
   const [ready, setReady] = useState(false); // the beat's hold (and its voice take) has passed (NEXT shows)
   const [vmuted, setVmuted] = useState(VOICE.muted);
   useEffect(() => VOICE.subscribe(setVmuted), []);
+  // M2 leave audit: --boxtop = the dialogue box's top edge (stage px). A waist-up Nanda on a choice beat (beta.css
+  // .raised, no floor) hangs her cut hem just behind it, so a 1-line box leaves no air under her and a 2-line box no face cut.
+  useEffect(() => {
+    const st = stageRef.current;
+    if (!st) return undefined;
+    const put = () => {
+      const box = st.querySelector('.db-say');
+      if (!box) return st.style.removeProperty('--boxtop');
+      const kk = st.getBoundingClientRect().height / 1080 || 1;
+      st.style.setProperty('--boxtop', `${Math.round((box.getBoundingClientRect().top - st.getBoundingClientRect().top) / kk)}px`);
+    };
+    const ro = new ResizeObserver(put);
+    let on = null; // the box being watched (a new beat remounts it)
+    const bind = () => { const b = st.querySelector('.db-say'); if (b === on) return; ro.disconnect(); on = b; if (b) ro.observe(b); put(); };
+    const mo = new MutationObserver(bind);
+    mo.observe(st, { childList: true, subtree: true });
+    bind();
+    return () => { ro.disconnect(); mo.disconnect(); };
+  }, []);
   // On a reaction frame the scene is the pick's scene, even when the pick already jumped on.
   const scene = SCENES[pos.react ? pos.react.s : pos.s];
   // The beat as this run sees it: the reaction frame, else the beat with `vary` overlays (bento echo) applied.
@@ -223,6 +242,12 @@ function Player() {
   const solo = !!(beat.choices?.length === 1 && !beat.choices[0].love && !tag && !handout && !beat.end && !GAME[beat.bg] && !beat.react);
   const off = !!scene.offstage; // she is in the house, not in the frame: no sprite, her lines are labelled from above
   const shown = useMemo(() => showLine(beat, off), [beat, off]);
+  // Blind run 1: no chips, choices in a seeded shuffled order; keys 1-9 follow the shown order (orderRef).
+  const isBlind = blind();
+  const nCh = beat.choices?.length ?? 0, seedNow = pos.luck?.seed ?? SEED;
+  const order = useMemo(() => (isBlind && nCh > 1 ? shuffleOrder(nCh, seedNow, `${beat.scene}:${beat.index}`) : null), [isBlind, nCh, seedNow, beat.scene, beat.index]);
+  const orderRef = useRef(order);
+  orderRef.current = order;
 
   // Meta loop (meta.js): each arrival at the first scene (boot or a loop back) is a new run; `run` feeds vary/if.
   const atFirst = !pos.done && pos.s === 0;
@@ -310,7 +335,7 @@ function Player() {
       else if (e.key === 'f' || e.key === 'F') toggleFull();
       else if (e.key === 'p' || e.key === 'P') setPaused((v) => !v);
       else if (e.key === 'm' || e.key === 'M') VOICE.setMuted(!VOICE.muted);
-      else if (/^[1-9]$/.test(e.key)) pick(+e.key - 1);
+      else if (/^[1-9]$/.test(e.key)) pick(orderRef.current?.[+e.key - 1] ?? +e.key - 1);
     };
     const onFull = () => setFull(!!document.fullscreenElement);
     addEventListener('keydown', onKey);
@@ -332,6 +357,8 @@ function Player() {
   const onNext = (waiting || solo) && ready && !card && !paused ? () => advance(true) : null;
   const say = !pos.done && !end && shown.parts.length > 0 && (!!beat.text || beat.wait === 'auto') && !GAME[beat.bg];
   const stampP = !pos.done && !end && beat.props?.shot === 'stamp' && beat.props.place ? beat.props : null;
+  const inForce = stampAt(SCENES, pos.react ? { ...pos, s: pos.react.s, b: pos.react.b } : pos); // a react line: the time where it was said
+  setSceneTime(inForce && !inForce.live ? inForce.time : null); // {TIME} = the stamp in force (set before Say renders, SLOP 1001 H5)
   const focus = !pos.done && !GAME[beat.bg] && !cut.sharp && !!(beat.text || beat.choices || card || end);
   // R5 focus plane (Tony 09-30, the HYBRID pick): when her feet stand on a visible floor, the ground around them stays
   // sharp (a floor band + an ellipse round her feet, soft edges), the rest of the bg blurs. Camera focus pulled to her.
@@ -366,7 +393,7 @@ function Player() {
         <div className="db-focus" aria-hidden="true" />
         {fplane ? <div className="db-fplane" style={{ '--fy': `${fplane}px` }} aria-hidden="true" /> : null}
         {!pos.done && !end && celOf(beat.props) && <Cel id={celOf(beat.props)} /> /* R5 cels over the blur (fx/Cels.jsx) */}
-        {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
+        {pop?.gacha && <EmotionFx gacha={pop.gacha} love={pop.love} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
         {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, ...castVars(flo.light) } : { '--plant': `${cut.plant}px`, ...castVars(flo.light) }} data-cast={flo.light ? 'lit' : undefined} aria-hidden="true" />}
@@ -384,10 +411,10 @@ function Player() {
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !shared && !(off && !end) && frame === 'medium'} under={(!!beat.props?.underUmbrella || shared) && !end} stageRef={stageRef} beatKey={rainKey} />}
         {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
-        {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}
+        {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} blind={isBlind} key={`h${beat.scene}${beat.index}`} />}
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
-          action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} /> : null} />}
-        {beat.choices && !tag && !handout && !solo && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} beatKey={`${beat.scene}:${beat.index}`} key={`c${beat.scene}${beat.index}`} />}
+          action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} blind={isBlind} /> : null} />}
+        {beat.choices && !tag && !handout && !solo && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} order={order} blind={isBlind} beatKey={`${beat.scene}:${beat.index}`} key={`c${beat.scene}${beat.index}`} />}
         {stampP && <div className="db-stamp" aria-hidden="true"><b>{stampP.place}</b><i>·</i><span>{stampP.live ? storyStamp(stampP.time) : stampP.time}</span></div>}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {rain && <WetGui level={rain} stageRef={stageRef} beatKey={rainKey} seed={beat.index + 1} />}

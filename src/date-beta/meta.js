@@ -1,5 +1,5 @@
 // meta.js (T3 META-LOOP): replay counter, live clock, and text tokens for date-beta.
-// Tokens: {RUN} {TIME} {DAYPART} {CLOTHES} {CROWD.1..4}. crowd.json is Tony-editable (CLOTHES, CROWD[4]).
+// Tokens: {RUN} {TIME} {NOW} {DAYPART} {CLOTHES} {CROWD.1..4}. crowd.json is Tony-editable (CLOTHES, CROWD[4]).
 // Run counter: localStorage "date-beta.run", bumped each time play reaches the first scene. ?run=N pins it (no writes).
 // Flag `run` (declared by packs/meta.json as ["1","2","3"]) = run bucket 1, 2, 3+ -> drives `vary` / `if`.
 // main.jsx hands crowd.json in via setCrowd (keeps this module plain JS for node --test).
@@ -8,6 +8,36 @@ import { TOKEN_RE } from './engine.js';
 export { TOKEN_RE };
 let crowd = { CLOTHES: 'outfit', CROWD: [] };
 export const setCrowd = (c) => { if (c && typeof c === 'object') crowd = c; };
+// {TIME} = the story's time: the last place/time stamp shown (main.jsx sets it), so a night scene never says the real
+// noon (SLOP 1001 H5). null (no stamp yet, or a live stamp) = the real clock. {NOW} = always the real clock: the
+// fourth-wall "I know the time" trick lines.
+let sceneTime = null;
+export const setSceneTime = (t) => { sceneTime = typeof t === 'string' && t ? t : null; };
+// The stamp in force at pos: the last stamp beat at or before it, walking back this scene and then the route (pos.path),
+// so a ?scene= jump or a replay loop gets the right time too; then file order. null = no stamp before pos.
+export function stampAt(scenes, pos) {
+  const ids = pos.path?.length ? pos.path : [scenes[pos.s]?.id];
+  for (let k = ids.length - 1; k >= 0; k--) {
+    const s = k === ids.length - 1 && scenes[pos.s]?.id === ids[k] ? pos.s : scenes.findIndex((x) => x.id === ids[k]);
+    if (s < 0) continue;
+    for (let b = s === pos.s ? Math.min(pos.b, scenes[s].beats.length - 1) : scenes[s].beats.length - 1; b >= 0; b--) {
+      const p = scenes[s].beats[b]?.props;
+      if (p?.shot === 'stamp' && p.place && p.time) return p;
+    }
+  }
+  // No stamp on the route (the old stamp-less scenes: door, station-talk, rain-crossing): a stamp whose place is this
+  // scene's chapter (STATION -> STATION 4:30 PM), else the nearest earlier stamp in file order.
+  const isStamp = (p) => p?.shot === 'stamp' && p.place && p.time;
+  const short = scenes[pos.s]?.short;
+  for (const sc of short ? scenes : []) for (const bt of sc.beats) if (isStamp(bt.props) && bt.props.place === short) return bt.props;
+  for (let s = Math.min(pos.s, scenes.length) - 1; s >= 0; s--) {
+    for (let b = scenes[s].beats.length - 1; b >= 0; b--) {
+      const p = scenes[s].beats[b]?.props;
+      if (p?.shot === 'stamp' && p.place && p.time) return p;
+    }
+  }
+  return null;
+}
 const KEY = 'date-beta.run';
 const store = () => { try { return globalThis.localStorage ?? null; } catch { return null; } };
 const qs = () => { try { return new URLSearchParams(globalThis.location?.search ?? ''); } catch { return new URLSearchParams(); } };
@@ -23,6 +53,19 @@ export function bumpRun() {
   run += 1;
   try { store()?.setItem(KEY, String(run)); } catch { /* private window: the counter lives in memory */ }
   return run;
+}
+
+// Blind run (Tony, Oct 1): run 1 hides the love chips and shuffles the choices so the numbers don't steer the first
+// play; replays (run 2+) bring the chips back in the authored order.
+export const blind = (n = getRun()) => n <= 1;
+// Shown order for n choices: a seeded Fisher-Yates (same seed + key = same order, so shots repeat). order[slot] = choice index.
+export function shuffleOrder(n, seed = 0, key = '') {
+  let h = (seed >>> 0) ^ 2166136261;
+  for (const ch of String(key)) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  const rnd = () => { h = (h + 0x6d2b79f5) | 0; let t = Math.imul(h ^ (h >>> 15), 1 | h); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const o = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
+  return o;
 }
 
 export function clock(d = new Date()) {
@@ -57,11 +100,12 @@ export function daypart(d = new Date()) {
 }
 
 // Fill every token in a display string. Unknown braces are left alone (the loader already rejected them).
-export function fill(text, { now = new Date(), n = getRun(), c = crowd } = {}) {
+export function fill(text, { now = new Date(), n = getRun(), c = crowd, time = sceneTime } = {}) {
   if (typeof text !== 'string' || !text.includes('{')) return text;
   return text.replace(TOKEN_RE, (m, k, off) => {
     if (k === 'RUN') return String(n);
-    if (k === 'TIME') return clock(now);
+    if (k === 'TIME') return time ?? clock(now);
+    if (k === 'NOW') return clock(now);
     if (k === 'DAYPART') return daypart(now);
     if (k === 'CLOTHES') return c.CLOTHES || 'outfit';
     const w = c.CROWD?.[+k.slice(6) - 1] || 'you';

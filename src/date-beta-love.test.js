@@ -248,7 +248,7 @@ test('love present: the bar and the sprite follow the scene flag; blackout beats
 test('love trail: done stops, here with beat pips, the shortest way to an ending; ?scene= fills the route before it', () => {
   const t = trail(S, start(S));
   assert.deepEqual(t.stops.map((x) => `${x.short}:${x.state}${x.end ? '♥' : ''}`),
-    ['ROOF:here', 'TRAIN:next', 'STATION:next', 'NIGHT:next', 'STATION:next', 'NIGHT:next', 'HER HOME:next', 'HER HOME:next', 'CAFÉ:next', 'END:next♥']);
+    ['ROOF:here', 'TRAIN:next', 'STATION:next', 'NIGHT:next', 'STATION:next', 'NIGHT:next', 'HER HOME:next', 'HER HOME:next', 'LEAVE:next', 'END:next♥']);
   assert.deepEqual([t.beat, t.beats], [0, 7]);
   const cup = startAt(S, { at: 'cup', beat: 2 });
   const c = trail(S, cup);
