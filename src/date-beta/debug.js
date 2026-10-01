@@ -2,7 +2,7 @@
 // graph(scenes)   -> nodes (scenes) + edges. A choice edge is `branching` when its beat's choices lead to different
 //                    scenes, or it sets a flag something reads (if / go.if / vary). Everything else is drawn thin and is
 //                    not clickable: fall-through, faux-pas picks (stay/leave: `stayed` is never read), Back to start.
-// layout(g)       -> x/y per node in the 1920x1080 stage. Column = longest path from the first scene, back-edges ignored.
+// layout(g, o, legacy) -> boxes for every scene node and branching pill on a canvas sized to the script (no overlaps).
 // prereqs(...)    -> the flags an edge's downstream reads that the edge does not set itself, in script order, each with
 //                    the options its setter choices offer. The UI asks for each one still unset.
 // storage         -> localStorage `dateBeta.debug.<schema hash>` = { remember, choices }. Only the tree reads it; a
@@ -80,40 +80,72 @@ export function graph(scenes) {
   return { nodes, edges, first };
 }
 
-// Longest-path columns (back-edges ignored), rows ordered by their parents' rows, all inside the stage.
-// Column gaps are sized to what sits in them: a gap a branching edge leaves from holds its pills (pill + air), a plain
-// gap only air. Node width is estimated from the id (mono chars). If the sum is wider than the stage, gaps shrink.
-export const LAYOUT = { W: 1920, H: 1080, top: 170, bottom: 60, side: 40, rowGap: 150, ch: 10.8, pad: 44, pill: 150, air: 28 };
+// A pannable canvas whose W x H grow with the script (no fixed stage). Columns = longest path from the first scene
+// (back-edges ignored). Each scene is a block: its node, then its branching pills stacked under it in one column, so
+// nodes and pills never share space. A block sits at its parents' mean y (the pill's own y when a pill leads there),
+// pushed down past the block above it. `legacy` (scenes the game cannot reach from scene 1) get their own lane under
+// the main map, on the same column grid. Box sizes are estimated from the text (mono ids, bold pill labels) and the
+// UI draws every box at exactly that size, so the estimate is the box.
+export const LAYOUT = { margin: 60, colGap: 150, laneGap: 150, blockGap: 36, nodeH: 48, pillH: 38, pillGap: 10, indent: 30,
+  ch: 10.8, pad: 44, pillCh: 10.5, pillPad: 40 };
 export const nodeWidth = (id, o = LAYOUT) => Math.ceil(id.length * o.ch + o.pad);
-export function layout(g, o = LAYOUT) {
+export const pillText = (e) => String(e.text ?? '').replace('{OR}', 'OR');
+export const pillWidth = (e, o = LAYOUT) => Math.ceil(pillText(e).length * o.pillCh + o.pillPad);
+export function layout(g, o = LAYOUT, legacy = new Set()) {
   const fwd = g.edges.filter((e) => e.kind !== 'back' && e.to);
   const idx = Object.fromEntries(g.nodes.map((n, i) => [n.id, i]));
+  const lane = (id) => (legacy.has(id) ? 1 : 0);
   const col = Object.fromEntries(g.nodes.map((n) => [n.id, 0]));
   // Scenes are in script order and forward edges only point later, so one pass in order settles longest paths.
+  // A lane's columns count only edges inside that lane.
   for (const n of g.nodes) {
-    for (const e of fwd) if (e.from === n.id && idx[e.to] > idx[n.id]) col[e.to] = Math.max(col[e.to], col[n.id] + 1);
+    for (const e of fwd) {
+      if (e.from === n.id && idx[e.to] > idx[n.id] && lane(e.to) === lane(n.id)) col[e.to] = Math.max(col[e.to], col[n.id] + 1);
+    }
   }
+  const pillsOf = Object.fromEntries(g.nodes.map((n) => [n.id, fwd.filter((e) => e.branching && e.from === n.id)]));
+  const blockW = (n) => Math.max(nodeWidth(n.id, o), ...pillsOf[n.id].map((e) => o.indent + pillWidth(e, o)));
+  const blockH = (n) => o.nodeH + pillsOf[n.id].length * (o.pillGap + o.pillH);
   const cols = Math.max(...Object.values(col)) + 1;
-  const half = Array.from({ length: cols }, (_, c) => Math.max(0, ...g.nodes.filter((n) => col[n.id] === c).map((n) => nodeWidth(n.id, o) / 2)));
-  const wide = Array.from({ length: cols }, (_, c) => fwd.some((e) => e.branching && col[e.from] === c));
-  const gaps = Array.from({ length: cols - 1 }, (_, c) => (wide[c] ? o.pill + 2 * o.air : o.air));
-  const fixed = half.reduce((a, b) => a + 2 * b, 0), room = o.W - 2 * o.side - fixed;
-  const k = Math.min(1, room / gaps.reduce((a, b) => a + b, 0));
-  const xs = [half[0]];
-  for (let c = 1; c < cols; c++) xs.push(xs[c - 1] + half[c - 1] + gaps[c - 1] * k + half[c]);
-  const shift = (o.W - (xs.at(-1) + half.at(-1))) / 2; // centre the whole map
-  const y = {}, midY = (o.top + o.H - o.bottom) / 2;
+  const left = [];
+  let x = o.margin;
   for (let c = 0; c < cols; c++) {
-    const here = g.nodes.filter((n) => col[n.id] === c);
-    const key = (n) => {
-      const ps = fwd.filter((e) => e.to === n.id && y[e.from] != null).map((e) => y[e.from]);
-      return ps.length ? ps.reduce((a, b) => a + b, 0) / ps.length : midY;
-    };
-    here.sort((a, b) => key(a) - key(b) || idx[a.id] - idx[b.id]);
-    const gap = Math.min(o.rowGap, (o.H - o.top - o.bottom) / Math.max(1, here.length));
-    here.forEach((n, r) => { y[n.id] = midY + (r - (here.length - 1) / 2) * gap; });
+    left.push(x);
+    x += Math.max(0, ...g.nodes.filter((n) => col[n.id] === c).map(blockW)) + o.colGap;
   }
-  return { cols, squeeze: k, pos: Object.fromEntries(g.nodes.map((n) => [n.id, { x: xs[col[n.id]] + shift, y: y[n.id], col: col[n.id], w: nodeWidth(n.id, o) }])) };
+  const W = x - o.colGap + o.margin;
+  const pos = {}, pills = {}, anchor = {}; // anchor: node id / pill edge id -> the y its outgoing edge leaves from
+  const lanes = [];
+  let top = o.margin;
+  for (const l of [0, 1]) {
+    const mine = g.nodes.filter((n) => lane(n.id) === l);
+    if (!mine.length) continue;
+    let bottom = top;
+    for (let c = 0; c < cols; c++) {
+      const want = (n) => {
+        const ys = fwd.filter((e) => e.to === n.id && lane(e.from) === l && pos[e.from]).map((e) => anchor[e.branching ? e.id : e.from]);
+        return ys.length ? ys.reduce((a, b) => a + b, 0) / ys.length - o.nodeH / 2 : top;
+      };
+      const here = mine.filter((n) => col[n.id] === c).map((n) => ({ n, y: want(n) }));
+      here.sort((a, b) => a.y - b.y || idx[a.n.id] - idx[b.n.id]);
+      let cursor = top;
+      for (const { n, y: wy } of here) {
+        const y = Math.max(wy, cursor), w = nodeWidth(n.id, o);
+        pos[n.id] = { x: left[c] + w / 2, y: y + o.nodeH / 2, col: c, w, h: o.nodeH, legacy: l === 1 };
+        anchor[n.id] = pos[n.id].y;
+        pillsOf[n.id].forEach((e, i) => {
+          const pw = pillWidth(e, o), py = y + o.nodeH + o.pillGap + i * (o.pillGap + o.pillH) + o.pillH / 2;
+          pills[e.id] = { x: left[c] + o.indent + pw / 2, y: py, w: pw, h: o.pillH };
+          anchor[e.id] = py;
+        });
+        cursor = y + blockH(n) + o.blockGap;
+      }
+      bottom = Math.max(bottom, cursor - o.blockGap);
+    }
+    lanes.push({ legacy: l === 1, top, bottom });
+    top = bottom + o.laneGap;
+  }
+  return { cols, W, H: lanes.at(-1).bottom + o.margin, left, lanes, pos, pills };
 }
 
 // Flags the edge's downstream reads, minus what the edge sets, in script order; options = the choices that set them.
