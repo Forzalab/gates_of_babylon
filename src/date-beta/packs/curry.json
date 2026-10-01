@@ -251,6 +251,7 @@
           "shot": "stamp",
           "place": "CURRY STREET",
           "time": "2:55 PM",
+          "fixed": true,
           "cut": {
             "frame": "off",
             "sharp": true
