@@ -32,7 +32,10 @@ function Truth({ circuit, view, fig, setSwitches }) {
   const classic = ins.length === 2 && outs.length === 1; // the fitted A / B / OUT header glyphs apply only here
 
   // Windowing: fixed row height measured from the first rendered row.
-  const box = useRef(null);
+  const box = useRef(null), cell = useRef(null);
+  const [full, setFull] = useState(false); // Fullscreen API on the .truth cell; Esc is the browser's, we only mirror it
+  useEffect(() => { const f = () => setFull(document.fullscreenElement === cell.current); document.addEventListener('fullscreenchange', f); return () => document.removeEventListener('fullscreenchange', f); }, []);
+  const toggleFull = () => { if (document.fullscreenElement) document.exitFullscreen(); else cell.current?.requestFullscreen?.(); };
   const [rowH, setRowH] = useState(40), [top, setTop] = useState(0), [boxH, setBoxH] = useState(400);
   const [more, setMore] = useState({ up: false, down: false, left: false, right: false }); // palette's scroll cues: only where rows / columns remain
   const cues = (el) => {
@@ -57,7 +60,7 @@ function Truth({ circuit, view, fig, setSwitches }) {
     cues(el);
     // Tony: the table snapped back while scrolling. This effect ran after EVERY render, and a scroll re-renders (setTop):
     // clearing maxHeight each time shrank/regrew the box and clamped scrollTop. Re-measure only when the table or the frame changes.
-  }, [shape, fig, rowH]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [shape, fig, rowH, full]); // eslint-disable-line react-hooks/exhaustive-deps
   const first = Math.max(0, Math.floor(top / rowH) - 2), last = Math.min(rows.length, first + Math.ceil(boxH / rowH) + 5);
   // Keep the live row in view when the switches change.
   useEffect(() => {
@@ -83,8 +86,11 @@ function Truth({ circuit, view, fig, setSwitches }) {
     </aside>
   );
   return (
-    <aside className="cell c-side r2 truth" aria-label="Truth table">
+    <aside className="cell c-side r2 truth" aria-label="Truth table" ref={cell}>
       <h2 className="label">Truth table</h2>
+      <button type="button" className="tt-full" aria-pressed={full} aria-label={full ? 'Exit full screen' : 'Full screen truth table'} onClick={toggleFull}>
+        <svg aria-hidden="true" viewBox="0 0 16 16"><path d={full ? 'M6 1v5H1M10 1v5h5M6 15v-5H1M10 15v-5h5' : 'M1 6V1h5M10 1h5v5M15 10v5h-5M6 15H1v-5'} /></svg>
+      </button>
       <div className="tt-wrap">
       <div className={`tt ${classic ? 'classic' : ''} ${gates.length ? 'gates' : ''} ${more.down ? 'fd' : ''}`} ref={box} onScroll={(e) => { setTop(e.currentTarget.scrollTop); cues(e.currentTarget); }}>
         <table style={{ '--n': heads.length }} role="grid" aria-label="Truth table rows; arrow keys set the switches">
