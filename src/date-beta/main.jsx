@@ -43,7 +43,7 @@ import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
 import { rainOf } from './fx/rain.js';
-import { floorOf, UNDER_BOX } from './art/floors.js';
+import { floorOf, UNDER_BOX, castVars } from './art/floors.js';
 import { Cel, celOf } from './fx/Cels.jsx';
 import './beta.css';
 import './fx.css';
@@ -211,7 +211,10 @@ function Player() {
   const autoFace = useMemo(() => (AUTOFACE ? autoFaces(scene.beats, (b) => stageFor(b.scare)) : []), [scene]);
   const face = beat.react ? null : (stepped && cut.face2) || cut.face || autoFace[beat.index] || null;
   // her floor (art/floors.js): an explicit props.cut.plant wins, else the per-bg / per-insert-shot floor line.
-  const flo = cut.plant ? { key: null, y: null } : floorOf(beat.bg, beat.props?.shot);
+  // (a planted beat keeps the floor's pose + light, R7 legs; only the y comes from the plant)
+  // props.cut.floor = a named floor for this one beat (a staging the bg's own floor does not have, e.g. rooftop-fence)
+  const flo0 = cut.floor ? floorOf(cut.floor) : floorOf(beat.bg, beat.props?.shot);
+  const flo = cut.plant ? { ...flo0, key: null, y: null, wet: false } : flo0;
   const tag = !!(cut.tag && beat.choices?.length === 1 && !beat.react);
   const handout = !!(cut.handout && beat.choices && !beat.react);
   // ux-six: a one-button "choice" with no score is a NEXT in disguise: drawn as the NEXT pill (named after the action),
@@ -350,12 +353,14 @@ function Player() {
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px` } : { '--plant': `${cut.plant}px` }} aria-hidden="true" />}
+        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, ...castVars(flo.light) } : { '--plant': `${cut.plant}px`, ...castVars(flo.light) }} data-cast={flo.light ? 'lit' : undefined} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={((!!beat.choices && !solo) || !!cut.raise) && !end && frame === 'medium' && !tag /* R5: a solo NEXT keeps the low box, so she stays down */} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
+            wet={!end && frame === 'medium' && !!flo.wet}
+            step={!end && frame === 'medium' && !pop ? flo.step : null} lit={!end && frame === 'medium' ? flo.light : null}
             face={end ? null : face} frame={end ? 'medium' : frame} reach={!end && !beat.react && !!cut.reach} />
         )}
         {!pos.done && !end && ART[`${beat.bg}-book`] && layer(`${beat.bg}-book`, 'db-book') /* BOOK cel: a foreground layer in front of Nanda */}

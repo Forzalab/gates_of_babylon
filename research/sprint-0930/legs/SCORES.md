@@ -1,0 +1,14 @@
+# R7 LEGS: scores (PASS = >= 9, no zero on items 1-3)
+
+| # | shot | iterations | final | result | compare (ref / before / after) |
+|---|---|---|---|---|---|
+| 1 | v2-rain 2 puddle shoes | (pre-restart) | pass | PASS | compare/01-v2-rain-2.jpg |
+| 2 | v2-rain 4 rain walk | 4 | 10 | PASS | compare/03-v2-rain-4-walk.jpg |
+| 3 | v2-curry 13 street walking | 3 | 9 | PASS | compare/04-v2-curry-13-street-walk.jpg |
+| 4 | v2-train 3 station feet | 2 | 10 | PASS | compare/05-v2-train-3-station-feet.jpg |
+| 5 | rooftop 2 shoes by the fence | 2 | 10 | PASS | compare/06-rooftop-2-shoes-by-fence.jpg |
+| 6 | v2-shop 12 walk out with the bags | 1 | 9 | PASS | compare/07-v2-shop-12-walk-out.jpg |
+| 7 | v2-train 6 carriage | 2 | 9 | PASS | compare/08-v2-train-6-carriage.jpg |
+| - | v2-train 8 platform-rain | - | - | N/A (feet behind the box) | - |
+| - | v2-street 0-5 | - | - | N/A (no feet on screen) | - |
+| 8 | v2-park 4 park walk-out | 5 | 10 | PASS | compare/09-v2-park-walk-out.jpg |

@@ -255,19 +255,69 @@ export const ANCHORS = Object.freeze({
 export const FACE_BUBBLE = { 'very-angry': 'hate', nervous: 'sweat', 'ticked-off': 'pout' };
 const STAGE_EMOTE = { 1: 'heart', 2: 'hearts', 3: 'or', 4: 'crack' };
 
+// R7 LEGS (research/sprint-0930/legs): her pin legs + shoes, built on a grid (gate units, ground = y 128.5).
+// Her canon (chibi ~2.5 heads): pin lead 6 w x 24 long from the skirt hem (y 94), the shoe = 18 w x 11.5 h (Loomis: her
+// own foot = 1/2 her head-width, kept for every pose). Nishiya: a plum dome shoe, the pink strap over the instep, a dark
+// sole lip with its thickness showing at the toe, a small toe-cap sheen; a contact shadow per sole, darkest AT the sole.
+// step: null = standing (both soles flat on one ground line) | 'walk' = Inoue's contact pose walking toward the camera:
+//   the FRONT leg (viewer's left) strikes with the heel, nearer = lower on screen, the toe lifted (its sole lip shows);
+//   the BACK leg pushes off, farther = higher on screen, the heel up, knee bent (a shorter, slightly slanted pin), only
+//   the toe on the ground (a small tight contact shadow). 'brace' = bumped: a widened base, pins splayed, soles flat.
+// lit: { rim, side, wet, bounce } = the key light's rim (bounce = the floor's light bouncing up onto the shins + toe caps) on the lit side of the pins + shoe domes (side 1 = light from the right).
+const shoeSVG = (x, gy, P, { w = 1, h = 1, lift = 0, sole = 1, contact = 1, lit = null, turn = 0 } = {}) => {
+  const b = gy - lift, t = b - 11.5 * h, hw = 9 * w, mid = b - 3.5 * h;
+  const dome = `M${x - hw},${mid} C${x - hw},${t + 2 * h} ${x - hw * 0.45},${t} ${x},${t} C${x + hw * 0.45},${t} ${x + hw},${t + 2 * h} ${x + hw},${mid} C${x + hw},${b - 1} ${x + hw * 0.66},${b} ${x},${b} C${x - hw * 0.66},${b} ${x - hw},${b - 1} ${x - hw},${mid} Z`;
+  const lip = 2.4 * sole;
+  const soleD = `M${x - hw},${mid + 0.6} C${x - hw},${b - 1} ${x - hw * 0.66},${b} ${x},${b} C${x + hw * 0.66},${b} ${x + hw},${b - 1} ${x + hw},${mid + 0.6} C${x + hw * 0.62},${b - lip + 0.4} ${x - hw * 0.62},${b - lip + 0.4} ${x - hw},${mid + 0.6} Z`;
+  const strapY = t + 3.8 * h;
+  // the contact dark: a soft pool + the near-black occlusion line right under the sole (lifted toe: only the heel's)
+  const shadow = contact ? `<ellipse cx="${x}" cy="${gy + 0.3}" rx="${hw * (lift ? 0.8 : 1.12) * contact}" ry="${1.9 * contact}" fill="${P.shadow}" opacity=".45"/><ellipse cx="${x}" cy="${gy + 0.1}" rx="${hw * (lift ? 0.5 : 0.86) * contact}" ry="${0.9 * contact}" fill="#0a0608" opacity="${lift ? 0.55 : 0.8}"/>${lit?.wet ? `<path d="M${x - hw * 1.1 * contact},${gy + 0.4} Q${x},${gy + 2.6 * contact} ${x + hw * 1.1 * contact},${gy + 0.4}" fill="none" stroke="${lit.rim}" stroke-width=".9" opacity=".55"/>` : ''}` : '';
+  const rim = lit ? `<path d="M${x + lit.side * hw * 0.55},${t + 0.9} C${x + lit.side * hw * 0.95},${t + 2.2 * h} ${x + lit.side * hw},${mid - 1} ${x + lit.side * hw},${mid}" fill="none" stroke="${lit.rim}" stroke-width="1.2" stroke-linecap="round" opacity=".85"/>` : '';
+  return `${shadow}<g${turn ? ` transform="rotate(${turn} ${x} ${gy})"` : ''}><path d="${dome}" fill="${P.shoe}" stroke="${P.rim}" stroke-width="1.8"/>
+    <path d="${soleD}" fill="${P.dark ? '#000' : '#2a0a22'}"/>
+    <path d="M${x - 7 * w},${strapY} H${x + 7 * w}" stroke="${P.dark ? P.rim : P.bow}" stroke-width="1.8" stroke-linecap="round"/>
+    ${P.dark ? '' : `<ellipse cx="${x - 3.6 * w}" cy="${strapY + 2.6 * h}" rx="${2 * w}" ry="${0.9 * h}" fill="#fff" opacity=".5"/>`}${rim}</g>`;
+};
+const pinSVG = (x0, y0, x1, y1, P, lit) => {
+  const a = (Math.atan2(x1 - x0, y1 - y0) * 180) / Math.PI, L = Math.hypot(x1 - x0, y1 - y0);
+  return `<g transform="translate(${x0} ${y0}) rotate(${-a.toFixed(2)})"><rect x="-3" y="0" width="6" height="${L.toFixed(2)}" rx="3" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/>
+    ${P.dark ? '' : '<rect x="-3" y="5" width="6" height="3" fill="' + P.bow + '"/>'}${lit ? `<path d="M${lit.side * 1.6} 9 V${(L - 2).toFixed(2)}" stroke="${lit.rim}" stroke-width="1.1" stroke-linecap="round" opacity=".8"/>` : ''}${lit?.bounce ? `<rect x="-2" y="${(L * 0.62).toFixed(2)}" width="4" height="${(L * 0.36).toFixed(2)}" rx="2" fill="${lit.bounce}" opacity=".3"/>` : ''}</g>`;
+};
+export function legsSVG(P, step = null, lit = null, refl = false) {
+  if (step === 'walk') {
+    // back leg first (farther), then the front leg over it
+    // Inoue: the feet land near the line of travel (the pins converge a little); refl = the copy mirrored in the water,
+    // where each foot must mirror about ITS OWN contact: the back leg is dropped 2 x (130.6 - 126.2) so the whole-sprite
+    // flip about the front sole hangs its reflection straight off its own toe.
+    const d = refl ? 8.8 : 0;
+    return `<g transform="translate(0 ${d})">${pinSVG(62, 94, 60.5, 115.5, P, lit) + shoeSVG(60.5, 126.2, P, { w: 0.92, h: 1.1, sole: 0.6, contact: 0.85, lit })}</g>`
+      + pinSVG(42, 94, 44, 119, P, lit) + shoeSVG(44, 130.6, P, { w: 1.04, h: 0.88, lift: 0.45, sole: 1.8, lit });
+  }
+  if (step === 'shy') {
+    // uchimata: the knees come in (the pins lean toward each other at the bottom), the toes turn in a touch, soles flat
+    return pinSVG(41, 94, 43.5, 118, P, lit) + shoeSVG(43.5, 128.5, P, { w: 0.96, lit, turn: 4 })
+      + pinSVG(63, 94, 60.5, 118, P, lit) + shoeSVG(60.5, 128.5, P, { w: 0.96, lit, turn: -4 });
+  }
+  if (step === 'brace') {
+    // bumped: the feet step out to catch her balance (a wider base, the pins splay from the hem), both soles flat,
+    // the outer edges of the shoes turned a little out (narrower domes)
+    return pinSVG(39, 94, 34.5, 118, P, lit) + shoeSVG(34, 128.5, P, { w: 0.94, lit })
+      + pinSVG(65, 94, 69.5, 118, P, lit) + shoeSVG(70, 128.5, P, { w: 0.94, lit });
+  }
+  return [40, 64].map((x) => pinSVG(x, 94, x, 118, P, lit) + shoeSVG(x, 128.5, P, { lit })).join('');
+}
+
 let uid = 0;
 // One figure as an SVG fragment (no <svg> wrapper). ids are unique per call so several can share a page.
 // overlay(P, ANCHORS) -> { under, over }: extra still layers (the gacha face layers). under = inside the body clip after
 // the face, before the fringe; over = after the figure, before the bubble.
 // face: a Scene A face id (SCENE_FACES) or any FACES key; it replaces the emote's face (the palette + bubble stay the emote's).
-export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null, reach = false } = {}) {
+export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null, reach = false, step = null, lit = null, refl = false, legs: withLegs = true } = {}) {
   const E0 = EMOTES[emote ?? STAGE_EMOTE[stage]] ?? EMOTES.heart;
   const E = face != null && FACES[face] ? { ...E0, face, bubble: FACE_BUBBLE[face] ?? E0.bubble } : E0;
   const s = E.pal, P = PAL[s], n = ++uid, cb = `nd-cb${n}`, gb = `nd-gb${n}`, sh = `nd-sh${n}`;
-  const legs = [40, 64].map((x) => `<rect x="${x - 3}" y="94" width="6" height="24" rx="3" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/>
-    ${P.dark ? '' : `<rect x="${x - 3}" y="99" width="6" height="3" fill="${P.bow}"/>`}
-    <path d="M${x - 9},125 C${x - 9},119 ${x - 4},117 ${x},117 C${x + 4},117 ${x + 9},119 ${x + 9},125 C${x + 9},127.5 ${x + 6},128.5 ${x},128.5 C${x - 6},128.5 ${x - 9},127.5 ${x - 9},125 Z" fill="${P.shoe}" stroke="${P.rim}" stroke-width="1.8"/>
-    <path d="M${x - 7},120.8 H${x + 7}" stroke="${P.dark ? P.rim : P.bow}" stroke-width="1.8" stroke-linecap="round"/>`).join('');
+  // legs: false = a waist-up crop (the raised, unfloored sprite is masked at the hem): no pin stubs under the skirt
+  const legs = withLegs ? legsSVG(P, step, lit, refl) : '';
   const shade = s === 3 ? `<defs><linearGradient id="${sh}" gradientUnits="userSpaceOnUse" x1="0" y1="12" x2="0" y2="72"><stop offset="0" stop-color="#2a0714" stop-opacity=".62"/><stop offset=".55" stop-color="#2a0714" stop-opacity=".38"/><stop offset="1" stop-color="#2a0714" stop-opacity="0"/></linearGradient></defs><rect x="0" y="12" width="120" height="60" fill="url(#${sh})"/>` : '';
   const sweatDrop = E.face === 'sweat' ? `<path d="${DROP}" transform="translate(27 30) scale(.62)" fill="#8fd3ff" stroke="#1f5f96" stroke-width="2"/>` : '';
   const k = big ? 0.74 : 0.57;
@@ -275,7 +325,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay =
   const gate = `<defs><clipPath id="${cb}"><path d="${BODYB}"/></clipPath>
       <radialGradient id="${gb}" cx=".42" cy=".4" r=".75"><stop offset="0" stop-color="${P.body}"/><stop offset="1" stop-color="${P.body2}"/></radialGradient></defs>
     ${E.aura ? `<radialGradient id="au${n}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#12040b" stop-opacity="0"/><stop offset=".6" stop-color="#12040b" stop-opacity=".55"/><stop offset="1" stop-color="#f0243f" stop-opacity="0"/></radialGradient><ellipse cx="58" cy="60" rx="98" ry="112" fill="url(#au${n})" class="nd-aura"/>` : ''}
-    <ellipse cx="52" cy="129" rx="58" ry="6.5" fill="${P.shadow}" opacity=".16"/>${legs}
+    ${withLegs ? `<ellipse cx="52" cy="129" rx="58" ry="6.5" fill="${P.shadow}" opacity="${step ? 0.08 : 0.16}"/>` : ''}${legs}
     ${reach ? pinArm([0, 75], [-9, 75], P) : [33, 75].map((y) => pinArm([0, y], [-9, y], P)).join('')}
     <path d="${BODYB}" fill="url(#${gb})" stroke="${P.rim}" stroke-width="3.2" stroke-linejoin="round"/>
     <g clip-path="url(#${cb})">

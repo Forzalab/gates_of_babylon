@@ -35,7 +35,8 @@ for (const sc of scenes) {
       if (!st || st.dataset.scene == null) return null;
       const say = document.querySelector('.db-say')?.textContent?.slice(0, 60) ?? '';
       return { scene: st.dataset.scene, bg: st.dataset.bg, shot: st.dataset.shot ?? null, say, nanda: !!nd && getComputedStyle(nd).display !== 'none',
-        plant: !!document.querySelector('.db-plant'), raised: !!nd?.classList.contains('raised') };
+        plant: !!document.querySelector('.db-plant'), raised: !!nd?.classList.contains('raised'),
+        waistUp: !!nd?.matches('.raised:not(.floored):not(.planted)'), floorKey: st.dataset.floor ?? null };
     });
     if (!info || info.scene !== sc.id || !info.nanda) continue;
     const seenKey = `${info.bg}|${info.say}`; if (seen.has(seenKey)) continue; seen.add(seenKey);
@@ -63,8 +64,9 @@ for (const sc of scenes) {
       const masked = nd.classList.contains('raised') && getComputedStyle(nd).maskImage !== 'none';
       return { low, cx, boxTop: masked ? Math.min(boxTop, low + 1) : boxTop, sprBottom: r.bottom };
     }, [a, b]);
-    const cropped = m.low < 0 || m.low >= m.boxTop - 10 || m.low >= 1076;
-    const key = floorOf(info.bg, info.shot).key;
+    // a waist-up crop (raised, unfloored: masked at the hem, drawn with no legs, R7 legs) shows no feet by design
+    const cropped = info.waistUp || m.low < 0 || m.low >= m.boxTop - 10 || m.low >= 1076;
+    const key = info.floorKey ?? floorOf(info.bg, info.shot).key; // the stage's data-floor (a per-beat cut.floor wins)
     const floor = FLOORS[key];
     const floorY = floor?.crop ? null : floor?.y ?? null;
     const gap = floorY == null ? null : floorY - m.low;

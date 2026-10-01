@@ -173,6 +173,15 @@ body { font-family: var(--cond); color: var(--ink); }
   background: radial-gradient(closest-side, rgba(24, 12, 22, .42), rgba(24, 12, 22, .22) 55%, rgba(24, 12, 22, 0)); pointer-events: none; }
 .db-plant.raised { bottom: calc(470px - var(--plant) - 4px); }
 .db-plant.floored { bottom: calc(1080px - var(--floor) - 17px); }
+/* R7 legs: a floor with a key light (floors.js light) turns the contact pool into a CAST shadow: pushed + turned away
+   from the light, stretched by its elevation, in the scene's own shadow ink; the per-sole contact darks live in the sprite. */
+.db-plant[data-cast] { transform: translate(var(--cast-dx), var(--cast-dy)) rotate(var(--cast-rot)) scaleX(var(--cast-len)); transform-origin: 50% 50%;
+  background: radial-gradient(closest-side, rgba(var(--cast-ink), var(--cast-a, .46)), rgba(var(--cast-ink), calc(var(--cast-a, .46) / 2)) 55%, rgba(var(--cast-ink), 0)); }
+/* R7 legs (research/sprint-0930/legs): on a WET floor (floors.js wet) her pins + shoes mirror in the water (Shinkai:
+   the reflection hangs straight down from the soles, darker, a touch soft, fading fast; dry floors get none). A flipped
+   copy of her sprite (Nanda.jsx .refl) folded about her soles (the box bottom sits 4 px under them). */
+:is(.stage, .stage.focus) .db-nanda.refl { pointer-events: none; animation: none; transform-origin: 50% 100%; transform: translateY(-8px) scaleY(-.82); filter: blur(1.2px) brightness(.62) saturate(.8);
+  -webkit-mask-image: linear-gradient(to top, rgba(0, 0, 0, .7), rgba(0, 0, 0, .3) 12%, transparent 24%); mask-image: linear-gradient(to top, rgba(0, 0, 0, .7), rgba(0, 0, 0, .3) 12%, transparent 24%); }
 /* OBBP: centred in play; back on the right while a modal card (goal card, end card) is up */
 .db-nanda { right: auto; left: 730px; }
 .stage.is-goal .db-nanda, .hud-scrim ~ .db-nanda { left: auto; right: 60px; }
@@ -376,6 +385,8 @@ body { font-family: var(--cond); color: var(--ink); }
 .stage.focus .scene:has(.art.basement, .art.cellar) { filter: brightness(.86); }
 /* the SANDWICH shots (art/sandwich.jsx): the mid haze layer already carries the depth; the front cels stay crisp */
 .stage.focus .scene:has(.sw-mid) { filter: brightness(.84); }
+/* R7 legs: the park walk-out cutaway (art/shots/FeetWalk.jsx): its trace is already blurred, the leg cels stay crisp */
+.stage.focus .scene:has(.fw-walk) { filter: brightness(.9); }
 .db-focus { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 334ms ease-out;
   background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(26, 7, 16, .55) 100%); }
 .stage.focus .db-focus { opacity: 1; }
