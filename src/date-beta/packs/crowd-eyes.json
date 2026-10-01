@@ -1,0 +1,14 @@
+{
+ "name": "crowd-eyes",
+ "notes": [
+  "Sprint 1001 crowd-eyes (Tony: 'add ppl silhouettes with red eyes, a LOT of silhouettes at different depth, from very near bokeh to faraway'). Applied after town, before love (love, ux-six, r5, r6, gacha keep the tail of PLAY); no later pack touches leave-fu / leave-yeah 0-3.",
+  "props.crowd = true | { density } draws art/crowd/CrowdLayer.jsx (far + mid behind Nanda, near bokeh over her, under the HUD). Beat-local: engine.js carried() drops it.",
+  "Every CROWD-speaker beat: leave-fu 2-3, leave-yeah 2-3. The second chorus line ('and ever and ever') is denser: the crowd closes in."
+ ],
+ "patch": [
+  { "scene": "leave-fu", "beat": 2, "props": { "crowd": { "density": 1 } } },
+  { "scene": "leave-fu", "beat": 3, "props": { "crowd": { "density": 1.4 } } },
+  { "scene": "leave-yeah", "beat": 2, "props": { "crowd": { "density": 1 } } },
+  { "scene": "leave-yeah", "beat": 3, "props": { "crowd": { "density": 1.4 } } }
+ ]
+}
