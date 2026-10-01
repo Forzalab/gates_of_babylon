@@ -57,6 +57,7 @@
       "set": {
         "bg": "vending-insert",
         "props": {
+          "sfx": { "cue": "vending-clunk", "at": 900 },
           "cut": {
             "face": "anya-smile",
             "sharp": true
@@ -132,6 +133,7 @@
       "set": {
         "bg": "station-ads-insert",
         "props": {
+          "sfx": [{ "cue": "ic-beep" }, { "cue": "ic-beep", "at": 700 }],
           "cut": {
             "face": "content",
             "sharp": true

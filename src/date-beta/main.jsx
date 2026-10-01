@@ -38,7 +38,8 @@ import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
-import { createLoader } from './assets.js';
+import { createLoader, beatCues, popCues } from './assets.js';
+import { watchLock } from './fx/lockSfx.js';
 import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
 import { NearLens } from './fx/NearLens.jsx';
@@ -229,14 +230,29 @@ function Player() {
   useEffect(() => {
     since.current = performance.now();
     // sfx on the frame cut; props.sfxAt: "<word>" lands it on that aligned word while the take plays
-    const sfxT = vt.sfxAt ? setTimeout(() => cue(beat.sfx), vt.sfxAt) : (cue(beat.sfx), null);
+    // props.sfx lays extra cues over it (assets.js beatCues); a scene change stops the beds (assets.js scene())
+    ASSETS.scene(pos.done ? null : beat.scene);
+    const prevBeat = beat.react || pos.done ? null : SCENES[pos.s]?.beats[pos.b - 1];
+    const sfxTs = beatCues(beat, prevBeat, ASSETS.isBed).map(({ cue: c, at }) => {
+      const ms = at ?? vt.sfxAt;
+      return ms ? setTimeout(() => cue(c), ms) : (cue(c), null);
+    });
     document.documentElement.dataset.beat = `${beat.scene}:${beat.index}`;
     setLeft(beat.timer && !pos.done ? beat.timer : null);
     setReady(false);
     // NEXT shows once the hold has passed AND the take is over (+ pad); a click can still skip after beat.hold
     const t = setTimeout(() => setReady(true), vt.readyAt);
-    return () => { clearTimeout(t); clearTimeout(sfxT); };
+    return () => { clearTimeout(t); sfxTs.forEach(clearTimeout); };
   }, [pos, beat]); // eslint-disable-line react-hooks/exhaustive-deps
+  // Love chimes / gacha / anger / rage / hate / heart pop: one set of cues per pop, when it shows (assets.js popCues).
+  useEffect(() => {
+    if (!pop) return undefined;
+    const ts = popCues(pop, pos.fx).map(({ cue: c, at }) => setTimeout(() => cue(c), at));
+    return () => ts.forEach(clearTimeout);
+  }, [pop]); // eslint-disable-line react-hooks/exhaustive-deps
+  // The run ending (end card / done) lets go of any bed.
+  useEffect(() => { if (end) ASSETS.stopBeds(); }, [end]);
+  useEffect(() => watchLock(document, (c) => cue(c)), []); // lock game: tap / mismatch / open / time-out (fx/lockSfx.js)
   // Voice: each new beat (or reaction frame) stops the last line and plays its own, if recorded.
   useEffect(() => {
     if (pos.done || end) VOICE.stop();

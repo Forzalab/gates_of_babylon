@@ -69,6 +69,7 @@
           "text": "She cuts off one small piece with her spoon. Crunch.",
           "bg": "curry-katsu-cut",
           "props": {
+            "sfx": "crunch",
             "cut": {
               "frame": "off",
               "sharp": true
