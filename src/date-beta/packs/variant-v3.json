@@ -455,6 +455,17 @@
      "sfx": "train-hum",
      "props": {
       "shot": "train"
+     },
+     "vary": {
+      "run": {
+       "1": {},
+       "2": {
+        "text": "Twelve stops to my home. Again. You rode them with me."
+       },
+       "3": {
+        "text": "Twelve stops. Third time today. I count. You forget."
+       }
+      }
      }
     },
     {

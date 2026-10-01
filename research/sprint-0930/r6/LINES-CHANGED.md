@@ -17,3 +17,12 @@ Notes for the session
 - #6 drops the "STATION · 4:30 PM" lead-in because train 0 now shows it as the on-screen stamp.
 - Not changed in R6 (same old line still used, no re-record): `v2-curry-katsu 11` and `v2-curry-alone 3` ("We walk out to the street. It is 3:40 PM.").
 - No other spoken line changed in R6. Rooftop mini-choices, the street dusk bg, the curry shadow and the R6 critic fix (skirt mask) are visual only.
+
+## main
+
+M4 replays (research/sprint-0930/replay/AUDIT.md). Source of truth: the named pack. These are run-variant lines (`vary.run`): run 1 keeps the old take.
+
+| # | Beat id | Speaker | Old line | New line | Old VO file |
+|---|---|---|---|---|---|
+| m1 | v3-train 1, run 2 (`variant-v3.json`) | Nanda | Twelve stops to my home. I counted them this morning. | Twelve stops to my home. Again. You rode them with me. | none (record new; run 1 take unchanged) |
+| m2 | v3-train 1, run 3 (`variant-v3.json`) | Nanda | Twelve stops to my home. I counted them this morning. | Twelve stops. Third time today. I count. You forget. | none (record new; run 1 take unchanged) |
