@@ -25,5 +25,5 @@ test('date-beta assets: every shipped sfx cue maps to a manifest id (or null = s
   const cues = new Set(data.scenes.flatMap((s) => s.beats.flatMap((b) => [b.sfx,
     ...Object.values(b.vary ?? {}).flatMap((m) => Object.values(m).map((e) => e.sfx))])).filter(Boolean));
   for (const c of cues) { const id = A.cueId(c); assert.ok(id === null || A.get(id), `cue ${c} -> ${id}`); }
-  for (const id of A.ids()) assert.ok(['sfx', 'bg', 'sprite'].includes(A.get(id).kind), id);
+  for (const id of A.ids()) assert.ok(['sfx', 'bg', 'sprite', 'music'].includes(A.get(id).kind), id);
 });

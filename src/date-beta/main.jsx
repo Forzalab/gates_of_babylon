@@ -38,7 +38,7 @@ import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
 import { createSession, bootDebug } from './debug.js';
 import manifest from './assets.json';
-import { createLoader, beatCues, popCues } from './assets.js';
+import { createLoader, beatCues, popCues, musicFor } from './assets.js';
 import { watchLock } from './fx/lockSfx.js';
 import { withInjury } from './injury.js';
 import { RainOverlay, WetGui } from './fx/RainOverlay.jsx';
@@ -260,6 +260,8 @@ function Player() {
     // sfx on the frame cut; props.sfxAt: "<word>" lands it on that aligned word while the take plays
     // props.sfx lays extra cues over it (assets.js beatCues); a scene change stops the beds (assets.js scene())
     ASSETS.scene(pos.done ? null : beat.scene);
+    const mus = musicFor(manifest, pos.done ? null : beat.scene); // the mood track: sweet, dark from the cup on
+    if (mus) { ASSETS.music(mus); document.documentElement.dataset.music = mus; }
     const prevBeat = beat.react || pos.done ? null : SCENES[pos.s]?.beats[pos.b - 1];
     const sfxTs = beatCues(beat, prevBeat, ASSETS.isBed).map(({ cue: c, at }) => {
       const ms = at ?? vt.sfxAt;

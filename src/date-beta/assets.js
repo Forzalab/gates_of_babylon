@@ -17,6 +17,17 @@ export const BEDS = Object.freeze(['SX-20', 'SX-15', 'SX-21', 'SX-27', 'SX-06', 
 export const BED_FADE = 0.5; // seconds: a bed's fade in / out, and the crossfade when one bed replaces another
 export const isBedId = (id) => BEDS.includes(id);
 
+// Music: one looping mood track under everything (assets.json "music"), sweet by default, dark on the darkScenes.
+// It survives scene changes (same track = no-op) and crossfades over MUSIC_FADE when the track changes.
+// MUSIC_GAIN is the knob: the files sit at -30 LUFS, so 0.35 (~-9 dB) lands near -39 LUFS, far under a voice take.
+export const MUSIC_GAIN = 0.35;
+export const MUSIC_FADE = 2.5; // seconds
+export function musicFor(manifest, sceneId) {
+  const m = manifest?.music;
+  if (!m || sceneId == null) return null; // null = keep whatever is playing
+  return (m.darkScenes ?? []).includes(sceneId) ? m.dark ?? null : m.default ?? null;
+}
+
 // Love chimes + emotion hits for a scored pick (pop = the engine's reaction { love, gacha?, emote }, fx = pos.fx).
 // Returns [{ cue, at }] (at = ms after the pop shows). A gacha tier or the pick's own hate-quake REPLACES the plain chime.
 export const HEART_POP_AT = 334; // the HUD's first step (beta.css lv-pop / lv-step) lands the heart + number
@@ -64,7 +75,7 @@ export function createLoader(manifest, base = '/') {
     try { const t = ctx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(v, t, ducked ? 0.03 : 0.12); } catch { master.gain.value = v; }
   };
   // The last cue (and last bed) asked for before the context existed (the first beat's sound, red-team R5)
-  let pend = { shot: null, bed: null };
+  let pend = { shot: null, bed: null, music: null };
   let bed = null, want = null, curScene; // bed = { id, src, g } looping now; want = a bed whose file has not decoded yet
   const failed = new Set(); // sfx whose file would not load
   // Start (or resume) the context inside a user gesture, then play the cue that was asked for before it: the first
@@ -74,7 +85,7 @@ export function createLoader(manifest, base = '/') {
     try { ctx = new (globalThis.AudioContext || globalThis.webkitAudioContext)(); } catch { return Promise.resolve(); }
     const decoding = [...bytes].map(([id, ab]) => Promise.resolve(ctx.decodeAudioData(ab)).then((b) => buffers.set(id, b), () => {}));
     bytes.clear();
-    return Promise.all(decoding).then(() => { const p = pend; pend = { shot: null, bed: null }; if (p.bed) play(p.bed); if (p.shot) play(p.shot); });
+    return Promise.all(decoding).then(() => { const p = pend; pend = { shot: null, bed: null, music: null }; if (p.music) music(p.music); if (p.bed) play(p.bed); if (p.shot) play(p.shot); });
   };
   const preload = () => {
     for (const id of A.ids()) {
@@ -86,7 +97,7 @@ export function createLoader(manifest, base = '/') {
           if (ctx) ctx.decodeAudioData(ab).then((b) => { buffers.set(id, b); if (want === id) startBed(id); }, () => {});
           else bytes.set(id, ab);
         }, () => { failed.add(id); });
-      } else { const img = new Image(); img.onload = () => images.set(id, u); img.src = u; }
+      } else if (A.get(id).kind !== 'music') { const img = new Image(); img.onload = () => images.set(id, u); img.src = u; } // music streams on demand
     }
     for (const ev of ['pointerdown', 'keydown']) addEventListener(ev, unlock, { once: true });
   };
@@ -124,6 +135,32 @@ export function createLoader(manifest, base = '/') {
     if (bed && ctx) fadeOut(bed, fade);
     bed = null;
   };
+  // ---- music: a streamed <audio> per track (not decoded to PCM: phone memory) -> its own gain -> master,
+  // so M (mute) and the -14 dB duck under a voice take apply to it too.
+  const tracks = new Map();
+  let song = null;
+  const ramp = (g, v, s) => { const t = ctx.currentTime; g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(v, t + s); };
+  const music = (id) => {
+    try {
+      if (!id || song?.id === id) return;
+      if (!ctx) { pend.music = id; return; }
+      const u = A.url(id, base);
+      if (!u) return;
+      gains();
+      let t = tracks.get(id);
+      if (!t) {
+        const el = new Audio(u); el.loop = true; el.preload = 'auto';
+        const g = ctx.createGain(); g.gain.value = 0;
+        ctx.createMediaElementSource(el).connect(g); g.connect(master);
+        t = { id, el, g }; tracks.set(id, t);
+      }
+      const old = song;
+      if (old) { ramp(old.g, 0, MUSIC_FADE); setTimeout(() => { if (song !== old) old.el.pause(); }, MUSIC_FADE * 1000 + 100); }
+      t.el.play()?.catch?.(() => {});
+      ramp(t.g, MUSIC_GAIN, MUSIC_FADE);
+      song = t;
+    } catch { /* music is never fatal */ }
+  };
   // The beat's scene: a change of scene stops the beds (the new scene's first beat starts its own).
   const scene = (id) => { if (id !== curScene) { curScene = id; stopBeds(); } };
   const play = (cue) => {
@@ -145,5 +182,5 @@ export function createLoader(manifest, base = '/') {
   const has = (id) => images.has(id); // true once the real image file has loaded (it then beats any fallback art)
   const setMuted = (v) => { muted = !!v; if (ctx) gains(); };
   const duck = (v) => { ducked = !!v; if (ctx) gains(); };
-  return { preload, play, src, unlock, has, setMuted, duck, scene, stopBeds, isBed: (c) => isBedId(A.cueId(c)), bedId: () => bed?.id ?? null };
+  return { preload, play, music, src, unlock, has, setMuted, duck, scene, stopBeds, musicId: () => song?.id ?? null, isBed: (c) => isBedId(A.cueId(c)), bedId: () => bed?.id ?? null };
 }

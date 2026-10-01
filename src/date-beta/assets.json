@@ -3,7 +3,10 @@
   "cues": { "static": "SX-06", "wind": "SX-15", "bell": "SX-23", "train-hum": "SX-21", "tick": "SX-45", "drone": "SX-27", "breath": "SX-28", "silence": null,
     "thump": "SX-04", "kettle": "SX-37", "rain": "SX-20",
     "collapse-tilt": "SX-C1", "collapse-slip": "SX-C2", "collapse-fall": "SX-C3", "collapse-glitch": "SX-C4", "collapse-void": null },
+  "music": { "default": "bgm-sweet", "dark": "bgm-dark", "darkScenes": ["cup", "steeped", "unknown", "escape", "escape-win", "escape-timeout", "leave", "leave-fu", "leave-yeah"] },
   "assets": {
+    "bgm-sweet": { "kind": "music", "path": "date-beta/music/bgm-sweet.mp3" },
+    "bgm-dark": { "kind": "music", "path": "date-beta/music/bgm-dark.mp3" },
     "SX-37": { "kind": "sfx", "path": "date-beta/sfx/kettle.wav" },
     "SX-20": { "kind": "sfx", "path": "date-beta/sfx/rain.wav" },
     "SX-04": { "kind": "sfx", "path": "date-beta/sfx/thump.wav" },
