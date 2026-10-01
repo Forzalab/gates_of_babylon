@@ -1,6 +1,6 @@
 #!/bin/bash
 # Alt QA one-shot (Tony: "prep ur env so u just go"). Usage: bash research/sprint-1001/alt-qa/run.sh
-# 1) moves the code worktree to the newest origin/demo-1001, rebuilds, serves a frozen preview on :5270
+# 1) moves the code worktree to the newest origin/${QA_BRANCH:-main}, rebuilds, serves a frozen preview on :5270
 # 2) shoots run 1 (blind) + run 2 (chips): routes A, B (katsu ending), leave (game-over endings), escape (win/timeout)
 #    in parallel per run, clock 12:20, 1920x1080, seed 1, a fresh browser context per route
 # 3) builds 4x3 contact sheets per route, prints INDEX, kills the preview by PID.
@@ -11,9 +11,9 @@ KIT=$(cd "$(dirname "$0")" && pwd)
 ROUTES=${ROUTES:-"A B leave escape"}
 cd "$ROOT" || exit 1
 # fresh container fallback: recreate the code worktree
-[ -d "$CODE" ] || git worktree add -q --detach "$CODE" origin/demo-1001
-git -C "$CODE" fetch -q origin demo-1001 && git -C "$CODE" checkout -q --detach origin/demo-1001 || exit 1
-echo "demo-1001 = $(git -C "$CODE" log -1 --format='%h %ci %s')"
+[ -d "$CODE" ] || git worktree add -q --detach "$CODE" origin/${QA_BRANCH:-main}
+git -C "$CODE" fetch -q origin ${QA_BRANCH:-main} && git -C "$CODE" checkout -q --detach origin/${QA_BRANCH:-main} || exit 1
+echo "${QA_BRANCH:-main} = $(git -C "$CODE" log -1 --format='%h %ci %s')"
 cd "$CODE" && { [ -d node_modules ] || npm ci --no-audit --no-fund >/dev/null 2>&1; } && npx vite build >/tmp/qa-build.log 2>&1 || { echo BUILD FAILED; tail -20 /tmp/qa-build.log; exit 1; }
 npx vite preview --port 5270 --strictPort >/tmp/qa-preview.log 2>&1 &
 PREV=$!; sleep 4
