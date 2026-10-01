@@ -86,11 +86,13 @@ export function graph(scenes) {
 // pushed down past the block above it. `legacy` (scenes the game cannot reach from scene 1) get their own lane under
 // the main map, on the same column grid. Box sizes are estimated from the text (mono ids, bold pill labels) and the
 // UI draws every box at exactly that size, so the estimate is the box.
-export const LAYOUT = { margin: 60, colGap: 150, laneGap: 150, blockGap: 36, nodeH: 48, pillH: 38, pillGap: 10, indent: 30,
+export const LAYOUT = { margin: 60, colGap: 150, laneGap: 150, blockGap: 36, nodeH: 48, pillH: 38, pillGap: 18, indent: 30,
   ch: 10.8, pad: 44, pillCh: 10.5, pillPad: 40 };
 export const nodeWidth = (id, o = LAYOUT) => Math.ceil(id.length * o.ch + o.pad);
 export const pillText = (e) => String(e.text ?? '').replace('{OR}', 'OR');
-export const pillWidth = (e, o = LAYOUT) => Math.ceil(pillText(e).length * o.pillCh + o.pillPad);
+// CJK / full-width glyphs count double.
+const ems = (s) => [...s].reduce((n, c) => n + (c.codePointAt(0) >= 0x2e80 ? 2 : 1), 0);
+export const pillWidth = (e, o = LAYOUT) => Math.ceil(ems(pillText(e)) * o.pillCh + o.pillPad);
 export function layout(g, o = LAYOUT, legacy = new Set()) {
   const fwd = g.edges.filter((e) => e.kind !== 'back' && e.to);
   const idx = Object.fromEntries(g.nodes.map((n, i) => [n.id, i]));
