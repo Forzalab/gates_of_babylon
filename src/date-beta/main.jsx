@@ -184,6 +184,25 @@ function Player() {
   const [ready, setReady] = useState(false); // the beat's hold (and its voice take) has passed (NEXT shows)
   const [vmuted, setVmuted] = useState(VOICE.muted);
   useEffect(() => VOICE.subscribe(setVmuted), []);
+  // M2 leave audit: --boxtop = the dialogue box's top edge (stage px). A waist-up Nanda on a choice beat (beta.css
+  // .raised, no floor) hangs her cut hem just behind it, so a 1-line box leaves no air under her and a 2-line box no face cut.
+  useEffect(() => {
+    const st = stageRef.current;
+    if (!st) return undefined;
+    const put = () => {
+      const box = st.querySelector('.db-say');
+      if (!box) return st.style.removeProperty('--boxtop');
+      const kk = st.getBoundingClientRect().height / 1080 || 1;
+      st.style.setProperty('--boxtop', `${Math.round((box.getBoundingClientRect().top - st.getBoundingClientRect().top) / kk)}px`);
+    };
+    const ro = new ResizeObserver(put);
+    let on = null; // the box being watched (a new beat remounts it)
+    const bind = () => { const b = st.querySelector('.db-say'); if (b === on) return; ro.disconnect(); on = b; if (b) ro.observe(b); put(); };
+    const mo = new MutationObserver(bind);
+    mo.observe(st, { childList: true, subtree: true });
+    bind();
+    return () => { ro.disconnect(); mo.disconnect(); };
+  }, []);
   // On a reaction frame the scene is the pick's scene, even when the pick already jumped on.
   const scene = SCENES[pos.react ? pos.react.s : pos.s];
   // The beat as this run sees it: the reaction frame, else the beat with `vary` overlays (bento echo) applied.
