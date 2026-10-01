@@ -21,7 +21,7 @@ export const isBedId = (id) => BEDS.includes(id);
 // Music: one looping mood track under everything (assets.json "music"), sweet by default, dark on the darkScenes.
 // It survives scene changes (same track = no-op) and crossfades over MUSIC_FADE when the track changes.
 // MUSIC_GAIN is the knob: the files sit at -30 LUFS, so 0.35 (~-9 dB) lands near -39 LUFS, far under a voice take.
-export const MUSIC_GAIN = 0.35;
+export const MUSIC_GAIN = 0.15;
 export const MUSIC_FADE = 2.5; // seconds
 export function musicFor(manifest, sceneId) {
   const m = manifest?.music;
