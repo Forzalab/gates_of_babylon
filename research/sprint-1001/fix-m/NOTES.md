@@ -21,3 +21,15 @@ No line text changed (voice is recorded). Scope: only M1 and M2; M3-M10 are not 
 - **Files:** research/sprint-0930/curry/pipeline/draw.py, public/date-beta/trace/curry/sauce.svg, src/date-beta/art/curry/Butter.jsx.
 - **After:** curry7. Her pink pin lead comes in from the right and its nub sits on the boat's belly; the stream still falls from the spout
   into the butter chicken. Nothing floats, no HUD overlap, no five fingers.
+
+## M2: shop 5 (`v2-shop` beat 5, bg `shop-basket-cups`): "Her hand puts one cup in the basket" showed no hand
+- **Wrong:** the top-down basket insert showed all three cups already at rest and no hand at all, so the line had nothing to match.
+  The Checkout.jsx comment said "her hand lowers cup 3", but no hand was ever drawn.
+- **Fix (art/shop/Checkout.jsx `BasketCupBowls`):** cup 3 is still in her hand, just above its spot. It is lifted (-10, -35) and drawn a little
+  bigger (0.62 vs 0.56), as it is closer to the top-down camera. Its overhead shadow stays on the landing spot, softer and wider.
+  Her `PinHand` (from shop/parts.jsx, H2's pin look, never five fingers) sits at (1275, 625) with rot -60 and s 0.8, so the round nub closes on cup 3's
+  lower-right rim at about (1206, 585). The lead runs down-right off the right frame edge and passes under the box, clear of cups 1 and 2.
+  Cups 1 and 2 render exactly as before. The aria label now names the two cups and her pin lowering the third.
+- **Files:** src/date-beta/art/shop/Checkout.jsx.
+- **After:** shop5. Her pink pin visibly holds the third cup over the basket, so "puts one cup in the basket" now has a hand. The insert keeps the usual
+  focus blur and dim behind the box: the beat has no `cut.sharp`, and making it sharp would be a pack change outside this fix. The pin still reads clearly through it.
