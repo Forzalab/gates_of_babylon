@@ -86,3 +86,12 @@ on dark). Consistent: OK.
 
 Left for Tony (no 6th iteration): a wide gap between her pair and yours in the middle; "hers stay close" would want yours
 ~100 px further left. The light-ray wedge under her front shoe is the park grade's flare (GradeLayer), not a shadow.
+
+## Reviewed, no legs on screen (N/A)
+v2-street 0-5 (feet under the box / she is offstage at door 12), v2-train 4 + 8 (3-line / 2-line box over her feet),
+v2-home 0-1 + genkan-in 0-1 (shoe + slipper props only, no legs; the props sit on the floor with contact), underpass 0.
+
+## Contact sheet 3 (all passed shots, final renders): compare/contact-sheet-3-all.jpg
+The puddle shot (pre-restart) and the seven new ones share one shoe model (plum dome, pink strap, sole lip), one pin
+length and one sneaker model (the puddle's purple + white). Each frame's shadow ink and rim come from its own light.
+Compares 03 + 04 re-rendered after the grade fix (the focus glow is back on her in both).
