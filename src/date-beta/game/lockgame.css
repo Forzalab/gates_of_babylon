@@ -2,13 +2,14 @@
    is a static frame (reduced-motion safe by construction). */
 .lg-root { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;
   gap: 1.6vh; background: radial-gradient(ellipse at 50% 30%, #2a1236 0%, var(--scrim) 70%); color: var(--scrim-ink);
-  font-family: var(--cond); user-select: none; }
+  font-family: var(--cond); user-select: none; box-sizing: border-box; padding-top: 14vh; }
+/* M1 route B: the title + timer sit below the HUD-safe band (y ~140 at 1080p = 13vh); the tiles shrink 15 -> 13vh to fit */
 .lg-head { display: flex; gap: 3vw; align-items: baseline; }
 .lg-title { font-size: 5vh; font-weight: 800; letter-spacing: .08em; color: var(--pink); }
 .lg-time { font-family: var(--mono); font-size: 5vh; font-weight: 700; color: var(--ink); min-width: 4ch; text-align: right; }
 .lg-time.low { color: var(--or-on-dark); }
 .lg-sub { font-size: 2.8vh; opacity: .9; }
-.lg-grid { display: grid; grid-template-columns: repeat(4, 15vh); grid-template-rows: repeat(4, 15vh); gap: 1.6vh; }
+.lg-grid { display: grid; grid-template-columns: repeat(4, 13vh); grid-template-rows: repeat(4, 13vh); gap: 1.6vh; }
 .lg-tile { position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center;
   border: .5vh solid var(--purple); border-radius: 2vh; background: var(--edge); cursor: pointer; padding: 0; }
 .lg-tile svg { width: 60%; height: 60%; }

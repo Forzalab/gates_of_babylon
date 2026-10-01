@@ -625,8 +625,9 @@ def napkin_shape(stain, fold=False):
             f'<path d="{blobpath(random.Random(3), 10, -10, 22, 1.6, .7)}" fill="{base}" opacity=".85"/><path d="{blobpath(random.Random(4), 60, 30, 14, 1.6, .7)}" fill="{base}" opacity=".7"/>')
 
 
-def napkin_shot(surface, dish, stain):
-    """your fingers (from the bottom-left, curry on the tips) + her hand from the right wiping them with the napkin."""
+def napkin_shot(surface, dish, stain, pin=False):
+    """your fingers (from the bottom-left, curry on the tips) + her hand from the right wiping them with the napkin.
+    pin = her hand is her pin (M1 route B, katsu): the nub presses the napkin over your fingertips."""
     base, dark, hi = stain
     b = surface + dish
     # your open hand, palm down, fingertips with curry; contact shadow on the table under it
@@ -634,6 +635,10 @@ def napkin_shot(surface, dish, stain):
     b += hand(560, 610, -10, 1.5, 'open', 'you')
     b += ''.join(f'<ellipse cx="{x}" cy="{y}" rx="16" ry="10" fill="{base}" stroke="{dark}" stroke-width="2"/>' for x, y in [(880, 480), (910, 520), (905, 565)])
     # her hand wraps the napkin over your index + middle fingers (napkin on top = it touches them)
+    if pin:
+        nap = f'<g transform="translate(930 470) rotate(170) scale(1.25 -1.25)">{napkin_shape(stain)}</g>'
+        b += cel(pin_hold((1010, 430), 84, ((2000, 560), (1500, 330)), held=nap), 'k', lift=(30, 60), op=.2)
+        return svg(b)
     b += hand(1084, 642, 180 + 10, 1.5, 'grip', 'her', flip=True, held=f'<g transform="translate(150 -70) rotate(180) scale(1 -1)">{napkin_shape(stain)}</g>')
     return svg(b)
 
@@ -747,7 +752,11 @@ def katsu_plate(cut=False):
         return b + spr('katsu-plate', *PLATE, shadow=.34)
     sl = 'M' + 'L'.join(f'{x} {y}' for x, y in SLICE) + 'Z'
     inner = (f'<clipPath id="nosl"><path d="M-10 -10H600V400H-10Z{sl}" clip-rule="evenodd"/></clipPath>'
-             f'<path d="{sl}" fill="{ROUX_FILL}" stroke="#4a2410" stroke-width="2"/><g clip-path="url(#nosl)">{BODY["katsu-plate"]}</g>')
+             f'<path d="{sl}" fill="{ROUX[0]}" stroke="#4a2410" stroke-width="2"/>'
+             f'<path d="M330 112Q352 92 380 112" stroke="#c07a3c" stroke-width="6" fill="none" stroke-linecap="round" opacity=".8"/>'
+             f'<ellipse cx="342" cy="104" rx="7" ry="4" fill="#ffffff" opacity=".7"/>'
+             f'<path d="M336 150Q360 160 384 146" stroke="#5a2e12" stroke-width="5" fill="none" stroke-linecap="round" opacity=".7"/>'
+             f'<g clip-path="url(#nosl)">{BODY["katsu-plate"]}</g>')
     return b + spr('katsu-plate', *PLATE, inner=inner, shadow=.34)
 
 
@@ -798,16 +807,27 @@ def katsu_cut():
     end = (bowl[0] + 940 * math.cos(a), bowl[1] + 940 * math.sin(a))
     G = (bowl[0] + 600 * math.cos(a), bowl[1] + 600 * math.sin(a))
     crunch = f'<path d="M{e[0] - 80} {e[1] - 70}l-40-40M{e[0] - 20} {e[1] - 100}l-6-56M{e[0] - 120} {e[1] - 10}l-56-10" stroke="#fff6de" stroke-width="10" stroke-linecap="round"/>'
-    h, H = grip.hand(G, 180 - 14 - 22, 52, 'spoon', 'her', flip=True, uid='kc')
     sp = spoon(bowl[0], bowl[1], end[0], end[1], 208)
-    return svg(counter() + katsu_plate() + crunch + cel(sp, 'k', (30, 50), .22) + hand_cel(h, 'k', 52, 4))
+    # M1 route B: her pin (Nanda canon, as napkin-fold) closes over the handle 6 cm up from its end; the lead comes in
+    # from the right frame edge, low (clear of the HUD column top right); the nub top stays below y 200.
+    Gp = (bowl[0] + 430 * math.cos(a), bowl[1] + 430 * math.sin(a))   # the grip, nearer the bowl: clear of the HUD column
+    arm = pin_hold((round(Gp[0]), round(Gp[1]) + 6), 70, ((2000, 640), (1800, 420)))
+    return svg(counter() + katsu_plate() + crunch + cel(sp, 'k', (30, 50), .22) + cel(arm, 'k', lift=(60, 120), op=.2))
 
 
 def katsu_pour():
     c = 2.0; rice = P((440, 170)); d0 = (760, 480)
     g = f'<g transform="{crop(c, rice, d0)}">{katsu_plate()}</g>'
     pool = f'<path d="M{d0[0] - 140} {d0[1] + 20}C{d0[0] - 120} {d0[1] - 50} {d0[0] + 140} {d0[1] - 60} {d0[0] + 200} {d0[1] + 10}C{d0[0] + 220} {d0[1] + 70} {d0[0] + 100} {d0[1] + 100} {d0[0]} {d0[1] + 90}C{d0[0] - 80} {d0[1] + 84} {d0[0] - 150} {d0[1] + 60} {d0[0] - 140} {d0[1] + 20}z" fill="{ROUX[0]}" stroke="{ROUX[1]}" stroke-width="10"/><path d="M{d0[0] - 60} {d0[1] - 10}c50-24 140-24 200-6" stroke="{ROUX[2]}" stroke-width="8" fill="none" stroke-linecap="round"/><ellipse cx="{d0[0] - 40}" cy="{d0[1] + 20}" rx="14" ry="8" fill="#fff"/>'
-    return svg(counter() + g + pool + boat_cel(boat(1460, 250, -30, 2.6, ROUX, (d0[0] + 40, d0[1] + 10)), 'k'))
+    to = (d0[0] + 40, d0[1] + 10)
+    # M1 route B: the boat is held. boat() places itself from the landing point (spout ~260 px above it); its handle is
+    # off the top of this crop, so her pin nub cradles the belly from below (boat-local (40, 40), on the belly line), lead from the right.
+    rot, sc = -30, 2.6
+    c_, s_ = math.cos(math.radians(rot)), math.sin(math.radians(rot))
+    bx = to[0] + 34 - (-110 * c_ + 30 * s_) * sc; by = to[1] - 260 - (-110 * s_ - 30 * c_) * sc
+    hx, hy = bx + (40 * c_ - 40 * s_) * sc, by + (40 * s_ + 40 * c_) * sc
+    arm = pin_hold((round(hx), round(hy)), 58, ((2000, 660), (1640, 470)))
+    return svg(counter() + g + pool + boat_cel(boat(1460, 250, rot, sc, ROUX, to), 'k') + cel(arm, 'k', lift=(60, 120), op=.2))
 
 
 CLOSE = (1.0, (170 + 150 * 1350 / 520, 110 + 200 * 1350 / 520), (760, 540))   # the roux, left half of the plate
@@ -828,8 +848,10 @@ def katsu_close():
     rot = math.degrees(th) - 180 + math.degrees(math.atan2(far[1] - gp[1], gp[0] - far[0]))
     hide = [(entry[0] + 120, entry[1]), (entry[0] + 120, entry[1] + 200), (entry[0] - 120, entry[1] + 200), (entry[0] - 120, entry[1])]
     pc = food_piece('katsu', G, rot, k, ROUX, 1.0, 0, 'c', hide)
-    h, H = grip.hand(G, 64, s, 'pinch', 'her', held=pc, wrist=6, uid='kc2')
-    return svg(counter() + g + hand_cel(h, 'k', s, 5) + meniscus(entry[0], entry[1], 1.9 * s, ROUX))
+    # M1 route B: her pin nub pinches the slice's near end (the slice is drawn first, the nub closes over it); the lead
+    # comes in from the right frame edge, above the plate, never into the HUD band (nub top > 200).
+    arm = pin_hold((round(G[0]), round(G[1])), 64, ((2000, 300), (1500, 160)), held=pc)
+    return svg(counter() + g + cel(arm, 'k', lift=(50, 90), op=.2) + meniscus(entry[0], entry[1], 1.9 * s, ROUX))
 
 
 def katsu_feed():
@@ -881,7 +903,7 @@ SHOTS = {
     'napkin': lambda: napkin_shot(cloth(), f'<g transform="translate(-700 560) scale(.8)">{thali_group()}</g>', BUTTER),
     'katsu-dish': katsu_dish, 'katsu-cut': katsu_cut, 'katsu-pour': katsu_pour, 'katsu-close': katsu_close,
     'katsu-feed': katsu_feed, 'katsu-bite': katsu_bite, 'katsu-water': katsu_water, 'katsu-counter': katsu_counter,
-    'katsu-napkin': lambda: napkin_shot(counter(), f'<g transform="translate(-700 560) scale(.8)">{katsu_plate()}</g>', ROUX),
+    'katsu-napkin': lambda: napkin_shot(counter(), f'<g transform="translate(-700 560) scale(.8)">{katsu_plate()}</g>', ROUX, pin=True),
     'napkin-fold': lambda: napkin_fold(counter(), f'<g transform="translate(-600 520) scale(.8)">{spr("fukujinzuke", 1250, 30, 620, shadow=.28)}{spr("katsu-plate", *PLATE, inner=plate_eaten(ROUX), shadow=.34)}</g>', ROUX),
 }
 only = sys.argv[2:]
