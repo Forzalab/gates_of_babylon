@@ -25,7 +25,11 @@ export function stampAt(scenes, pos) {
       if (p?.shot === 'stamp' && p.place && p.time) return p;
     }
   }
-  // No stamp on the route (the old stamp-less scenes: door, station-talk, rain-crossing): the nearest earlier stamp in file order.
+  // No stamp on the route (the old stamp-less scenes: door, station-talk, rain-crossing): a stamp whose place is this
+  // scene's chapter (STATION -> STATION 4:30 PM), else the nearest earlier stamp in file order.
+  const isStamp = (p) => p?.shot === 'stamp' && p.place && p.time;
+  const short = scenes[pos.s]?.short;
+  for (const sc of short ? scenes : []) for (const bt of sc.beats) if (isStamp(bt.props) && bt.props.place === short) return bt.props;
   for (let s = Math.min(pos.s, scenes.length) - 1; s >= 0; s--) {
     for (let b = scenes[s].beats.length - 1; b >= 0; b--) {
       const p = scenes[s].beats[b]?.props;

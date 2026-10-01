@@ -57,4 +57,6 @@ test('stampAt: the stamp in force walks back this scene, then the route (?scene=
   assert.equal(stampAt(scenes, { s: 0, b: 1, path: ['a'] }).time, '12:00 NOON', 'a new run starts clean');
   assert.equal(stampAt(scenes, { s: 2, b: 0, path: ['c'] }).time, '7:00 PM', 'no stamp on the route: nearest earlier stamp in file order');
   assert.equal(stampAt([{ id: 'z', beats: [{}] }], { s: 0, b: 0, path: ['z'] }), null);
+  const named = [{ id: 'a', beats: [{ props: { shot: 'stamp', place: 'STATION', time: '4:30 PM' } }] }, { id: 'h', beats: [st('7:05 PM')] }, { id: 'old', short: 'STATION', beats: [{}] }];
+  assert.equal(stampAt(named, { s: 2, b: 0, path: ['old'] }).time, '4:30 PM', 'chapter = stamp place wins over file order');
 });
