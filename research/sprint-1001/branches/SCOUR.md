@@ -260,3 +260,10 @@ Not demo-relevant but new (⚑ 10-01): `ccr-e9874dc9-9t3u5d`, `claude/bold-ptole
 | ⚑ `sprint/interiors` | MERGED | 0/0/0 | 2026-09-30 | — | — | date-beta interiors: escape-timeout returns to the traced sitting room |
 | ⚑ `sprint/shop-scene` | MERGED | 0/0/0 | 2026-09-30 | — | — | shop vtrace r2: cart POV, produce, eggs/OCPD, cups, basket + end card back on vtracer trac |
 | ⚑ `sprint/ux-six` | MERGED | 0/0/0 | 2026-09-30 | — | — | ux-six: shots (256-colour), control checks, FOR-ALT notes |
+
+## Re-check 06:40 PT vs ccr head `35df730c`
+- IN ccr now: `crowd-eyes`, `ccr-44b3aeaf-0iuf00` (M1/M2), `ccr-9e547080-secqtv` (H6/H7), `crowd-voice`. Head verified: test 439/439, voice-gaps 0 silent, build ok, float audit 0 flags.
+- `ccr-4a751f0b` / `ccr-5a9dde06` / `main` (sfx-wire + leave-route): **superseded**. ccr has its own sound wiring (f88d9316, `assets.js` beds/cues/duck, `vending-clunk` on v2-train 2), and the leave route lives in `packs/story.json` ("Say goodnight", rooftop leave). Do not merge: two sound systems.
+- `hud-build`: **superseded**. ccr's `Hud.jsx` + `lv-` styles in `beta.css`.
+- `narration-vo`: **drop**. Its 4 takes (281_13, 253_4, 254_0, 297_1) are referenced nowhere on ccr.
+- New: `crowd-voice-v2` @ 4032a7b (layered crowd chant v2). Gates green; merges only after Tony listens.
