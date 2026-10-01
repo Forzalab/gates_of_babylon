@@ -27,3 +27,13 @@ test('Choices wiring: a shown slot picks its ORIGINAL index; keys follow the sho
   const main = readFileSync(new URL('./date-beta/main.jsx', import.meta.url), 'utf8');
   assert.match(main, /pick\(orderRef\.current\?\.\[\+e\.key - 1\] \?\? \+e\.key - 1\)/);
 });
+
+test('C2 flow: a blind shuffle never shows the authored order; a handout (bento) is never shuffled', () => {
+  for (const n of [2, 3, 4]) for (let k = 0; k < 200; k++) {
+    const o = shuffleOrder(n, 1, `s:${k}`);
+    assert.ok(o.some((v, i) => v !== i), `n=${n} key s:${k} came out unshuffled`);
+  }
+  assert.deepEqual(shuffleOrder(3, 1, 'hungry:0').some((v, i) => v !== i), true, 'hungry:0 (C2 FAIL case) is shuffled');
+  const main = readFileSync(new URL('./date-beta/main.jsx', import.meta.url), 'utf8');
+  assert.match(main, /isBlind && nCh > 1 && !handout \? shuffleOrder/);
+});

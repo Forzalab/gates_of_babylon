@@ -245,9 +245,10 @@ function Player() {
   const off = !!scene.offstage; // she is in the house, not in the frame: no sprite, her lines are labelled from above
   const shown = useMemo(() => showLine(beat, off), [beat, off]);
   // Blind run 1: no chips, choices in a seeded shuffled order; keys 1-9 follow the shown order (orderRef).
+  // C2 flow: a handout (Scene A bento) draws its items by place, not by order, so it keeps the authored order (keys too).
   const isBlind = blind();
   const nCh = beat.choices?.length ?? 0, seedNow = pos.luck?.seed ?? SEED;
-  const order = useMemo(() => (isBlind && nCh > 1 ? shuffleOrder(nCh, seedNow, `${beat.scene}:${beat.index}`) : null), [isBlind, nCh, seedNow, beat.scene, beat.index]);
+  const order = useMemo(() => (isBlind && nCh > 1 && !handout ? shuffleOrder(nCh, seedNow, `${beat.scene}:${beat.index}`) : null), [isBlind, nCh, seedNow, beat.scene, beat.index, handout]);
   const orderRef = useRef(order);
   orderRef.current = order;
 

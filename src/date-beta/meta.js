@@ -65,7 +65,8 @@ export function shuffleOrder(n, seed = 0, key = '') {
   const rnd = () => { h = (h + 0x6d2b79f5) | 0; let t = Math.imul(h ^ (h >>> 15), 1 | h); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
   const o = Array.from({ length: n }, (_, i) => i);
   for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
-  return o;
+  // C2 flow: a shuffle that lands on the authored order (1 in n!) is no shuffle: rotate it by one.
+  return n > 1 && o.every((v, i) => v === i) ? [...o.slice(1), o[0]] : o;
 }
 
 export function clock(d = new Date()) {
