@@ -18,6 +18,7 @@ import Coach from './Coach.jsx';
 const HISTORY = 10; // linear undo stack depth (Tony)
 import Say from './Say.jsx';
 import Toasts, { TOAST_MS } from './Toasts.jsx';
+import { play } from './logicSfx.js';
 
 const edgeTypes = { wire: Wire };
 
@@ -159,6 +160,7 @@ export default function App() {
 
   const toggle = (id) => {
     commit();
+    play(circuit.nodes[id].value ? 'off' : 'on');
     setCircuit((c) => ({ ...c, nodes: { ...c.nodes, [id]: { ...c.nodes[id], value: !c.nodes[id].value } } }));
   };
 
@@ -274,6 +276,7 @@ export default function App() {
     const base = stuck(); at = free(at, it.kind, undefined, (q) => !worse(stuck(id, q, { id, type: it.kind, position: q }), base));
     setCircuit((c) => ({ ...c, nodes: { ...c.nodes, [id]: { id, kind: it.kind, ...(it.type && { type: it.type }), ...(it.kind === 'S' && { value: false }) } } }));
     setView((v) => [...v.map((n) => ({ ...n, selected: false })), { id, type: it.kind, position: at, data: {}, selected: true }]);
+    play('place');
   };
   const onDrop = (e) => {
     const raw = e.dataTransfer.getData(DND);
@@ -293,11 +296,13 @@ export default function App() {
     const check = canConnect(circuit, source, target, pin);
     if (!check.ok) {
       const phrase = REJECT_PHRASE[check.reason] ?? 'cantConnect';
+      play('reject');
       setReject({ node: target, handle: targetHandle, phrase, text: phrase === 'cantConnect' ? `Can't connect: ${check.reason}` : undefined });
       return setStatus({ phrase: null, text: '' }); // the gate says it (role=alert); the logo stays quiet
     }
     setReject(null);
     commit();
+    play('connect');
     const id = `w${nextWire++}`;
     setCircuit((c) => ({ ...c, wires: { ...c.wires, [id]: { id, source, target, pin } } }));
     straighten(source, target, pin);
@@ -339,7 +344,7 @@ export default function App() {
     const node = el?.closest('.react-flow__node')?.dataset.id;
     if (!node) return; // dropped on nothing
     // Same-kind port (input->input, output->output): no silent refusal; mark the port it was dropped on (T4).
-    if (el.classList.contains(from.type)) return setReject({ node, handle: el.dataset.handleid, phrase: null });
+    if (el.classList.contains(from.type)) return play('reject'), setReject({ node, handle: el.dataset.handleid, phrase: null });
     const to = { node, handle: el.dataset.handleid };
     const [src, dst] = from.type === 'source' ? [from, to] : [to, from];
     onConnect({ source: src.node, target: dst.node, targetHandle: dst.handle });
@@ -360,6 +365,7 @@ export default function App() {
   const removeNodes = (ids) => {
     if (!ids.length) return;
     commit();
+    play('trash');
     setView((v) => v.filter((n) => !ids.includes(n.id)));
     setCircuit((c) => ({
       nodes: Object.fromEntries(Object.entries(c.nodes).filter(([id]) => !ids.includes(id))),
@@ -426,6 +432,7 @@ export default function App() {
     const gone = changes.filter((ch) => ch.type === 'remove').map((ch) => ch.id);
     if (!gone.length) return;
     commit();
+    play('disconnect');
     setCircuit((c) => ({ ...c, wires: Object.fromEntries(Object.entries(c.wires).filter(([id]) => !gone.includes(id))) }));
   };
 
