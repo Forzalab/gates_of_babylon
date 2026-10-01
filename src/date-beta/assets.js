@@ -14,14 +14,14 @@ export function makeAssets(manifest = {}) {
 // Beds: the looping sounds. They run until the scene changes (or a 'silence' beat), one at a time (see createLoader).
 // Files are made to loop (synth.py: 0.5 s crossfaded ends). Every other sfx is a one-shot.
 export const BEDS = Object.freeze(['SX-20', 'SX-15', 'SX-21', 'SX-27', 'SX-06', 'umbrella-rain']);
-export const BED_LEVEL = 0.125; // Tony Oct 1: background beds -20 dB, well under the voice
+export const BED_LEVEL = 0.09; // Tony Oct 1: background beds -20 dB, well under the voice
 export const BED_FADE = 0.5; // seconds: a bed's fade in / out, and the crossfade when one bed replaces another
 export const isBedId = (id) => BEDS.includes(id);
 
 // Music: one looping mood track under everything (assets.json "music"), sweet by default, dark on the darkScenes.
 // It survives scene changes (same track = no-op) and crossfades over MUSIC_FADE when the track changes.
 // MUSIC_GAIN is the knob: the files sit at -30 LUFS, so 0.35 (~-9 dB) lands near -39 LUFS, far under a voice take.
-export const MUSIC_GAIN = 0.15;
+export const MUSIC_GAIN = 0.35;
 export const MUSIC_FADE = 2.5; // seconds
 export function musicFor(manifest, sceneId) {
   const m = manifest?.music;
