@@ -11,10 +11,10 @@
       { "speaker": "NANDA", "text": "Good. Now we can have the perfect date. The same perfect date. Ehehe." }
     ] },
     { "id": "meta-crowd", "title": "Meta: crowdwork", "short": "CROWD", "bg": "platform", "nanda": true, "beats": [
-      { "speaker": "NANDA", "text": "Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. Yes, you. I see you." },
-      { "speaker": "NANDA", "text": "Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. Everybody in here is thinking about me. That's the vibe, right?" },
-      { "speaker": "NANDA", "text": "Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. I'm just remembering your face. For later. ♡" },
-      { "speaker": "NANDA", "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover." }
+      { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "big-eyes-peek" } }, "text": "Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. Yes, you. I see you." },
+      { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "smug-gloating" } }, "text": "Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. Everybody in here is thinking about me. That's the vibe, right?" },
+      { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "4" } }, "text": "Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. I'm just remembering your face. For later. ♡" },
+      { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "anya-smile" } }, "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover." }
     ] },
     { "id": "meta-loop", "title": "Meta: loop", "short": "LOOP", "bg": "platform", "nanda": true, "beats": [
       { "speaker": "NANDA", "text": "Hey… have we stood here before? No. Silly. It's just a nice day. It's {TIME}. Remember that.", "vary": { "run": {

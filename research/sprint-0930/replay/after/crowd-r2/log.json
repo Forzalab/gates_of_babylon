@@ -1,0 +1,30 @@
+[
+ {
+  "nm": "01-meta-crowd-0.png",
+  "beat": "meta-crowd:0",
+  "text": "NANDA: Want to see a magic trick? It's 5:42 AM, a sleepy morning, and this is a classroom. Hi, you in the back row. Yes, you. I see you.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "02-meta-crowd-1.png",
+  "beat": "meta-crowd:1",
+  "text": "NANDA: Trick two. you by the window is thinking about snacks. you with the laptop open is thinking about me. Everybody in here is thinking about me. That's the ",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "03-meta-crowd-2.png",
+  "beat": "meta-crowd:2",
+  "text": "NANDA: Trick three. you pretending not to watch, you laughed a little. I heard it. It's okay, I'm not mad. I'm just remembering your face. For later. ♡",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "04-meta-crowd-3.png",
+  "beat": "meta-crowd:3",
+  "text": "NANDA: I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover.",
+  "choices": [],
+  "pop": null
+ }
+]
