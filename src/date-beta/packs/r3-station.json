@@ -173,6 +173,19 @@
     },
     {
       "scene": "v2-train",
+      "beat": 6,
+      "set": {
+        "vary": {
+          "run": {
+            "1": { "speaker": false, "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'" },
+            "2": { "text": "Twelve stops. Second time today. You forgot. I did not.", "props": { "cut": { "face": "big-eyes-peek", "raise": true, "plant": 72 } } },
+            "3": { "text": "Three fingers. Three times today. Same train. Same you.", "props": { "cut": { "face": "big-eyes-peek", "raise": true, "plant": 72 } } }
+          }
+        }
+      }
+    },
+    {
+      "scene": "v2-train",
       "beat": 7,
       "set": {
         "bg": "train-rain-sleepy",

@@ -3,7 +3,7 @@
   "flags": { "run": ["1", "2", "3"] },
   "scenes": [
     { "id": "meta-park", "title": "Meta: park", "short": "PARK", "bg": "rooftop", "nanda": true, "beats": [
-      { "speaker": "NANDA", "text": "I love your {CLOTHES}. You wore it for me. I can tell. Don't say no, I already decided. ♡", "timer": 12, "choices": [
+      { "speaker": "NANDA", "props": { "cut": { "raise": true, "face": "big-eyes-peek" } }, "text": "I love your {CLOTHES}. You wore it for me. I can tell. Don't say no, I already decided. ♡", "timer": 12, "choices": [
         { "text": "I wore it for you", "love": 3, "emote": "hearts", "fx": "love-burst", "react": "I knew it. I know everything about you. Even the time. It's {TIME}. ♡" },
         { "text": "It was clean", "default": true, "love": 1, "emote": "sweat", "fx": "none", "react": "Clean for me. That's the same thing, silly." },
         { "text": "Not everything is about you", "love": -4, "emote": "hate", "fx": "hate-quake", "react": "…Everything is about me. You'll learn. You always learn, around run {RUN}." }
