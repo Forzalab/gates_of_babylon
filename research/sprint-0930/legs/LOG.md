@@ -59,3 +59,17 @@ harder (ref 04, low sun); ours stay soft because none of these three keys is a h
 | 1 | floor 742 (clear of the rivets), walk pose, sun behind the camera front-left: shadow falls back + right, warm rim left, pavement bounce | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 9 | PASS |
 
 Left: the bg is soft at y 742 (blurred facade base), contact keeps 1 of 2.
+
+## 7. v2-train 6 "12 stops to her home." (train-sun, planted)
+| it | change | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | total | kept |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | before: soles on the 3-line box's rivets (683 vs 689), static in a moving carriage | 2 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 4 | - |
+| 1 | plant 90 -> 72 (floor entry 690 -> 670 to match, float audit 0); brace stance; low sun from the right windows: long cast left, orange rim, warm bounce, grade | 2 | 2 | 1 | 1 | 0 | 1 | 1 | 1 | 9 | yes: PASS |
+| 2 | darker cast ink (a .55 -> .72) | 2 | 2 | 1 | 1 | 0 | 1 | 1 | 1 | 9 | kept (equal; still hard to read on the dark-brown floor) |
+
+v2-train 8 (platform-rain): her feet are behind the box on every take (plant 100, a 2-line box): no legs on screen, N/A.
+
+## Contact sheet 2 (shots 5-7 against 2-4): compare/contact-sheet-2.jpg
+One shoe model, one pin length in all six; three stances (walk, brace, shy) read apart at thumbnail size; each scene's
+shadow ink comes from its own floor (cool blue deck, grey pavement, brown carriage). Weakest: the carriage cast (dark
+on dark). Consistent: OK.

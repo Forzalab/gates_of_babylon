@@ -18,7 +18,11 @@ export const FLOORS = {
   // (the facade + its glass are lit evenly, brighter on the left): her shadow falls away from us, back and right.
   'shop-way-out': { y: 742, step: 'walk',
     light: { side: -1, rim: '#fff6e6', bounce: '#d4d9dd', dx: -13, dy: -4, rot: -6, len: 1.5, ink: '34, 44, 60', a: 0.55, grade: 'saturate(.96)' } },
-  'train-sun': { y: 690 },        // the carriage floor (v2-train 6, matched to the Tony-approved plant 90)
+  // the carriage floor (v2-train 6). R7 legs: plant 90 -> 72 in r3-station.json (the 3-line box's rivets ate her soles), y 690 -> 670 to match.
+  // A moving carriage: the brace stance (feet apart for balance). Low 4:40 sun through the right-hand windows: a long
+  // warm-brown cast to the left, an orange rim on her right, the lit floor bouncing up warm.
+  'train-sun': { y: 670, step: 'brace',
+    light: { side: 1, rim: '#ffd29a', bounce: '#e9b27a', dx: -95, dy: 3, rot: -3, len: 2.1, ink: '40, 16, 8', a: 0.72, grade: 'saturate(.95) sepia(.08)' } },
   'platform-rain': { y: 698, wet: true },    // the platform edge (v2-train 8, plant 100)
   // R7 legs: the station feet (v2-train 3 bumped, 4 "Hey, you"): planted beats (cut.plant 90 wins for the y) still take
   // the pose + light. Key = the sun shafts from the upper right through the roof (Crowd.jsx): a cool rim on her right,

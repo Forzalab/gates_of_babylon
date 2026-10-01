@@ -42,3 +42,7 @@
 ## 6. v2-shop 12 (shop-way-out), walking out
 - UI: her soles sat on the box rivets (two-line box top ~772); contact shadow under the rivets. Pose: static on a walk-out.
 - Light: sunny 2 PM, the key behind the camera to the left (the facade glass is brightest on the left): shadow back-right.
+
+## 7. v2-train 6 (train-sun), the carriage
+- UI: soles on the rivets of the 3-line box. Pose: a plain stand in a moving carriage (KyoAni: feet apart for balance).
+- Light: 4:40 sun low through the right-hand windows: long warm cast to the left, orange rim right, warm floor bounce.
