@@ -1,5 +1,7 @@
 // BG-X1 fallback: XOR Coffee, 7:00 AM. Morning light through the front window, the counter, a wall clock at 7:00,
 // the sign. Two tables; the one by the window already has a cup at the seat facing yours.
+import { useStoryTime } from './util.js';
+
 // props.cups (leave-yeah 4, shot cafe-cups): "Every table has two cups. Every cup has your name." Both tables get a
 // pair, each cup marked "you" in her pink marker; the tables move up 60 / 90 px so the low pan clears the box.
 const Cup = ({ x, y, name }) => (
@@ -10,6 +12,7 @@ const Cup = ({ x, y, name }) => (
   </g>
 );
 export default function Cafe({ props = {} }) {
+  const [h, m] = useStoryTime(7, 0);
   return (
     <svg className="art cafe" viewBox="0 0 1920 1080" role="img" aria-label="XOR Coffee in the morning. The wall clock reads 7:00.">
       <defs>
@@ -30,8 +33,8 @@ export default function Cafe({ props = {} }) {
       <g transform="translate(1000 420)">
         <circle r="74" fill="#fbf7f1" stroke="#2a1a18" strokeWidth="8" />
         {Array.from({ length: 12 }, (_, i) => <line key={i} y1="-58" y2="-66" stroke="#2a1a18" strokeWidth="5" transform={`rotate(${i * 30})`} />)}
-        <line y2="-54" stroke="#2a1a18" strokeWidth="6" strokeLinecap="round" />
-        <line y2="-34" stroke="#2a1a18" strokeWidth="9" strokeLinecap="round" transform="rotate(210)" />
+        <line y2="-54" stroke="#2a1a18" strokeWidth="6" strokeLinecap="round" transform={`rotate(${m * 6})`} />
+        <line y2="-34" stroke="#2a1a18" strokeWidth="9" strokeLinecap="round" transform={`rotate(${(h % 12) * 30 + m / 2})`} />
       </g>
       {/* menu board */}
       <rect x="1180" y="320" width="560" height="300" fill="#3a3230" />

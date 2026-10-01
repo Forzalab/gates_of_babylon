@@ -1,8 +1,9 @@
 // Rooftop establishing shot: a pink clock tower (maker: Figur), cherry blossoms, blue sky, the school railing.
 // Palette sampled with Pillow from Tony's CC0 refs (research/date-beta-demo/compare.py). Flat fills, one sky gradient.
-// props.clock: 'live' = the player's real local time (second hand steps once a second; hidden under reduced motion)
-//              'noon' = snaps to 12:00 and stays (a hard cut in both modes).
+// Clock = the story clock (meta.js): the real time from 12:00 to 14:00, else 12:00. props.clock 'live' adds the
+// second hand while the real time shows (hidden under reduced motion); 'noon' = no second hand.
 import { rng, useNow } from './util.js';
+import { storyTime } from '../meta.js';
 import { OrSpans } from '../Say.jsx';
 
 const SAKURA = ['#f6daef', '#f4c4e4', '#eeaee4', '#ef8ac9', '#e49fcc'];
@@ -60,8 +61,9 @@ function Hands({ h, m, s, second }) {
 const ROMAN = ['XII', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI'];
 
 function ClockFace({ time, live, rm }) {
-  const hh = time.getHours(), mm = time.getMinutes(), ss = time.getSeconds();
-  const [h, m, s] = live ? [((hh % 12) + mm / 60) * 30, (mm + ss / 60) * 6, ss * 6] : [0, 0, 0];
+  const [hh, mm] = storyTime(12, 0, time), real = time.getHours() === 12 || time.getHours() === 13;
+  const ss = real ? time.getSeconds() : 0;
+  const [h, m, s] = [((hh % 12) + mm / 60) * 30, (mm + ss / 60) * 6, ss * 6];
   return (
     <g transform="translate(1140 430)">
       <rect x="-142" y="-142" width="284" height="284" fill="#d6a93f" stroke="#8a6320" strokeWidth="5" />
@@ -80,15 +82,25 @@ function ClockFace({ time, live, rm }) {
         return <text key={n} x={Math.cos(a) * 80} y={Math.sin(a) * 80 + 8} textAnchor="middle" className="roman">{n}</text>;
       })}
       <text y="48" textAnchor="middle" className="figur-clock">Figur</text>
-      <Hands h={h} m={m} s={s} second={live && !rm} />
+      <Hands h={h} m={m} s={s} second={live && real && !rm} />
     </g>
   );
 }
 
+// the side face (seen edge-on): same story time, hands squashed to the ellipse (rx 34 / ry 100)
+function SideHands({ time }) {
+  const [hh, mm] = storyTime(12, 0, time);
+  const hand = (deg, len, w) => {
+    const a = (deg * Math.PI) / 180;
+    return <line x1="1392" y1="430" x2={1392 + Math.sin(a) * len * 0.34} y2={430 - Math.cos(a) * len} stroke="#2b2440" strokeWidth={w} strokeLinecap="round" />;
+  };
+  return <g>{hand(((hh % 12) + mm / 60) * 30, 52, 6)}{hand(mm * 6, 80, 4)}</g>;
+}
+
 export default function Rooftop({ props, rm }) {
   const live = props.clock !== 'noon';
-  const now = useNow(live);
-  const stamp = live ? now.toTimeString().slice(0, 5) : '12:00';
+  const now = useNow(true);
+  const stamp = storyTime(12, 0, now).map((v) => String(v).padStart(2, '0')).join(':');
   return (
     <svg className="art rooftop" viewBox="0 0 1920 1080" data-time={stamp} role="img"
       aria-label={`A pink clock tower in cherry blossoms. The clock reads ${stamp}.`}>
@@ -124,7 +136,7 @@ export default function Rooftop({ props, rm }) {
       <rect x="1320" y="266" width="14" height="340" fill="#976c94" />
       <ellipse cx="1392" cy="430" rx="46" ry="118" fill="#d6a93f" stroke="#8a6320" strokeWidth="4" />
       <ellipse cx="1392" cy="430" rx="34" ry="100" fill="#efe6ee" stroke="#3b3350" strokeWidth="3" />
-      <line x1="1392" y1="430" x2="1392" y2="352" stroke="#2b2440" strokeWidth="5" />
+      <SideHands time={now} />
       <ClockFace time={now} live={live} rm={rm} />
 
       {/* ledge, belfry, ledge */}

@@ -41,6 +41,7 @@
           "shot": "stamp",
           "place": "SCHOOL ROOFTOP",
           "time": "12:00 NOON",
+          "live": true,
           "cut": {
             "frame": "off",
             "sharp": true

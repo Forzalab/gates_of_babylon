@@ -1,5 +1,6 @@
 // Tiny shared helpers for the hand-authored SVG scenes.
 import { useEffect, useState } from 'react';
+import { storyTime } from '../meta.js';
 
 // Deterministic RNG (mulberry32): blossom clusters, rice grains and QR modules look hand-placed but never move.
 export function rng(seed) {
@@ -36,6 +37,11 @@ export function useNow(on = true) {
     return () => clearTimeout(t);
   }, [on]);
   return now;
+}
+
+// a story-clock dial: canonical [h, m] -> what it shows now (meta.js storyTime; real time only 12:00-14:00)
+export function useStoryTime(h, m) {
+  return storyTime(h, m, useNow(true));
 }
 
 export const HEART = 'M0 -3C-4 -10 -14 -6 -9 2L0 10L9 2C14 -6 4 -10 0 -3Z';
