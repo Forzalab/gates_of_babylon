@@ -1,0 +1,58 @@
+{
+ "log": [
+  {
+   "nm": "01-v2-curry-1-choice.png",
+   "beat": "v2-curry:1",
+   "who": "NANDA",
+   "line": "I am hungry. You pick my lunch. Pick the right one.",
+   "choices": [
+    "Butter chicken for her",
+    "Katsu curry",
+    "I am not hungry"
+   ]
+  },
+  {
+   "nm": "02-v2-curry-1-react.png",
+   "beat": "v2-curry:1",
+   "who": "NANDA",
+   "line": "Then you watch me eat.",
+   "choices": []
+  },
+  {
+   "nm": "03-v2-curry-alone-0.png",
+   "beat": "v2-curry-alone:0",
+   "who": "",
+   "line": "She opens the yellow door. A bell rings.",
+   "choices": []
+  },
+  {
+   "nm": "04-v2-curry-alone-1.png",
+   "beat": "v2-curry-alone:1",
+   "who": "",
+   "line": "She eats alone. You get no food. She looks at you the whole time.",
+   "choices": []
+  },
+  {
+   "nm": "05-v2-curry-alone-2.png",
+   "beat": "v2-curry-alone:2",
+   "who": "",
+   "line": "She folds her napkin and keeps it. She collects them.",
+   "choices": []
+  },
+  {
+   "nm": "06-v2-curry-alone-3.png",
+   "beat": "v2-curry-alone:3",
+   "who": "",
+   "line": "We walk out to the street. It is 3:40 PM.",
+   "choices": []
+  },
+  {
+   "nm": "07-v2-train-0.png",
+   "beat": "v2-train:0",
+   "who": "",
+   "line": "4:30 PM. Her station. She takes your hand. 'Now we go to MY home. On MY train.'",
+   "choices": []
+  }
+ ],
+ "errs": []
+}
