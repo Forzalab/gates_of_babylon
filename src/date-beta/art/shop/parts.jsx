@@ -192,6 +192,23 @@ export function PinHand({ x, y, rot = 0, s = 1, press = false, r = 58 }) {
   );
 }
 
+// her pin as a free lead (H3): from `from` (a point hidden behind her sprite, at her pin's height) via the control point
+// `ctrl` to the nub at `nub`. Same look as <PinHand>; `held` (drawn first) sits under the nub, so the nub closes on it.
+export function PinLead({ from, ctrl, nub, r = 32, held = null }) {
+  const [x0, y0] = from, [cx, cy] = ctrl, [nx, ny] = nub;
+  const d = `M${x0} ${y0} Q${cx} ${cy} ${nx} ${ny}`;
+  return (
+    <g>
+      {held}
+      <path d={d} fill="none" stroke={PIN.rim} strokeWidth={r * 0.62} strokeLinecap="round" />
+      <path d={d} fill="none" stroke={PIN.lit} strokeWidth={r * 0.27} strokeLinecap="round" />
+      <circle cx={nx} cy={ny} r={r} fill={PIN.lit} stroke={PIN.rim} strokeWidth={r * 0.14} />
+      <path d={`M${nx - r * 0.1} ${ny + r * 0.62} A${r * 0.66} ${r * 0.66} 0 0 0 ${nx + r * 0.62} ${ny + r * 0.08}`} fill="none" stroke={PIN.groove} strokeWidth={r * 0.16} strokeLinecap="round" />
+      <ellipse cx={nx - r * 0.36} cy={ny - r * 0.38} rx={r * 0.3} ry={r * 0.2} transform={`rotate(-30 ${nx - r * 0.36} ${ny - r * 0.38})`} fill="#fff" opacity=".8" />
+    </g>
+  );
+}
+
 export function Hand({ x, y, rot = 0, s = 1, her = false, pose = 'flat', thumb = 'left', sleeve, press = false }) {
   if (her) return <PinHand x={x} y={y} rot={rot} s={s} press={press} />;
   const sl = sleeve ?? (her ? SP.her : SP.knit);

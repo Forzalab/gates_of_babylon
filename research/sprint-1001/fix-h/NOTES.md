@@ -44,3 +44,15 @@ Scope: H4/H5/M4/L4/C1 were fixed elsewhere. The coordinator moved H6 (and curry 
   - Shop 12 (ShopExit) is H3, below.
 - **Also checked (main's flag), no fix needed:** katsu 11 (v2-curry-katsu:11) and the escape end cards (escape-win:7, escape-timeout:7) show the pin legs with shoes
   standing on the floor, with the correct legs: katsu11-after.jpg, escape-win7-after.jpg, escape-timeout7-after.jpg.
+
+## H3: shop 12 (ShopExit): a pink arm came down from the ceiling to hold the sleeve
+- **Wrong:** "She holds your sleeve" was drawn as a pink-sleeved 5-finger arm entering from the top right, gripping your green sleeve by the
+  NAND MART bags. Nanda stood at the centre, nowhere near it, so the arm read as a disembodied limb from the ceiling.
+- **Root cause:** in art/shop/Front.jsx ShopExit, `<Hand x={1440} y={330} rot={120} her ...>` placed her hand as a free cel with its forearm
+  running off the top edge, on the far side of the frame from her sprite (her pins are on her left side, at about x 740).
+- **Fix:** the bags, their handles and your fist (green sleeve, now running off the LEFT frame edge into the door frame) are moved to her pin
+  side, just left of her. A new `PinLead` in shop/parts.jsx (the same pin look as `PinHand`) runs from behind her body at her upper pin's height (x 800,
+  y 457, hidden under her sprite) in a low curve, and its round nub pinches the cuff of your sleeve from below, just behind the fist.
+  The ceiling arm is deleted. The text and voice are unchanged.
+- **Files:** src/date-beta/art/shop/Front.jsx, src/date-beta/art/shop/parts.jsx.
+- **After:** shop12. Her own pin lead visibly comes out of her side and ends on your sleeve. Nothing comes from the ceiling, the sleeve reaches the frame edge, and nothing floats.
