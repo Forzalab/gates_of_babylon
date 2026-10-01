@@ -1,11 +1,12 @@
 // Replay shot driver: node shoot.mjs <name> "<query>" [choiceIdx|first|last] [maxShots]
+// ROOT=<dir> writes to <dir>/<name>/ instead of shots/<name>/ (the M4 fix pass: ROOT=after).
 // Opens date-beta.html?<query>, clicks through the scene (stops when the scene id changes / an end card), one PNG per new state.
 import pkg from '/opt/node22/lib/node_modules/playwright/index.js';
 import fs from 'node:fs';
 const { chromium } = pkg;
 const [name, query, pol = '0', max = '14'] = process.argv.slice(2);
 const PORT = process.env.PORT || 5231;
-const OUT = new URL('./shots/' + name + '/', import.meta.url).pathname;
+const OUT = new URL(`./${process.env.ROOT || 'shots'}/${name}/`, import.meta.url).pathname; // ROOT=after for the fix pass
 fs.mkdirSync(OUT, { recursive: true });
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
 const page = await (await browser.newContext({ viewport: { width: 1920, height: 1080 } })).newPage();
