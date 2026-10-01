@@ -402,6 +402,9 @@ body { font-family: var(--cond); color: var(--ink); }
 .stage.focus .scene:has(.sw-mid) { filter: brightness(.84); }
 /* R7 legs: the park walk-out cutaway (art/shots/FeetWalk.jsx): its trace is already blurred, the leg cels stay crisp */
 .stage.focus .scene:has(.fw-walk) { filter: brightness(.9); }
+/* menu-bg (Tony 10-01): the GOAL card (rooftop:0) sits on the OLD flowery look: crisp tower, no blur, no fence lens.
+   The card is opaque; the .db-focus vignette stays as the light scrim. */
+.stage.focus.is-goal .scene, :root[data-lowfx] .stage.focus.is-goal .scene { filter: none; }
 .db-focus { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 334ms ease-out;
   background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(26, 7, 16, .55) 100%); }
 .stage.focus .db-focus { opacity: 1; }
