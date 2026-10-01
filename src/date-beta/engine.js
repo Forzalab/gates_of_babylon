@@ -49,7 +49,7 @@ const KEYS = {
   root: ['version', 'note', 'flags', 'love', 'gacha', 'scenes'],
   scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short', 'offstage'],
   beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end', 'loveHidden'],
-  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake', 'pass'],
+  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake', 'pass', 'next'],
 };
 // Default emote for a score change: +3 and up hearts, +2 heart, +1 sweat, -1 pout, -2 or, -3 and down crack.
 export const emoteFor = (love) => (love >= 3 ? 'hearts' : love === 2 ? 'heart' : love === 1 ? 'sweat'
@@ -396,6 +396,7 @@ function loadChoices(list, at, decl = {}) {
     if (c.pass && c.react != null) fail(where, 'a pass pick has no reaction frame, so no react line');
     const fx = c.fake ? 'chosen-flash' : c.fx ?? (love > 0 ? 'none' : 'none');
     let react = null;
+    if (c.next != null && (typeof c.next !== 'string' || !c.next.trim() || words(c.next) > 4 || c.react == null)) fail(where, 'next = a short label (<= 4 words) for the NEXT button on its react frame; needs a react');
     if (c.react != null) {
       if (typeof c.react !== 'string' || !c.react.trim()) fail(where, 'react must be a non-empty string (her line)');
       if (words(c.react) > MAX_WORDS) fail(where, `react has ${words(c.react)} words, max ${MAX_WORDS}`);
@@ -404,7 +405,7 @@ function loadChoices(list, at, decl = {}) {
     }
     return Object.freeze({ text: c.text, side, go: loadGo(c.go, where, decl), if: declared(decl, flagsField(c.if, where, 'if'), where),
       set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or),
-      love, fx, fake: !!c.fake, pass: !!c.pass, emote: love ? c.emote ?? (fx === 'hate-quake' ? 'hate' : emoteFor(love)) : null, react, tell: love ? c.tell ?? true : false });
+      love, fx, fake: !!c.fake, pass: !!c.pass, emote: love ? c.emote ?? (fx === 'hate-quake' ? 'hate' : emoteFor(love)) : null, react, tell: love ? c.tell ?? true : false, ...(c.next != null ? { next: c.next.trim() } : {}) });
   });
   // A fake choice plays the first choice's outcome (go / set / love / emote / react), so the goal walk and the route graph see it.
   return Object.freeze(loaded.map((c) => {
@@ -531,7 +532,7 @@ function take(scenes, pos, c, rm) {
   if (!c.love) return dest;
   const t = roll.tier;
   const gacha = t ? Object.freeze({ id: t.id, fx: t.fx, face: t.face, label: t.label, bonus: t.bonus, base: c.love }) : null;
-  const react = Object.freeze({ love: swing, from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b,
+  const react = Object.freeze({ love: swing, from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, ...(c.next ? { next: c.next } : {}), s: pos.s, b: pos.b,
     ...(gacha ? { gacha } : {}) });
   return here && !c.pass ? { ...dest, react } : { ...dest, pending: react }; // pass: no frame, the pop shows on the next beat
 }

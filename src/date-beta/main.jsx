@@ -421,14 +421,14 @@ function Player() {
         {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
         {throng && <CrowdNear crowd={throng} key={`cn${beat.scene}${beat.index}`} />}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} blind={isBlind} key={`h${beat.scene}${beat.index}`} />}
-        {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
+        {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : beat.react?.next ? fill(beat.react.next) : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
           action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} blind={isBlind} /> : null} />}
         {beat.choices && !tag && !handout && !solo && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} order={order} blind={isBlind} beatKey={`${beat.scene}:${beat.index}`} key={`c${beat.scene}${beat.index}`} />}
         {stampP && <div className="db-stamp" aria-hidden="true"><b>{stampP.place}</b><i>·</i><span>{stampP.live ? storyStamp(stampP.time) : stampP.time}</span></div>}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {rain && <WetGui level={rain} stageRef={stageRef} beatKey={rainKey} seed={beat.index + 1} />}
         {card && <GoalCard onNext={() => advance(true)} />}
-        {onNext && !say && <NextButton className="solo" label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} onClick={onNext} />}
+        {onNext && !say && <NextButton className="solo" label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : beat.react?.next ? fill(beat.react.next) : undefined} onClick={onNext} />}
         {hint && <div className={`db-hint${card ? ' big' : ''}`}>Click anywhere to continue</div>}
         {paused && <div className="db-paused" role="status">paused (P)</div>}
       </div>
