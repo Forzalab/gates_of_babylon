@@ -638,10 +638,58 @@ def napkin_shot(surface, dish, stain):
     return svg(b)
 
 
+# M3 alone (not hungry): HER hand is her pin (Nanda canon, R5 Tony 09-30: the input pin with a round nub, as in the key
+# close-up fx/Cels.jsx KeyPalm). Her palette: rim / lit (art/nanda.js SWEET). The pin lead comes in from the right frame
+# edge (her side), the nub pinches the folded napkin's corner (the napkin is drawn first, so the nub closes over it).
+PIN_RIM, PIN_LIT = '#d1177f', '#ffc4e6'
+
+
+def pin_hold(nub, r, lead, held=''):
+    """her pin hand: a lead (rim stroke + lit core) from `lead` (a frame-edge point + its control point) to the nub at
+    `nub`, radius r. `held` is drawn under the nub (the nub grips its corner). Light from the upper left: the sheen sits
+    top-left on the nub; grip ticks on the shaded (lower-right) side."""
+    (x0, y0), (cx, cy) = lead
+    nx, ny = nub
+    d = f'M{x0} {y0}Q{cx} {cy} {nx} {ny}'
+    g = held
+    g += f'<path d="{d}" fill="none" stroke="{PIN_RIM}" stroke-width="{r * .62:.0f}" stroke-linecap="round"/>'
+    g += f'<path d="{d}" fill="none" stroke="{PIN_LIT}" stroke-width="{r * .27:.0f}" stroke-linecap="round"/>'
+    g += f'<circle cx="{nx}" cy="{ny}" r="{r}" fill="{PIN_LIT}" stroke="{PIN_RIM}" stroke-width="{r * .14:.0f}"/>'
+    g += f'<path d="M{nx - r * .1:.0f} {ny + r * .62:.0f}A{r * .66:.0f} {r * .66:.0f} 0 0 0 {nx + r * .62:.0f} {ny + r * .08:.0f}" fill="none" stroke="#efb0d2" stroke-width="{r * .16:.0f}" stroke-linecap="round"/>'
+    g += f'<ellipse cx="{nx - r * .36:.0f}" cy="{ny - r * .38:.0f}" rx="{r * .3:.0f}" ry="{r * .2:.0f}" transform="rotate(-30 {nx - r * .36:.0f} {ny - r * .38:.0f})" fill="#ffffff" opacity=".8"/>'
+    g += ''.join(f'<path d="M{nx + r * a:.0f} {ny + r * b:.0f}l{r * c:.0f} {r * e:.0f}" stroke="{PIN_RIM}" stroke-width="{r * .07:.0f}" stroke-linecap="round"/>'
+                 for a, b, c, e in [(1.12, -.2, .26, -.08), (1.06, .26, .26, .1), (.86, .7, .2, .2)])
+    return g
+
+
+def plate_eaten(stain):
+    """the katsu plate after she ate it all, in plate-sprite units (520 x 317, the traced plate's own oval): a clean
+    white plate, roux smears where the curry was, a few grains, one pickle shred, the spoon left on it."""
+    base, dark, hi = stain
+    r = random.Random(21)
+    b = '<ellipse cx="262" cy="160" rx="258" ry="152" fill="#b9a284"/>'
+    b += '<ellipse cx="258" cy="154" rx="254" ry="148" fill="#fbf8f1" stroke="#c8b69c" stroke-width="3"/>'
+    b += '<ellipse cx="252" cy="152" rx="206" ry="118" fill="#f2ece0"/>'
+    b += '<path d="M60 150C80 90 180 60 250 70" stroke="#ffffff" stroke-width="10" fill="none" stroke-linecap="round" opacity=".8"/>'
+    for (x0, y0, x1, y1, w) in [(90, 190, 300, 230, 26), (120, 140, 280, 180, 18), (170, 100, 330, 120, 12), (300, 210, 410, 170, 14)]:
+        b += f'<path d="M{x0} {y0}Q{(x0 + x1) / 2:.0f} {(y0 + y1) / 2 + 18:.0f} {x1} {y1}" stroke="{base}" stroke-width="{w}" fill="none" stroke-linecap="round" opacity=".55"/>'
+    for _ in range(9):
+        gx, gy, ga = r.randint(150, 430), r.randint(90, 230), r.randint(0, 180)
+        b += f'<ellipse cx="{gx}" cy="{gy}" rx="5" ry="3" transform="rotate({ga} {gx} {gy})" fill="#ffffff" stroke="#a8a090" stroke-width="1"/>'
+    b += '<path d="M400 110l16 -6l4 10l-16 5z" fill="#c8202e"/>'
+    # the spoon, bowl down on the plate, handle off to the upper right
+    b += '<path d="M250 150L470 70" stroke="#8e96a1" stroke-width="16" stroke-linecap="round"/><path d="M250 150L470 70" stroke="#e8edf2" stroke-width="6" stroke-linecap="round"/>'
+    b += '<ellipse cx="226" cy="160" rx="44" ry="28" transform="rotate(-20 226 160)" fill="#d6dce3" stroke="#8e96a1" stroke-width="5"/>'
+    b += '<ellipse cx="218" cy="154" rx="20" ry="9" transform="rotate(-20 218 154)" fill="#ffffff" opacity=".8"/>'
+    return b
+
+
 def napkin_fold(surface, dish, stain):
+    """not hungry: she holds up her folded napkin in her pin (she keeps it), over the counter, by her eaten plate."""
     b = surface + dish
-    b += f'<ellipse cx="{1080 + SDX}" cy="{640 + SDY}" rx="260" ry="50" fill="{SH}" opacity=".22"/>'
-    b += hand(1300, 520, 180 + 6, 1.7, 'grip', 'her', flip=True, held=f'<g transform="translate(150 -40) rotate(180) scale(1.7 -1.7)">{napkin_shape(stain, True)}</g>')
+    nap = f'<g transform="translate(1000 420) rotate(-12) scale(2.6)">{napkin_shape(stain, True)}</g>'
+    arm = pin_hold((1270, 320), 96, ((2000, 740), (1580, 700)), held=nap)
+    b += cel(arm, 'k', lift=(70, 230), op=.2)
     return svg(b)
 
 
@@ -834,7 +882,7 @@ SHOTS = {
     'katsu-dish': katsu_dish, 'katsu-cut': katsu_cut, 'katsu-pour': katsu_pour, 'katsu-close': katsu_close,
     'katsu-feed': katsu_feed, 'katsu-bite': katsu_bite, 'katsu-water': katsu_water, 'katsu-counter': katsu_counter,
     'katsu-napkin': lambda: napkin_shot(counter(), f'<g transform="translate(-700 560) scale(.8)">{katsu_plate()}</g>', ROUX),
-    'napkin-fold': lambda: napkin_fold(counter(), f'<g transform="translate(-600 520) scale(.8)">{katsu_plate()}</g>', ROUX),
+    'napkin-fold': lambda: napkin_fold(counter(), f'<g transform="translate(-600 520) scale(.8)">{spr("fukujinzuke", 1250, 30, 620, shadow=.28)}{spr("katsu-plate", *PLATE, inner=plate_eaten(ROUX), shadow=.34)}</g>', ROUX),
 }
 only = sys.argv[2:]
 for k, f in SHOTS.items():

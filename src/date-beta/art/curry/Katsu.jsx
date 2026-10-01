@@ -117,7 +117,8 @@ export function CurryKatsuNapkin() {
   return <CurryScene id="katsu-napkin" label="Close: her hand wipes the brown curry off your fingers with a white paper napkin, over the katsu plate." />;
 }
 
-// not hungry: she holds up her folded napkin (you got no food, so no fingers to wipe)
+// not hungry: she holds up her folded napkin (you got no food, so no fingers to wipe). M3: her hand = her pin (the round
+// nub pinches the napkin, Nanda canon) and the plate is eaten clean (draw.py napkin_fold / plate_eaten).
 export function CurryNapkinFold() {
-  return <CurryScene id="napkin-fold" label="Close: her hand holds up her folded paper napkin over the counter, next to her empty katsu plate." />;
+  return <CurryScene id="napkin-fold" label="Close: her pin hand, a pink lead with a round nub, holds up her folded paper napkin over the counter, next to her empty katsu plate and its spoon." />;
 }
