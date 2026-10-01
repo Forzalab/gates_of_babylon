@@ -69,6 +69,7 @@
           "text": "She cuts off one small piece with her spoon. Crunch.",
           "bg": "curry-katsu-cut",
           "props": {
+            "sfx": "crunch",
             "cut": {
               "frame": "off",
               "sharp": true
@@ -186,14 +187,14 @@
           "speaker": false,
           "text": "She eats alone. You get no food. She looks at you the whole time.",
           "sfx": "silence",
-          "bg": "curry-katsu-int",
+          "bg": "curry-katsu-counter",
           "props": {
             "shot": "stamp",
             "place": "OR OR CURRY",
             "time": "3:00 PM",
             "cut": {
               "frame": "medium",
-              "face": "hate"
+              "face": "smug-gloating"
             }
           }
         },

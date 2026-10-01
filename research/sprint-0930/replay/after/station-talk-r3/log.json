@@ -1,0 +1,48 @@
+[
+ {
+  "nm": "01-station-talk-0-choice.png",
+  "beat": "station-talk:0",
+  "text": "NANDA: Twelve stops, and you held the pole. Not me. Next time, hold me.",
+  "choices": [
+   "Next time, I'll hold you",
+   "It was crowded",
+   "I needed the pole"
+  ],
+  "pop": null
+ },
+ {
+  "nm": "02-station-talk-0-react.png",
+  "beat": "station-talk:0",
+  "text": "NANDA: There is no next time. Only this time. Again. ♡",
+  "choices": [],
+  "pop": "+3 She liked that."
+ },
+ {
+  "nm": "03-station-talk-1.png",
+  "beat": "station-talk:1",
+  "text": "NANDA: Run 3. Same day. You know, I know. Skip the small talk. It's 5:56 AM again. Hold my hand.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "04-station-talk-2.png",
+  "beat": "station-talk:2",
+  "text": "MC: Run 3. I know every line. So do you.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "05-station-talk-3.png",
+  "beat": "station-talk:3",
+  "text": "NANDA: Of course it's a loop. I made it. Every ending comes back here, every morning. And you keep coming back. That's love.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "06-station-talk-4.png",
+  "beat": "station-talk:4",
+  "text": "NANDA: It's raining. Good. Rain keeps people inside. Inside is where people stay.",
+  "choices": [],
+  "pop": null
+ }
+]

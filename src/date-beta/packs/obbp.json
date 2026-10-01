@@ -1,5 +1,5 @@
 {
- "note": "OBBP integration: meta lines placed into story, MOVE placeholders filled (mech pattern), lock-game win/lose re-pointed to mech choice order, meta preview scenes dropped. B-08: blackout auto beats trimmed to 7.5 s total (was 17.1 s).",
+ "note": "OBBP integration: meta lines placed into story, MOVE placeholders filled (mech pattern), lock-game win/lose re-pointed to mech choice order, meta preview scenes dropped. B-08: blackout auto beats trimmed to 7.5 s total (was 17.1 s). M4 replay (research/sprint-0930/replay/AUDIT.md): the loop lines in station-talk get a face per run (calm, nervous, tired; love, stare, proud) and the MC line hides her (cut.frame off); appended patches at the end.",
  "patch": [
   {
    "scene": "park",
@@ -272,10 +272,22 @@
       "run": {
        "1": {},
        "2": {
-        "text": "Wait. Why is everything the same? Same rain. Same {TIME}. You said that exact thing last time. I remember. Do you?"
+        "text": "Wait. Why is everything the same? Same rain. Same {TIME}. You said that exact thing last time. I remember. Do you?",
+        "props": {
+         "cut": {
+          "raise": true,
+          "face": "nervous"
+         }
+        }
        },
        "3": {
-        "text": "Run {RUN}. Same day. You know, I know. Skip the small talk. It's {TIME} again. Hold my hand."
+        "text": "Run {RUN}. Same day. You know, I know. Skip the small talk. It's {TIME} again. Hold my hand.",
+        "props": {
+         "cut": {
+          "raise": true,
+          "face": "dazed-sleepy"
+         }
+        }
        }
       }
      }
@@ -302,10 +314,22 @@
       "run": {
        "1": {},
        "2": {
-        "text": "A loop? Ehehe. Then you can't leave. You picked me last time too. You'll pick me again."
+        "text": "A loop? Ehehe. Then you can't leave. You picked me last time too. You'll pick me again.",
+        "props": {
+         "cut": {
+          "raise": true,
+          "face": "4"
+         }
+        }
        },
        "3": {
-        "text": "Of course it's a loop. I made it. Every ending comes back here, every {DAYPART}. And you keep coming back. That's love."
+        "text": "Of course it's a loop. I made it. Every ending comes back here, every {DAYPART}. And you keep coming back. That's love.",
+        "props": {
+         "cut": {
+          "raise": true,
+          "face": "smug-gloating"
+         }
+        }
        }
       }
      }
@@ -380,6 +404,35 @@
    "beat": 9,
    "set": {
     "hold": 500
+   }
+  },
+  {
+   "scene": "station-talk",
+   "beat": 1,
+   "props": {
+    "cut": {
+     "raise": true,
+     "face": "content"
+    }
+   }
+  },
+  {
+   "scene": "station-talk",
+   "beat": 2,
+   "props": {
+    "cut": {
+     "frame": "off"
+    }
+   }
+  },
+  {
+   "scene": "station-talk",
+   "beat": 3,
+   "props": {
+    "cut": {
+     "raise": true,
+     "face": "heart-laugh"
+    }
    }
   }
  ],

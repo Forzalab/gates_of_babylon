@@ -40,7 +40,8 @@ test('curry: in the play list before love; the pick is on the street; the three 
     'curry-naan-lift', 'curry-sauce', 'curry-naan-dip', 'curry-naan-feed', 'curry-butter-bite', 'curry-lassi', 'curry-napkin', 'curry-street']);
   assert.deepEqual(bgs('v2-curry-katsu'), ['curry-katsu-door', 'curry-katsu-int', 'curry-katsu-counter', 'curry-katsu-dish', 'curry-katsu-cut', 'curry-katsu-pour',
     'curry-katsu-close', 'curry-katsu-feed', 'curry-katsu-bite', 'curry-katsu-water', 'curry-katsu-napkin', 'curry-street']);
-  assert.deepEqual(bgs('v2-curry-alone'), ['curry-katsu-door', 'curry-katsu-int', 'curry-napkin-fold', 'curry-street']);
+  // M3 alone: "She eats alone" is shown at the counter with her katsu plate (the empty TV room showed no food)
+  assert.deepEqual(bgs('v2-curry-alone'), ['curry-katsu-door', 'curry-katsu-counter', 'curry-napkin-fold', 'curry-street']);
   // katsu = butter, beat for beat (from the door on); the napkin is SHOWN on both paths, never told over the street
   assert.equal(sc('v2-curry').beats.length - 2, sc('v2-curry-katsu').beats.length);
   for (const id of ['v2-curry', 'v2-curry-katsu']) assert.match(sc(id).beats.at(-2).bg, /napkin/, id);

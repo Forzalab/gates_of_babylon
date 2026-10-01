@@ -11,6 +11,7 @@ export const SHOT_ALIASES = {
   'shop-exit': { bg: 'closeup', props: { of: 'shop-street', x: 1300, y: 560, zoom: 1.8, tone: 'day' } },
   'library-int': { bg: 'insert', props: { item: 'book', of: 'street-day', caption: 'shh… library' }, borrowed: true },
   'book-slot': { bg: 'insert', props: { item: 'book', of: 'street-day', caption: 'thunk.', tilt: 6 } },
+  'book-return': { bg: 'insert', props: { item: 'book-return', of: 'street-day', caption: 'thunk.', tilt: 0 } },
   'crossing-bell': { bg: 'closeup', props: { of: 'rail-crossing', x: 760, y: 420, zoom: 2.2 } },
   'curry-house-int': { bg: 'closeup', props: { of: 'curry-house', x: 960, y: 540, zoom: 1 } },
   'curry-house-ext': { bg: 'closeup', props: { of: 'shop-street', x: 700, y: 520, zoom: 1.7, tone: 'day' }, borrowed: true },

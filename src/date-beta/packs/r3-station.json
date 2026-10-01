@@ -57,6 +57,7 @@
       "set": {
         "bg": "vending-insert",
         "props": {
+          "sfx": { "cue": "vending-clunk", "at": 900 },
           "cut": {
             "face": "anya-smile",
             "sharp": true
@@ -132,6 +133,7 @@
       "set": {
         "bg": "station-ads-insert",
         "props": {
+          "sfx": [{ "cue": "ic-beep" }, { "cue": "ic-beep", "at": 700 }],
           "cut": {
             "face": "content",
             "sharp": true
@@ -166,6 +168,19 @@
             "plant": 72
           },
           "near": null
+        }
+      }
+    },
+    {
+      "scene": "v2-train",
+      "beat": 6,
+      "set": {
+        "vary": {
+          "run": {
+            "1": { "speaker": false, "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'" },
+            "2": { "text": "Twelve stops. Second time today. You forgot. I did not.", "props": { "cut": { "face": "big-eyes-peek", "raise": true, "plant": 72 } } },
+            "3": { "text": "Three fingers. Three times today. Same train. Same you.", "props": { "cut": { "face": "big-eyes-peek", "raise": true, "plant": 72 } } }
+          }
         }
       }
     },

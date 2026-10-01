@@ -20,7 +20,7 @@
       "scene": "rooftop",
       "beat": 0,
       "set": {
-        "bg": "rooftop-noon",
+        "bg": "rooftop",
         "props": {
           "clock": "live",
           "cut": {

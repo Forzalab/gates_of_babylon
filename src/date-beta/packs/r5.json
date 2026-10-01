@@ -5,7 +5,8 @@
   "v2-park: beat 1 (the feet close-up) is cut; 'Hold my hand' plays on the real park bg with her upper pin reaching out at the viewer (props.cut.reach, a nervous face: her hand shakes); the rack shot's huge blurred duplicate of her is gone (plain park bg, her own sprite).",
   "Line/visual fixes (the R5 audit's contradictions): the train 'She takes your hand' = her pin reaches; 'The rain stops' said so while it still rained: the line now says it slows to a few drops (the 'stopping' rain FX, the umbrella still up); the key close-up = her pin hand opened with the key + red marks (cel key-palm, no beige card, she is off-frame: it IS her hand); 'Door 12 opens' = a close-up on the door + カチッ (cel door-click); 'She kneels' = lower + reaching down; 'Her hand on your back' = the kitchen bg, her pin reaching (no floating over a teacup card).",
   "Insert shots (art/shots Insert, the old beige card): no card any more, the item is the close-up, big on the blurred place; she steps out of that frame (main.jsx). 'Close-up. Her shoes are wet' now IS that close-up: since the puddle re-render (research/sprint-0930/puddle) its own bg rain-puddle, a top-down shot of both pairs of wet shoes + her reflection, so she steps out of the frame (cut.frame off) and the insert card is not used.",
-  "v2-street 1 'Take small steps' is her line on a choice beat (the raised box hides any close-up): her on her street, no feet insert."
+  "v2-street 1 'Take small steps' is her line on a choice beat (the raised box hides any close-up): her on her street, no feet insert.",
+  "M1 route B (library -> katsu -> escape-win / escape-timeout, research/sprint-0930/rB/AUDIT.md): the crossing train beat = her pin grabs at you (reach, nervous); 'drops into the slot' = the return-post insert (book-return); the walk-out = her pin finds your hand on the street (no 5-finger hand card); the basement shelf beats push in on the shelf they name (props.shot closeup of the cellar, ofProps.shelf; the newest jar keeps the pick on its label); timeout 0 plays in the basement (the steep stairs up to the hatch; she is not in frame yet: she is still coming down); 'Four cups now' shows four; 'She holds out' = her pin reaches; a different face every beat in both endings."
  ],
  "patch": [
   {
@@ -121,6 +122,256 @@
    "beat": 1,
    "props": {
     "shot": null
+   }
+  },
+  {
+   "scene": "v2-library",
+   "beat": 1,
+   "props": {
+    "cut": {
+     "face": "nervous",
+     "reach": true
+    }
+   }
+  },
+  {
+   "scene": "v2-library",
+   "beat": 4,
+   "props": {
+    "shot": "book-return"
+   }
+  },
+  {
+   "scene": "v2-library",
+   "beat": 5,
+   "set": {
+    "bg": "street-day",
+    "props": {
+     "cut": {
+      "face": "blush-embarrassed",
+      "reach": true
+     }
+    }
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 1,
+   "props": {
+    "shot": "closeup",
+    "of": "cellar",
+    "x": 420,
+    "y": 520,
+    "zoom": 1.7,
+    "ofProps": {
+     "shelf": "jars"
+    },
+    "near": "shelves"
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 2,
+   "props": {
+    "shot": "closeup",
+    "of": "cellar",
+    "x": 380,
+    "y": 440,
+    "zoom": 2.3,
+    "ofProps": {
+     "shelf": "jars"
+    },
+    "near": "shelves"
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 3,
+   "props": {
+    "shot": "closeup",
+    "of": "cellar",
+    "x": 330,
+    "y": 850,
+    "zoom": 1.8,
+    "ofProps": {
+     "shelf": "bentos"
+    },
+    "near": "shelves"
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 4,
+   "props": {
+    "shot": "closeup",
+    "of": "cellar",
+    "x": 260,
+    "y": 870,
+    "zoom": 2.4,
+    "ofProps": {
+     "shelf": "bentos"
+    },
+    "near": "shelves"
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 5,
+   "props": {
+    "shot": "closeup",
+    "of": "cellar",
+    "x": 540,
+    "y": 1000,
+    "zoom": 4.5,
+    "ofProps": {
+     "shelf": "usu"
+    },
+    "near": "shelves"
+   }
+  },
+  {
+   "scene": "escape",
+   "beat": 6,
+   "props": {
+    "shot": "closeup",
+    "of": "cellar",
+    "x": 330,
+    "y": 430,
+    "zoom": 2.6,
+    "ofProps": {
+     "shelf": "newest"
+    },
+    "near": "shelves"
+   },
+   "set": {
+    "vary": {
+     "bento": {
+      "umeboshi": {
+       "text": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+       "props": {
+        "jar": "umeboshi",
+        "ofProps": {
+         "shelf": "newest",
+         "jar": "umeboshi"
+        }
+       }
+      },
+      "tamagoyaki": {
+       "text": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.",
+       "props": {
+        "jar": "tamagoyaki",
+        "ofProps": {
+         "shelf": "newest",
+         "jar": "tamagoyaki"
+        }
+       }
+      }
+     }
+    }
+   }
+  },
+  {
+   "scene": "escape-win",
+   "beat": 1,
+   "props": {
+    "cut": {
+     "face": "smug-gloating"
+    }
+   }
+  },
+  {
+   "scene": "escape-win",
+   "beat": 2,
+   "props": {
+    "cut": {
+     "face": "ticked-off"
+    }
+   }
+  },
+  {
+   "scene": "escape-win",
+   "beat": 3,
+   "props": {
+    "cut": {
+     "face": "blush-embarrassed"
+    }
+   }
+  },
+  {
+   "scene": "escape-win",
+   "beat": 5,
+   "props": {
+    "cut": {
+     "face": 3
+    }
+   }
+  },
+  {
+   "scene": "escape-win",
+   "beat": 6,
+   "props": {
+    "cut": {
+     "face": "content"
+    }
+   }
+  },
+  {
+   "scene": "escape-timeout",
+   "beat": 0,
+   "set": {
+    "bg": "cellar",
+    "props": {
+     "near": "shelves",
+     "cut": {
+      "frame": "off"
+     }
+    }
+   }
+  },
+  {
+   "scene": "escape-timeout",
+   "beat": 2,
+   "props": {
+    "cut": {
+     "face": "content"
+    }
+   }
+  },
+  {
+   "scene": "escape-timeout",
+   "beat": 3,
+   "props": {
+    "cut": {
+     "face": "anya-smile",
+     "reach": true
+    }
+   }
+  },
+  {
+   "scene": "escape-timeout",
+   "beat": 4,
+   "props": {
+    "cut": {
+     "face": "big-eyes-peek"
+    }
+   }
+  },
+  {
+   "scene": "escape-timeout",
+   "beat": 5,
+   "props": {
+    "cut": {
+     "face": "blush-embarrassed"
+    }
+   }
+  },
+  {
+   "scene": "escape-timeout",
+   "beat": 6,
+   "props": {
+    "cut": {
+     "face": "smug-gloating"
+    }
    }
   }
  ]

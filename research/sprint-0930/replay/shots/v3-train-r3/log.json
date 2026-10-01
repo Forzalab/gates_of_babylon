@@ -1,0 +1,37 @@
+[
+ {
+  "nm": "01-v3-train-0.png",
+  "beat": "v3-train:0",
+  "text": "STATION · 4:30 PM. The big clock ticks. She taps her card twice.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "02-v3-train-1.png",
+  "beat": "v3-train:1",
+  "text": "NANDA: Twelve stops to my home. I counted them this morning.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "03-v3-train-2.png",
+  "beat": "v3-train:2",
+  "text": "In the window, three of you sit in a row. You, you, you.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "04-v3-train-3.png",
+  "beat": "v3-train:3",
+  "text": "5:20 PM. Rain on the window. Her stop.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "05-v3-train-4.png",
+  "beat": "v3-train:4",
+  "text": "The train doors slide open. Cut. Her umbrella snaps open.",
+  "choices": [],
+  "pop": null
+ }
+]

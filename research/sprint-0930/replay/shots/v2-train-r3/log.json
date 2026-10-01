@@ -1,0 +1,65 @@
+[
+ {
+  "nm": "01-v2-train-0.png",
+  "beat": "v2-train:0",
+  "text": "4:30 PM. Her station. She takes your hand. 'Now we go to MY home. On MY train.'",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "02-v2-train-1.png",
+  "beat": "v2-train:1",
+  "text": "The station is full. Everyone is going home.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "03-v2-train-2.png",
+  "beat": "v2-train:2",
+  "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "04-v2-train-3.png",
+  "beat": "v2-train:3",
+  "text": "Two men bump into her. ",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "05-v2-train-4.png",
+  "beat": "v2-train:4",
+  "text": "NANDA: Hey, you. Wavy hair. And you. Hat boy, the gringo. Stop pushing. He is MINE.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "06-v2-train-5.png",
+  "beat": "v2-train:5",
+  "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "07-v2-train-6.png",
+  "beat": "v2-train:6",
+  "text": "NANDA: Three fingers. Three times today. Same train. Same you.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "08-v2-train-7.png",
+  "beat": "v2-train:7",
+  "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
+  "choices": [],
+  "pop": null
+ },
+ {
+  "nm": "09-v2-train-8.png",
+  "beat": "v2-train:8",
+  "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'",
+  "choices": [],
+  "pop": null
+ }
+]

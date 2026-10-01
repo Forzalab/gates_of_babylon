@@ -1,0 +1,479 @@
+{
+ "log": [
+  {
+   "nm": "A01-v2-park-3-choice.png",
+   "beat": "v2-park:3",
+   "who": "NANDA",
+   "line": "One job before lunch. My groceries, or my library book?",
+   "choices": [
+    "Carry her groceries",
+    "Return her book",
+    "Do it alone, later"
+   ],
+   "end": null,
+   "taken": "Return her book"
+  },
+  {
+   "nm": "A02-v2-park-3-react.png",
+   "beat": "v2-park:3",
+   "who": "NANDA",
+   "line": "The book. It is very late.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "A03-v2-library-0.png",
+   "beat": "v2-library:0",
+   "who": "",
+   "line": "The bell rings. The gate is down.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "A04-v2-library-1.png",
+   "beat": "v2-library:1",
+   "who": "",
+   "line": "A train passes. Her hand grabs your sleeve until it is gone.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "A05-v2-library-2.png",
+   "beat": "v2-library:2",
+   "who": "",
+   "line": "LIBRARY · 2:00 PM. Cool air. Very quiet.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "A06-v2-library-3.png",
+   "beat": "v2-library:3",
+   "who": "NANDA",
+   "line": "You touched this book once. Right here. I kept it forty days.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "A07-v2-library-4.png",
+   "beat": "v2-library:4",
+   "who": "",
+   "line": "Close-up. The book drops into the slot. Thunk.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "A08-v2-library-5.png",
+   "beat": "v2-library:5",
+   "who": "",
+   "line": "Her empty hand finds your hand. You walk out.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "A09-v2-town-0.png",
+   "beat": "v2-town:0",
+   "who": "",
+   "line": "Big signs. Big screens. She holds your hand.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B01-v2-curry-1-choice.png",
+   "beat": "v2-curry:1",
+   "who": "NANDA",
+   "line": "I am hungry. You pick my lunch. Pick the right one.",
+   "choices": [
+    "Butter chicken for her",
+    "Katsu curry",
+    "I am not hungry"
+   ],
+   "end": null,
+   "taken": "Katsu curry"
+  },
+  {
+   "nm": "B02-v2-curry-1-react.png",
+   "beat": "v2-curry:1",
+   "who": "NANDA",
+   "line": "Crunchy. Good choice.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B03-v2-curry-katsu-0.png",
+   "beat": "v2-curry-katsu:0",
+   "who": "",
+   "line": "She opens the yellow door. A bell rings.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B04-v2-curry-katsu-1.png",
+   "beat": "v2-curry-katsu:1",
+   "who": "",
+   "line": "We go inside OR OR CURRY. A TV plays a cooking show.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B05-v2-curry-katsu-2.png",
+   "beat": "v2-curry-katsu:2",
+   "who": "",
+   "line": "We sit at the counter. She sits on your right. Her knee touches your knee.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B06-v2-curry-katsu-3.png",
+   "beat": "v2-curry-katsu:3",
+   "who": "",
+   "line": "Lunch comes on a white plate. Rice, brown curry, and a fried pork cutlet.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B07-v2-curry-katsu-4.png",
+   "beat": "v2-curry-katsu:4",
+   "who": "",
+   "line": "She cuts off one small piece with her spoon. Crunch.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B08-v2-curry-katsu-5.png",
+   "beat": "v2-curry-katsu:5",
+   "who": "",
+   "line": "She pours more curry on the rice. It is thick, brown, and hot.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B09-v2-curry-katsu-6.png",
+   "beat": "v2-curry-katsu:6",
+   "who": "",
+   "line": "She dips the small piece in the curry. The curry drips.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B10-v2-curry-katsu-7.png",
+   "beat": "v2-curry-katsu:7",
+   "who": "NANDA",
+   "line": "Feed me. With your hand. Not the spoon. Your hand.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B11-v2-curry-katsu-8.png",
+   "beat": "v2-curry-katsu:8",
+   "who": "",
+   "line": "She eats the piece from your fingers. She looks at your face the whole time. There is curry on her lip.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B12-v2-curry-katsu-9.png",
+   "beat": "v2-curry-katsu:9",
+   "who": "",
+   "line": "She pushes her lemon water to you. It has only one straw.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B13-v2-curry-katsu-10.png",
+   "beat": "v2-curry-katsu:10",
+   "who": "",
+   "line": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B14-v2-curry-katsu-11.png",
+   "beat": "v2-curry-katsu:11",
+   "who": "",
+   "line": "We walk out to the street. It is 3:40 PM.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "B15-v2-train-0.png",
+   "beat": "v2-train:0",
+   "who": "",
+   "line": "4:30 PM. Her station. She takes your hand. 'Now we go to MY home. On MY train.'",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C01-escape-0-choice.png",
+   "beat": "escape:0",
+   "who": "",
+   "line": "Concrete. One bulb. Rain at a high window.",
+   "choices": [
+    "Look at the shelves",
+    "Peek at the pretty shelves ♡"
+   ],
+   "end": null,
+   "taken": "Peek at the pretty shelves ♡"
+  },
+  {
+   "nm": "C02-escape-0-react.png",
+   "beat": "escape:0",
+   "who": "NANDA (ABOVE)",
+   "line": "Pretty, right? I dust them every day.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C03-escape-1.png",
+   "beat": "escape:1",
+   "who": "",
+   "line": "Jars on the shelves. Each one: a date, a name.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C04-escape-2.png",
+   "beat": "escape:2",
+   "who": "",
+   "line": "The dates go back years. The names are all different.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C05-escape-3.png",
+   "beat": "escape:3",
+   "who": "",
+   "line": "Bento boxes, one per day. Your name on each. Untouched.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C06-escape-4.png",
+   "beat": "escape:4",
+   "who": "",
+   "line": "The oldest is dated before you met.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C07-escape-5-choice.png",
+   "beat": "escape:5",
+   "who": "",
+   "line": "A mortar and a mallet. One fresh mochi. Hers only.",
+   "choices": [
+    "Keep looking",
+    "Keep looking… and nothing else"
+   ],
+   "end": null,
+   "taken": "Keep looking"
+  },
+  {
+   "nm": "C08-escape-5-react.png",
+   "beat": "escape:5",
+   "who": "NANDA (ABOVE)",
+   "line": "You're looking too long.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C09-escape-6.png",
+   "beat": "escape:6",
+   "who": "",
+   "line": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C10-escape-9.png",
+   "beat": "escape:9",
+   "who": "",
+   "line": "⏳ Her clock is running…",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C11-escape-11.png",
+   "beat": "escape:11",
+   "who": "",
+   "line": "⏳ Her clock is running…",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C12-escape-12.png",
+   "beat": "escape:12",
+   "who": "",
+   "line": "Minutes gone. A clock upstairs chimed. You lost count.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C13-escape-13.png",
+   "beat": "escape:13",
+   "who": "",
+   "line": "Above you, footsteps. Slow. Counting. One, two, three.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C14-escape-14.png",
+   "beat": "escape:14",
+   "who": "NANDA (ABOVE)",
+   "line": "Four, five… Don't hide, darling. I always find you.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C15-escape-15-game.png",
+   "beat": "escape:15",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C16-escape-15-game-half.png",
+   "beat": "escape:15",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C17-escape-15-game-won.png",
+   "beat": "escape:15",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C18-escape-win-0.png",
+   "beat": "escape-win:0",
+   "who": "",
+   "line": "She's waiting at the outside door.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C19-escape-win-1.png",
+   "beat": "escape-win:1",
+   "who": "NANDA",
+   "line": "You took the long way.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C20-escape-win-2.png",
+   "beat": "escape-win:2",
+   "who": "NANDA",
+   "line": "You picked sour.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C21-escape-win-3.png",
+   "beat": "escape-win:3",
+   "who": "NANDA",
+   "line": "Now every hour is ours.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C22-escape-win-5.png",
+   "beat": "escape-win:5",
+   "who": "NANDA",
+   "line": "Mine.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C23-escape-win-6.png",
+   "beat": "escape-win:6",
+   "who": "",
+   "line": "Wide. Her street at night. One window lit. It's yours now.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "C24-escape-win-7-end.png",
+   "beat": "escape-win:7",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "end": "ENDING ESCAPE You got out. She was already there. LOVE 0% PLAY AGAIN"
+  },
+  {
+   "nm": "D01-escape-15-game.png",
+   "beat": "escape:15",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D02-escape-15-game-low.png",
+   "beat": "escape:15",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D03-escape-timeout-0.png",
+   "beat": "escape-timeout:0",
+   "who": "",
+   "line": "The ladder creaks. She's coming down.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D04-escape-timeout-2.png",
+   "beat": "escape-timeout:2",
+   "who": "",
+   "line": "You wake at the tea table. Four cups now.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D05-escape-timeout-3.png",
+   "beat": "escape-timeout:3",
+   "who": "",
+   "line": "She holds out the tamagoyaki. You eat.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D06-escape-timeout-4.png",
+   "beat": "escape-timeout:4",
+   "who": "NANDA",
+   "line": "甘いでしょ。…ね？",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D07-escape-timeout-5.png",
+   "beat": "escape-timeout:5",
+   "who": "NANDA",
+   "line": "One sweet bite…",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D08-escape-timeout-6.png",
+   "beat": "escape-timeout:6",
+   "who": "NANDA",
+   "line": "…then sleep. You're mine to keep.",
+   "choices": [],
+   "end": null
+  },
+  {
+   "nm": "D09-escape-timeout-7-end.png",
+   "beat": "escape-timeout:7",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "end": "ENDING ESCAPE? You waited. Now there are four cups. LOVE 3% PLAY AGAIN"
+  }
+ ],
+ "errs": []
+}

@@ -11,6 +11,39 @@ export function makeAssets(manifest = {}) {
   return { get, cueId, url, ids: () => Object.keys(assets) };
 }
 
+// Beds: the looping sounds. They run until the scene changes (or a 'silence' beat), one at a time (see createLoader).
+// Files are made to loop (synth.py: 0.5 s crossfaded ends). Every other sfx is a one-shot.
+export const BEDS = Object.freeze(['SX-20', 'SX-15', 'SX-21', 'SX-27', 'SX-06', 'umbrella-rain']);
+export const BED_FADE = 0.5; // seconds: a bed's fade in / out, and the crossfade when one bed replaces another
+export const isBedId = (id) => BEDS.includes(id);
+
+// Love chimes + emotion hits for a scored pick (pop = the engine's reaction { love, gacha?, emote }, fx = pos.fx).
+// Returns [{ cue, at }] (at = ms after the pop shows). A gacha tier or the pick's own hate-quake REPLACES the plain chime.
+export const HEART_POP_AT = 334; // the HUD's first step (beta.css lv-pop / lv-step) lands the heart + number
+export function popCues(pop, fx = null) {
+  if (!pop || !pop.love) return [];
+  const g = pop.gacha?.fx;
+  if (pop.love > 0) {
+    return [{ cue: g === 'love-bomb' ? 'love-bomb' : g === 'love-crit' ? 'gacha-crit' : 'love-up', at: 0 }, { cue: 'heart-pop', at: HEART_POP_AT }];
+  }
+  const hate = fx?.kind === 'hate-quake' || pop.emote === 'hate';
+  return [{ cue: g === 'rage' ? 'rage-thunder' : g === 'anger' ? 'anger-pop' : hate ? 'hate-quake' : 'love-down', at: 0 }];
+}
+
+// props.sfx on a beat: extra cue(s) laid over beat.sfx on the same cut. A name, or a list of names / { cue, at } (at = ms
+// from the cut; none = with beat.sfx, so props.sfxAt moves it too). Props carry to the next beat in the engine, so a one-shot
+// equal to one on the previous beat is inherited, not authored: it does not fire again (props.sfx: null ends a carried bed).
+const norm = (v) => (v == null ? [] : (Array.isArray(v) ? v : [v])).map((e) => (typeof e === 'string' ? { cue: e } : e)).filter((e) => e && typeof e.cue === 'string');
+export const propSfx = (props) => norm(props?.sfx);
+export function beatCues(beat, prev = null, bed = () => false) {
+  if (!beat) return [];
+  const seen = new Set(propSfx(prev?.props).map((e) => JSON.stringify(e)));
+  // beds are idempotent (the same bed asked again is a no-op), so only the one-shots need the inherited check
+  const mine = beat.react ? [] : propSfx(beat.props).filter((e) => bed(e.cue) || !seen.has(JSON.stringify(e)));
+  const out = beat.sfx && !(bed(beat.sfx) && mine.some((e) => bed(e.cue))) ? [{ cue: beat.sfx }] : []; // one bed per beat: props.sfx wins
+  return out.concat(mine);
+}
+
 export const placeholderImg = (id, w = 320, h = 180) => `data:image/svg+xml,${encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="${w}" height="${h}"><rect width="100%" height="100%" fill="#888"/>`
   + `<text x="50%" y="50%" fill="#fff" font-family="monospace" font-size="24" text-anchor="middle" dominant-baseline="middle">${String(id).replace(/[<&>]/g, '')}</text></svg>`)}`;
@@ -23,14 +56,17 @@ export function createLoader(manifest, base = '/') {
   const A = makeAssets(manifest);
   const bytes = new Map(), buffers = new Map(), images = new Map();
   let ctx = null, master = null, muted = false, ducked = false;
-  // ONE sfx bus (master): M mutes it; it sits -8 dB (0.398) under a voice take (voice/index.js onSpeak).
-  const DUCK = 0.398;
+  // ONE sfx bus (master): M mutes it; it sits -14 dB (0.2) under a voice take (voice/index.js onSpeak).
+  const DUCK = 0.2;
   const gains = () => {
     if (!master) { master = ctx.createGain(); master.gain.value = muted ? 0 : ducked ? DUCK : 1; master.connect(ctx.destination); }
     const v = muted ? 0 : ducked ? DUCK : 1;
     try { const t = ctx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(v, t, ducked ? 0.03 : 0.12); } catch { master.gain.value = v; }
   };
-  let pending = null; // the last cue asked for before the context existed (the first beat's sound, red-team R5)
+  // The last cue (and last bed) asked for before the context existed (the first beat's sound, red-team R5)
+  let pend = { shot: null, bed: null };
+  let bed = null, want = null, curScene; // bed = { id, src, g } looping now; want = a bed whose file has not decoded yet
+  const failed = new Set(); // sfx whose file would not load
   // Start (or resume) the context inside a user gesture, then play the cue that was asked for before it: the first
   // beat's sfx fires on mount, before any gesture, and would otherwise never be heard.
   const unlock = () => {
@@ -38,7 +74,7 @@ export function createLoader(manifest, base = '/') {
     try { ctx = new (globalThis.AudioContext || globalThis.webkitAudioContext)(); } catch { return Promise.resolve(); }
     const decoding = [...bytes].map(([id, ab]) => Promise.resolve(ctx.decodeAudioData(ab)).then((b) => buffers.set(id, b), () => {}));
     bytes.clear();
-    return Promise.all(decoding).then(() => { const c = pending; pending = null; if (c) play(c); });
+    return Promise.all(decoding).then(() => { const p = pend; pend = { shot: null, bed: null }; if (p.bed) play(p.bed); if (p.shot) play(p.shot); });
   };
   const preload = () => {
     for (const id of A.ids()) {
@@ -46,10 +82,10 @@ export function createLoader(manifest, base = '/') {
       if (!u) continue;
       if (A.get(id).kind === 'sfx') {
         fetch(u).then((r) => (r.ok ? r.arrayBuffer() : null)).then((ab) => {
-          if (!ab) return;
-          if (ctx) ctx.decodeAudioData(ab).then((b) => buffers.set(id, b), () => {});
+          if (!ab) { failed.add(id); return; }
+          if (ctx) ctx.decodeAudioData(ab).then((b) => { buffers.set(id, b); if (want === id) startBed(id); }, () => {});
           else bytes.set(id, ab);
-        }, () => {});
+        }, () => { failed.add(id); });
       } else { const img = new Image(); img.onload = () => images.set(id, u); img.src = u; }
     }
     for (const ev of ['pointerdown', 'keydown']) addEventListener(ev, unlock, { once: true });
@@ -59,11 +95,45 @@ export function createLoader(manifest, base = '/') {
     o.frequency.value = beepHz(id); g.gain.value = 0.05;
     o.connect(g).connect(master); o.start(); o.stop(ctx.currentTime + 0.08);
   };
+  // ---- beds: one looping source at a time. The same bed asked for again is a no-op (no doubling, no gap); a different
+  // one crossfades over BED_FADE; stopBeds fades out. The scene changing stops them (scene()).
+  const fadeOut = (b, s = BED_FADE) => {
+    try {
+      const t = ctx.currentTime;
+      b.g.gain.cancelScheduledValues(t); b.g.gain.setValueAtTime(b.g.gain.value, t); b.g.gain.linearRampToValueAtTime(0, t + s);
+      b.src.stop(t + s + 0.05);
+    } catch { /* already stopped */ }
+  };
+  const startBed = (id) => {
+    if (bed?.id === id) { want = null; return; }
+    gains();
+    const b = buffers.get(id);
+    if (!b) {
+      if (failed.has(id)) { want = null; if (bed) { fadeOut(bed); bed = null; } if (!synth(ctx, id, master)) beep(id); } else want = id; // no file: the stand-in once; else wait for the decode
+      return;
+    }
+    want = null;
+    const src = ctx.createBufferSource(), g = ctx.createGain();
+    src.buffer = b; src.loop = true; g.gain.value = 0; src.connect(g); g.connect(master); src.start();
+    g.gain.linearRampToValueAtTime(1, ctx.currentTime + BED_FADE);
+    if (bed) fadeOut(bed);
+    bed = { id, src, g };
+  };
+  const stopBeds = (fade = BED_FADE) => {
+    want = null; pend.bed = null;
+    if (bed && ctx) fadeOut(bed, fade);
+    bed = null;
+  };
+  // The beat's scene: a change of scene stops the beds (the new scene's first beat starts its own).
+  const scene = (id) => { if (id !== curScene) { curScene = id; stopBeds(); } };
   const play = (cue) => {
     try {
+      if (cue === 'silence') { stopBeds(1); return; } // the authored silence also ends a bed
       const id = A.cueId(cue);
       if (!id) return;
-      if (!ctx) { pending = cue; return; }
+      const isBed = isBedId(id);
+      if (!ctx) { if (isBed) pend.bed = cue; else pend.shot = cue; return; }
+      if (isBed) { startBed(id); return; }
       gains();
       const out = master;
       const b = buffers.get(id);
@@ -75,5 +145,5 @@ export function createLoader(manifest, base = '/') {
   const has = (id) => images.has(id); // true once the real image file has loaded (it then beats any fallback art)
   const setMuted = (v) => { muted = !!v; if (ctx) gains(); };
   const duck = (v) => { ducked = !!v; if (ctx) gains(); };
-  return { preload, play, src, unlock, has, setMuted, duck };
+  return { preload, play, src, unlock, has, setMuted, duck, scene, stopBeds, isBed: (c) => isBedId(A.cueId(c)), bedId: () => bed?.id ?? null };
 }
