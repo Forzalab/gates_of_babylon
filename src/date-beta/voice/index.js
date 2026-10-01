@@ -20,7 +20,7 @@ export function createVoice(base = '/', storage = () => localStorage, onSpeak = 
 
   // Speech bus: +6 dB then a compressor/limiter so a take never clips (the takes sit near -24 LUFS, quieter than the beds).
   let ctx = null, bus = null;
-  const GAIN = 2; // back from 4: the takes carry their own room noise, and +6 dB into the limiter lifted that noise too
+  const GAIN = 5; // back from 4: the takes carry their own room noise, and +6 dB into the limiter lifted that noise too
   const route = (a) => {
     try {
       if (!ctx) {
