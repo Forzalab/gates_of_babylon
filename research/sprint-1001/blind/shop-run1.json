@@ -1,0 +1,39 @@
+{
+ "case": "shop",
+ "run": "1",
+ "start": "0",
+ "shelf": {
+  "chip": "HER LIST\ncarrots ♡",
+  "items": [
+   "carrots",
+   "daikon",
+   "potato",
+   "jar"
+  ],
+  "chips": 0,
+  "choices": 0
+ },
+ "perfect": {
+  "seen": [
+   "produce:carrots",
+   "eggs:eggs",
+   "cups:three"
+  ],
+  "startLove": "0",
+  "endLove": "3",
+  "endBeat": "v2-shop:4",
+  "pop": "+3 She liked that."
+ },
+ "onewrong": {
+  "seen": [
+   "produce:jar",
+   "produce:carrots",
+   "eggs:eggs",
+   "cups:three"
+  ],
+  "startLove": "0",
+  "endLove": "2",
+  "endBeat": "v2-shop:4",
+  "pop": "+2 She liked that."
+ }
+}
