@@ -39,6 +39,9 @@ function Truth({ circuit, view, fig, setSwitches }) {
     const m = { up: el.scrollTop > 1, down: el.scrollTop + el.clientHeight < el.scrollHeight - 1,
       left: el.scrollLeft > 1, right: el.scrollLeft + el.clientWidth < el.scrollWidth - 1 };
     setMore((o) => (Object.keys(m).some((k) => m[k] !== o[k]) ? m : o));
+    // The bottom fade is a mask, which also hides the native horizontal scrollbar. Tell the CSS how tall that strip is, so the fade ends above it.
+    const sb = `${el.offsetHeight - el.clientHeight}px`;
+    el.style.setProperty('--sb', sb); el.parentElement.style.setProperty('--sb', sb); // the wrap too, so the bottom cue sits above the strip
   };
   useEffect(() => {
     const el = box.current; if (!el) return;
@@ -52,7 +55,8 @@ function Truth({ circuit, view, fig, setSwitches }) {
     // Was: capped only when the rows overflowed 100vh, so a taller row 02 let 8-16 rows run to the cell's bottom rule.
     const room = cell.bottom - 32 * u - el.getBoundingClientRect().top;
     const cap = Math.min(parseFloat(getComputedStyle(el).maxHeight), room);
-    if (el.scrollHeight > cap + 0.5) el.style.maxHeight = `${head + Math.floor((cap - head) / rowH) * rowH}px`;
+    const sb = el.offsetHeight - el.clientHeight; // horizontal scrollbar strip: sits below the whole rows, not inside them
+    if (el.scrollHeight > cap + 0.5) el.style.maxHeight = `${head + Math.floor((cap - head - sb) / rowH) * rowH + sb}px`;
     setBoxH(el.clientHeight);
     cues(el);
     // Tony: the table snapped back while scrolling. This effect ran after EVERY render, and a scroll re-renders (setTop):
