@@ -4,6 +4,7 @@
 // left shop, a clock on the pole at 3:40 (both above the dialogue box), the neon mush redrawn: 花や / FLOWERS, そば.
 import { R3Scene, Plate, preloadTrace } from './parts.jsx';
 import { Mid, CurryFront } from '../sandwichFronts.jsx';
+import { useStoryTime } from '../util.js';
 
 preloadTrace('curry-street');
 const T = 'afternoon';
@@ -25,7 +26,8 @@ function Poles() {
 function Clock() {
   const cx = 525, cy = 470, r = 50; // above the dialogue box (y 560+)
   const hand = (deg, len) => [cx + Math.sin((deg * Math.PI) / 180) * len, cy - Math.cos((deg * Math.PI) / 180) * len];
-  const [hx, hy] = hand(110, 28), [mx, my] = hand(240, 40);
+  const [h, m] = useStoryTime(3, 40);
+  const [hx, hy] = hand((h % 12) * 30 + m / 2, 28), [mx, my] = hand(m * 6, 40);
   return (
     <g>
       <rect x="517" y="412" width="16" height="12" fill="#5a4a44" />

@@ -5,7 +5,7 @@
 // Light: magic hour, ONE sun low behind the trees at the right -> every shadow falls long toward the front-left
 // (trunks, lamp, bench); warm rim on the right edges. Grade: Your-Name magic tone (flare, sparkles, drifting petals).
 // Motion: Grade's stepped sparkles + petals (500 ms per pose); rm = still.
-import { rng } from '../util.js';
+import { rng, useStoryTime } from '../util.js';
 import { camera, preloadTrace, Trace, Grade } from './kit.jsx';
 
 preloadTrace('park');
@@ -70,6 +70,7 @@ function Bench() {
 }
 
 function Tower() {
+  const [h, m] = useStoryTime(4, 0); // magic hour
   // far pink clock tower (the pink-cathedral ref, redrawn small) in the bright sky gap: hazed, rim-lit from the right
   return (
     <g opacity=".8">
@@ -79,7 +80,7 @@ function Tower() {
       <path d="M1580 430V330H1664V430Z" fill="#e2a0bf" />
       <path d="M1640 272L1644 270V430H1638Z M1700 300L1704 300V430H1698Z" fill="#fff4e0" opacity=".8" />
       <circle cx="1622" cy="300" r="17" fill="#fff6fa" stroke="#c77a9e" strokeWidth="3" />
-      <path d="M1622 300V288M1622 300L1630 305" stroke="#8a4a6a" strokeWidth="2.5" strokeLinecap="round" />
+      <g transform="translate(1622 300)" stroke="#8a4a6a" strokeWidth="2.5" strokeLinecap="round"><path d="M0 0V-12" transform={`rotate(${m * 6})`} /><path d="M0 0V-9" transform={`rotate(${(h % 12) * 30 + m / 2})`} /></g>
       <circle cx="1622" cy="370" r="14" fill="#c77a9e" opacity=".6" />
       {/* far treeline in haze, hiding the base */}
       <g fill="#d9e6c8">{[[1520, 420, 44], [1575, 408, 40], [1630, 414, 48], [1690, 404, 42], [1740, 420, 40]].map(([x, y, r]) => <circle key={x} cx={x} cy={y} r={r} />)}</g>

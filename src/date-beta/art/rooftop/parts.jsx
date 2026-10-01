@@ -3,6 +3,7 @@
 // fence, stairwell box, antenna, tile joints, far skyline, and the Figur clock tower from the goal card in the distance.
 // Still art: no timers, no animation (reduced motion first).
 import { traceUrl, preloadTrace } from '../romance/Grade.jsx';
+import { useStoryTime } from '../util.js';
 
 export { preloadTrace };
 
@@ -20,7 +21,8 @@ export function RoofSvg({ id, label, children }) {
 // The Figur clock tower (Rooftop.jsx, the goal card) boiled down to its silhouette: lavender spire with gold finials,
 // pink crown with dark slots, gold-framed clock, belfry arches. Local origin = spire base centre; ~540 wide at s = 1.
 // Hands are fixed (h, m): noon = both up. `haze` = group opacity, so the sky shows through like air, not like glass.
-export function FigurTower({ x, y, s = 0.15, h = 12, m = 0, haze = 0.78, tint = 'day' }) {
+export function FigurTower({ x, y, s = 0.15, h: h0 = 12, m: m0 = 0, haze = 0.78, tint = 'day' }) {
+  const [h, m] = useStoryTime(h0, m0);
   const warm = tint === 'warm';
   const c = warm
     ? { spL: '#d9b2c8', spD: '#9c7aa6', crown: '#f6c6c6', crownD: '#b98096', body: '#f1c4c8', bodyD: '#b58398', gold: '#e8b35a', slot: '#5d3a5a', face: '#fff1dc' }

@@ -2,7 +2,7 @@
 // No motion: steam and the TV are 2 static poses swapped on the stepped clock (5 ticks = 625 ms, >= 500 ms);
 // reduced motion = pose 0 only. Screen direction: YOUR hand enters from the bottom-left, hers from the right.
 import { R3Scene, preloadTrace } from '../r3-station/parts.jsx';
-import { useStep } from '../util.js';
+import { useStep, useStoryTime } from '../util.js';
 import './curry.css';
 
 export { preloadTrace };
@@ -29,7 +29,8 @@ export function Steam({ x, y, h = 220, w = 70, rm, o = 0.5 }) {
 }
 
 // a wall / pole clock; h, m = the time it shows
-export function Clock({ cx, cy, r = 50, h, m }) {
+export function Clock({ cx, cy, r = 50, h: h0, m: m0 }) {
+  const [h, m] = useStoryTime(h0, m0);
   const hand = (deg, len) => [cx + Math.sin((deg * Math.PI) / 180) * len, cy - Math.cos((deg * Math.PI) / 180) * len];
   const [hx, hy] = hand((h % 12) * 30 + m / 2, r * 0.56), [mx, my] = hand(m * 6, r * 0.8);
   return (

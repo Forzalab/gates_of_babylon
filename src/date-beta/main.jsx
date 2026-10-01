@@ -32,7 +32,7 @@ import { SHOT_ALIASES } from './art/shots/aliases.js';
 import { Handout, SmileTag, PovFood, PeekBento, useStep } from './SceneA.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
-import { setCrowd, bumpRun, runBucket, getRun, fill } from './meta.js';
+import { setCrowd, bumpRun, runBucket, getRun, fill, storyStamp } from './meta.js';
 import { cardFor, failLine } from './endcard.js';
 import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
@@ -388,7 +388,7 @@ function Player() {
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
           action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} /> : null} />}
         {beat.choices && !tag && !handout && !solo && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} beatKey={`${beat.scene}:${beat.index}`} key={`c${beat.scene}${beat.index}`} />}
-        {stampP && <div className="db-stamp" aria-hidden="true"><b>{stampP.place}</b><i>·</i><span>{stampP.time}</span></div>}
+        {stampP && <div className="db-stamp" aria-hidden="true"><b>{stampP.place}</b><i>·</i><span>{storyStamp(stampP.time)}</span></div>}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {rain && <WetGui level={rain} stageRef={stageRef} beatKey={rainKey} seed={beat.index + 1} />}
         {card && <GoalCard onNext={() => advance(true)} />}
