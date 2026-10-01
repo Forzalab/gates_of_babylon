@@ -59,7 +59,9 @@ for (const sc of scenes) {
       const ui = [...document.querySelectorAll('.db-say, .db-choices, .db-ask, .db-handout, .hud-scrim')].map((e) => e.getBoundingClientRect())
         .filter((q) => q.width && q.left < r.right && q.right > r.left);
       const boxTop = Math.min(1080, ...ui.map((q) => q.top));
-      return { low, cx, boxTop, sprBottom: r.bottom };
+      // R5/R6: a raised sprite with the skirt mask (beta.css .db-nanda.raised) is a waist-up crop, not visible feet
+      const masked = nd.classList.contains('raised') && getComputedStyle(nd).maskImage !== 'none';
+      return { low, cx, boxTop: masked ? Math.min(boxTop, low + 1) : boxTop, sprBottom: r.bottom };
     }, [a, b]);
     const cropped = m.low < 0 || m.low >= m.boxTop - 10 || m.low >= 1076;
     const key = floorOf(info.bg, info.shot).key;

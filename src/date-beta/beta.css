@@ -160,7 +160,7 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-nanda.raised { bottom: 470px; }
 /* R5: lifted over a choice box with no floor under her, her legs would dangle in the air: the frame crops her at the
    skirt instead (a soft fade), so she reads as a waist-up shot, never as floating. Floored / planted beats keep legs. */
-.db-nanda.raised:not(.floored):not(.planted) { -webkit-mask-image: linear-gradient(to bottom, #000 80.1%, transparent 80.5%); mask-image: linear-gradient(to bottom, #000 80.1%, transparent 80.5%); }
+.db-nanda.raised:not(.floored):not(.planted) { -webkit-mask-image: linear-gradient(to bottom, #000 77.6%, transparent 78%); mask-image: linear-gradient(to bottom, #000 77.6%, transparent 78%); }
 /* props.cut.plant = px she is lowered from her default spot (explicit, per beat). .floored = the per-bg / per-insert floor
    line (art/floors.js, --floor = stage y of the ground at her column): her feet sit ON it whatever the box does.
    .db-plant = her contact shadow, GLOBAL (research/sprint-0930/town/SHADOWS.md, float-audit/REPORT.md): straight under her
