@@ -44,3 +44,10 @@ The crowd's legs are all under the box (Crowd.jsx); the feet on screen are hers.
 Same shoe model, sole lip and pin length in all three; the shadow family follows each scene (soft cool-left in the
 drizzle, long warm-right in the afternoon street, cool-left under the station shafts). The refs' cast shadows are
 harder (ref 04, low sun); ours stay soft because none of these three keys is a hard low sun. Consistent: OK.
+
+## 5. rooftop 2 "Her shoes by the fence. Toes pointed at you." (rooftop-noon)
+| it | change | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | total | kept |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | before: the line is about her shoes, the box hides them (rooftop-noon is a crop bg) | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | - |
+| 1 | per-beat floor (props.cut.floor = rooftop-fence, y 786 on the tile deck); 'shy' uchimata stance (knees + toes in 7 deg); noon sun front-left: short crisp cast right, warm rim left, deck bounce | 1 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 9 | yes |
+| 2 | toe-in 7 -> 4 deg, shoes 1.5 u apart (they were crossing at the toes) | 2 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 10 | PASS |

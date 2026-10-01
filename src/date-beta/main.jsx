@@ -212,7 +212,9 @@ function Player() {
   const face = beat.react ? null : (stepped && cut.face2) || cut.face || autoFace[beat.index] || null;
   // her floor (art/floors.js): an explicit props.cut.plant wins, else the per-bg / per-insert-shot floor line.
   // (a planted beat keeps the floor's pose + light, R7 legs; only the y comes from the plant)
-  const flo = cut.plant ? { ...floorOf(beat.bg, beat.props?.shot), key: null, y: null, wet: false } : floorOf(beat.bg, beat.props?.shot);
+  // props.cut.floor = a named floor for this one beat (a staging the bg's own floor does not have, e.g. rooftop-fence)
+  const flo0 = cut.floor ? floorOf(cut.floor) : floorOf(beat.bg, beat.props?.shot);
+  const flo = cut.plant ? { ...flo0, key: null, y: null, wet: false } : flo0;
   const tag = !!(cut.tag && beat.choices?.length === 1 && !beat.react);
   const handout = !!(cut.handout && beat.choices && !beat.react);
   // ux-six: a one-button "choice" with no score is a NEXT in disguise: drawn as the NEXT pill (named after the action),

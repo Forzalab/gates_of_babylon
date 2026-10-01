@@ -21,6 +21,13 @@ export const FLOORS = {
   // the cast shadow to the left in the platform's blue-grey ink. Pose: bumped = a braced, widened stance (Inoue).
   'station-ads': { y: 690, step: 'brace',
     light: { side: 1, rim: '#e4eef6', bounce: '#a9bccb', dx: -78, dy: 4, rot: -4, len: 1.4, ink: '16, 24, 34', a: 0.55, grade: 'saturate(.9) brightness(.98)' } },
+  // per-beat floors (props.cut.floor): rooftop 2 "Her shoes by the fence. Toes pointed at you." The line is about her
+  // shoes, but rooftop-noon is a crop bg (the box hid them). This one beat stands her on the roof deck (y 786, the deck
+  // between the fence base ~700 and the box rivets ~810) in the 'shy' stance (KyoAni uchimata: the knees + toes turned in,
+  // toes still pointed at the camera). Noon sun high from the front-left (the stair-house's left face is the lit one): a
+  // short, crisper cast shadow just right of her feet, a warm-white rim on her left edges, the deck's bounce on the shins.
+  'rooftop-fence': { y: 786, step: 'shy',
+    light: { side: -1, rim: '#fff4dc', bounce: '#c9d6e4', dx: -22, dy: 3, rot: 3, len: 1.15, ink: '30, 44, 70', a: 0.6, grade: 'saturate(.97)' } },
   // ground hidden behind the box at her column: feet tuck behind it
   // R7 legs: the street walking ("We walk out to the street", v2-curry 13 / katsu 11 / alone 3). Was UNDER_BOX: the box
   // rivets sliced her shoes in half. Now she stands up the street (y 790, clear of the one-line box at ~810) in the walk

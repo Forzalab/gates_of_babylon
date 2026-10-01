@@ -344,7 +344,8 @@
           "props": {
             "clock": "noon",
             "cut": {
-              "frame": "medium"
+              "frame": "medium",
+              "floor": "rooftop-fence"
             }
           }
         }

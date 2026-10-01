@@ -20,7 +20,7 @@ test('floors: every bg a Nanda-visible route beat uses has a floor entry (y or c
       const cut = b.props?.cut ?? {};
       const frame = cut.frame ?? 'medium';
       if (frame !== 'medium' || cut.plant || b.present === false) continue;
-      const { key } = floorOf(bg, b.props?.shot);
+      const { key } = cut.floor ? floorOf(cut.floor) : floorOf(bg, b.props?.shot);
       if (key && !FLOORS[key]) miss.add(key);
     }
   }

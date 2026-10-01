@@ -32,3 +32,9 @@
 - Pose: a static stand on "Two men bump into her" (Inoue: a bump = a caught-balance, widened base).
 - Light: the sun shafts come down from the upper right through the roof; the pool was magenta-tinted and centred at
   x 960, 40 px right of her soles. Grade: hotter than the blue-grey platform. The crowd's feet are all behind the box.
+
+## 5. rooftop 2 (rooftop-noon), her shoes by the fence
+- The text shows her shoes; the frame hid them (crop bg, box over the feet). New mechanism: `props.cut.floor` = a named
+  floor for one beat (main.jsx, floors test + float audit read it through the stage's data-floor).
+- Nishiya/KyoAni: "toes pointed at you" played as a shy uchimata (knees in, toes a touch in), ref 06 (indoor shoes on tiles).
+- Light: noon, high, front-left (the stair-house's left face is lit): short, crisper cast shadow to the right.
