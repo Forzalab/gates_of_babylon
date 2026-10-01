@@ -14,7 +14,7 @@ export function makeAssets(manifest = {}) {
 // Beds: the looping sounds. They run until the scene changes (or a 'silence' beat), one at a time (see createLoader).
 // Files are made to loop (synth.py: 0.5 s crossfaded ends). Every other sfx is a one-shot.
 export const BEDS = Object.freeze(['SX-20', 'SX-15', 'SX-21', 'SX-27', 'SX-06', 'umbrella-rain']);
-export const BED_LEVEL = 0.2; // Tony Oct 1: background beds -14 dB, well under the voice
+export const BED_LEVEL = 0.1; // Tony Oct 1: background beds -20 dB, well under the voice
 export const BED_FADE = 0.5; // seconds: a bed's fade in / out, and the crossfade when one bed replaces another
 export const isBedId = (id) => BEDS.includes(id);
 
