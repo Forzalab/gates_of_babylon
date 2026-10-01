@@ -114,10 +114,10 @@ export function CurryNaanLift() {
   return <CurryScene id="naan-lift" label="Close: her two pink pin hands tear the naan. One round nub presses the big naan down, the other pinches the torn-off tip and lifts it." />;
 }
 
-// a small steel boat pours more butter sauce into the butter chicken cup
+// her pin hand holds a small steel boat and pours more butter sauce into the butter chicken cup (M1: the boat is held)
 export function CurrySauce({ rm }) {
   return (
-    <CurryScene id="sauce" label="Close: more butter sauce pours from a small steel boat into the cup of butter chicken. It is thick, orange, and shiny.">
+    <CurryScene id="sauce" label="Close: her pink pin hand holds a small steel boat and pours more butter sauce into the cup of butter chicken. It is thick, orange, and shiny.">
       <Steam x={620} y={330} h={170} rm={rm} o={0.35} />
     </CurryScene>
   );

@@ -529,7 +529,16 @@ def sauce_crop():
 def sauce():
     c, s0, d0 = sauce_crop()
     g = f'<g transform="{crop(c, s0, d0)}">{thali_group()}</g>'
-    return svg(cloth() + g + boat_cel(boat(1500, 240, -28, 1.9, BUTTER, (d0[0] + 40, d0[1] - 10)), 'b'))
+    # M1 (SLOP 10-01, "She pours more butter sauce"): the boat is held, as katsu_pour. boat() places itself from the
+    # landing point; her pin nub grips the belly (boat-local (50, 22): this boat is smaller than katsu's, so the nub sits
+    # higher, over the belly line, to read as holding, not touching), the lead from the right frame edge under the HUD
+    # column, over the saag katori. The nub top stays below the y=140 HUD band.
+    rot, sc, to = -28, 1.9, (d0[0] + 40, d0[1] - 10)
+    c_, s_ = math.cos(math.radians(rot)), math.sin(math.radians(rot))
+    bx = to[0] + 34 - (-110 * c_ + 30 * s_) * sc; by = to[1] - 260 - (-110 * s_ - 30 * c_) * sc
+    hx, hy = bx + (50 * c_ - 22 * s_) * sc, by + (50 * s_ + 22 * c_) * sc
+    arm = pin_hold((round(hx), round(hy)), 58, ((2000, 600), (1600, 420)))
+    return svg(cloth() + g + boat_cel(boat(1500, 240, rot, sc, BUTTER, to), 'b') + cel(arm, 'b', lift=(60, 120), op=.2))
 
 
 def naan_dip():

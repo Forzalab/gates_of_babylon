@@ -2,7 +2,7 @@
 // 06 retro register, 05 basket + hand, 08 self-checkout); cels = THE cups, the POP cards, the LED total, the shop lady,
 // her hand, the self-checkout screen. Overhead shop light everywhere (cel shadows straight down) + a per-scene tint.
 import { traceUrl, preloadTrace } from '../romance/Grade.jsx';
-import { ShopScene, Card, Hand, BasketBed, BasketGoods, Shadow, SP } from './parts.jsx';
+import { ShopScene, Card, Hand, PinHand, BasketBed, BasketGoods, Shadow, SP } from './parts.jsx';
 
 // vtrace r2: the basket is the trace of ref 03 (the green basket full of groceries, 3/4 from above); her list sits on
 // top (the shared BasketGoods: carrot bag, egg pack, cups 1 + 2 on one baseline) and her hand lowers cup 3.
@@ -10,22 +10,34 @@ import { ShopScene, Card, Hand, BasketBed, BasketGoods, Shadow, SP } from './par
 // the basket's top-down camera (rim ~a circle, a sliver of wall). Three identical copies, so they match; sprite 300 x 286.
 preloadTrace('shop/r2-cup');
 const CUPS = [[1195, 300, 0.56, -8], [1340, 455, 0.56, 6], [1150, 560, 0.56, 3]]; // x, y = sprite centre, scale, tilt
+// M2 (SLOP 10-01, "Her hand puts one cup in the basket"): cup 3 is still in her hand, just above its spot. Lifted toward
+// the top-down camera it reads a little bigger and its overhead shadow stays on its landing spot (softer, wider: it is
+// off the goods). HER hand = her PIN (Nanda canon): the round nub closes on cup 3's lower-right rim and its lead runs
+// down-right off the frame edge (it passes under the box), clear of cups 1 + 2.
+const LIFT = { dx: -10, dy: -35, k: 0.62 };
 function BasketCupBowls() {
   return (
     <g>
-      {CUPS.map(([x, y, k, r], i) => (
-        <g key={i} transform={`translate(${x} ${y}) rotate(${r})`}>
-          <ellipse cx={22 * k} cy={112 * k} rx={150 * k} ry={70 * k} fill="#1c0c08" opacity=".5" />
-          <image href={traceUrl('shop/r2-cup')} x={-150 * k} y={-143 * k} width={300 * k} height={286 * k} />
-        </g>
-      ))}
+      {CUPS.map(([x, y, k, r], i) => {
+        const held = i === 2;
+        const kk = held ? LIFT.k : k;
+        return (
+          <g key={i}>
+            <ellipse cx={x + 22 * k} cy={y + 112 * k} rx={150 * k * (held ? 1.08 : 1)} ry={70 * k * (held ? 1.08 : 1)} fill="#1c0c08" opacity={held ? 0.3 : 0.5} transform={`rotate(${r} ${x} ${y})`} />
+            <image href={traceUrl('shop/r2-cup')} x={-150 * kk} y={-143 * kk} width={300 * kk} height={286 * kk}
+              transform={`translate(${held ? x + LIFT.dx : x} ${held ? y + LIFT.dy : y}) rotate(${r})`} />
+          </g>
+        );
+      })}
+      {/* her pin: rot -60 sends the lead down-right; at s .8 the nub sits (-69, -40) from (x, y), on cup 3's lower-right rim */}
+      <PinHand x={1275} y={625} rot={-60} s={0.8} />
     </g>
   );
 }
 
 export function BasketCups() {
   return (
-    <ShopScene id="basket" trace="cel-basket" tint="#fff0e0" label="Close-up from above: a green shop basket full of groceries. On top: carrots.">
+    <ShopScene id="basket" trace="cel-basket" tint="#fff0e0" label="Close-up from above: a green shop basket full of groceries. On top: carrots and two tea cups. Her pink pin hand lowers a third cup into the basket.">
       <Shadow x={980} y={690} w={640} h={60} op={0.28} dx={0} />
       <BasketGoods x={930} y={620} s={1.25} />
       <BasketCupBowls />
