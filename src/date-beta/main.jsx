@@ -416,7 +416,7 @@ function Player() {
         {!pos.done && !end && frame === 'pov' && <PovFood food={cut.food} />}
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !shared && !(off && !end) && frame === 'medium'} under={(!!beat.props?.underUmbrella || shared) && !end} stageRef={stageRef} beatKey={rainKey} />}
-        {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
+        {!pos.done && !end && !card && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD; never behind the GOAL card (menu-bg: the clean flowery tower there) */}
         {throng && <CrowdNear crowd={throng} key={`cn${beat.scene}${beat.index}`} />}
         {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} blind={isBlind} key={`h${beat.scene}${beat.index}`} />}
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
