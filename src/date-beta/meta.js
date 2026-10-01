@@ -55,6 +55,19 @@ export function bumpRun() {
   return run;
 }
 
+// Blind run (Tony, Oct 1): run 1 hides the love chips and shuffles the choices so the numbers don't steer the first
+// play; replays (run 2+) bring the chips back in the authored order.
+export const blind = (n = getRun()) => n <= 1;
+// Shown order for n choices: a seeded Fisher-Yates (same seed + key = same order, so shots repeat). order[slot] = choice index.
+export function shuffleOrder(n, seed = 0, key = '') {
+  let h = (seed >>> 0) ^ 2166136261;
+  for (const ch of String(key)) h = Math.imul(h ^ ch.charCodeAt(0), 16777619);
+  const rnd = () => { h = (h + 0x6d2b79f5) | 0; let t = Math.imul(h ^ (h >>> 15), 1 | h); t ^= t + Math.imul(t ^ (t >>> 7), 61 | t); return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+  const o = Array.from({ length: n }, (_, i) => i);
+  for (let i = n - 1; i > 0; i--) { const j = Math.floor(rnd() * (i + 1)); [o[i], o[j]] = [o[j], o[i]]; }
+  return o;
+}
+
 export function clock(d = new Date()) {
   const h = d.getHours(), m = d.getMinutes();
   return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`;

@@ -32,7 +32,7 @@ import { SHOT_ALIASES } from './art/shots/aliases.js';
 import { Handout, SmileTag, PovFood, PeekBento, useStep } from './SceneA.jsx';
 import { Fx } from './Fx.jsx';
 import { EmotionFx } from './art/emotion/EmotionFx.jsx';
-import { setCrowd, bumpRun, runBucket, getRun, fill, setSceneTime, stampAt } from './meta.js';
+import { setCrowd, bumpRun, runBucket, getRun, fill, setSceneTime, stampAt, blind, shuffleOrder } from './meta.js';
 import { cardFor, failLine } from './endcard.js';
 import crowd from './packs/crowd.json';
 import { Hud, HudDefs, GoalCard, EndCard, NextButton } from './Hud.jsx';
@@ -242,6 +242,12 @@ function Player() {
   const solo = !!(beat.choices?.length === 1 && !beat.choices[0].love && !tag && !handout && !beat.end && !GAME[beat.bg] && !beat.react);
   const off = !!scene.offstage; // she is in the house, not in the frame: no sprite, her lines are labelled from above
   const shown = useMemo(() => showLine(beat, off), [beat, off]);
+  // Blind run 1: no chips, choices in a seeded shuffled order; keys 1-9 follow the shown order (orderRef).
+  const isBlind = blind();
+  const nCh = beat.choices?.length ?? 0, seedNow = pos.luck?.seed ?? SEED;
+  const order = useMemo(() => (isBlind && nCh > 1 ? shuffleOrder(nCh, seedNow, `${beat.scene}:${beat.index}`) : null), [isBlind, nCh, seedNow, beat.scene, beat.index]);
+  const orderRef = useRef(order);
+  orderRef.current = order;
 
   // Meta loop (meta.js): each arrival at the first scene (boot or a loop back) is a new run; `run` feeds vary/if.
   const atFirst = !pos.done && pos.s === 0;
@@ -329,7 +335,7 @@ function Player() {
       else if (e.key === 'f' || e.key === 'F') toggleFull();
       else if (e.key === 'p' || e.key === 'P') setPaused((v) => !v);
       else if (e.key === 'm' || e.key === 'M') VOICE.setMuted(!VOICE.muted);
-      else if (/^[1-9]$/.test(e.key)) pick(+e.key - 1);
+      else if (/^[1-9]$/.test(e.key)) pick(orderRef.current?.[+e.key - 1] ?? +e.key - 1);
     };
     const onFull = () => setFull(!!document.fullscreenElement);
     addEventListener('keydown', onKey);
@@ -405,10 +411,10 @@ function Player() {
         {!pos.done && !end && frame === 'peek' && <PeekBento food={cut.food} />}
         {rain && <RainOverlay level={rain} bg={beat.bg} rm={RM} umbrella={!!beat.props?.umbrella && !shared && !(off && !end) && frame === 'medium'} under={(!!beat.props?.underUmbrella || shared) && !end} stageRef={stageRef} beatKey={rainKey} />}
         {!pos.done && !end && !GAME[beat.bg] && beat.props?.near && <NearLens near={beat.props.near} /> /* near-lens foreground: over the scene, under the HUD */}
-        {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} key={`h${beat.scene}${beat.index}`} />}
+        {handout && !pos.done && !end && <Handout choices={beat.choices} map={cut.handout} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} blind={isBlind} key={`h${beat.scene}${beat.index}`} />}
         {say && <Say line={shown} onNext={onNext} label={solo ? `NEXT · ${fill(beat.choices[0].plain)}` : undefined} lead={lead} at={splitAt} stepped={stepped} key={`${beat.scene}${beat.index}${beat.react ? 'r' : ''}`}
-          action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} /> : null} />}
-        {beat.choices && !tag && !handout && !solo && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} beatKey={`${beat.scene}:${beat.index}`} key={`c${beat.scene}${beat.index}`} />}
+          action={tag ? <SmileTag choice={beat.choices[0]} onPick={pick} blind={isBlind} /> : null} />}
+        {beat.choices && !tag && !handout && !solo && !pos.done && !end && !GAME[beat.bg] && <Choices later={!stepped} choices={beat.choices} onPick={pick} on={beat.choices.map((c) => enabled(c, pos.flags))} left={left} total={beat.timer} def={timeoutPick(beat, pos.flags)} hidden={beat.loveHidden} order={order} blind={isBlind} beatKey={`${beat.scene}:${beat.index}`} key={`c${beat.scene}${beat.index}`} />}
         {stampP && <div className="db-stamp" aria-hidden="true"><b>{stampP.place}</b><i>·</i><span>{stampP.time}</span></div>}
         {here && <Hud love={pos.love ?? 0} goal={SCENES.love.goal} trail={trail(SCENES, pos)} pop={pop} />}
         {rain && <WetGui level={rain} stageRef={stageRef} beatKey={rainKey} seed={beat.index + 1} />}
