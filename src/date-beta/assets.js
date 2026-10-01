@@ -69,7 +69,7 @@ export function createLoader(manifest, base = '/') {
   const bytes = new Map(), buffers = new Map(), images = new Map();
   let ctx = null, master = null, muted = false, ducked = false;
   // ONE sfx bus (master): M mutes it; it sits -14 dB (0.2) under a voice take (voice/index.js onSpeak).
-  const DUCK = 0.75; // Tony Oct 1: sfx bus -20 dB under a voice take
+  const DUCK = 0.5; // Tony Oct 1: sfx bus -20 dB under a voice take
   const gains = () => {
     if (!master) { master = ctx.createGain(); master.gain.value = muted ? 0 : ducked ? DUCK : 1; master.connect(ctx.destination); }
     const v = muted ? 0 : ducked ? DUCK : 1;
