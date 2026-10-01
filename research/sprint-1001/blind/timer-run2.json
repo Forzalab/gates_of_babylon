@@ -1,0 +1,74 @@
+{
+ "case": "timer",
+ "run": "2",
+ "beat": "hungry:0",
+ "love0": "0",
+ "say": "NANDA I'm so hungry. Feed me. Butter chicken, or katsu curry? Pick the right one.",
+ "sayBox": [
+  260,
+  489,
+  1660,
+  744
+ ],
+ "choiceBox": [
+  90,
+  860,
+  1830,
+  1010
+ ],
+ "legend": true,
+ "shown": [
+  "1:Butter chicken, for her|chip=♥ ??|def=false",
+  "2:Katsu curry|chip=♥ ??|def=true",
+  "3:I'm not hungry|chip=♡ ??|def=false"
+ ],
+ "timebar": true,
+ "clicks": {
+  "Butter chicken, for her": {
+   "slot": 1,
+   "loveAfter": "3",
+   "pop": "+3 She liked that.",
+   "nextBeat": "hungry:0",
+   "say": "NANDA With naan! You know me so well. ♡ NEXT"
+  },
+  "Katsu curry": {
+   "slot": 2,
+   "loveAfter": "2",
+   "pop": "+2 She liked that.",
+   "nextBeat": "hungry:0",
+   "say": "NANDA Crunchy! You chose. I'll pretend I did. NEXT"
+  },
+  "I'm not hungry": {
+   "slot": 3,
+   "loveAfter": "0",
+   "pop": "−4 She did not like that.",
+   "nextBeat": "hungry:0",
+   "say": "NANDA You don't eat? Then you watch me eat. NEXT"
+  }
+ },
+ "keys": {
+  "1": {
+   "labelOfKey": "1: Butter chicken, for her",
+   "routedTo": "Butter chicken, for her",
+   "say": "NANDA With naan! You know me so well. ♡ NEXT"
+  },
+  "2": {
+   "labelOfKey": "2: Katsu curry",
+   "routedTo": "Katsu curry",
+   "say": "NANDA Crunchy! You chose. I'll pretend I did. NEXT"
+  },
+  "3": {
+   "labelOfKey": "3: I'm not hungry",
+   "routedTo": "I'm not hungry",
+   "say": "NANDA You don't eat? Then you watch me eat. NEXT"
+  }
+ },
+ "midTimer": "TIME ⏳ 4",
+ "timeout": {
+  "defaultText": "Katsu curry",
+  "loveAfter": "2",
+  "pop": "+2 She liked that.",
+  "nextBeat": "hungry:0",
+  "say": "NANDA Crunchy! You chose. I'll pretend I did. NEXT"
+ }
+}

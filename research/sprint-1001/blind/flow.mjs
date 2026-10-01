@@ -4,7 +4,7 @@ import fs from 'node:fs';
 const { chromium } = pkg;
 const CASE = process.argv[2], RUN = process.argv[3], PORT = process.argv[4] || '5611';
 const OUT = new URL('./', import.meta.url).pathname;
-const SPEC = { rooftop3: '&scene=rooftop&beat=3', train: '&scene=station-talk&beat=0', timer: '&scene=park&beat=0', shop: '&scene=v2-shop&beat=4' }[CASE];
+const SPEC = { rooftop3: '&scene=rooftop&beat=3', train: '&scene=station-talk&beat=0', timer: '&scene=hungry&beat=0', shop: '&scene=v2-shop&beat=4' }[CASE];
 const browser = await chromium.launch({ executablePath: '/opt/pw-browsers/chromium', args: ['--no-sandbox'] });
 const LOOK = () => {
   const q = (s) => document.querySelector(s), qa = (s) => [...document.querySelectorAll(s)];
