@@ -183,5 +183,66 @@ export function Chopstick({ from, to, w0 = 40, w1 = 13 }) {
   );
 }
 
+// H1 (SLOP 10-01): the sticks are never held by nobody. YOUR right hand (5 fingers OK: it is the MC's, never Nanda's,
+// whose hands are pins) grips her pink chopsticks: both sticks run under the hand and out past the curled index +
+// middle, the thumb pad presses the upper stick, the forearm + the MC's green knit sleeve run off the frame edge.
+// <HeldChopsticks tips={[[x, y] lower, [x, y] upper]} grip={[x, y]} s> : the sticks' back ends converge in the hand at
+// `grip`; the hand is aimed at the tips. The thumb stays on the screen-top side whichever way the sticks point.
+const HS = { skin: '#fcd8c4', skinLo: '#e8b39b', line: '#7a4a3a', knit: '#3d6b4a', knitLo: '#2a4a34', knitHi: '#5a8a64' };
+function ChopHand() {
+  const ol = { stroke: HS.line, strokeWidth: 4, strokeLinejoin: 'round', strokeLinecap: 'round' };
+  const finger = (d, w) => (
+    <g><path d={d} fill="none" stroke={HS.line} strokeWidth={w + 8} strokeLinecap="round" strokeLinejoin="round" />
+      <path d={d} fill="none" stroke={HS.skin} strokeWidth={w} strokeLinecap="round" strokeLinejoin="round" /></g>
+  );
+  return (
+    <g>
+      {/* forearm + knit sleeve, off the frame edge: bent 22 deg down at the wrist (the sticks are not in line with the arm) */}
+      <g transform="rotate(-22 -40 0)">
+        <path d="M-40 -56 L-900 -110 L-900 120 L-40 60 Z" fill={HS.skin} {...ol} />
+        <path d="M-120 -78 L-1000 -150 L-1000 170 L-120 86 Z" fill={HS.knit} stroke={HS.knitLo} strokeWidth="6" strokeLinejoin="round" />
+        {[-150, -190, -230].map((x) => <path key={x} d={`M${x} ${-80 - (x + 120) * 0.08} L${x} ${88 - (x + 120) * 0.09}`} stroke={HS.knitLo} strokeWidth="6" />)}
+        <path d="M-160 -60 L-900 -120" stroke={HS.knitHi} strokeWidth="10" strokeLinecap="round" opacity=".7" />
+      </g>
+      {/* ring + pinky, curled under (drawn first: behind the palm) */}
+      {finger('M70 34 C110 40 122 58 104 74', 26)}
+      {finger('M54 52 C88 62 96 78 80 90', 22)}
+      {/* the back of the hand */}
+      <path d="M-50 -54 C0 -70 70 -64 104 -40 C118 -10 112 30 90 52 C40 70 -10 66 -50 56 Z" fill={HS.skin} {...ol} />
+      <path d="M-10 -50 C30 -60 70 -54 92 -38" fill="none" stroke="#fff" strokeWidth="8" strokeLinecap="round" opacity=".45" />
+      <path d="M-30 46 C20 58 60 52 86 40" fill="none" stroke={HS.skinLo} strokeWidth="10" strokeLinecap="round" opacity=".8" />
+      {/* middle finger: under the lower stick, tip up against it */}
+      {finger('M96 12 C140 14 168 22 176 40', 28)}
+      {/* index: curled over the upper stick */}
+      {finger('M100 -24 C150 -30 184 -26 196 -6', 30)}
+      {/* thumb: along the top, its pad pressing the upper stick */}
+      {finger('M-20 -58 C40 -86 120 -76 168 -50', 32)}
+      {/* nails: the thumb, index + middle tips (MC's: plain, unpainted) */}
+      {[[160, -52, 8], [190, -10, 40], [170, 34, 60]].map(([x, y, r]) => <ellipse key={x} cx={x} cy={y} rx="9" ry="7" transform={`rotate(${r} ${x} ${y})`} fill="#ffe8e0" stroke={HS.line} strokeWidth="2.5" />)}
+      {[[118, -22], [114, 16]].map(([x, y]) => <path key={x + y} d={`M${x} ${y - 9} q5 9 0 18`} stroke={HS.skinLo} strokeWidth="3.5" fill="none" strokeLinecap="round" />)}
+    </g>
+  );
+}
+
+// children = the held piece: drawn between the lower stick (its tip under the piece) and the upper one (on top of it);
+// behind = both sticks pinch it from behind (a big piece seen from the eater's side: no stick crosses its face).
+export function HeldChopsticks({ tips, grip, s = 1, w0 = 40, w1 = 13, behind = false, children }) {
+  const [gx, gy] = grip;
+  const mx = (tips[0][0] + tips[1][0]) / 2, my = (tips[0][1] + tips[1][1]) / 2;
+  const a = Math.atan2(my - gy, mx - gx), deg = a * 180 / Math.PI;
+  const flip = Math.cos(a) < 0 ? -1 : 1;                                         // keep the thumb on the screen-top side
+  const ux = Math.cos(a), uy = Math.sin(a), nx = -uy * flip, ny = ux * flip;    // n = toward the lower stick
+  const back = (k) => [gx - ux * 150 * s + nx * k * s, gy - uy * 150 * s + ny * k * s];   // the thick ends, hidden in the palm
+  return (
+    <g className="sa-held-sticks">
+      <Chopstick from={back(14)} to={tips[0]} w0={w0} w1={w1} />
+      {behind && <Chopstick from={back(-30)} to={tips[1]} w0={w0} w1={w1} />}
+      {children}
+      {!behind && <Chopstick from={back(-30)} to={tips[1]} w0={w0} w1={w1} />}
+      <g transform={`translate(${gx} ${gy}) rotate(${deg}) scale(${s} ${s * flip})`}><ChopHand /></g>
+    </g>
+  );
+}
+
 const STAR = 'M0 -1L.2 -.2L1 0L.2 .2L0 1L-.2 .2L-1 0L-.2 -.2Z';
 export const Glint = ({ x, y, s = 14, op = 0.9 }) => <path d={STAR} transform={`translate(${x} ${y}) scale(${s})`} fill="#fff" opacity={op} />;

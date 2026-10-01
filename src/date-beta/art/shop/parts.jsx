@@ -170,7 +170,47 @@ export function EggPack({ x, y, w = 240, brown = false }) {
 // pose: 'flat' (open, fingertips at y = -(96 + finger)), 'grip' (fingers wrap a bar at y = -118, tips end on its far
 // edge), 'pinch' (thumb + index meet at the tip point (0, -150)). her = pink cuff + pink nails. thumb = which side.
 // The tip of the middle finger in 'flat' is at (0, -170); 'grip' puts the knuckles on y = -108.
+// H2 (SLOP 10-01): HER hand is always her input PIN (Nanda canon: a pin lead with a round nub, never 5 fingers), drawn
+// the way the katsu shots draw it (curry pipeline draw.py pin_hold: a rim stroke + a lit core, the nub with a top-left
+// sheen and grip ticks on its shaded side). Same frame as <Hand>: the lead runs down local +y off the frame edge, the
+// nub sits where the fingers would grip (local y -100). press = white strain ticks over the nub (it pushes, hard).
+const PIN = { rim: '#d1177f', lit: '#ffc4e6', groove: '#efb0d2' };
+export function PinHand({ x, y, rot = 0, s = 1, press = false, r = 58 }) {
+  const ny = -100;
+  return (
+    <g transform={`translate(${x} ${y}) rotate(${rot}) scale(${s})`}>
+      <path d={`M0 1400 L0 ${ny}`} stroke={PIN.rim} strokeWidth={r * 0.62} strokeLinecap="round" />
+      <path d={`M0 1400 L0 ${ny}`} stroke={PIN.lit} strokeWidth={r * 0.27} strokeLinecap="round" />
+      <circle cx="0" cy={ny} r={r} fill={PIN.lit} stroke={PIN.rim} strokeWidth={r * 0.14} />
+      <path d={`M${-r * 0.1} ${ny + r * 0.62} A${r * 0.66} ${r * 0.66} 0 0 0 ${r * 0.62} ${ny + r * 0.08}`} fill="none" stroke={PIN.groove} strokeWidth={r * 0.16} strokeLinecap="round" />
+      <ellipse cx={-r * 0.36} cy={ny - r * 0.38} rx={r * 0.3} ry={r * 0.2} transform={`rotate(-30 ${-r * 0.36} ${ny - r * 0.38})`} fill="#fff" opacity=".8" />
+      {[[1.12, -0.2, 0.26, -0.08], [1.06, 0.26, 0.26, 0.1], [0.86, 0.7, 0.2, 0.2]].map(([a, b, c, e]) => (
+        <path key={a} d={`M${r * a} ${ny + r * b} l${r * c} ${r * e}`} stroke={PIN.rim} strokeWidth={r * 0.07} strokeLinecap="round" />
+      ))}
+      {press && [-0.7, 0, 0.7].map((u) => <path key={u} d={`M${r * u * 1.3} ${ny - r - 10} l${r * u * 0.3} -26`} stroke={SP.white} strokeWidth="6" strokeLinecap="round" />)}
+    </g>
+  );
+}
+
+// her pin as a free lead (H3): from `from` (a point hidden behind her sprite, at her pin's height) via the control point
+// `ctrl` to the nub at `nub`. Same look as <PinHand>; `held` (drawn first) sits under the nub, so the nub closes on it.
+export function PinLead({ from, ctrl, nub, r = 32, held = null }) {
+  const [x0, y0] = from, [cx, cy] = ctrl, [nx, ny] = nub;
+  const d = `M${x0} ${y0} Q${cx} ${cy} ${nx} ${ny}`;
+  return (
+    <g>
+      {held}
+      <path d={d} fill="none" stroke={PIN.rim} strokeWidth={r * 0.62} strokeLinecap="round" />
+      <path d={d} fill="none" stroke={PIN.lit} strokeWidth={r * 0.27} strokeLinecap="round" />
+      <circle cx={nx} cy={ny} r={r} fill={PIN.lit} stroke={PIN.rim} strokeWidth={r * 0.14} />
+      <path d={`M${nx - r * 0.1} ${ny + r * 0.62} A${r * 0.66} ${r * 0.66} 0 0 0 ${nx + r * 0.62} ${ny + r * 0.08}`} fill="none" stroke={PIN.groove} strokeWidth={r * 0.16} strokeLinecap="round" />
+      <ellipse cx={nx - r * 0.36} cy={ny - r * 0.38} rx={r * 0.3} ry={r * 0.2} transform={`rotate(-30 ${nx - r * 0.36} ${ny - r * 0.38})`} fill="#fff" opacity=".8" />
+    </g>
+  );
+}
+
 export function Hand({ x, y, rot = 0, s = 1, her = false, pose = 'flat', thumb = 'left', sleeve, press = false }) {
+  if (her) return <PinHand x={x} y={y} rot={rot} s={s} press={press} />;
   const sl = sleeve ?? (her ? SP.her : SP.knit);
   const slLo = her ? SP.herLo : sleeve ? SP.playerLo : SP.knitLo;
   const ol = { stroke: SP.skinLine, strokeWidth: 3.5, strokeLinejoin: 'round' };

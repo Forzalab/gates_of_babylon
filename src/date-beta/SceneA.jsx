@@ -7,7 +7,7 @@
 //   PovFood  : the POV "you eat" insert: the chosen piece big in the foreground, up in the chopsticks.
 //   PeekBento: the watching-you-eat foreground: the box low left, the eaten piece gone.
 import { useEffect, useState } from 'react';
-import { BentoSvg, TamaBlock, Umeboshi, Chopstick, Glint } from './art/scene-a/index.js';
+import { BentoSvg, TamaBlock, Umeboshi, Chopstick, HeldChopsticks, Glint } from './art/scene-a/index.js';
 import { Parts, LoveChip } from './Say.jsx';
 import { fill } from './meta.js';
 import './scene-a.css';
@@ -93,18 +93,19 @@ export function PovFood({ food = 'tama' }) {
       aria-label={ume ? 'Your view: the umeboshi comes up to your mouth in her pink chopsticks.' : 'Your view: a tamagoyaki slice comes up to your mouth in her pink chopsticks.'}>
       <defs><radialGradient id="pov-vig" cx=".5" cy=".46" r=".72"><stop offset=".62" stopColor="#1a0710" stopOpacity="0" /><stop offset="1" stopColor="#1a0710" stopOpacity=".5" /></radialGradient></defs>
       <rect width="1920" height="1080" fill="url(#pov-vig)" />
+      {/* H1: your hand holds the sticks (bottom right, the green knit sleeve off the frame edge), never nobody's */}
       {ume ? (
         <g>
-          <Chopstick from={[2080, 1180]} to={[1010, 640]} w0={64} w1={20} />
-          <g transform="translate(820 600) rotate(-8)"><Umeboshi r={170} uid="pov-u" /></g>
-          <Chopstick from={[2080, 900]} to={[990, 520]} w0={64} w1={20} />
+          <HeldChopsticks tips={[[1010, 640], [990, 520]]} grip={[1640, 700]} s={1.7} w0={64} w1={20}>
+            <g transform="translate(820 600) rotate(-8)"><Umeboshi r={170} uid="pov-u" /></g>
+          </HeldChopsticks>
           <Glint x={700} y={470} s={30} />
         </g>
       ) : (
         <g>
-          <Chopstick from={[2080, 1200]} to={[1030, 720]} w0={64} w1={20} />
-          <g transform="translate(800 610) rotate(-8) scale(1.45)"><TamaBlock uid="pov-t" /></g>
-          <Chopstick from={[2080, 880]} to={[1010, 470]} w0={64} w1={20} />
+          <HeldChopsticks tips={[[1060, 700], [1080, 430]]} grip={[1660, 720]} s={1.7} w0={64} w1={20} behind>
+            <g transform="translate(800 610) rotate(-8) scale(1.45)"><TamaBlock uid="pov-t" /></g>
+          </HeldChopsticks>
           <Glint x={610} y={430} s={34} /><Glint x={1080} y={520} s={20} op={0.8} />
         </g>
       )}
