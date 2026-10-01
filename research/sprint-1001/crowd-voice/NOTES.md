@@ -28,7 +28,7 @@ Chosen: 1+2+3+4+5 together (they stack, none replaces another), tanh soft satura
 - Pitched copy: rubberband pitch = 2^(st/12) with st drawn from [-4..+4], tempo 1+-3.5%, adelay 10..55 ms (beat 2) / 10..75 ms (beat 3). Near: HPF 100, LPF 5.2-7.5 kHz, vol 0.38-0.58. Far: delay +25 ms, LPF 2.2-3.4 kHz, HPF 140, aecho (0.7/0.5, 70-110|150-230 ms), vol 0.22-0.32.
 - Low layer: LPF 1.5 kHz, vol 0.35 (beat 2) / 0.45 (beat 3).
 - Bus: amix (no normalize) -> asoftclip tanh 1.4. Room send: LPF 2.4 kHz, aecho taps 47/83/131/197/283 ms, vol 0.30 / 0.38. Breath: brown noise LPF 500 HPF 70, tremolo 0.45 Hz depth 0.7, vol 0.18.
-- Trim to original length, 60 ms fade out, alimiter 0.8, then gain-match to original LUFS (iterated through the mp3 encode) and alimiter 0.84 (-1.5 dBFS). Encode mono mp3 128k.
+- Trim to original length + 120 ms, 140 ms fade out, alimiter 0.8, then gain-match to original LUFS (iterated through the mp3 encode) and alimiter 0.84 (-1.5 dBFS). Encode mono mp3 128k.
 
 ## Before / after
 TAIL = 0.12 s of extra length: the first render (same length) tripped the repo QA hard error "speech touches the end" (smeared copies + room tail reach the file end), so the render is 120 ms longer and fades out over the last 140 ms.
