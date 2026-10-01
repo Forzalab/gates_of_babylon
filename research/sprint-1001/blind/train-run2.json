@@ -1,0 +1,66 @@
+{
+ "case": "train",
+ "run": "2",
+ "beat": "station-talk:0",
+ "love0": "0",
+ "say": "NANDA Twelve stops, and you held the pole. Not me. Next time, hold me.",
+ "sayBox": [
+  260,
+  489,
+  1660,
+  744
+ ],
+ "choiceBox": [
+  90,
+  860,
+  1830,
+  1010
+ ],
+ "legend": true,
+ "shown": [
+  "1:Next time, I'll hold you|chip=♥ ??|def=false",
+  "2:It was crowded|chip=♥ ??|def=true",
+  "3:I needed the pole|chip=♡ ??|def=false"
+ ],
+ "timebar": true,
+ "clicks": {
+  "Next time, I'll hold you": {
+   "slot": 1,
+   "loveAfter": "3",
+   "pop": "+3 She liked that.",
+   "nextBeat": "station-talk:0",
+   "say": "NANDA There is no next time. Only this time. Again. ♡ NEXT"
+  },
+  "It was crowded": {
+   "slot": 2,
+   "loveAfter": "1",
+   "pop": "+1 She liked that.",
+   "nextBeat": "station-talk:0",
+   "say": "NANDA It's always crowded. That's why you need me. NEXT"
+  },
+  "I needed the pole": {
+   "slot": 3,
+   "loveAfter": "0",
+   "pop": "−4 She did not like that.",
+   "nextBeat": "station-talk:0",
+   "say": "NANDA The pole won't miss you. I will. NEXT"
+  }
+ },
+ "keys": {
+  "1": {
+   "labelOfKey": "1: Next time, I'll hold you",
+   "routedTo": "Next time, I'll hold you",
+   "say": "NANDA There is no next time. Only this time. Again"
+  },
+  "2": {
+   "labelOfKey": "2: It was crowded",
+   "routedTo": "It was crowded",
+   "say": "NANDA It's always crowded. That's why you need me."
+  },
+  "3": {
+   "labelOfKey": "3: I needed the pole",
+   "routedTo": "I needed the pole",
+   "say": "NANDA The pole won't miss you. I will. NEXT"
+  }
+ }
+}
