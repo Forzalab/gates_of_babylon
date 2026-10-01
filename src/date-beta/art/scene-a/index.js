@@ -3,10 +3,10 @@
 // Components for custom layouts (the handout beat): BentoBox (<g>, 1160x812 local), BentoSvg (<svg>), the food parts.
 import { ROOFTOP, RooftopNoon, RooftopWarm } from '../rooftop/index.js';
 import { BentoBox, BentoSvg, BentoInsert, BentoLift, BentoLiftTama, BentoLiftUme, BOX, UME, TAMA } from './Bento.jsx';
-import { Umeboshi, TamaSlice, TamaLog, TamaBlock, Chopstick, ShisoLeaf, UmeStain, Glint } from './foods.jsx';
+import { Umeboshi, TamaSlice, TamaLog, TamaBlock, Chopstick, HeldChopsticks, ShisoLeaf, UmeStain, Glint } from './foods.jsx';
 
 export { RooftopNoon, RooftopWarm, BentoBox, BentoSvg, BentoInsert, BentoLift, BentoLiftTama, BentoLiftUme, BOX, UME, TAMA };
-export { Umeboshi, TamaSlice, TamaLog, TamaBlock, Chopstick, ShisoLeaf, UmeStain, Glint };
+export { Umeboshi, TamaSlice, TamaLog, TamaBlock, Chopstick, HeldChopsticks, ShisoLeaf, UmeStain, Glint };
 export const SCENE_A = {
   ...ROOFTOP,
   'bento-insert': BentoInsert,
