@@ -1,4 +1,4 @@
-# Sound + emote credits (Dejting only; Logic mode is silent)
+# Sound + emote credits (Dejting files; Logic mode uses file-free synth sounds, src/logicSfx.js)
 
 Kenney.nl (https://kenney.nl), all CC0:
 - Interface Sounds, UI Audio, Casino Audio
