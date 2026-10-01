@@ -974,6 +974,82 @@
   "date-beta/voice/29-escape-timeout/209_4-t.mp3": {
    "audioMs": 7158,
    "holdMs": 7508
+  },
+  "date-beta/voice/03-v2-shop/411_4-r.mp3": {
+   "audioMs": 5460,
+   "holdMs": 5810
+  },
+  "date-beta/voice/03-v2-shop/412_4-r.mp3": {
+   "audioMs": 3500,
+   "holdMs": 3850
+  },
+  "date-beta/voice/03-v2-shop/413_4-r.mp3": {
+   "audioMs": 3892,
+   "holdMs": 4242
+  },
+  "date-beta/voice/37-v2-town/406_1.mp3": {
+   "audioMs": 4023,
+   "holdMs": 4373
+  },
+  "date-beta/voice/37-v2-town/407_2.mp3": {
+   "audioMs": 4859,
+   "holdMs": 5209
+  },
+  "date-beta/voice/37-v2-town/408_3.mp3": {
+   "audioMs": 6139,
+   "holdMs": 6489
+  },
+  "date-beta/voice/37-v2-town/409_4.mp3": {
+   "audioMs": 5224,
+   "holdMs": 5574
+  },
+  "date-beta/voice/05-v2-curry/410_7.mp3": {
+   "audioMs": 5224,
+   "holdMs": 5574
+  },
+  "date-beta/voice/09-v2-home/414_4-r.mp3": {
+   "audioMs": 3866,
+   "holdMs": 4216
+  },
+  "date-beta/voice/38-unknown/415_1-r.mp3": {
+   "audioMs": 2064,
+   "holdMs": 2414
+  },
+  "date-beta/voice/38-unknown/416_1-r.mp3": {
+   "audioMs": 4598,
+   "holdMs": 4948
+  },
+  "date-beta/voice/38-unknown/417_4-r.mp3": {
+   "audioMs": 4153,
+   "holdMs": 4503
+  },
+  "date-beta/voice/38-unknown/418_4-r.mp3": {
+   "audioMs": 3318,
+   "holdMs": 3668
+  },
+  "date-beta/voice/39-escape/419_0-r.mp3": {
+   "audioMs": 2456,
+   "holdMs": 2806
+  },
+  "date-beta/voice/39-escape/420_0-r.mp3": {
+   "audioMs": 3213,
+   "holdMs": 3563
+  },
+  "date-beta/voice/39-escape/421_5-r.mp3": {
+   "audioMs": 2377,
+   "holdMs": 2727
+  },
+  "date-beta/voice/39-escape/422_5-r.mp3": {
+   "audioMs": 3030,
+   "holdMs": 3380
+  },
+  "date-beta/voice/30-leave/404_3-r.mp3": {
+   "audioMs": 3213,
+   "holdMs": 3563
+  },
+  "date-beta/voice/30-leave/405_3-r.mp3": {
+   "audioMs": 5590,
+   "holdMs": 5940
   }
  }
 }

@@ -19,7 +19,7 @@ Priority = how often a demo run hits it: leave + v2-town first (main routes), th
 | 411 | v2-shop | 4 R− | 03-v2-shop/411_4-r.mp3 | `[sing-song] You forgot my list. [flatly] Next time I write it on your hand.` |
 | 412 | v2-shop | 4 R= | 03-v2-shop/412_4-r.mp3 | `[smiling] Almost perfect. [warm] I still keep you.` |
 | 413 | v2-shop | 4 R+ | 03-v2-shop/413_4-r.mp3 | `[proud][happy] Every item, first try. [sweet] You know me.` |
-| 414 | v2-home | 4 R | 09-v2-home/414_4-r.mp3 | `[flatly] …Goodnight? [slow] It's only seven-ten.` |
+| 414 | v2-home | 4 R | 09-v2-home/414_4-r.mp3 | `[flatly] …Goodnight? [slow] It's only 7:10.` |
 | 415 | unknown | 1 R+ | 38-unknown/415_1-r.mp3 | `[from far, curious] Did something creak down there?` |
 | 416 | unknown | 1 R= | 38-unknown/416_1-r.mp3 | `[warm] So gentle. [whispers] You were always gentle with my things.` |
 | 417 | unknown | 4 R+ | 38-unknown/417_4-r.mp3 | `[amused] Heavy feet. [whispers] I can hear every step.` |
