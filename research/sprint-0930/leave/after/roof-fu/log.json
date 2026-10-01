@@ -1,0 +1,156 @@
+{
+ "route": "roof-fu",
+ "scenes": [
+  "rooftop",
+  "leave",
+  "leave-fu"
+ ],
+ "errors": [],
+ "log": [
+  {
+   "nm": "13-rooftop-11-choice.jpg",
+   "beat": "rooftop:11",
+   "tag": "choice",
+   "who": "NANDA",
+   "line": "Stay fORever? The rain can wait.",
+   "choices": [
+    "♥ ?? Stay a minute",
+    "♥ ?? Walk with her",
+    "♡ ?? OR Leave before the rain"
+   ],
+   "pop": null,
+   "end": null,
+   "taken": "OR Leave before the rain"
+  },
+  {
+   "nm": "14-rooftop-11-react.jpg",
+   "beat": "rooftop:11",
+   "tag": "react",
+   "who": "NANDA",
+   "line": "…Fine. The rain can have you. Later.",
+   "choices": [],
+   "pop": "−8 She did not like that.",
+   "end": null
+  },
+  {
+   "nm": "15-leave-0.jpg",
+   "beat": "leave:0",
+   "tag": "",
+   "who": "NANDA",
+   "line": "Leaving is not an option.",
+   "choices": [],
+   "pop": null,
+   "end": null
+  },
+  {
+   "nm": "16-leave-1.jpg",
+   "beat": "leave:1",
+   "tag": "",
+   "who": "",
+   "line": "XOR Coffee. 7:00 AM.",
+   "choices": [],
+   "pop": null,
+   "end": null
+  },
+  {
+   "nm": "17-leave-2-choice.jpg",
+   "beat": "leave:2",
+   "tag": "choice",
+   "who": "NANDA",
+   "line": "He wakes at 7:00.",
+   "choices": [
+    "♥ +2 Good morning, Nanda",
+    "♥ +1 Who's 'he'?",
+    "♡ −3 Stop following me"
+   ],
+   "pop": null,
+   "end": null,
+   "taken": "Good morning, Nanda"
+  },
+  {
+   "nm": "18-leave-2-react.jpg",
+   "beat": "leave:2",
+   "tag": "react",
+   "who": "NANDA",
+   "line": "Good morning! Same as yesterday. Same as always.",
+   "choices": [],
+   "pop": "+2 She liked that.",
+   "end": null
+  },
+  {
+   "nm": "19-leave-3-choice.jpg",
+   "beat": "leave:3",
+   "tag": "choice",
+   "who": "NANDA",
+   "line": "From now on… can we be fORever?",
+   "choices": [
+    "♥ ?? uhmmm yeah ig",
+    "♥ ?? Forever sounds long",
+    "♡ ?? FUCK YOU. I'm leaving"
+   ],
+   "pop": null,
+   "end": null,
+   "taken": "FUCK YOU. I'm leaving"
+  },
+  {
+   "nm": "20-leave-3-react.jpg",
+   "beat": "leave:3",
+   "tag": "react",
+   "who": "NANDA",
+   "line": "Leave, then. I'll be here. I'm always here.",
+   "choices": [],
+   "pop": "−5 She did not like that.",
+   "end": null
+  },
+  {
+   "nm": "21-leave-fu-0.jpg",
+   "beat": "leave-fu:0",
+   "tag": "",
+   "who": "",
+   "line": "Her hand rises. Time freezes. The café turns.",
+   "choices": [],
+   "pop": null,
+   "end": null
+  },
+  {
+   "nm": "22-leave-fu-1.jpg",
+   "beat": "leave-fu:1",
+   "tag": "",
+   "who": "NANDA",
+   "line": "You said leave. I heard 'lea—'.",
+   "choices": [],
+   "pop": null,
+   "end": null
+  },
+  {
+   "nm": "23-leave-fu-2.jpg",
+   "beat": "leave-fu:2",
+   "tag": "",
+   "who": "CROWD",
+   "line": "fORever and ever",
+   "choices": [],
+   "pop": null,
+   "end": null
+  },
+  {
+   "nm": "24-leave-fu-3.jpg",
+   "beat": "leave-fu:3",
+   "tag": "",
+   "who": "CROWD",
+   "line": "fORever and ever and ever",
+   "choices": [],
+   "pop": null,
+   "end": null
+  },
+  {
+   "nm": "25-leave-fu-4-end.jpg",
+   "beat": "leave-fu:4",
+   "tag": "end",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "pop": null,
+   "end": "GAME OVER 0% You left a crumb. I noticed. Again? LOVE 0%. You needed 100%. TRY AGAIN"
+  }
+ ]
+}
