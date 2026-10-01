@@ -259,7 +259,7 @@
     },
     {
       "id": "leave",
-      "short": "CAFÉ",
+      "short": "LEAVE",
       "title": "LEAVE / XOR Coffee 7:00 AM",
       "bg": "BG-D1",
       "scare": 1,
