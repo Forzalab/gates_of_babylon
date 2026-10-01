@@ -1,0 +1,16 @@
+/* art/crowd/CrowdLayer.jsx: the CROWD layer. Back (far + mid) paints before Nanda; front (near bokeh) over her, under
+   the HUD (DOM order, no z-index). Motion = a staggered blink + the pupils drifting; .rm / reduced motion = still. */
+.cw-crowd { position: absolute; inset: 0; width: 1920px; height: 1080px; pointer-events: none; overflow: hidden; }
+.cw-crowd svg { position: absolute; inset: 0; width: 1920px; height: 1080px; overflow: visible; }
+.cw-near-body { filter: blur(18px); opacity: .97; }
+.cw-near-eyes { filter: blur(1.6px) drop-shadow(0 0 22px rgba(255, 20, 45, .55)); }
+.cw-dot { fill: #ff2238; opacity: .85; }
+.cw-grin { opacity: .7; }
+
+.cw-eyes { transform-box: fill-box; transform-origin: center; animation: cw-blink var(--cw-dur, 7s) infinite steps(1, end); }
+.cw-pupil { animation: cw-look 11s ease-in-out infinite alternate; }
+.cw-sway { animation: cw-sway 9s ease-in-out infinite alternate; }
+@keyframes cw-blink { 0%, 94% { transform: none; } 95%, 97% { transform: scaleY(.08); } }
+@keyframes cw-look { from { transform: translateX(-3px); } to { transform: translateX(3px); } }
+@keyframes cw-sway { from { transform: translate(-3px, 0); } to { transform: translate(3px, -2px); } }
+@media (prefers-reduced-motion: reduce) { .cw-crowd * { animation: none !important; } }
