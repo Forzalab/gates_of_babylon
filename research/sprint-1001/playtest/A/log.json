@@ -112,12 +112,12 @@
    "tag": "choice",
    "text": "NANDA: Sweet. Like me. Good input.",
    "choices": [
-    "♥ ?? ",
-    "♥ ??  [default]",
-    "♡ ?? "
+    "♥ ?? Best I've ever had",
+    "♥ ?? It's good [default]",
+    "♡ ?? Bit salty, honestly"
    ],
    "pop": null,
-   "taken": "♥ ?? "
+   "taken": "♥ ?? Best I've ever had"
   },
   {
    "nm": "012-rooftop-9-react.png",
@@ -356,7 +356,303 @@
    "pop": "+3 She liked that."
   },
   {
-   "nm": "034-v2-shop-4-game-sg-shelf.png",
+   "nm": "034-v2-shop-5.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "5",
+   "tag": "",
+   "text": "Close-up. Her hand puts one cup in the basket. Then two. Then three.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "035-v2-shop-6.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "6",
+   "tag": "",
+   "text": "You walk past the sweets. She does not look at them. She looks at you.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "036-v2-shop-7.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "7",
+   "tag": "",
+   "text": "Checkout. Lane 2 is open. You put the basket on the counter.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "037-v2-shop-8.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "8",
+   "tag": "",
+   "text": "The shop lady smiles at you. Nanda sees it.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "038-v2-shop-9.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "9",
+   "tag": "",
+   "text": "Close-up. Her nails press into the basket handle. Hard.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "039-v2-shop-10.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "10",
+   "tag": "",
+   "text": "She pulls you to the self-checkout. No shop lady there.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "040-v2-shop-11.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "11",
+   "tag": "",
+   "text": "NANDA: Do not look at her. Look at me. I bought you a cup.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "041-v2-shop-12.png",
+   "leg": "A",
+   "scene": "v2-shop",
+   "beat": "12",
+   "tag": "",
+   "text": "The shop bell rings. You carry the bags. She holds your sleeve.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "042-v2-town-0.png",
+   "leg": "A",
+   "scene": "v2-town",
+   "beat": "0",
+   "tag": "",
+   "text": "Big signs. Big screens. She holds your hand.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "043-v2-town-1.png",
+   "leg": "A",
+   "scene": "v2-town",
+   "beat": "1",
+   "tag": "",
+   "text": "NANDA: We are going out for curry. Just you and me.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "044-v2-town-2.png",
+   "leg": "A",
+   "scene": "v2-town",
+   "beat": "2",
+   "tag": "",
+   "text": "NANDA: So many people. I will hold your arm. Tight.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "045-v2-town-3.png",
+   "leg": "A",
+   "scene": "v2-town",
+   "beat": "3",
+   "tag": "",
+   "text": "NANDA: Wow! A giant oshi board. Oshi means \"my favorite.\"",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "046-v2-town-4.png",
+   "leg": "A",
+   "scene": "v2-town",
+   "beat": "4",
+   "tag": "",
+   "text": "NANDA: But not one of them is as cute as me. Right?",
+   "choices": [],
+   "pop": null,
+   "taken": "NEXT · Walk to lunch"
+  },
+  {
+   "nm": "047-v2-curry-0.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "0",
+   "tag": "",
+   "text": "It is 2:55 PM. Two curry shops stand side by side.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "048-v2-curry-1-choice.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "1",
+   "tag": "choice",
+   "text": "NANDA: I am hungry. You pick my lunch. Pick the right one.",
+   "choices": [
+    "♥ ?? Butter chicken for her",
+    "♥ ?? Katsu curry [default]",
+    "♡ ?? I am not hungry"
+   ],
+   "pop": null,
+   "taken": "♥ ?? Butter chicken for her"
+  },
+  {
+   "nm": "049-v2-curry-1-react.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "1",
+   "tag": "react",
+   "text": "NANDA: With naan! You know me.",
+   "choices": [],
+   "pop": "+3 She liked that."
+  },
+  {
+   "nm": "050-v2-curry-2.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "2",
+   "tag": "",
+   "text": "She opens the glass door. A bell rings.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "051-v2-curry-3.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "3",
+   "tag": "",
+   "text": "We go inside NAND HOUSE. A TV plays a dance video.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "052-v2-curry-4.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "4",
+   "tag": "",
+   "text": "We sit at a table by the window. She sits on your right. Her knee touches your knee.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "053-v2-curry-5.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "5",
+   "tag": "",
+   "text": "Lunch comes on a steel tray. Butter chicken, green saag, rice, and one very big naan.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "054-v2-curry-6.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "6",
+   "tag": "",
+   "text": "She tears off a piece of naan with two fingers.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "055-v2-curry-7.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "7",
+   "tag": "",
+   "text": "She pours more butter sauce. It is thick, orange, and shiny.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "056-v2-curry-8.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "8",
+   "tag": "",
+   "text": "She dips the naan in the sauce. The sauce drips.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "057-v2-curry-9.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "9",
+   "tag": "",
+   "text": "NANDA: Feed me. With your hand. Not the spoon. Your hand.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "058-v2-curry-10.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "10",
+   "tag": "",
+   "text": "She eats the naan from your fingers. She looks at your face the whole time. There is sauce on her lip.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "059-v2-curry-11.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "11",
+   "tag": "",
+   "text": "She pushes her mango lassi to you. It has only one straw.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "060-v2-curry-12.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "12",
+   "tag": "",
+   "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "061-v2-curry-13.png",
+   "leg": "A",
+   "scene": "v2-curry",
+   "beat": "13",
+   "tag": "",
+   "text": "We walk out of the curry shop. It is 3:40 PM. Lunch is done. Now we walk to her station.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "062-v2-train-0-next-scene.png",
+   "leg": "A",
+   "scene": "v2-train",
+   "beat": "0",
+   "tag": "next-scene",
+   "text": "4:30 PM. Her station. She takes your hand. 'Now we go to MY home. On MY train.'",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "063-v2-shop-4-game-sg-shelf.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -366,7 +662,7 @@
    "pop": null
   },
   {
-   "nm": "035-v2-shop-4-game-sg-wrong.png",
+   "nm": "064-v2-shop-4-game-sg-wrong.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -376,7 +672,7 @@
    "pop": null
   },
   {
-   "nm": "036-v2-shop-4-game-sg-shelf.png",
+   "nm": "065-v2-shop-4-game-sg-shelf.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -386,7 +682,7 @@
    "pop": null
   },
   {
-   "nm": "037-v2-shop-4-game-sg-right.png",
+   "nm": "066-v2-shop-4-game-sg-right.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -396,7 +692,7 @@
    "pop": null
   },
   {
-   "nm": "038-v2-shop-4-game-sg-shelf.png",
+   "nm": "067-v2-shop-4-game-sg-shelf.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -406,7 +702,7 @@
    "pop": null
   },
   {
-   "nm": "039-v2-shop-4-game-sg-wrong.png",
+   "nm": "068-v2-shop-4-game-sg-wrong.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -416,7 +712,7 @@
    "pop": null
   },
   {
-   "nm": "040-v2-shop-4-game-sg-shelf.png",
+   "nm": "069-v2-shop-4-game-sg-shelf.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -426,7 +722,7 @@
    "pop": null
   },
   {
-   "nm": "041-v2-shop-4-game-sg-wrong-sg-split.png",
+   "nm": "070-v2-shop-4-game-sg-wrong-sg-split.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -436,7 +732,7 @@
    "pop": null
   },
   {
-   "nm": "042-v2-shop-4-game-sg-wrong.png",
+   "nm": "071-v2-shop-4-game-sg-wrong.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -446,7 +742,7 @@
    "pop": null
   },
   {
-   "nm": "043-v2-shop-4-game-sg-shelf.png",
+   "nm": "072-v2-shop-4-game-sg-shelf.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -456,7 +752,7 @@
    "pop": null
   },
   {
-   "nm": "044-v2-shop-4-game-sg-right.png",
+   "nm": "073-v2-shop-4-game-sg-right.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -466,7 +762,7 @@
    "pop": null
   },
   {
-   "nm": "045-v2-shop-4-game-sg-shelf.png",
+   "nm": "074-v2-shop-4-game-sg-shelf.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -476,7 +772,7 @@
    "pop": null
   },
   {
-   "nm": "046-v2-shop-4-game-sg-wrong-sg-split.png",
+   "nm": "075-v2-shop-4-game-sg-wrong-sg-split.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -486,7 +782,7 @@
    "pop": null
   },
   {
-   "nm": "047-v2-shop-4-game-sg-wrong.png",
+   "nm": "076-v2-shop-4-game-sg-wrong.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -496,7 +792,7 @@
    "pop": null
   },
   {
-   "nm": "048-v2-shop-4-game-sg-shelf.png",
+   "nm": "077-v2-shop-4-game-sg-shelf.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -506,7 +802,7 @@
    "pop": null
   },
   {
-   "nm": "049-v2-shop-4-game-sg-wrong-sg-split.png",
+   "nm": "078-v2-shop-4-game-sg-wrong-sg-split.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -516,7 +812,7 @@
    "pop": null
   },
   {
-   "nm": "050-v2-shop-4-game-sg-wrong.png",
+   "nm": "079-v2-shop-4-game-sg-wrong.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -526,7 +822,7 @@
    "pop": null
   },
   {
-   "nm": "051-v2-shop-4-game-sg-wrong.png",
+   "nm": "080-v2-shop-4-game-sg-wrong.png",
    "leg": "A2",
    "scene": "v2-shop",
    "beat": "4",
@@ -534,6 +830,96 @@
    "text": "GAME sg-wrong She is done waiting. She takes it herself. NANDA Ehehe. Try again, ne? ♡",
    "choices": [],
    "pop": "−2 She did not like that."
+  },
+  {
+   "nm": "081-v2-shop-5.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "5",
+   "tag": "",
+   "text": "Close-up. Her hand puts one cup in the basket. Then two. Then three.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "082-v2-shop-6.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "6",
+   "tag": "",
+   "text": "You walk past the sweets. She does not look at them. She looks at you.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "083-v2-shop-7.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "7",
+   "tag": "",
+   "text": "Checkout. Lane 2 is open. You put the basket on the counter.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "084-v2-shop-8.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "8",
+   "tag": "",
+   "text": "The shop lady smiles at you. Nanda sees it.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "085-v2-shop-9.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "9",
+   "tag": "",
+   "text": "Close-up. Her nails press into the basket handle. Hard.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "086-v2-shop-10.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "10",
+   "tag": "",
+   "text": "She pulls you to the self-checkout. No shop lady there.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "087-v2-shop-11.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "11",
+   "tag": "",
+   "text": "NANDA: Do not look at her. Look at me. I bought you a cup.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "088-v2-shop-12.png",
+   "leg": "A2",
+   "scene": "v2-shop",
+   "beat": "12",
+   "tag": "",
+   "text": "The shop bell rings. You carry the bags. She holds your sleeve.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "089-v2-town-0-next-scene.png",
+   "leg": "A2",
+   "scene": "v2-town",
+   "beat": "0",
+   "tag": "next-scene",
+   "text": "Big signs. Big screens. She holds your hand.",
+   "choices": [],
+   "pop": null
   }
  ],
  "errs": []
