@@ -5,7 +5,7 @@ import TTBox from './TTBox.jsx';
 // Full truth table in a dialog. Rendered inside .app (a portal to it, not to <body>) so --u and the container query still resolve.
 // Open: focus goes to the live row, the rest of .app is inert. Escape, the X and a click on the veil close it (Truth.jsx returns focus).
 export const OpenIcon = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9V3H9M15 3H21V9M21 15V21H15M9 21H3V15" /></svg>;
-const CloseIcon = () => <svg viewBox="-12 -12 24 24" aria-hidden="true"><path d="M-7 -7L7 7M7 -7L-7 7" /></svg>;
+const CloseIcon = () => <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5L19 19M19 5L5 19" /></svg>;
 
 export default function TTPopup({ host, onClose, ...table }) {
   useEffect(() => {
