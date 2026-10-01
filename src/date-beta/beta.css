@@ -385,6 +385,8 @@ body { font-family: var(--cond); color: var(--ink); }
 .stage.focus .scene:has(.art.basement, .art.cellar) { filter: brightness(.86); }
 /* the SANDWICH shots (art/sandwich.jsx): the mid haze layer already carries the depth; the front cels stay crisp */
 .stage.focus .scene:has(.sw-mid) { filter: brightness(.84); }
+/* R7 legs: the park walk-out cutaway (art/shots/FeetWalk.jsx): its trace is already blurred, the leg cels stay crisp */
+.stage.focus .scene:has(.fw-walk) { filter: brightness(.9); }
 .db-focus { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 334ms ease-out;
   background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(26, 7, 16, .55) 100%); }
 .stage.focus .db-focus { opacity: 1; }

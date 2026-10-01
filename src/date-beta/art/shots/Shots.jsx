@@ -9,6 +9,7 @@ import { ART } from '../index.js';
 import { Grade } from '../romance/Grade.jsx';
 import { nandaSVG } from '../nanda.js';
 import { ITEMS, ITEM_LABEL } from './items.jsx';
+import FeetWalk from './FeetWalk.jsx';
 import './shots.css';
 
 const W = 1920, H = 1080;
@@ -44,6 +45,14 @@ export function Closeup({ props = {}, rm }) {
 export function Insert({ props = {}, rm }) {
   const { item = 'curry', of = 'crossing-day', caption, tone = 'day', tilt = -3 } = props;
   const Item = ITEMS[item] ?? ITEMS.curry;
+  // R7 legs: the park walk-out is a full-frame waist-down cutaway (FeetWalk.jsx), not an item in the middle of the frame
+  if (item === 'feet' && (props.pose ?? 'park') === 'park') return (
+    <div className="art shot insert feet-walk" role="img" aria-label="Insert: her shoes and your shoes walking out of the park, in step">
+      <Cam of={of} zoom={1.15} rm className="shot-blur" />
+      <FeetWalk />
+      <GradeLayer id="sh-in" tone={tone} rm={rm} sun={[1560, 160]} sparkles={12} />
+    </div>
+  );
   return (
     <div className="art shot insert" role="img" aria-label={`Insert: ${ITEM_LABEL[item] ?? item}`}>
       <Cam of={of} zoom={1.15} rm className="shot-blur" />

@@ -46,3 +46,10 @@
 ## 7. v2-train 6 (train-sun), the carriage
 - UI: soles on the rivets of the 3-line box. Pose: a plain stand in a moving carriage (KyoAni: feet apart for balance).
 - Light: 4:40 sun low through the right-hand windows: long warm cast to the left, orange rim right, warm floor bounce.
+
+## 8. v2-park 4 (insert feet, pose park), the park walk-out
+- The worst one left: a beige oval plate in mid-frame (it read as a card), pink stub shoes with cream socks (her canon is
+  pin legs + plum shoes), the leg stumps ended in mid-air, your sneakers had no ground and no light.
+- Rebuilt as a KyoAni waist-down cutaway at full frame: her sprite at a scale that puts her face under the HUD band, your
+  jeans leaving the frame top; Inoue contact pose for both pairs, in step; the park's sun low behind-right (Park.jsx):
+  long casts front-left, warm rims right, the pink gravel bouncing up.

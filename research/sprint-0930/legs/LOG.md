@@ -73,3 +73,16 @@ v2-train 8 (platform-rain): her feet are behind the box on every take (plant 100
 One shoe model, one pin length in all six; three stances (walk, brace, shy) read apart at thumbnail size; each scene's
 shadow ink comes from its own floor (cool blue deck, grey pavement, brown carriage). Weakest: the carriage cast (dark
 on dark). Consistent: OK.
+
+## 8. The park walk-out: v2-park 4 "Two pairs of shoes walk out of the park. Hers stay close to yours." (insert feet/park)
+| it | change | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | total | kept |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | before: a beige oval plate in mid-frame, pink stub shoes (not her canon: no pins), leg stumps ending in mid-air, no light | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 1 | - |
+| 1 | full-frame waist-down cutaway (FeetWalk.jsx): her own sprite at 11 px/u in the walk pose, your jeans + sneakers in step, path ground, cast shadows front-left, rims right | 2 | 1 | 1 | 1 | 0 | 1 | 0 | 1 | 7 | yes (the stage focus blur softened every cel) |
+| 2 | the focus blur skips this scene (its trace is pre-blurred): the cels are crisp | 2 | 1 | 1 | 1 | 0 | 1 | 1 | 1 | 8 | yes |
+| 3 | your legs narrower + separated, a seam on the front leg, darker casts, the leg dapples (grey blobs) out | 2 | 2 | 1 | 0 | 1 | 1 | 1 | 1 | 9 | yes |
+| 4 | the jeans drawn after each shoe: the hem breaks over the tongue | 2 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 10 | yes |
+| 5 | the toe-off sneaker's sole narrowed to its upper (it read as a skateboard) | 2 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 10 | PASS |
+
+Left for Tony (no 6th iteration): a wide gap between her pair and yours in the middle; "hers stay close" would want yours
+~100 px further left. The light-ray wedge under her front shoe is the park grade's flare (GradeLayer), not a shadow.

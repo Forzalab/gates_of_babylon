@@ -11,3 +11,4 @@
 | 7 | v2-train 6 carriage | 2 | 9 | PASS | compare/08-v2-train-6-carriage.jpg |
 | - | v2-train 8 platform-rain | - | - | N/A (feet behind the box) | - |
 | - | v2-street 0-5 | - | - | N/A (no feet on screen) | - |
+| 8 | v2-park 4 park walk-out | 5 | 10 | PASS | compare/09-v2-park-walk-out.jpg |
