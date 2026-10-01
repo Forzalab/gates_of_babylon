@@ -29,11 +29,11 @@ function band(ctx, src, f, q = 1) {
 const env = (p, t, a, peak, hold, r) => {
   p.setValueAtTime(0, t); p.linearRampToValueAtTime(peak, t + a); p.setValueAtTime(peak, t + a + hold); p.linearRampToValueAtTime(0, t + a + hold + r);
 };
-function burst(ctx, out, t, f, q, peak, dur) { // a noise hit: clicks, taps, drops, crackle
+export function burst(ctx, out, t, f, q, peak, dur) { // a noise hit: clicks, taps, drops, crackle
   const n = noise(ctx), { g } = band(ctx, n, f, q); g.connect(out);
   env(g.gain, t, 0.003, peak, 0, dur); n.start(t, Math.random()); n.stop(t + dur + 0.05);
 }
-function tone(ctx, out, t, f, peak, dur, type = 'sine', f2) {
+export function tone(ctx, out, t, f, peak, dur, type = 'sine', f2) {
   const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type;
   o.frequency.setValueAtTime(clampHz(f), t); if (f2) o.frequency.exponentialRampToValueAtTime(clampHz(f2), t + dur);
   g.gain.setValueAtTime(0, t); g.gain.linearRampToValueAtTime(peak, t + 0.005); g.gain.exponentialRampToValueAtTime(0.0005, t + dur);

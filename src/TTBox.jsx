@@ -4,7 +4,7 @@ import { ScrollCues } from './Palette.jsx';
 // The truth table's scrolling box: sticky header, windowed rows, live row, click-to-set, arrow keys, scroll cues, bottom fade.
 // Shared by the inline cell and the full-table popup (Truth.jsx). Only a window of rows is rendered, so 13 switches
 // (8,192 rows) stay cheap. `limit(el)` = the lowest y (px) the box may reach; the box is trimmed to whole rows above it.
-export default function TTBox({ rows, ins, heads, live, setSwitches, fig, classic, limit, focusLive = false }) {
+export default function TTBox({ rows, ins, gates = 0, heads, live, setSwitches, fig, classic, limit, focusLive = false }) {
   const box = useRef(null);
   const [rowH, setRowH] = useState(40), [top, setTop] = useState(0), [boxH, setBoxH] = useState(400);
   const [more, setMore] = useState({ up: false, down: false, left: false, right: false }); // palette's scroll cues: only where rows / columns remain
@@ -53,11 +53,11 @@ export default function TTBox({ rows, ins, heads, live, setSwitches, fig, classi
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const cls = (h) => ({ A: 'hA', B: 'hB' })[h];
-  const kind = (j) => (j < ins.length ? 'k-S' : 'k-L'); // column kind: switch (input) or lamp (output)
+  const kind = (j) => (j < ins.length ? 'k-S' : j < ins.length + gates ? 'k-G' : 'k-L'); // column kind: switch, gate (intermediate, G1..) or lamp
   const stop = live >= first && live < last ? live : first;
   return (
     <div className="tt-wrap">
-      <div className={`tt ${classic ? 'classic' : ''} ${more.down ? 'fd' : ''}`} ref={box} onScroll={(e) => { setTop(e.currentTarget.scrollTop); cues(e.currentTarget); }}>
+      <div className={`tt ${classic ? 'classic' : ''} ${gates ? 'gates' : ''} ${more.down ? 'fd' : ''}`} ref={box} onScroll={(e) => { setTop(e.currentTarget.scrollTop); cues(e.currentTarget); }}>
         <table style={{ '--n': heads.length }} role="grid" aria-label="Truth table rows; arrow keys set the switches">
           <thead><tr>
             {heads.map((h, j) => h === 'OUT' && classic

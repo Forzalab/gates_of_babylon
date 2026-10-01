@@ -5,7 +5,7 @@ import TTPopup, { OpenIcon } from './TTPopup.jsx';
 import { partNames } from './names.js';
 
 // Truth table built from the circuit (Kerney req. 2). Inputs = switches ordered top-to-bottom on the canvas (then
-// left-to-right), outputs = lamps in the same order. 2^n rows, MSB = the top switch. Rows are computed once per circuit
+// left-to-right), then one column per gate (same order), then outputs = lamps in the same order. 2^n rows, MSB = the top switch. Rows are computed once per circuit
 // SHAPE (wires, parts, order), not per toggle; only a window of rows is rendered, so 13 switches (8,192 rows) stay cheap.
 // The live row = the switches' current values. Clicking a row sets the switches to it.
 
@@ -13,8 +13,8 @@ export default memo(Truth);
 function Truth({ circuit, view, fig, setSwitches }) {
   const byPos = (kind) => view.filter((n) => circuit.nodes[n.id]?.kind === kind)
     .sort((a, b) => a.position.y - b.position.y || a.position.x - b.position.x).map((n) => n.id);
-  const ins = byPos('S'), outs = byPos('L');
-  const shape = JSON.stringify([ins, outs, circuit.wires, Object.values(circuit.nodes).map((n) => [n.id, n.kind, n.type])]);
+  const ins = byPos('S'), gates = byPos('G'), outs = byPos('L');
+  const shape = JSON.stringify([ins, gates, outs, circuit.wires, Object.values(circuit.nodes).map((n) => [n.id, n.kind, n.type])]);
   const rows = useMemo(() => {
     const n = ins.length, all = [];
     for (let r = 0; r < 2 ** n; r++) {
@@ -22,14 +22,14 @@ function Truth({ circuit, view, fig, setSwitches }) {
       const nodes = { ...circuit.nodes };
       ins.forEach((id, i) => { nodes[id] = { ...nodes[id], value: !!bits[i] }; });
       const v = evaluate({ ...circuit, nodes });
-      all.push([...bits, ...outs.map((id) => +!!v[id])]);
+      all.push([...bits, ...gates.map((id) => +!!v[id]), ...outs.map((id) => +!!v[id])]);
     }
     return all;
   }, [shape]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const live = ins.reduce((acc, id) => acc * 2 + (circuit.nodes[id].value ? 1 : 0), 0);
   const names = partNames(view, circuit); // same function the canvas plates use
-  const heads = [...ins, ...outs].map((id) => names[id]);
+  const heads = [...ins, ...gates, ...outs].map((id) => names[id] || circuit.nodes[id].type);
   const classic = ins.length === 2 && outs.length === 1; // the fitted A / B / OUT header glyphs apply only here
 
   const [open, setOpen] = useState(false), openBtn = useRef(null);
@@ -52,9 +52,9 @@ function Truth({ circuit, view, fig, setSwitches }) {
     <aside className="cell c-side r2 truth" aria-label="Truth table">
       <h2 className="label">Truth table</h2>
       <button className="tt-ico" ref={openBtn} aria-label="Open full truth table" aria-haspopup="dialog" onClick={() => setOpen(true)}><OpenIcon /></button>
-      <TTBox rows={rows} ins={ins} heads={heads} live={live} setSwitches={setSwitches} fig={fig} classic={classic} limit={limit} />
+      <TTBox rows={rows} ins={ins} gates={gates.length} heads={heads} live={live} setSwitches={setSwitches} fig={fig} classic={classic} limit={limit} />
       {open && openBtn.current?.closest('.app') && <TTPopup host={openBtn.current.closest('.app')} onClose={close}
-        rows={rows} ins={ins} heads={heads} live={live} setSwitches={setSwitches} fig={fig} classic={classic} />}
+        rows={rows} ins={ins} gates={gates.length} heads={heads} live={live} setSwitches={setSwitches} fig={fig} classic={classic} />}
     </aside>
   );
 }

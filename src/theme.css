@@ -315,8 +315,8 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .truth th { font: 700 max(calc(32.4 * var(--u)), calc(32.4 * var(--f)))/0.70988 var(--font); font-stretch: 100%; padding: 0 0 0.52469em; text-align: center; border-bottom: var(--rule) solid var(--ink); }
 .truth td { font: 760 max(calc(35.8 * var(--u)), calc(35.8 * var(--f)))/1 var(--font); font-stretch: 105%; height: 1.89944em; padding: 0; text-align: center; border-bottom: var(--hair) solid var(--ink); font-variant-numeric: tabular-nums; }
 /* Column widths: ref3's A / B / OUT columns (23.62 / 30.73 / 23.40) rescaled to fill the width the # column left. */
-.truth .classic th:nth-child(1) { width: 30.38%; } .truth .classic th:nth-child(2) { width: 39.52%; }
-.truth .classic th:nth-child(3) { width: 30.10%; }
+.truth .classic:not(.gates) th:nth-child(1) { width: 30.38%; } .truth .classic:not(.gates) th:nth-child(2) { width: 39.52%; }
+.truth .classic:not(.gates) th:nth-child(3) { width: 30.10%; }
 /* Rows scroll inside the table box under a sticky header; a click on a row sets the switches. */
 .truth .tt { max-height: 100vh; /* Truth.jsx caps it to the room above the row-03 rule, so a taller row 02 shows more rows */ overflow-y: auto; scrollbar-width: thin; margin-top: calc(32 * var(--u) - 0.2 * max(calc(32.4 * var(--u)), calc(32.4 * var(--f)))); }
 .truth .tt table { margin-top: 0; }
@@ -329,7 +329,7 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .truth .pal-more.left { left: auto; right: 100%; }
 .truth .pal-more.left svg, .truth .pal-more.right svg { width: calc(8 * var(--u)); height: calc(16 * var(--u)); }
 .truth .pal-more.down { left: 0; right: 0; width: auto; top: auto; bottom: var(--sb, 0px); }   /* centred bottom cue over the fade, as in the sidebar */
-.truth .tt table { width: calc(max(4, var(--n)) * 25%); } /* never squeeze: a column keeps its n = 3 width (1/4 of the box); past 4 columns the table scrolls sideways */
+.truth .tt table { width: calc(max(6, var(--n)) * 100% / 6); } /* gate columns (G1..) add columns: up to 6 share the box (outputs never hide); past 6 a column keeps 1/6 and the table scrolls sideways */
 /* The header line box (0.71em) is exactly cap height, so round caps (O, C) overshoot it; inside the scroller that overshoot
    was clipped at the box top. 0.2em of headroom inside the box, taken back from the margin above: nothing moves. */
 .truth thead th { padding-top: 0.2em; }
@@ -347,7 +347,9 @@ body { background: var(--paper); color: var(--ink); font-family: var(--font); -w
 .truth td .f4 { font-stretch: 50%; } /* N2: 4 was 20 vs ref3 17 */
 .truth td .f2 { font-stretch: 75%; } .truth td .f1 { font-stretch: 125%; font-variation-settings: 'XTRA' 520; }
 .truth tr.live td { background: var(--one); color: var(--paper); } /* Tony: white on orange */
-.truth tr:not(.live) td { font-weight: 560; } /* 1c: non-live rows one weight step down, same ink */
+.truth tr:not(.live) td { font-weight: 560; }
+.truth th.k-G, .truth td.k-G { font-weight: 400; opacity: 0.6; } /* gate columns: intermediate values, lighter than switches / lamps */
+.truth tr.live td.k-G { opacity: 1; } /* 1c: non-live rows one weight step down, same ink */
 
 /* Footer: status (left) and help bar (right). Delta 6: Medium caps, cap 12px, +0.08em, ink. */
 .status { display: flex; align-items: center; padding: 0 calc(16 * var(--u)); }
