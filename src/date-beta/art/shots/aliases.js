@@ -29,5 +29,5 @@ export const SHOT_ALIASES = {
   'hatch-dark': { bg: 'closeup', props: { of: 'basement', x: 960, y: 300, zoom: 2 } },
   'cups-end': { bg: 'insert', props: { item: 'cups-end', of: 'teatable', tone: 'night' } },
   'street-night-window': { bg: 'closeup', props: { of: 'street-dusk', x: 1100, y: 420, zoom: 1.5, tone: 'night' } },
-  'cafe-cups': { bg: 'establish', props: { of: 'cafe', from: [500, 560], to: [1400, 560], zoom: 1.35 } },
+  'cafe-cups': { bg: 'establish', props: { of: 'cafe', from: [420, 680], to: [900, 680], zoom: 1.3, ofProps: { cups: true } } }, // low pan: the tables (y 800-860) sit above the box
 };
