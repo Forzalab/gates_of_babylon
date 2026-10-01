@@ -38,7 +38,7 @@ test('scene + shown line -> file (tags and pauses ignored, missing = null)', () 
 
 test('recorded lines are reachable: most manifest takes resolve from the live V2 pack text', () => {
   const R = (p) => read(`./date-beta/${p}`);
-  const packs = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2'].map((n) => ({ name: n, ...R(`packs/${n}.json`) }));
+  const packs = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'r6'].map((n) => ({ name: n, ...R(`packs/${n}.json`) }));
   const scenes = loadScenes(applyPacks(R('scenes.json'), packs));
   const seen = new Set();
   for (const s of scenes) {

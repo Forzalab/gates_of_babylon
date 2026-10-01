@@ -7,7 +7,7 @@ import { loadScenes, parseLine } from '../../src/date-beta/engine.js';
 const D = new URL('../../src/date-beta/', import.meta.url);
 const R = (p) => JSON.parse(fs.readFileSync(new URL(p, D), 'utf8'));
 // same list + order as main.jsx PLAY
-export const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'gacha']
+export const PLAY = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'r6', 'gacha']
   .filter((n) => fs.existsSync(new URL(`packs/${n}.json`, D)));
 
 export function narrationLines() {

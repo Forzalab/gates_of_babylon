@@ -508,7 +508,7 @@
   "scene": "v2-train",
   "beat": "1 quote",
   "file": "public/date-beta/voice/06-v2-train/239_1-quote.mp3",
-  "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'"
+  "text": "4:30 PM. Her station. She takes your hand. 'Now we go to MY home. On MY train.'"
  },
  {
   "n": 240,
@@ -607,22 +607,6 @@
   "beat": "N 2",
   "file": "public/date-beta/voice/narration/v2-park/252_2.mp3",
   "text": "Her thumb is on your wrist. She is counting your pulse. She wants every beat to be for her.",
-  "voice": "narrator"
- },
- {
-  "n": 253,
-  "scene": "v2-park",
-  "beat": "N 4",
-  "file": "public/date-beta/voice/narration/v2-park/253_4.mp3",
-  "text": "Two pairs of shoes walk out of the park. Hers stay close to yours.",
-  "voice": "narrator"
- },
- {
-  "n": 254,
-  "scene": "v2-shop",
-  "beat": "N 0",
-  "file": "public/date-beta/voice/narration/v2-shop/254_0.mp3",
-  "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you to a shop.",
   "voice": "narrator"
  },
  {
@@ -834,14 +818,6 @@
   "voice": "narrator"
  },
  {
-  "n": 281,
-  "scene": "v2-curry",
-  "beat": "N 13",
-  "file": "public/date-beta/voice/narration/v2-curry/281_13.mp3",
-  "text": "We walk out to the street. It is 3:40 PM.",
-  "voice": "narrator"
- },
- {
   "n": 282,
   "scene": "v2-curry-katsu",
   "beat": "N 0",
@@ -959,14 +935,6 @@
   "beat": "N 3",
   "file": "public/date-beta/voice/narration/v2-curry-alone/296_3.mp3",
   "text": "We walk out to the street. It is 3:40 PM.",
-  "voice": "narrator"
- },
- {
-  "n": 297,
-  "scene": "v2-train",
-  "beat": "N 1",
-  "file": "public/date-beta/voice/narration/v2-train/297_1.mp3",
-  "text": "STATION · 4:30 PM. The station is full. Everyone is going home.",
   "voice": "narrator"
  },
  {
@@ -1784,5 +1752,36 @@
   "file": "public/date-beta/voice/narration/v2-rain/399_4.mp3",
   "text": "The rain slows to a few drops. Two pairs of wet shoes walk toward her street.",
   "voice": "narrator"
+ },
+ {
+  "n": 400,
+  "scene": "v2-shop",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-shop/400_0.mp3",
+  "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you into a shop. You are here to buy her groceries.",
+  "voice": "narrator"
+ },
+ {
+  "n": 401,
+  "scene": "v2-curry",
+  "beat": "N 13",
+  "file": "public/date-beta/voice/narration/v2-curry/401_13.mp3",
+  "text": "We walk out of the curry shop. It is 3:40 PM. Lunch is done. Now we walk to her station.",
+  "voice": "narrator"
+ },
+ {
+  "n": 402,
+  "scene": "v2-train",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/v2-train/402_1.mp3",
+  "text": "The station is full. Everyone is going home.",
+  "voice": "narrator"
+ },
+ {
+  "n": 403,
+  "scene": "v2-shop",
+  "beat": "2",
+  "file": "public/date-beta/voice/03-v2-shop/403_2.mp3",
+  "text": "[bubbly][proud] We are here to shop. [smiling] You buy what is on my list: carrots, eggs, three cups. [giggles][too long] And you. ♡"
  }
 ]

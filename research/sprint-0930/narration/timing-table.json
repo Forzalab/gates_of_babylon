@@ -578,7 +578,7 @@
  {
   "scene": "v2-train",
   "beat": "1 quote",
-  "chars": 81,
+  "chars": 79,
   "file": "date-beta/voice/06-v2-train/239_1-quote.mp3",
   "audioMs": 4389,
   "holdMs": 4739
@@ -689,22 +689,6 @@
   "file": "date-beta/voice/narration/v2-park/252_2.mp3",
   "audioMs": 7158,
   "holdMs": 7508
- },
- {
-  "scene": "v2-park",
-  "beat": "N 4",
-  "chars": 66,
-  "file": "date-beta/voice/narration/v2-park/253_4.mp3",
-  "audioMs": 4284,
-  "holdMs": 4634
- },
- {
-  "scene": "v2-shop",
-  "beat": "N 0",
-  "chars": 78,
-  "file": "date-beta/voice/narration/v2-shop/254_0.mp3",
-  "audioMs": 7314,
-  "holdMs": 7664
  },
  {
   "scene": "v2-shop",
@@ -915,14 +899,6 @@
   "holdMs": 5705
  },
  {
-  "scene": "v2-curry",
-  "beat": "N 13",
-  "chars": 41,
-  "file": "date-beta/voice/narration/v2-curry/281_13.mp3",
-  "audioMs": 3265,
-  "holdMs": 3615
- },
- {
   "scene": "v2-curry-katsu",
   "beat": "N 0",
   "chars": 40,
@@ -1041,14 +1017,6 @@
   "file": "date-beta/voice/narration/v2-curry-alone/296_3.mp3",
   "audioMs": 3370,
   "holdMs": 3720
- },
- {
-  "scene": "v2-train",
-  "beat": "N 1",
-  "chars": 63,
-  "file": "date-beta/voice/narration/v2-train/297_1.mp3",
-  "audioMs": 5695,
-  "holdMs": 6045
  },
  {
   "scene": "v2-train",
@@ -1871,5 +1839,37 @@
   "file": "date-beta/voice/narration/v2-rain/399_4.mp3",
   "audioMs": 5590,
   "holdMs": 5940
+ },
+ {
+  "scene": "v2-shop",
+  "beat": "N 0",
+  "chars": 115,
+  "file": "date-beta/voice/narration/v2-shop/400_0.mp3",
+  "audioMs": 9300,
+  "holdMs": 9650
+ },
+ {
+  "scene": "v2-curry",
+  "beat": "N 13",
+  "chars": 88,
+  "file": "date-beta/voice/narration/v2-curry/401_13.mp3",
+  "audioMs": 6949,
+  "holdMs": 7299
+ },
+ {
+  "scene": "v2-train",
+  "beat": "N 1",
+  "chars": 44,
+  "file": "date-beta/voice/narration/v2-train/402_1.mp3",
+  "audioMs": 2847,
+  "holdMs": 3197
+ },
+ {
+  "scene": "v2-shop",
+  "beat": "2",
+  "chars": 88,
+  "file": "date-beta/voice/03-v2-shop/403_2.mp3",
+  "audioMs": 9979,
+  "holdMs": 10329
  }
 ]

@@ -348,14 +348,6 @@
    "audioMs": 7158,
    "holdMs": 7508
   },
-  "date-beta/voice/narration/v2-park/253_4.mp3": {
-   "audioMs": 4284,
-   "holdMs": 4634
-  },
-  "date-beta/voice/narration/v2-shop/254_0.mp3": {
-   "audioMs": 7314,
-   "holdMs": 7664
-  },
   "date-beta/voice/narration/v2-shop/255_1.mp3": {
    "audioMs": 3918,
    "holdMs": 4268
@@ -460,10 +452,6 @@
    "audioMs": 5355,
    "holdMs": 5705
   },
-  "date-beta/voice/narration/v2-curry/281_13.mp3": {
-   "audioMs": 3265,
-   "holdMs": 3615
-  },
   "date-beta/voice/narration/v2-curry-katsu/282_0.mp3": {
    "audioMs": 2900,
    "holdMs": 3250
@@ -523,10 +511,6 @@
   "date-beta/voice/narration/v2-curry-alone/296_3.mp3": {
    "audioMs": 3370,
    "holdMs": 3720
-  },
-  "date-beta/voice/narration/v2-train/297_1.mp3": {
-   "audioMs": 5695,
-   "holdMs": 6045
   },
   "date-beta/voice/narration/v2-train/298_3.mp3": {
    "audioMs": 2769,
@@ -941,6 +925,22 @@
   "date-beta/voice/narration/v2-rain/399_4.mp3": {
    "audioMs": 5590,
    "holdMs": 5940
+  },
+  "date-beta/voice/narration/v2-shop/400_0.mp3": {
+   "audioMs": 9300,
+   "holdMs": 9650
+  },
+  "date-beta/voice/narration/v2-curry/401_13.mp3": {
+   "audioMs": 6949,
+   "holdMs": 7299
+  },
+  "date-beta/voice/narration/v2-train/402_1.mp3": {
+   "audioMs": 2847,
+   "holdMs": 3197
+  },
+  "date-beta/voice/03-v2-shop/403_2.mp3": {
+   "audioMs": 9979,
+   "holdMs": 10329
   }
  }
 }

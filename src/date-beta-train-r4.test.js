@@ -10,7 +10,7 @@ import { nandaSVG, TRAIN_FACES } from './date-beta/art/nanda.js';
 import { buildIndex, fileForLine } from './date-beta/voice/voice.js';
 
 const read = (p) => JSON.parse(readFileSync(new URL(p, import.meta.url), 'utf8'));
-const PACKS = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station'];
+const PACKS = ['story', 'meta', 'mech', 'lockgame', 'obbp', 'sequences', 'variant-v2', 'r3-station', 'r3-rain', 'scene-a', 'interiors', 'curry', 'shop', 'town', 'love', 'ux-six', 'r5', 'r6'];
 const data = applyPacks(read('./date-beta/scenes.json'), PACKS.map((n) => ({ name: n, ...read(`./date-beta/packs/${n}.json`) })));
 const S = loadScenes(data);
 const T = S.find((s) => s.id === 'v2-train');
@@ -68,7 +68,7 @@ test('train-r4: the six traced faces render in her palette (distinct from each o
 
 test('train-r4 art: crowd + bumpers on the station beats, the machine echoes the bento pick on every station beat, the sleeper', () => {
   const src = (p) => readFileSync(new URL(`./date-beta/art/r3-station/${p}`, import.meta.url), 'utf8');
-  assert.deepEqual(T.beats.map((b) => b.bg), ['train', 'station-gate-r3', 'vending-insert', 'station-ads', 'station-ads', 'station-ads-insert', 'train-sun', 'train-rain-sleepy', 'platform-rain']);
+  assert.deepEqual(T.beats.map((b) => b.bg), ['station-gate-r3', 'station-gate-r3', 'vending-insert', 'station-ads', 'station-ads', 'station-ads-insert', 'train-sun', 'train-rain-sleepy', 'platform-rain']);
   for (const i of [1, 2, 3, 4, 5]) {
     assert.equal(beatView(T.beats[i], { bento: 'umeboshi' }).props.drink, 'umeboshi', `beat ${i}`);
     assert.equal(beatView(T.beats[i], { bento: 'tamagoyaki' }).props.drink, 'tamagoyaki', `beat ${i}`);
