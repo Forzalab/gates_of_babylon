@@ -1,0 +1,570 @@
+{
+ "log": [
+  {
+   "nm": "001-menu-index.png",
+   "leg": "escape",
+   "scene": "",
+   "beat": "",
+   "tag": "index",
+   "text": "Logic mode front page (index.html)",
+   "choices": []
+  },
+  {
+   "nm": "002-cup-0.png",
+   "leg": "escape-win",
+   "scene": "cup",
+   "beat": "0",
+   "tag": "",
+   "text": "The tea is poured. Three cups.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "003-cup-1-choice.png",
+   "leg": "escape-win",
+   "scene": "cup",
+   "beat": "1",
+   "tag": "choice",
+   "text": "NANDA: I bought umeboshi. For no reason. Eat.",
+   "choices": [
+    "♥ +2 Eat it all",
+    "♥ +1 Eat a little [default]",
+    "♡ −3 I'm not hungry"
+   ],
+   "pop": null,
+   "taken": "♥ +2 Eat it all"
+  },
+  {
+   "nm": "004-cup-1-react.png",
+   "leg": "escape-win",
+   "scene": "cup",
+   "beat": "1",
+   "tag": "react",
+   "text": "NANDA: See? You needed me.",
+   "choices": [],
+   "pop": "+2 She liked that."
+  },
+  {
+   "nm": "005-cup-2.png",
+   "leg": "escape-win",
+   "scene": "cup",
+   "beat": "2",
+   "tag": "",
+   "text": "Third teacup. Nobody poured it. One umeboshi on its saucer.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "006-cup-3.png",
+   "leg": "escape-win",
+   "scene": "cup",
+   "beat": "3",
+   "tag": "",
+   "text": "MC: Who's the third cup for?",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "007-cup-4-choice.png",
+   "leg": "escape-win",
+   "scene": "cup",
+   "beat": "4",
+   "tag": "choice",
+   "text": "NANDA: For Input B. Silly. It's always three of us.",
+   "choices": [
+    "♥ ?? Drink",
+    "♥ ?? Hold the cup [default]",
+    "♡ ?? Stand up"
+   ],
+   "pop": null,
+   "taken": "♡ ?? Stand up"
+  },
+  {
+   "nm": "008-cup-4-react.png",
+   "leg": "escape-win",
+   "scene": "cup",
+   "beat": "4",
+   "tag": "react",
+   "text": "NANDA: Sit. The tea isn't finished.",
+   "choices": [],
+   "pop": "−5 She did not like that."
+  },
+  {
+   "nm": "009-unknown-0.png",
+   "leg": "escape-win",
+   "scene": "unknown",
+   "beat": "0",
+   "tag": "",
+   "text": "You stand. The floor tilts a little.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "010-unknown-1-choice.png",
+   "leg": "escape-win",
+   "scene": "unknown",
+   "beat": "1",
+   "tag": "choice",
+   "text": "Under the table: a floor hatch. Too big for storage.",
+   "choices": [
+    "♡ −1 Open the hatch",
+    "♥ +1 Gently open the hatch ♡"
+   ],
+   "pop": null,
+   "taken": "♡ −1 Open the hatch"
+  },
+  {
+   "nm": "011-unknown-1-react.png",
+   "leg": "escape-win",
+   "scene": "unknown",
+   "beat": "1",
+   "tag": "react",
+   "text": "NANDA (ABOVE): Did something creak down there?",
+   "choices": [],
+   "pop": "−1 She did not like that."
+  },
+  {
+   "nm": "012-unknown-2.png",
+   "leg": "escape-win",
+   "scene": "unknown",
+   "beat": "2",
+   "tag": "",
+   "text": "Upstairs, the kettle clicks off. Her slippers stop moving.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "013-unknown-3.png",
+   "leg": "escape-win",
+   "scene": "unknown",
+   "beat": "3",
+   "tag": "",
+   "text": "NANDA (UPSTAIRS): Darling? Where did you go?",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "014-unknown-4-choice.png",
+   "leg": "escape-win",
+   "scene": "unknown",
+   "beat": "4",
+   "tag": "choice",
+   "text": "A steep wooden ladder. Down into the dark.",
+   "choices": [
+    "♡ ?? Climb down",
+    "♥ ?? Tippy-toe down ♡"
+   ],
+   "pop": null,
+   "taken": "♡ ?? Climb down"
+  },
+  {
+   "nm": "015-unknown-4-react.png",
+   "leg": "escape-win",
+   "scene": "unknown",
+   "beat": "4",
+   "tag": "react",
+   "text": "NANDA (ABOVE): Heavy feet. I can hear every step.",
+   "choices": [],
+   "pop": "−6 She did not like that."
+  },
+  {
+   "nm": "016-escape-0-choice.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "0",
+   "tag": "choice",
+   "text": "Concrete. One bulb. Rain at a high window.",
+   "choices": [
+    "♡ −1 Look at the shelves",
+    "♥ +1 Peek at the pretty shelves ♡"
+   ],
+   "pop": null,
+   "taken": "♡ −1 Look at the shelves"
+  },
+  {
+   "nm": "017-escape-0-react.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "0",
+   "tag": "react",
+   "text": "NANDA (ABOVE): Don't touch the labels.",
+   "choices": [],
+   "pop": "−1 She did not like that."
+  },
+  {
+   "nm": "018-escape-1.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "1",
+   "tag": "",
+   "text": "Jars on the shelves. Each one: a date, a name.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "019-escape-2.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "2",
+   "tag": "",
+   "text": "The dates go back years. The names are all different.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "020-escape-3.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "3",
+   "tag": "",
+   "text": "Bento boxes, one per day. Your name on each. Untouched.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "021-escape-4.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "4",
+   "tag": "",
+   "text": "The oldest is dated before you met.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "022-escape-5-choice.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "5",
+   "tag": "choice",
+   "text": "A mortar and a mallet. One fresh mochi. Hers only.",
+   "choices": [
+    "♡ ?? Keep looking",
+    "♥ ?? Keep looking… and nothing else"
+   ],
+   "pop": null,
+   "taken": "♡ ?? Keep looking"
+  },
+  {
+   "nm": "023-escape-5-react.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "5",
+   "tag": "react",
+   "text": "NANDA (ABOVE): You're looking too long.",
+   "choices": [],
+   "pop": "−1 She did not like that."
+  },
+  {
+   "nm": "024-escape-6.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "6",
+   "tag": "",
+   "text": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "025-escape-9.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "9",
+   "tag": "",
+   "text": "⏳ Her clock is running…",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "026-escape-11.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "11",
+   "tag": "",
+   "text": "⏳ Her clock is running…",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "027-escape-12.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "12",
+   "tag": "",
+   "text": "Minutes gone. A clock upstairs chimed. You lost count.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "028-escape-13.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "13",
+   "tag": "",
+   "text": "Above you, footsteps. Slow. Counting. One, two, three.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "029-escape-14.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "14",
+   "tag": "",
+   "text": "NANDA (ABOVE): Four, five… Don't hide, darling. I always find you.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "030-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "031-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "032-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "033-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "034-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "035-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "036-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "037-escape-15-lock.png",
+   "leg": "escape-win",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "038-escape-win-0-react.png",
+   "leg": "escape-win",
+   "scene": "escape-win",
+   "beat": "0",
+   "tag": "react",
+   "text": "She's waiting at the outside door.",
+   "choices": [],
+   "pop": "−3 She did not like that."
+  },
+  {
+   "nm": "039-escape-win-1.png",
+   "leg": "escape-win",
+   "scene": "escape-win",
+   "beat": "1",
+   "tag": "",
+   "text": "NANDA: You took the long way.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "040-escape-win-2.png",
+   "leg": "escape-win",
+   "scene": "escape-win",
+   "beat": "2",
+   "tag": "",
+   "text": "NANDA: You picked sour.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "041-escape-win-3.png",
+   "leg": "escape-win",
+   "scene": "escape-win",
+   "beat": "3",
+   "tag": "",
+   "text": "NANDA: Now every hour is ours.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "042-escape-win-5.png",
+   "leg": "escape-win",
+   "scene": "escape-win",
+   "beat": "5",
+   "tag": "",
+   "text": "NANDA: Mine.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "043-escape-win-6.png",
+   "leg": "escape-win",
+   "scene": "escape-win",
+   "beat": "6",
+   "tag": "",
+   "text": "Wide. Her street at night. One window lit. It's yours now.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "044-escape-win-7-end.png",
+   "leg": "escape-win",
+   "scene": "escape-win",
+   "beat": "7",
+   "tag": "end",
+   "text": "END: ENDING ESCAPE You got out. She was already there. LOVE 0% PLAY AGAIN",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "045-escape-13.png",
+   "leg": "escape-timeout",
+   "scene": "escape",
+   "beat": "13",
+   "tag": "",
+   "text": "Above you, footsteps. Slow. Counting. One, two, three.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "046-escape-14.png",
+   "leg": "escape-timeout",
+   "scene": "escape",
+   "beat": "14",
+   "tag": "",
+   "text": "NANDA (ABOVE): Four, five… Don't hide, darling. I always find you.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "047-escape-15-lock.png",
+   "leg": "escape-timeout",
+   "scene": "escape",
+   "beat": "15",
+   "tag": "lock",
+   "text": "",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "048-escape-timeout-0-react.png",
+   "leg": "escape-timeout",
+   "scene": "escape-timeout",
+   "beat": "0",
+   "tag": "react",
+   "text": "The ladder creaks. She's coming down.",
+   "choices": [],
+   "pop": "+1 She liked that."
+  },
+  {
+   "nm": "049-escape-timeout-2.png",
+   "leg": "escape-timeout",
+   "scene": "escape-timeout",
+   "beat": "2",
+   "tag": "",
+   "text": "You wake at the tea table. Four cups now.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "050-escape-timeout-3.png",
+   "leg": "escape-timeout",
+   "scene": "escape-timeout",
+   "beat": "3",
+   "tag": "",
+   "text": "She holds out an umeboshi. You eat.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "051-escape-timeout-4.png",
+   "leg": "escape-timeout",
+   "scene": "escape-timeout",
+   "beat": "4",
+   "tag": "",
+   "text": "NANDA: すっぱいでしょ。…ね？",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "052-escape-timeout-5.png",
+   "leg": "escape-timeout",
+   "scene": "escape-timeout",
+   "beat": "5",
+   "tag": "",
+   "text": "NANDA: One sour hour…",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "053-escape-timeout-6.png",
+   "leg": "escape-timeout",
+   "scene": "escape-timeout",
+   "beat": "6",
+   "tag": "",
+   "text": "NANDA: …then every hour is ours.",
+   "choices": [],
+   "pop": null
+  },
+  {
+   "nm": "054-escape-timeout-7-end.png",
+   "leg": "escape-timeout",
+   "scene": "escape-timeout",
+   "beat": "7",
+   "tag": "end",
+   "text": "END: ENDING ESCAPE? You waited. Now there are four cups. LOVE 3% PLAY AGAIN",
+   "choices": [],
+   "pop": null
+  }
+ ],
+ "errs": []
+}
