@@ -1,0 +1,20 @@
+[
+ {
+  "it": "cup:4",
+  "nm": "cup-4.png",
+  "beat": "cup:4",
+  "nandaTop": 201,
+  "nandaCls": "db-nanda stage-3 frame-medium raised",
+  "boxTop": 554,
+  "line": "For Input B. Silly. It's always three of us."
+ },
+ {
+  "it": "cup:0",
+  "nm": "cup-0.png",
+  "beat": "cup:0",
+  "nandaTop": 424,
+  "nandaCls": "db-nanda stage-2 frame-medium",
+  "boxTop": 826,
+  "line": "The tea is poured. Three cups."
+ }
+]

@@ -16,7 +16,7 @@
         { "speaker": "NANDA", "text": "So many people. I will hold your arm. Tight.", "bg": "town-crossing",
           "props": { "cut": { "frame": "medium", "face": "anya-smile", "plant": 90 } } },
         { "speaker": "NANDA", "text": "Wow! A giant oshi board. Oshi means \"my favorite.\"", "bg": "town-board",
-          "props": { "cut": { "frame": "medium", "face": "big-eyes-peek", "plant": 90 } } },
+          "props": { "cut": { "frame": "medium", "face": "big-eyes-peek", "plant": 40 } } },
         { "speaker": "NANDA", "text": "But not one of them is as cute as me. Right?", "bg": "town-board",
           "props": { "cut": { "frame": "medium", "face": "heart-laugh" } },
           "choices": [{ "text": "Walk to lunch", "go": "v2-curry" }] }

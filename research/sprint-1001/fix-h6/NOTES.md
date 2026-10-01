@@ -23,3 +23,11 @@ Other R6 beats: R6 changed text on v2-park 3, v2-shop 0 + 2, v2-curry 13, v2-tra
 
 ## Verify
 npm test 437/437 · voice-gaps 96 live lines, 0 silent · vite build ok · float audit 93 Nanda beats, 0 flags.
+
+## Round 2 (06:30 PT, from reviewer A partial on review-a)
+| item | before | fix | after |
+|---|---|---|---|
+| v2-town:3 | `plant 90` + 2-line box: only her eyes/hair | `plant 40` in `packs/town.json` (beat 3 only; town 1-2 have 1-line boxes, fine) | face clear, head still under the board girl's face |
+| v2-shop:7, v2-home:4 | - | none | face clear on head: VERIFIED |
+| WT03 plaster gone at tea | `injury.js` stopped after v2-home | `injuryLayer(scene, beat, path)`: plaster-20 on cup/steeped/unknown/escape* only if `pos.path` went through v2-home (cup is also reached from genkan-talk, never hurt) | plaster on at cup:0 / cup:4 |
+Verify: npm test 440/440, voice-gaps 0 silent, build ok, float audit 0 flags (also covers M1/M2).

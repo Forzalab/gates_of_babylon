@@ -1,0 +1,29 @@
+[
+ {
+  "it": "v2-town:3",
+  "nm": "v2-town-3.png",
+  "beat": "v2-town:3",
+  "nandaTop": 514,
+  "nandaCls": "db-nanda stage-1 frame-medium planted",
+  "boxTop": 761,
+  "line": "Wow! A giant oshi board. Oshi means \"my favorite.\""
+ },
+ {
+  "it": "v2-shop:7",
+  "nm": "v2-shop-7.png",
+  "beat": "v2-shop:7",
+  "nandaTop": 424,
+  "nandaCls": "db-nanda stage-1 frame-medium",
+  "boxTop": 773,
+  "line": "Checkout. Lane 2 is open. You put the basket on the counter."
+ },
+ {
+  "it": "v2-home:4",
+  "nm": "v2-home-4.png",
+  "beat": "v2-home:4",
+  "nandaTop": 148,
+  "nandaCls": "db-nanda stage-1 frame-medium raised",
+  "boxTop": 501,
+  "line": "Her hand on your back. She sits you in the middle chair."
+ }
+]

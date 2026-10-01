@@ -405,7 +405,7 @@ function Player() {
         {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, ...castVars(flo.light) } : { '--plant': `${cut.plant}px`, ...castVars(flo.light) }} data-cast={flo.light ? 'lit' : undefined} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={((!!beat.choices && !solo) || !!cut.raise) && !end && frame === 'medium' && !tag /* R5: a solo NEXT keeps the low box, so she stays down */} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
-            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
+            big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index, pos.path)}
             planted={!end && frame === 'medium' && cut.plant ? cut.plant : 0}
             floor={!end && frame === 'medium' && flo.y ? flo.y : 0}
             wet={!end && frame === 'medium' && !!flo.wet}
