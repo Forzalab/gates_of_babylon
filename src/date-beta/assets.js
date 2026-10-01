@@ -14,6 +14,7 @@ export function makeAssets(manifest = {}) {
 // Beds: the looping sounds. They run until the scene changes (or a 'silence' beat), one at a time (see createLoader).
 // Files are made to loop (synth.py: 0.5 s crossfaded ends). Every other sfx is a one-shot.
 export const BEDS = Object.freeze(['SX-20', 'SX-15', 'SX-21', 'SX-27', 'SX-06', 'umbrella-rain']);
+export const BED_LEVEL = 0.2; // Tony Oct 1: background beds -14 dB, well under the voice
 export const BED_FADE = 0.5; // seconds: a bed's fade in / out, and the crossfade when one bed replaces another
 export const isBedId = (id) => BEDS.includes(id);
 
@@ -68,7 +69,7 @@ export function createLoader(manifest, base = '/') {
   const bytes = new Map(), buffers = new Map(), images = new Map();
   let ctx = null, master = null, muted = false, ducked = false;
   // ONE sfx bus (master): M mutes it; it sits -14 dB (0.2) under a voice take (voice/index.js onSpeak).
-  const DUCK = 0.2;
+  const DUCK = 0.1; // Tony Oct 1: sfx bus -20 dB under a voice take
   const gains = () => {
     if (!master) { master = ctx.createGain(); master.gain.value = muted ? 0 : ducked ? DUCK : 1; master.connect(ctx.destination); }
     const v = muted ? 0 : ducked ? DUCK : 1;
@@ -126,7 +127,7 @@ export function createLoader(manifest, base = '/') {
     want = null;
     const src = ctx.createBufferSource(), g = ctx.createGain();
     src.buffer = b; src.loop = true; g.gain.value = 0; src.connect(g); g.connect(master); src.start();
-    g.gain.linearRampToValueAtTime(1, ctx.currentTime + BED_FADE);
+    g.gain.linearRampToValueAtTime(BED_LEVEL, ctx.currentTime + BED_FADE);
     if (bed) fadeOut(bed);
     bed = { id, src, g };
   };
