@@ -21,3 +21,9 @@
   and left. It was a centred radial at x 960 while her soles sit at ~x 893.
 - Grade: her magenta/plum ran hotter than the grey-green drizzle.
 - UI: clear of the box (soles 700, box top 775).
+
+## 3. v2-curry 13 (curry-street), the street walking
+- UI: the floor was UNDER_BOX, so the box rivets cut both shoes across the middle (the worst UI fit on the route).
+- Contact: none (no ground). Pose: static on a "we walk out" line.
+- Light: afternoon sun from the left (every pole is lit on its left face) = a warm rim on her left edges, a long cast
+  shadow to the right, warm-brown shadow ink, a warm floor bounce on the shins.

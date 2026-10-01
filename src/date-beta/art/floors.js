@@ -18,7 +18,12 @@ export const FLOORS = {
   'platform-rain': { y: 698, wet: true },    // the platform edge (v2-train 8, plant 100)
   'station-ads': { y: 690 },      // the platform under the ads (v2-train 4, plant 90)
   // ground hidden behind the box at her column: feet tuck behind it
-  'curry-street': { y: UNDER_BOX },
+  // R7 legs: the street walking ("We walk out to the street", v2-curry 13 / katsu 11 / alone 3). Was UNDER_BOX: the box
+  // rivets sliced her shoes in half. Now she stands up the street (y 790, clear of the one-line box at ~810) in the walk
+  // pose. Light: the afternoon sun from the left (the poles are lit on their left faces): a warm rim on her left edges,
+  // a longer cast shadow to the right, warm-brown shadow ink.
+  'curry-street': { y: 790, step: 'walk',
+    light: { side: -1, rim: '#ffe6c0', bounce: '#e8a878', dx: -6, dy: 7, rot: 5, len: 2.0, ink: '58, 34, 30', a: 0.62, grade: 'drop-shadow(0 4px 6px rgba(58, 34, 30, .22)) saturate(.95)' } },
   'town-board': { y: UNDER_BOX },
   // insert-card shots (a card over the bg): no ground in the card, feet tuck behind the box
   'feet-park': { y: UNDER_BOX },

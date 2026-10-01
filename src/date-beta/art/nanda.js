@@ -263,7 +263,7 @@ const STAGE_EMOTE = { 1: 'heart', 2: 'hearts', 3: 'or', 4: 'crack' };
 //   the FRONT leg (viewer's left) strikes with the heel, nearer = lower on screen, the toe lifted (its sole lip shows);
 //   the BACK leg pushes off, farther = higher on screen, the heel up, knee bent (a shorter, slightly slanted pin), only
 //   the toe on the ground (a small tight contact shadow).
-// lit: { rim, side } = the key light's rim on the lit side of the pins + shoe domes (side 1 = light from the right).
+// lit: { rim, side, wet, bounce } = the key light's rim (bounce = the floor's light bouncing up onto the shins + toe caps) on the lit side of the pins + shoe domes (side 1 = light from the right).
 const shoeSVG = (x, gy, P, { w = 1, h = 1, lift = 0, sole = 1, contact = 1, lit = null } = {}) => {
   const b = gy - lift, t = b - 11.5 * h, hw = 9 * w, mid = b - 3.5 * h;
   const dome = `M${x - hw},${mid} C${x - hw},${t + 2 * h} ${x - hw * 0.45},${t} ${x},${t} C${x + hw * 0.45},${t} ${x + hw},${t + 2 * h} ${x + hw},${mid} C${x + hw},${b - 1} ${x + hw * 0.66},${b} ${x},${b} C${x - hw * 0.66},${b} ${x - hw},${b - 1} ${x - hw},${mid} Z`;
@@ -281,7 +281,7 @@ const shoeSVG = (x, gy, P, { w = 1, h = 1, lift = 0, sole = 1, contact = 1, lit 
 const pinSVG = (x0, y0, x1, y1, P, lit) => {
   const a = (Math.atan2(x1 - x0, y1 - y0) * 180) / Math.PI, L = Math.hypot(x1 - x0, y1 - y0);
   return `<g transform="translate(${x0} ${y0}) rotate(${-a.toFixed(2)})"><rect x="-3" y="0" width="6" height="${L.toFixed(2)}" rx="3" fill="${P.sock}" stroke="${P.rim}" stroke-width="2"/>
-    ${P.dark ? '' : '<rect x="-3" y="5" width="6" height="3" fill="' + P.bow + '"/>'}${lit ? `<path d="M${lit.side * 1.6} 9 V${(L - 2).toFixed(2)}" stroke="${lit.rim}" stroke-width="1.1" stroke-linecap="round" opacity=".8"/>` : ''}</g>`;
+    ${P.dark ? '' : '<rect x="-3" y="5" width="6" height="3" fill="' + P.bow + '"/>'}${lit ? `<path d="M${lit.side * 1.6} 9 V${(L - 2).toFixed(2)}" stroke="${lit.rim}" stroke-width="1.1" stroke-linecap="round" opacity=".8"/>` : ''}${lit?.bounce ? `<rect x="-2" y="${(L * 0.62).toFixed(2)}" width="4" height="${(L * 0.36).toFixed(2)}" rx="2" fill="${lit.bounce}" opacity=".3"/>` : ''}</g>`;
 };
 export function legsSVG(P, step = null, lit = null, refl = false) {
   if (step === 'walk') {
@@ -290,7 +290,7 @@ export function legsSVG(P, step = null, lit = null, refl = false) {
     // where each foot must mirror about ITS OWN contact: the back leg is dropped 2 x (130.6 - 126.2) so the whole-sprite
     // flip about the front sole hangs its reflection straight off its own toe.
     const d = refl ? 8.8 : 0;
-    return `<g transform="translate(0 ${d})">${pinSVG(62, 94, 60.5, 115.5, P, lit) + shoeSVG(60.5, 126.2, P, { w: 0.92, h: 1.1, sole: 0.6, contact: 0.7, lit })}</g>`
+    return `<g transform="translate(0 ${d})">${pinSVG(62, 94, 60.5, 115.5, P, lit) + shoeSVG(60.5, 126.2, P, { w: 0.92, h: 1.1, sole: 0.6, contact: 0.85, lit })}</g>`
       + pinSVG(42, 94, 44, 119, P, lit) + shoeSVG(44, 130.6, P, { w: 1.04, h: 0.88, lift: 0.45, sole: 1.8, lit });
   }
   return [40, 64].map((x) => pinSVG(x, 94, x, 118, P, lit) + shoeSVG(x, 128.5, P, { lit })).join('');
