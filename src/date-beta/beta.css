@@ -20,6 +20,17 @@ body { font-family: var(--cond); color: var(--ink); }
   border-radius: .16em; background: var(--scrim); color: var(--or-on-dark); font-weight: 700; text-shadow: none; }
 .has-or .db-or { background: none; padding: 0; margin: 0; }
 
+/* ---------- train-r4 styled spans (engine SPANS, Say.jsx Parts): Nanda naming the two bumpers ----------
+   wavy = italic + a teal wavy underline; hat = bold orange + a small cap-icon chip. Both >= 4.5:1 on the pink box.
+   The words stay plain text for OCR / screen readers; the underline sits under the descenders (offset) so OCR keeps them. */
+.db-span { font-style: normal; }
+.db-wavy { font-style: italic; color: #0a6670; text-decoration: underline wavy #12a3ac; text-decoration-thickness: 3px; text-underline-offset: 12px; text-decoration-skip-ink: none; }
+.db-hat { font-weight: 800; color: #a3400a; white-space: nowrap; }
+.db-hat-chip { display: inline-flex; align-items: center; justify-content: center; width: 1.05em; height: .78em; margin: 0 .16em 0 .04em;
+  vertical-align: .02em; border-radius: .22em; background: #ffe2c6; border: 2px solid #a3400a; color: #a3400a; }
+.db-hat-chip .db-cap { width: .72em; height: .5em; display: block; }
+.db-say.has-or .db-wavy { color: #7fe6ee; } .db-say.has-or .db-hat { color: #ffb070; }
+
 /* ---------- dialogue: the candy chip (R2b §5). Opaque pink box, magenta rim + white inner stroke, pins = shape only ---------- */
 .db-say { position: absolute; left: 50%; bottom: 64px; transform: translateX(-50%); width: 1400px; min-height: 190px;
   padding: 58px 150px 50px 78px; border: 5px solid var(--rim); border-radius: 18px; color: var(--box-ink); pointer-events: none;
@@ -147,9 +158,31 @@ body { font-family: var(--cond); color: var(--ink); }
   filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)); animation: nanda-in 320ms ease-out both; }
 /* feet on the floor; lifted above the raised box only on choice beats */
 .db-nanda.raised { bottom: 470px; }
+/* R5: lifted over a choice box with no floor under her, her legs would dangle in the air: the frame crops her at the
+   skirt instead (a soft fade), so she reads as a waist-up shot, never as floating. Floored / planted beats keep legs. */
+.db-nanda.raised:not(.floored):not(.planted) { -webkit-mask-image: linear-gradient(to bottom, #000 80.1%, transparent 80.5%); mask-image: linear-gradient(to bottom, #000 80.1%, transparent 80.5%); }
+/* props.cut.plant = px she is lowered from her default spot (explicit, per beat). .floored = the per-bg / per-insert floor
+   line (art/floors.js, --floor = stage y of the ground at her column): her feet sit ON it whatever the box does.
+   .db-plant = her contact shadow, GLOBAL (research/sprint-0930/town/SHADOWS.md, float-audit/REPORT.md): straight under her
+   feet (centred on her column, x 960), soft radial, no offset / rotation, and no z-index, so it paints in DOM order:
+   BEHIND her sprite and BEHIND the dialogue box, never over them. */
+.db-nanda.planted { bottom: calc(160px - var(--plant)); }
+.db-nanda.planted.raised { bottom: calc(470px - var(--plant)); }
+.db-nanda.floored, .db-nanda.floored.raised { bottom: calc(1080px - var(--floor) - 4px); }
+.db-plant { position: absolute; left: 820px; bottom: calc(160px - var(--plant) - 4px); width: 280px; height: 34px; border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(24, 12, 22, .42), rgba(24, 12, 22, .22) 55%, rgba(24, 12, 22, 0)); pointer-events: none; }
+.db-plant.raised { bottom: calc(470px - var(--plant) - 4px); }
+.db-plant.floored { bottom: calc(1080px - var(--floor) - 17px); }
 /* OBBP: centred in play; back on the right while a modal card (goal card, end card) is up */
 .db-nanda { right: auto; left: 730px; }
 .stage.is-goal .db-nanda, .hud-scrim ~ .db-nanda { left: auto; right: 60px; }
+/* town (research/sprint-0930/town/SHADOWS.md): all 3 pure-vtrace bgs have the street in soft light (04: the street floor is in
+   the buildings' open shade; 05 / 07: overcast), so her contact shadow sits straight UNDER her feet (centred on her
+   column, x 960), soft-edged, cool open-shade ink, and paints BEHIND her sprite and the box (no z-index), never over
+   them. Her body drop-shadow is the same softness (no hard 12 px offset). */
+.stage[data-bg^="town-"] .db-plant { background: radial-gradient(closest-side, rgba(34, 38, 62, .42), rgba(34, 38, 62, .22) 55%, rgba(34, 38, 62, 0)); }
+.stage[data-bg^="town-"] .db-nanda { filter: drop-shadow(0 4px 6px rgba(34, 38, 62, .22)); }
+.db-book { pointer-events: none; }
 @keyframes nanda-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
 
 /* ================= HUD (Hud.jsx; research/date-beta-mockups/hud/ variant A, Tony's literal copy). `hud-` / `lv-` prefixed.
@@ -170,6 +203,12 @@ body { font-family: var(--cond); color: var(--ink); }
   font: 900 38px/1 var(--btn); letter-spacing: .04em; text-shadow: var(--g-ring); pointer-events: auto; cursor: pointer;
   box-shadow: inset 0 0 0 3px var(--g-pink-edge), inset 0 -5px 0 rgba(90, 8, 50, .3), 0 0 0 7px var(--g-rim), 0 0 0 9px var(--g-rim-edge),
     0 10px 0 2px var(--g-rim-edge); }
+/* dialog-box: inside the chip, tucked in the bottom-right corner below the last line's descenders (the box keeps its size,
+   so it covers no more art than before). */
+.db-say .hud-next { right: 22px; bottom: 10px; padding: 9px 22px 10px 28px; font-size: 28px; gap: 10px;
+  box-shadow: inset 0 0 0 3px var(--g-pink-edge), inset 0 -4px 0 rgba(90, 8, 50, .3), 0 0 0 5px var(--g-rim), 0 0 0 7px var(--g-rim-edge),
+    0 6px 0 2px var(--g-rim-edge); }
+.db-say .hud-next svg { width: 20px; height: 23px; }
 .hud-next svg { width: 26px; height: 30px; overflow: visible; }
 .hud-next svg path { fill: #fff; stroke: var(--g-ol); stroke-width: 2.4; stroke-linejoin: round; paint-order: stroke; }
 .has-or .hud-next { background-color: #3a0d1c; background-image: var(--g-dark); color: var(--scrim-ink);
@@ -287,6 +326,17 @@ body { font-family: var(--cond); color: var(--ink); }
 .hud-end .sub { margin: 16px 0 0; font: 500 40px/1.25 var(--cond); }
 .hud-end.low .sub { color: #f3c6d6; }
 .hud-end .hud-next { position: absolute; left: 50%; right: auto; bottom: -44px; transform: translateX(-50%); white-space: nowrap; }
+/* fail card: the line is her reason (5-8 words), smaller than the win headline so it fits 2 lines */
+.hud-end.low h2 { font-size: 64px; line-height: 1.1; max-width: 900px; text-wrap: balance; }
+/* ending card (STEEPED / ESCAPE / ESCAPE?): the story ending, not a loss. Dark, her red rim, the name huge. */
+.hud-end.ending { border: 6px solid var(--her); background: var(--scrim); color: var(--scrim-ink); box-shadow: inset 0 0 0 4px #5a0a1c, 0 14px 0 #8b0f2c; padding-top: 72px; }
+.hud-end.ending .kicker { color: var(--or-on-dark); }
+.hud-end.ending h2 { font-size: 150px; line-height: 1; letter-spacing: .04em; color: var(--scrim-ink); }
+.hud-end.ending .sub { color: #f3c6d6; }
+.hud-end.ending .stat { display: inline-flex; align-items: center; gap: 10px; margin: 28px 0 0; padding: 8px 20px; border-radius: 999px;
+  background: #2a0714; color: var(--scrim-ink); font: 700 30px/1 var(--cond); letter-spacing: .12em; }
+.hud-end.ending .stat svg { width: 30px; height: 28px; }
+.hud-end.ending .stat svg path { fill: var(--or-on-dark); }
 .low-heart path.shell { fill: #2a0714; stroke: var(--her); stroke-width: 7; stroke-linejoin: round; }
 .low-heart path.crack { fill: none; stroke: var(--her); stroke-width: 7; stroke-linejoin: round; stroke-linecap: round; }
 .low-heart path.part { fill: url(#lvLowFill); }
@@ -308,19 +358,69 @@ body { font-family: var(--cond); color: var(--ink); }
 /* NEXT on an art-only click beat (no chip to hang from) */
 .hud-next.solo { right: 60px; bottom: 60px; }
 
-/* "Click anywhere to continue": big on the goal card, then a small corner hint under the chip. Never on choice beats. */
-.db-hint { position: absolute; left: 32px; bottom: 10px; z-index: 9; padding: 8px 16px 9px; border-radius: 999px; pointer-events: none;
-  background: rgba(26, 7, 16, .82); color: var(--scrim-ink); font: 700 22px/1 var(--cond); letter-spacing: .04em; }
-.db-hint.big { left: 50%; bottom: 96px; transform: translateX(-50%); padding: 16px 36px 18px; border: 4px solid var(--pink);
-  font: 900 48px/1 var(--btn); letter-spacing: .01em; white-space: nowrap; }
+/* "Click anywhere to continue": a SUBTITLE, never a button (R5, Tony 09-30): no pill, no border, plain text with a thin
+   dark outline + soft shadow so it reads on any bg. Big on the goal card, then a small corner line. Never on choice beats. */
+.db-hint { position: absolute; left: 36px; bottom: 14px; z-index: 9; pointer-events: none; background: none;
+  color: #fff; font: 700 22px/1 var(--cond); letter-spacing: .04em; opacity: .92;
+  -webkit-text-stroke: 1px rgba(26, 7, 16, .55); paint-order: stroke fill;
+  text-shadow: 0 1px 0 rgba(26, 7, 16, .9), 0 0 4px rgba(26, 7, 16, .85), 0 2px 10px rgba(26, 7, 16, .55); }
+.db-hint.big { left: 50%; bottom: 96px; transform: translateX(-50%); font: 800 44px/1 var(--btn); letter-spacing: .01em; white-space: nowrap;
+  -webkit-text-stroke: 2px rgba(26, 7, 16, .6); text-shadow: 0 2px 0 rgba(26, 7, 16, .9), 0 0 8px rgba(26, 7, 16, .8), 0 4px 18px rgba(26, 7, 16, .5); }
 
 /* focus: while a line, choice or card is up, the art behind blurs + dims under a vignette (red at scare 2); Nanda gets a
    pink rim-light. Art-only beats stay sharp. .rm = same look, hard cut. data-lowfx (slow machine) = dim + vignette only. */
 .scene { transition: filter 334ms ease-out; }
 .stage.focus .scene { filter: blur(3px) brightness(.78); }
 :root[data-lowfx] .stage.focus .scene { filter: brightness(.72); }
+/* the basement's payoff is its labels (today's jar): no blur there, only the dim */
+.stage.focus .scene:has(.art.basement, .art.cellar) { filter: brightness(.86); }
+/* the SANDWICH shots (art/sandwich.jsx): the mid haze layer already carries the depth; the front cels stay crisp */
+.stage.focus .scene:has(.sw-mid) { filter: brightness(.84); }
 .db-focus { position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity 334ms ease-out;
   background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(26, 7, 16, .55) 100%); }
 .stage.focus .db-focus { opacity: 1; }
+/* R5 focus plane (main.jsx fplane, --fy = her floor y): the scene only dims; the blur moves to a backdrop layer whose mask
+   leaves a SHARP floor band (feathered, full width) + a sharp ellipse round her feet. Hybrid = band + ellipse (Tony 09-30).
+   Her contact shadow gets stronger with it. data-lowfx = no blur anyway, so no plane. */
+.stage.focus.fplane .scene { filter: brightness(.78); }
+.db-fplane { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; -webkit-backdrop-filter: blur(3px); backdrop-filter: blur(3px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 calc(var(--fy) - 210px), transparent calc(var(--fy) - 90px), transparent calc(var(--fy) + 30px), #000 calc(var(--fy) + 150px)),
+    radial-gradient(ellipse 300px 330px at 960px calc(var(--fy) - 120px), transparent 50%, #000 100%);
+  mask-image: linear-gradient(to bottom, #000 calc(var(--fy) - 210px), transparent calc(var(--fy) - 90px), transparent calc(var(--fy) + 30px), #000 calc(var(--fy) + 150px)),
+    radial-gradient(ellipse 300px 330px at 960px calc(var(--fy) - 120px), transparent 50%, #000 100%);
+  -webkit-mask-composite: source-in; mask-composite: intersect; }
+:root[data-lowfx] .db-fplane { display: none; }
+.stage.fplane .db-plant { background: radial-gradient(closest-side, rgba(24, 12, 22, .62), rgba(24, 12, 22, .34) 55%, rgba(24, 12, 22, 0)); height: 40px; }
 .stage.focus[data-scare="2"] .db-focus { background: radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(120, 8, 30, .6) 100%); }
 .stage.focus .db-nanda { filter: drop-shadow(0 12px 0 rgba(58, 10, 38, .22)) drop-shadow(0 0 10px rgba(255, 95, 162, .75)); }
+
+/* ============ ux-six (sprint 0930): layering, legibility, contrast */
+/* Place/time stamp: drawn once, by the player (main.jsx .db-stamp), above her sprite + emote bubble, below the HUD pop.
+   The art's own stamp (art/shots Stamp) is hidden so it never shows twice. Sits under the pop's lane (pop ends ~y 180). */
+.stage .shot-stamp { display: none; }
+.db-stamp { position: absolute; left: 96px; top: 206px; z-index: 6; display: flex; gap: 18px; align-items: baseline; padding: 18px 34px;
+  background: rgba(12, 6, 18, .86); border-left: 8px solid #ff5fa2; color: #fffaf2; font: 700 52px/1 var(--cond, sans-serif); letter-spacing: .08em;
+  pointer-events: none; }
+.db-stamp i { color: #ff5fa2; font-style: normal; } .db-stamp span { font-weight: 400; }
+/* +N pop: the HUD lifts over the FX layer (.db-fx z 30, falling hearts / quake) while a pop is up, so the pill stays readable */
+.hud-a:has(.lv-pop) { z-index: 31; }
+.lv-pop .lv-tell { background: rgba(26, 7, 16, .96); }
+/* Contrast >= 4.5:1 for white text on the pink pills (was 1.8:1 on #ffa6d6 chips, ~3:1 at the top of the pink buttons) */
+.viewport { --g-pink: linear-gradient(180deg, #c63a88 0%, #b52c7e 40%, #a82272 65%, #8f1a62 100%);
+  --next-body: linear-gradient(180deg, #c63a88 0%, #b02a7a 42%, #9c206c 70%, #82185a 100%); }
+.db-chip.up { color: var(--lv-ol); text-shadow: none; }
+/* Top controls: >= 24 px text, solid black ground (white on #000 = 21:1), big hit area */
+/* stacked down the right edge so the bigger controls never sit on the HUD ribbon (it ends at x 1580) */
+.chrome { gap: 8px; flex-direction: column; align-items: flex-end; }
+.chrome button, .chrome a { font-size: 24px; padding: 10px 16px; min-height: 48px; border: 2px solid #fff; background: #000; }
+/* Timer label + the one-time ?? legend */
+.db-timebar .db-timer { white-space: nowrap; min-width: 0; }
+/* under the right-hand button, clear of the centred DEFAULT tag under a pink or mid default */
+.db-legend { position: absolute; right: 0; bottom: -64px; white-space: nowrap; z-index: 4; padding: 10px 22px 12px; border-radius: 12px; background: rgba(26, 7, 16, .92);
+  color: #ffe9f1; font: 700 28px/1 var(--cond); letter-spacing: .02em; box-shadow: 0 0 0 3px rgba(255, 233, 241, .5); pointer-events: none; }
+.db-legend b { color: #ffa6d6; }
+/* Offscreen speaker label (NANDA (ABOVE)): same tag, dashed = not in the frame */
+.db-say.offscreen .who { border-style: dashed; }
+
+/* R5 cels (fx/Cels.jsx: the bump marks, the key palm, the door click), over the blur, under Nanda + the box */
+.db-cel { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; pointer-events: none; font-family: var(--btn); }

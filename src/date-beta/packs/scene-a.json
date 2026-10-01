@@ -1,0 +1,382 @@
+{
+  "name": "scene-a",
+  "notes": [
+    "Scene A rebuild (Tony, plan R2 wave 2; research/sprint-0930/scene-a/CHECKS.md). Runs after variant-v2 and before love, so the beat numbers below are the post-v2 ones and love.json's rooftop:8 is the merged beat.",
+    "Rooftop after this pack: 0 goal card | 1 establishing (bg only, the stamp once) | 2 she is there | 3 handout (her bento = the choice) | 4 insert: whole box | 5 extreme close-up: the piece in chopsticks | 6 POV: you eat | 7 cutaway: her eyes | 8 one box, two steps: 'Sweet. Like me.' then 'Sweet, ne?' (peek) | 9 'Don't stare' + the smile tag (+1) | 10 forecast, split at f-OR-ecast (she laughs) | 11 stay forever (close).",
+    "props.cut = the Scene A camera + chrome (SCENES.md). Every beat sets its own cut, because props carry forward inside a scene.",
+    "Voice: line texts kept so the takes match (rooftop 001, 005/006 as the lead, 007/008, 009, 010, 012, 013...). 'Sour, ne?' became 'Sour, neee?' to match take 007 as recorded. New lines (Itadakimasu, the eyes cutaway, 'Her shoes by the fence') are MC / narration: no take.",
+    "yum = what you said about her cooking (best | good | salty). Only the 'Don't stare' beat reads it (vary), so each answer gets its own recorded line on that beat and the smile tag after it.",
+    "nearblur: props.near = 'fence' (fx/NearLens.jsx: chain-link at the lower corners, watched from behind the fence) on the establishing beats 0-2; beat 3 (the bento handout) stops it, so the choice beats stay clean."
+  ],
+  "flags": {
+    "yum": [
+      "best",
+      "good",
+      "salty"
+    ]
+  },
+  "patch": [
+    {
+      "scene": "rooftop",
+      "beat": 0,
+      "set": {
+        "bg": "rooftop-noon",
+        "props": {
+          "clock": "live",
+          "cut": {
+            "frame": "off"
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 1,
+      "set": {
+        "bg": "rooftop-noon",
+        "text": null,
+        "speaker": null,
+        "hold": 900,
+        "props": {
+          "shot": "stamp",
+          "place": "SCHOOL ROOFTOP",
+          "time": "12:00 NOON",
+          "cut": {
+            "frame": "off",
+            "sharp": true
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 2,
+      "set": {
+        "bg": "rooftop-noon",
+        "props": {
+          "clock": "noon",
+          "cut": {
+            "frame": "handout",
+            "handout": {
+              "tama": 0,
+              "ume": 1
+            }
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 3,
+      "set": {
+        "bg": "bento-insert",
+        "props": {
+          "cut": {
+            "frame": "off",
+            "sharp": true
+          }
+        },
+        "vary": {
+          "bento": {
+            "tamagoyaki": {
+              "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers.",
+              "props": {
+                "focus": "tama"
+              }
+            },
+            "umeboshi": {
+              "text": "Close-up. The lid lifts. One red umeboshi on white rice.",
+              "props": {
+                "focus": "ume"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 4,
+      "set": {
+        "bg": "bento-lift",
+        "text": null,
+        "sfx": null,
+        "hold": 900,
+        "props": {
+          "cut": {
+            "frame": "off",
+            "sharp": true
+          }
+        },
+        "vary": {
+          "bento": {
+            "tamagoyaki": {
+              "bg": "bento-lift-tama"
+            },
+            "umeboshi": {
+              "bg": "bento-lift-ume"
+            }
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 5,
+      "set": {
+        "bg": "rooftop-noon",
+        "text": "MC: Itadakimasu.",
+        "props": {
+          "cut": {
+            "frame": "pov",
+            "food": "tama"
+          }
+        },
+        "vary": {
+          "bento": {
+            "tamagoyaki": {},
+            "umeboshi": {
+              "props": {
+                "cut": {
+                  "frame": "pov",
+                  "food": "ume"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 6,
+      "set": {
+        "bg": "rooftop-noon",
+        "hold": 1000,
+        "props": {
+          "pucker": false,
+          "cut": {
+            "frame": "peek",
+            "food": "tama",
+            "face": "big-eyes-peek",
+            "face2": "anya-smile",
+            "step": 1000,
+            "lead": "Sweet. Like me. Good input."
+          }
+        },
+        "vary": {
+          "bento": {
+            "tamagoyaki": {
+              "text": "NANDA: Sweet, ne? I rolled it myself.",
+              "props": {
+                "pucker": false,
+                "cut": {
+                  "frame": "peek",
+                  "food": "tama",
+                  "face": "big-eyes-peek",
+                  "face2": "anya-smile",
+                  "step": 1000,
+                  "lead": "Sweet. Like me. Good input."
+                }
+              }
+            },
+            "umeboshi": {
+              "text": "NANDA: Sour, neee?",
+              "props": {
+                "pucker": true,
+                "cut": {
+                  "frame": "peek",
+                  "food": "ume",
+                  "face": "big-eyes-peek",
+                  "face2": "anya-smile",
+                  "step": 1000,
+                  "lead": "Sour. Hm. You like things that bite?"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 6,
+      "choice": 0,
+      "set": {
+        "react": null,
+        "pass": true,
+        "set": {
+          "cold": "no",
+          "yum": "best"
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 6,
+      "choice": 1,
+      "set": {
+        "react": null,
+        "pass": true,
+        "set": {
+          "cold": "no",
+          "yum": "good"
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 6,
+      "choice": 2,
+      "set": {
+        "set": {
+          "cold": "yes",
+          "yum": "salty"
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 7,
+      "set": {
+        "bg": "rooftop-noon",
+        "text": "NANDA: …Obviously. Don't stare.",
+        "speaker": null,
+        "props": {
+          "cut": {
+            "frame": "medium",
+            "face": "blush-embarrassed",
+            "tag": true
+          }
+        },
+        "vary": {
+          "yum": {
+            "best": {},
+            "good": {
+              "text": "NANDA: Good is a start. Tomorrow I'll do better.",
+              "props": {
+                "cut": {
+                  "frame": "medium",
+                  "face": "content",
+                  "tag": true
+                }
+              }
+            },
+            "salty": {
+              "text": "NANDA: Salty. Noted. Forever.",
+              "props": {
+                "cut": {
+                  "frame": "medium",
+                  "face": "hate",
+                  "tag": true
+                }
+              }
+            }
+          }
+        },
+        "choices": [
+          {
+            "text": "smile",
+            "side": "pink",
+            "love": 1,
+            "emote": "heart",
+            "pass": true
+          }
+        ]
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 8,
+      "set": {
+        "bg": "rooftop-noon",
+        "hold": 500,
+        "props": {
+          "cut": {
+            "frame": "medium",
+            "at": "f-",
+            "step": 500,
+            "face2": "heart-laugh"
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 9,
+      "set": {
+        "bg": "rooftop-noon",
+        "props": {
+          "clock": "noon",
+          "cut": {
+            "frame": "close",
+            "face": "content"
+          }
+        }
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 6,
+      "beats": [
+        {
+          "bg": "rooftop-noon",
+          "text": "She doesn't eat hers. She watches you chew.",
+          "sfx": "wind",
+          "props": {
+            "cut": {
+              "frame": "eyes",
+              "face": "big-eyes-peek",
+              "sharp": true
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scene": "rooftop",
+      "beat": 2,
+      "beats": [
+        {
+          "bg": "rooftop-noon",
+          "speaker": false,
+          "text": "Her shoes by the fence. Toes pointed at you.",
+          "props": {
+            "clock": "noon",
+            "cut": {
+              "frame": "medium"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "scene": "rooftop",
+      "beat": 0,
+      "props": {
+        "near": "fence"
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 1,
+      "props": {
+        "near": "fence"
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 2,
+      "props": {
+        "near": "fence"
+      }
+    },
+    {
+      "scene": "rooftop",
+      "beat": 3,
+      "props": {
+        "near": null
+      }
+    }
+  ]
+}

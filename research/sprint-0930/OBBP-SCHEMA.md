@@ -30,3 +30,10 @@ Game bg `lock-game` from `game/index.js`.
 
 ## Shots / bugs
 `obbp/shots/01..13` (1920x1080, 256 colours). Bugs: `KNOWN-BUGS.md`.
+
+## packs/love.json (love audit + hidden chips, last in play order)
+- Keys: `patch` only. Beat numbers are the final ones (after sequences and variant-v2).
+- New patch form `{scene, beat, choice: i, set: {...}}` merges into `choices[i]` (used for love values).
+- Love audit: `love` on every option of the 10 move-pick beats that had none. See `alt-test/LOVE-AUDIT.md`.
+- `loveHidden: true` on ~50% of choice beats + every consequential one (chip shows `??`; documented in `src/date-beta/SCENES.md`).
+

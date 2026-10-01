@@ -1,0 +1,4 @@
+/* fx/rain.css: rain overlay layers (RainOverlay.jsx). z-order: after Nanda in the DOM with no z-index (so over her,
+   under the dialogue box, which comes later); the wet-GUI marks sit over the GUI (choices 5, ribbon 6) at 7. */
+.rn-overlay, .rn-wet { position: absolute; inset: 0; width: 1920px; height: 1080px; pointer-events: none; overflow: visible; }
+.rn-wet { z-index: 7; }

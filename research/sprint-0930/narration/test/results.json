@@ -1,0 +1,212 @@
+[
+ {
+  "voice": "daniel",
+  "model": "eleven_multilingual_v2",
+  "line": 1,
+  "latencyMs": 1241,
+  "bytes": 81128,
+  "audioMs": 5068,
+  "aligned": true,
+  "file": "daniel_eleven_multilingual_v2_1.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_multilingual_v2",
+  "line": 2,
+  "latencyMs": 1257,
+  "bytes": 127939,
+  "audioMs": 7993,
+  "aligned": true,
+  "file": "daniel_eleven_multilingual_v2_2.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_multilingual_v2",
+  "line": 3,
+  "latencyMs": 902,
+  "bytes": 41004,
+  "audioMs": 2560,
+  "aligned": true,
+  "file": "daniel_eleven_multilingual_v2_3.mp3"
+ },
+ {
+  "voice": "river",
+  "model": "eleven_multilingual_v2",
+  "line": 1,
+  "latencyMs": 1225,
+  "bytes": 62737,
+  "audioMs": 3918,
+  "aligned": true,
+  "file": "river_eleven_multilingual_v2_1.mp3"
+ },
+ {
+  "voice": "river",
+  "model": "eleven_multilingual_v2",
+  "line": 2,
+  "latencyMs": 1483,
+  "bytes": 85725,
+  "audioMs": 5355,
+  "aligned": true,
+  "file": "river_eleven_multilingual_v2_2.mp3"
+ },
+ {
+  "voice": "river",
+  "model": "eleven_multilingual_v2",
+  "line": 3,
+  "latencyMs": 1033,
+  "bytes": 33062,
+  "audioMs": 2064,
+  "aligned": true,
+  "file": "river_eleven_multilingual_v2_3.mp3"
+ },
+ {
+  "voice": "alice",
+  "model": "eleven_multilingual_v2",
+  "line": 1,
+  "latencyMs": 1667,
+  "bytes": 73186,
+  "audioMs": 4571,
+  "aligned": true,
+  "file": "alice_eleven_multilingual_v2_1.mp3"
+ },
+ {
+  "voice": "alice",
+  "model": "eleven_multilingual_v2",
+  "line": 2,
+  "latencyMs": 1487,
+  "bytes": 98264,
+  "audioMs": 6139,
+  "aligned": true,
+  "file": "alice_eleven_multilingual_v2_2.mp3"
+ },
+ {
+  "voice": "alice",
+  "model": "eleven_multilingual_v2",
+  "line": 3,
+  "latencyMs": 1018,
+  "bytes": 39750,
+  "audioMs": 2482,
+  "aligned": true,
+  "file": "alice_eleven_multilingual_v2_3.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_v3",
+  "line": 1,
+  "latencyMs": 2883,
+  "bytes": 99518,
+  "audioMs": 6217,
+  "aligned": true,
+  "file": "daniel_eleven_v3_1.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_v3",
+  "line": 2,
+  "latencyMs": 4175,
+  "bytes": 121252,
+  "audioMs": 7576,
+  "aligned": true,
+  "file": "daniel_eleven_v3_2.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_v3",
+  "line": 3,
+  "latencyMs": 1752,
+  "bytes": 41839,
+  "audioMs": 2612,
+  "aligned": true,
+  "file": "daniel_eleven_v3_3.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_flash_v2_5",
+  "line": 1,
+  "latencyMs": 262,
+  "bytes": 99100,
+  "audioMs": 6191,
+  "aligned": true,
+  "file": "daniel_eleven_flash_v2_5_1.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_flash_v2_5",
+  "line": 2,
+  "latencyMs": 305,
+  "bytes": 119998,
+  "audioMs": 7497,
+  "aligned": true,
+  "file": "daniel_eleven_flash_v2_5_2.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_flash_v2_5",
+  "line": 3,
+  "latencyMs": 218,
+  "bytes": 38914,
+  "audioMs": 2429,
+  "aligned": true,
+  "file": "daniel_eleven_flash_v2_5_3.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_v4",
+  "line": 1,
+  "latencyMs": 1959,
+  "bytes": 84471,
+  "audioMs": 5277,
+  "aligned": true,
+  "file": "daniel_eleven_v4_1.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_v4",
+  "line": 2,
+  "latencyMs": 2264,
+  "bytes": 114982,
+  "audioMs": 7184,
+  "aligned": true,
+  "file": "daniel_eleven_v4_2.mp3"
+ },
+ {
+  "voice": "daniel",
+  "model": "eleven_v4",
+  "line": 3,
+  "latencyMs": 1261,
+  "bytes": 46019,
+  "audioMs": 2873,
+  "aligned": true,
+  "file": "daniel_eleven_v4_3.mp3"
+ },
+ {
+  "voice": "river",
+  "model": "eleven_v3",
+  "line": 1,
+  "latencyMs": 2912,
+  "bytes": 81546,
+  "audioMs": 5094,
+  "aligned": true,
+  "file": "river_eleven_v3_1.mp3"
+ },
+ {
+  "voice": "river",
+  "model": "eleven_v3",
+  "line": 2,
+  "latencyMs": 3902,
+  "bytes": 106205,
+  "audioMs": 6635,
+  "aligned": true,
+  "file": "river_eleven_v3_2.mp3"
+ },
+ {
+  "voice": "river",
+  "model": "eleven_v3",
+  "line": 3,
+  "latencyMs": 1747,
+  "bytes": 39332,
+  "audioMs": 2456,
+  "aligned": true,
+  "file": "river_eleven_v3_3.mp3"
+ }
+]

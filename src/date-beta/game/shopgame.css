@@ -1,0 +1,46 @@
+/* ShopGame "HER LIST": projector-sized on the 1920x1080 stage. No transitions or keyframes: every state is a static
+   frame (reduced-motion safe by construction). Colours from tokens.css. */
+.sg-root { position: absolute; inset: 0; font-family: var(--cond); color: var(--ink); user-select: none; overflow: hidden; }
+.sg-bg { position: absolute; inset: 0; }
+.sg-bg > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sg-head { position: absolute; left: 0; right: 0; top: 118px; display: flex; justify-content: center; align-items: center; gap: 28px; }
+.sg-aisle, .sg-wait { background: var(--scrim); color: var(--scrim-ink); font-size: 34px; font-weight: 800; letter-spacing: .06em;
+  padding: 10px 22px; border-radius: 12px; }
+.sg-wait b { font-family: var(--mono); color: var(--pink); display: inline-block; min-width: 2ch; text-align: right; }
+.sg-wait.low b { color: var(--or-on-dark); }
+.sg-chip { background: #fffdf4; color: #2b2a55; border: 5px solid var(--pink); border-radius: 14px; padding: 8px 26px 12px;
+  font-size: 58px; font-weight: 800; transform: rotate(-2deg); box-shadow: 0 8px 0 rgba(58, 10, 38, .3); }
+.sg-chip small { display: block; font-size: 22px; letter-spacing: .12em; color: var(--pink-deep, #b8325a); }
+.sg-shelf-row { position: absolute; left: 110px; right: 490px; bottom: 190px; display: flex; justify-content: center; gap: 40px; }
+.sg-item { position: relative; width: 300px; height: 330px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 12px; background: #fffdf6; border: 6px solid #3a2a30; border-radius: 22px; cursor: pointer; padding: 0;
+  box-shadow: 0 12px 0 rgba(40, 20, 30, .45); font: inherit; color: #2b2a33; }
+.sg-item svg { width: 190px; height: 190px; }
+.sg-item:hover, .sg-item:focus-visible { outline: 8px solid var(--pink); outline-offset: 4px; }
+.sg-label { font-family: var(--jp); font-size: 40px; font-weight: 800; white-space: nowrap; }
+.sg-sub { font-size: 22px; font-weight: 700; opacity: .7; letter-spacing: .04em; }
+.sg-key { position: absolute; top: 12px; left: 14px; width: 52px; height: 52px; border-radius: 50%; background: #2b2a33; color: #fff;
+  font: 800 34px/52px var(--mono); text-align: center; }
+.sg-say { position: absolute; left: 120px; right: 620px; bottom: 90px; display: flex; flex-direction: column; gap: 10px;
+  background: var(--scrim); color: var(--scrim-ink); font-size: 50px; font-weight: 700; line-height: 1.2; padding: 26px 36px; border-radius: 18px; }
+.sg-say b { color: var(--pink); margin-right: .4em; }
+.sg-aside { font-size: 36px; opacity: .92; }
+.sg-shadow { position: absolute; inset: 0; background: rgba(10, 4, 18, .72); }
+.sg-split .sg-say { background: #000; }
+.sg-card { position: absolute; left: 50%; top: 150px; transform: translateX(-50%) rotate(-2deg); background: #fffdf4; color: #2b2a55;
+  border: 6px solid var(--pink); border-radius: 18px; padding: 24px 44px; text-align: center; }
+.sg-list-title { font-size: 40px; font-weight: 800; letter-spacing: .1em; color: var(--pink); }
+.sg-got { list-style: none; display: flex; gap: 22px; align-items: center; justify-content: center; margin: 14px 0; padding: 0; }
+.sg-got svg { width: 130px; height: 130px; }
+.sg-you { font-size: 64px; font-weight: 800; color: var(--pink); }
+.sg-line { font-size: 42px; font-weight: 700; }
+/* ONE anchor for Nanda in every game frame (shelf, wrong, right, end): same size, right edge, feet on the floor band
+   (y ~950), a contact shadow offset down-left. With the react line up (Say box) she is cropped at the box top (y 800)
+   so no leg shows below it. */
+.sg-root .db-nanda { left: auto; right: 40px; bottom: 118px; width: 400px; height: 432px; z-index: 2; animation-name: none; }
+.sg-foot { position: absolute; right: 150px; bottom: 112px; width: 230px; height: 30px; border-radius: 50%;
+  background: rgba(74, 31, 36, .3); z-index: 1; }
+.stage:has(.db-say) .sg-root .db-nanda { clip-path: inset(0 0 150px 0); }
+.stage:has(.db-say) .sg-foot { display: none; }
+.sg-split .db-nanda { filter: brightness(.8) drop-shadow(0 0 6px rgba(140, 170, 255, .7)); }
+.sg-end .sg-card { left: 70px; top: 140px; transform: rotate(-2deg); }

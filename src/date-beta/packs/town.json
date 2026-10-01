@@ -1,0 +1,31 @@
+{
+  "name": "town",
+  "notes": "TOWN walk to curry lunch (research/sprint-0930/town/NOTES.md): AKIBA 2:45 PM, after the shop / library and before the curry street choice (v2-curry). 3 traced shots: street (establishing + stamp), crossing (her hands on your arm), the giant ゲートちゃん billboard. One Nanda face per beat; planted on the street (cut.plant + .db-plant).",
+  "scenes": [
+    {
+      "id": "v2-town",
+      "title": "V2 town: the walk to curry",
+      "short": "TOWN",
+      "bg": "town-street",
+      "nanda": true,
+      "beats": [
+        { "speaker": false, "text": "AKIBA · 2:45 PM. Big signs. Big screens. She holds your hand.", "sfx": "wind", "bg": "town-street",
+          "props": { "shot": "stamp", "place": "AKIBA", "time": "2:45 PM", "cut": { "frame": "off", "sharp": true } } },
+        { "speaker": "NANDA", "text": "We are going out for curry. Just you and me.", "bg": "town-street",
+          "props": { "cut": { "frame": "medium", "face": "happy", "plant": 90 } } },
+        { "speaker": "NANDA", "text": "So many people. I will hold your arm. Tight.", "bg": "town-crossing",
+          "props": { "cut": { "frame": "medium", "face": "anya-smile", "plant": 90 } } },
+        { "speaker": "NANDA", "text": "Wow! A giant oshi board. Oshi means \"my favorite.\"", "bg": "town-board",
+          "props": { "cut": { "frame": "medium", "face": "big-eyes-peek", "plant": 90 } } },
+        { "speaker": "NANDA", "text": "But not one of them is as cute as me. Right?", "bg": "town-board",
+          "props": { "cut": { "frame": "medium", "face": "heart-laugh" } },
+          "choices": [{ "text": "Walk to lunch", "go": "v2-curry" }] }
+      ]
+    }
+  ],
+  "insert": [{ "after": "v2-library", "ids": ["v2-town"] }],
+  "patch": [
+    { "scene": "v2-shop", "beat": 12, "choice": 0, "set": { "go": "v2-town" } },
+    { "scene": "v2-library", "beat": 5, "choice": 0, "set": { "go": "v2-town" } }
+  ]
+}

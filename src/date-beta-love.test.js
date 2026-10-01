@@ -212,7 +212,7 @@ test('love endings: 100% = win, 60..99% = almost, below 60% = low; 100 only when
   const end = startAt(S, { at: 'steeped', beat: 4 });
   assert.equal(beatAt(S, end).end, 'steeped');
   const at = (love) => ending(S, { ...end, love });
-  assert.deepEqual({ ...at(16) }, { kind: 'steeped', pct: 100, tier: 'win', love: 16, goal: 16 });
+  assert.deepEqual({ ...at(16) }, { kind: 'steeped', scene: 'steeped', pct: 100, tier: 'win', love: 16, goal: 16 });
   assert.equal(at(15).tier, 'almost');
   assert.equal(at(10).pct, 63);
   assert.equal(at(10).tier, 'almost');

@@ -1,0 +1,124 @@
+{
+  "note": "T1b INTERIORS+BASEMENT: bg patches only (no copy). apartment = traced walk-up; cup + unknown + escape-timeout 2 = the traced sitting room; steeped = the traced bedroom; escape = the new cellar (0 + the returns from each blackout: 8, 10, 12); escape 13 stays the lock game (lockgame/obbp packs). nearblur: escape cellar beats get props.near = 'shelves' (fx/NearLens.jsx: hiding behind her shelves); the blackout beats stop it (12-13: ux-six.json, which re-sets their props; the lock game bg never draws it). v2-home 0 (the genkan establishing shot): props.near = 'genkan' (door-frame edge + shoe-rack edge, peeking in).",
+  "patch": [
+    {
+      "scene": "apartment",
+      "beat": 0,
+      "set": {
+        "bg": "apartment-trace"
+      }
+    },
+    {
+      "scene": "cup",
+      "beat": 0,
+      "set": {
+        "bg": "sitting-room"
+      }
+    },
+    {
+      "scene": "steeped",
+      "beat": 0,
+      "set": {
+        "bg": "bedroom"
+      }
+    },
+    {
+      "scene": "unknown",
+      "beat": 0,
+      "set": {
+        "bg": "sitting-room"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 0,
+      "set": {
+        "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 8,
+      "set": {
+        "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 10,
+      "set": {
+        "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 12,
+      "set": {
+        "bg": "cellar"
+      }
+    },
+    {
+      "scene": "escape-timeout",
+      "beat": 2,
+      "set": {
+        "bg": "sitting-room"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 0,
+      "props": {
+        "near": "shelves"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 1,
+      "props": {
+        "near": "shelves"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 7,
+      "props": {
+        "near": null
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 8,
+      "props": {
+        "near": "shelves"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 9,
+      "props": {
+        "near": null
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 10,
+      "props": {
+        "near": "shelves"
+      }
+    },
+    {
+      "scene": "escape",
+      "beat": 11,
+      "props": {
+        "near": null
+      }
+    },
+    {
+      "scene": "v2-home",
+      "beat": 0,
+      "props": {
+        "near": "genkan"
+      }
+    }
+  ]
+}

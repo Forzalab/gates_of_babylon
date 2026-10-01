@@ -1,0 +1,6 @@
+# Restore: root cause (the traced renders were never deleted; they were never shown)
+1. main.jsx draws `props.shot` INSTEAD of `beat.bg`; a shot with no `of` fell back to its component default (`establish` = crossing-day, `stamp` = shop-street), so v2 park / shop / rain / her street all opened on the same crosswalk, and the library opened on shop-street.
+2. The engine carried props beat to beat, so one `stamp`/`establish` beat pinned the WHOLE scene to that frame: rooftop 1-9 = the shop-street stamp, cup = the old teatable stamp, escape = the old basement stamp (plus stale umbrella cards).
+3. `park` had no art (obbp aff5939 mapped `park: Rooftop`); the real park + cellar / apartment / sitting-room / bedroom / genkan v2 sat unmerged on origin/sprint/interiors.
+4. Fix: shots take the beat's own bg as `props.home` when they have no `of` (art/shots/index.js + main.jsx; `match` also cuts back to home); `props.shot` props are beat-local in engine.js; v2's cup/escape stamps drop their hard-coded `of`.
+5. Merged origin/sprint/interiors per its SCHEMA (`...INTERIORS` last in ART; `interiors` in PLAY before love/gacha). Shots: restore/shots/, side-by-sides: restore/shots/sbs/. Curry = cafe is still borrowed art (Agent 3).

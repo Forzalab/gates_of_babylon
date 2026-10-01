@@ -1,0 +1,1745 @@
+{
+ "01-goal-card": {
+  "beat": "rooftop:0",
+  "step": null,
+  "text": "",
+  "say": null,
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": null,
+  "sayInk": null,
+  "lines": [],
+  "nanda": null,
+  "frame": "off",
+  "face": null,
+  "layers": [
+   [
+    "hud-next ",
+    [
+     943,
+     682,
+     1189,
+     746
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "02-establishing-stamp": {
+  "beat": "rooftop:1",
+  "step": null,
+  "text": "",
+  "say": null,
+  "covered": [],
+  "stamp": [
+   96,
+   150,
+   1118,
+   238
+  ],
+  "stampText": "SCHOOL ROOFTOP·12:00 NOON",
+  "sayBg": null,
+  "sayInk": null,
+  "lines": [],
+  "nanda": null,
+  "frame": "off",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": false
+ },
+ "03-she-is-there": {
+  "beat": "rooftop:2",
+  "step": null,
+  "text": "Her shoes by the fence. Toes pointed at you.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(90, 42, 80)",
+  "lines": [
+   [
+    343,
+    874,
+    1446,
+    947
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "04-handout": {
+  "beat": "rooftop:3",
+  "step": null,
+  "text": "I made two. One's for you. Don't look at me like that.",
+  "say": [
+   260,
+   761,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    821,
+    1504,
+    894
+   ],
+   [
+    343,
+    889,
+    470,
+    962
+   ]
+  ],
+  "nanda": [
+   715,
+   -59,
+   1275,
+   545
+  ],
+  "frame": "handout",
+  "face": null,
+  "layers": [
+   [
+    "sa-handout-box",
+    [
+     600,
+     360,
+     1320,
+     883
+    ]
+   ],
+   [
+    "sa-food-tag right",
+    [
+     1350,
+     432,
+     1809,
+     516
+    ]
+   ],
+   [
+    "sa-food-tag left is-default",
+    [
+     149,
+     530,
+     570,
+     614
+    ]
+   ],
+   [
+    "sa-other purple",
+    [
+     151,
+     640,
+     570,
+     715
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "04b-handout-hover-tama": {
+  "beat": "rooftop:3",
+  "step": null,
+  "text": "I made two. One's for you. Don't look at me like that.",
+  "say": [
+   260,
+   761,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    821,
+    1504,
+    894
+   ],
+   [
+    343,
+    889,
+    470,
+    962
+   ]
+  ],
+  "nanda": [
+   715,
+   -59,
+   1275,
+   545
+  ],
+  "frame": "handout",
+  "face": null,
+  "layers": [
+   [
+    "sa-handout-box",
+    [
+     600,
+     360,
+     1320,
+     883
+    ]
+   ],
+   [
+    "sa-food-tag right hot",
+    [
+     1350,
+     432,
+     1809,
+     516
+    ]
+   ],
+   [
+    "sa-food-tag left is-default",
+    [
+     149,
+     530,
+     570,
+     614
+    ]
+   ],
+   [
+    "sa-other purple",
+    [
+     151,
+     640,
+     570,
+     715
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "05-tama-react": {
+  "beat": "rooftop:3",
+  "step": null,
+  "text": "Sweet egg for my sweet boy. ♡",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    886,
+    1116,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "06-tama-insert": {
+  "beat": "rooftop:4",
+  "step": null,
+  "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers.",
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(90, 42, 80)",
+  "lines": [
+   [
+    343,
+    821,
+    1445,
+    894
+   ],
+   [
+    343,
+    889,
+    629,
+    962
+   ]
+  ],
+  "nanda": null,
+  "frame": "off",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": false
+ },
+ "07-tama-lift": {
+  "beat": "rooftop:5",
+  "step": null,
+  "text": "",
+  "say": null,
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": null,
+  "sayInk": null,
+  "lines": [],
+  "nanda": null,
+  "frame": "off",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": false
+ },
+ "08-tama-pov": {
+  "beat": "rooftop:6",
+  "step": null,
+  "text": "Itadakimasu.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    886,
+    663,
+    959
+   ]
+  ],
+  "nanda": [
+   1214,
+   114,
+   1594,
+   524
+  ],
+  "frame": "pov",
+  "face": null,
+  "layers": [
+   [
+    "sa-layer sa-pov",
+    [
+     0,
+     0,
+     1920,
+     1080
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "09-tama-eyes-cutaway": {
+  "beat": "rooftop:7",
+  "step": null,
+  "text": "She doesn't eat hers. She watches you chew.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(90, 42, 80)",
+  "lines": [
+   [
+    343,
+    874,
+    1437,
+    947
+   ]
+  ],
+  "nanda": [
+   0,
+   0,
+   1920,
+   1080
+  ],
+  "frame": "eyes",
+  "face": "big-eyes-peek",
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": false
+ },
+ "10a-tama-peek-step1": {
+  "beat": "rooftop:8",
+  "step": "1",
+  "text": "Sweet. Like me. Good input.",
+  "say": [
+   260,
+   483,
+   1660,
+   744
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    543,
+    1034,
+    616
+   ]
+  ],
+  "nanda": [
+   497,
+   -516,
+   1990,
+   1094
+  ],
+  "frame": "peek",
+  "face": "big-eyes-peek",
+  "layers": [
+   [
+    "sa-bento-svg sa-layer sa-peek-box",
+    [
+     -173,
+     271,
+     813,
+     1065
+    ]
+   ],
+   [
+    "db-choice pink",
+    [
+     90,
+     860,
+     643,
+     1010
+    ]
+   ],
+   [
+    "db-choice mid is-default",
+    [
+     683,
+     860,
+     1237,
+     1010
+    ]
+   ],
+   [
+    "db-choice purple",
+    [
+     1277,
+     860,
+     1830,
+     1010
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "10b-tama-peek-step2": {
+  "beat": "rooftop:8",
+  "step": "2",
+  "text": "Sweet. Like me. Good input. / Sweet, ne? I rolled it myself.",
+  "say": [
+   260,
+   483,
+   1660,
+   744
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    543,
+    1034,
+    616
+   ],
+   [
+    343,
+    617,
+    1051,
+    690
+   ]
+  ],
+  "nanda": [
+   497,
+   -516,
+   1990,
+   1094
+  ],
+  "frame": "peek",
+  "face": "anya-smile",
+  "layers": [
+   [
+    "sa-bento-svg sa-layer sa-peek-box",
+    [
+     -173,
+     271,
+     813,
+     1065
+    ]
+   ],
+   [
+    "db-choice pink",
+    [
+     90,
+     860,
+     643,
+     1010
+    ]
+   ],
+   [
+    "db-choice mid is-default",
+    [
+     683,
+     860,
+     1237,
+     1010
+    ]
+   ],
+   [
+    "db-choice purple",
+    [
+     1277,
+     860,
+     1830,
+     1010
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "11-tama-dont-stare-best": {
+  "beat": "rooftop:9",
+  "step": null,
+  "text": "…Obviously. Don't stare.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    886,
+    958,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": "blush-embarrassed",
+  "layers": [
+   [
+    "hud-next sa-smile",
+    [
+     1302,
+     956,
+     1611,
+     1051
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "12a-tama-forecast-step1": {
+  "beat": "rooftop:10",
+  "step": "1",
+  "text": "Technically, rain wasn't ",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(26, 7, 16)",
+  "sayInk": "rgb(255, 233, 241)",
+  "lines": [
+   [
+    343,
+    886,
+    934,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "12b-tama-forecast-step2": {
+  "beat": "rooftop:10",
+  "step": "2",
+  "text": "Technically, rain wasn't f-OR-ecast.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(26, 7, 16)",
+  "sayInk": "rgb(255, 233, 241)",
+  "lines": [
+   [
+    343,
+    886,
+    934,
+    959
+   ],
+   [
+    934,
+    886,
+    983,
+    959
+   ],
+   [
+    984,
+    887,
+    1057,
+    960
+   ],
+   [
+    1056,
+    886,
+    1232,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": "heart-laugh",
+  "layers": [
+   [
+    "hud-next ",
+    [
+     1394,
+     987,
+     1611,
+     1051
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "13-tama-stay-close": {
+  "beat": "rooftop:11",
+  "step": null,
+  "text": "Stay fORever? The rain can wait.",
+  "say": [
+   60,
+   489,
+   1060,
+   744
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(26, 7, 16)",
+  "sayInk": "rgb(255, 233, 241)",
+  "lines": [
+   [
+    143,
+    549,
+    293,
+    622
+   ],
+   [
+    294,
+    550,
+    367,
+    623
+   ],
+   [
+    366,
+    549,
+    722,
+    622
+   ],
+   [
+    143,
+    617,
+    371,
+    690
+   ]
+  ],
+  "nanda": [
+   787,
+   -288,
+   2037,
+   1060
+  ],
+  "frame": "close",
+  "face": "content",
+  "layers": [
+   [
+    "db-choice pink",
+    [
+     90,
+     860,
+     643,
+     1010
+    ]
+   ],
+   [
+    "db-choice mid is-default",
+    [
+     683,
+     860,
+     1237,
+     1010
+    ]
+   ],
+   [
+    "db-choice purple has-or",
+    [
+     1277,
+     860,
+     1830,
+     1010
+    ]
+   ]
+  ],
+  "hud": [
+   5,
+   -32,
+   1554,
+   84
+  ],
+  "trail": [
+   1000,
+   -30,
+   1512,
+   48
+  ],
+  "stageFocus": true
+ },
+ "05-ume-react": {
+  "beat": "rooftop:3",
+  "step": null,
+  "text": "Sour. Brave. I'll remember you like sour.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    886,
+    1312,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "06-ume-insert": {
+  "beat": "rooftop:4",
+  "step": null,
+  "text": "Close-up. The lid lifts. One red umeboshi on white rice.",
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(90, 42, 80)",
+  "lines": [
+   [
+    343,
+    821,
+    1438,
+    894
+   ],
+   [
+    343,
+    889,
+    611,
+    962
+   ]
+  ],
+  "nanda": null,
+  "frame": "off",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": false
+ },
+ "07-ume-lift": {
+  "beat": "rooftop:5",
+  "step": null,
+  "text": "",
+  "say": null,
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": null,
+  "sayInk": null,
+  "lines": [],
+  "nanda": null,
+  "frame": "off",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": false
+ },
+ "08-ume-pov": {
+  "beat": "rooftop:6",
+  "step": null,
+  "text": "Itadakimasu.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    886,
+    663,
+    959
+   ]
+  ],
+  "nanda": [
+   1214,
+   114,
+   1594,
+   524
+  ],
+  "frame": "pov",
+  "face": null,
+  "layers": [
+   [
+    "sa-layer sa-pov",
+    [
+     0,
+     0,
+     1920,
+     1080
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "09-ume-eyes-cutaway": {
+  "beat": "rooftop:7",
+  "step": null,
+  "text": "She doesn't eat hers. She watches you chew.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(90, 42, 80)",
+  "lines": [
+   [
+    343,
+    874,
+    1437,
+    947
+   ]
+  ],
+  "nanda": [
+   0,
+   0,
+   1920,
+   1080
+  ],
+  "frame": "eyes",
+  "face": "big-eyes-peek",
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": false
+ },
+ "10a-ume-peek-step1": {
+  "beat": "rooftop:8",
+  "step": "1",
+  "text": "Sour. Hm. You like things that bite?",
+  "say": [
+   260,
+   483,
+   1660,
+   744
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    543,
+    1227,
+    616
+   ]
+  ],
+  "nanda": [
+   497,
+   -516,
+   1990,
+   1094
+  ],
+  "frame": "peek",
+  "face": "big-eyes-peek",
+  "layers": [
+   [
+    "sa-bento-svg sa-layer sa-peek-box",
+    [
+     -173,
+     271,
+     813,
+     1065
+    ]
+   ],
+   [
+    "db-choice pink",
+    [
+     90,
+     860,
+     643,
+     1010
+    ]
+   ],
+   [
+    "db-choice mid is-default",
+    [
+     683,
+     860,
+     1237,
+     1010
+    ]
+   ],
+   [
+    "db-choice purple",
+    [
+     1277,
+     860,
+     1830,
+     1010
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "10b-ume-peek-step2": {
+  "beat": "rooftop:8",
+  "step": "2",
+  "text": "Sour. Hm. You like things that bite? / Sour, neee?",
+  "say": [
+   260,
+   483,
+   1660,
+   744
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    543,
+    1227,
+    616
+   ],
+   [
+    343,
+    617,
+    625,
+    690
+   ]
+  ],
+  "nanda": [
+   497,
+   -516,
+   1990,
+   1094
+  ],
+  "frame": "peek",
+  "face": "anya-smile",
+  "layers": [
+   [
+    "sa-bento-svg sa-layer sa-peek-box",
+    [
+     -173,
+     271,
+     813,
+     1065
+    ]
+   ],
+   [
+    "db-choice pink",
+    [
+     90,
+     860,
+     643,
+     1010
+    ]
+   ],
+   [
+    "db-choice mid is-default",
+    [
+     683,
+     860,
+     1237,
+     1010
+    ]
+   ],
+   [
+    "db-choice purple",
+    [
+     1277,
+     860,
+     1830,
+     1010
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "11-ume-dont-stare-good": {
+  "beat": "rooftop:9",
+  "step": null,
+  "text": "Good is a start. Tomorrow I'll do better.",
+  "say": [
+   260,
+   761,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    821,
+    1149,
+    894
+   ],
+   [
+    343,
+    889,
+    517,
+    962
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": "content",
+  "layers": [
+   [
+    "hud-next sa-smile",
+    [
+     1302,
+     956,
+     1611,
+     1051
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "12a-ume-forecast-step1": {
+  "beat": "rooftop:10",
+  "step": "1",
+  "text": "Technically, rain wasn't ",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(26, 7, 16)",
+  "sayInk": "rgb(255, 233, 241)",
+  "lines": [
+   [
+    343,
+    886,
+    934,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": null,
+  "layers": [],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "12b-ume-forecast-step2": {
+  "beat": "rooftop:10",
+  "step": "2",
+  "text": "Technically, rain wasn't f-OR-ecast.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(26, 7, 16)",
+  "sayInk": "rgb(255, 233, 241)",
+  "lines": [
+   [
+    343,
+    886,
+    934,
+    959
+   ],
+   [
+    934,
+    886,
+    983,
+    959
+   ],
+   [
+    984,
+    887,
+    1057,
+    960
+   ],
+   [
+    1056,
+    886,
+    1232,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": "heart-laugh",
+  "layers": [
+   [
+    "hud-next ",
+    [
+     1394,
+     987,
+     1611,
+     1051
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "13-ume-stay-close": {
+  "beat": "rooftop:11",
+  "step": null,
+  "text": "Stay fORever? The rain can wait.",
+  "say": [
+   60,
+   489,
+   1060,
+   744
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(26, 7, 16)",
+  "sayInk": "rgb(255, 233, 241)",
+  "lines": [
+   [
+    143,
+    549,
+    293,
+    622
+   ],
+   [
+    294,
+    550,
+    367,
+    623
+   ],
+   [
+    366,
+    549,
+    722,
+    622
+   ],
+   [
+    143,
+    617,
+    371,
+    690
+   ]
+  ],
+  "nanda": [
+   787,
+   -288,
+   2037,
+   1060
+  ],
+  "frame": "close",
+  "face": "content",
+  "layers": [
+   [
+    "db-choice pink",
+    [
+     90,
+     860,
+     643,
+     1010
+    ]
+   ],
+   [
+    "db-choice mid is-default",
+    [
+     683,
+     860,
+     1237,
+     1010
+    ]
+   ],
+   [
+    "db-choice purple has-or",
+    [
+     1277,
+     860,
+     1830,
+     1010
+    ]
+   ]
+  ],
+  "hud": [
+   5,
+   -32,
+   1554,
+   84
+  ],
+  "trail": [
+   1000,
+   -30,
+   1512,
+   48
+  ],
+  "stageFocus": true
+ },
+ "11s-salty-react": {
+  "beat": "rooftop:8",
+  "step": null,
+  "text": "Say that again. Slowly. So I can write it down.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    886,
+    1482,
+    959
+   ]
+  ],
+  "nanda": [
+   497,
+   -516,
+   1990,
+   1094
+  ],
+  "frame": "peek",
+  "face": null,
+  "layers": [
+   [
+    "sa-bento-svg sa-layer sa-peek-box",
+    [
+     -173,
+     271,
+     813,
+     1065
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ },
+ "11t-salty-dont-stare": {
+  "beat": "rooftop:9",
+  "step": null,
+  "text": "Salty. Noted. Forever.",
+  "say": [
+   260,
+   826,
+   1660,
+   1016
+  ],
+  "covered": [],
+  "stamp": null,
+  "stampText": null,
+  "sayBg": "rgb(255, 240, 246)",
+  "sayInk": "rgb(74, 18, 56)",
+  "lines": [
+   [
+    343,
+    886,
+    880,
+    959
+   ]
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "frame": "medium",
+  "face": "hate",
+  "layers": [
+   [
+    "hud-next sa-smile",
+    [
+     1302,
+     956,
+     1611,
+     1051
+    ]
+   ]
+  ],
+  "hud": [
+   32,
+   16,
+   1580,
+   94
+  ],
+  "trail": [
+   1040,
+   36,
+   1550,
+   75
+  ],
+  "stageFocus": true
+ }
+}

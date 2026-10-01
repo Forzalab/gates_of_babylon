@@ -3,6 +3,7 @@
 // Pop = the delta pill + one literal line under the fill head. Goal card = the rules, once per run. End card = the result.
 // All static by default (the reduced-motion frame); .play steps in at >= 334 ms per step, nothing loops.
 import { lovePct } from './engine.js';
+import { cardFor, REAL_ENDINGS, winLine } from './endcard.js';
 
 const HEART = 'M50 88C22 66 4 50 4 28C4 13 16 4 29 4C39 4 46 10 50 17C54 10 61 4 71 4C84 4 96 13 96 28C96 50 78 66 50 88Z';
 const CRACK = `${HEART} M50 17L42 36L56 48L45 62L50 88`;
@@ -117,13 +118,31 @@ export function GoalCard({ onNext }) {
   );
 }
 
-// end = engine.ending(): { kind, pct, tier }. 100% = win; anything less = game over (Tony's literal copy).
-export function EndCard({ end, onAgain }) {
-  const win = end.tier === 'win';
+// end = engine.ending(): { kind, scene, pct, tier }. endcard.cardFor picks the card: 100% = the win card; a real ending
+// (STEEPED / ESCAPE / ESCAPE?) keeps its own ending card at any %; anything else is a real loss = the fail card, whose
+// line (endcard.failLine) is picked by seed + run and varies by ending and love band. line = that text, {RUN} filled.
+export function EndCard({ end, line = '', onAgain }) {
+  const mode = cardFor(end);
+  if (mode === 'ending') {
+    const e = REAL_ENDINGS[end.scene];
+    return (
+      <>
+        <div className="hud-scrim" aria-hidden="true" />
+        <section className="hud-end ending" aria-label={`Ending: ${e.title}`} data-card="ending">
+          <p className="kicker">ENDING</p>
+          <h2>{e.title}</h2>
+          <p className="sub">{e.line}</p>
+          <p className="stat"><Line />LOVE {end.pct}%</p>
+          <NextButton label="PLAY AGAIN" onClick={onAgain} />
+        </section>
+      </>
+    );
+  }
+  const win = mode === 'win';
   return (
     <>
       <div className="hud-scrim" aria-hidden="true" />
-      <section className={`hud-end ${win ? 'win' : 'low'}`} aria-label={win ? 'You win' : 'Game over'}>
+      <section className={`hud-end ${win ? 'win' : 'low'}`} aria-label={win ? 'You win' : 'Game over'} data-card={mode}>
         <p className="kicker">{win ? 'YOU WIN' : 'GAME OVER'}</p>
         <div className="bigheart">
           {win ? <BigHeart /> : (
@@ -134,8 +153,8 @@ export function EndCard({ end, onAgain }) {
           )}
           <b className="lv-num">{end.pct}%</b>
         </div>
-        <h2>{win ? 'She loves you.' : 'She does not love you enough.'}</h2>
-        <p className="sub">{win ? 'You drank all her tea. You are not leaving.' : `LOVE ${end.pct}%. You needed 100%.`}</p>
+        <h2>{win ? 'She loves you.' : line}</h2>
+        <p className="sub">{win ? winLine(end) : `LOVE ${end.pct}%. You needed 100%.`}</p>
         <NextButton label={win ? 'PLAY AGAIN' : 'TRY AGAIN'} onClick={onAgain} />
       </section>
     </>

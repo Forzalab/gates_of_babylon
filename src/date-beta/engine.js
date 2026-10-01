@@ -11,11 +11,22 @@
 // pos.love is the running score, clamped 0..goal; goal = the best total any path can reach (loader walk), so 100% is
 // always reachable and never by accident. A scored pick returns a reaction frame (pos.react) that next() clears; a pick
 // made where she is absent carries its pop (pos.pending) to the next beat where she is present.
+import { loadGacha, rollGacha, freshLuck, nextRunLuck } from './gacha.js';
 export const MAX_WORDS = 30; // a line, a vary text, a react
 // Meta tokens (T3, meta.js fills them at render): allowed braces besides {OR}.
 export const TOKEN_RE = /\{(RUN|TIME|DAYPART|CLOTHES|CROWD\.[1-4])\}/g;
 export const MAX_CHOICE_WORDS = 12; // a button label
 export const MIN_HOLD = 500; // every beat holds >= 500 ms before a click can move on (script HARD RULES)
+// Beat-local props that never carry to the next beat: an `emote` (this line's face) and a hidden sprite (cut.frame
+// 'off', e.g. a mini-game that draws its own Nanda or a hand insert), so "hide Nanda" never leaks past its beat.
+// R5: a cel (props.cel, fx/Cels.jsx) and her reaching arm (props.cut.reach) are one beat's action, never carried.
+// sfx-wire: props.sfx (fx/sound.js: a beat's own one-shots, e.g. the vending clunk) never carries either.
+export function carried(p) {
+  const { emote, cel, sfx, ...rest } = p;
+  if (rest.cut?.frame === 'off') { const { frame, ...cut } = rest.cut; rest.cut = cut; }
+  if (rest.cut?.reach) { const { reach, ...cut } = rest.cut; rest.cut = cut; }
+  return rest;
+}
 export const RM_ALTS = ['same', 'hard-cut', 'static', 'skip']; // skip = drop this beat when motion is reduced
 export const WAITS = ['click', 'start', 'auto', 'choice']; // start = START button/keys; auto = timer; choice = a pick
 export const SCARES = [0, 1, 2];
@@ -29,16 +40,16 @@ export const VARY_KEYS = ['text', 'speaker', 'props', 'sprite', 'bg', 'sfx'];
 // on the flag (or with a variant that falls back to that text) fails at load. The picking choices are exempt.
 export const ECHO = { bento: /\b(umeboshi|tamagoyaki|sour|sweet)\b|すっぱい|甘い/iu };
 export const LOVE_MIN = -5, LOVE_MAX = 5;
-export const EMOTES = ['heart', 'hearts', 'sweat', 'pout', 'or', 'crack', 'hate'];
+export const EMOTES = ['heart', 'hearts', 'sweat', 'pout', 'or', 'crack', 'hate', 'puff']; // puff = the gacha anger face (ref 11)
 export const CARDS = ['goal'];
 export const END_ID = /^[a-z][a-z-]{0,15}$/; // the ending's name (steeped | escape | leave), for the card's label
 export const SHORT = /^[A-Z0-9ÉÈ .'-]{1,8}$/u; // a scene's name on the route trail
 export const TIER = { win: 100, almost: 60 }; // ending cards: 100% = win, 60..99% = almost, below = low
 const KEYS = {
-  root: ['version', 'note', 'flags', 'love', 'scenes'],
-  scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short'],
-  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end'],
-  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake'],
+  root: ['version', 'note', 'flags', 'love', 'gacha', 'scenes'],
+  scene: ['id', 'title', 'bg', 'enter', 'scare', 'beats', 'defaults', 'nanda', 'short', 'offstage'],
+  beat: ['bg', 'sprite', 'props', 'text', 'speaker', 'sfx', 'rmAlt', 'motion', 'hold', 'auto', 'wait', 'scare', 'choices', 'timer', 'set', 'vary', 'card', 'end', 'loveHidden'],
+  choice: ['text', 'side', 'go', 'if', 'set', 'default', 'love', 'emote', 'react', 'tell', 'fx', 'fake', 'pass'],
 };
 // Default emote for a score change: +3 and up hearts, +2 heart, +1 sweat, -1 pout, -2 or, -3 and down crack.
 export const emoteFor = (love) => (love >= 3 ? 'hearts' : love === 2 ? 'heart' : love === 1 ? 'sweat'
@@ -117,14 +128,37 @@ function assetField(v, kind, where, manifest, names) {
 export const isAssetId = (v) => typeof v === 'string' && ASSET_ID.test(v);
 
 // "f{OR}ever" -> [{ t: 'f' }, { t: 'OR', or: true }, { t: 'ever' }]. Any other brace is a typo and fails loudly.
+// train-r4 styled spans: "{wavy:Wavy hair.}" / "{hat:Hat boy.}" -> { t: 'Wavy hair.', span: 'wavy' }. The plain text
+// (voice lookup, aria, OCR) is just the words; Say.jsx draws the look (wavy = italic teal wavy underline, hat = bold orange + cap chip).
+export const SPANS = ['wavy', 'hat'];
+const SPAN_RE = /\{(wavy|hat):([^{}]+)\}/g;
 export function orParts(text, where = 'text') {
   const bits = text.split(OR_MARK);
-  if (bits.some((b) => /[{}]/.test(b.replace(TOKEN_RE, '')))) fail(where, `stray brace in "${text}" (the only mark is ${OR_MARK})`);
+  if (bits.some((b) => /[{}]/.test(b.replace(TOKEN_RE, '').replace(SPAN_RE, '')))) fail(where, `stray brace in "${text}" (the only marks are ${OR_MARK}, {wavy:…}, {hat:…})`);
   const out = [];
-  bits.forEach((t, i) => { if (i) out.push({ t: 'OR', or: true }); if (t) out.push({ t }); });
+  const push = (t) => {
+    let k = 0;
+    for (const m of t.matchAll(SPAN_RE)) {
+      if (m.index > k) out.push({ t: t.slice(k, m.index) });
+      out.push({ t: m[2], span: m[1] });
+      k = m.index + m[0].length;
+    }
+    if (k < t.length) out.push({ t: t.slice(k) });
+  };
+  bits.forEach((t, i) => { if (i) out.push({ t: 'OR', or: true }); if (t) push(t); });
   return out;
 }
 const plain = (parts) => parts.map((p) => p.t).join('');
+// Scene A two-step line (props.cut.at): parts split at the first occurrence of `at` in a text part: [before, after]. No match = [all, []].
+export function splitParts(parts, at) {
+  for (const [i, p] of parts.entries()) {
+    const k = p.or ? -1 : p.t.indexOf(at);
+    if (k < 0 || (k === 0 && i === 0)) continue;
+    const head = p.t.slice(0, k);
+    return [[...parts.slice(0, i), ...(head ? [{ ...p, t: head }] : [])], [{ ...p, t: p.t.slice(k) }, ...parts.slice(i + 1)]];
+  }
+  return [parts, []];
+}
 
 // "NANDA: line" -> speaker + line. No prefix = narration (who = null). An explicit `speaker` wins and the text is
 // then taken as-is (no prefix parse); speaker: false = narration even when the text starts "WORD:" (a sign read out).
@@ -163,7 +197,10 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       bg = b.bg ?? bg;
       if (!bg) fail(at, 'no bg (set it on the scene or the beat)');
       if (b.speaker != null && b.speaker !== false && (typeof b.speaker !== 'string' || !b.speaker.trim())) fail(at, 'speaker must be a non-empty string (or false)');
-      props = { ...props, ...b.props };
+      // A camera shot (props.shot) is one cut: its props are this beat's only, so a stamp / establish never pins the
+      // rest of the scene to its frame (the next beat shows the scene's bg again). Other props carry forward.
+      const own = { ...props, ...b.props };
+      if (b.props?.shot == null) props = carried(own);
       const text = b.text ?? '';
       if (words(text) > MAX_WORDS) fail(at, `text has ${words(text)} words, max ${MAX_WORDS}`);
       const rmAlt = b.rmAlt ?? 'same';
@@ -182,13 +219,14 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
       if (wait === 'auto' && auto === null) fail(at, 'wait "auto" needs an auto time');
       const timer = b.timer == null ? null : typeof b.timer === 'number' && b.timer > 0 ? Math.max(b.timer, MIN_TIMER) : b.timer;
       if (timer !== null && (!choices || typeof timer !== 'number' || !(timer > 0))) fail(at, 'timer must be a positive number of seconds, on a choice beat');
+      if (b.loveHidden != null && (typeof b.loveHidden !== 'boolean' || !choices)) fail(at, 'loveHidden must be true or false, on a choice beat');
       const card = b.card ?? null;
       if (card !== null && !CARDS.includes(card)) fail(at, `card "${card}" is not one of ${CARDS.join('|')}`);
       if (card && wait !== 'click') fail(at, 'a card beat waits for a click (no choices, no auto)');
       const end = b.end ?? null;
       if (end !== null && (typeof end !== 'string' || !END_ID.test(end))) fail(at, 'end must be a lowercase ending name like "steeped"');
       if (end && !choices) fail(at, 'an end beat needs its "Back to start" choice (the result card\'s button takes choice 0)');
-      const base = { bg, sprite: b.sprite ?? null, props: Object.freeze({ ...props }), text, speaker: b.speaker ?? null,
+      const base = { bg, sprite: b.sprite ?? null, props: Object.freeze(own), text, speaker: b.speaker ?? null,
         line: parseLine(text, at, b.speaker ?? null), sfx: b.sfx ?? null };
       const vary = loadVary(b.vary, base, at, decl, manifest, art, cueNames);
       echoLint(text, vary, at);
@@ -196,18 +234,23 @@ export function loadScenes(data, { manifest = null, art = null } = {}) {
         if (!Object.keys(c.set ?? {}).some((k) => ECHO[k])) echoLint(c.text, null, `${at}.choices[${j}]`);
       }
       return Object.freeze({ scene: s.id, index: i, ...base, rmAlt, motion: !!b.motion, hold, auto, wait, scare, choices, timer,
-        set: declared(decl, flagsField(b.set, at, 'set'), at), vary, card, end });
+        set: declared(decl, flagsField(b.set, at, 'set'), at), vary, card, end, loveHidden: !!b.loveHidden });
     });
     for (const b of beats) for (const c of b.choices ?? []) for (const t of goTargets(c.go)) pending.push([`${b.scene}[${b.index}]`, t]);
     if (s.nanda != null && typeof s.nanda !== 'boolean') fail(s.id, '"nanda" must be true or false');
-    const nanda = s.nanda ?? beats.some((b) => views(b, decl).some((v) => v.line.who === 'NANDA'));
+    if (s.offstage != null && typeof s.offstage !== 'boolean') fail(s.id, '"offstage" must be true or false');
+    // offstage (ux-six): she is in the house but not in the frame (unknown / basement / lock game): the HUD, pops and
+    // reaction frames stay, the sprite does not draw (main.jsx), her lines carry an offscreen speaker label.
+    const offstage = !!s.offstage;
+    const nanda = s.nanda ?? (offstage || beats.some((b) => views(b, decl).some((v) => v.line.who === 'NANDA')));
     const ending = beats.some((b) => b.end);
     const short = s.short ?? (ending ? 'END' : s.id.toUpperCase().replace(/-/g, ' ').slice(0, 8).trim());
     if (typeof short !== 'string' || !SHORT.test(short)) fail(s.id, `short "${short}" must be 1-8 uppercase characters`);
-    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats, nanda, short, ending });
+    return Object.freeze({ id: s.id, title: s.title ?? s.id, enter: s.enter ?? 'cut', defaults, beats, nanda, offstage, short, ending });
   });
   for (const [at, go] of pending) if (!ids.has(go)) fail(at, `choice goes to unknown scene "${go}"`);
   scenes.love = loadLove(data.love, scenes);
+  scenes.gacha = loadGacha(data.gacha, { emotes: EMOTES }); // gacha.js: surprise crits / penalties / pity on scored picks (goal walk ignores them)
   return Object.freeze(scenes);
 }
 
@@ -348,6 +391,9 @@ function loadChoices(list, at, decl = {}) {
     if (c.fx != null && !FX.includes(c.fx)) fail(where, `fx "${c.fx}" is not one of ${FX.join('|')}`);
     if (c.fake != null && typeof c.fake !== 'boolean') fail(where, 'fake must be true or false');
     if (c.fake && i === 0) fail(where, 'the first choice cannot be fake (a fake pick is overridden to the first choice)');
+    // pass: a scored pick with no reaction frame: play moves on at once and the pop rides to the next beat she is on.
+    if (c.pass != null && typeof c.pass !== 'boolean') fail(where, 'pass must be true or false');
+    if (c.pass && c.react != null) fail(where, 'a pass pick has no reaction frame, so no react line');
     const fx = c.fake ? 'chosen-flash' : c.fx ?? (love > 0 ? 'none' : 'none');
     let react = null;
     if (c.react != null) {
@@ -358,7 +404,7 @@ function loadChoices(list, at, decl = {}) {
     }
     return Object.freeze({ text: c.text, side, go: loadGo(c.go, where, decl), if: declared(decl, flagsField(c.if, where, 'if'), where),
       set: declared(decl, flagsField(c.set, where, 'set'), where), default: !!c.default, parts, plain: plain(parts), hasOr: parts.some((p) => p.or),
-      love, fx, fake: !!c.fake, emote: love ? c.emote ?? (fx === 'hate-quake' ? 'hate' : emoteFor(love)) : null, react, tell: love ? c.tell ?? true : false });
+      love, fx, fake: !!c.fake, pass: !!c.pass, emote: love ? c.emote ?? (fx === 'hate-quake' ? 'hate' : emoteFor(love)) : null, react, tell: love ? c.tell ?? true : false });
   });
   // A fake choice plays the first choice's outcome (go / set / love / emote / react), so the goal walk and the route graph see it.
   return Object.freeze(loaded.map((c) => {
@@ -374,6 +420,10 @@ export const sceneIndex = (scenes, id) => scenes.findIndex((s) => s.id === id);
 // ---------- love
 const loveOf = (scenes) => scenes.love ?? { start: 0, goal: 0 };
 export const clampLove = (n, goal) => Math.min(Math.max(0, n), Math.max(0, goal));
+// ux-six: one pick (base + gacha bonus, e.g. the pity love-bomb) never moves the meter more than this share of the goal.
+export const MAX_SWING = 0.25;
+export const swingCap = (goal) => Math.max(LOVE_MAX, Math.floor(MAX_SWING * goal));
+export const capSwing = (delta, goal) => Math.max(-swingCap(goal), Math.min(swingCap(goal), delta));
 // The shown percentage. 100 only when the heart is full, so a near miss never rounds up to a win.
 export function lovePct(love, goal) {
   if (!(goal > 0)) return 0;
@@ -381,21 +431,26 @@ export function lovePct(love, goal) {
   return Math.max(0, Math.min(99, Math.round((100 * love) / goal)));
 }
 export const tierFor = (pct) => (pct >= TIER.win ? 'win' : pct >= TIER.almost ? 'almost' : 'low');
-// The result card for an `end` beat: { kind, pct, tier, love, goal }. null off an ending, or when the script has no love.
+// The result card for an `end` beat: { kind, scene, pct, tier, love, goal } (scene = the ending scene's id). null off an ending, or when the script has no love.
 export function ending(scenes, pos) {
   if (pos.done || pos.react) return null;
   const beat = beatAt(scenes, pos), { goal } = loveOf(scenes);
   if (!beat.end || !(goal > 0)) return null;
   const pct = lovePct(pos.love ?? 0, goal);
-  return Object.freeze({ kind: beat.end, pct, tier: tierFor(pct), love: pos.love ?? 0, goal });
+  return Object.freeze({ kind: beat.end, scene: scenes[pos.s].id, pct, tier: tierFor(pct), love: pos.love ?? 0, goal });
 }
 // Is she on screen? Her scene (`nanda`) and not a blackout beat. Drives the HUD bar and the sprite.
-export const present = (scene, beat) => !!scene?.nanda && !!beat && beat.bg !== 'blackout';
+// An offstage scene (ux-six) keeps her HUD through its blackouts too (the sprite never draws there anyway).
+export const present = (scene, beat) => !!scene?.nanda && !!beat && (beat.bg !== 'blackout' || !!scene.offstage);
 
 // ---------- positions: { s, b, done, flags, love, path } (+ react = the reaction frame, + pending = a pop waiting for her)
-// path = the scene ids entered this run, in order (the route trail's filled stops).
-const mk = (s, b, done, { flags, love, path, pending }) => (pending ? { s, b, done, flags, love, path, pending } : { s, b, done, flags, love, path });
-const runOf = (scenes, pos) => ({ flags: pos.flags ?? {}, love: pos.love ?? loveOf(scenes).start, path: pos.path ?? [], pending: pos.pending ?? null });
+// path = the scene ids entered this run, in order (the route trail's filled stops). luck = the gacha state (gacha.js),
+// only when the script has a root `gacha`.
+const mk = (s, b, done, { flags, love, path, pending, luck }) => {
+  const p = pending ? { s, b, done, flags, love, path, pending } : { s, b, done, flags, love, path };
+  return luck ? { ...p, luck } : p;
+};
+const runOf = (scenes, pos) => ({ flags: pos.flags ?? {}, love: pos.love ?? loveOf(scenes).start, path: pos.path ?? [], pending: pos.pending ?? null, luck: pos.luck ?? null });
 const dropReact = ({ react, fx, ...p }) => p;
 
 // Move forward from (s, b) inclusive until a beat that plays under this motion setting. Every beat reached,
@@ -414,16 +469,18 @@ function settle(scenes, s, b, rm, st) {
 }
 
 // A fresh run from scene `at` (default: scene 1). love = love.start unless given; path = the shortest route to `at`,
-// so ?scene=door shows the trail it would have after playing up to the door.
-export function start(scenes, { rm = false, at = null, flags = {}, love = null } = {}) {
+// so ?scene=door shows the trail it would have after playing up to the door. seed / force: the gacha luck (gacha.js);
+// luck = carry an existing luck state instead (a new run after a go back to scene 1).
+export function start(scenes, { rm = false, at = null, flags = {}, love = null, seed = null, force = null, luck = null } = {}) {
   let i = at == null ? 0 : sceneIndex(scenes, at);
   if (i < 0) i = 0;
   const { start: l0, goal } = loveOf(scenes);
-  return settle(scenes, i, 0, rm, { flags, love: clampLove(love ?? l0, goal), path: routeTo(scenes, i), pending: null });
+  return settle(scenes, i, 0, rm, { flags, love: clampLove(love ?? l0, goal), path: routeTo(scenes, i), pending: null,
+    luck: luck ?? freshLuck(scenes.gacha, { seed, force }) });
 }
 // ?scene=<id>&beat=<n>: n beats in, clamped to the beats that exist (a huge or junk n never hangs the tab).
-export function startAt(scenes, { rm = false, at = null, beat = 0, love = null } = {}) {
-  let p = start(scenes, { rm, at, love });
+export function startAt(scenes, { rm = false, at = null, beat = 0, love = null, seed = null, force = null } = {}) {
+  let p = start(scenes, { rm, at, love, seed, force });
   const max = scenes.reduce((n, sc) => n + sc.beats.length, 0);
   const n = Math.min(Math.max(0, Math.floor(Number(beat)) || 0), max);
   for (let i = 0; i < n && !p.done; i++) {
@@ -453,6 +510,7 @@ export function choose(scenes, pos, i, rm = false) {
     return { ...take(scenes, pos, first, rm), fx: Object.freeze({ kind: 'chosen-flash', action: first.plain, fake: true }) };
   }
   const out = take(scenes, pos, c, rm);
+  if (c.love && (out.react ?? out.pending)?.gacha) return out; // a gacha tier brings its own FX (art/emotion), not the pick's
   return c.fx && c.fx !== 'none' ? { ...out, fx: Object.freeze({ kind: c.fx, action: c.plain, fake: false }) } : out;
 }
 // A go back to scene 1 is a new run (love back to start). A scored pick where she is present returns the reaction frame
@@ -461,14 +519,21 @@ function take(scenes, pos, c, rm) {
   const { start: l0, goal } = loveOf(scenes);
   const flags = c.set ? { ...pos.flags, ...c.set } : pos.flags;
   const go = resolveGo(c.go, flags);
-  if (go != null && go === scenes[0].id) return start(scenes, { rm, flags });
-  const was = pos.love ?? l0, love = clampLove(was + c.love, goal);
+  if (go != null && go === scenes[0].id) return start(scenes, { rm, flags, luck: nextRunLuck(pos.luck) });
+  // gacha (gacha.js): a scored pick may roll a bonus tier. react.love = the whole change (base + bonus), react.gacha = the tier.
+  const roll = rollGacha(scenes.gacha, pos.luck ?? null, c.love);
+  // Tony: the pity love-bomb (and only it) is exempt from capSwing, so it lands its full +15 bonus.
+  const swing = roll.tier?.id === 'pity' ? c.love + roll.bonus : capSwing(c.love + roll.bonus, goal);
+  const was = pos.love ?? l0, love = clampLove(was + swing, goal);
   const here = present(scenes[pos.s], beatAt(scenes, pos));
-  const st = { ...runOf(scenes, pos), flags, love, pending: here ? null : pos.pending ?? null };
+  const st = { ...runOf(scenes, pos), flags, love, pending: here ? null : pos.pending ?? null, luck: roll.luck };
   const dest = settle(scenes, go ? sceneIndex(scenes, go) : pos.s, go ? 0 : pos.b + 1, rm, st);
   if (!c.love) return dest;
-  const react = Object.freeze({ love: c.love, from: was, to: love, emote: c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b });
-  return here ? { ...dest, react } : { ...dest, pending: react };
+  const t = roll.tier;
+  const gacha = t ? Object.freeze({ id: t.id, fx: t.fx, face: t.face, label: t.label, bonus: t.bonus, base: c.love }) : null;
+  const react = Object.freeze({ love: swing, from: was, to: love, emote: t?.emote ?? c.emote, line: c.react, tell: c.tell, s: pos.s, b: pos.b,
+    ...(gacha ? { gacha } : {}) });
+  return here && !c.pass ? { ...dest, react } : { ...dest, pending: react }; // pass: no frame, the pop shows on the next beat
 }
 // Debug tree: stand on the edge's beat ({ s, b, i }) with these flags (and score) and take choice i, exactly as choose()
 // would, except the choice's own `if` is not checked (a warning is returned instead of a silent no-op).
@@ -486,13 +551,13 @@ export function jumpTo(scenes, edge, flags = {}, rm = false, love = null) {
 // scene in file order (red-team R2/R3). Every pick skipped over scores as the timer would have picked it (the
 // `default`, else pink), so skipping earns nothing a wait would not. On a reaction frame, Esc just closes it.
 export function skip(scenes, pos, rm = false) {
-  if (pos.done) return start(scenes, { rm });
+  if (pos.done) return start(scenes, { rm, luck: nextRunLuck(pos.luck) });
   if (pos.react) return dropReact(pos);
   const sc = scenes[pos.s], first = scenes[0].id, { goal } = loveOf(scenes);
   const home = (b) => b.choices?.some((c) => goTargets(c.go).includes(first));
   const branch = sc.beats.findIndex((b, i) => i >= pos.b && b.choices?.some((c) => c.go != null) && !home(b));
   if (branch === pos.b) return pos;
-  if (branch < 0 && sc.beats.some(home)) return start(scenes, { rm });
+  if (branch < 0 && sc.beats.some(home)) return start(scenes, { rm, luck: nextRunLuck(pos.luck) });
   const st = runOf(scenes, pos);
   if (st.pending && present(sc, sc.beats[pos.b])) st.pending = null;
   let flags = st.flags;
@@ -504,7 +569,7 @@ export function skip(scenes, pos, rm = false) {
   }
   if (branch > pos.b) return settle(scenes, pos.s, branch, false, { ...st, flags });
   const p = settle(scenes, pos.s + 1, 0, rm, { ...st, flags: { ...st.flags, ...sc.defaults } });
-  return p.done ? start(scenes, { rm }) : p;
+  return p.done ? start(scenes, { rm, luck: nextRunLuck(pos.luck) }) : p;
 }
 
 // ---------- the reaction frame: the pick's beat with its choices gone, her `react` line (else the question line),

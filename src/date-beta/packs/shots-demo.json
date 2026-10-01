@@ -1,0 +1,287 @@
+{
+ "note": "Preview scene for art/shots: ?pack=shots-demo&scene=shots-demo&beat=<n>&still. Not part of the shipped order.",
+ "scenes": [
+  {
+   "id": "shots-demo",
+   "title": "Shots demo",
+   "bg": "closeup",
+   "beats": [
+    {
+     "bg": "closeup",
+     "props": {
+      "of": "shop-street",
+      "x": 1300,
+      "y": 420,
+      "zoom": 2.4,
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "closeup",
+     "props": {
+      "of": "rail-crossing",
+      "x": 700,
+      "y": 500,
+      "zoom": 1.8
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "curry",
+      "of": "crossing-day",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "butter-chicken",
+      "of": "crossing-day",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "katsu",
+      "of": "crossing-day",
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "book",
+      "of": "rail-crossing",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "grocery",
+      "of": "shop-street",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "teacup",
+      "of": "street-dusk",
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "bento",
+      "of": "rooftop",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "hands",
+      "of": "street-day",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "cups3",
+      "of": "shop-street",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "ic-card",
+      "of": "naan",
+      "tone": "day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "umbrella",
+      "of": "crossing-night",
+      "tone": "night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "key",
+      "of": "street-dusk",
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "insert",
+     "props": {
+      "item": "cups-end",
+      "of": "teatable",
+      "tone": "night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "heart",
+      "of": "street-day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "hearts",
+      "of": "street-dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "sweat",
+      "of": "shop-street"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "or",
+      "of": "crossing-night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "reaction",
+     "props": {
+      "emote": "hate",
+      "of": "crossing-night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "establish",
+     "props": {
+      "of": "crossing-night",
+      "from": [
+       500,
+       500
+      ],
+      "to": [
+       1400,
+       420
+      ],
+      "zoom": 1.5,
+      "tone": "night"
+     },
+     "text": ""
+    },
+    {
+     "bg": "push",
+     "props": {
+      "of": "genkan-in",
+      "x": 960,
+      "y": 520,
+      "from": 1,
+      "to": 1.8
+     },
+     "text": ""
+    },
+    {
+     "bg": "push",
+     "props": {
+      "of": "street-dusk",
+      "x": 960,
+      "y": 540,
+      "from": 1.8,
+      "to": 1,
+      "tone": "dusk"
+     },
+     "text": ""
+    },
+    {
+     "bg": "rack",
+     "props": {
+      "of": "street-dusk",
+      "emote": "hearts",
+      "focus": "her"
+     },
+     "text": ""
+    },
+    {
+     "bg": "pov",
+     "props": {
+      "of": "shop-street"
+     },
+     "text": ""
+    },
+    {
+     "bg": "ots",
+     "props": {
+      "of": "street-dusk",
+      "emote": "heart"
+     },
+     "text": ""
+    },
+    {
+     "bg": "timelapse",
+     "props": {
+      "of": "street-day"
+     },
+     "text": ""
+    },
+    {
+     "bg": "dutch",
+     "props": {
+      "of": "basement"
+     },
+     "text": ""
+    },
+    {
+     "bg": "match",
+     "props": {
+      "of": "crossing-day",
+      "to": "teatable",
+      "x": 960,
+      "y": 560
+     },
+     "text": ""
+    },
+    {
+     "bg": "stamp",
+     "props": {
+      "of": "shop-street",
+      "place": "SHOP STREET",
+      "time": "3:10 PM"
+     },
+     "text": ""
+    }
+   ]
+  }
+ ]
+}

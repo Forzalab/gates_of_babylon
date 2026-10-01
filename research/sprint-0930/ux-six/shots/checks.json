@@ -1,0 +1,26 @@
+{
+  "lockWinScene": "escape-win:0",
+  "lockWinCard": "ending / ESCAPE",
+  "steepedFirst": "Rest. I'll do the remembering.",
+  "legend": "?? = hidden, find out",
+  "timer": "TIME ⏳ 11",
+  "soloNext": "NEXT · Walk to lunch ",
+  "soloNoChoices": true,
+  "soloAdvances": "v2-library:5 -> v2-curry:0",
+  "cupLine": "The tea is poured. Three cups.",
+  "stampCount": 1,
+  "autoLine": "⏳ Her clock is running…",
+  "chrome": [
+    "◂ LOGIC:24px/48px",
+    "⛶ fullscreen:24px/48px",
+    "🔊 voice:24px/48px",
+    "skip ▸▸:24px/48px"
+  ],
+  "skipButton": "v2-park:0 -> v2-park:5",
+  "skipKey": "v2-park:5",
+  "pauseOn": true,
+  "pauseBlocksNext": true,
+  "pauseOff": true,
+  "mute": "false -> true -> false",
+  "errors": []
+}

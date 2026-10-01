@@ -1,0 +1,2589 @@
+{
+ "version": 1,
+ "note": "date-beta demo spine: shared scenes (rooftop, train, naan at dusk, blackout, then alt's night walk: platform = the same station at night, underpass, apartment) -> door (stairs beat first) -> genkan-in -> cup (steeped | unknown -> escape) | leave; every ending card goes back to scene 1, the rooftop (the Figur collapse in Logic mode lands there, as if START was pressed; the old fake-site Splash art is kept but out of the play path). bg = art id in src/date-beta/art; props carry forward beat to beat; text <= 12 words (an OR is only ever the explicit token {OR}, rule C: that line gets the dark box); scare = 0|1|2 dread (beat, else scene, else 0); choices = [{ text, side?: pink|purple, go?, if?, set?, default? }]; timer/set/speaker/sprite/defaults: see SCENES.md; sfx = cue name or manifest id; rmAlt = what reduced motion does (same | hard-cut | static | skip). flags = declared pick flags; vary = per-value overlay of text/speaker/props/sprite/bg/sfx (echo rule: a line naming the bento pick must vary on bento).",
+ "flags": {
+  "bento": [
+   "umeboshi",
+   "tamagoyaki"
+  ],
+  "cold": [
+   "no",
+   "yes"
+  ],
+  "errand": [
+   "groceries",
+   "library"
+  ],
+  "food": [
+   "butter",
+   "katsu"
+  ],
+  "run": [
+   "1",
+   "2",
+   "3"
+  ]
+ },
+ "love": {
+  "start": 0,
+  "goal": "auto"
+ },
+ "scenes": [
+  {
+   "id": "rooftop",
+   "short": "ROOF",
+   "title": "Rooftop / clock tower",
+   "bg": "rooftop",
+   "enter": "fade",
+   "defaults": {
+    "stayed": false,
+    "bento": "umeboshi"
+   },
+   "beats": [
+    {
+     "props": {
+      "clock": "live"
+     },
+     "sfx": "wind",
+     "hold": 1200,
+     "card": "goal"
+    },
+    {
+     "props": {
+      "clock": "noon"
+     },
+     "text": "I made two. One's for you. Don't look at me like that.",
+     "sfx": "tick",
+     "choices": [
+      {
+       "text": "Take the tamagoyaki",
+       "side": "pink",
+       "set": {
+        "cold": "no",
+        "bento": "tamagoyaki"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Sweet egg for my sweet boy. ♡"
+      },
+      {
+       "text": "Take the umeboshi",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no",
+        "bento": "umeboshi"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Sour. Brave. I'll remember you like sour."
+      },
+      {
+       "text": "Take neither",
+       "side": "purple",
+       "set": {
+        "cold": "yes",
+        "bento": "umeboshi"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "…I woke up at four for this."
+      }
+     ],
+     "timer": 12,
+     "speaker": "NANDA"
+    },
+    {
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: Sour. Hm. You like things that bite?"
+       },
+       "tamagoyaki": {
+        "text": "NANDA: Sweet. Like me. Good input."
+       }
+      }
+     }
+    },
+    {
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: Sour, ne?",
+        "props": {
+         "pucker": true
+        }
+       },
+       "tamagoyaki": {
+        "text": "NANDA: Sweet, ne? I rolled it myself.",
+        "props": {
+         "pucker": false
+        }
+       }
+      }
+     },
+     "choices": [
+      {
+       "text": "Best I've ever had",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "love-burst",
+       "react": "…Obviously. Don't stare."
+      },
+      {
+       "text": "It's good",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Good is a start. Tomorrow I'll do better."
+      },
+      {
+       "text": "Bit salty, honestly",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Say that again. Slowly. So I can write it down."
+      }
+     ],
+     "timer": 12
+    },
+    {
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "You smile for her anyway."
+       },
+       "tamagoyaki": {
+        "text": "You smile for her. It's easy."
+       }
+      },
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Salty. Noted. Forever.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "text": "MC: Technically, rain wasn't f-{OR}-ecast.",
+     "sfx": "bell"
+    },
+    {
+     "props": {
+      "clock": "noon"
+     },
+     "text": "NANDA: Stay f{OR}ever? The rain can wait.",
+     "scare": 1,
+     "sfx": "breath",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Stay a minute",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "A minute. Then another. Then the whole day."
+      },
+      {
+       "text": "Walk with her",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Yay! Park first. I already planned it."
+      },
+      {
+       "text": "{OR} Leave before the rain",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "…Fine. The rain can have you. Later."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "park",
+   "short": "PARK",
+   "title": "park",
+   "bg": "park",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": "NANDA",
+     "text": "I love your {CLOTHES}. You wore it for me. I can tell. Don't say no, I already decided. ♡",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "I wore it for you",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "I knew it. I know everything about you. Even the time. It's {TIME}. ♡"
+      },
+      {
+       "text": "It was clean",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Clean for me. That's the same thing, silly."
+      },
+      {
+       "text": "Not everything is about you",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "…Everything is about me. You'll learn. You always learn, around run {RUN}."
+      }
+     ],
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Park. Now. Hold my hand on the way.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Sakura only last a week. Then they fall. I don't let things fall.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Don't say that again. The petals are listening.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Hold my hand. The whole way. Hands get lost if you let go.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Hold it tight",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Tighter. Mm. Now you're mine till tonight. ♡"
+      },
+      {
+       "text": "Hold one finger",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "One finger is a start. I'll collect the rest."
+      },
+      {
+       "text": "Pull your hand back",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Oh. …Your hand is cold anyway."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Who needs friends? I'm the only friend you need. I'm like ten friends. In one!",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "I'll warm it later. I have ways.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "It's {TIME}. One job today. My groceries, or my library book? You pick. I already know.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Carry her groceries",
+       "side": "pink",
+       "go": "errand-shop",
+       "set": {
+        "cold": "no",
+        "errand": "groceries"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "love-burst",
+       "react": "Groceries! For our dinner. I mean mine. Ours."
+      },
+      {
+       "text": "Return her book",
+       "side": "mid",
+       "go": "errand-library",
+       "default": true,
+       "set": {
+        "cold": "no",
+        "errand": "library"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "none",
+       "react": "The book! It's late. Like you. But you came."
+      },
+      {
+       "text": "Do it alone, later",
+       "side": "purple",
+       "go": "errand-shop",
+       "set": {
+        "cold": "yes",
+        "errand": "groceries"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Alone? There's no alone today. Groceries. Now."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "errand-shop",
+   "short": "SHOP",
+   "title": "errand-shop",
+   "bg": "shop-street",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": false,
+     "text": "A street of little shops. Pink petals on every roof.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Carrots first. Then you can talk.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Carrots. Rice. Two cups. No, three cups. We'll need three.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Get three cups",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "You get it. You always get me."
+      },
+      {
+       "text": "Why three?",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Because it's always three of us. Silly."
+      },
+      {
+       "text": "Two is normal",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Normal people are lonely. Do you want lonely?"
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "The shop lady smiled at you. It's okay! She has a bad face. Look at me.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Three. Say it. Three.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "You carry the bags. I carry you. In my heart. Heavy, right?",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "So heavy, in a good way",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Ehehe. Heavy means you can't run."
+      },
+      {
+       "text": "The bags are fine",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Fine is my least favorite word."
+      },
+      {
+       "text": "Carry your own bags",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "…Okay. I'll carry everything. I always do."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I'm hungry. You look hungry too. Let's eat. Now.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "I carry a lot. You don't even know.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": false,
+     "text": "WALK TO THE FOOD STALLS",
+     "choices": [
+      {
+       "text": "Walk to the food stalls",
+       "go": "hungry"
+      },
+      {
+       "text": "Skip to the food stalls ♡",
+       "go": "hungry"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "errand-library",
+   "short": "LIBRARY",
+   "title": "errand-library",
+   "bg": "rail-crossing",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": false,
+     "text": "A rail crossing. Bells ring. Sakura on the tracks."
+    },
+    {
+     "speaker": "NANDA",
+     "text": "This book is forty days late. I kept it because you touched it once.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "That's so cute",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "I knew you'd say that. I wrote it down."
+      },
+      {
+       "text": "I don't remember that",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "I do. I remember for both of us."
+      },
+      {
+       "text": "That's creepy",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Creepy is a word for people who get left."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "The gate is down. The train is a big metal door. I hate doors. Stand closer.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Don't use words you can't take back.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Book's back. Now the library can't keep you either. Only I can.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Only you",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 4,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Only me. Say it at the station too."
+      },
+      {
+       "text": "Let's go eat",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Mm! Yes! Food, then more me."
+      },
+      {
+       "text": "Nobody keeps me",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -5,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Everybody gets kept. It's just who does it."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "WALK TO THE FOOD STALLS",
+     "choices": [
+      {
+       "text": "Walk to the food stalls",
+       "go": "hungry"
+      },
+      {
+       "text": "Stroll to the yummy stalls ♡",
+       "go": "hungry"
+      }
+     ],
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "You'll see. Tonight.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "hungry",
+   "short": "HUNGRY",
+   "title": "hungry",
+   "bg": "crossing-day",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": "NANDA",
+     "text": "I'm so hungry. Feed me. Butter chicken, or katsu curry? Pick the right one.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Butter chicken, for her",
+       "side": "pink",
+       "set": {
+        "cold": "no",
+        "food": "butter"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "With naan! You know me so well. ♡"
+      },
+      {
+       "text": "Katsu curry",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no",
+        "food": "katsu"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "none",
+       "react": "Crunchy! You chose. I'll pretend I did."
+      },
+      {
+       "text": "I'm not hungry",
+       "side": "purple",
+       "set": {
+        "cold": "yes",
+        "food": "katsu"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "You don't eat? Then you watch me eat."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Say ahh. No, I feed you first. Then you feed me. That's the rule.",
+     "vary": {
+      "food": {
+       "butter": {
+        "text": "Tear the naan. Give me the soft part. Always the soft part."
+       },
+       "katsu": {
+        "text": "Cut the katsu. Blow on it. I like it when you work for me."
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Mm! See? You're so good at making me happy. Keep going. Forever.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Anything for you",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Anything. I'll hold you to that. ♡"
+      },
+      {
+       "text": "It's just lunch",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Nothing is just anything with me."
+      },
+      {
+       "text": "Feed yourself",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "…I can. I just won't."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "town",
+   "short": "TOWN",
+   "title": "town",
+   "bg": "crossing-day",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": false,
+     "text": "The big crossing. A thousand people. She only looks at you.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Wipe my mouth. …Thank you. See? Easy.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "So many people. Don't look at them. They can't love you like me.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Only looking at you",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Good. Your eyes are mine till bedtime."
+      },
+      {
+       "text": "Keep walking",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Walk close. Crowds eat people."
+      },
+      {
+       "text": "I like crowds",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Then get lost in one. See who finds you."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Your phone buzzed. It's just people. We're busy being us.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Me. Only me finds you.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Want to see a magic trick? It's {TIME}, a sleepy {DAYPART}, and this is a classroom. Hi, {CROWD.1}. Yes, you. I see you."
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Trick two. {CROWD.2} is thinking about snacks. {CROWD.3} is thinking about me. Everybody in here is thinking about me. That's the vibe, right?"
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Trick three. {CROWD.4}, you laughed a little. I heard it. It's okay, I'm not mad. I'm just remembering your face. For later. ♡"
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover."
+    },
+    {
+     "speaker": "NANDA",
+     "text": "You're so smart. Smarter than everyone here. They don't get you. Only I get you.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "You get me",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "I'm the only one who ever will."
+      },
+      {
+       "text": "I'm not that smart",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Don't argue with me. It's cute, but don't."
+      },
+      {
+       "text": "Stop flattering me",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Fine. You're nothing. …That's how they'd say it."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Train time. Twelve stops. I counted them this morning. For fun.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "See? You need me to be nice to you.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": false,
+     "text": "WALK TO THE STATION",
+     "choices": [
+      {
+       "text": "Walk to the station",
+       "go": "train"
+      },
+      {
+       "text": "Walk to the station… and nothing else",
+       "go": "train"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "train",
+   "short": "TRAIN",
+   "title": "Train window / NOT Sweet ad",
+   "bg": "train",
+   "enter": "fade",
+   "beats": [
+    {
+     "props": {
+      "zoom": false
+     },
+     "text": "AND Line, local service. Home in twelve stops.",
+     "sfx": "train-hum",
+     "motion": true,
+     "rmAlt": "static",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "props": {
+         "ad": "umeboshi"
+        }
+       },
+       "tamagoyaki": {
+        "props": {
+         "ad": "tamagoyaki"
+        }
+       }
+      }
+     }
+    },
+    {
+     "props": {
+      "zoom": true
+     },
+     "sfx": "tick",
+     "motion": true,
+     "rmAlt": "hard-cut",
+     "hold": 1600,
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "Nobody reads the ads. This one says すっぱい！ SOUR!",
+        "props": {
+         "adCopy": "すっぱい！ SOUR!"
+        }
+       },
+       "tamagoyaki": {
+        "text": "Nobody reads the ads. This one says 甘い！ SWEET!",
+        "props": {
+         "adCopy": "甘い！ SWEET!"
+        }
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "naan",
+   "short": "STATION",
+   "title": "Hot NAAN billboard",
+   "bg": "naan",
+   "enter": "fade",
+   "beats": [
+    {
+     "props": {},
+     "sfx": "tick",
+     "motion": true,
+     "rmAlt": "static",
+     "hold": 1500,
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "props": {
+         "vending": "umeboshi"
+        }
+       },
+       "tamagoyaki": {
+        "props": {
+         "vending": "tamagoyaki"
+        }
+       }
+      }
+     }
+    },
+    {
+     "text": "MC: Technically, that's a NAND gate. Not bread.",
+     "sfx": "tick",
+     "motion": true,
+     "rmAlt": "static",
+     "vary": {
+      "food": {
+       "butter": {
+        "text": "Technically, that's a NAND gate. Not our lunch.",
+        "speaker": "MC"
+       },
+       "katsu": {}
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "blackout",
+   "short": "NIGHT",
+   "title": "Blackout / ADORE ME",
+   "bg": "blackout",
+   "scare": 2,
+   "beats": [
+    {
+     "props": {
+      "phase": "dark"
+     },
+     "sfx": "drone",
+     "auto": 1000
+    },
+    {
+     "props": {
+      "phase": "forecast"
+     },
+     "motion": true,
+     "rmAlt": "hard-cut",
+     "auto": 2600
+    },
+    {
+     "props": {
+      "phase": "or"
+     },
+     "sfx": "breath",
+     "motion": true,
+     "rmAlt": "hard-cut",
+     "auto": 2600
+    },
+    {
+     "props": {
+      "phase": "dor"
+     },
+     "motion": true,
+     "rmAlt": "skip",
+     "auto": 1500
+    },
+    {
+     "props": {
+      "phase": "ador"
+     },
+     "motion": true,
+     "rmAlt": "hard-cut",
+     "auto": 1500
+    },
+    {
+     "props": {
+      "phase": "adore"
+     },
+     "motion": true,
+     "rmAlt": "skip",
+     "auto": 1500
+    },
+    {
+     "props": {
+      "phase": "adoreme"
+     },
+     "motion": true,
+     "rmAlt": "hard-cut",
+     "auto": 2800
+    },
+    {
+     "props": {
+      "phase": "fade"
+     },
+     "motion": true,
+     "rmAlt": "skip",
+     "auto": 1800
+    },
+    {
+     "props": {
+      "phase": "cut"
+     },
+     "sfx": "silence",
+     "auto": 1000
+    },
+    {
+     "sfx": "static",
+     "hold": 800
+    }
+   ]
+  },
+  {
+   "id": "platform",
+   "short": "STATION",
+   "title": "Platform / NEXT: {OR} (alt)",
+   "bg": "platform",
+   "enter": "fade",
+   "scare": 1,
+   "beats": [
+    {
+     "props": {
+      "train": "here"
+     },
+     "text": "Her stop. The rain followed us off the train.",
+     "sfx": "rain",
+     "hold": 1200
+    },
+    {
+     "props": {
+      "train": "gone"
+     },
+     "text": "The AND Line leaves. Just two of us now.",
+     "sfx": "train-hum",
+     "motion": true,
+     "rmAlt": "hard-cut",
+     "hold": 1600
+    },
+    {
+     "text": "NEXT: this {OR} that. The sign never picks.",
+     "speaker": false,
+     "sfx": "breath"
+    }
+   ]
+  },
+  {
+   "id": "station-talk",
+   "short": "STATION",
+   "title": "station-talk",
+   "bg": "platform",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": "NANDA",
+     "text": "Twelve stops, and you held the pole. Not me. Next time, hold me.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Next time, I'll hold you",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "There is no next time. Only this time. Again. ♡"
+      },
+      {
+       "text": "It was crowded",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "It's always crowded. That's why you need me."
+      },
+      {
+       "text": "I needed the pole",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "The pole won't miss you. I will."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Hey… have we stood here before? No. Silly. It's just a nice day. It's {TIME}. Remember that.",
+     "vary": {
+      "run": {
+       "1": {},
+       "2": {
+        "text": "Wait. Why is everything the same? Same rain. Same {TIME}. You said that exact thing last time. I remember. Do you?"
+       },
+       "3": {
+        "text": "Run {RUN}. Same day. You know, I know. Skip the small talk. It's {TIME} again. Hold my hand."
+       }
+      }
+     }
+    },
+    {
+     "speaker": "MC",
+     "text": "(Weird. Feels like I've heard that before.)",
+     "vary": {
+      "run": {
+       "1": {},
+       "2": {
+        "text": "Didn't we already do this? The bento, the train, the tea… Nanda, are we in a loop?"
+       },
+       "3": {
+        "text": "Run {RUN}. I know every line. So do you."
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Déjà vu is just your heart remembering me early. ♡",
+     "vary": {
+      "run": {
+       "1": {},
+       "2": {
+        "text": "A loop? Ehehe. Then you can't leave. You picked me last time too. You'll pick me again."
+       },
+       "3": {
+        "text": "Of course it's a loop. I made it. Every ending comes back here, every {DAYPART}. And you keep coming back. That's love."
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "It's raining. Good. Rain keeps people inside. Inside is where people stay.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Every night. At this stop. Waiting.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "rain-crossing",
+   "short": "RAIN",
+   "title": "rain-crossing",
+   "bg": "crossing-night",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": false,
+     "text": "Rain. The signs glow. The crossing is empty now. It's {TIME}."
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Share my umbrella. It's small. We have to be very close. That's the point.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Step under, close",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 4,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Your shoulder's wet. It's okay. I'll dry everything."
+      },
+      {
+       "text": "Hold it for her",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Tall and useful. I'm keeping you."
+      },
+      {
+       "text": "I'll just get wet",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Then get wet. Sick boys stay home. My home."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "If you ever left, I'd be fine. I'd just stand here. In the rain. Until you came back.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Don't run. It's slippery. People fall.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Say you had fun. Say it's the best day ever. Say it twice.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Best day ever. Twice",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 4,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Then we'll have it again. And again. ♡"
+      },
+      {
+       "text": "It was a nice day",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Nice. Next time, same day, but better."
+      },
+      {
+       "text": "It's been too long",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -5,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Too long? …It hasn't even started."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "WALK HER HOME",
+     "choices": [
+      {
+       "text": "Walk her home",
+       "go": "underpass"
+      },
+      {
+       "text": "Walk her home… and nothing else",
+       "go": "underpass"
+      }
+     ],
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Walk me home. That's not a question.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "underpass",
+   "short": "NIGHT",
+   "title": "Underpass / ads (alt)",
+   "bg": "underpass",
+   "enter": "fade",
+   "scare": 1,
+   "beats": [
+    {
+     "text": "Your steps, her steps. Always an even count.",
+     "sfx": "tick",
+     "hold": 1200
+    },
+    {
+     "text": "NANDA: Don't read the ads. Read me.",
+     "sfx": "tick"
+    }
+   ]
+  },
+  {
+   "id": "walk-home",
+   "short": "WALKHOME",
+   "title": "walk-home",
+   "bg": "street-day",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": false,
+     "text": "The rain stops. Sun on her street. She walks slower."
+    },
+    {
+     "speaker": "NANDA",
+     "text": "This is my street. I walk it every day and pretend you're next to me. Now you are.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "I'm right here",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Right here. Don't move from right here."
+      },
+      {
+       "text": "It's a nice street",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "It's nicer with you on it. Stay on it."
+      },
+      {
+       "text": "That's a lot",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -4,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "A lot is how much I love you. Get used to it."
+      }
+     ]
+    },
+    {
+     "speaker": false,
+     "text": "The sky goes orange. She stopped walking a while ago.",
+     "bg": "street-dusk",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "You'll get used to it. Everyone does.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Walk slower. If we walk slow, the day can't end. It's {DAYPART}.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Walk slower with her",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Slower… slower… there. Now we're almost still."
+      },
+      {
+       "text": "Keep the same pace",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Same pace. Same day. Same you. Good."
+      },
+      {
+       "text": "I need to go home",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -5,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Home? You're walking me home. That's where you're going."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Everyone goes home at night. Not you. You come home with me.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Don't look back at the station. It's gone for you.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": false,
+     "text": "FOLLOW HER INSIDE",
+     "choices": [
+      {
+       "text": "Follow her inside",
+       "go": "apartment"
+      },
+      {
+       "text": "Follow her inside… and nothing else",
+       "go": "apartment"
+      },
+      {
+       "text": "Run home alone",
+       "fake": true
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "apartment",
+   "short": "HER HOME",
+   "title": "Her building / one lit window (alt)",
+   "bg": "apartment",
+   "enter": "fade",
+   "scare": 1,
+   "beats": [
+    {
+     "text": "Four floors. One window lit.",
+     "sfx": "rain",
+     "hold": 1000
+    },
+    {
+     "text": "NANDA: That's mine. I left the light on for you.",
+     "sfx": "rain"
+    }
+   ]
+  },
+  {
+   "id": "door",
+   "short": "HER HOME",
+   "title": "DOOR / Unit 12",
+   "bg": "BG-D1",
+   "enter": "fade",
+   "scare": 1,
+   "beats": [
+    {
+     "bg": "stairs",
+     "props": {
+      "door": "shut"
+     },
+     "sfx": "tick",
+     "hold": 1000
+    },
+    {
+     "bg": "BG-D1",
+     "text": "NANDA: This is me. Unit 12. Obviously you'll remember.",
+     "scare": 0,
+     "sfx": "rain",
+     "choices": [
+      {
+       "text": "I'll never forget it",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "love-burst",
+       "react": "Good. I wrote it on your hand anyway."
+      },
+      {
+       "text": "Nice building",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "It's old. It has a basement. Lots of room."
+      },
+      {
+       "text": "Which unit again?",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Twelve. Twelve. Twelve. Say it back."
+      }
+     ],
+     "timer": 12
+    },
+    {
+     "text": "NANDA: Come in? Just for tea.",
+     "scare": 0,
+     "sfx": "tick",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Say it. …Good.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "text": "NANDA: I already boiled the water. This morning. Just in case.",
+     "sfx": "kettle",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "Just one cup",
+       "side": "pink",
+       "go": "genkan-in",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "One cup. I'll pour it slow."
+      },
+      {
+       "text": "One cup, then home",
+       "side": "mid",
+       "go": "genkan-in",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Then home. Sure. Come in."
+      },
+      {
+       "text": "Say goodnight",
+       "side": "purple",
+       "go": "leave",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "…Goodnight? It's only {TIME}."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "genkan-in",
+   "short": "HER HOME",
+   "title": "Genkan arrival insert (alt)",
+   "bg": "genkan-in",
+   "scare": 1,
+   "beats": [
+    {
+     "props": {
+      "insert": false
+     },
+     "text": "Her shoes. Lined up to the millimetre.",
+     "sfx": "thump",
+     "hold": 1000
+    },
+    {
+     "props": {
+      "insert": true
+     },
+     "text": "Men's slippers. Already set out.",
+     "sfx": "thump",
+     "motion": true,
+     "rmAlt": "hard-cut",
+     "hold": 1600
+    },
+    {
+     "text": "A tiny shrine. Inside: a circuit you built.",
+     "sfx": "breath"
+    }
+   ]
+  },
+  {
+   "id": "genkan-talk",
+   "short": "GENKAN",
+   "title": "genkan-talk",
+   "bg": "genkan-in",
+   "enter": "fade",
+   "beats": [
+    {
+     "speaker": "NANDA",
+     "text": "おかえり。Welcome home. I mean my home. I mean our home. Same thing.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "ただいま",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 4,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "You said it! ただいま! I'm keeping that."
+      },
+      {
+       "text": "Thanks for having me",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Having you. Yes. That's the word."
+      },
+      {
+       "text": "This isn't my home",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -5,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Not yet."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Slippers on. I bought them in your size. Last year. Before we met. Don't think about it.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Shoes off. Now.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "speaker": "NANDA",
+     "text": "I made a list of things you like. Forty things. I'm number one. I checked.",
+     "timer": 12,
+     "choices": [
+      {
+       "text": "You're number one",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "I knew it. The list is never wrong."
+      },
+      {
+       "text": "What's number two?",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Tea. Number two is tea. Come drink it."
+      },
+      {
+       "text": "Burn the list",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -5,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "I have copies. In the basement."
+      }
+     ]
+    },
+    {
+     "speaker": "NANDA",
+     "text": "Kitchen's this way. Don't open the other doors. They're shy.",
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "Don't go near the basement.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "cup",
+   "short": "TEA",
+   "title": "Third cup",
+   "bg": "BG-D2",
+   "enter": "fade",
+   "scare": 1,
+   "beats": [
+    {
+     "sfx": "kettle",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: I bought umeboshi. For no reason. Eat.",
+        "props": {
+         "fridge": "umeboshi",
+         "plate": "umeboshi"
+        }
+       },
+       "tamagoyaki": {
+        "text": "NANDA: I made tamagoyaki. For no reason. Eat.",
+        "props": {
+         "fridge": "tamagoyaki",
+         "plate": "tamagoyaki"
+        }
+       }
+      }
+     },
+     "choices": [
+      {
+       "text": "Eat it all",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "love-burst",
+       "react": "See? You needed me."
+      },
+      {
+       "text": "Eat a little",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "A little now. A lot later."
+      },
+      {
+       "text": "I'm not hungry",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "You will be. Later."
+      }
+     ],
+     "timer": 12
+    },
+    {
+     "sfx": "thump",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "Third teacup. Nobody poured it. One umeboshi on its saucer."
+       },
+       "tamagoyaki": {
+        "text": "Third teacup. Nobody poured it. Tamagoyaki on its saucer."
+       }
+      },
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "I'll wait. I'm good at waiting.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    },
+    {
+     "text": "MC: Who's the third cup for?",
+     "sfx": "tick"
+    },
+    {
+     "text": "NANDA: For Input B. Silly. It's always three of us.",
+     "scare": 2,
+     "sfx": "breath",
+     "choices": [
+      {
+       "text": "Drink",
+       "side": "pink",
+       "go": "steeped",
+       "set": {
+        "cold": "no"
+       },
+       "love": 3,
+       "emote": "hearts",
+       "fx": "love-burst",
+       "react": "Drink. It's warm. It makes the thinking stop."
+      },
+      {
+       "text": "Hold the cup",
+       "side": "mid",
+       "go": "steeped",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Hold it. Smell it. Then drink. I'll wait."
+      },
+      {
+       "text": "Stand up",
+       "side": "purple",
+       "go": "unknown",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "Sit. The tea isn't finished."
+      }
+     ],
+     "timer": 12
+    }
+   ]
+  },
+  {
+   "id": "steeped",
+   "title": "ENDING / STEEPED",
+   "bg": "BG-D2",
+   "scare": 2,
+   "beats": [
+    {
+     "text": "{OR}",
+     "sfx": "breath",
+     "hold": 1000
+    },
+    {
+     "text": "NANDA: Rest. I'll do the remembering.",
+     "sfx": "silence"
+    },
+    {
+     "sfx": "breath",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: Bitter cup, sour hour. Every hour is ours."
+       },
+       "tamagoyaki": {
+        "text": "NANDA: Warm cup, sweet sleep. You're mine to keep."
+       }
+      }
+     }
+    },
+    {
+     "text": "NANDA: いつまでも一緒。…F{OR}ever. ね？",
+     "sfx": "breath"
+    },
+    {
+     "text": "STEEPED.",
+     "sfx": "static",
+     "hold": 1500,
+     "end": "steeped",
+     "choices": [
+      {
+       "text": "Back to start",
+       "go": "rooftop"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "unknown",
+   "short": "HER HOME",
+   "title": "Hatch / ladder",
+   "bg": "BG-D2",
+   "scare": 1,
+   "beats": [
+    {
+     "text": "You stand. The floor tilts a little.",
+     "sfx": "thump"
+    },
+    {
+     "text": "Under the table: a floor hatch. Too big for storage.",
+     "sfx": "tick",
+     "choices": [
+      {
+       "text": "Open the hatch"
+      },
+      {
+       "text": "Gently open the hatch ♡"
+      }
+     ]
+    },
+    {
+     "text": "A steep wooden ladder. Down into the dark.",
+     "sfx": "drone",
+     "choices": [
+      {
+       "text": "Climb down"
+      },
+      {
+       "text": "Tippy-toe down ♡"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "escape",
+   "short": "HER HOME",
+   "title": "ESCAPE / basement (choice steps; 4x4 puzzle later)",
+   "bg": "basement",
+   "enter": "fade",
+   "scare": 2,
+   "beats": [
+    {
+     "props": {
+      "shelf": null
+     },
+     "text": "Concrete. One bulb. Rain at a high window.",
+     "sfx": "drone",
+     "motion": true,
+     "rmAlt": "static",
+     "choices": [
+      {
+       "text": "Look at the shelves"
+      },
+      {
+       "text": "Peek at the pretty shelves ♡"
+      }
+     ]
+    },
+    {
+     "props": {
+      "shelf": "jars"
+     },
+     "text": "Jars on the shelves. Each one: a date, a name.",
+     "sfx": "thump"
+    },
+    {
+     "text": "The dates go back years. The names are all different."
+    },
+    {
+     "props": {
+      "shelf": "bentos"
+     },
+     "text": "Bento boxes, one per day. Your name on each. Untouched.",
+     "sfx": "tick"
+    },
+    {
+     "text": "The oldest is dated before you met."
+    },
+    {
+     "props": {
+      "shelf": "usu"
+     },
+     "text": "A mortar and a mallet. One fresh mochi. Hers only.",
+     "sfx": "tick",
+     "choices": [
+      {
+       "text": "Keep looking"
+      },
+      {
+       "text": "Keep looking… and nothing else"
+      }
+     ]
+    },
+    {
+     "props": {
+      "shelf": "newest"
+     },
+     "sfx": "thump",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+        "props": {
+         "jar": "umeboshi"
+        }
+       },
+       "tamagoyaki": {
+        "text": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.",
+        "props": {
+         "jar": "tamagoyaki"
+        }
+       }
+      }
+     }
+    },
+    {
+     "bg": "blackout",
+     "props": {
+      "phase": "dark"
+     },
+     "sfx": "silence",
+     "auto": 500
+    },
+    {
+     "bg": "basement",
+     "props": {
+      "shelf": "newest"
+     },
+     "auto": 700
+    },
+    {
+     "bg": "blackout",
+     "props": {
+      "phase": "dark"
+     },
+     "auto": 1000
+    },
+    {
+     "bg": "basement",
+     "props": {
+      "shelf": "newest"
+     },
+     "auto": 700
+    },
+    {
+     "bg": "blackout",
+     "props": {
+      "phase": "dark"
+     },
+     "auto": 2000
+    },
+    {
+     "bg": "basement",
+     "props": {
+      "shelf": null
+     },
+     "text": "Minutes gone. A clock upstairs chimed. You lost count.",
+     "sfx": "bell"
+    },
+    {
+     "sfx": "rain",
+     "choices": [
+      {
+       "text": "Leave her house",
+       "go": "escape-win",
+       "love": -3
+      },
+      {
+       "text": "Wait for her",
+       "go": "escape-timeout",
+       "love": 1,
+       "default": true
+      },
+      {
+       "text": "Stay right here",
+       "fake": true
+      }
+     ],
+     "bg": "lock-game",
+     "props": {
+      "win": 0,
+      "lose": 1,
+      "secs": 40
+     }
+    }
+   ]
+  },
+  {
+   "id": "escape-win",
+   "title": "ENDING / ESCAPE (clear)",
+   "bg": "BG-D1",
+   "scare": 2,
+   "beats": [
+    {
+     "text": "She's waiting at the outside door.",
+     "sfx": "rain",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "props": {
+         "vending": "umeboshi"
+        }
+       },
+       "tamagoyaki": {
+        "props": {
+         "vending": "tamagoyaki"
+        }
+       }
+      }
+     }
+    },
+    {
+     "text": "NANDA: You took the long way.",
+     "sfx": "thump"
+    },
+    {
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: You picked sour."
+       },
+       "tamagoyaki": {
+        "text": "NANDA: Home is warm, and sweet."
+       }
+      }
+     }
+    },
+    {
+     "sfx": "breath",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: Now every hour is ours."
+       },
+       "tamagoyaki": {
+        "text": "NANDA: Sleep now. You're mine to keep."
+       }
+      }
+     }
+    },
+    {
+     "bg": "blackout",
+     "props": {
+      "phase": "dark"
+     },
+     "sfx": "drone",
+     "auto": 1200
+    },
+    {
+     "text": "NANDA: Mine.",
+     "sfx": "silence"
+    },
+    {
+     "text": "ESCAPE.",
+     "sfx": "static",
+     "hold": 1500,
+     "end": "escape",
+     "choices": [
+      {
+       "text": "Back to start",
+       "go": "rooftop"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "escape-timeout",
+   "title": "ENDING / ESCAPE (timeout)",
+   "bg": "BG-D3",
+   "scare": 2,
+   "beats": [
+    {
+     "text": "The ladder creaks. She's coming down.",
+     "sfx": "thump"
+    },
+    {
+     "bg": "blackout",
+     "props": {
+      "phase": "dark"
+     },
+     "sfx": "drone",
+     "auto": 1200
+    },
+    {
+     "bg": "BG-D2",
+     "props": {
+      "cups": 4
+     },
+     "text": "You wake at the tea table. Four cups now.",
+     "sfx": "kettle"
+    },
+    {
+     "sfx": "thump",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "She holds out an umeboshi. You eat.",
+        "props": {
+         "feed": "umeboshi"
+        }
+       },
+       "tamagoyaki": {
+        "text": "She holds out the tamagoyaki. You eat.",
+        "props": {
+         "feed": "tamagoyaki"
+        }
+       }
+      }
+     }
+    },
+    {
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: すっぱいでしょ。…ね？"
+       },
+       "tamagoyaki": {
+        "text": "NANDA: 甘いでしょ。…ね？"
+       }
+      }
+     }
+    },
+    {
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: One sour hour…"
+       },
+       "tamagoyaki": {
+        "text": "NANDA: One sweet bite…"
+       }
+      }
+     }
+    },
+    {
+     "sfx": "breath",
+     "vary": {
+      "bento": {
+       "umeboshi": {
+        "text": "NANDA: …then every hour is ours."
+       },
+       "tamagoyaki": {
+        "text": "NANDA: …then sleep. You're mine to keep."
+       }
+      }
+     }
+    },
+    {
+     "text": "ESCAPE?",
+     "sfx": "static",
+     "hold": 1500,
+     "end": "escape",
+     "choices": [
+      {
+       "text": "Back to start",
+       "go": "rooftop"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "leave",
+   "short": "CAFÉ",
+   "title": "LEAVE / XOR Coffee 7:00 AM",
+   "bg": "BG-D1",
+   "scare": 1,
+   "beats": [
+    {
+     "text": "NANDA: Leaving is not an option.",
+     "scare": 2,
+     "sfx": "thump"
+    },
+    {
+     "bg": "BG-X1",
+     "text": "XOR Coffee. 7:00 AM.",
+     "scare": 0,
+     "sfx": "static"
+    },
+    {
+     "text": "NANDA: He wakes at 7:00.",
+     "sfx": "tick",
+     "choices": [
+      {
+       "text": "Good morning, Nanda",
+       "side": "pink",
+       "set": {
+        "cold": "no"
+       },
+       "love": 2,
+       "emote": "heart",
+       "fx": "love-burst",
+       "react": "Good morning! Same as yesterday. Same as always."
+      },
+      {
+       "text": "Who's 'he'?",
+       "side": "mid",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "none",
+       "react": "Nobody. Not anymore."
+      },
+      {
+       "text": "Stop following me",
+       "side": "purple",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -3,
+       "emote": "hate",
+       "fx": "hate-quake",
+       "react": "I was here first."
+      }
+     ],
+     "timer": 12
+    },
+    {
+     "text": "NANDA: From now on… can we be f{OR}ever?",
+     "scare": 2,
+     "sfx": "breath",
+     "choices": [
+      {
+       "text": "uhmmm yeah ig",
+       "side": "pink",
+       "go": "leave-yeah",
+       "set": {
+        "cold": "no"
+       },
+       "love": 1,
+       "emote": "sweat",
+       "fx": "love-burst"
+      },
+      {
+       "text": "Forever sounds long",
+       "side": "mid",
+       "go": "leave-yeah",
+       "default": true,
+       "set": {
+        "cold": "no"
+       },
+       "love": 0,
+       "fx": "chosen-flash",
+       "fake": true
+      },
+      {
+       "text": "FUCK YOU. I'm leaving",
+       "side": "purple",
+       "go": "leave-fu",
+       "set": {
+        "cold": "yes"
+       },
+       "love": -5,
+       "emote": "hate",
+       "fx": "hate-quake"
+      }
+     ],
+     "timer": 12,
+     "vary": {
+      "cold": {
+       "no": {},
+       "yes": {
+        "text": "だめ。You already said forever. I heard it.",
+        "speaker": "NANDA"
+       }
+      }
+     }
+    }
+   ]
+  },
+  {
+   "id": "leave-fu",
+   "title": "ENDING / LEAVE (refuse)",
+   "bg": "BG-X1",
+   "scare": 2,
+   "beats": [
+    {
+     "text": "Her hand rises. Time freezes. The café turns.",
+     "sfx": "silence"
+    },
+    {
+     "text": "NANDA: You said leave. I heard 'lea—'.",
+     "sfx": "breath"
+    },
+    {
+     "text": "CROWD: f{OR}ever and ever",
+     "sfx": "drone"
+    },
+    {
+     "text": "CROWD: f{OR}ever and ever and ever",
+     "sfx": "drone"
+    },
+    {
+     "text": "LEAVE.",
+     "sfx": "static",
+     "hold": 1500,
+     "end": "leave",
+     "choices": [
+      {
+       "text": "Back to start",
+       "go": "rooftop"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "leave-yeah",
+   "title": "ENDING / LEAVE (agree)",
+   "bg": "BG-X1",
+   "scare": 2,
+   "beats": [
+    {
+     "text": "NANDA: Hooray! F{OR}ever and ever!",
+     "sfx": "bell"
+    },
+    {
+     "text": "NANDA: Good input.",
+     "sfx": "breath"
+    },
+    {
+     "text": "CROWD: f{OR}ever and ever",
+     "sfx": "drone"
+    },
+    {
+     "text": "CROWD: f{OR}ever and ever and ever",
+     "sfx": "drone"
+    },
+    {
+     "text": "LEAVE.",
+     "sfx": "static",
+     "hold": 1500,
+     "end": "leave",
+     "choices": [
+      {
+       "text": "Back to start",
+       "go": "rooftop"
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

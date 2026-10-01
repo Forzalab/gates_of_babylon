@@ -1,0 +1,1788 @@
+[
+ {
+  "n": 1,
+  "scene": "rooftop",
+  "beat": "1",
+  "file": "public/date-beta/voice/01-rooftop/001_1.mp3",
+  "text": "[shyly][happy] I made two. [flat, pleased] One's for you. [pause][chuckles softly] …Don't look at me like that."
+ },
+ {
+  "n": 2,
+  "scene": "rooftop",
+  "beat": "1 R+",
+  "file": "public/date-beta/voice/01-rooftop/002_1-r.mp3",
+  "text": "[giggles][too long] Sweet egg… [smiling][bubbly] for my sweet boy."
+ },
+ {
+  "n": 4,
+  "scene": "rooftop",
+  "beat": "1 R−",
+  "file": "public/date-beta/voice/01-rooftop/004_1-r.mp3",
+  "text": "[sudden flat][quiet] …I woke up at four [sweet] for this."
+ },
+ {
+  "n": 6,
+  "scene": "rooftop",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/01-rooftop/006_2-t.mp3",
+  "text": "[happy][bubbly] Sweet. Like me. [perfectly even][smiling] Good input."
+ },
+ {
+  "n": 8,
+  "scene": "rooftop",
+  "beat": "3 (t)",
+  "file": "public/date-beta/voice/01-rooftop/008_3-t.mp3",
+  "text": "[sing-song] Sweet, ne? [proud][slow] I rolled it. Myself."
+ },
+ {
+  "n": 11,
+  "scene": "rooftop",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/01-rooftop/011_3-r.mp3",
+  "text": "[sudden flat][quiet] Say that again. Slowly. So I can write it… [sweet] down."
+ },
+ {
+  "n": 12,
+  "scene": "rooftop",
+  "beat": "4 cold",
+  "file": "public/date-beta/voice/01-rooftop/012_4-cold.mp3",
+  "text": "[sudden flat][quiet] Salty. Noted. [perfectly even] …Forever."
+ },
+ {
+  "n": 14,
+  "scene": "rooftop",
+  "beat": "6 R+",
+  "file": "public/date-beta/voice/01-rooftop/014_6-r.mp3",
+  "text": "[whispers][close] A minute. [whispers, slower] Then another. [whispers, slowest] Then the whole day."
+ },
+ {
+  "n": 15,
+  "scene": "rooftop",
+  "beat": "6 R=",
+  "file": "public/date-beta/voice/01-rooftop/015_6-r.mp3",
+  "text": "[excited] Yay! Park first. [flat, pleased] I already planned it."
+ },
+ {
+  "n": 16,
+  "scene": "rooftop",
+  "beat": "6 R−",
+  "file": "public/date-beta/voice/01-rooftop/016_6-r.mp3",
+  "text": "[sudden flat][quiet] …Fine. The rain can have you. [sweet] Later."
+ },
+ {
+  "n": 17,
+  "scene": "v2-park",
+  "beat": "3",
+  "file": "public/date-beta/voice/02-v2-park/017_3.mp3",
+  "text": "[breathless][tender] Hold my hand. [trembling] My hand is shaking. [whispers][close] Only yours… [whispers, slower] can stop it."
+ },
+ {
+  "n": 18,
+  "scene": "v2-park",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/02-v2-park/018_3-r.mp3",
+  "text": "[relieved][happy] It stopped. [pause] See? [flat, pleased] It only needed you."
+ },
+ {
+  "n": 20,
+  "scene": "v2-park",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/02-v2-park/020_3-r.mp3",
+  "text": "[sudden flat][quiet] Okay. My hand can wait. It is good at… [sweet] waiting."
+ },
+ {
+  "n": 21,
+  "scene": "v2-park",
+  "beat": "5",
+  "file": "public/date-beta/voice/02-v2-park/021_5.mp3",
+  "text": "[bright] One job before lunch. [sing-song] My groceries, or my library book?"
+ },
+ {
+  "n": 22,
+  "scene": "v2-park",
+  "beat": "5 R shop",
+  "file": "public/date-beta/voice/02-v2-park/022_5-r-shop.mp3",
+  "text": "[excited][bubbly] Groceries. [warm][slow] For our dinner."
+ },
+ {
+  "n": 24,
+  "scene": "v2-park",
+  "beat": "5 R−",
+  "file": "public/date-beta/voice/02-v2-park/024_5-r.mp3",
+  "text": "[sudden flat][quiet] Alone? No. [perfectly even] Groceries. [sweet] Now."
+ },
+ {
+  "n": 25,
+  "scene": "v2-shop",
+  "beat": "5",
+  "file": "public/date-beta/voice/03-v2-shop/025_5.mp3",
+  "text": "[perfectly even] Do not look at her. [smiling][close] Look at me. [bubbly][rushed] I bought you a cup."
+ },
+ {
+  "n": 26,
+  "scene": "v2-library",
+  "beat": "4",
+  "file": "public/date-beta/voice/04-v2-library/026_4.mp3",
+  "text": "[tender] You touched this book once. [whispers][close] Right here. [flat, pleased] I kept it forty days."
+ },
+ {
+  "n": 28,
+  "scene": "v2-curry",
+  "beat": "2 R+ (b)",
+  "file": "public/date-beta/voice/05-v2-curry/028_2-r-b.mp3",
+  "text": "[gasps][excited] With naan! [warm][slow] You know me."
+ },
+ {
+  "n": 30,
+  "scene": "v2-curry",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/05-v2-curry/030_2-r.mp3",
+  "text": "[sudden flat][quiet] Then you watch me… [sweet] eat."
+ },
+ {
+  "n": 31,
+  "scene": "v2-curry",
+  "beat": "4",
+  "file": "public/date-beta/voice/05-v2-curry/031_4.mp3",
+  "text": "[sweet][close] Feed me. [whispers] With your hand. [perfectly even] Not the spoon. [whispers, slower] Your hand."
+ },
+ {
+  "n": 32,
+  "scene": "v2-train",
+  "beat": "station crowd (Tony, → the class, 4:30 PM)",
+  "file": "public/date-beta/voice/06-v2-train/032_station-crowd-tony-the-class-4-30-pm.mp3",
+  "text": "[playful][bubbly] I see you, the curly-haired guy. [giggles][too long] I see you, you gringo wearing a cap. [pouty][sing-song] Don't gang up on me, [smiling][close] you all NEVER stop my [perfectly even] eternal bond [flat, pleased] with my lover."
+ },
+ {
+  "n": 34,
+  "scene": "v2-train",
+  "beat": "3 run 2",
+  "file": "public/date-beta/voice/06-v2-train/034_3-run-2.mp3",
+  "text": "[warm] Twelve stops. Second time today. [quiet] You forgot. [perfectly even] I did not."
+ },
+ {
+  "n": 35,
+  "scene": "v2-train",
+  "beat": "3 run 3",
+  "file": "public/date-beta/voice/06-v2-train/035_3-run-3.mp3",
+  "text": "[slow] Three fingers. [whispers] Three times today. [perfectly even][smiling] Same train. Same you."
+ },
+ {
+  "n": 36,
+  "scene": "v2-rain",
+  "beat": "2",
+  "file": "public/date-beta/voice/07-v2-rain/036_2.mp3",
+  "text": "[bubbly] Share my umbrella. [sing-song] It is small. [whispers][close] Our arms have to touch."
+ },
+ {
+  "n": 37,
+  "scene": "v2-rain",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/07-v2-rain/037_2-r.mp3",
+  "text": "[breathless][happy] Our arms touch. [warm][slow] Now I am warm."
+ },
+ {
+  "n": 38,
+  "scene": "v2-rain",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/07-v2-rain/038_2-r.mp3",
+  "text": "[smiling] Your hand on the handle. [perfectly even] My hand on yours."
+ },
+ {
+  "n": 39,
+  "scene": "v2-rain",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/07-v2-rain/039_2-r.mp3",
+  "text": "[sudden flat][quiet] Then get wet. Sick boys stay… [sweet] inside."
+ },
+ {
+  "n": 40,
+  "scene": "v2-street",
+  "beat": "2",
+  "file": "public/date-beta/voice/08-v2-street/040_2.mp3",
+  "text": "[tender][slow] Take small steps. [whispers][close] Small steps… [whispers, slower] make the day longer."
+ },
+ {
+  "n": 41,
+  "scene": "v2-street",
+  "beat": "2 R+",
+  "file": "public/date-beta/voice/08-v2-street/041_2-r.mp3",
+  "text": "[whispers] Smaller. [whispers, slower] Smaller. [whispers, slowest] There. [giggles][too long] We are almost still."
+ },
+ {
+  "n": 42,
+  "scene": "v2-street",
+  "beat": "2 R=",
+  "file": "public/date-beta/voice/08-v2-street/042_2-r.mp3",
+  "text": "[perfectly even][smiling] Same pace. Same day. Same you."
+ },
+ {
+  "n": 43,
+  "scene": "v2-street",
+  "beat": "2 R−",
+  "file": "public/date-beta/voice/08-v2-street/043_2-r.mp3",
+  "text": "[sudden flat][quiet] Home? You are walking me… [sweet] home."
+ },
+ {
+  "n": 44,
+  "scene": "v2-street",
+  "beat": "5",
+  "file": "public/date-beta/voice/08-v2-street/044_5.mp3",
+  "text": "[warm][slow] I held it since noon. [flat, pleased] So I would be ready. [whispers][close] For you."
+ },
+ {
+  "n": 45,
+  "scene": "v2-home",
+  "beat": "3",
+  "file": "public/date-beta/voice/09-v2-home/045_3.mp3",
+  "text": "[smiling][slow] Every choice you made today led here. [pause][perfectly even] I planned them all."
+ },
+ {
+  "n": 47,
+  "scene": "cup",
+  "beat": "0 (t)",
+  "file": "public/date-beta/voice/10-cup/047_0-t.mp3",
+  "text": "[bubbly] I made tamagoyaki. [smiling] For no reason. [perfectly even][sweet] Eat."
+ },
+ {
+  "n": 48,
+  "scene": "cup",
+  "beat": "0 R+",
+  "file": "public/date-beta/voice/10-cup/048_0-r.mp3",
+  "text": "[happy] See? [whispers][close][flat, pleased] You needed me."
+ },
+ {
+  "n": 50,
+  "scene": "cup",
+  "beat": "0 R−",
+  "file": "public/date-beta/voice/10-cup/050_0-r.mp3",
+  "text": "[sudden flat][quiet] You will be. [sweet] Later."
+ },
+ {
+  "n": 51,
+  "scene": "cup",
+  "beat": "1 cold",
+  "file": "public/date-beta/voice/10-cup/051_1-cold.mp3",
+  "text": "[sudden flat][quiet] I'll wait. I'm good at… [sweet] waiting."
+ },
+ {
+  "n": 53,
+  "scene": "cup",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/10-cup/053_3-r.mp3",
+  "text": "[warm] Drink. It's warm. [whispers][close] It makes the thinking… [whispers, slower] stop."
+ },
+ {
+  "n": 55,
+  "scene": "cup",
+  "beat": "3 R−",
+  "file": "public/date-beta/voice/10-cup/055_3-r.mp3",
+  "text": "[sudden flat][quiet] Sit. The tea isn't… [sweet] finished."
+ },
+ {
+  "n": 57,
+  "scene": "steeped",
+  "beat": "2 (u)",
+  "file": "public/date-beta/voice/11-steeped/057_2-u.mp3",
+  "text": "[slow] Bitter cup, sour hour. [whispers][perfectly even] Every hour is ours."
+ },
+ {
+  "n": 58,
+  "scene": "steeped",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/11-steeped/058_2-t.mp3",
+  "text": "[slow] Warm cup, sweet sleep. [whispers][perfectly even] You're mine to keep."
+ },
+ {
+  "n": 59,
+  "scene": "steeped",
+  "beat": "3",
+  "file": "public/date-beta/voice/11-steeped/059_3.mp3",
+  "text": "[whispers][warm][slow] いつまでも一緒。 [pause][perfectly even] …Forever. [slow][sing-song] Neee?"
+ },
+ {
+  "n": 62,
+  "scene": "escape-win",
+  "beat": "2 (t)",
+  "file": "public/date-beta/voice/12-escape-win/062_2-t.mp3",
+  "text": "[softly][warm] Home is warm, and sweet."
+ },
+ {
+  "n": 65,
+  "scene": "escape-win",
+  "beat": "5",
+  "file": "public/date-beta/voice/12-escape-win/065_5.mp3",
+  "text": "[whispers][perfectly even] Mine."
+ },
+ {
+  "n": 66,
+  "scene": "escape-timeout",
+  "beat": "4 (u)",
+  "file": "public/date-beta/voice/13-escape-timeout/066_4-u.mp3",
+  "text": "[warm][slow] すっぱいでしょ。 [pause][sing-song] …Neee?"
+ },
+ {
+  "n": 67,
+  "scene": "escape-timeout",
+  "beat": "4 (t)",
+  "file": "public/date-beta/voice/13-escape-timeout/067_4-t.mp3",
+  "text": "[warm][slow] 甘いでしょ。 [pause][sing-song] …Neee?"
+ },
+ {
+  "n": 70,
+  "scene": "escape-timeout",
+  "beat": "6 (u)",
+  "file": "public/date-beta/voice/13-escape-timeout/070_6-u.mp3",
+  "text": "[whispers, slower] …then every hour [perfectly even] is ours."
+ },
+ {
+  "n": 71,
+  "scene": "escape-timeout",
+  "beat": "6 (t)",
+  "file": "public/date-beta/voice/13-escape-timeout/071_6-t.mp3",
+  "text": "[whispers, slower] …then sleep. [perfectly even] You're mine to keep."
+ },
+ {
+  "n": 3,
+  "scene": "rooftop",
+  "beat": "1 R=",
+  "file": "public/date-beta/voice/01-rooftop/003_1-r.mp3",
+  "text": "[amused] Sour. [proud] Brave. [whispers][close] I'll remember… [whispers, slower] you like sour."
+ },
+ {
+  "n": 5,
+  "scene": "rooftop",
+  "beat": "2 (u)",
+  "file": "public/date-beta/voice/01-rooftop/005_2-u.mp3",
+  "text": "[curious] Sour. Hm. [teasing][sing-song] You like things that bite?"
+ },
+ {
+  "n": 7,
+  "scene": "rooftop",
+  "beat": "3 (u)",
+  "file": "public/date-beta/voice/01-rooftop/007_3-u.mp3",
+  "text": "[warm] Sour, [slow][sing-song] neee?"
+ },
+ {
+  "n": 9,
+  "scene": "rooftop",
+  "beat": "3 R+",
+  "file": "public/date-beta/voice/01-rooftop/009_3-r.mp3",
+  "text": "[pouty][smiling] …Obviously. [rushed] Don't stare."
+ },
+ {
+  "n": 10,
+  "scene": "rooftop",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/01-rooftop/010_3-r.mp3",
+  "text": "[warm] Good is a start. [sweetly][perfectly even] Tomorrow I'll do better."
+ },
+ {
+  "n": 13,
+  "scene": "rooftop",
+  "beat": "6",
+  "file": "public/date-beta/voice/01-rooftop/013_6.mp3",
+  "text": "[breathless][happy] Stay forever? [whispers][close] The rain… [whispers, slower] can wait."
+ },
+ {
+  "n": 19,
+  "scene": "v2-park",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/02-v2-park/019_3-r.mp3",
+  "text": "[smiling] One finger. [perfectly even][sweet] I will hold it very hard."
+ },
+ {
+  "n": 23,
+  "scene": "v2-park",
+  "beat": "5 R lib",
+  "file": "public/date-beta/voice/02-v2-park/023_5-r-lib.mp3",
+  "text": "[happy] The book. [giggles][too long] It is very late."
+ },
+ {
+  "n": 27,
+  "scene": "v2-curry",
+  "beat": "2",
+  "file": "public/date-beta/voice/05-v2-curry/027_2.mp3",
+  "text": "[pouty] I am hungry. [bubbly] You pick my lunch. [perfectly even][smiling] Pick the right one."
+ },
+ {
+  "n": 29,
+  "scene": "v2-curry",
+  "beat": "2 R= (k)",
+  "file": "public/date-beta/voice/05-v2-curry/029_2-r-k.mp3",
+  "text": "[happy] Crunchy. [flat, pleased] Good choice."
+ },
+ {
+  "n": 33,
+  "scene": "v2-train",
+  "beat": "3 run 1",
+  "file": "public/date-beta/voice/06-v2-train/033_3-run-1.mp3",
+  "text": "[proud][slow] Twelve stops. [sing-song] I count them on my fingers. [smiling] See?"
+ },
+ {
+  "n": 46,
+  "scene": "cup",
+  "beat": "0 (u)",
+  "file": "public/date-beta/voice/10-cup/046_0-u.mp3",
+  "text": "[sing-song] I bought umeboshi. [smiling] For no reason. [perfectly even][sweet] Eat."
+ },
+ {
+  "n": 49,
+  "scene": "cup",
+  "beat": "0 R=",
+  "file": "public/date-beta/voice/10-cup/049_0-r.mp3",
+  "text": "[whispers] A little now. [whispers, slower] A lot later."
+ },
+ {
+  "n": 52,
+  "scene": "cup",
+  "beat": "3",
+  "file": "public/date-beta/voice/10-cup/052_3.mp3",
+  "text": "[amused] For Input B. [giggles][too long] Silly. [perfectly even][smiling] It's always three of us."
+ },
+ {
+  "n": 54,
+  "scene": "cup",
+  "beat": "3 R=",
+  "file": "public/date-beta/voice/10-cup/054_3-r.mp3",
+  "text": "[whispers] Hold it. [whispers, slower] Smell it. [whispers, slowest] Then drink. [sweet] I'll wait."
+ },
+ {
+  "n": 56,
+  "scene": "steeped",
+  "beat": "1",
+  "file": "public/date-beta/voice/11-steeped/056_1.mp3",
+  "text": "[tender] Rest. [whispers][close] I'll do the remembering."
+ },
+ {
+  "n": 60,
+  "scene": "escape-win",
+  "beat": "1",
+  "file": "public/date-beta/voice/12-escape-win/060_1.mp3",
+  "text": "[sweetly][smiling] You took the long way."
+ },
+ {
+  "n": 61,
+  "scene": "escape-win",
+  "beat": "2 (u)",
+  "file": "public/date-beta/voice/12-escape-win/061_2-u.mp3",
+  "text": "[softly] You picked sour."
+ },
+ {
+  "n": 63,
+  "scene": "escape-win",
+  "beat": "3 (u)",
+  "file": "public/date-beta/voice/12-escape-win/063_3-u.mp3",
+  "text": "[smiling] Now every hour [whispers, slower] is ours."
+ },
+ {
+  "n": 64,
+  "scene": "escape-win",
+  "beat": "3 (t)",
+  "file": "public/date-beta/voice/12-escape-win/064_3-t.mp3",
+  "text": "[tender] Sleep now. [whispers, slower] You're mine to keep."
+ },
+ {
+  "n": 68,
+  "scene": "escape-timeout",
+  "beat": "5 (u)",
+  "file": "public/date-beta/voice/13-escape-timeout/068_5-u.mp3",
+  "text": "[softly] One sour hour…"
+ },
+ {
+  "n": 69,
+  "scene": "escape-timeout",
+  "beat": "5 (t)",
+  "file": "public/date-beta/voice/13-escape-timeout/069_5-t.mp3",
+  "text": "[softly] One sweet bite…"
+ },
+ {
+  "n": 238,
+  "scene": "v2-train",
+  "beat": "5 crowd",
+  "file": "public/date-beta/voice/06-v2-train/238_5-crowd.mp3",
+  "text": "[annoyed] Hey, you. [pointed] Wavy hair. [sharp] And you. [mocking] Hat boy, the gringo. [firm] Stop pushing. [low, possessive] He is MINE."
+ },
+ {
+  "n": 239,
+  "scene": "v2-train",
+  "beat": "1 quote",
+  "file": "public/date-beta/voice/06-v2-train/239_1-quote.mp3",
+  "text": "4:30 PM. Lunch is done. She takes your hand. 'Now we go to MY home. On MY train.'"
+ },
+ {
+  "n": 240,
+  "scene": "v2-train",
+  "beat": "3 ume quote",
+  "file": "public/date-beta/voice/06-v2-train/240_3-ume-quote.mp3",
+  "text": "She buys a plum drink. Sour. 'Like the one you picked. I remember.'"
+ },
+ {
+  "n": 241,
+  "scene": "v2-train",
+  "beat": "3 tama quote",
+  "file": "public/date-beta/voice/06-v2-train/241_3-tama-quote.mp3",
+  "text": "Egg pudding drink. Sweet. 'Like the one you picked. I remember.'"
+ },
+ {
+  "n": 242,
+  "scene": "v2-train",
+  "beat": "6 quote",
+  "file": "public/date-beta/voice/06-v2-train/242_6-quote.mp3",
+  "text": "She taps her card. Beep. Then she taps it again. For you. 'I pay. You are my guest.'"
+ },
+ {
+  "n": 243,
+  "scene": "v2-train",
+  "beat": "7 run 1 quote",
+  "file": "public/date-beta/voice/06-v2-train/243_7-run-1-quote.mp3",
+  "text": "12 stops to her home. She counts them on her fingers. 'Every day I count alone. Today I count with you.'"
+ },
+ {
+  "n": 244,
+  "scene": "v2-train",
+  "beat": "9 quote",
+  "file": "public/date-beta/voice/06-v2-train/244_9-quote.mp3",
+  "text": "Stop 12. Her stop. She wakes up fast. She pulls your sleeve. 'Home. Come.'"
+ },
+ {
+  "n": 245,
+  "scene": "rooftop",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/rooftop/245_2.mp3",
+  "text": "Her shoes by the fence. Toes pointed at you.",
+  "voice": "narrator"
+ },
+ {
+  "n": 246,
+  "scene": "rooftop",
+  "beat": "N 4 bento=umeboshi",
+  "file": "public/date-beta/voice/narration/rooftop/246_4-bento-umeboshi.mp3",
+  "text": "Close-up. The lid lifts. One red umeboshi on white rice.",
+  "voice": "narrator"
+ },
+ {
+  "n": 247,
+  "scene": "rooftop",
+  "beat": "N 4 bento=tamagoyaki",
+  "file": "public/date-beta/voice/narration/rooftop/247_4-bento-tamagoyaki.mp3",
+  "text": "Close-up. The lid lifts. Tamagoyaki, rolled in gold layers.",
+  "voice": "narrator"
+ },
+ {
+  "n": 248,
+  "scene": "rooftop",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/rooftop/248_6.mp3",
+  "text": "Itadakimasu.",
+  "voice": "narrator"
+ },
+ {
+  "n": 249,
+  "scene": "rooftop",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/rooftop/249_7.mp3",
+  "text": "She doesn't eat hers. She watches you chew.",
+  "voice": "narrator"
+ },
+ {
+  "n": 250,
+  "scene": "rooftop",
+  "beat": "N 10",
+  "file": "public/date-beta/voice/narration/rooftop/250_10.mp3",
+  "text": "Technically, rain wasn't f-OR-ecast.",
+  "voice": "narrator"
+ },
+ {
+  "n": 251,
+  "scene": "v2-park",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-park/251_0.mp3",
+  "text": "PARK · 1:00 PM. A path under cherry trees. Petals on the ground.",
+  "voice": "narrator"
+ },
+ {
+  "n": 252,
+  "scene": "v2-park",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/v2-park/252_2.mp3",
+  "text": "Her thumb is on your wrist. She is counting your pulse. She wants every beat to be for her.",
+  "voice": "narrator"
+ },
+ {
+  "n": 253,
+  "scene": "v2-park",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/v2-park/253_4.mp3",
+  "text": "Two pairs of shoes walk out of the park. Hers stay close to yours.",
+  "voice": "narrator"
+ },
+ {
+  "n": 254,
+  "scene": "v2-shop",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-shop/254_0.mp3",
+  "text": "SHOP STREET · 2:00 PM. Sunny. Vending machines hum. Nanda pulls you to a shop.",
+  "voice": "narrator"
+ },
+ {
+  "n": 255,
+  "scene": "v2-shop",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/v2-shop/255_1.mp3",
+  "text": "The shop doors slide open. A little tune plays.",
+  "voice": "narrator"
+ },
+ {
+  "n": 256,
+  "scene": "v2-shop",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-shop/256_3.mp3",
+  "text": "Your hands push the cart. Her hand slides on top of yours.",
+  "voice": "narrator"
+ },
+ {
+  "n": 257,
+  "scene": "v2-shop",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/v2-shop/257_5.mp3",
+  "text": "Close-up. Her hand puts one cup in the basket. Then two. Then three.",
+  "voice": "narrator"
+ },
+ {
+  "n": 258,
+  "scene": "v2-shop",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/v2-shop/258_6.mp3",
+  "text": "You walk past the sweets. She does not look at them. She looks at you.",
+  "voice": "narrator"
+ },
+ {
+  "n": 259,
+  "scene": "v2-shop",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/v2-shop/259_7.mp3",
+  "text": "Checkout. Lane 2 is open. You put the basket on the counter.",
+  "voice": "narrator"
+ },
+ {
+  "n": 260,
+  "scene": "v2-shop",
+  "beat": "N 8",
+  "file": "public/date-beta/voice/narration/v2-shop/260_8.mp3",
+  "text": "The shop lady smiles at you. Nanda sees it.",
+  "voice": "narrator"
+ },
+ {
+  "n": 261,
+  "scene": "v2-shop",
+  "beat": "N 9",
+  "file": "public/date-beta/voice/narration/v2-shop/261_9.mp3",
+  "text": "Close-up. Her nails press into the basket handle. Hard.",
+  "voice": "narrator"
+ },
+ {
+  "n": 262,
+  "scene": "v2-shop",
+  "beat": "N 10",
+  "file": "public/date-beta/voice/narration/v2-shop/262_10.mp3",
+  "text": "She pulls you to the self-checkout. No shop lady there.",
+  "voice": "narrator"
+ },
+ {
+  "n": 263,
+  "scene": "v2-shop",
+  "beat": "N 12",
+  "file": "public/date-beta/voice/narration/v2-shop/263_12.mp3",
+  "text": "The shop bell rings. You carry the bags. She holds your sleeve.",
+  "voice": "narrator"
+ },
+ {
+  "n": 264,
+  "scene": "v2-library",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-library/264_0.mp3",
+  "text": "RAIL CROSSING · 1:50 PM. The bell rings. The gate is down.",
+  "voice": "narrator"
+ },
+ {
+  "n": 265,
+  "scene": "v2-library",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/v2-library/265_1.mp3",
+  "text": "A train passes. Her hand grabs your sleeve until it is gone.",
+  "voice": "narrator"
+ },
+ {
+  "n": 266,
+  "scene": "v2-library",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/v2-library/266_2.mp3",
+  "text": "LIBRARY · 2:00 PM. Cool air. Very quiet.",
+  "voice": "narrator"
+ },
+ {
+  "n": 267,
+  "scene": "v2-library",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/v2-library/267_4.mp3",
+  "text": "Close-up. The book drops into the slot. Thunk.",
+  "voice": "narrator"
+ },
+ {
+  "n": 268,
+  "scene": "v2-library",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/v2-library/268_5.mp3",
+  "text": "Her empty hand finds your hand. You walk out.",
+  "voice": "narrator"
+ },
+ {
+  "n": 269,
+  "scene": "v2-town",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-town/269_0.mp3",
+  "text": "AKIBA · 2:45 PM. Big signs. Big screens. She holds your hand.",
+  "voice": "narrator"
+ },
+ {
+  "n": 270,
+  "scene": "v2-curry",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-curry/270_0.mp3",
+  "text": "It is 2:55 PM. Two curry shops stand side by side.",
+  "voice": "narrator"
+ },
+ {
+  "n": 271,
+  "scene": "v2-curry",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/v2-curry/271_2.mp3",
+  "text": "She opens the glass door. A bell rings.",
+  "voice": "narrator"
+ },
+ {
+  "n": 272,
+  "scene": "v2-curry",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-curry/272_3.mp3",
+  "text": "We go inside NAND HOUSE. A TV plays a dance video.",
+  "voice": "narrator"
+ },
+ {
+  "n": 273,
+  "scene": "v2-curry",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/v2-curry/273_4.mp3",
+  "text": "We sit at a table by the window. She sits on your right. Her knee touches your knee.",
+  "voice": "narrator"
+ },
+ {
+  "n": 274,
+  "scene": "v2-curry",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/v2-curry/274_5.mp3",
+  "text": "Lunch comes on a steel tray. Butter chicken, green saag, rice, and one very big naan.",
+  "voice": "narrator"
+ },
+ {
+  "n": 275,
+  "scene": "v2-curry",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/v2-curry/275_6.mp3",
+  "text": "She tears off a piece of naan with two fingers.",
+  "voice": "narrator"
+ },
+ {
+  "n": 276,
+  "scene": "v2-curry",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/v2-curry/276_7.mp3",
+  "text": "She pours more butter sauce. It is thick, orange, and shiny.",
+  "voice": "narrator"
+ },
+ {
+  "n": 277,
+  "scene": "v2-curry",
+  "beat": "N 8",
+  "file": "public/date-beta/voice/narration/v2-curry/277_8.mp3",
+  "text": "She dips the naan in the sauce. The sauce drips.",
+  "voice": "narrator"
+ },
+ {
+  "n": 278,
+  "scene": "v2-curry",
+  "beat": "N 10",
+  "file": "public/date-beta/voice/narration/v2-curry/278_10.mp3",
+  "text": "She eats the naan from your fingers. She looks at your face the whole time. There is sauce on her lip.",
+  "voice": "narrator"
+ },
+ {
+  "n": 279,
+  "scene": "v2-curry",
+  "beat": "N 11",
+  "file": "public/date-beta/voice/narration/v2-curry/279_11.mp3",
+  "text": "She pushes her mango lassi to you. It has only one straw.",
+  "voice": "narrator"
+ },
+ {
+  "n": 280,
+  "scene": "v2-curry",
+  "beat": "N 12",
+  "file": "public/date-beta/voice/narration/v2-curry/280_12.mp3",
+  "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+  "voice": "narrator"
+ },
+ {
+  "n": 281,
+  "scene": "v2-curry",
+  "beat": "N 13",
+  "file": "public/date-beta/voice/narration/v2-curry/281_13.mp3",
+  "text": "We walk out to the street. It is 3:40 PM.",
+  "voice": "narrator"
+ },
+ {
+  "n": 282,
+  "scene": "v2-curry-katsu",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/282_0.mp3",
+  "text": "She opens the yellow door. A bell rings.",
+  "voice": "narrator"
+ },
+ {
+  "n": 283,
+  "scene": "v2-curry-katsu",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/283_1.mp3",
+  "text": "We go inside OR OR CURRY. A TV plays a cooking show.",
+  "voice": "narrator"
+ },
+ {
+  "n": 284,
+  "scene": "v2-curry-katsu",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/284_2.mp3",
+  "text": "We sit at the counter. She sits on your right. Her knee touches your knee.",
+  "voice": "narrator"
+ },
+ {
+  "n": 285,
+  "scene": "v2-curry-katsu",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/285_3.mp3",
+  "text": "Lunch comes on a white plate. Rice, brown curry, and a fried pork cutlet.",
+  "voice": "narrator"
+ },
+ {
+  "n": 286,
+  "scene": "v2-curry-katsu",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/286_4.mp3",
+  "text": "She cuts off one small piece with her spoon. Crunch.",
+  "voice": "narrator"
+ },
+ {
+  "n": 287,
+  "scene": "v2-curry-katsu",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/287_5.mp3",
+  "text": "She pours more curry on the rice. It is thick, brown, and hot.",
+  "voice": "narrator"
+ },
+ {
+  "n": 288,
+  "scene": "v2-curry-katsu",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/288_6.mp3",
+  "text": "She dips the small piece in the curry. The curry drips.",
+  "voice": "narrator"
+ },
+ {
+  "n": 289,
+  "scene": "v2-curry-katsu",
+  "beat": "N 8",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/289_8.mp3",
+  "text": "She eats the piece from your fingers. She looks at your face the whole time. There is curry on her lip.",
+  "voice": "narrator"
+ },
+ {
+  "n": 290,
+  "scene": "v2-curry-katsu",
+  "beat": "N 9",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/290_9.mp3",
+  "text": "She pushes her lemon water to you. It has only one straw.",
+  "voice": "narrator"
+ },
+ {
+  "n": 291,
+  "scene": "v2-curry-katsu",
+  "beat": "N 10",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/291_10.mp3",
+  "text": "She wipes your fingers with her napkin. Then she keeps the napkin. She collects them.",
+  "voice": "narrator"
+ },
+ {
+  "n": 292,
+  "scene": "v2-curry-katsu",
+  "beat": "N 11",
+  "file": "public/date-beta/voice/narration/v2-curry-katsu/292_11.mp3",
+  "text": "We walk out to the street. It is 3:40 PM.",
+  "voice": "narrator"
+ },
+ {
+  "n": 293,
+  "scene": "v2-curry-alone",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-curry-alone/293_0.mp3",
+  "text": "She opens the yellow door. A bell rings.",
+  "voice": "narrator"
+ },
+ {
+  "n": 294,
+  "scene": "v2-curry-alone",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/v2-curry-alone/294_1.mp3",
+  "text": "She eats alone. You get no food. She looks at you the whole time.",
+  "voice": "narrator"
+ },
+ {
+  "n": 295,
+  "scene": "v2-curry-alone",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/v2-curry-alone/295_2.mp3",
+  "text": "She folds her napkin and keeps it. She collects them.",
+  "voice": "narrator"
+ },
+ {
+  "n": 296,
+  "scene": "v2-curry-alone",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-curry-alone/296_3.mp3",
+  "text": "We walk out to the street. It is 3:40 PM.",
+  "voice": "narrator"
+ },
+ {
+  "n": 297,
+  "scene": "v2-train",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/v2-train/297_1.mp3",
+  "text": "STATION · 4:30 PM. The station is full. Everyone is going home.",
+  "voice": "narrator"
+ },
+ {
+  "n": 298,
+  "scene": "v2-train",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-train/298_3.mp3",
+  "text": "Two men bump her bag. They laugh.",
+  "voice": "narrator"
+ },
+ {
+  "n": 299,
+  "scene": "v2-train",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/v2-train/299_7.mp3",
+  "text": "5:20 PM. It's raining. She lays her head on yours. She drifts away.",
+  "voice": "narrator"
+ },
+ {
+  "n": 300,
+  "scene": "v2-rain",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-rain/300_0.mp3",
+  "text": "BIG CROSSING · 5:30 PM. Heavy rain. The signs glow. Nobody else.",
+  "voice": "narrator"
+ },
+ {
+  "n": 301,
+  "scene": "v2-rain",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/v2-rain/301_2.mp3",
+  "text": "Close-up. Her shoes are wet. She walks in the puddles for you.",
+  "voice": "narrator"
+ },
+ {
+  "n": 302,
+  "scene": "v2-rain",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-rain/302_3.mp3",
+  "text": "She looks up at you. Then down. Then up again.",
+  "voice": "narrator"
+ },
+ {
+  "n": 303,
+  "scene": "v2-rain",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/v2-rain/303_4.mp3",
+  "text": "The rain stops. Two pairs of wet shoes walk toward her street.",
+  "voice": "narrator"
+ },
+ {
+  "n": 304,
+  "scene": "v2-street",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-street/304_0.mp3",
+  "text": "HER STREET · 6:00 PM. Wet road. Low sun. Long shadows.",
+  "voice": "narrator"
+ },
+ {
+  "n": 305,
+  "scene": "v2-street",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/v2-street/305_2.mp3",
+  "text": "7:00 PM. The sky goes orange, then dark blue. You walked one hour.",
+  "voice": "narrator"
+ },
+ {
+  "n": 306,
+  "scene": "v2-street",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-street/306_3.mp3",
+  "text": "Close-up. Her house key. Her fist opens. Red marks on her palm.",
+  "voice": "narrator"
+ },
+ {
+  "n": 307,
+  "scene": "v2-street",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/v2-street/307_5.mp3",
+  "text": "Close-up. The key turns. Click. Door 12 opens.",
+  "voice": "narrator"
+ },
+ {
+  "n": 308,
+  "scene": "v2-home",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/v2-home/308_0.mp3",
+  "text": "HER HOME · 7:05 PM. Very clean. Her shoes in a perfect line.",
+  "voice": "narrator"
+ },
+ {
+  "n": 309,
+  "scene": "v2-home",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/v2-home/309_1.mp3",
+  "text": "She kneels. She puts slippers on your feet. Your size.",
+  "voice": "narrator"
+ },
+ {
+  "n": 310,
+  "scene": "v2-home",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-home/310_3.mp3",
+  "text": "HER KITCHEN · 7:10 PM. Three chairs. Three cups. Steam.",
+  "voice": "narrator"
+ },
+ {
+  "n": 311,
+  "scene": "v2-home",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/v2-home/311_4.mp3",
+  "text": "Her hand on your back. She sits you in the middle chair.",
+  "voice": "narrator"
+ },
+ {
+  "n": 312,
+  "scene": "park",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/park/312_0.mp3",
+  "text": "A sakura park. Blue sky. Petals fall like slow snow.",
+  "voice": "narrator"
+ },
+ {
+  "n": 313,
+  "scene": "park",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/park/313_4.mp3",
+  "text": "Close-up. Her fingers lock between yours. Tight. Tighter.",
+  "voice": "narrator"
+ },
+ {
+  "n": 314,
+  "scene": "errand-shop",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/errand-shop/314_0.mp3",
+  "text": "A street of little shops. Pink petals on every roof.",
+  "voice": "narrator"
+ },
+ {
+  "n": 315,
+  "scene": "errand-shop",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/errand-shop/315_2.mp3",
+  "text": "Close-up. Three cups in the basket. She strokes the third one.",
+  "voice": "narrator"
+ },
+ {
+  "n": 316,
+  "scene": "errand-shop",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/errand-shop/316_6.mp3",
+  "text": "The shop door jingles shut. The bags cut into your fingers.",
+  "voice": "narrator"
+ },
+ {
+  "n": 317,
+  "scene": "errand-shop",
+  "beat": "N 8",
+  "file": "public/date-beta/voice/narration/errand-shop/317_8.mp3",
+  "text": "WALK TO THE FOOD STALLS",
+  "voice": "narrator"
+ },
+ {
+  "n": 318,
+  "scene": "errand-library",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/errand-library/318_0.mp3",
+  "text": "A rail crossing. Bells ring. Sakura on the tracks.",
+  "voice": "narrator"
+ },
+ {
+  "n": 319,
+  "scene": "errand-library",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/errand-library/319_3.mp3",
+  "text": "The library. Cool air. So quiet you can hear pages turn.",
+  "voice": "narrator"
+ },
+ {
+  "n": 320,
+  "scene": "errand-library",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/errand-library/320_4.mp3",
+  "text": "Close-up. The book drops in the return slot. Thunk.",
+  "voice": "narrator"
+ },
+ {
+  "n": 321,
+  "scene": "errand-library",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/errand-library/321_7.mp3",
+  "text": "Outside, the crossing bell starts again. She waits for it to stop.",
+  "voice": "narrator"
+ },
+ {
+  "n": 322,
+  "scene": "errand-library",
+  "beat": "N 8",
+  "file": "public/date-beta/voice/narration/errand-library/322_8.mp3",
+  "text": "WALK TO THE FOOD STALLS",
+  "voice": "narrator"
+ },
+ {
+  "n": 323,
+  "scene": "town",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/town/323_0.mp3",
+  "text": "The big crossing. A thousand people. She only looks at you.",
+  "voice": "narrator"
+ },
+ {
+  "n": 324,
+  "scene": "town",
+  "beat": "N 12",
+  "file": "public/date-beta/voice/narration/town/324_12.mp3",
+  "text": "WALK TO THE STATION",
+  "voice": "narrator"
+ },
+ {
+  "n": 325,
+  "scene": "train",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/train/325_0.mp3",
+  "text": "AND Line, local service. Home in twelve stops.",
+  "voice": "narrator"
+ },
+ {
+  "n": 326,
+  "scene": "train",
+  "beat": "N 1 bento=umeboshi",
+  "file": "public/date-beta/voice/narration/train/326_1-bento-umeboshi.mp3",
+  "text": "Nobody reads the ads. This one says すっぱい！ SOUR!",
+  "voice": "narrator"
+ },
+ {
+  "n": 327,
+  "scene": "train",
+  "beat": "N 1 bento=tamagoyaki",
+  "file": "public/date-beta/voice/narration/train/327_1-bento-tamagoyaki.mp3",
+  "text": "Nobody reads the ads. This one says 甘い！ SWEET!",
+  "voice": "narrator"
+ },
+ {
+  "n": 328,
+  "scene": "naan",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/naan/328_1.mp3",
+  "text": "Technically, that's a NAND gate. Not bread.",
+  "voice": "narrator"
+ },
+ {
+  "n": 329,
+  "scene": "naan",
+  "beat": "N 1 food=butter",
+  "file": "public/date-beta/voice/narration/naan/329_1-food-butter.mp3",
+  "text": "Technically, that's a NAND gate. Not our lunch.",
+  "voice": "narrator"
+ },
+ {
+  "n": 330,
+  "scene": "platform",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/platform/330_0.mp3",
+  "text": "Her stop. The rain followed us off the train.",
+  "voice": "narrator"
+ },
+ {
+  "n": 331,
+  "scene": "platform",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/platform/331_1.mp3",
+  "text": "The AND Line leaves. Just two of us now.",
+  "voice": "narrator"
+ },
+ {
+  "n": 332,
+  "scene": "platform",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/platform/332_2.mp3",
+  "text": "NEXT: this OR that. The sign never picks.",
+  "voice": "narrator"
+ },
+ {
+  "n": 333,
+  "scene": "station-talk",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/station-talk/333_2.mp3",
+  "text": "(Weird. Feels like I've heard that before.)",
+  "voice": "narrator"
+ },
+ {
+  "n": 334,
+  "scene": "station-talk",
+  "beat": "N 2 run=2",
+  "file": "public/date-beta/voice/narration/station-talk/334_2-run-2.mp3",
+  "text": "Didn't we already do this? The bento, the train, the tea… Nanda, are we in a loop?",
+  "voice": "narrator"
+ },
+ {
+  "n": 335,
+  "scene": "station-talk",
+  "beat": "N 2 run=3",
+  "file": "public/date-beta/voice/narration/station-talk/335_2-run-3.mp3",
+  "text": "Run {RUN}. I know every line. So do you.",
+  "voice": "narrator"
+ },
+ {
+  "n": 336,
+  "scene": "rain-crossing",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/rain-crossing/336_0.mp3",
+  "text": "Rain. The signs glow. The crossing is empty now. It's {TIME}.",
+  "voice": "narrator"
+ },
+ {
+  "n": 337,
+  "scene": "rain-crossing",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/rain-crossing/337_2.mp3",
+  "text": "Close-up. Rain on the umbrella. Her shoulder gets wet. Yours doesn't.",
+  "voice": "narrator"
+ },
+ {
+  "n": 338,
+  "scene": "rain-crossing",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/rain-crossing/338_6.mp3",
+  "text": "WALK HER HOME",
+  "voice": "narrator"
+ },
+ {
+  "n": 339,
+  "scene": "underpass",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/underpass/339_0.mp3",
+  "text": "Your steps, her steps. Always an even count.",
+  "voice": "narrator"
+ },
+ {
+  "n": 340,
+  "scene": "walk-home",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/walk-home/340_0.mp3",
+  "text": "The rain stops. Sun on her street. She walks slower.",
+  "voice": "narrator"
+ },
+ {
+  "n": 341,
+  "scene": "walk-home",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/walk-home/341_2.mp3",
+  "text": "The sky goes orange. She stopped walking a while ago.",
+  "voice": "narrator"
+ },
+ {
+  "n": 342,
+  "scene": "walk-home",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/walk-home/342_5.mp3",
+  "text": "Close-up. Her house key is already in her hand. Warm. Held since noon.",
+  "voice": "narrator"
+ },
+ {
+  "n": 343,
+  "scene": "walk-home",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/walk-home/343_7.mp3",
+  "text": "FOLLOW HER INSIDE",
+  "voice": "narrator"
+ },
+ {
+  "n": 344,
+  "scene": "apartment",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/apartment/344_0.mp3",
+  "text": "Four floors. One window lit.",
+  "voice": "narrator"
+ },
+ {
+  "n": 345,
+  "scene": "genkan-in",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/genkan-in/345_0.mp3",
+  "text": "Her shoes. Lined up to the millimetre.",
+  "voice": "narrator"
+ },
+ {
+  "n": 346,
+  "scene": "genkan-in",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/genkan-in/346_1.mp3",
+  "text": "Men's slippers. Already set out.",
+  "voice": "narrator"
+ },
+ {
+  "n": 347,
+  "scene": "genkan-in",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/genkan-in/347_2.mp3",
+  "text": "A tiny shrine. Inside: a circuit you built.",
+  "voice": "narrator"
+ },
+ {
+  "n": 348,
+  "scene": "genkan-talk",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/genkan-talk/348_4.mp3",
+  "text": "The kitchen. Too clean. Three chairs. The kettle is already warm.",
+  "voice": "narrator"
+ },
+ {
+  "n": 349,
+  "scene": "genkan-talk",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/genkan-talk/349_5.mp3",
+  "text": "Close-up. She pours. The steam curls up like a finger.",
+  "voice": "narrator"
+ },
+ {
+  "n": 350,
+  "scene": "cup",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/cup/350_0.mp3",
+  "text": "HER KITCHEN · 7:20 PM. The tea is poured. Three cups.",
+  "voice": "narrator"
+ },
+ {
+  "n": 351,
+  "scene": "cup",
+  "beat": "N 2 bento=umeboshi",
+  "file": "public/date-beta/voice/narration/cup/351_2-bento-umeboshi.mp3",
+  "text": "Third teacup. Nobody poured it. One umeboshi on its saucer.",
+  "voice": "narrator"
+ },
+ {
+  "n": 352,
+  "scene": "cup",
+  "beat": "N 2 bento=tamagoyaki",
+  "file": "public/date-beta/voice/narration/cup/352_2-bento-tamagoyaki.mp3",
+  "text": "Third teacup. Nobody poured it. Tamagoyaki on its saucer.",
+  "voice": "narrator"
+ },
+ {
+  "n": 353,
+  "scene": "cup",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/cup/353_3.mp3",
+  "text": "Who's the third cup for?",
+  "voice": "narrator"
+ },
+ {
+  "n": 354,
+  "scene": "steeped",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/steeped/354_3.mp3",
+  "text": "Close-up. Your cup, empty. Hers, full. She never drank.",
+  "voice": "narrator"
+ },
+ {
+  "n": 355,
+  "scene": "steeped",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/steeped/355_4.mp3",
+  "text": "STEEPED.",
+  "voice": "narrator"
+ },
+ {
+  "n": 356,
+  "scene": "unknown",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/unknown/356_0.mp3",
+  "text": "You stand. The floor tilts a little.",
+  "voice": "narrator"
+ },
+ {
+  "n": 357,
+  "scene": "unknown",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/unknown/357_1.mp3",
+  "text": "Under the table: a floor hatch. Too big for storage.",
+  "voice": "narrator"
+ },
+ {
+  "n": 358,
+  "scene": "unknown",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/unknown/358_2.mp3",
+  "text": "Upstairs, the kettle clicks off. Her slippers stop moving.",
+  "voice": "narrator"
+ },
+ {
+  "n": 359,
+  "scene": "unknown",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/unknown/359_4.mp3",
+  "text": "A steep wooden ladder. Down into the dark.",
+  "voice": "narrator"
+ },
+ {
+  "n": 360,
+  "scene": "escape",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/escape/360_0.mp3",
+  "text": "BASEMENT · 7:40 PM. Concrete. One bulb. Rain at a high window.",
+  "voice": "narrator"
+ },
+ {
+  "n": 361,
+  "scene": "escape",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/escape/361_1.mp3",
+  "text": "Jars on the shelves. Each one: a date, a name.",
+  "voice": "narrator"
+ },
+ {
+  "n": 362,
+  "scene": "escape",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/escape/362_2.mp3",
+  "text": "The dates go back years. The names are all different.",
+  "voice": "narrator"
+ },
+ {
+  "n": 363,
+  "scene": "escape",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/escape/363_3.mp3",
+  "text": "Bento boxes, one per day. Your name on each. Untouched.",
+  "voice": "narrator"
+ },
+ {
+  "n": 364,
+  "scene": "escape",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/escape/364_4.mp3",
+  "text": "The oldest is dated before you met.",
+  "voice": "narrator"
+ },
+ {
+  "n": 365,
+  "scene": "escape",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/escape/365_5.mp3",
+  "text": "A mortar and a mallet. One fresh mochi. Hers only.",
+  "voice": "narrator"
+ },
+ {
+  "n": 366,
+  "scene": "escape",
+  "beat": "N 6 bento=umeboshi",
+  "file": "public/date-beta/voice/narration/escape/366_6-bento-umeboshi.mp3",
+  "text": "Newest jar: today, your name, umeboshi. Lid off. Empty.",
+  "voice": "narrator"
+ },
+ {
+  "n": 367,
+  "scene": "escape",
+  "beat": "N 6 bento=tamagoyaki",
+  "file": "public/date-beta/voice/narration/escape/367_6-bento-tamagoyaki.mp3",
+  "text": "Newest jar: today, your name, tamagoyaki. Lid off. Empty.",
+  "voice": "narrator"
+ },
+ {
+  "n": 368,
+  "scene": "escape",
+  "beat": "N 12",
+  "file": "public/date-beta/voice/narration/escape/368_12.mp3",
+  "text": "Minutes gone. A clock upstairs chimed. You lost count.",
+  "voice": "narrator"
+ },
+ {
+  "n": 369,
+  "scene": "escape",
+  "beat": "N 13",
+  "file": "public/date-beta/voice/narration/escape/369_13.mp3",
+  "text": "Above you, footsteps. Slow. Counting. One, two, three.",
+  "voice": "narrator"
+ },
+ {
+  "n": 370,
+  "scene": "escape-win",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/escape-win/370_0.mp3",
+  "text": "She's waiting at the outside door.",
+  "voice": "narrator"
+ },
+ {
+  "n": 371,
+  "scene": "escape-win",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/escape-win/371_6.mp3",
+  "text": "Wide. Her street at night. One window lit. It's yours now.",
+  "voice": "narrator"
+ },
+ {
+  "n": 372,
+  "scene": "escape-win",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/escape-win/372_7.mp3",
+  "text": "ESCAPE.",
+  "voice": "narrator"
+ },
+ {
+  "n": 373,
+  "scene": "escape-timeout",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/escape-timeout/373_0.mp3",
+  "text": "The ladder creaks. She's coming down.",
+  "voice": "narrator"
+ },
+ {
+  "n": 374,
+  "scene": "escape-timeout",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/escape-timeout/374_2.mp3",
+  "text": "You wake at the tea table. Four cups now.",
+  "voice": "narrator"
+ },
+ {
+  "n": 375,
+  "scene": "escape-timeout",
+  "beat": "N 3 bento=umeboshi",
+  "file": "public/date-beta/voice/narration/escape-timeout/375_3-bento-umeboshi.mp3",
+  "text": "She holds out an umeboshi. You eat.",
+  "voice": "narrator"
+ },
+ {
+  "n": 376,
+  "scene": "escape-timeout",
+  "beat": "N 3 bento=tamagoyaki",
+  "file": "public/date-beta/voice/narration/escape-timeout/376_3-bento-tamagoyaki.mp3",
+  "text": "She holds out the tamagoyaki. You eat.",
+  "voice": "narrator"
+ },
+ {
+  "n": 377,
+  "scene": "escape-timeout",
+  "beat": "N 7",
+  "file": "public/date-beta/voice/narration/escape-timeout/377_7.mp3",
+  "text": "ESCAPE?",
+  "voice": "narrator"
+ },
+ {
+  "n": 378,
+  "scene": "leave",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/leave/378_1.mp3",
+  "text": "XOR Coffee. 7:00 AM.",
+  "voice": "narrator"
+ },
+ {
+  "n": 379,
+  "scene": "leave-fu",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/leave-fu/379_0.mp3",
+  "text": "Her hand rises. Time freezes. The café turns.",
+  "voice": "narrator"
+ },
+ {
+  "n": 380,
+  "scene": "leave-fu",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/leave-fu/380_2.mp3",
+  "text": "fORever and ever",
+  "voice": "narrator"
+ },
+ {
+  "n": 381,
+  "scene": "leave-fu",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/leave-fu/381_3.mp3",
+  "text": "fORever and ever and ever",
+  "voice": "narrator"
+ },
+ {
+  "n": 382,
+  "scene": "leave-fu",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/leave-fu/382_4.mp3",
+  "text": "LEAVE.",
+  "voice": "narrator"
+ },
+ {
+  "n": 383,
+  "scene": "leave-yeah",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/leave-yeah/383_2.mp3",
+  "text": "fORever and ever",
+  "voice": "narrator"
+ },
+ {
+  "n": 384,
+  "scene": "leave-yeah",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/leave-yeah/384_3.mp3",
+  "text": "fORever and ever and ever",
+  "voice": "narrator"
+ },
+ {
+  "n": 385,
+  "scene": "leave-yeah",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/leave-yeah/385_4.mp3",
+  "text": "Wide. The café. Every table has two cups. Every cup has your name.",
+  "voice": "narrator"
+ },
+ {
+  "n": 386,
+  "scene": "leave-yeah",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/leave-yeah/386_5.mp3",
+  "text": "LEAVE.",
+  "voice": "narrator"
+ },
+ {
+  "n": 387,
+  "scene": "seq-butter",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/seq-butter/387_0.mp3",
+  "text": "A tiny curry house. Warm yellow light. Spice in the air. Two seats, side by side.",
+  "voice": "narrator"
+ },
+ {
+  "n": 388,
+  "scene": "seq-butter",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/seq-butter/388_2.mp3",
+  "text": "Close-up. Butter chicken lands. Orange and glossy. One naan, torn in two.",
+  "voice": "narrator"
+ },
+ {
+  "n": 389,
+  "scene": "seq-butter",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/seq-butter/389_5.mp3",
+  "text": "She wipes your mouth with her thumb. Then she licks the thumb.",
+  "voice": "narrator"
+ },
+ {
+  "n": 390,
+  "scene": "seq-butter",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/seq-butter/390_6.mp3",
+  "text": "The bell over the door. Outside, the big crossing roars again.",
+  "voice": "narrator"
+ },
+ {
+  "n": 391,
+  "scene": "seq-katsu",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/seq-katsu/391_0.mp3",
+  "text": "A tiny curry house. Oil hisses in the back. Two seats, side by side.",
+  "voice": "narrator"
+ },
+ {
+  "n": 392,
+  "scene": "seq-katsu",
+  "beat": "N 2",
+  "file": "public/date-beta/voice/narration/seq-katsu/392_2.mp3",
+  "text": "Close-up. Katsu curry lands. The knife goes in. Crunch.",
+  "voice": "narrator"
+ },
+ {
+  "n": 393,
+  "scene": "seq-katsu",
+  "beat": "N 5",
+  "file": "public/date-beta/voice/narration/seq-katsu/393_5.mp3",
+  "text": "She eats slowly. She never looks at the plate. Only at you.",
+  "voice": "narrator"
+ },
+ {
+  "n": 394,
+  "scene": "seq-katsu",
+  "beat": "N 6",
+  "file": "public/date-beta/voice/narration/seq-katsu/394_6.mp3",
+  "text": "The bell over the door. Outside, the big crossing roars again.",
+  "voice": "narrator"
+ },
+ {
+  "n": 395,
+  "scene": "seq-station",
+  "beat": "N 0",
+  "file": "public/date-beta/voice/narration/seq-station/395_0.mp3",
+  "text": "The station. Noon light through the glass roof. A train sighs somewhere.",
+  "voice": "narrator"
+ },
+ {
+  "n": 396,
+  "scene": "seq-station",
+  "beat": "N 1",
+  "file": "public/date-beta/voice/narration/seq-station/396_1.mp3",
+  "text": "Close-up. The ticket gate. She taps her card. Then taps it again. For you.",
+  "voice": "narrator"
+ },
+ {
+  "n": 397,
+  "scene": "seq-station",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/seq-station/397_3.mp3",
+  "text": "The door chime plays. She holds your sleeve the whole song.",
+  "voice": "narrator"
+ },
+ {
+  "n": 398,
+  "scene": "v2-train",
+  "beat": "N 3",
+  "file": "public/date-beta/voice/narration/v2-train/398_3.mp3",
+  "text": "Two men bump into her. They laugh.",
+  "voice": "narrator"
+ },
+ {
+  "n": 399,
+  "scene": "v2-rain",
+  "beat": "N 4",
+  "file": "public/date-beta/voice/narration/v2-rain/399_4.mp3",
+  "text": "The rain slows to a few drops. Two pairs of wet shoes walk toward her street.",
+  "voice": "narrator"
+ }
+]

@@ -1,0 +1,84 @@
+{
+ "log": [
+  {
+   "n": 1,
+   "file": "01-rooftop-rooftop_0.png",
+   "beat": "rooftop:0",
+   "scene": "rooftop",
+   "who": "",
+   "line": "",
+   "choices": [],
+   "love": 0,
+   "goal": 28,
+   "pop": null,
+   "fx": null,
+   "fxText": null,
+   "goalCard": true,
+   "end": null,
+   "game": false,
+   "next": true,
+   "stamp": null,
+   "timer": null,
+   "vis": "XII I II III IV V VI VII VIII IX X XI Figur FIGUR WEATHER Today's f-OR-ecast: rain 0% LOVE 100% ROOF 1/10 GOAL Make Nanda like you. Her LOVE score must reach 100%. Each choice changes it. Choose carefully. +3 she liked it −2 she did not like it GOT IT Click anywhere to continue ◂ LOGIC ⛶ fullscreen "
+  },
+  {
+   "n": 2,
+   "file": "02-rooftop-rooftop_1.png",
+   "beat": "rooftop:1",
+   "scene": "rooftop",
+   "who": "",
+   "line": "SCHOOL ROOFTOP · 12:00 NOON. Her shoes by the fence. Toes pointed at you.",
+   "choices": [],
+   "love": 0,
+   "goal": 28,
+   "pop": null,
+   "fx": null,
+   "fxText": null,
+   "goalCard": false,
+   "end": null,
+   "game": false,
+   "next": true,
+   "stamp": "八百屋\n花\n和菓子\nパン\n団\n子\n¥100\n¥150\n¥200\nSCHOOL ROOFTOP\n·\n12:00 NOON",
+   "timer": null,
+   "vis": "八百屋 花 和菓子 パン 団 子 ¥100 ¥150 ¥200 SCHOOL ROOFTOP · 12:00 NOON SCHOOL ROOFTOP · 12:00 NOON. Her shoes by the fence. Toes pointed at you. NEXT 0% LOVE 100% ROOF 2/10 Click anywhere to continue ◂ LOGIC ⛶ fullscreen 🔊 voice skip ▸▸ [sound: wind]"
+  },
+  {
+   "n": 3,
+   "file": "03-rooftop-rooftop_2.png",
+   "beat": "rooftop:2",
+   "scene": "rooftop",
+   "who": "NANDA",
+   "line": "I made two. One's for you. Don't look at me like that.",
+   "choices": [
+    {
+     "t": "Take the tamagoyaki",
+     "chip": "♥ +3",
+     "cls": "db-chip up"
+    },
+    {
+     "t": "Take the umeboshi",
+     "chip": "♥ +1",
+     "cls": "db-chip up"
+    },
+    {
+     "t": "Take neither",
+     "chip": "♡ −3",
+     "cls": "db-chip down"
+    }
+   ],
+   "love": 0,
+   "goal": 28,
+   "pop": null,
+   "fx": null,
+   "fxText": null,
+   "goalCard": false,
+   "end": null,
+   "game": false,
+   "next": false,
+   "stamp": "八百屋\n花\n和菓子\nパン\n団\n子\n¥100\n¥150\n¥200\nSCHOOL ROOFTOP\n·\n12:00 NOON",
+   "timer": "12",
+   "vis": "八百屋 花 和菓子 パン 団 子 ¥100 ¥150 ¥200 SCHOOL ROOFTOP · 12:00 NOON NANDA I made two. One's for you. Don't look at me like that. 12 ♥ +3 Take the tamagoyaki ♥ +1 Take the umeboshi DEFAULT ♡ −3 Take neither 0% LOVE 100% ROOF 3/10 ◂ LOGIC ⛶ fullscreen 🔊 voice skip ▸▸ [sound: tick]"
+  }
+ ],
+ "errs": []
+}

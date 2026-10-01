@@ -1,0 +1,188 @@
+{
+ "1": {
+  "scene": "v2-train",
+  "art": "art r3 r3-station-gate-r3",
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "text": "STATION · 4:30 PM. Many feet walk past. Hers stop next to yours.",
+  "id": "station-gate-r3",
+  "hud": [
+   [
+    1394,
+    987,
+    1611,
+    1051
+   ],
+   [
+    32,
+    16,
+    1580,
+    94
+   ]
+  ]
+ },
+ "2": {
+  "scene": "v2-train",
+  "art": "art r3 r3-station-ads",
+  "say": [
+   260,
+   624,
+   1660,
+   1016
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "text": "I see you, the curly-haired guy. I see you, you gringo wearing a cap. Don't gang up on me, you all NEVER stop my eternal bond with my lover.",
+  "id": "station-ads",
+  "hud": [
+   [
+    1394,
+    987,
+    1611,
+    1051
+   ],
+   [
+    32,
+    16,
+    1580,
+    94
+   ]
+  ]
+ },
+ "3": {
+  "scene": "v2-train",
+  "art": "art r3 r3-station-ads-insert",
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "text": "Close-up. She taps her card. Then she taps it again, for you.",
+  "id": "station-ads-insert",
+  "hud": [
+   [
+    1394,
+    987,
+    1611,
+    1051
+   ],
+   [
+    32,
+    16,
+    1580,
+    94
+   ]
+  ]
+ },
+ "4": {
+  "scene": "v2-train",
+  "art": "art r3 r3-train-sun",
+  "say": [
+   260,
+   761,
+   1660,
+   1016
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "text": "Twelve stops. I count them on my fingers. See?",
+  "id": "train-sun",
+  "hud": [
+   [
+    1394,
+    987,
+    1611,
+    1051
+   ],
+   [
+    32,
+    16,
+    1580,
+    94
+   ]
+  ]
+ },
+ "5": {
+  "scene": "v2-train",
+  "art": "art r3 r3-train-rain",
+  "say": [
+   260,
+   773,
+   1660,
+   1016
+  ],
+  "nanda": [
+   730,
+   424,
+   1190,
+   920
+  ],
+  "text": "5:20 PM. Her head is on your shoulder. Rain hits the window.",
+  "id": "train-rain",
+  "hud": [
+   [
+    1394,
+    987,
+    1611,
+    1051
+   ],
+   [
+    32,
+    16,
+    1580,
+    94
+   ]
+  ]
+ },
+ "6": {
+  "scene": "v2-train",
+  "art": "art r3 r3-platform-rain",
+  "say": [
+   260,
+   519,
+   1660,
+   762
+  ],
+  "nanda": [
+   730,
+   114,
+   1190,
+   610
+  ],
+  "text": "Her stop. The doors open. She pulls you out by the sleeve.",
+  "id": "platform-rain",
+  "hud": [
+   [
+    32,
+    16,
+    1580,
+    94
+   ]
+  ]
+ }
+}
