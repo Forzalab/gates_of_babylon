@@ -3,6 +3,9 @@
 import manifest from './manifest.json';
 import timing from './timing.json';
 import { buildIndex, fileForLine, planFor } from './voice.js';
+// Takes are re-recorded IN PLACE (same paths), so a browser that played the old ones keeps them cached
+// (Oct 1: the British Daniel narration kept playing after the v4 re-record to Sean). Bump this on every re-record.
+export const VOICE_REV = 'v4';
 
 const INDEX = buildIndex(manifest);
 const KEY = 'date-beta-voice-muted';
@@ -46,7 +49,7 @@ export function createVoice(base = '/', storage = () => localStorage, onSpeak = 
     if (!file && then) { file = then; then = null; }
     if (!file || muted || !unlocked || typeof Audio === 'undefined') return;
     try {
-      const a = new Audio(`${base}${file}`);
+      const a = new Audio(`${base}${file}?v=${VOICE_REV}`);
       a.addEventListener('error', () => { if (cur === a) { cur = null; speak(false); } });
       a.addEventListener('ended', () => {
         if (cur !== a) return;

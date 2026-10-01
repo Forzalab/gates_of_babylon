@@ -61,3 +61,10 @@ test('no reachable Nanda line is silent unless listed in sprint-1001/voice/gaps.
   const fresh = miss.filter((m) => !listed.has(`${m.scene}|${m.text}`)).map((m) => `${m.scene} ${m.beat}: ${m.text}`);
   assert.deepEqual(fresh, []);
 });
+
+test('voice URLs carry a revision (cache-bust): in-place re-records must not replay stale cached takes', async () => {
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('./date-beta/voice/index.js', import.meta.url), 'utf8');
+  assert.match(src, /new Audio\(`\$\{base\}\$\{file\}\?v=\$\{VOICE_REV\}`\)/);
+  assert.match(src, /export const VOICE_REV = 'v4';/);
+});
