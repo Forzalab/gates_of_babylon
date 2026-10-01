@@ -175,7 +175,7 @@ body { font-family: var(--cond); color: var(--ink); }
 .db-plant.floored { bottom: calc(1080px - var(--floor) - 17px); }
 /* R7 legs: a floor with a key light (floors.js light) turns the contact pool into a CAST shadow: pushed + turned away
    from the light, stretched by its elevation, in the scene's own shadow ink; the per-sole contact darks live in the sprite. */
-.db-plant.floored[data-cast] { transform: translate(var(--cast-dx), var(--cast-dy)) rotate(var(--cast-rot)) scaleX(var(--cast-len)); transform-origin: 50% 50%;
+.db-plant[data-cast] { transform: translate(var(--cast-dx), var(--cast-dy)) rotate(var(--cast-rot)) scaleX(var(--cast-len)); transform-origin: 50% 50%;
   background: radial-gradient(closest-side, rgba(var(--cast-ink), var(--cast-a, .46)), rgba(var(--cast-ink), calc(var(--cast-a, .46) / 2)) 55%, rgba(var(--cast-ink), 0)); }
 /* R7 legs (research/sprint-0930/legs): on a WET floor (floors.js wet) her pins + shoes mirror in the water (Shinkai:
    the reflection hangs straight down from the soles, darker, a touch soft, fading fast; dry floors get none). A flipped

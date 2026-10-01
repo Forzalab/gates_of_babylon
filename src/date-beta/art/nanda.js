@@ -262,7 +262,7 @@ const STAGE_EMOTE = { 1: 'heart', 2: 'hearts', 3: 'or', 4: 'crack' };
 // step: null = standing (both soles flat on one ground line) | 'walk' = Inoue's contact pose walking toward the camera:
 //   the FRONT leg (viewer's left) strikes with the heel, nearer = lower on screen, the toe lifted (its sole lip shows);
 //   the BACK leg pushes off, farther = higher on screen, the heel up, knee bent (a shorter, slightly slanted pin), only
-//   the toe on the ground (a small tight contact shadow).
+//   the toe on the ground (a small tight contact shadow). 'brace' = bumped: a widened base, pins splayed, soles flat.
 // lit: { rim, side, wet, bounce } = the key light's rim (bounce = the floor's light bouncing up onto the shins + toe caps) on the lit side of the pins + shoe domes (side 1 = light from the right).
 const shoeSVG = (x, gy, P, { w = 1, h = 1, lift = 0, sole = 1, contact = 1, lit = null } = {}) => {
   const b = gy - lift, t = b - 11.5 * h, hw = 9 * w, mid = b - 3.5 * h;
@@ -293,6 +293,12 @@ export function legsSVG(P, step = null, lit = null, refl = false) {
     return `<g transform="translate(0 ${d})">${pinSVG(62, 94, 60.5, 115.5, P, lit) + shoeSVG(60.5, 126.2, P, { w: 0.92, h: 1.1, sole: 0.6, contact: 0.85, lit })}</g>`
       + pinSVG(42, 94, 44, 119, P, lit) + shoeSVG(44, 130.6, P, { w: 1.04, h: 0.88, lift: 0.45, sole: 1.8, lit });
   }
+  if (step === 'brace') {
+    // bumped: the feet step out to catch her balance (a wider base, the pins splay from the hem), both soles flat,
+    // the outer edges of the shoes turned a little out (narrower domes)
+    return pinSVG(39, 94, 34.5, 118, P, lit) + shoeSVG(34, 128.5, P, { w: 0.94, lit })
+      + pinSVG(65, 94, 69.5, 118, P, lit) + shoeSVG(70, 128.5, P, { w: 0.94, lit });
+  }
   return [40, 64].map((x) => pinSVG(x, 94, x, 118, P, lit) + shoeSVG(x, 128.5, P, { lit })).join('');
 }
 
@@ -301,11 +307,12 @@ let uid = 0;
 // overlay(P, ANCHORS) -> { under, over }: extra still layers (the gacha face layers). under = inside the body clip after
 // the face, before the fringe; over = after the figure, before the bubble.
 // face: a Scene A face id (SCENE_FACES) or any FACES key; it replaces the emote's face (the palette + bubble stay the emote's).
-export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null, reach = false, step = null, lit = null, refl = false } = {}) {
+export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay = null, face = null, reach = false, step = null, lit = null, refl = false, legs: withLegs = true } = {}) {
   const E0 = EMOTES[emote ?? STAGE_EMOTE[stage]] ?? EMOTES.heart;
   const E = face != null && FACES[face] ? { ...E0, face, bubble: FACE_BUBBLE[face] ?? E0.bubble } : E0;
   const s = E.pal, P = PAL[s], n = ++uid, cb = `nd-cb${n}`, gb = `nd-gb${n}`, sh = `nd-sh${n}`;
-  const legs = legsSVG(P, step, lit, refl);
+  // legs: false = a waist-up crop (the raised, unfloored sprite is masked at the hem): no pin stubs under the skirt
+  const legs = withLegs ? legsSVG(P, step, lit, refl) : '';
   const shade = s === 3 ? `<defs><linearGradient id="${sh}" gradientUnits="userSpaceOnUse" x1="0" y1="12" x2="0" y2="72"><stop offset="0" stop-color="#2a0714" stop-opacity=".62"/><stop offset=".55" stop-color="#2a0714" stop-opacity=".38"/><stop offset="1" stop-color="#2a0714" stop-opacity="0"/></linearGradient></defs><rect x="0" y="12" width="120" height="60" fill="url(#${sh})"/>` : '';
   const sweatDrop = E.face === 'sweat' ? `<path d="${DROP}" transform="translate(27 30) scale(.62)" fill="#8fd3ff" stroke="#1f5f96" stroke-width="2"/>` : '';
   const k = big ? 0.74 : 0.57;
@@ -313,7 +320,7 @@ export function nandaSVG({ stage = 1, emote, talk = true, big = false, overlay =
   const gate = `<defs><clipPath id="${cb}"><path d="${BODYB}"/></clipPath>
       <radialGradient id="${gb}" cx=".42" cy=".4" r=".75"><stop offset="0" stop-color="${P.body}"/><stop offset="1" stop-color="${P.body2}"/></radialGradient></defs>
     ${E.aura ? `<radialGradient id="au${n}" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#12040b" stop-opacity="0"/><stop offset=".6" stop-color="#12040b" stop-opacity=".55"/><stop offset="1" stop-color="#f0243f" stop-opacity="0"/></radialGradient><ellipse cx="58" cy="60" rx="98" ry="112" fill="url(#au${n})" class="nd-aura"/>` : ''}
-    <ellipse cx="52" cy="129" rx="58" ry="6.5" fill="${P.shadow}" opacity="${step ? 0.08 : 0.16}"/>${legs}
+    ${withLegs ? `<ellipse cx="52" cy="129" rx="58" ry="6.5" fill="${P.shadow}" opacity="${step ? 0.08 : 0.16}"/>` : ''}${legs}
     ${reach ? pinArm([0, 75], [-9, 75], P) : [33, 75].map((y) => pinArm([0, y], [-9, y], P)).join('')}
     <path d="${BODYB}" fill="url(#${gb})" stroke="${P.rim}" stroke-width="3.2" stroke-linejoin="round"/>
     <g clip-path="url(#${cb})">

@@ -25,3 +25,22 @@ legs on screen is the walk-out onto the curry street.
 | 3 | 2 without the toe-cap line; back-foot contact 0.7 -> 0.85 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 1 | 9 | PASS |
 
 Left: the street's ground at y 790 is soft (the bg is blurred there), so contact keeps 1 of 2.
+
+## 4. Station feet: v2-train 3 "Two men bump into her" (station-ads, planted 90; also v2-train 4)
+The crowd's legs are all under the box (Crowd.jsx); the feet on screen are hers.
+| it | change | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | total | kept |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| 0 | before (with the shared sole/contact fix): a statue on a "bumped" line, a magenta pool centred off her feet | 2 | 1 | 0 | 1 | 0 | 0 | 0 | 1 | 5 | - |
+| 1 | planted beats keep the floor's pose + light; 'brace' stance (wider base, pins splayed); sun shafts up-right: cool rim, cast to the left in blue-grey ink; grade | 2 | 2 | 1 | 1 | 1 | 0 | 1 | 1 | 9 | yes |
+| 2 | a cool floor bounce on the shins | 2 | 2 | 1 | 1 | 1 | 1 | 1 | 1 | 10 | PASS |
+
+## Fixes found on the way
+- The grade was an inline `filter` on her svg, which overrode the stage's focus glow (`.stage.focus .db-nanda`). It is
+  now an inner `<g style=filter>`, so the focus plane / drop-shadow stay as they were (rain walk + street re-shot).
+- Float audit: town 12 / errand-shop 8 (raised waist-up crops) showed two pin stubs under the hem. Those crops now draw
+  no legs at all (Nanda.jsx waistUp), and the audit counts a waist-up crop as cropped. Float audit: 0 flags.
+
+## Contact sheet 1 (shots 2-4): compare/contact-sheet-1.jpg
+Same shoe model, sole lip and pin length in all three; the shadow family follows each scene (soft cool-left in the
+drizzle, long warm-right in the afternoon street, cool-left under the station shafts). The refs' cast shadows are
+harder (ref 04, low sun); ours stay soft because none of these three keys is a hard low sun. Consistent: OK.

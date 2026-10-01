@@ -27,3 +27,8 @@
 - Contact: none (no ground). Pose: static on a "we walk out" line.
 - Light: afternoon sun from the left (every pole is lit on its left face) = a warm rim on her left edges, a long cast
   shadow to the right, warm-brown shadow ink, a warm floor bounce on the shins.
+
+## 4. v2-train 3 (station-ads), the station feet
+- Pose: a static stand on "Two men bump into her" (Inoue: a bump = a caught-balance, widened base).
+- Light: the sun shafts come down from the upper right through the roof; the pool was magenta-tinted and centred at
+  x 960, 40 px right of her soles. Grade: hotter than the blue-grey platform. The crowd's feet are all behind the box.

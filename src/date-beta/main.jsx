@@ -211,7 +211,8 @@ function Player() {
   const autoFace = useMemo(() => (AUTOFACE ? autoFaces(scene.beats, (b) => stageFor(b.scare)) : []), [scene]);
   const face = beat.react ? null : (stepped && cut.face2) || cut.face || autoFace[beat.index] || null;
   // her floor (art/floors.js): an explicit props.cut.plant wins, else the per-bg / per-insert-shot floor line.
-  const flo = cut.plant ? { key: null, y: null } : floorOf(beat.bg, beat.props?.shot);
+  // (a planted beat keeps the floor's pose + light, R7 legs; only the y comes from the plant)
+  const flo = cut.plant ? { ...floorOf(beat.bg, beat.props?.shot), key: null, y: null, wet: false } : floorOf(beat.bg, beat.props?.shot);
   const tag = !!(cut.tag && beat.choices?.length === 1 && !beat.react);
   const handout = !!(cut.handout && beat.choices && !beat.react);
   // ux-six: a one-button "choice" with no score is a NEXT in disguise: drawn as the NEXT pill (named after the action),
@@ -347,7 +348,7 @@ function Player() {
         {pop?.gacha && <EmotionFx gacha={pop.gacha} key={`${pop.s}/${pop.b}`} /> /* gacha tier: still backdrop for the reaction frame */}
         <Fx fx={pos.fx} rm={RM} stageRef={stageRef} />
         {end && <EndCard end={end} line={fill(failLine(end, { seed: pos.luck?.seed ?? SEED, run: getRun() }))} onAgain={() => pick(0)} />}
-        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, ...castVars(flo.light) } : { '--plant': `${cut.plant}px` }} data-cast={flo.light ? 'lit' : undefined} aria-hidden="true" />}
+        {!pos.done && !end && !(off) && frame === 'medium' && (cut.plant || flo.y) && (here || speaksNanda(beat.line)) && <div className={`db-plant${flo.y ? ' floored' : ((!!beat.choices && !solo) || !!cut.raise) && !tag ? ' raised' : ''}`} style={flo.y ? { '--floor': `${flo.y}px`, ...castVars(flo.light) } : { '--plant': `${cut.plant}px`, ...castVars(flo.light) }} data-cast={flo.light ? 'lit' : undefined} aria-hidden="true" />}
         {!pos.done && !(off && !end) && (here || speaksNanda(beat.line)) && (frame !== 'off' || end) && (
           <Nanda scare={beat.scare} raised={((!!beat.choices && !solo) || !!cut.raise) && !end && frame === 'medium' && !tag /* R5: a solo NEXT keeps the low box, so she stays down */} emote={end ? (cardFor(end) === 'fail' ? 'crack' : 'hearts') : pop?.emote ?? beat.props?.emote ?? null}
             big={!!(pop || end)} talk={!!(speaksNanda(beat.line) || pop || end || card)} layers={end ? null : withInjury(pop?.gacha ? LAYERS ?? pop.gacha.face : (!beat.react && cut.layers) || null, scene.id, beat.index)}
