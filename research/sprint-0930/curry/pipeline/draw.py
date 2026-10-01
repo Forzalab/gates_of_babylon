@@ -9,7 +9,8 @@
 #   top-left edges, shades on bottom-right edges, and every cast shadow falls to the lower RIGHT (+dx, +dy).
 # - ONE vanishing point per drawing (cloth weave / counter planks radiate from VP). Close shots are CROPS of the hero
 #   drawing (a scale/translate of the SAME group), so the dish is the same sprite in every shot.
-# - Hands have 5 fingers, joined to a wrist and a sleeve that runs off the frame edge. Food touches fingers or a surface.
+# - YOUR hands have 5 fingers, joined to a wrist and a sleeve that runs off the frame edge. HER hands are always her PINS
+#   (pin_hold: a lead + a round nub, Nanda canon; H2 10-01). Food touches fingers, a nub or a surface.
 # - No text is drawn here (the shop signs are JSX, below the y=140 HUD band). Faces + hands stay above y=740 (the box).
 # usage: python3 draw.py <out dir>
 import sys, os, re, json, random, math
@@ -503,15 +504,17 @@ def naan_lift():
         m = ((a[0] + b[0]) / 2 + 12, (a[1] + b[1]) / 2 + 22)
         strands += f'<path d="M{a[0]:.0f} {a[1]:.0f}Q{m[0]:.0f} {m[1]:.0f} {b[0]:.0f} {b[1]:.0f}" stroke="#fbf0d4" stroke-width="{11 - i * 2}" fill="none" stroke-linecap="round"/>'
         strands += f'<path d="M{a[0]:.0f} {a[1]:.0f}Q{m[0]:.0f} {m[1]:.0f} {b[0]:.0f} {b[1]:.0f}" stroke="#d9b27a" stroke-width="2" fill="none" opacity=".7" transform="translate(2 4)"/>'
-    # the anchor hand: her LEFT (mirrored), from the top right, the fingertips on the naan 2 cm right of the tear
+    # H2 (SLOP 10-01, Nanda canon: PIN hands, never 5 fingers; as katsu_close / napkin_fold): her two input pins.
+    # The anchor pin comes in from the right frame edge and its nub presses the naan 2 cm right of the tear (drawn
+    # over the naan: it holds it down); the pulling pin comes in from the left edge and its nub pinches the torn piece
+    # by its torn edge (the piece is drawn under the nub, so the nub closes over it).
     A = on((150, 196))
-    ha, HA = grip.hand(A, 118, s, 'press', 'her', flip=True, wrist=-10, uid='la')
-    # the pulling hand: her RIGHT, from the top left, thumb under the piece + the index on top of it, at the torn edge
     P = piece_pt('naan', G, rot, k, (98, 196))
-    hb, HB = grip.hand(P, 64, s, 'pinch', 'her', wrist=8, uid='lb')
-    return svg(cloth() + g + hand_cel(ha, 'b', s, 1.2) + gn + strands
-               + hand_cel(hb, 'b', s, 6.5)
-               + grip.shadow(piece_sil('naan', G, rot, k), *grip.lift_off(s, 5), .28) + f'<g filter="url(#tint-b)">{pc}</g>')
+    ra, rb = round(1.25 * s), round(1.35 * s)
+    ha = pin_hold((round(A[0]), round(A[1])), ra, ((2000, round(A[1]) + 260), (round(A[0]) + 360, round(A[1]) + 120)))
+    hb = pin_hold((round(P[0]), round(P[1])), rb, ((-80, round(P[1]) - 150), (round(P[0]) - 380, round(P[1]) - 230)), held=pc)   # from the left edge, under the HUD band
+    return svg(cloth() + g + gn + strands + cel(ha, 'b', lift=(20, 30), op=.22)
+               + grip.shadow(piece_sil('naan', G, rot, k), *grip.lift_off(s, 5), .28) + cel(hb, 'b', lift=(60, 110), op=.2))
 
 
 SAUCE = (1.6, None, (880, 540))        # the butter katori, big
@@ -547,8 +550,9 @@ def naan_dip():
     rot = math.degrees(th) - 180
     hide = surface_hide(cx, cy, rx, ry, entry[1])
     pc = food_piece('naan', G, rot, k, BUTTER, .62, 0, 'd', hide)
-    h, H = grip.hand(G, 176, s, 'scoop', 'her', flip=True, held=pc, wrist=-8, uid='d')   # her left hand, from the right (ref 04)
-    return svg(cloth() + g + hand_cel(h, 'b', s, 8) + meniscus(entry[0] + 1.2 * s, entry[1], 3.6 * s, BUTTER))
+    # H2: her pin (not a 5-finger hand), from the right frame edge, the nub on the piece's held end (piece under the nub)
+    h = pin_hold((round(G[0]), round(G[1])), round(1.25 * s), ((2000, round(G[1]) + 60), (round(G[0]) + 420, round(G[1]) - 60)), held=pc)   # under the HUD column
+    return svg(cloth() + g + cel(h, 'b', lift=(50, 90), op=.2) + meniscus(entry[0] + 1.2 * s, entry[1], 3.6 * s, BUTTER))
 
 
 def naan_feed():
@@ -625,7 +629,7 @@ def napkin_shape(stain, fold=False):
             f'<path d="{blobpath(random.Random(3), 10, -10, 22, 1.6, .7)}" fill="{base}" opacity=".85"/><path d="{blobpath(random.Random(4), 60, 30, 14, 1.6, .7)}" fill="{base}" opacity=".7"/>')
 
 
-def napkin_shot(surface, dish, stain, pin=False):
+def napkin_shot(surface, dish, stain, pin=False, scene='k'):
     """your fingers (from the bottom-left, curry on the tips) + her hand from the right wiping them with the napkin.
     pin = her hand is her pin (M1 route B, katsu): the nub presses the napkin over your fingertips."""
     base, dark, hi = stain
@@ -637,7 +641,7 @@ def napkin_shot(surface, dish, stain, pin=False):
     # her hand wraps the napkin over your index + middle fingers (napkin on top = it touches them)
     if pin:
         nap = f'<g transform="translate(930 470) rotate(170) scale(1.25 -1.25)">{napkin_shape(stain)}</g>'
-        b += cel(pin_hold((1010, 430), 84, ((2000, 560), (1500, 330)), held=nap), 'k', lift=(30, 60), op=.2)
+        b += cel(pin_hold((1010, 430), 84, ((2000, 560), (1500, 330)), held=nap), scene, lift=(30, 60), op=.2)
         return svg(b)
     b += hand(1084, 642, 180 + 10, 1.5, 'grip', 'her', flip=True, held=f'<g transform="translate(150 -70) rotate(180) scale(1 -1)">{napkin_shape(stain)}</g>')
     return svg(b)
@@ -900,7 +904,7 @@ def katsu_counter():
 SHOTS = {
     'thali': thali, 'naan-lift': naan_lift, 'sauce': sauce, 'naan-dip': naan_dip, 'naan-feed': naan_feed, 'butter-bite': butter_bite,
     'lassi': lassi, 'butter-table': butter_table,
-    'napkin': lambda: napkin_shot(cloth(), f'<g transform="translate(-700 560) scale(.8)">{thali_group()}</g>', BUTTER),
+    'napkin': lambda: napkin_shot(cloth(), f'<g transform="translate(-700 560) scale(.8)">{thali_group()}</g>', BUTTER, pin=True, scene='b'),
     'katsu-dish': katsu_dish, 'katsu-cut': katsu_cut, 'katsu-pour': katsu_pour, 'katsu-close': katsu_close,
     'katsu-feed': katsu_feed, 'katsu-bite': katsu_bite, 'katsu-water': katsu_water, 'katsu-counter': katsu_counter,
     'katsu-napkin': lambda: napkin_shot(counter(), f'<g transform="translate(-700 560) scale(.8)">{katsu_plate()}</g>', ROUX, pin=True),

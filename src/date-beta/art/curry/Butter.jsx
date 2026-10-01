@@ -93,7 +93,7 @@ export function CurryButterInt({ rm }) {
 }
 
 // Every shot below is HAND-DRAWN flat cel (research/sprint-0930/curry/pipeline/draw.py): one window light from the upper
-// left, cast shadows down-right, the SAME thali sprite in every close-up (crops of the hero), 5-finger hands on sleeves.
+// left, cast shadows down-right, the SAME thali sprite in every close-up (crops of the hero), 5-finger hands on sleeves for YOU; her hands are her pins (H2, draw.py pin_hold).
 
 // the two-shot: the window on the left, her booth in the middle (she sits on its seat, her shadow falls right), our table
 export function CurryButterTable() {
@@ -111,7 +111,7 @@ export function CurryThali({ rm }) {
 
 // her hand (from the right) lifts the piece she tore off the naan tip
 export function CurryNaanLift() {
-  return <CurryScene id="naan-lift" label="Close: her fingers hold up a piece of naan. She tore it off the tip of the big naan." />;
+  return <CurryScene id="naan-lift" label="Close: her two pink pin hands tear the naan. One round nub presses the big naan down, the other pinches the torn-off tip and lifts it." />;
 }
 
 // a small steel boat pours more butter sauce into the butter chicken cup
@@ -125,7 +125,7 @@ export function CurrySauce({ rm }) {
 
 // her fingers dip the same piece into the butter chicken; the sauce drips
 export function CurryNaanDip() {
-  return <CurryScene id="naan-dip" label="Very close: her fingers dip the piece of naan in the butter chicken. The sauce drips off it." />;
+  return <CurryScene id="naan-dip" label="Very close: her pink pin hand dips the piece of naan in the butter chicken. The sauce drips off it." />;
 }
 
 // POV, extreme close-up: YOUR hand (bottom-left) holds the sauced naan at her open mouth. All of it sits above the box.
@@ -153,5 +153,5 @@ export function CurryLassi() {
 
 // the napkin: her hand (from the right) wipes the sauce off your fingers with a white napkin, over the tray
 export function CurryNapkin() {
-  return <CurryScene id="napkin" label="Close: her hand wipes the orange sauce off your fingers with a white paper napkin, over the lunch tray." />;
+  return <CurryScene id="napkin" label="Close: her pink pin hand presses a white paper napkin over your fingers and wipes off the orange sauce, over the lunch tray." />;
 }
