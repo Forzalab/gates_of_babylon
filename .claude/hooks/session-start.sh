@@ -8,8 +8,15 @@ set -euo pipefail
 IN="$(cat 2>/dev/null || true)"
 cd "${CLAUDE_PROJECT_DIR:-$(dirname "$0")/../..}"
 timeout 600 npm install --no-audit --no-fund >/dev/null 2>&1 && echo "(npm install ok)" || echo "(npm install failed or timed out — run it manually)"
+# Brain: clone it if missing (setup time may have lacked the token/network), unless the env bootstrap hook handles it
+if ! grep -qsE "brain-bootstrap|brain/scripts/session-start.sh" "$HOME/.claude/settings.json"; then
+  if [ ! -d /home/claude/brain/.git ] && [ -n "${BRAIN_TOKEN:-}" ]; then
+    mkdir -p /home/claude
+    timeout 120 git clone -q "https://oauth2:${BRAIN_TOKEN}@gitlab.com/Forzalab-bravo/brain.git" /home/claude/brain 2>&1 | sed 's/glpat-[^@ ]*/***/g' | tail -2
+  fi
+fi
 B=/home/claude/brain/scripts/session-start.sh
-if [ -f "$B" ] && ! grep -qs "brain/scripts/session-start.sh" "$HOME/.claude/settings.json"; then
+if [ -f "$B" ] && ! grep -qsE "brain-bootstrap|brain/scripts/session-start.sh" "$HOME/.claude/settings.json"; then
   printf '%s' "$IN" | bash "$B" || true
 fi
 exit 0
